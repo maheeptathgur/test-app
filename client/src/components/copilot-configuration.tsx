@@ -7,7 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image } from "lucide-react";
+import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
 
 interface CopilotConfigurationProps {
@@ -38,7 +39,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     "What are your capabilities?",
     "Can you provide some examples of what you can do?"
   ]);
-  const [scope, setScope] = useState("Private");
+  const [scope, setScope] = useState("private");
   const [iconImage, setIconImage] = useState<File | null>(null);
   const [bannerImage, setBannerImage] = useState<File | null>(null);
   const [aiProvider, setAiProvider] = useState("OpenAI");
@@ -187,19 +188,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                           placeholder="Enter copilot name"
                         />
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="scope">Scope</Label>
-                        <Select value={scope} onValueChange={setScope}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Private">Private</SelectItem>
-                            <SelectItem value="Public">Public</SelectItem>
-                            <SelectItem value="Embedded">Embedded</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
+
                     </div>
                     
                     <div className="space-y-2">
@@ -380,6 +369,157 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                           </div>
                         ))}
                       </div>
+                    </div>
+                    
+                    {/* Scope */}
+                    <div className="space-y-3">
+                      <Label className="text-base font-medium">Scope</Label>
+                      <p className="text-sm text-muted-foreground">
+                        Control who can access this copilot
+                      </p>
+                      <RadioGroup value={scope} onValueChange={setScope} className="space-y-3">
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="private" id="private" />
+                          <Label htmlFor="private" className="text-sm">
+                            Private - Only you can access this copilot
+                          </Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="public" id="public" />
+                          <Label htmlFor="public" className="text-sm">
+                            Public - Anyone with the link can access this copilot
+                          </Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="embedded" id="embedded" />
+                          <Label htmlFor="embedded" className="text-sm">
+                            Embedded - Can be embedded in websites and applications
+                          </Label>
+                        </div>
+                      </RadioGroup>
+                      
+                      {/* Code generation for public/embedded */}
+                      {(scope === 'public' || scope === 'embedded') && (
+                        <div className="mt-4 space-y-3">
+                          <div className="flex items-center gap-2">
+                            <Code className="w-4 h-4" />
+                            <Label className="text-sm font-medium">Integration Code</Label>
+                          </div>
+                          <Tabs defaultValue="javascript" className="w-full">
+                            <TabsList className="grid w-full grid-cols-3">
+                              <TabsTrigger value="javascript">JavaScript</TabsTrigger>
+                              <TabsTrigger value="iframe">iframe</TabsTrigger>
+                              <TabsTrigger value="react">React</TabsTrigger>
+                            </TabsList>
+                            <TabsContent value="javascript" className="mt-3">
+                              <div className="relative">
+                                <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
+                                  <code>{`<!-- Add this to your HTML -->
+<div id="knolli-copilot"></div>
+<script src="https://embed.knolli.com/widget.js"></script>
+<script>
+  KnolliWidget.init({
+    copilotId: '${copilot.id}',
+    container: '#knolli-copilot',
+    theme: 'light'
+  });
+</script>`}</code>
+                                </pre>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="absolute top-2 right-2"
+                                  onClick={() => {
+                                    const code = `<!-- Add this to your HTML -->
+<div id="knolli-copilot"></div>
+<script src="https://embed.knolli.com/widget.js"></script>
+<script>
+  KnolliWidget.init({
+    copilotId: '${copilot.id}',
+    container: '#knolli-copilot',
+    theme: 'light'
+  });
+</script>`;
+                                    navigator.clipboard.writeText(code);
+                                  }}
+                                >
+                                  <Copy className="w-3 h-3" />
+                                </Button>
+                              </div>
+                            </TabsContent>
+                            <TabsContent value="iframe" className="mt-3">
+                              <div className="relative">
+                                <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
+                                  <code>{`<iframe 
+  src="https://embed.knolli.com/copilot/${copilot.id}"
+  width="400"
+  height="600"
+  frameborder="0"
+  allow="microphone">
+</iframe>`}</code>
+                                </pre>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="absolute top-2 right-2"
+                                  onClick={() => {
+                                    const code = `<iframe 
+  src="https://embed.knolli.com/copilot/${copilot.id}"
+  width="400"
+  height="600"
+  frameborder="0"
+  allow="microphone">
+</iframe>`;
+                                    navigator.clipboard.writeText(code);
+                                  }}
+                                >
+                                  <Copy className="w-3 h-3" />
+                                </Button>
+                              </div>
+                            </TabsContent>
+                            <TabsContent value="react" className="mt-3">
+                              <div className="relative">
+                                <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
+                                  <code>{`import { KnolliWidget } from '@knolli/react';
+
+function MyComponent() {
+  return (
+    <KnolliWidget
+      copilotId="${copilot.id}"
+      theme="light"
+      width="400px"
+      height="600px"
+    />
+  );
+}`}</code>
+                                </pre>
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  className="absolute top-2 right-2"
+                                  onClick={() => {
+                                    const code = `import { KnolliWidget } from '@knolli/react';
+
+function MyComponent() {
+  return (
+    <KnolliWidget
+      copilotId="${copilot.id}"
+      theme="light"
+      width="400px"
+      height="600px"
+    />
+  );
+}`;
+                                    navigator.clipboard.writeText(code);
+                                  }}
+                                >
+                                  <Copy className="w-3 h-3" />
+                                </Button>
+                              </div>
+                            </TabsContent>
+                          </Tabs>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
