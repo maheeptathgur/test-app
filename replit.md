@@ -113,6 +113,8 @@ Changelog:
 - June 30, 2025. Updated chat interface to open within main content area while keeping sidebar visible, replacing section content when chat is active
 - June 30, 2025. Modified chat layout to hide top bar and fill entire right section when in chat mode, providing maximum space for conversation
 - June 30, 2025. Added collapsible sidebar functionality with toggle button, smooth transitions, and adaptive icon-only mode when collapsed
+- June 30, 2025. Removed duplicate title sections from all sample screens to avoid redundancy with main header area
+- June 30, 2025. Changed main content layout to unified scrolling with header and content combined instead of sticky header
 ```
 
 ## User Preferences
