@@ -130,6 +130,10 @@ export default function Dashboard() {
     showNotification(`Duplicated ${copilot.name}`);
   };
 
+  const handleArchiveCopilot = (copilot: CopilotData) => {
+    showNotification(`Archived copilot: ${copilot.name}`);
+  };
+
   const handleDeleteCopilot = (copilot: CopilotData) => {
     if (confirm(`Are you sure you want to delete ${copilot.name}?`)) {
       setCopilots(prev => prev.filter(c => c.id !== copilot.id));
@@ -283,6 +287,7 @@ export default function Dashboard() {
                       onStartChat={handleStartChat}
                       onEdit={handleEditCopilot}
                       onDuplicate={handleDuplicateCopilot}
+                      onArchive={handleArchiveCopilot}
                       onDelete={handleDeleteCopilot}
                     />
                   ))}
@@ -566,6 +571,7 @@ export default function Dashboard() {
                       onStartChat={handleStartChat}
                       onEdit={handleEditCopilot}
                       onDuplicate={handleDuplicateCopilot}
+                      onArchive={handleArchiveCopilot}
                       onDelete={handleDeleteCopilot}
                     />
                   ))}
