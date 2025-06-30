@@ -441,7 +441,12 @@ export default function Dashboard() {
           subtitle: 'Manage knowledge articles and documentation for your copilots',
           content: <SampleScreen section="knowledge-base" />,
         };
-
+      case 'profile-fields':
+        return {
+          title: 'Profile Fields',
+          subtitle: 'Custom fields to collect additional user information',
+          content: <SampleScreen section="profile-fields" />,
+        };
       case 'subscriptions':
         return {
           title: 'Subscriptions',

@@ -21,7 +21,8 @@ export function SampleScreen({ section }: SampleScreenProps) {
       return <WorkflowsScreen />;
     case 'knowledge-base':
       return <KnowledgeBaseScreen />;
-
+    case 'profile-fields':
+      return <ProfileFieldsScreen />;
     case 'subscriptions':
       return <SubscriptionsScreen />;
     case 'conversations':
@@ -330,7 +331,71 @@ function KnowledgeBaseScreen() {
   );
 }
 
+function ProfileFieldsScreen() {
+  const fields = [
+    { id: 1, name: "Company Size", type: "Select", required: true, active: true },
+    { id: 2, name: "Industry", type: "Text", required: true, active: true },
+    { id: 3, name: "Phone Number", type: "Phone", required: false, active: true },
+    { id: 4, name: "Department", type: "Select", required: false, active: false }
+  ];
 
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-end">
+        <Button className="bg-brand-primary hover:bg-brand-primary/90">
+          <UserCog className="w-4 h-4 mr-2" />
+          Add Field
+        </Button>
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Custom Fields</CardTitle>
+          <CardDescription>Manage additional profile information fields</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Field Name</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Required</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {fields.map((field) => (
+                <TableRow key={field.id}>
+                  <TableCell className="font-medium">{field.name}</TableCell>
+                  <TableCell>
+                    <Badge variant="outline">{field.type}</Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={field.required ? 'destructive' : 'secondary'}>
+                      {field.required ? 'Required' : 'Optional'}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant={field.active ? 'default' : 'secondary'}>
+                      {field.active ? 'Active' : 'Inactive'}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm">Edit</Button>
+                      <Button variant="outline" size="sm">Delete</Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
 
 function SubscriptionsScreen() {
   return (
