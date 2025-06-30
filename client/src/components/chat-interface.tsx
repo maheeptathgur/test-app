@@ -67,49 +67,62 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
   if (!isOpen || !copilot) return null;
 
   return (
-    <Card className="fixed bottom-5 right-5 w-96 h-[500px] flex flex-col shadow-2xl z-50 animate-in slide-in-from-bottom-2">
-      <div className="flex items-center justify-between p-4 border-b bg-gray-50 rounded-t-lg">
-        <h3 className="font-semibold text-gray-900">{copilot.name}</h3>
-        <Button variant="ghost" size="sm" onClick={onClose} className="h-6 w-6 p-0">
+    <div className="fixed inset-0 bg-background z-50 flex flex-col">
+      <div className="flex items-center justify-between p-6 border-b bg-muted/50">
+        <div className="flex items-center gap-3">
+          <div className={`w-10 h-10 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-sm font-semibold`}>
+            {copilot.avatar}
+          </div>
+          <div>
+            <h1 className="text-xl font-semibold text-foreground">{copilot.name}</h1>
+            <p className="text-sm text-muted-foreground">{copilot.description}</p>
+          </div>
+        </div>
+        <Button variant="outline" onClick={onClose} className="gap-2">
           <X className="h-4 w-4" />
+          Close Chat
         </Button>
       </div>
       
-      <div className="flex-1 p-4 overflow-y-auto space-y-4">
-        {messages.map((message) => (
-          <div
-            key={message.id}
-            className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
+      <div className="flex-1 p-6 overflow-y-auto">
+        <div className="max-w-4xl mx-auto space-y-6">
+          {messages.map((message) => (
             <div
-              className={`max-w-[80%] p-3 rounded-lg ${
-                message.sender === 'user'
-                  ? 'text-white'
-                  : 'bg-gray-100 text-gray-900'
-              }`}
-              style={message.sender === 'user' ? { backgroundColor: 'hsl(var(--primary))' } : {}}
+              key={message.id}
+              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              {message.content}
+              <div
+                className={`max-w-[70%] p-4 rounded-lg ${
+                  message.sender === 'user'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-foreground'
+                }`}
+              >
+                {message.content}
+              </div>
             </div>
-          </div>
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
-      
-      <div className="p-4 border-t bg-gray-50 rounded-b-lg">
-        <div className="flex gap-2">
-          <Input
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Type your message..."
-            className="flex-1"
-          />
-          <Button onClick={handleSendMessage} size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-            <Send className="h-4 w-4" />
-          </Button>
+          ))}
+          <div ref={messagesEndRef} />
         </div>
       </div>
-    </Card>
+      
+      <div className="border-t bg-muted/50 p-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex gap-3">
+            <Input
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyPress={handleKeyPress}
+              placeholder="Type your message..."
+              className="flex-1 h-12"
+            />
+            <Button onClick={handleSendMessage} className="h-12 px-6">
+              <Send className="h-4 w-4 mr-2" />
+              Send
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
