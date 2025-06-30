@@ -340,7 +340,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
           </Button>
           <Button onClick={handleSave} className="gap-2">
             <Save className="h-4 w-4" />
-            Save Profile
+            Save Configuration
           </Button>
         </div>
       </div>
