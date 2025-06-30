@@ -703,24 +703,25 @@ export default function Dashboard() {
         </div>
       </div>
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Bar - Hidden when in chat mode */}
-        {!chatCopilot && (
-          <div className="px-8 py-6" style={{ backgroundColor: '#f2f2f2' }}>
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
-                <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
+      <div className="flex-1 overflow-y-auto" style={{ backgroundColor: '#f2f2f2' }}>
+        {/* Combined scrollable content */}
+        <div className={`${chatCopilot ? '' : 'p-8'}`}>
+          {/* Top Bar - Hidden when in chat mode */}
+          {!chatCopilot && (
+            <div className="mb-8">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
+                  <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
+                </div>
+                {(activeSection === 'copilots' || activeSection === 'knowledge-base' || activeSection === 'profile-fields') && (
+                  <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />
+                )}
               </div>
-              {(activeSection === 'copilots' || activeSection === 'knowledge-base' || activeSection === 'profile-fields') && (
-                <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />
-              )}
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Content Body */}
-        <div className={`flex-1 overflow-y-auto ${chatCopilot ? '' : 'p-8'}`} style={{ backgroundColor: '#f2f2f2' }}>
+          {/* Content Body */}
           {sectionContent.content}
         </div>
       </div>
