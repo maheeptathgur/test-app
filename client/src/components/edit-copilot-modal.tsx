@@ -87,7 +87,7 @@ export function EditCopilotModal({ isOpen, copilot, onClose, onUpdateCopilot }: 
             <Button type="button" variant="outline" onClick={onClose} className="flex-1">
               Cancel
             </Button>
-            <Button type="submit" className="flex-1 text-white" style={{ backgroundColor: '#008062' }}>
+            <Button type="submit" className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground">
               Save Changes
             </Button>
           </div>
