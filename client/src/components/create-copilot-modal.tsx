@@ -31,7 +31,7 @@ export function CreateCopilotModal({ onCreateCopilot }: CreateCopilotModalProps)
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+        <Button className="text-white" style={{ backgroundColor: '#008062' }}>
           <Plus className="w-4 h-4 mr-2" />
           New Copilot
         </Button>
@@ -82,7 +82,7 @@ export function CreateCopilotModal({ onCreateCopilot }: CreateCopilotModalProps)
             <Button type="button" variant="outline" onClick={() => setIsOpen(false)} className="flex-1">
               Cancel
             </Button>
-            <Button type="submit" className="flex-1 bg-blue-600 hover:bg-blue-700">
+            <Button type="submit" className="flex-1 text-white" style={{ backgroundColor: '#008062' }}>
               Create Copilot
             </Button>
           </div>
