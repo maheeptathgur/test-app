@@ -158,4 +158,8 @@
   .google-drive-btn:hover .google-drive-icon {
     color: white !important;
   }
+
+  .google-drive-btn:hover {
+    border-color: #008062 !important;
+  }
 }
