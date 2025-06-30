@@ -119,7 +119,7 @@ Changelog:
 - June 30, 2025. Fixed chat interface to use fixed height layout instead of growing with messages for better UI consistency
 - June 30, 2025. Moved profile fields to copilot-specific configuration and created comprehensive copilot configuration interface with tabbed design for general settings, components management, and target user profile fields
 - June 30, 2025. Updated edit copilot functionality to open full-screen configuration interface instead of modal, allowing detailed component editing and profile field customization
-- June 30, 2025. Removed Profile Fields from main navigation menu and cleaned up related types and components since profile fields are now copilot-specific configuration rather than global settings
+- June 30, 2025. Restored Profile Fields section in main navigation while keeping copilot-specific profile field configuration - now supports both global field definitions and per-copilot target user personas
 ```
 
 ## User Preferences
