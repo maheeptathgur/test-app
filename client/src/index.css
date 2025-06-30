@@ -150,4 +150,12 @@
     opacity: 0;
     transition: all 300ms ease-in;
   }
+
+  .google-drive-icon {
+    color: #008062;
+  }
+
+  .google-drive-btn:hover .google-drive-icon {
+    color: white !important;
+  }
 }
