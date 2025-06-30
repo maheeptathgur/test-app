@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield } from "lucide-react";
+import knolliLogo from "@assets/image_1751267938774.png";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { WorkspaceSelector } from "@/components/workspace-selector";
@@ -318,12 +319,11 @@ export default function Dashboard() {
         {/* Logo */}
         <div className="p-6 border-b border-sidebar-border">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-              <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
-                <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
-              </svg>
-            </div>
-            <span className="text-lg font-bold text-sidebar-foreground">Knolli</span>
+            <img 
+              src={knolliLogo}
+              alt="Knolli Logo" 
+              className="h-8 w-auto"
+            />
           </div>
           <WorkspaceSelector
             currentWorkspace={currentWorkspace}
