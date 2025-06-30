@@ -96,6 +96,7 @@ export default function Dashboard() {
   const [sortBy, setSortBy] = useState<'name' | 'type' | 'status'>('name');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const { toast } = useToast();
 
   const showNotification = (message: string) => {
@@ -189,6 +190,14 @@ export default function Dashboard() {
     if (show) {
       setSidebarCollapsed(true);
     }
+  };
+
+  const handleFileSelect = (fileName: string) => {
+    setSelectedFiles(prev => 
+      prev.includes(fileName) 
+        ? prev.filter(f => f !== fileName)
+        : [...prev, fileName]
+    );
   };
 
   // Filter and sort copilots
@@ -759,49 +768,98 @@ export default function Dashboard() {
             <div className="flex-1 p-4 space-y-3 overflow-y-auto">
               <h4 className="text-sm font-medium text-foreground">All Files</h4>
               <div className="space-y-2">
-                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                <div 
+                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedFiles.includes('Project_Brief.pdf') 
+                      ? 'border-green-500 bg-green-50/50' 
+                      : 'border-transparent bg-white hover:bg-muted/30'
+                  }`}
+                  onClick={() => handleFileSelect('Project_Brief.pdf')}
+                >
                   <FileText className="w-4 h-4 text-blue-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">Project_Brief.pdf</div>
                     <div className="text-xs text-muted-foreground">2 hours ago • 1.2 MB</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                <div 
+                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedFiles.includes('logo_design.png') 
+                      ? 'border-green-500 bg-green-50/50' 
+                      : 'border-transparent bg-white hover:bg-muted/30'
+                  }`}
+                  onClick={() => handleFileSelect('logo_design.png')}
+                >
                   <Image className="w-4 h-4 text-green-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">logo_design.png</div>
                     <div className="text-xs text-muted-foreground">Yesterday • 856 KB</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                <div 
+                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedFiles.includes('background_music.mp3') 
+                      ? 'border-green-500 bg-green-50/50' 
+                      : 'border-transparent bg-white hover:bg-muted/30'
+                  }`}
+                  onClick={() => handleFileSelect('background_music.mp3')}
+                >
                   <Music className="w-4 h-4 text-purple-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">background_music.mp3</div>
                     <div className="text-xs text-muted-foreground">3 days ago • 4.8 MB</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                <div 
+                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedFiles.includes('demo_video.mp4') 
+                      ? 'border-green-500 bg-green-50/50' 
+                      : 'border-transparent bg-white hover:bg-muted/30'
+                  }`}
+                  onClick={() => handleFileSelect('demo_video.mp4')}
+                >
                   <Video className="w-4 h-4 text-red-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">demo_video.mp4</div>
                     <div className="text-xs text-muted-foreground">1 week ago • 24.5 MB</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                <div 
+                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedFiles.includes('presentation.pptx') 
+                      ? 'border-green-500 bg-green-50/50' 
+                      : 'border-transparent bg-white hover:bg-muted/30'
+                  }`}
+                  onClick={() => handleFileSelect('presentation.pptx')}
+                >
                   <FileText className="w-4 h-4 text-orange-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">presentation.pptx</div>
                     <div className="text-xs text-muted-foreground">1 week ago • 3.2 MB</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                <div 
+                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedFiles.includes('data_export.csv') 
+                      ? 'border-green-500 bg-green-50/50' 
+                      : 'border-transparent bg-white hover:bg-muted/30'
+                  }`}
+                  onClick={() => handleFileSelect('data_export.csv')}
+                >
                   <File className="w-4 h-4 text-gray-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">data_export.csv</div>
                     <div className="text-xs text-muted-foreground">2 weeks ago • 540 KB</div>
                   </div>
                 </div>
-                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                <div 
+                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
+                    selectedFiles.includes('screenshot_2024.jpg') 
+                      ? 'border-green-500 bg-green-50/50' 
+                      : 'border-transparent bg-white hover:bg-muted/30'
+                  }`}
+                  onClick={() => handleFileSelect('screenshot_2024.jpg')}
+                >
                   <Image className="w-4 h-4 text-green-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">screenshot_2024.jpg</div>
