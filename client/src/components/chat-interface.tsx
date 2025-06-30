@@ -10,13 +10,15 @@ interface ChatInterfaceProps {
   isOpen: boolean;
   copilot: CopilotData | null;
   onClose: () => void;
+  onToggleAttachment?: (show: boolean) => void;
 }
 
-export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) {
+export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [showProfileFields, setShowProfileFields] = useState(false);
   const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
   const [profileData, setProfileData] = useState({
     title: "Marketing Manager",
     company: "TechCorp Inc.",
@@ -262,7 +264,14 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
       <div className="border-t bg-muted/50 p-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex gap-3">
-            <Button variant="outline" className="h-12 px-3">
+            <Button 
+              variant="outline" 
+              className="h-12 px-3"
+              onClick={() => {
+                setShowAttachmentSidebar(!showAttachmentSidebar);
+                onToggleAttachment?.(!showAttachmentSidebar);
+              }}
+            >
               <Paperclip className="h-4 w-4" />
             </Button>
             <Input

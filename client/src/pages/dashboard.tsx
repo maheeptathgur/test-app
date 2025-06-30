@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X } from "lucide-react";
 import knolliLogo from "@assets/image_1751267938774.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -95,6 +95,7 @@ export default function Dashboard() {
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'archived'>('all');
   const [sortBy, setSortBy] = useState<'name' | 'type' | 'status'>('name');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
   const { toast } = useToast();
 
   const showNotification = (message: string) => {
@@ -182,6 +183,14 @@ export default function Dashboard() {
     setConfiguringCopilot(null);
   };
 
+  const handleToggleAttachment = (show: boolean) => {
+    setShowAttachmentSidebar(show);
+    // Collapse the main sidebar when attachment sidebar is shown
+    if (show) {
+      setSidebarCollapsed(true);
+    }
+  };
+
   // Filter and sort copilots
   const getFilteredAndSortedCopilots = () => {
     let filtered = copilots.filter(copilot => {
@@ -220,6 +229,7 @@ export default function Dashboard() {
             isOpen={true}
             copilot={chatCopilot}
             onClose={() => setChatCopilot(null)}
+            onToggleAttachment={handleToggleAttachment}
           />
         ),
       };
@@ -751,6 +761,109 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      
+      {/* Attachment Sidebar */}
+      {showAttachmentSidebar && (
+        <div className="w-80 border-l border-sidebar-border bg-background flex flex-col">
+          <div className="p-4 border-b flex items-center justify-between">
+            <h3 className="font-semibold text-foreground">Attachments</h3>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setShowAttachmentSidebar(false);
+                setSidebarCollapsed(false);
+              }}
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          </div>
+          
+          <div className="flex-1 p-4 space-y-4 overflow-y-auto">
+            {/* Upload Area */}
+            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+              <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+              <div className="text-sm text-muted-foreground mb-2">
+                Drag & drop files here, or click to select
+              </div>
+              <Button variant="outline" size="sm">
+                Choose Files
+              </Button>
+            </div>
+            
+            {/* File Type Categories */}
+            <div className="space-y-3">
+              <h4 className="text-sm font-medium text-foreground">Quick Upload</h4>
+              <div className="grid grid-cols-2 gap-2">
+                <Button variant="outline" className="h-16 flex flex-col gap-1">
+                  <FileText className="w-5 h-5" />
+                  <span className="text-xs">Documents</span>
+                </Button>
+                <Button variant="outline" className="h-16 flex flex-col gap-1">
+                  <Image className="w-5 h-5" />
+                  <span className="text-xs">Images</span>
+                </Button>
+                <Button variant="outline" className="h-16 flex flex-col gap-1">
+                  <Music className="w-5 h-5" />
+                  <span className="text-xs">Audio</span>
+                </Button>
+                <Button variant="outline" className="h-16 flex flex-col gap-1">
+                  <Video className="w-5 h-5" />
+                  <span className="text-xs">Video</span>
+                </Button>
+              </div>
+            </div>
+            
+            {/* Recent Files */}
+            <div className="space-y-3">
+              <h4 className="text-sm font-medium text-foreground">Recent Files</h4>
+              <div className="space-y-2">
+                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                  <FileText className="w-4 h-4 text-blue-500" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium truncate">Project_Brief.pdf</div>
+                    <div className="text-xs text-muted-foreground">2 hours ago</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                  <Image className="w-4 h-4 text-green-500" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium truncate">logo_design.png</div>
+                    <div className="text-xs text-muted-foreground">Yesterday</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                  <Music className="w-4 h-4 text-purple-500" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium truncate">background_music.mp3</div>
+                    <div className="text-xs text-muted-foreground">3 days ago</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Connected Sources */}
+            <div className="space-y-3">
+              <h4 className="text-sm font-medium text-foreground">Connected Sources</h4>
+              <div className="space-y-2">
+                <Button variant="outline" className="w-full justify-start gap-2">
+                  <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                  Google Drive
+                </Button>
+                <Button variant="outline" className="w-full justify-start gap-2">
+                  <div className="w-4 h-4 bg-black rounded"></div>
+                  GitHub
+                </Button>
+                <Button variant="outline" className="w-full justify-start gap-2">
+                  <div className="w-4 h-4 bg-purple-500 rounded"></div>
+                  Notion
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      
       {/* Edit Modal */}
       <EditCopilotModal
         isOpen={!!editingCopilot}
