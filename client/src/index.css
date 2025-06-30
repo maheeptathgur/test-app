@@ -7,7 +7,7 @@
   --brand-primary: hsl(166, 100%, 25%); /* #008062 - Primary teal */
   --brand-primary-light: hsl(166, 45%, 35%); /* #4a9d88 - Lighter teal */
   --brand-primary-dark: hsl(166, 100%, 20%); /* #00664f - Darker teal */
-  --brand-secondary: hsl(187, 18%, 90%); /* #e6eeef - Light blue-gray */
+  --brand-secondary: #e6eeef; /* Light blue-gray */
   --brand-secondary-dark: hsl(187, 18%, 80%); /* #c7d4d6 - Darker blue-gray */
   --brand-accent: hsl(166, 60%, 45%); /* #2db494 - Vibrant teal accent */
   --brand-neutral-light: hsl(0, 0%, 98%); /* #fafafa - Almost white */
@@ -78,7 +78,7 @@
   --destructive: hsl(0, 72%, 51%);
   --destructive-foreground: hsl(0, 0%, 100%);
   --ring: var(--brand-primary);
-  --sidebar-background: var(--brand-secondary);
+  --sidebar-background: #e6eeef;
   --sidebar-foreground: var(--brand-neutral-dark);
   --sidebar-primary: var(--brand-primary);
   --sidebar-primary-foreground: hsl(0, 0%, 100%);
