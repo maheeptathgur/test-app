@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send } from "lucide-react";
+import { X, Send, Paperclip } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -109,6 +109,9 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
       <div className="border-t bg-muted/50 p-6">
         <div className="max-w-4xl mx-auto">
           <div className="flex gap-3">
+            <Button variant="outline" className="h-12 px-3">
+              <Paperclip className="h-4 w-4" />
+            </Button>
             <Input
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
