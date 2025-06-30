@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip } from "lucide-react";
+import { X, Send, Paperclip, UserCog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -78,10 +78,16 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
             <p className="text-sm text-muted-foreground">{copilot.description}</p>
           </div>
         </div>
-        <Button variant="outline" onClick={onClose} className="gap-2">
-          <X className="h-4 w-4" />
-          Close Chat
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" className="gap-2">
+            <UserCog className="h-4 w-4" />
+            Profile Fields
+          </Button>
+          <Button variant="outline" onClick={onClose} className="gap-2">
+            <X className="h-4 w-4" />
+            Close Chat
+          </Button>
+        </div>
       </div>
       
       <div className="flex-1 p-6 overflow-y-auto">
