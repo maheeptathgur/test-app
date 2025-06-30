@@ -333,7 +333,7 @@ export default function Dashboard() {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-6 py-6">
+        <nav className="flex-1 px-6 py-6 overflow-y-auto">
           <ul className="space-y-2">
             {navigationItems.map((item) => {
               const Icon = item.icon;
