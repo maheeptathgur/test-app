@@ -15,8 +15,8 @@ interface ComponentDetailsModalProps {
 
 // Mock data for component details
 const componentDetails = {
-  // Agents
-  "Content Generator": {
+  // Agents - matching the actual sample data
+  "Content Writer": {
     type: "agent" as const,
     description: "AI-powered content creation agent that generates high-quality articles, blog posts, and marketing copy.",
     capabilities: ["Article Writing", "SEO Optimization", "Tone Adaptation", "Multi-language Support"],
@@ -28,17 +28,41 @@ const componentDetails = {
     },
     icon: FileText
   },
-  "Customer Support Agent": {
+  "SEO Optimizer": {
     type: "agent" as const,
-    description: "Intelligent customer service agent that handles inquiries, resolves issues, and escalates complex cases.",
-    capabilities: ["Issue Resolution", "FAQ Responses", "Ticket Creation", "Sentiment Analysis"],
+    description: "Advanced SEO specialist agent that optimizes content for search engines and improves rankings.",
+    capabilities: ["Keyword Research", "Content Optimization", "Meta Tag Generation", "Technical SEO"],
     configuration: {
-      "Response Time": "< 30 seconds",
-      "Escalation Threshold": "3 failed attempts",
-      "Knowledge Base": "Customer Support KB",
-      "Languages": "English, Spanish, French"
+      "SEO Framework": "Technical + Content",
+      "Keyword Database": "Semrush, Ahrefs",
+      "Optimization Level": "Advanced",
+      "Languages": "Multi-language support"
     },
-    icon: MessageSquare
+    icon: Search
+  },
+  "Media Planner": {
+    type: "agent" as const,
+    description: "Strategic media planning agent that creates and optimizes advertising campaigns across channels.",
+    capabilities: ["Campaign Strategy", "Budget Allocation", "Channel Selection", "Performance Optimization"],
+    configuration: {
+      "Channels": "Google Ads, Facebook, LinkedIn",
+      "Budget Management": "Automated optimization",
+      "Targeting": "Advanced audience segmentation",
+      "Reporting": "Real-time performance tracking"
+    },
+    icon: BarChart3
+  },
+  "Trend Spotter": {
+    type: "agent" as const,
+    description: "Social media trend analysis agent that identifies viral content and emerging patterns.",
+    capabilities: ["Trend Detection", "Viral Content Analysis", "Hashtag Research", "Audience Insights"],
+    configuration: {
+      "Data Sources": "Twitter, Instagram, TikTok, LinkedIn",
+      "Analysis Frequency": "Real-time monitoring",
+      "Trend Categories": "Industry-specific + General",
+      "Alert System": "Instant notifications for emerging trends"
+    },
+    icon: Globe
   },
   "Data Analyst": {
     type: "agent" as const,
@@ -65,18 +89,78 @@ const componentDetails = {
     icon: Shield
   },
 
-  // Tools
-  "SEO Tool": {
+  // Tools - matching sample data
+  "Grammarly": {
     type: "tool" as const,
-    description: "Comprehensive SEO analysis and optimization tool for improving search engine rankings.",
-    capabilities: ["Keyword Analysis", "Content Optimization", "Meta Tag Generation", "Competition Analysis"],
+    description: "Advanced grammar and writing assistant that improves content quality and readability.",
+    capabilities: ["Grammar Checking", "Style Suggestions", "Plagiarism Detection", "Tone Analysis"],
     configuration: {
-      "API Integration": "Google Search Console",
-      "Keyword Database": "Semrush, Ahrefs",
-      "Analysis Depth": "Comprehensive",
-      "Report Format": "Detailed Dashboard"
+      "Integration": "Real-time API",
+      "Languages": "30+ languages supported",
+      "Writing Goals": "Audience-specific optimization",
+      "Premium Features": "Advanced suggestions enabled"
+    },
+    icon: FileText
+  },
+  "SEMrush": {
+    type: "tool" as const,
+    description: "Comprehensive SEO and digital marketing toolkit for competitive analysis and optimization.",
+    capabilities: ["Keyword Research", "Competitor Analysis", "Site Audit", "Rank Tracking"],
+    configuration: {
+      "API Access": "Professional tier",
+      "Database Size": "25+ billion keywords", 
+      "Geographic Coverage": "Global + Local markets",
+      "Report Types": "Automated + Custom dashboards"
     },
     icon: Search
+  },
+  "HubSpot": {
+    type: "tool" as const,
+    description: "All-in-one CRM and marketing automation platform for lead management and nurturing.",
+    capabilities: ["CRM Management", "Email Marketing", "Lead Scoring", "Pipeline Tracking"],
+    configuration: {
+      "Plan": "Marketing Hub Professional",
+      "Contacts": "Unlimited contact storage",
+      "Automation": "Advanced workflow builder",
+      "Integration": "1000+ app connections"
+    },
+    icon: Users
+  },
+  "Mailchimp": {
+    type: "tool" as const,
+    description: "Email marketing platform with automation, analytics, and audience management features.",
+    capabilities: ["Email Campaigns", "Automation Workflows", "A/B Testing", "Analytics"],
+    configuration: {
+      "Plan": "Standard tier",
+      "Contacts": "50,000 subscriber limit",
+      "Sends": "500,000 emails/month",
+      "Features": "Advanced segmentation + reporting"
+    },
+    icon: Mail
+  },
+  "Google Analytics": {
+    type: "tool" as const,
+    description: "Web analytics platform that tracks and reports website traffic and user behavior.",
+    capabilities: ["Traffic Analysis", "User Behavior", "Conversion Tracking", "Custom Reports"],
+    configuration: {
+      "Version": "Google Analytics 4",
+      "Properties": "Multiple site tracking",
+      "Data Retention": "14 months",
+      "Goals": "Custom conversion events"
+    },
+    icon: BarChart3
+  },
+  "Hootsuite": {
+    type: "tool" as const,
+    description: "Social media management platform for scheduling, monitoring, and analyzing social content.",
+    capabilities: ["Content Scheduling", "Social Listening", "Analytics", "Team Collaboration"],
+    configuration: {
+      "Plan": "Professional",
+      "Accounts": "10 social profiles",
+      "Scheduling": "Unlimited posts",
+      "Team Members": "5 user access"
+    },
+    icon: Globe
   },
   "Knowledge Base Tool": {
     type: "tool" as const,
@@ -139,16 +223,16 @@ const componentDetails = {
     icon: Calendar
   },
 
-  // Workflows
-  "Content Workflow": {
+  // Workflows - matching sample data
+  "Campaign Planning": {
     type: "workflow" as const,
-    description: "End-to-end content creation workflow from ideation to publication with review stages.",
-    capabilities: ["Content Planning", "Draft Generation", "Review Process", "Publication"],
+    description: "Strategic marketing campaign workflow that plans, executes, and optimizes multi-channel campaigns.",
+    capabilities: ["Campaign Strategy", "Budget Planning", "Timeline Management", "Performance Tracking"],
     configuration: {
-      "Stages": "Ideation → Draft → Review → Publish",
-      "Approvers": "Content Manager, SEO Specialist",
-      "Automation": "Auto-scheduling, SEO checks",
-      "Integration": "CMS, Social Media platforms"
+      "Stages": "Strategy → Planning → Execution → Analysis",
+      "Channels": "Email, Social, Paid Ads, Content",
+      "Budget Management": "Automated allocation and tracking",
+      "Approval Process": "Multi-stage campaign approvals"
     },
     icon: Workflow
   },
@@ -206,7 +290,88 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
   if (!component) return null;
 
   const details = componentDetails[component.name as keyof typeof componentDetails];
-  if (!details) return null;
+  
+  // Fallback for unknown components
+  if (!details) {
+    const fallbackDetails = {
+      type: component.type,
+      description: `${component.type.charAt(0).toUpperCase() + component.type.slice(1)} component that provides specialized functionality for your copilot.`,
+      capabilities: ["Custom Integration", "Automated Processing", "Real-time Updates", "Advanced Configuration"],
+      configuration: {
+        "Status": "Active",
+        "Integration": "Custom API",
+        "Configuration": "Default settings applied",
+        "Last Updated": "Recently configured"
+      },
+      icon: component.type === 'agent' ? Bot : component.type === 'tool' ? Wrench : Workflow
+    };
+    
+    const Icon = fallbackDetails.icon;
+    const typeColor = component.type === 'agent' ? 'bg-purple-100 text-purple-700' :
+                     component.type === 'tool' ? 'bg-blue-100 text-blue-700' :
+                     'bg-amber-100 text-amber-700';
+
+    return (
+      <Dialog open={isOpen} onOpenChange={onClose}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-3">
+              <div className={`p-2 rounded-lg ${typeColor}`}>
+                <Icon className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-xl font-semibold">{component.name}</span>
+                <Badge variant="secondary" className={`ml-2 text-xs ${typeColor}`}>
+                  {component.type}
+                </Badge>
+              </div>
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-sm font-medium text-gray-900 mb-2">Description</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{fallbackDetails.description}</p>
+            </div>
+
+            <Separator />
+
+            <div>
+              <h3 className="text-sm font-medium text-gray-900 mb-3">Capabilities</h3>
+              <div className="grid grid-cols-2 gap-2">
+                {fallbackDetails.capabilities.map((capability, index) => (
+                  <div key={index} className="flex items-center gap-2 text-sm">
+                    <div className="w-1.5 h-1.5 bg-brand-primary rounded-full" />
+                    <span className="text-gray-600">{capability}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <Separator />
+
+            <div>
+              <h3 className="text-sm font-medium text-gray-900 mb-3">Configuration</h3>
+              <div className="space-y-3">
+                {Object.entries(fallbackDetails.configuration).map(([key, value], index) => (
+                  <div key={index} className="flex justify-between items-start">
+                    <span className="text-sm font-medium text-gray-700 flex-shrink-0 w-1/3">{key}:</span>
+                    <span className="text-sm text-gray-600 text-right">{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-end pt-4">
+              <Button variant="outline" onClick={onClose}>
+                Close
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
 
   const Icon = details.icon;
   const typeColor = component.type === 'agent' ? 'bg-purple-100 text-purple-700' :
