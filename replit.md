@@ -121,7 +121,7 @@ Changelog:
 - June 30, 2025. Updated edit copilot functionality to open full-screen configuration interface instead of modal, allowing detailed component editing and profile field customization
 - June 30, 2025. Restored Profile Fields section in main navigation while keeping copilot-specific profile field configuration - now supports both global field definitions and per-copilot target user personas
 - June 30, 2025. Moved scope settings to advanced settings section and added dynamic code generation feature for public/embedded copilots showing JavaScript, iframe, and React integration code with copy functionality
-- June 30, 2025. Implemented collapsible attachment sidebar that opens when chat attach button is clicked, automatically collapses main sidebar, and provides file upload interface with drag-and-drop, quick upload categories for documents/images/audio/video, recent files list, and connected sources integration
+- June 30, 2025. Implemented collapsible attachment sidebar positioned between main sidebar and content area, opens when chat attach button is clicked, automatically collapses main sidebar, provides comprehensive file upload interface with drag-and-drop, displays all files with file sizes and timestamps, and includes connected sources integration for Google Drive, GitHub, and Notion
 ```
 
 ## User Preferences
