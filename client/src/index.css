@@ -9,7 +9,7 @@
   --brand-primary-dark: hsl(166, 100%, 20%); /* #00664f - Darker teal */
   --brand-secondary: #e6eeef; /* Light blue-gray */
   --brand-secondary-dark: hsl(187, 18%, 80%); /* #c7d4d6 - Darker blue-gray */
-  --brand-accent: hsl(166, 60%, 45%); /* #2db494 - Vibrant teal accent */
+  --brand-accent: hsl(166, 100%, 41%); /* #00d2a0 - Vibrant teal accent */
   --brand-neutral-light: hsl(0, 0%, 98%); /* #fafafa - Almost white */
   --brand-neutral: hsl(0, 0%, 95%); /* #f2f2f2 - Light gray */
   --brand-neutral-medium: hsl(0, 0%, 60%); /* #999999 - Medium gray */
@@ -53,7 +53,7 @@
   --brand-primary-dark: hsl(166, 100%, 15%); /* Darker teal */
   --brand-secondary: hsl(187, 18%, 15%); /* Dark blue-gray */
   --brand-secondary-dark: hsl(187, 18%, 12%); /* Darker blue-gray */
-  --brand-accent: hsl(166, 60%, 50%); /* Brighter accent for dark theme */
+  --brand-accent: hsl(166, 100%, 45%); /* Brighter accent for dark theme */
   --brand-neutral-light: hsl(0, 0%, 8%); /* Very dark gray */
   --brand-neutral: hsl(0, 0%, 12%); /* Dark gray */
   --brand-neutral-medium: hsl(0, 0%, 70%); /* Light gray for text */
