@@ -223,44 +223,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                       />
                     </div>
                     
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <Label>Conversation Starters</Label>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={addConversationStarter}
-                          disabled={conversationStarters.length >= 5}
-                          className="gap-2"
-                        >
-                          <Plus className="h-3 w-3" />
-                          Add Starter
-                        </Button>
-                      </div>
-                      <div className="space-y-3">
-                        {conversationStarters.map((starter, index) => (
-                          <div key={index} className="flex gap-2">
-                            <Input
-                              value={starter}
-                              onChange={(e) => handleConversationStarterChange(index, e.target.value)}
-                              placeholder={`Conversation starter ${index + 1}`}
-                              className="flex-1"
-                            />
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="sm"
-                              onClick={() => removeConversationStarter(index)}
-                              disabled={conversationStarters.length <= 1}
-                            >
-                              <Trash2 className="h-3 w-3" />
-                            </Button>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label>Icon Image (1:1 ratio)</Label>
@@ -381,6 +344,44 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         onChange={(e) => setApiKey(e.target.value)}
                         placeholder="Enter your API key for the selected provider"
                       />
+                    </div>
+
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <Label>Conversation Starters</Label>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={addConversationStarter}
+                          disabled={conversationStarters.length >= 5}
+                          className="gap-2"
+                        >
+                          <Plus className="h-3 w-3" />
+                          Add Starter
+                        </Button>
+                      </div>
+                      <div className="space-y-3">
+                        {conversationStarters.map((starter, index) => (
+                          <div key={index} className="flex gap-2">
+                            <Input
+                              value={starter}
+                              onChange={(e) => handleConversationStarterChange(index, e.target.value)}
+                              placeholder={`Conversation starter ${index + 1}`}
+                              className="flex-1"
+                            />
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              onClick={() => removeConversationStarter(index)}
+                              disabled={conversationStarters.length <= 1}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
