@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3 } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { WorkspaceSelector } from "@/components/workspace-selector";
@@ -68,6 +68,12 @@ const navigationItems = [
   { id: 'agents', label: 'Agents', icon: Users },
   { id: 'tools', label: 'Tools', icon: Settings },
   { id: 'workflows', label: 'Workflows', icon: BarChart3 },
+  { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
+  { id: 'profile-fields', label: 'Profile Fields', icon: UserCog },
+  { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
+  { id: 'conversations', label: 'Conversations', icon: MessageSquare },
+  { id: 'analytics', label: 'Analytics', icon: TrendingUp },
+  { id: 'users', label: 'Users', icon: Shield },
 ] as const;
 
 export default function Dashboard() {
@@ -152,7 +158,7 @@ export default function Dashboard() {
     setEditingCopilot(null);
   };
 
-  const getSectionContent = () => {
+  const getSectionContent = (): { title: string; subtitle: string; content: React.ReactNode } => {
     switch (activeSection) {
       case 'copilots':
         return {
@@ -206,6 +212,97 @@ export default function Dashboard() {
               <BarChart3 className="mx-auto h-12 w-12 text-muted-foreground" />
               <h3 className="mt-2 text-sm font-medium text-foreground">No workflows configured</h3>
               <p className="mt-1 text-sm text-muted-foreground">Create automated workflows to streamline your processes.</p>
+            </div>
+          ),
+        };
+      case 'knowledge-base':
+        return {
+          title: 'Knowledge Base',
+          subtitle: 'Manage knowledge articles and documentation for your copilots',
+          content: (
+            <div className="text-center py-12">
+              <BookOpen className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-2 text-sm font-medium text-foreground">No knowledge articles</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Create knowledge articles to help your copilots provide better responses.</p>
+            </div>
+          ),
+        };
+      case 'profile-fields':
+        return {
+          title: 'Profile Fields',
+          subtitle: 'Custom fields to collect additional user information',
+          content: (
+            <div className="text-center py-12">
+              <UserCog className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-2 text-sm font-medium text-foreground">No profile fields configured</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Add custom fields to gather more information from your users.</p>
+            </div>
+          ),
+        };
+      case 'subscriptions':
+        return {
+          title: 'Subscriptions',
+          subtitle: 'Manage user subscriptions and billing information',
+          content: (
+            <div className="text-center py-12">
+              <CreditCard className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-2 text-sm font-medium text-foreground">No active subscriptions</h3>
+              <p className="mt-1 text-sm text-muted-foreground">View and manage user subscription plans and billing.</p>
+            </div>
+          ),
+        };
+      case 'conversations':
+        return {
+          title: 'Conversations',
+          subtitle: 'View and manage all user conversations with copilots',
+          content: (
+            <div className="text-center py-12">
+              <MessageSquare className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-2 text-sm font-medium text-foreground">No conversations yet</h3>
+              <p className="mt-1 text-sm text-muted-foreground">User conversations with copilots will appear here.</p>
+            </div>
+          ),
+        };
+      case 'analytics':
+        return {
+          title: 'Analytics',
+          subtitle: 'Performance metrics and insights for your copilots',
+          content: (
+            <div className="text-center py-12">
+              <TrendingUp className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-2 text-sm font-medium text-foreground">No analytics data</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Analytics and performance metrics will be displayed here.</p>
+            </div>
+          ),
+        };
+      case 'users':
+        return {
+          title: 'Users',
+          subtitle: 'Manage user accounts and permissions',
+          content: (
+            <div className="text-center py-12">
+              <Shield className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-2 text-sm font-medium text-foreground">No users configured</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Add and manage user accounts and their permissions.</p>
+            </div>
+          ),
+        };
+      default:
+        return {
+          title: 'Copilots',
+          subtitle: 'AI assistants configured for specific tasks and conversations',
+          content: (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {copilots.map((copilot) => (
+                <CopilotCard
+                  key={copilot.id}
+                  copilot={copilot}
+                  onStartChat={handleStartChat}
+                  onEdit={handleEditCopilot}
+                  onDuplicate={handleDuplicateCopilot}
+                  onDelete={handleDeleteCopilot}
+                />
+              ))}
             </div>
           ),
         };
@@ -276,7 +373,7 @@ export default function Dashboard() {
               <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
               <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
             </div>
-            {activeSection === 'copilots' && (
+            {(activeSection === 'copilots' || activeSection === 'knowledge-base' || activeSection === 'profile-fields') && (
               <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />
             )}
           </div>
