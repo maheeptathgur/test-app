@@ -874,7 +874,7 @@ export default function Dashboard() {
                 Upload Files
               </Button>
               <Button variant="outline" className="w-full justify-start gap-2">
-                <SiGoogledrive className="w-4 h-4 text-blue-500" />
+                <SiGoogledrive className="w-4 h-4 text-green-500" />
                 Import from Google Drive
               </Button>
             </div>
