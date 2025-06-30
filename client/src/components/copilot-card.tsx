@@ -10,10 +10,11 @@ interface CopilotCardProps {
   onStartChat: (copilot: CopilotData) => void;
   onEdit: (copilot: CopilotData) => void;
   onDuplicate: (copilot: CopilotData) => void;
+  onArchive: (copilot: CopilotData) => void;
   onDelete: (copilot: CopilotData) => void;
 }
 
-export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onDelete }: CopilotCardProps) {
+export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchive, onDelete }: CopilotCardProps) {
   return (
     <Card className="p-6 hover:shadow-lg transition-shadow">
       <CardContent className="p-0">
@@ -39,6 +40,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onDelet
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => onEdit(copilot)}>Edit</DropdownMenuItem>
               <DropdownMenuItem onClick={() => onDuplicate(copilot)}>Duplicate</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onArchive(copilot)}>Archive</DropdownMenuItem>
               <DropdownMenuItem onClick={() => onDelete(copilot)} className="text-red-600">Delete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
