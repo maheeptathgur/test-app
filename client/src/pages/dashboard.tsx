@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X } from "lucide-react";
+import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -873,7 +874,7 @@ export default function Dashboard() {
                 Upload Files
               </Button>
               <Button variant="outline" className="w-full justify-start gap-2">
-                <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                <SiGoogledrive className="w-4 h-4 text-blue-500" />
                 Import from Google Drive
               </Button>
             </div>
