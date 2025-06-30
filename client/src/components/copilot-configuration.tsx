@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { X, Save, Settings, Bot, Users, Workflow, Database, Plus, Trash2 } from "lucide-react";
+import { X, Save, Settings, Bot, Users, Workflow, Database, Plus, Trash2, Upload, Image } from "lucide-react";
 import { CopilotData } from "@/lib/types";
 
 interface CopilotConfigurationProps {
@@ -33,6 +33,18 @@ interface ProfileData {
 
 export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfigurationProps) {
   const [copilotData, setCopilotData] = useState<CopilotData>(copilot);
+  const [systemPrompt, setSystemPrompt] = useState("You are a helpful AI assistant focused on providing accurate and relevant information.");
+  const [conversationStarters, setConversationStarters] = useState([
+    "How can you help me today?",
+    "What are your capabilities?",
+    "Can you provide some examples of what you can do?"
+  ]);
+  const [scope, setScope] = useState("Private");
+  const [iconImage, setIconImage] = useState<File | null>(null);
+  const [bannerImage, setBannerImage] = useState<File | null>(null);
+  const [aiProvider, setAiProvider] = useState("OpenAI");
+  const [aiModel, setAiModel] = useState("gpt-4");
+  const [apiKey, setApiKey] = useState("");
   const [profileData, setProfileData] = useState<ProfileData>({
     title: "Senior Product Manager",
     company: "TechCorp Inc.",
@@ -59,6 +71,43 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       ...prev,
       [field]: value
     }));
+  };
+
+  const handleConversationStarterChange = (index: number, value: string) => {
+    const updated = [...conversationStarters];
+    updated[index] = value;
+    setConversationStarters(updated);
+  };
+
+  const addConversationStarter = () => {
+    if (conversationStarters.length < 5) {
+      setConversationStarters([...conversationStarters, ""]);
+    }
+  };
+
+  const removeConversationStarter = (index: number) => {
+    if (conversationStarters.length > 1) {
+      setConversationStarters(conversationStarters.filter((_, i) => i !== index));
+    }
+  };
+
+  const handleImageUpload = (type: 'icon' | 'banner', file: File | null) => {
+    if (type === 'icon') {
+      setIconImage(file);
+    } else {
+      setBannerImage(file);
+    }
+  };
+
+  const getAvailableModels = (provider: string) => {
+    const models = {
+      "OpenAI": ["gpt-4", "gpt-4-turbo", "gpt-3.5-turbo"],
+      "Anthropic": ["claude-3-opus", "claude-3-sonnet", "claude-3-haiku"],
+      "Google": ["gemini-pro", "gemini-pro-vision", "gemini-ultra"],
+      "Meta": ["llama-2-70b", "llama-2-13b", "llama-2-7b"],
+      "Mistral": ["mistral-large", "mistral-medium", "mistral-small"]
+    };
+    return models[provider as keyof typeof models] || [];
   };
 
   const handleSave = () => {
@@ -121,44 +170,216 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
           <div className="flex-1 overflow-y-auto">
             <TabsContent value="general" className="p-6 m-0 h-full">
               <div className="max-w-4xl mx-auto space-y-6">
+                {/* Copilot Configuration */}
                 <Card>
                   <CardHeader>
-                    <CardTitle className="text-lg">Basic Information</CardTitle>
+                    <CardTitle className="text-lg">Copilot Configuration</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
-                        <Label htmlFor="name">Name</Label>
+                        <Label htmlFor="name">Copilot Name</Label>
                         <Input
                           id="name"
                           value={copilotData.name}
                           onChange={(e) => handleCopilotChange('name', e.target.value)}
-                          placeholder="Copilot name"
+                          placeholder="Enter copilot name"
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="type">Type</Label>
-                        <Select value={copilotData.type} onValueChange={(value) => handleCopilotChange('type', value)}>
+                        <Label htmlFor="scope">Scope</Label>
+                        <Select value={scope} onValueChange={setScope}>
                           <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="general">General</SelectItem>
-                            <SelectItem value="content">Content</SelectItem>
-                            <SelectItem value="analyst">Analyst</SelectItem>
-                            <SelectItem value="support">Support</SelectItem>
+                            <SelectItem value="Private">Private</SelectItem>
+                            <SelectItem value="Public">Public</SelectItem>
+                            <SelectItem value="Embedded">Embedded</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
                     </div>
+                    
                     <div className="space-y-2">
-                      <Label htmlFor="description">Description</Label>
+                      <Label htmlFor="description">Copilot Description</Label>
                       <Textarea
                         id="description"
                         value={copilotData.description}
                         onChange={(e) => handleCopilotChange('description', e.target.value)}
                         placeholder="Describe what this copilot does"
                         rows={3}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="systemPrompt">System Prompt</Label>
+                      <Textarea
+                        id="systemPrompt"
+                        value={systemPrompt}
+                        onChange={(e) => setSystemPrompt(e.target.value)}
+                        placeholder="Enter the system prompt that defines how the copilot behaves"
+                        rows={4}
+                      />
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <Label>Conversation Starters</Label>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={addConversationStarter}
+                          disabled={conversationStarters.length >= 5}
+                          className="gap-2"
+                        >
+                          <Plus className="h-3 w-3" />
+                          Add Starter
+                        </Button>
+                      </div>
+                      <div className="space-y-3">
+                        {conversationStarters.map((starter, index) => (
+                          <div key={index} className="flex gap-2">
+                            <Input
+                              value={starter}
+                              onChange={(e) => handleConversationStarterChange(index, e.target.value)}
+                              placeholder={`Conversation starter ${index + 1}`}
+                              className="flex-1"
+                            />
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              onClick={() => removeConversationStarter(index)}
+                              disabled={conversationStarters.length <= 1}
+                            >
+                              <Trash2 className="h-3 w-3" />
+                            </Button>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label>Icon Image (1:1 ratio)</Label>
+                        <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                          <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                          <div className="text-sm text-muted-foreground mb-2">
+                            Upload icon image
+                          </div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => handleImageUpload('icon', e.target.files?.[0] || null)}
+                            className="hidden"
+                            id="icon-upload"
+                          />
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => document.getElementById('icon-upload')?.click()}
+                            className="gap-2"
+                          >
+                            <Upload className="h-3 w-3" />
+                            Choose File
+                          </Button>
+                          {iconImage && (
+                            <div className="mt-2 text-xs text-muted-foreground">
+                              {iconImage.name}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label>Banner Image (16:9 ratio)</Label>
+                        <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                          <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                          <div className="text-sm text-muted-foreground mb-2">
+                            Upload banner image
+                          </div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => handleImageUpload('banner', e.target.files?.[0] || null)}
+                            className="hidden"
+                            id="banner-upload"
+                          />
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => document.getElementById('banner-upload')?.click()}
+                            className="gap-2"
+                          >
+                            <Upload className="h-3 w-3" />
+                            Choose File
+                          </Button>
+                          {bannerImage && (
+                            <div className="mt-2 text-xs text-muted-foreground">
+                              {bannerImage.name}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+                
+                {/* Advanced Settings */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Advanced Settings</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="aiProvider">AI Provider</Label>
+                        <Select value={aiProvider} onValueChange={(value) => {
+                          setAiProvider(value);
+                          setAiModel(getAvailableModels(value)[0] || '');
+                        }}>
+                          <SelectTrigger>
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="OpenAI">OpenAI</SelectItem>
+                            <SelectItem value="Anthropic">Anthropic</SelectItem>
+                            <SelectItem value="Google">Google</SelectItem>
+                            <SelectItem value="Meta">Meta</SelectItem>
+                            <SelectItem value="Mistral">Mistral</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="aiModel">AI Model</Label>
+                        <Select value={aiModel} onValueChange={setAiModel}>
+                          <SelectTrigger>
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {getAvailableModels(aiProvider).map((model) => (
+                              <SelectItem key={model} value={model}>
+                                {model}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="apiKey">API Key</Label>
+                      <Input
+                        id="apiKey"
+                        type="password"
+                        value={apiKey}
+                        onChange={(e) => setApiKey(e.target.value)}
+                        placeholder="Enter your API key for the selected provider"
                       />
                     </div>
                   </CardContent>
