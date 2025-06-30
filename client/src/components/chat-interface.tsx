@@ -14,6 +14,7 @@ interface ChatInterfaceProps {
 export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
+  const [showProfileFields, setShowProfileFields] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -79,7 +80,7 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="gap-2">
+          <Button variant="outline" className="gap-2" onClick={() => setShowProfileFields(!showProfileFields)}>
             <UserCog className="h-4 w-4" />
             Profile Fields
           </Button>
@@ -92,6 +93,45 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
       
       <div className="flex-1 p-6 overflow-y-auto">
         <div className="max-w-4xl mx-auto h-full flex flex-col">
+          {showProfileFields && (
+            <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
+              <h3 className="font-semibold mb-3 text-foreground">Target User Profile</h3>
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span className="text-muted-foreground">Title:</span>
+                  <span className="ml-2 text-foreground">Marketing Manager</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Company:</span>
+                  <span className="ml-2 text-foreground">TechCorp Inc.</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Industry:</span>
+                  <span className="ml-2 text-foreground">Software Technology</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Department:</span>
+                  <span className="ml-2 text-foreground">Marketing</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Experience:</span>
+                  <span className="ml-2 text-foreground">5-7 years</span>
+                </div>
+                <div>
+                  <span className="text-muted-foreground">Location:</span>
+                  <span className="ml-2 text-foreground">San Francisco, CA</span>
+                </div>
+                <div className="col-span-2">
+                  <span className="text-muted-foreground">Communication Style:</span>
+                  <span className="ml-2 text-foreground">Professional, data-driven</span>
+                </div>
+                <div className="col-span-2">
+                  <span className="text-muted-foreground">Goals:</span>
+                  <span className="ml-2 text-foreground">Increase brand awareness and lead generation</span>
+                </div>
+              </div>
+            </div>
+          )}
           <div className="flex-1 space-y-6 overflow-y-auto">
             {messages.map((message) => (
               <div
