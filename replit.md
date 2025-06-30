@@ -115,6 +115,7 @@ Changelog:
 - June 30, 2025. Added collapsible sidebar functionality with toggle button, smooth transitions, and adaptive icon-only mode when collapsed
 - June 30, 2025. Removed duplicate title sections from all sample screens to avoid redundancy with main header area
 - June 30, 2025. Changed main content layout to unified scrolling with header and content combined instead of sticky header
+- June 30, 2025. Made component badges clickable with detailed modal showing description, capabilities, and configuration for agents, tools, and workflows
 ```
 
 ## User Preferences

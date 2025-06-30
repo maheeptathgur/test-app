@@ -4,6 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { CopilotData } from "@/lib/types";
+import { ComponentDetailsModal } from "./component-details-modal";
+import { useState } from "react";
 
 interface CopilotCardProps {
   copilot: CopilotData;
@@ -15,6 +17,18 @@ interface CopilotCardProps {
 }
 
 export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchive, onDelete }: CopilotCardProps) {
+  const [selectedComponent, setSelectedComponent] = useState<{ name: string; type: 'agent' | 'tool' | 'workflow' } | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleComponentClick = (component: { name: string; type: 'agent' | 'tool' | 'workflow' }) => {
+    setSelectedComponent(component);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedComponent(null);
+  };
   return (
     <Card className="p-6 hover:shadow-lg transition-shadow">
       <CardContent className="p-0">
@@ -54,11 +68,12 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
             <Badge
               key={index}
               variant="secondary"
-              className={`text-xs font-medium ${
-                component.type === 'agent' ? 'bg-purple-100 text-purple-700' :
-                component.type === 'tool' ? 'bg-blue-100 text-blue-700' :
-                'bg-amber-100 text-amber-700'
+              className={`text-xs font-medium cursor-pointer hover:shadow-md transition-shadow ${
+                component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
+                component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
+                'bg-amber-100 text-amber-700 hover:bg-amber-200'
               }`}
+              onClick={() => handleComponentClick(component)}
             >
               {component.name}
             </Badge>
@@ -72,6 +87,12 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           Start Chat
         </Button>
       </CardContent>
+
+      <ComponentDetailsModal
+        isOpen={isModalOpen}
+        component={selectedComponent}
+        onClose={closeModal}
+      />
     </Card>
   );
 }
