@@ -108,6 +108,7 @@ Changelog:
 - June 30, 2025. Implemented view toggle (grid/table), search, filtering, and sorting system for copilots screen
 - June 30, 2025. Added archive functionality to copilot dropdown menus in both grid and table views
 - June 30, 2025. Created comprehensive sample screens for all navigation sections (Agents, Tools, Workflows, Knowledge Base, Profile Fields, Subscriptions, Conversations, Analytics, Users) with realistic data and interactive elements
+- June 30, 2025. Updated copilot status system from online/offline to active/archived, removed status indicators, and updated filtering system accordingly
 ```
 
 ## User Preferences

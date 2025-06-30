@@ -27,7 +27,7 @@ const mockCopilots: CopilotData[] = [
     id: '1',
     name: 'Content Assistant',
     description: 'Helps with blog posts, social media content, and marketing copy. Optimized for brand voice and SEO.',
-    status: 'online',
+    status: 'active',
     avatar: 'CA',
     avatarColor: 'bg-blue-100 text-blue-600',
     type: 'content',
@@ -42,7 +42,7 @@ const mockCopilots: CopilotData[] = [
     id: '2',
     name: 'Campaign Manager',
     description: 'Plans and executes marketing campaigns across multiple channels with automated workflows.',
-    status: 'online',
+    status: 'active',
     avatar: 'CM',
     avatarColor: 'bg-green-100 text-green-600',
     type: 'general',
@@ -57,7 +57,7 @@ const mockCopilots: CopilotData[] = [
     id: '3',
     name: 'Social Analyst',
     description: 'Analyzes social media performance, tracks trends, and provides insights for optimization.',
-    status: 'offline',
+    status: 'archived',
     avatar: 'SA',
     avatarColor: 'bg-orange-100 text-orange-600',
     type: 'analyst',
@@ -91,7 +91,7 @@ export default function Dashboard() {
   const [editingCopilot, setEditingCopilot] = useState<CopilotData | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
-  const [statusFilter, setStatusFilter] = useState<'all' | 'online' | 'offline'>('all');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'archived'>('all');
   const [sortBy, setSortBy] = useState<'name' | 'type' | 'status'>('name');
   const { toast } = useToast();
 
@@ -150,7 +150,7 @@ export default function Dashboard() {
       id: Date.now().toString(),
       name: data.name,
       description: data.description,
-      status: 'online',
+      status: 'active',
       avatar: avatarInitials,
       avatarColor: colors[Math.floor(Math.random() * colors.length)],
       type: data.type,
@@ -224,14 +224,14 @@ export default function Dashboard() {
                   
                   {/* Filters */}
                   <div className="flex gap-2">
-                    <Select value={statusFilter} onValueChange={(value: 'all' | 'online' | 'offline') => setStatusFilter(value)}>
+                    <Select value={statusFilter} onValueChange={(value: 'all' | 'active' | 'archived') => setStatusFilter(value)}>
                       <SelectTrigger className="w-32">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="all">All Status</SelectItem>
-                        <SelectItem value="online">Online</SelectItem>
-                        <SelectItem value="offline">Offline</SelectItem>
+                        <SelectItem value="active">Active</SelectItem>
+                        <SelectItem value="archived">Archived</SelectItem>
                       </SelectContent>
                     </Select>
                     
@@ -323,7 +323,7 @@ export default function Dashboard() {
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${copilot.status === 'online' ? 'bg-green-500' : 'bg-gray-400'}`} />
+                              <div className={`w-2 h-2 rounded-full ${copilot.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}`} />
                               <span className="capitalize">{copilot.status}</span>
                             </div>
                           </TableCell>
@@ -454,14 +454,14 @@ export default function Dashboard() {
                   
                   {/* Filters */}
                   <div className="flex gap-2">
-                    <Select value={statusFilter} onValueChange={(value: 'all' | 'online' | 'offline') => setStatusFilter(value)}>
+                    <Select value={statusFilter} onValueChange={(value: 'all' | 'active' | 'archived') => setStatusFilter(value)}>
                       <SelectTrigger className="w-32">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="all">All Status</SelectItem>
-                        <SelectItem value="online">Online</SelectItem>
-                        <SelectItem value="offline">Offline</SelectItem>
+                        <SelectItem value="active">Active</SelectItem>
+                        <SelectItem value="archived">Archived</SelectItem>
                       </SelectContent>
                     </Select>
                     
@@ -553,7 +553,7 @@ export default function Dashboard() {
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${copilot.status === 'online' ? 'bg-green-500' : 'bg-gray-400'}`} />
+                              <div className={`w-2 h-2 rounded-full ${copilot.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}`} />
                               <span className="capitalize">{copilot.status}</span>
                             </div>
                           </TableCell>
