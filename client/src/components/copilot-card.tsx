@@ -23,10 +23,10 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onDelet
               <span className="text-lg font-semibold">{copilot.avatar}</span>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-900">{copilot.name}</h3>
+              <h3 className="font-semibold text-card-foreground">{copilot.name}</h3>
               <div className="flex items-center gap-2 mt-1">
-                <div className={`w-2 h-2 rounded-full ${copilot.status === 'online' ? 'bg-green-500' : 'bg-gray-400'}`}></div>
-                <span className="text-sm text-gray-500 capitalize">{copilot.status}</span>
+                <div className={`w-2 h-2 rounded-full ${copilot.status === 'online' ? 'bg-primary' : 'bg-muted-foreground'}`}></div>
+                <span className="text-sm text-muted-foreground capitalize">{copilot.status}</span>
               </div>
             </div>
           </div>
@@ -44,7 +44,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onDelet
           </DropdownMenu>
         </div>
         
-        <p className="text-gray-600 text-sm mb-4">{copilot.description}</p>
+        <p className="text-muted-foreground text-sm mb-4">{copilot.description}</p>
         
         <div className="flex flex-wrap gap-2 mb-4">
           {copilot.components.map((component, index) => (
@@ -64,8 +64,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onDelet
         
         <Button 
           onClick={() => onStartChat(copilot)}
-          className="w-full text-white"
-          style={{ backgroundColor: '#008062' }}
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
         >
           Start Chat
         </Button>

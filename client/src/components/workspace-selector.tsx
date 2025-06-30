@@ -14,15 +14,15 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3 bg-gray-50 hover:bg-gray-100">
+        <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3 bg-sidebar-accent hover:bg-card">
           <div className={`w-8 h-8 ${currentWorkspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
             {currentWorkspace.avatar}
           </div>
           <div className="text-left flex-1">
-            <div className="text-sm font-medium text-gray-900">{currentWorkspace.name}</div>
-            <div className="text-xs text-gray-500">{currentWorkspace.type}</div>
+            <div className="text-sm font-medium text-sidebar-foreground">{currentWorkspace.name}</div>
+            <div className="text-xs text-muted-foreground">{currentWorkspace.type}</div>
           </div>
-          <ChevronDown className="w-5 h-5 text-gray-400" />
+          <ChevronDown className="w-5 h-5 text-muted-foreground" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 p-2" align="start">
@@ -31,7 +31,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
             key={workspace.id}
             onClick={() => onWorkspaceChange(workspace)}
             className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer ${
-              workspace.id === currentWorkspace.id ? 'bg-blue-50 text-blue-600' : ''
+              workspace.id === currentWorkspace.id ? 'bg-accent text-accent-foreground' : ''
             }`}
           >
             <div className={`w-8 h-8 ${workspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
@@ -39,7 +39,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
             </div>
             <div>
               <div className="text-sm font-medium">{workspace.name}</div>
-              <div className="text-xs text-gray-500">{workspace.type}</div>
+              <div className="text-xs text-muted-foreground">{workspace.type}</div>
             </div>
           </DropdownMenuItem>
         ))}

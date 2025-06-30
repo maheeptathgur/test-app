@@ -179,9 +179,9 @@ export default function Dashboard() {
           subtitle: 'Individual AI agents that can be combined into copilots',
           content: (
             <div className="text-center py-12">
-              <Users className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No agents configured</h3>
-              <p className="mt-1 text-sm text-gray-500">Get started by creating your first agent.</p>
+              <Users className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-2 text-sm font-medium text-foreground">No agents configured</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Get started by creating your first agent.</p>
             </div>
           ),
         };
@@ -191,9 +191,9 @@ export default function Dashboard() {
           subtitle: 'External tools and integrations available to your copilots',
           content: (
             <div className="text-center py-12">
-              <Settings className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No tools configured</h3>
-              <p className="mt-1 text-sm text-gray-500">Connect external tools to enhance your copilots.</p>
+              <Settings className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-2 text-sm font-medium text-foreground">No tools configured</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Connect external tools to enhance your copilots.</p>
             </div>
           ),
         };
@@ -203,9 +203,9 @@ export default function Dashboard() {
           subtitle: 'Automated workflows and processes for your copilots',
           content: (
             <div className="text-center py-12">
-              <BarChart3 className="mx-auto h-12 w-12 text-gray-400" />
-              <h3 className="mt-2 text-sm font-medium text-gray-900">No workflows configured</h3>
-              <p className="mt-1 text-sm text-gray-500">Create automated workflows to streamline your processes.</p>
+              <BarChart3 className="mx-auto h-12 w-12 text-muted-foreground" />
+              <h3 className="mt-2 text-sm font-medium text-foreground">No workflows configured</h3>
+              <p className="mt-1 text-sm text-muted-foreground">Create automated workflows to streamline your processes.</p>
             </div>
           ),
         };
@@ -215,11 +215,11 @@ export default function Dashboard() {
   const sectionContent = getSectionContent();
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <div className="w-64 border-r border-gray-200 flex flex-col" style={{ backgroundColor: '#e6eeef' }}>
+      <div className="w-64 bg-sidebar-background border-r border-sidebar-border flex flex-col">
         {/* Workspace Selector */}
-        <div className="p-6 border-b border-gray-200">
+        <div className="p-6 border-b border-sidebar-border">
           <WorkspaceSelector
             currentWorkspace={currentWorkspace}
             workspaces={workspaces}
@@ -240,8 +240,8 @@ export default function Dashboard() {
                     onClick={() => handleSectionChange(item.id as NavigationSection)}
                     className={`w-full justify-start gap-3 ${
                       isActive 
-                        ? 'text-blue-600 bg-blue-50' 
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                        ? 'text-sidebar-primary bg-sidebar-accent' 
+                        : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
                     }`}
                   >
                     <Icon className="w-5 h-5" />
@@ -254,14 +254,14 @@ export default function Dashboard() {
         </nav>
 
         {/* User Profile */}
-        <div className="p-6 border-t border-gray-200">
+        <div className="p-6 border-t border-sidebar-border">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium text-gray-600">JD</span>
+            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+              <span className="text-sm font-medium text-muted-foreground">JD</span>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium text-gray-900 truncate">John Doe</div>
-              <div className="text-xs text-gray-500 truncate">john.doe@company.com</div>
+              <div className="text-sm font-medium text-sidebar-foreground truncate">John Doe</div>
+              <div className="text-xs text-muted-foreground truncate">john.doe@company.com</div>
             </div>
           </div>
         </div>
@@ -270,11 +270,11 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
-        <div className="bg-white border-b border-gray-200 px-8 py-6">
+        <div className="bg-card border-b border-border px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">{sectionContent.title}</h1>
-              <p className="text-gray-600 mt-1">{sectionContent.subtitle}</p>
+              <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
+              <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
             </div>
             {activeSection === 'copilots' && (
               <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />

@@ -87,7 +87,7 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
                   ? 'text-white'
                   : 'bg-gray-100 text-gray-900'
               }`}
-              style={message.sender === 'user' ? { backgroundColor: '#008062' } : {}}
+              style={message.sender === 'user' ? { backgroundColor: 'hsl(var(--primary))' } : {}}
             >
               {message.content}
             </div>
@@ -105,7 +105,7 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
             placeholder="Type your message..."
             className="flex-1"
           />
-          <Button onClick={handleSendMessage} size="sm" className="text-white" style={{ backgroundColor: '#008062' }}>
+          <Button onClick={handleSendMessage} size="sm" className="bg-primary hover:bg-primary/90 text-primary-foreground">
             <Send className="h-4 w-4" />
           </Button>
         </div>
