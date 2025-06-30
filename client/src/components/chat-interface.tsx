@@ -91,7 +91,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
   if (!isOpen || !copilot) return null;
 
   return (
-    <div className="flex flex-col h-full bg-background">
+    <div className="flex flex-col h-full" style={{ backgroundColor: '#f2f2f2' }}>
       <div className="flex items-center justify-between p-6 border-b bg-muted/50">
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-sm font-semibold`}>
@@ -114,8 +114,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
         </div>
       </div>
       
-      <div className="flex-1 p-6 overflow-y-auto">
-        <div className="max-w-4xl mx-auto h-full flex flex-col">
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
           {showProfileFields && (
             <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
               <div className="flex items-center justify-between mb-3">
@@ -261,8 +261,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
         </div>
       </div>
       
-      <div className="border-t bg-muted/50 p-6">
-        <div className="max-w-4xl mx-auto">
+      <div className="border-t bg-muted/50">
+        <div className="max-w-4xl mx-auto p-6">
           <div className="flex gap-3">
             <Button 
               variant="outline" 
