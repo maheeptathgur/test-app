@@ -873,8 +873,8 @@ export default function Dashboard() {
                 <Upload className="w-4 h-4" />
                 Upload Files
               </Button>
-              <Button variant="outline" className="w-full justify-start gap-2">
-                <SiGoogledrive className="w-4 h-4" style={{ color: '#008062' }} />
+              <Button variant="outline" className="w-full justify-start gap-2 group">
+                <SiGoogledrive className="w-4 h-4 group-hover:text-white transition-colors" style={{ color: '#008062' }} />
                 Import from Google Drive
               </Button>
             </div>
