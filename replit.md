@@ -111,6 +111,7 @@ Changelog:
 - June 30, 2025. Updated copilot status system from online/offline to active/archived, removed status indicators, and updated filtering system accordingly
 - June 30, 2025. Modified chat interface to open as full screen instead of modal overlay when "Start Chat" is clicked, with improved layout and messaging
 - June 30, 2025. Updated chat interface to open within main content area while keeping sidebar visible, replacing section content when chat is active
+- June 30, 2025. Modified chat layout to hide top bar and fill entire right section when in chat mode, providing maximum space for conversation
 ```
 
 ## User Preferences
