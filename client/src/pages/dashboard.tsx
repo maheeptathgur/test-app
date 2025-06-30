@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import knolliLogo from "@assets/image_1751267938774.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -93,6 +93,7 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'archived'>('all');
   const [sortBy, setSortBy] = useState<'name' | 'type' | 'status'>('name');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const { toast } = useToast();
 
   const showNotification = (message: string) => {
@@ -630,21 +631,33 @@ export default function Dashboard() {
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <div className="w-64 border-r border-sidebar-border flex flex-col bg-[#e6eeef]">
-        {/* Logo */}
+      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
+        {/* Logo and Toggle */}
         <div className="p-6 border-b border-sidebar-border">
-          <div className="flex items-center gap-3 mb-4">
-            <img 
-              src={knolliLogo}
-              alt="Knolli Logo" 
-              className="h-8 w-auto"
-            />
+          <div className="flex items-center justify-between mb-4">
+            {!sidebarCollapsed && (
+              <img 
+                src={knolliLogo}
+                alt="Knolli Logo" 
+                className="h-8 w-auto"
+              />
+            )}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+              className="text-sidebar-foreground hover:text-sidebar-primary"
+            >
+              {sidebarCollapsed ? <PanelLeftOpen className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
+            </Button>
           </div>
-          <WorkspaceSelector
-            currentWorkspace={currentWorkspace}
-            workspaces={workspaces}
-            onWorkspaceChange={handleWorkspaceChange}
-          />
+          {!sidebarCollapsed && (
+            <WorkspaceSelector
+              currentWorkspace={currentWorkspace}
+              workspaces={workspaces}
+              onWorkspaceChange={handleWorkspaceChange}
+            />
+          )}
         </div>
 
         {/* Navigation */}
@@ -658,14 +671,15 @@ export default function Dashboard() {
                   <Button
                     variant="ghost"
                     onClick={() => handleSectionChange(item.id as NavigationSection)}
-                    className={`w-full justify-start gap-3 ${
+                    className={`w-full ${sidebarCollapsed ? 'justify-center px-2' : 'justify-start gap-3'} ${
                       isActive 
                         ? 'text-sidebar-primary bg-sidebar-accent' 
                         : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
                     }`}
+                    title={sidebarCollapsed ? item.label : undefined}
                   >
                     <Icon className="w-5 h-5" />
-                    {item.label}
+                    {!sidebarCollapsed && item.label}
                   </Button>
                 </li>
               );
@@ -675,14 +689,16 @@ export default function Dashboard() {
 
         {/* User Profile */}
         <div className="p-6 border-t border-sidebar-border">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center">
+          <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'gap-3'}`}>
+            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center" title={sidebarCollapsed ? "John Doe" : undefined}>
               <span className="text-sm font-medium text-muted-foreground">JD</span>
             </div>
-            <div className="flex-1 min-w-0">
-              <div className="text-sm font-medium text-sidebar-foreground truncate">John Doe</div>
-              <div className="text-xs text-muted-foreground truncate">john.doe@company.com</div>
-            </div>
+            {!sidebarCollapsed && (
+              <div className="flex-1 min-w-0">
+                <div className="text-sm font-medium text-sidebar-foreground truncate">John Doe</div>
+                <div className="text-xs text-muted-foreground truncate">john.doe@company.com</div>
+              </div>
+            )}
           </div>
         </div>
       </div>
