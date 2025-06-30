@@ -736,35 +736,10 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      {/* Main Content */}
-      <div className="flex-1 overflow-y-auto" style={{ backgroundColor: '#f2f2f2' }}>
-        {/* Combined scrollable content */}
-        <div className={`${chatCopilot || configuringCopilot ? 'h-full' : 'p-8'}`}>
-          {/* Top Bar - Hidden when in chat or configuration mode */}
-          {!chatCopilot && !configuringCopilot && (
-            <div className="mb-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
-                  <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
-                </div>
-                {activeSection === 'copilots' && (
-                  <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Content Body */}
-          <div className={chatCopilot || configuringCopilot ? 'h-full' : ''}>
-            {sectionContent.content}
-          </div>
-        </div>
-      </div>
       
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
-        <div className="w-80 border-l border-sidebar-border bg-background flex flex-col">
+        <div className="w-80 border-r border-sidebar-border bg-background flex flex-col">
           <div className="p-4 border-b flex items-center justify-between">
             <h3 className="font-semibold text-foreground">Attachments</h3>
             <Button
@@ -791,52 +766,57 @@ export default function Dashboard() {
               </Button>
             </div>
             
-            {/* File Type Categories */}
+            {/* All Files */}
             <div className="space-y-3">
-              <h4 className="text-sm font-medium text-foreground">Quick Upload</h4>
-              <div className="grid grid-cols-2 gap-2">
-                <Button variant="outline" className="h-16 flex flex-col gap-1">
-                  <FileText className="w-5 h-5" />
-                  <span className="text-xs">Documents</span>
-                </Button>
-                <Button variant="outline" className="h-16 flex flex-col gap-1">
-                  <Image className="w-5 h-5" />
-                  <span className="text-xs">Images</span>
-                </Button>
-                <Button variant="outline" className="h-16 flex flex-col gap-1">
-                  <Music className="w-5 h-5" />
-                  <span className="text-xs">Audio</span>
-                </Button>
-                <Button variant="outline" className="h-16 flex flex-col gap-1">
-                  <Video className="w-5 h-5" />
-                  <span className="text-xs">Video</span>
-                </Button>
-              </div>
-            </div>
-            
-            {/* Recent Files */}
-            <div className="space-y-3">
-              <h4 className="text-sm font-medium text-foreground">Recent Files</h4>
+              <h4 className="text-sm font-medium text-foreground">All Files</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
                   <FileText className="w-4 h-4 text-blue-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">Project_Brief.pdf</div>
-                    <div className="text-xs text-muted-foreground">2 hours ago</div>
+                    <div className="text-xs text-muted-foreground">2 hours ago • 1.2 MB</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
                   <Image className="w-4 h-4 text-green-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">logo_design.png</div>
-                    <div className="text-xs text-muted-foreground">Yesterday</div>
+                    <div className="text-xs text-muted-foreground">Yesterday • 856 KB</div>
                   </div>
                 </div>
                 <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
                   <Music className="w-4 h-4 text-purple-500" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">background_music.mp3</div>
-                    <div className="text-xs text-muted-foreground">3 days ago</div>
+                    <div className="text-xs text-muted-foreground">3 days ago • 4.8 MB</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                  <Video className="w-4 h-4 text-red-500" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium truncate">demo_video.mp4</div>
+                    <div className="text-xs text-muted-foreground">1 week ago • 24.5 MB</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                  <FileText className="w-4 h-4 text-orange-500" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium truncate">presentation.pptx</div>
+                    <div className="text-xs text-muted-foreground">1 week ago • 3.2 MB</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                  <File className="w-4 h-4 text-gray-500" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium truncate">data_export.csv</div>
+                    <div className="text-xs text-muted-foreground">2 weeks ago • 540 KB</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
+                  <Image className="w-4 h-4 text-green-500" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-medium truncate">screenshot_2024.jpg</div>
+                    <div className="text-xs text-muted-foreground">2 weeks ago • 1.8 MB</div>
                   </div>
                 </div>
               </div>
@@ -863,6 +843,32 @@ export default function Dashboard() {
           </div>
         </div>
       )}
+      
+      {/* Main Content */}
+      <div className="flex-1 overflow-y-auto" style={{ backgroundColor: '#f2f2f2' }}>
+        {/* Combined scrollable content */}
+        <div className={`${chatCopilot || configuringCopilot ? 'h-full' : 'p-8'}`}>
+          {/* Top Bar - Hidden when in chat or configuration mode */}
+          {!chatCopilot && !configuringCopilot && (
+            <div className="mb-8">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
+                  <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
+                </div>
+                {activeSection === 'copilots' && (
+                  <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Content Body */}
+          <div className={chatCopilot || configuringCopilot ? 'h-full' : ''}>
+            {sectionContent.content}
+          </div>
+        </div>
+      </div>
       
       {/* Edit Modal */}
       <EditCopilotModal
