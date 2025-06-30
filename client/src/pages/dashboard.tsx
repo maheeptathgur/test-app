@@ -13,6 +13,7 @@ import { CopilotCard } from "@/components/copilot-card";
 import { ChatInterface } from "@/components/chat-interface";
 import { CreateCopilotModal } from "@/components/create-copilot-modal";
 import { EditCopilotModal } from "@/components/edit-copilot-modal";
+import { SampleScreen } from "@/components/sample-screens";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
@@ -381,109 +382,55 @@ export default function Dashboard() {
         return {
           title: 'Agents',
           subtitle: 'Individual AI agents that can be combined into copilots',
-          content: (
-            <div className="text-center py-12">
-              <Users className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-2 text-sm font-medium text-foreground">No agents configured</h3>
-              <p className="mt-1 text-sm text-muted-foreground">Get started by creating your first agent.</p>
-            </div>
-          ),
+          content: <SampleScreen section="agents" />,
         };
       case 'tools':
         return {
           title: 'Tools',
           subtitle: 'External tools and integrations available to your copilots',
-          content: (
-            <div className="text-center py-12">
-              <Settings className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-2 text-sm font-medium text-foreground">No tools configured</h3>
-              <p className="mt-1 text-sm text-muted-foreground">Connect external tools to enhance your copilots.</p>
-            </div>
-          ),
+          content: <SampleScreen section="tools" />,
         };
       case 'workflows':
         return {
           title: 'Workflows',
           subtitle: 'Automated workflows and processes for your copilots',
-          content: (
-            <div className="text-center py-12">
-              <BarChart3 className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-2 text-sm font-medium text-foreground">No workflows configured</h3>
-              <p className="mt-1 text-sm text-muted-foreground">Create automated workflows to streamline your processes.</p>
-            </div>
-          ),
+          content: <SampleScreen section="workflows" />,
         };
       case 'knowledge-base':
         return {
           title: 'Knowledge Base',
           subtitle: 'Manage knowledge articles and documentation for your copilots',
-          content: (
-            <div className="text-center py-12">
-              <BookOpen className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-2 text-sm font-medium text-foreground">No knowledge articles</h3>
-              <p className="mt-1 text-sm text-muted-foreground">Create knowledge articles to help your copilots provide better responses.</p>
-            </div>
-          ),
+          content: <SampleScreen section="knowledge-base" />,
         };
       case 'profile-fields':
         return {
           title: 'Profile Fields',
           subtitle: 'Custom fields to collect additional user information',
-          content: (
-            <div className="text-center py-12">
-              <UserCog className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-2 text-sm font-medium text-foreground">No profile fields configured</h3>
-              <p className="mt-1 text-sm text-muted-foreground">Add custom fields to gather more information from your users.</p>
-            </div>
-          ),
+          content: <SampleScreen section="profile-fields" />,
         };
       case 'subscriptions':
         return {
           title: 'Subscriptions',
           subtitle: 'Manage user subscriptions and billing information',
-          content: (
-            <div className="text-center py-12">
-              <CreditCard className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-2 text-sm font-medium text-foreground">No active subscriptions</h3>
-              <p className="mt-1 text-sm text-muted-foreground">View and manage user subscription plans and billing.</p>
-            </div>
-          ),
+          content: <SampleScreen section="subscriptions" />,
         };
       case 'conversations':
         return {
           title: 'Conversations',
           subtitle: 'View and manage all user conversations with copilots',
-          content: (
-            <div className="text-center py-12">
-              <MessageSquare className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-2 text-sm font-medium text-foreground">No conversations yet</h3>
-              <p className="mt-1 text-sm text-muted-foreground">User conversations with copilots will appear here.</p>
-            </div>
-          ),
+          content: <SampleScreen section="conversations" />,
         };
       case 'analytics':
         return {
           title: 'Analytics',
           subtitle: 'Performance metrics and insights for your copilots',
-          content: (
-            <div className="text-center py-12">
-              <TrendingUp className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-2 text-sm font-medium text-foreground">No analytics data</h3>
-              <p className="mt-1 text-sm text-muted-foreground">Analytics and performance metrics will be displayed here.</p>
-            </div>
-          ),
+          content: <SampleScreen section="analytics" />,
         };
       case 'users':
         return {
           title: 'Users',
           subtitle: 'Manage user accounts and permissions',
-          content: (
-            <div className="text-center py-12">
-              <Shield className="mx-auto h-12 w-12 text-muted-foreground" />
-              <h3 className="mt-2 text-sm font-medium text-foreground">No users configured</h3>
-              <p className="mt-1 text-sm text-muted-foreground">Add and manage user accounts and their permissions.</p>
-            </div>
-          ),
+          content: <SampleScreen section="users" />,
         };
       default:
         return {
