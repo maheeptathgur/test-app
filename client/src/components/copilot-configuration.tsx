@@ -151,8 +151,8 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       {/* Content */}
       <div className="flex-1 overflow-hidden">
         <Tabs defaultValue="general" className="h-full flex flex-col">
-          <div className="border-b">
-            <div className="max-w-4xl mx-auto px-6 pt-4">
+          <div className="border-b bg-muted/20">
+            <div className="max-w-4xl mx-auto px-6 pt-4 pb-4">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="general" className="flex items-center gap-2">
                   <Settings className="w-4 h-4" />
@@ -169,6 +169,8 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
               </TabsList>
             </div>
           </div>
+          
+          <Separator />
 
           <div className="flex-1 overflow-y-auto">
             <TabsContent value="general" className="p-0 m-0 h-full">
