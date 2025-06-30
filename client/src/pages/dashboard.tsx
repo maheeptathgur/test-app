@@ -771,9 +771,12 @@ export default function Dashboard() {
                 <div 
                   className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                     selectedFiles.includes('Project_Brief.pdf') 
-                      ? 'border-green-500 bg-green-50/50' 
-                      : 'border-transparent bg-white hover:bg-muted/30'
+                      ? 'bg-white hover:bg-muted/30' 
+                      : 'bg-white hover:bg-muted/30'
                   }`}
+                  style={{
+                    borderColor: selectedFiles.includes('Project_Brief.pdf') ? '#008062' : '#dadde2'
+                  }}
                   onClick={() => handleFileSelect('Project_Brief.pdf')}
                 >
                   <FileText className="w-4 h-4 text-blue-500" />
@@ -783,11 +786,10 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                    selectedFiles.includes('logo_design.png') 
-                      ? 'border-green-500 bg-green-50/50' 
-                      : 'border-transparent bg-white hover:bg-muted/30'
-                  }`}
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  style={{
+                    borderColor: selectedFiles.includes('logo_design.png') ? '#008062' : '#dadde2'
+                  }}
                   onClick={() => handleFileSelect('logo_design.png')}
                 >
                   <Image className="w-4 h-4 text-green-500" />
@@ -797,11 +799,10 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                    selectedFiles.includes('background_music.mp3') 
-                      ? 'border-green-500 bg-green-50/50' 
-                      : 'border-transparent bg-white hover:bg-muted/30'
-                  }`}
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  style={{
+                    borderColor: selectedFiles.includes('background_music.mp3') ? '#008062' : '#dadde2'
+                  }}
                   onClick={() => handleFileSelect('background_music.mp3')}
                 >
                   <Music className="w-4 h-4 text-purple-500" />
@@ -811,11 +812,10 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                    selectedFiles.includes('demo_video.mp4') 
-                      ? 'border-green-500 bg-green-50/50' 
-                      : 'border-transparent bg-white hover:bg-muted/30'
-                  }`}
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  style={{
+                    borderColor: selectedFiles.includes('demo_video.mp4') ? '#008062' : '#dadde2'
+                  }}
                   onClick={() => handleFileSelect('demo_video.mp4')}
                 >
                   <Video className="w-4 h-4 text-red-500" />
@@ -825,11 +825,10 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                    selectedFiles.includes('presentation.pptx') 
-                      ? 'border-green-500 bg-green-50/50' 
-                      : 'border-transparent bg-white hover:bg-muted/30'
-                  }`}
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  style={{
+                    borderColor: selectedFiles.includes('presentation.pptx') ? '#008062' : '#dadde2'
+                  }}
                   onClick={() => handleFileSelect('presentation.pptx')}
                 >
                   <FileText className="w-4 h-4 text-orange-500" />
@@ -839,11 +838,10 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                    selectedFiles.includes('data_export.csv') 
-                      ? 'border-green-500 bg-green-50/50' 
-                      : 'border-transparent bg-white hover:bg-muted/30'
-                  }`}
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  style={{
+                    borderColor: selectedFiles.includes('data_export.csv') ? '#008062' : '#dadde2'
+                  }}
                   onClick={() => handleFileSelect('data_export.csv')}
                 >
                   <File className="w-4 h-4 text-gray-500" />
@@ -853,11 +851,10 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
-                    selectedFiles.includes('screenshot_2024.jpg') 
-                      ? 'border-green-500 bg-green-50/50' 
-                      : 'border-transparent bg-white hover:bg-muted/30'
-                  }`}
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  style={{
+                    borderColor: selectedFiles.includes('screenshot_2024.jpg') ? '#008062' : '#dadde2'
+                  }}
                   onClick={() => handleFileSelect('screenshot_2024.jpg')}
                 >
                   <Image className="w-4 h-4 text-green-500" />
