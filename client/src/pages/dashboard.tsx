@@ -315,7 +315,7 @@ export default function Dashboard() {
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <div className="w-64 bg-sidebar-background border-r border-sidebar-border flex flex-col min-h-screen">
+      <div className="w-64 border-r border-sidebar-border flex flex-col bg-[#e6eeef]">
         {/* Logo */}
         <div className="p-6 border-b border-sidebar-border">
           <div className="flex items-center gap-3 mb-4">
