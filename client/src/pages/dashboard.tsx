@@ -1,7 +1,12 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown } from "lucide-react";
 import knolliLogo from "@assets/image_1751267938774.png";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { WorkspaceSelector } from "@/components/workspace-selector";
 import { CopilotCard } from "@/components/copilot-card";
@@ -83,6 +88,10 @@ export default function Dashboard() {
   const [copilots, setCopilots] = useState<CopilotData[]>(mockCopilots);
   const [chatCopilot, setChatCopilot] = useState<CopilotData | null>(null);
   const [editingCopilot, setEditingCopilot] = useState<CopilotData | null>(null);
+  const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'online' | 'offline'>('all');
+  const [sortBy, setSortBy] = useState<'name' | 'type' | 'status'>('name');
   const { toast } = useToast();
 
   const showNotification = (message: string) => {
@@ -159,6 +168,33 @@ export default function Dashboard() {
     setEditingCopilot(null);
   };
 
+  // Filter and sort copilots
+  const getFilteredAndSortedCopilots = () => {
+    let filtered = copilots.filter(copilot => {
+      const matchesSearch = copilot.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           copilot.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesStatus = statusFilter === 'all' || copilot.status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+
+    filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'type':
+          return a.type.localeCompare(b.type);
+        case 'status':
+          return a.status.localeCompare(b.status);
+        default:
+          return 0;
+      }
+    });
+
+    return filtered;
+  };
+
+  const filteredCopilots = getFilteredAndSortedCopilots();
+
   const getSectionContent = (): { title: string; subtitle: string; content: React.ReactNode } => {
     switch (activeSection) {
       case 'copilots':
@@ -166,17 +202,173 @@ export default function Dashboard() {
           title: 'Copilots',
           subtitle: 'AI assistants configured for specific tasks and conversations',
           content: (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {copilots.map((copilot) => (
-                <CopilotCard
-                  key={copilot.id}
-                  copilot={copilot}
-                  onStartChat={handleStartChat}
-                  onEdit={handleEditCopilot}
-                  onDuplicate={handleDuplicateCopilot}
-                  onDelete={handleDeleteCopilot}
-                />
-              ))}
+            <div className="space-y-6">
+              {/* Controls Bar */}
+              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                <div className="flex flex-col sm:flex-row gap-4 flex-1">
+                  {/* Search */}
+                  <div className="relative flex-1 max-w-md">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                    <Input
+                      placeholder="Search copilots..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10"
+                    />
+                  </div>
+                  
+                  {/* Filters */}
+                  <div className="flex gap-2">
+                    <Select value={statusFilter} onValueChange={(value: 'all' | 'online' | 'offline') => setStatusFilter(value)}>
+                      <SelectTrigger className="w-32">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Status</SelectItem>
+                        <SelectItem value="online">Online</SelectItem>
+                        <SelectItem value="offline">Offline</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="sm">
+                          <ArrowUpDown className="w-4 h-4 mr-2" />
+                          Sort
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuItem onClick={() => setSortBy('name')}>
+                          Sort by Name
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setSortBy('type')}>
+                          Sort by Type
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setSortBy('status')}>
+                          Sort by Status
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </div>
+                
+                {/* View Toggle */}
+                <div className="flex gap-1 border rounded-lg p-1">
+                  <Button
+                    variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setViewMode('grid')}
+                    className="px-3"
+                  >
+                    <Grid className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === 'table' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setViewMode('table')}
+                    className="px-3"
+                  >
+                    <List className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Content */}
+              {viewMode === 'grid' ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredCopilots.map((copilot) => (
+                    <CopilotCard
+                      key={copilot.id}
+                      copilot={copilot}
+                      onStartChat={handleStartChat}
+                      onEdit={handleEditCopilot}
+                      onDuplicate={handleDuplicateCopilot}
+                      onDelete={handleDeleteCopilot}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="border rounded-lg">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Type</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Description</TableHead>
+                        <TableHead className="text-right">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredCopilots.map((copilot) => (
+                        <TableRow key={copilot.id}>
+                          <TableCell className="font-medium">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
+                                {copilot.avatar}
+                              </div>
+                              {copilot.name}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="secondary" className="capitalize">
+                              {copilot.type}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <div className={`w-2 h-2 rounded-full ${copilot.status === 'online' ? 'bg-green-500' : 'bg-gray-400'}`} />
+                              <span className="capitalize">{copilot.status}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="max-w-xs truncate">
+                            {copilot.description}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <div className="flex gap-2 justify-end">
+                              <Button variant="outline" size="sm" onClick={() => handleStartChat(copilot)}>
+                                Chat
+                              </Button>
+                              <Button variant="outline" size="sm" onClick={() => handleEditCopilot(copilot)}>
+                                Edit
+                              </Button>
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button variant="outline" size="sm">
+                                    More
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                  <DropdownMenuItem onClick={() => handleDuplicateCopilot(copilot)}>
+                                    Duplicate
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem onClick={() => handleDeleteCopilot(copilot)} className="text-destructive">
+                                    Delete
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+
+              {/* Empty State */}
+              {filteredCopilots.length === 0 && (
+                <div className="text-center py-12">
+                  <Monitor className="mx-auto h-12 w-12 text-muted-foreground" />
+                  <h3 className="mt-2 text-sm font-medium text-foreground">No copilots found</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {searchTerm || statusFilter !== 'all' 
+                      ? 'Try adjusting your search or filters' 
+                      : 'Get started by creating your first copilot'
+                    }
+                  </p>
+                </div>
+              )}
             </div>
           ),
         };
@@ -293,17 +485,173 @@ export default function Dashboard() {
           title: 'Copilots',
           subtitle: 'AI assistants configured for specific tasks and conversations',
           content: (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {copilots.map((copilot) => (
-                <CopilotCard
-                  key={copilot.id}
-                  copilot={copilot}
-                  onStartChat={handleStartChat}
-                  onEdit={handleEditCopilot}
-                  onDuplicate={handleDuplicateCopilot}
-                  onDelete={handleDeleteCopilot}
-                />
-              ))}
+            <div className="space-y-6">
+              {/* Controls Bar */}
+              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+                <div className="flex flex-col sm:flex-row gap-4 flex-1">
+                  {/* Search */}
+                  <div className="relative flex-1 max-w-md">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                    <Input
+                      placeholder="Search copilots..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10"
+                    />
+                  </div>
+                  
+                  {/* Filters */}
+                  <div className="flex gap-2">
+                    <Select value={statusFilter} onValueChange={(value: 'all' | 'online' | 'offline') => setStatusFilter(value)}>
+                      <SelectTrigger className="w-32">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Status</SelectItem>
+                        <SelectItem value="online">Online</SelectItem>
+                        <SelectItem value="offline">Offline</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="outline" size="sm">
+                          <ArrowUpDown className="w-4 h-4 mr-2" />
+                          Sort
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuItem onClick={() => setSortBy('name')}>
+                          Sort by Name
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setSortBy('type')}>
+                          Sort by Type
+                        </DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => setSortBy('status')}>
+                          Sort by Status
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                </div>
+                
+                {/* View Toggle */}
+                <div className="flex gap-1 border rounded-lg p-1">
+                  <Button
+                    variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setViewMode('grid')}
+                    className="px-3"
+                  >
+                    <Grid className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === 'table' ? 'default' : 'ghost'}
+                    size="sm"
+                    onClick={() => setViewMode('table')}
+                    className="px-3"
+                  >
+                    <List className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Content */}
+              {viewMode === 'grid' ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredCopilots.map((copilot) => (
+                    <CopilotCard
+                      key={copilot.id}
+                      copilot={copilot}
+                      onStartChat={handleStartChat}
+                      onEdit={handleEditCopilot}
+                      onDuplicate={handleDuplicateCopilot}
+                      onDelete={handleDeleteCopilot}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="border rounded-lg">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Name</TableHead>
+                        <TableHead>Type</TableHead>
+                        <TableHead>Status</TableHead>
+                        <TableHead>Description</TableHead>
+                        <TableHead className="text-right">Actions</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredCopilots.map((copilot) => (
+                        <TableRow key={copilot.id}>
+                          <TableCell className="font-medium">
+                            <div className="flex items-center gap-3">
+                              <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
+                                {copilot.avatar}
+                              </div>
+                              {copilot.name}
+                            </div>
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="secondary" className="capitalize">
+                              {copilot.type}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-2">
+                              <div className={`w-2 h-2 rounded-full ${copilot.status === 'online' ? 'bg-green-500' : 'bg-gray-400'}`} />
+                              <span className="capitalize">{copilot.status}</span>
+                            </div>
+                          </TableCell>
+                          <TableCell className="max-w-xs truncate">
+                            {copilot.description}
+                          </TableCell>
+                          <TableCell className="text-right">
+                            <div className="flex gap-2 justify-end">
+                              <Button variant="outline" size="sm" onClick={() => handleStartChat(copilot)}>
+                                Chat
+                              </Button>
+                              <Button variant="outline" size="sm" onClick={() => handleEditCopilot(copilot)}>
+                                Edit
+                              </Button>
+                              <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                  <Button variant="outline" size="sm">
+                                    More
+                                  </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                  <DropdownMenuItem onClick={() => handleDuplicateCopilot(copilot)}>
+                                    Duplicate
+                                  </DropdownMenuItem>
+                                  <DropdownMenuItem onClick={() => handleDeleteCopilot(copilot)} className="text-destructive">
+                                    Delete
+                                  </DropdownMenuItem>
+                                </DropdownMenuContent>
+                              </DropdownMenu>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              )}
+
+              {/* Empty State */}
+              {filteredCopilots.length === 0 && (
+                <div className="text-center py-12">
+                  <Monitor className="mx-auto h-12 w-12 text-muted-foreground" />
+                  <h3 className="mt-2 text-sm font-medium text-foreground">No copilots found</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {searchTerm || statusFilter !== 'all' 
+                      ? 'Try adjusting your search or filters' 
+                      : 'Get started by creating your first copilot'
+                    }
+                  </p>
+                </div>
+              )}
             </div>
           ),
         };
