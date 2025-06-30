@@ -705,7 +705,7 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto" style={{ backgroundColor: '#f2f2f2' }}>
         {/* Combined scrollable content */}
-        <div className={`${chatCopilot ? '' : 'p-8'}`}>
+        <div className={`${chatCopilot ? 'h-full' : 'p-8'}`}>
           {/* Top Bar - Hidden when in chat mode */}
           {!chatCopilot && (
             <div className="mb-8">
@@ -722,7 +722,9 @@ export default function Dashboard() {
           )}
 
           {/* Content Body */}
-          {sectionContent.content}
+          <div className={chatCopilot ? 'h-full' : ''}>
+            {sectionContent.content}
+          </div>
         </div>
       </div>
       {/* Edit Modal */}
