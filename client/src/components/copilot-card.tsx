@@ -26,8 +26,9 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
             <div>
               <h3 className="font-semibold text-card-foreground">{copilot.name}</h3>
               <div className="flex items-center gap-2 mt-1">
-                <div className={`w-2 h-2 rounded-full ${copilot.status === 'online' ? 'bg-primary' : 'bg-muted-foreground'}`}></div>
-                <span className="text-sm text-muted-foreground capitalize">{copilot.status}</span>
+                <Badge variant={copilot.status === 'active' ? 'default' : 'secondary'} className="text-xs capitalize">
+                  {copilot.status}
+                </Badge>
               </div>
             </div>
           </div>

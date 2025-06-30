@@ -10,7 +10,7 @@ export interface CopilotData {
   id: string;
   name: string;
   description: string;
-  status: 'online' | 'offline';
+  status: 'active' | 'archived';
   avatar: string;
   avatarColor: string;
   type: string;
