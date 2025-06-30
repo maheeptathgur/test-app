@@ -315,7 +315,7 @@ export default function Dashboard() {
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
-      <div className="w-64 bg-sidebar-background border-r border-sidebar-border flex flex-col">
+      <div className="w-64 border-r border-sidebar-border flex flex-col bg-[#e6eeef]">
         {/* Logo */}
         <div className="p-6 border-b border-sidebar-border">
           <div className="flex items-center gap-3 mb-4">
@@ -371,7 +371,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
@@ -392,14 +391,12 @@ export default function Dashboard() {
           {sectionContent.content}
         </div>
       </div>
-
       {/* Chat Interface */}
       <ChatInterface
         isOpen={!!chatCopilot}
         copilot={chatCopilot}
         onClose={() => setChatCopilot(null)}
       />
-
       {/* Edit Modal */}
       <EditCopilotModal
         isOpen={!!editingCopilot}
