@@ -169,8 +169,6 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
               </TabsList>
             </div>
           </div>
-          
-          <Separator />
 
           <div className="flex-1 overflow-y-auto">
             <TabsContent value="general" className="p-0 m-0 h-full">
