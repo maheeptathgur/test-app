@@ -754,20 +754,9 @@ export default function Dashboard() {
             </Button>
           </div>
           
-          <div className="flex-1 p-4 space-y-4 overflow-y-auto">
-            {/* Upload Area */}
-            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-              <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-              <div className="text-sm text-muted-foreground mb-2">
-                Drag & drop files here, or click to select
-              </div>
-              <Button variant="outline" size="sm">
-                Choose Files
-              </Button>
-            </div>
-            
-            {/* All Files */}
-            <div className="space-y-3">
+          <div className="flex-1 flex flex-col">
+            {/* All Files - Takes up most of the space */}
+            <div className="flex-1 p-4 space-y-3 overflow-y-auto">
               <h4 className="text-sm font-medium text-foreground">All Files</h4>
               <div className="space-y-2">
                 <div className="flex items-center gap-3 p-2 rounded-md hover:bg-muted/50 cursor-pointer">
@@ -822,23 +811,16 @@ export default function Dashboard() {
               </div>
             </div>
             
-            {/* Connected Sources */}
-            <div className="space-y-3">
-              <h4 className="text-sm font-medium text-foreground">Connected Sources</h4>
-              <div className="space-y-2">
-                <Button variant="outline" className="w-full justify-start gap-2">
-                  <div className="w-4 h-4 bg-blue-500 rounded"></div>
-                  Google Drive
-                </Button>
-                <Button variant="outline" className="w-full justify-start gap-2">
-                  <div className="w-4 h-4 bg-black rounded"></div>
-                  GitHub
-                </Button>
-                <Button variant="outline" className="w-full justify-start gap-2">
-                  <div className="w-4 h-4 bg-purple-500 rounded"></div>
-                  Notion
-                </Button>
-              </div>
+            {/* Import Options - Fixed at bottom */}
+            <div className="border-t p-4 space-y-2">
+              <Button className="w-full justify-start gap-2">
+                <Upload className="w-4 h-4" />
+                Upload Files
+              </Button>
+              <Button variant="outline" className="w-full justify-start gap-2">
+                <div className="w-4 h-4 bg-blue-500 rounded"></div>
+                Import from Google Drive
+              </Button>
             </div>
           </div>
         </div>
