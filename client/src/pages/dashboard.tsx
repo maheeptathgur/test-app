@@ -689,7 +689,7 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Bar */}
-        <div className="px-8 py-6 bg-[#f2f2f2]" style={{ backgroundColor: '#e6eeef' }}>
+        <div className="px-8 py-6" style={{ backgroundColor: '#f2f2f2' }}>
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
@@ -702,7 +702,7 @@ export default function Dashboard() {
         </div>
 
         {/* Content Body */}
-        <div className="flex-1 p-8 overflow-y-auto" style={{ backgroundColor: '#e6eeef' }}>
+        <div className="flex-1 p-8 overflow-y-auto" style={{ backgroundColor: '#f2f2f2' }}>
           {sectionContent.content}
         </div>
       </div>
