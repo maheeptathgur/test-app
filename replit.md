@@ -117,7 +117,8 @@ Changelog:
 - June 30, 2025. Changed main content layout to unified scrolling with header and content combined instead of sticky header
 - June 30, 2025. Made component badges clickable with detailed modal showing description, capabilities, and configuration for agents, tools, and workflows
 - June 30, 2025. Fixed chat interface to use fixed height layout instead of growing with messages for better UI consistency
-- June 30, 2025. Added profile fields interface accessible from chat header with comprehensive user context fields for job title, industry, communication preferences, expertise, and goals
+- June 30, 2025. Moved profile fields to copilot-specific configuration and created comprehensive copilot configuration interface with tabbed design for general settings, components management, and target user profile fields
+- June 30, 2025. Updated edit copilot functionality to open full-screen configuration interface instead of modal, allowing detailed component editing and profile field customization
 ```
 
 ## User Preferences

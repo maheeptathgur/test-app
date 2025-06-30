@@ -13,6 +13,7 @@ import { CopilotCard } from "@/components/copilot-card";
 import { ChatInterface } from "@/components/chat-interface";
 import { CreateCopilotModal } from "@/components/create-copilot-modal";
 import { EditCopilotModal } from "@/components/edit-copilot-modal";
+import { CopilotConfiguration } from "@/components/copilot-configuration";
 import { SampleScreen } from "@/components/sample-screens";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
@@ -89,6 +90,7 @@ export default function Dashboard() {
   const [copilots, setCopilots] = useState<CopilotData[]>(mockCopilots);
   const [chatCopilot, setChatCopilot] = useState<CopilotData | null>(null);
   const [editingCopilot, setEditingCopilot] = useState<CopilotData | null>(null);
+  const [configuringCopilot, setConfiguringCopilot] = useState<CopilotData | null>(null);
   const [viewMode, setViewMode] = useState<'grid' | 'table'>('grid');
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'archived'>('all');
@@ -118,7 +120,7 @@ export default function Dashboard() {
   };
 
   const handleEditCopilot = (copilot: CopilotData) => {
-    setEditingCopilot(copilot);
+    setConfiguringCopilot(copilot);
   };
 
   const handleDuplicateCopilot = (copilot: CopilotData) => {
@@ -173,6 +175,14 @@ export default function Dashboard() {
     setEditingCopilot(null);
   };
 
+  const handleSaveCopilotConfiguration = (updatedCopilot: CopilotData) => {
+    setCopilots(prev => prev.map(copilot => 
+      copilot.id === updatedCopilot.id ? updatedCopilot : copilot
+    ));
+    showNotification(`Updated configuration for: ${updatedCopilot.name}`);
+    setConfiguringCopilot(null);
+  };
+
   // Filter and sort copilots
   const getFilteredAndSortedCopilots = () => {
     let filtered = copilots.filter(copilot => {
@@ -211,6 +221,21 @@ export default function Dashboard() {
             isOpen={true}
             copilot={chatCopilot}
             onClose={() => setChatCopilot(null)}
+          />
+        ),
+      };
+    }
+
+    // If configuring a copilot, show configuration interface
+    if (configuringCopilot) {
+      return {
+        title: `Configure ${configuringCopilot.name}`,
+        subtitle: 'Edit copilot settings, components, and profile fields',
+        content: (
+          <CopilotConfiguration
+            copilot={configuringCopilot}
+            onClose={() => setConfiguringCopilot(null)}
+            onSave={handleSaveCopilotConfiguration}
           />
         ),
       };
@@ -705,16 +730,16 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="flex-1 overflow-y-auto" style={{ backgroundColor: '#f2f2f2' }}>
         {/* Combined scrollable content */}
-        <div className={`${chatCopilot ? 'h-full' : 'p-8'}`}>
-          {/* Top Bar - Hidden when in chat mode */}
-          {!chatCopilot && (
+        <div className={`${chatCopilot || configuringCopilot ? 'h-full' : 'p-8'}`}>
+          {/* Top Bar - Hidden when in chat or configuration mode */}
+          {!chatCopilot && !configuringCopilot && (
             <div className="mb-8">
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
                   <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
                 </div>
-                {(activeSection === 'copilots' || activeSection === 'knowledge-base' || activeSection === 'profile-fields') && (
+                {activeSection === 'copilots' && (
                   <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />
                 )}
               </div>
@@ -722,7 +747,7 @@ export default function Dashboard() {
           )}
 
           {/* Content Body */}
-          <div className={chatCopilot ? 'h-full' : ''}>
+          <div className={chatCopilot || configuringCopilot ? 'h-full' : ''}>
             {sectionContent.content}
           </div>
         </div>
