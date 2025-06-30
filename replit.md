@@ -110,6 +110,7 @@ Changelog:
 - June 30, 2025. Created comprehensive sample screens for all navigation sections (Agents, Tools, Workflows, Knowledge Base, Profile Fields, Subscriptions, Conversations, Analytics, Users) with realistic data and interactive elements
 - June 30, 2025. Updated copilot status system from online/offline to active/archived, removed status indicators, and updated filtering system accordingly
 - June 30, 2025. Modified chat interface to open as full screen instead of modal overlay when "Start Chat" is clicked, with improved layout and messaging
+- June 30, 2025. Updated chat interface to open within main content area while keeping sidebar visible, replacing section content when chat is active
 ```
 
 ## User Preferences

@@ -200,6 +200,21 @@ export default function Dashboard() {
   const filteredCopilots = getFilteredAndSortedCopilots();
 
   const getSectionContent = (): { title: string; subtitle: string; content: React.ReactNode } => {
+    // If chat is open, show chat interface instead of section content
+    if (chatCopilot) {
+      return {
+        title: `Chat with ${chatCopilot.name}`,
+        subtitle: chatCopilot.description,
+        content: (
+          <ChatInterface
+            isOpen={true}
+            copilot={chatCopilot}
+            onClose={() => setChatCopilot(null)}
+          />
+        ),
+      };
+    }
+
     switch (activeSection) {
       case 'copilots':
         return {
@@ -691,12 +706,6 @@ export default function Dashboard() {
           {sectionContent.content}
         </div>
       </div>
-      {/* Chat Interface */}
-      <ChatInterface
-        isOpen={!!chatCopilot}
-        copilot={chatCopilot}
-        onClose={() => setChatCopilot(null)}
-      />
       {/* Edit Modal */}
       <EditCopilotModal
         isOpen={!!editingCopilot}
