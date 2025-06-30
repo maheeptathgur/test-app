@@ -874,7 +874,14 @@ export default function Dashboard() {
                 Upload Files
               </Button>
               <Button variant="outline" className="w-full justify-start gap-2 group">
-                <SiGoogledrive className="w-4 h-4 group-hover:text-white transition-colors" style={{ color: '#008062' }} />
+                <SiGoogledrive 
+                  className="w-4 h-4 transition-colors" 
+                  style={{ 
+                    color: '#008062',
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'white'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#008062'}
+                />
                 Import from Google Drive
               </Button>
             </div>
