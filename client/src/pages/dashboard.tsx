@@ -315,8 +315,16 @@ export default function Dashboard() {
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <div className="w-64 bg-sidebar-background border-r border-sidebar-border flex flex-col">
-        {/* Workspace Selector */}
+        {/* Logo */}
         <div className="p-6 border-b border-sidebar-border">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <svg viewBox="0 0 24 24" className="w-5 h-5 text-white" fill="currentColor">
+                <path d="M12 2L2 7v10c0 5.55 3.84 9.74 9 11 5.16-1.26 9-5.45 9-11V7l-10-5z"/>
+              </svg>
+            </div>
+            <span className="text-lg font-bold text-sidebar-foreground">Knolli</span>
+          </div>
           <WorkspaceSelector
             currentWorkspace={currentWorkspace}
             workspaces={workspaces}
