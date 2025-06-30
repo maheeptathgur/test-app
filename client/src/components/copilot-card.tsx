@@ -64,7 +64,8 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onDelet
         
         <Button 
           onClick={() => onStartChat(copilot)}
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+          className="w-full text-white"
+          style={{ backgroundColor: '#008062' }}
         >
           Start Chat
         </Button>
