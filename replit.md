@@ -105,6 +105,7 @@ Changelog:
 - June 30, 2025. Changed font to Funnel Sans from Google Fonts and applied consistently throughout the app
 - June 30, 2025. Added comprehensive navigation menu with Knowledge Base, Profile Fields, Subscriptions, Conversations, Analytics, and Users sections
 - June 30, 2025. Added Knolli logo to top left sidebar using provided brand logo image
+- June 30, 2025. Implemented view toggle (grid/table), search, filtering, and sorting system for copilots screen
 ```
 
 ## User Preferences
