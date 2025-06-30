@@ -67,7 +67,7 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
   if (!isOpen || !copilot) return null;
 
   return (
-    <div className="fixed inset-0 bg-background z-50 flex flex-col">
+    <div className="flex flex-col h-full bg-background">
       <div className="flex items-center justify-between p-6 border-b bg-muted/50">
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-sm font-semibold`}>
