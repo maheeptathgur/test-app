@@ -739,7 +739,7 @@ export default function Dashboard() {
       
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
-        <div className="w-80 border-r border-sidebar-border flex flex-col" style={{ backgroundColor: '#f3f5f7' }}>
+        <div className="w-80 border-r border-sidebar-border flex flex-col" style={{ backgroundColor: '#f3f4f7' }}>
           <div className="p-4 border-b flex items-center justify-between">
             <h3 className="font-semibold text-foreground">Attachments</h3>
             <Button
