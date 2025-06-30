@@ -748,7 +748,7 @@ export default function Dashboard() {
       
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
-        <div className="w-80 border-r border-sidebar-border flex flex-col h-screen" style={{ backgroundColor: '#f3f4f7' }}>
+        <div className="w-80 border-r border-sidebar-border flex flex-col h-full" style={{ backgroundColor: '#f3f4f7' }}>
           <div className="p-4 border-b flex items-center justify-between">
             <h3 className="font-semibold text-foreground">Attachments</h3>
             <Button
@@ -763,9 +763,9 @@ export default function Dashboard() {
             </Button>
           </div>
           
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col min-h-0">
             {/* All Files - Takes up most of the space */}
-            <div className="flex-1 p-4 space-y-3 overflow-y-auto">
+            <div className="flex-1 p-4 space-y-3 overflow-y-auto min-h-0">
               <h4 className="text-sm font-medium text-foreground">All Files</h4>
               <div className="space-y-2">
                 <div 
@@ -867,7 +867,7 @@ export default function Dashboard() {
             </div>
             
             {/* Import Options - Fixed at bottom */}
-            <div className="border-t p-4 space-y-2">
+            <div className="border-t p-4 space-y-2 flex-shrink-0">
               <Button className="w-full justify-start gap-2">
                 <Upload className="w-4 h-4" />
                 Upload Files
