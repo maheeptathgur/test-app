@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip } from "lucide-react";
+import { X, Send, Paperclip, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { ChatMessage, CopilotData } from "@/lib/types";
+import { ProfileFieldsInterface } from "./profile-fields-interface";
 
 interface ChatInterfaceProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface ChatInterfaceProps {
 export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
+  const [showProfileFields, setShowProfileFields] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -78,56 +80,76 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
             <p className="text-sm text-muted-foreground">{copilot.description}</p>
           </div>
         </div>
-        <Button variant="outline" onClick={onClose} className="gap-2">
-          <X className="h-4 w-4" />
-          Close Chat
-        </Button>
+        <div className="flex gap-2">
+          <Button 
+            variant="outline" 
+            onClick={() => setShowProfileFields(true)} 
+            className="gap-2"
+            disabled={showProfileFields}
+          >
+            <User className="h-4 w-4" />
+            Profile
+          </Button>
+          <Button variant="outline" onClick={onClose} className="gap-2">
+            <X className="h-4 w-4" />
+            Close Chat
+          </Button>
+        </div>
       </div>
       
-      <div className="flex-1 p-6 overflow-y-auto">
-        <div className="max-w-4xl mx-auto h-full flex flex-col">
-          <div className="flex-1 space-y-6 overflow-y-auto">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-[70%] p-4 rounded-lg ${
-                    message.sender === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-foreground'
-                  }`}
-                >
-                  {message.content}
-                </div>
+      {/* Conditional content - either chat or profile fields */}
+      {showProfileFields ? (
+        <div className="flex-1 overflow-hidden">
+          <ProfileFieldsInterface onClose={() => setShowProfileFields(false)} />
+        </div>
+      ) : (
+        <>
+          <div className="flex-1 p-6 overflow-y-auto">
+            <div className="max-w-4xl mx-auto h-full flex flex-col">
+              <div className="flex-1 space-y-6 overflow-y-auto">
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[70%] p-4 rounded-lg ${
+                        message.sender === 'user'
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-muted text-foreground'
+                      }`}
+                    >
+                      {message.content}
+                    </div>
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
               </div>
-            ))}
-            <div ref={messagesEndRef} />
+            </div>
           </div>
-        </div>
-      </div>
-      
-      <div className="border-t bg-muted/50 p-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="flex gap-3">
-            <Button variant="outline" className="h-12 px-3">
-              <Paperclip className="h-4 w-4" />
-            </Button>
-            <Input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Type your message..."
-              className="flex-1 h-12"
-            />
-            <Button onClick={handleSendMessage} className="h-12 px-6">
-              <Send className="h-4 w-4 mr-2" />
-              Send
-            </Button>
+          
+          <div className="border-t bg-muted/50 p-6">
+            <div className="max-w-4xl mx-auto">
+              <div className="flex gap-3">
+                <Button variant="outline" className="h-12 px-3">
+                  <Paperclip className="h-4 w-4" />
+                </Button>
+                <Input
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Type your message..."
+                  className="flex-1 h-12"
+                />
+                <Button onClick={handleSendMessage} className="h-12 px-6">
+                  <Send className="h-4 w-4 mr-2" />
+                  Send
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }
