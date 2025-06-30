@@ -84,24 +84,26 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
         </Button>
       </div>
       
-      <div className="flex-1 p-6 overflow-y-auto">
-        <div className="max-w-4xl mx-auto space-y-6">
-          {messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
+      <div className="flex-1 p-6 overflow-y-auto" style={{ minHeight: '0' }}>
+        <div className="max-w-4xl mx-auto space-y-6 min-h-full flex flex-col">
+          <div className="flex-1 space-y-6">
+            {messages.map((message) => (
               <div
-                className={`max-w-[70%] p-4 rounded-lg ${
-                  message.sender === 'user'
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-foreground'
-                }`}
+                key={message.id}
+                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                {message.content}
+                <div
+                  className={`max-w-[70%] p-4 rounded-lg ${
+                    message.sender === 'user'
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-foreground'
+                  }`}
+                >
+                  {message.content}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
           <div ref={messagesEndRef} />
         </div>
       </div>
