@@ -46,11 +46,7 @@ function AgentsScreen() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Agents</h1>
-          <p className="text-gray-600">Manage your AI agents and their configurations</p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <Bot className="w-4 h-4 mr-2" />
           Create Agent
@@ -166,11 +162,7 @@ function ToolsScreen() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Tools</h1>
-          <p className="text-gray-600">Manage and configure your automation tools</p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <Wrench className="w-4 h-4 mr-2" />
           Add Tool
@@ -218,11 +210,7 @@ function WorkflowsScreen() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Workflows</h1>
-          <p className="text-gray-600">Automate your business processes</p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <GitBranch className="w-4 h-4 mr-2" />
           Create Workflow
@@ -265,11 +253,7 @@ function KnowledgeBaseScreen() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Knowledge Base</h1>
-          <p className="text-gray-600">Manage your documentation and help articles</p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <BookOpen className="w-4 h-4 mr-2" />
           New Article
@@ -357,11 +341,7 @@ function ProfileFieldsScreen() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Profile Fields</h1>
-          <p className="text-gray-600">Configure custom fields for user profiles</p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <UserCog className="w-4 h-4 mr-2" />
           Add Field
@@ -420,11 +400,7 @@ function ProfileFieldsScreen() {
 function SubscriptionsScreen() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Subscriptions</h1>
-          <p className="text-gray-600">Manage your billing and subscription plans</p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <CreditCard className="w-4 h-4 mr-2" />
           Upgrade Plan
@@ -509,11 +485,7 @@ function ConversationsScreen() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Conversations</h1>
-          <p className="text-gray-600">Monitor and manage user interactions</p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <MessageSquare className="w-4 h-4 mr-2" />
           New Conversation
@@ -609,11 +581,7 @@ function ConversationsScreen() {
 function AnalyticsScreen() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Analytics</h1>
-          <p className="text-gray-600">Track performance and usage metrics</p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <BarChart3 className="w-4 h-4 mr-2" />
           Export Report
@@ -744,11 +712,7 @@ function UsersScreen() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold text-gray-900">Users</h1>
-          <p className="text-gray-600">Manage user accounts and permissions</p>
-        </div>
+      <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <Users className="w-4 h-4 mr-2" />
           Invite User
