@@ -4,10 +4,11 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image } from "lucide-react";
+import { X, Save, Settings, Bot, Users, Workflow, Database, Plus, Trash2, Upload, Image } from "lucide-react";
 import { CopilotData } from "@/lib/types";
 
 interface CopilotConfigurationProps {
@@ -109,10 +110,15 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     return models[provider as keyof typeof models] || [];
   };
 
+  const handleSave = () => {
+    onSave(copilotData);
+    onClose();
+  };
+
   const addComponent = (type: 'agent' | 'tool' | 'workflow') => {
     const newComponent = {
-      name: `New ${type}`,
-      type: type
+      name: `New ${type.charAt(0).toUpperCase() + type.slice(1)}`,
+      type
     };
     handleCopilotChange('components', [...copilotData.components, newComponent]);
   };
@@ -121,13 +127,6 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     const newComponents = copilotData.components.filter((_, i) => i !== index);
     handleCopilotChange('components', newComponents);
   };
-
-  const handleSave = () => {
-    onSave(copilotData);
-    onClose();
-  };
-
-  if (!copilot) return null;
 
   return (
     <div className="flex flex-col h-full bg-background">
@@ -154,18 +153,18 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
           <div className="border-b">
             <div className="max-w-4xl mx-auto px-6 pt-4">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="general" className="flex items-center gap-2">
-                  <Settings className="w-4 h-4" />
-                  General
-                </TabsTrigger>
-                <TabsTrigger value="components" className="flex items-center gap-2">
-                  <Bot className="w-4 h-4" />
-                  Components
-                </TabsTrigger>
-                <TabsTrigger value="profile" className="flex items-center gap-2">
-                  <Users className="w-4 h-4" />
-                  Profile Fields
-                </TabsTrigger>
+              <TabsTrigger value="general" className="flex items-center gap-2">
+                <Settings className="w-4 h-4" />
+                General
+              </TabsTrigger>
+              <TabsTrigger value="components" className="flex items-center gap-2">
+                <Bot className="w-4 h-4" />
+                Components
+              </TabsTrigger>
+              <TabsTrigger value="profile" className="flex items-center gap-2">
+                <Users className="w-4 h-4" />
+                Profile Fields
+              </TabsTrigger>
               </TabsList>
             </div>
           </div>
@@ -224,6 +223,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                       />
                     </div>
                     
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label>Icon Image (1:1 ratio)</Label>
