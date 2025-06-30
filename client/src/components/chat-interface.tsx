@@ -1,7 +1,8 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
 import { ChatMessage, CopilotData } from "@/lib/types";
 
@@ -15,6 +16,17 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [showProfileFields, setShowProfileFields] = useState(false);
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [profileData, setProfileData] = useState({
+    title: "Marketing Manager",
+    company: "TechCorp Inc.",
+    industry: "Software Technology",
+    department: "Marketing",
+    experience: "5-7 years",
+    location: "San Francisco, CA",
+    communicationStyle: "Professional, data-driven",
+    goals: "Increase brand awareness and lead generation"
+  });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,6 +45,15 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  const handleProfileChange = (field: string, value: string) => {
+    setProfileData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSaveProfile = () => {
+    setIsEditingProfile(false);
+    // In a real app, this would save to the backend
+  };
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
@@ -95,39 +116,123 @@ export function ChatInterface({ isOpen, copilot, onClose }: ChatInterfaceProps) 
         <div className="max-w-4xl mx-auto h-full flex flex-col">
           {showProfileFields && (
             <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
-              <h3 className="font-semibold mb-3 text-foreground">Target User Profile</h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="font-semibold text-foreground">Target User Profile</h3>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => isEditingProfile ? handleSaveProfile() : setIsEditingProfile(true)}
+                  className="gap-2"
+                >
+                  {isEditingProfile ? (
+                    <>
+                      <Check className="h-3 w-3" />
+                      Save
+                    </>
+                  ) : (
+                    <>
+                      <Edit3 className="h-3 w-3" />
+                      Edit
+                    </>
+                  )}
+                </Button>
+              </div>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-muted-foreground">Title:</span>
-                  <span className="ml-2 text-foreground">Marketing Manager</span>
+                  <span className="text-muted-foreground block mb-1">Title:</span>
+                  {isEditingProfile ? (
+                    <Input
+                      value={profileData.title}
+                      onChange={(e) => handleProfileChange('title', e.target.value)}
+                      className="h-8"
+                    />
+                  ) : (
+                    <span className="text-foreground">{profileData.title}</span>
+                  )}
                 </div>
                 <div>
-                  <span className="text-muted-foreground">Company:</span>
-                  <span className="ml-2 text-foreground">TechCorp Inc.</span>
+                  <span className="text-muted-foreground block mb-1">Company:</span>
+                  {isEditingProfile ? (
+                    <Input
+                      value={profileData.company}
+                      onChange={(e) => handleProfileChange('company', e.target.value)}
+                      className="h-8"
+                    />
+                  ) : (
+                    <span className="text-foreground">{profileData.company}</span>
+                  )}
                 </div>
                 <div>
-                  <span className="text-muted-foreground">Industry:</span>
-                  <span className="ml-2 text-foreground">Software Technology</span>
+                  <span className="text-muted-foreground block mb-1">Industry:</span>
+                  {isEditingProfile ? (
+                    <Input
+                      value={profileData.industry}
+                      onChange={(e) => handleProfileChange('industry', e.target.value)}
+                      className="h-8"
+                    />
+                  ) : (
+                    <span className="text-foreground">{profileData.industry}</span>
+                  )}
                 </div>
                 <div>
-                  <span className="text-muted-foreground">Department:</span>
-                  <span className="ml-2 text-foreground">Marketing</span>
+                  <span className="text-muted-foreground block mb-1">Department:</span>
+                  {isEditingProfile ? (
+                    <Input
+                      value={profileData.department}
+                      onChange={(e) => handleProfileChange('department', e.target.value)}
+                      className="h-8"
+                    />
+                  ) : (
+                    <span className="text-foreground">{profileData.department}</span>
+                  )}
                 </div>
                 <div>
-                  <span className="text-muted-foreground">Experience:</span>
-                  <span className="ml-2 text-foreground">5-7 years</span>
+                  <span className="text-muted-foreground block mb-1">Experience:</span>
+                  {isEditingProfile ? (
+                    <Input
+                      value={profileData.experience}
+                      onChange={(e) => handleProfileChange('experience', e.target.value)}
+                      className="h-8"
+                    />
+                  ) : (
+                    <span className="text-foreground">{profileData.experience}</span>
+                  )}
                 </div>
                 <div>
-                  <span className="text-muted-foreground">Location:</span>
-                  <span className="ml-2 text-foreground">San Francisco, CA</span>
+                  <span className="text-muted-foreground block mb-1">Location:</span>
+                  {isEditingProfile ? (
+                    <Input
+                      value={profileData.location}
+                      onChange={(e) => handleProfileChange('location', e.target.value)}
+                      className="h-8"
+                    />
+                  ) : (
+                    <span className="text-foreground">{profileData.location}</span>
+                  )}
                 </div>
                 <div className="col-span-2">
-                  <span className="text-muted-foreground">Communication Style:</span>
-                  <span className="ml-2 text-foreground">Professional, data-driven</span>
+                  <span className="text-muted-foreground block mb-1">Communication Style:</span>
+                  {isEditingProfile ? (
+                    <Input
+                      value={profileData.communicationStyle}
+                      onChange={(e) => handleProfileChange('communicationStyle', e.target.value)}
+                      className="h-8"
+                    />
+                  ) : (
+                    <span className="text-foreground">{profileData.communicationStyle}</span>
+                  )}
                 </div>
                 <div className="col-span-2">
-                  <span className="text-muted-foreground">Goals:</span>
-                  <span className="ml-2 text-foreground">Increase brand awareness and lead generation</span>
+                  <span className="text-muted-foreground block mb-1">Goals:</span>
+                  {isEditingProfile ? (
+                    <Textarea
+                      value={profileData.goals}
+                      onChange={(e) => handleProfileChange('goals', e.target.value)}
+                      className="min-h-[60px]"
+                    />
+                  ) : (
+                    <span className="text-foreground">{profileData.goals}</span>
+                  )}
                 </div>
               </div>
             </div>
