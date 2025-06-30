@@ -114,7 +114,6 @@ export default function Dashboard() {
 
   const handleStartChat = (copilot: CopilotData) => {
     setChatCopilot(copilot);
-    showNotification(`Started chat with ${copilot.name}`);
   };
 
   const handleEditCopilot = (copilot: CopilotData) => {
