@@ -922,10 +922,6 @@ function MyComponent() {
                         <Upload className="w-4 h-4 mr-1" />
                         Upload Files
                       </Button>
-                      <Button variant="outline" size="sm">
-                        <FolderOpen className="w-4 h-4 mr-1" />
-                        Create Folder
-                      </Button>
                     </div>
                   </div>
                   
