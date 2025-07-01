@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User } from "lucide-react";
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -733,17 +733,44 @@ export default function Dashboard() {
 
         {/* User Profile */}
         <div className="p-6 border-t border-sidebar-border">
-          <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'gap-3'}`}>
-            <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center" title={sidebarCollapsed ? "John Doe" : undefined}>
-              <span className="text-sm font-medium text-muted-foreground">JD</span>
-            </div>
-            {!sidebarCollapsed && (
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-sidebar-foreground truncate">John Doe</div>
-                <div className="text-xs text-muted-foreground truncate">john.doe@company.com</div>
-              </div>
-            )}
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                variant="ghost" 
+                className={`w-full ${sidebarCollapsed ? 'p-2' : 'p-3'} h-auto hover:bg-sidebar-accent justify-start`}
+              >
+                <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'gap-3 w-full'}`}>
+                  <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center" title={sidebarCollapsed ? "John Doe" : undefined}>
+                    <span className="text-sm font-medium text-muted-foreground">JD</span>
+                  </div>
+                  {!sidebarCollapsed && (
+                    <>
+                      <div className="flex-1 min-w-0 text-left">
+                        <div className="text-sm font-medium text-sidebar-foreground truncate">John Doe</div>
+                        <div className="text-xs text-muted-foreground truncate">john.doe@company.com</div>
+                      </div>
+                      <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                    </>
+                  )}
+                </div>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56">
+              <DropdownMenuItem>
+                <User className="w-4 h-4 mr-2" />
+                Profile Settings
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings className="w-4 h-4 mr-2" />
+                Account Settings
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem className="text-red-600 hover:text-red-700">
+                <LogOut className="w-4 h-4 mr-2" />
+                Sign Out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
       
