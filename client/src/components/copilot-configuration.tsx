@@ -14,9 +14,6 @@ import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy,
 import { SiGmail, SiSlack } from "react-icons/si";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
-import { AgentConfigureScreen } from "./agent-screens";
-import { ToolConfigureScreen } from "./tool-configure-screen";
-import { WorkflowEditor } from "./workflow-editor";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
@@ -42,7 +39,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [activeTab, setActiveTab] = useState("general");
   const [codeTab, setCodeTab] = useState("javascript");
   const [copilotData, setCopilotData] = useState<CopilotData>(copilot);
-  const [configScreen, setConfigScreen] = useState<{ type: string; data: any } | null>(null);
+
   const [systemPrompt, setSystemPrompt] = useState("You are a helpful AI assistant focused on providing accurate and relevant information.");
   const [conversationStarters, setConversationStarters] = useState([
     "How can you help me today?",
@@ -253,21 +250,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     }));
   };
 
-  const handleAgentConfigure = (agent: any) => {
-    setConfigScreen({ type: 'agent', data: agent });
-  };
 
-  const handleToolConfigure = (tool: any) => {
-    setConfigScreen({ type: 'tool', data: tool });
-  };
-
-  const handleWorkflowConfigure = (workflow: any) => {
-    setConfigScreen({ type: 'workflow', data: workflow });
-  };
-
-  const handleBackFromConfig = () => {
-    setConfigScreen(null);
-  };
 
   const handleProfileChange = (field: keyof ProfileData, value: string) => {
     setProfileData(prev => ({
@@ -392,21 +375,31 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     setTempDescription("");
   };
 
+  // Navigation handlers dispatch custom events
+  const handleAgentConfigure = (agent: any) => {
+    onClose(); // Close the copilot configuration
+    window.dispatchEvent(new CustomEvent('navigate-to-agent-configure', { 
+      detail: { id: agent.id, name: agent.name } 
+    }));
+  };
+
+  const handleToolConfigure = (tool: any) => {
+    onClose(); // Close the copilot configuration
+    window.dispatchEvent(new CustomEvent('navigate-to-tool-configure', { 
+      detail: { id: tool.id, name: tool.name } 
+    }));
+  };
+
+  const handleWorkflowConfigure = (workflow: any) => {
+    onClose(); // Close the copilot configuration
+    window.dispatchEvent(new CustomEvent('navigate-to-workflow-edit', { 
+      detail: { id: workflow.id, name: workflow.name } 
+    }));
+  };
+
   if (!copilot) return null;
 
-  // Show configuration screens when configScreen is set
-  if (configScreen) {
-    switch (configScreen.type) {
-      case 'agent':
-        return <AgentConfigureScreen agent={configScreen.data} onBack={handleBackFromConfig} />;
-      case 'tool':
-        return <ToolConfigureScreen tool={configScreen.data} onBack={handleBackFromConfig} />;
-      case 'workflow':
-        return <WorkflowEditor workflowId={configScreen.data.id} onBack={handleBackFromConfig} />;
-      default:
-        return null;
-    }
-  }
+  // Navigation handlers dispatch custom events instead of showing inline screens
 
   return (
     <div className="flex flex-col h-full bg-background">

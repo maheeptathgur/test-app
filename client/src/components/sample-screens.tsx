@@ -31,19 +31,33 @@ import { ToolConfigureScreen } from "./tool-configure-screen";
 
 interface SampleScreenProps {
   section: NavigationSection;
+  configureAgent?: {id: string, name: string} | null;
+  onClearConfigureAgent?: () => void;
+  configureTool?: {id: string, name: string} | null;
+  onClearConfigureTool?: () => void;
+  configureWorkflow?: {id: string, name: string} | null;
+  onClearConfigureWorkflow?: () => void;
 }
 
-export function SampleScreen({ section }: SampleScreenProps) {
-  const [configureAgent, setConfigureAgent] = useState<any>(null);
+export function SampleScreen({ 
+  section, 
+  configureAgent: externalConfigureAgent, 
+  onClearConfigureAgent,
+  configureTool: externalConfigureTool,
+  onClearConfigureTool,
+  configureWorkflow: externalConfigureWorkflow,
+  onClearConfigureWorkflow 
+}: SampleScreenProps) {
+  const [localConfigureAgent, setLocalConfigureAgent] = useState<any>(null);
   const [testAgent, setTestAgent] = useState<any>(null);
   const [editWorkflow, setEditWorkflow] = useState<string | undefined>(undefined);
-  const [configureTool, setConfigureTool] = useState<any>(null);
+  const [localConfigureTool, setLocalConfigureTool] = useState<any>(null);
   const [showConnectNewTool, setShowConnectNewTool] = useState(false);
   const [showBrowseIntegrations, setShowBrowseIntegrations] = useState(false);
   const [showAddWorkspace, setShowAddWorkspace] = useState(false);
 
   const handleAgentConfigure = (agent: any) => {
-    setConfigureAgent(agent);
+    setLocalConfigureAgent(agent);
   };
 
   const handleAgentTest = (agent: any) => {
@@ -51,8 +65,9 @@ export function SampleScreen({ section }: SampleScreenProps) {
   };
 
   const handleBackToAgents = () => {
-    setConfigureAgent(null);
+    setLocalConfigureAgent(null);
     setTestAgent(null);
+    onClearConfigureAgent?.();
   };
 
   const handleWorkflowEdit = (workflowId: string) => {
@@ -61,14 +76,16 @@ export function SampleScreen({ section }: SampleScreenProps) {
 
   const handleBackToWorkflows = () => {
     setEditWorkflow(undefined);
+    onClearConfigureWorkflow?.();
   };
 
   const handleToolConfigure = (tool: any) => {
-    setConfigureTool(tool);
+    setLocalConfigureTool(tool);
   };
 
   const handleBackToTools = () => {
-    setConfigureTool(null);
+    setLocalConfigureTool(null);
+    onClearConfigureTool?.();
   };
 
   // Show Configure screen if an agent is being configured
@@ -79,21 +96,25 @@ export function SampleScreen({ section }: SampleScreenProps) {
   return (
     <>
       {(() => {
-        // Main content logic (duplicated from above for clarity)
-        if (configureAgent) {
-          return <AgentConfigureScreen agent={configureAgent} onBack={handleBackToAgents} />;
+        // Determine which agent/tool/workflow to configure (external from copilot config or local from screen)
+        const agentToConfig = externalConfigureAgent || localConfigureAgent;
+        const toolToConfig = externalConfigureTool || localConfigureTool;
+        const workflowToConfig = externalConfigureWorkflow || (editWorkflow ? { id: editWorkflow, name: editWorkflow } : null);
+
+        if (agentToConfig) {
+          return <AgentConfigureScreen agent={agentToConfig} onBack={handleBackToAgents} />;
         }
 
         if (testAgent) {
           return <AgentTestScreen agent={testAgent} onBack={handleBackToAgents} />;
         }
 
-        if (editWorkflow) {
-          return <WorkflowEditor workflowId={editWorkflow} onBack={handleBackToWorkflows} />;
+        if (workflowToConfig) {
+          return <WorkflowEditor workflowId={workflowToConfig.id} onBack={handleBackToWorkflows} />;
         }
 
-        if (configureTool) {
-          return <ToolConfigureScreen tool={configureTool} onBack={handleBackToTools} />;
+        if (toolToConfig) {
+          return <ToolConfigureScreen tool={toolToConfig} onBack={handleBackToTools} />;
         }
 
         switch (section) {

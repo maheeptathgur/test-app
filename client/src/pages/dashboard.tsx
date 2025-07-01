@@ -224,9 +224,45 @@ export default function Dashboard() {
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [copilotToDelete, setCopilotToDelete] = useState<CopilotData | null>(null);
+  
+  // State for tracking which specific agent/tool/workflow to configure
+  const [configureAgent, setConfigureAgent] = useState<{id: string, name: string} | null>(null);
+  const [configureTool, setConfigureTool] = useState<{id: string, name: string} | null>(null);
+  const [configureWorkflow, setConfigureWorkflow] = useState<{id: string, name: string} | null>(null);
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
+
+  // Handle navigation events from copilot configuration
+  useEffect(() => {
+    const handleAgentConfigure = (event: CustomEvent) => {
+      setConfigureAgent(event.detail);
+      setActiveSection('agents');
+      setConfiguringCopilot(null); // Close copilot config
+    };
+
+    const handleToolConfigure = (event: CustomEvent) => {
+      setConfigureTool(event.detail);
+      setActiveSection('tools');
+      setConfiguringCopilot(null); // Close copilot config
+    };
+
+    const handleWorkflowConfigure = (event: CustomEvent) => {
+      setConfigureWorkflow(event.detail);
+      setActiveSection('workflows');
+      setConfiguringCopilot(null); // Close copilot config
+    };
+
+    window.addEventListener('navigate-to-agent-configure', handleAgentConfigure as EventListener);
+    window.addEventListener('navigate-to-tool-configure', handleToolConfigure as EventListener);
+    window.addEventListener('navigate-to-workflow-edit', handleWorkflowConfigure as EventListener);
+
+    return () => {
+      window.removeEventListener('navigate-to-agent-configure', handleAgentConfigure as EventListener);
+      window.removeEventListener('navigate-to-tool-configure', handleToolConfigure as EventListener);
+      window.removeEventListener('navigate-to-workflow-edit', handleWorkflowConfigure as EventListener);
+    };
+  }, []);
 
   const showNotification = (message: string) => {
     toast({
@@ -602,19 +638,31 @@ export default function Dashboard() {
         return {
           title: 'Agents',
           subtitle: 'Individual AI agents that can be combined into copilots',
-          content: <SampleScreen section="agents" />,
+          content: <SampleScreen 
+            section="agents" 
+            configureAgent={configureAgent}
+            onClearConfigureAgent={() => setConfigureAgent(null)}
+          />,
         };
       case 'tools':
         return {
           title: 'Tools',
           subtitle: 'External tools and integrations available to your copilots',
-          content: <SampleScreen section="tools" />,
+          content: <SampleScreen 
+            section="tools" 
+            configureTool={configureTool}
+            onClearConfigureTool={() => setConfigureTool(null)}
+          />,
         };
       case 'workflows':
         return {
           title: 'Workflows',
           subtitle: 'Automated workflows and processes for your copilots',
-          content: <SampleScreen section="workflows" />,
+          content: <SampleScreen 
+            section="workflows" 
+            configureWorkflow={configureWorkflow}
+            onClearConfigureWorkflow={() => setConfigureWorkflow(null)}
+          />,
         };
       case 'knowledge-base':
         return {
