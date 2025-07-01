@@ -5,11 +5,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
-import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Filter } from "lucide-react";
+import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { PricingScreen } from "./pricing-screen";
 
@@ -346,7 +345,7 @@ function KnowledgeBaseScreen() {
         <Card>
           <CardContent className="p-6">
             <div className="text-center">
-              <p className="text-3xl font-bold text-brand-primary">32</p>
+              <p className="text-3xl font-bold text-brand-primary">18</p>
               <p className="text-sm text-muted-foreground">Total Documents</p>
             </div>
           </CardContent>
@@ -354,399 +353,30 @@ function KnowledgeBaseScreen() {
         <Card>
           <CardContent className="p-6">
             <div className="text-center">
-              <p className="text-3xl font-bold text-green-600">18</p>
-              <p className="text-sm text-muted-foreground">Workspace Docs</p>
+              <p className="text-3xl font-bold text-green-600">15</p>
+              <p className="text-sm text-muted-foreground">Published</p>
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-6">
             <div className="text-center">
-              <p className="text-3xl font-bold text-blue-600">9</p>
-              <p className="text-sm text-muted-foreground">Copilot Docs</p>
+              <p className="text-3xl font-bold text-blue-600">3,489</p>
+              <p className="text-sm text-muted-foreground">Total Views</p>
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-6">
             <div className="text-center">
-              <p className="text-3xl font-bold text-orange-600">5</p>
-              <p className="text-sm text-muted-foreground">User Uploads</p>
+              <p className="text-3xl font-bold text-orange-600">127</p>
+              <p className="text-sm text-muted-foreground">Contributors</p>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <Tabs defaultValue="all" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="all">All Documents</TabsTrigger>
-          <TabsTrigger value="workspace">Workspace</TabsTrigger>
-          <TabsTrigger value="copilots">Copilots</TabsTrigger>
-          <TabsTrigger value="uploads">User Uploads</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="all" className="space-y-4 mt-6">
-          {/* Workspace Documents */}
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">Company Handbook</div>
-                    <div className="text-sm text-muted-foreground">Complete guide to company policies and procedures</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>Created by Jennifer Walsh</span>
-                    <span>•</span>
-                    <span>5 days ago</span>
-                    <span>•</span>
-                    <span className="text-blue-600 font-medium">Workspace</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">PDF</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* Copilot Document */}
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-green-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">Product Documentation</div>
-                    <div className="text-sm text-muted-foreground">Comprehensive guide for product features</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>From Marketing Assistant</span>
-                    <span>•</span>
-                    <span>2 days ago</span>
-                    <span>•</span>
-                    <span className="text-green-600 font-medium">Copilot</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">PDF</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          {/* User Upload */}
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">Sales Training Materials</div>
-                    <div className="text-sm text-muted-foreground">Training presentations and sales methodologies</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>Uploaded by Sarah Martinez</span>
-                    <span>•</span>
-                    <span>4 hours ago</span>
-                    <span>•</span>
-                    <span className="text-orange-600 font-medium">User Upload</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">PPTX</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="workspace" className="space-y-4 mt-6">
-          <div className="space-y-4">
-            <div className="p-4 border rounded-lg bg-white">
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">Company Handbook</div>
-                    <div className="text-sm text-muted-foreground">Complete guide to company policies and procedures</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>Created by Jennifer Walsh</span>
-                    <span>•</span>
-                    <span>5 days ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">PDF</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">Development Guidelines</div>
-                    <div className="text-sm text-muted-foreground">Coding standards and development best practices</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>Created by David Park</span>
-                    <span>•</span>
-                    <span>1 week ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">MD</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="copilots" className="space-y-4 mt-6">
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-green-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">Product Documentation</div>
-                    <div className="text-sm text-muted-foreground">Comprehensive guide for product features</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>From Marketing Assistant</span>
-                    <span>•</span>
-                    <span>2 days ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">PDF</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-green-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">FAQ Document</div>
-                    <div className="text-sm text-muted-foreground">Frequently asked questions and answers</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>From Customer Support</span>
-                    <span>•</span>
-                    <span>1 week ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">DOCX</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-green-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">API Integration Guide</div>
-                    <div className="text-sm text-muted-foreground">Step-by-step integration documentation</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>From Content Writer</span>
-                    <span>•</span>
-                    <span>3 days ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">MD</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        </TabsContent>
-
-        <TabsContent value="uploads" className="space-y-4 mt-6">
-          <div className="space-y-4">
-            <div className="p-4 border rounded-lg bg-white">
-              <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">Sales Training Materials</div>
-                    <div className="text-sm text-muted-foreground">Training presentations and sales methodologies</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>Uploaded by Sarah Martinez</span>
-                    <span>•</span>
-                    <span>4 hours ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">PPTX</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">Q4 Financial Report</div>
-                    <div className="text-sm text-muted-foreground">Quarterly financial analysis and projections</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>Uploaded by Michael Chen</span>
-                    <span>•</span>
-                    <span>2 days ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">XLSX</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
-                <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
-                <div className="flex-1 min-w-0">
-                  <div>
-                    <div className="font-medium">Project Timeline Template</div>
-                    <div className="text-sm text-muted-foreground">Gantt chart template for project management</div>
-                  </div>
-                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                    <span>Uploaded by Lisa Wang</span>
-                    <span>•</span>
-                    <span>1 day ago</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 ml-4">
-                <Badge variant="secondary" className="text-xs">XLSX</Badge>
-                <Button variant="ghost" size="sm" title="View/Edit">
-                  <Eye className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" title="Rename">
-                  <Edit3 className="w-4 h-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-          </div>
-        </TabsContent>
-      </Tabs>
+      <div className="space-y-4">
         {/* Knowledge base documents */}
         <div className="p-4 border rounded-lg bg-white">
           <div className="flex items-start justify-between">
@@ -1010,8 +640,8 @@ function KnowledgeBaseScreen() {
               )}
             </div>
           </div>
-        </TabsContent>
-      </Tabs>
+        </div>
+      </div>
 
       {/* AI Document Suggestions Modal */}
       <Dialog open={suggestDocsOpen} onOpenChange={setSuggestDocsOpen}>
