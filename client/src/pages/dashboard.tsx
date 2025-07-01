@@ -432,7 +432,6 @@ export default function Dashboard() {
                       onDuplicate={handleDuplicateCopilot}
                       onArchive={handleArchiveCopilot}
                       onDelete={handleDeleteCopilot}
-                      onToggleFavorite={handleToggleFavorite}
                     />
                   ))}
                 </div>
@@ -680,7 +679,6 @@ export default function Dashboard() {
                       onDuplicate={handleDuplicateCopilot}
                       onArchive={handleArchiveCopilot}
                       onDelete={handleDeleteCopilot}
-                      onToggleFavorite={handleToggleFavorite}
                     />
                   ))}
                 </div>
