@@ -675,7 +675,7 @@ function MyComponent() {
             <div className="p-0 m-0 h-full">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <h2 className="text-lg font-semibold text-foreground">Components</h2>
                     <div className="flex gap-2">
                       <Button variant="outline" size="sm" onClick={() => addComponent('agent')}>
@@ -692,46 +692,242 @@ function MyComponent() {
                       </Button>
                     </div>
                   </div>
-                  <div className="space-y-4">
-                    {copilotData.components.map((component, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
-                        <div className="flex items-center gap-3">
-                          <Badge
-                            variant="secondary"
-                            className={`text-xs font-medium ${
-                              component.type === 'agent' ? 'bg-purple-100 text-purple-700' :
-                              component.type === 'tool' ? 'bg-blue-100 text-blue-700' :
-                              'bg-amber-100 text-amber-700'
-                            }`}
-                          >
-                            {component.type}
-                          </Badge>
-                          <Input
-                            value={component.name}
-                            onChange={(e) => {
-                              const newComponents = [...copilotData.components];
-                              newComponents[index] = { ...component, name: e.target.value };
-                              handleCopilotChange('components', newComponents);
-                            }}
-                            className="font-medium"
-                          />
+
+                  {/* Agents Section */}
+                  <div className="space-y-4 mb-8">
+                    <h3 className="text-md font-medium text-gray-900">Agents</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
+                            <PenTool className="w-5 h-5 text-white" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-sm">Content Creator</div>
+                            <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700 mt-1">Agent</Badge>
+                          </div>
                         </div>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => removeComponent(index)}
-                          className="text-red-600 hover:text-red-700"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        <div className="space-y-2 text-xs text-gray-600">
+                          <div className="flex justify-between">
+                            <span>Specialization:</span>
+                            <span className="font-medium">Content Creation</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Tools:</span>
+                            <span className="font-medium">3 connected</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Workflows:</span>
+                            <span className="font-medium">2 active</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Tasks:</span>
+                            <span className="font-medium">156 completed</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-1 mt-3">
+                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
                       </div>
-                    ))}
-                    {copilotData.components.length === 0 && (
-                      <div className="text-center py-8 text-muted-foreground">
-                        No components added yet. Use the buttons above to add agents, tools, or workflows.
+
+                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
+                            <BarChart className="w-5 h-5 text-white" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-sm">Data Analyst</div>
+                            <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700 mt-1">Agent</Badge>
+                          </div>
+                        </div>
+                        <div className="space-y-2 text-xs text-gray-600">
+                          <div className="flex justify-between">
+                            <span>Specialization:</span>
+                            <span className="font-medium">Data Analysis</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Tools:</span>
+                            <span className="font-medium">4 connected</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Workflows:</span>
+                            <span className="font-medium">3 active</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Tasks:</span>
+                            <span className="font-medium">89 completed</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-1 mt-3">
+                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
                       </div>
-                    )}
+                    </div>
                   </div>
+
+                  {/* Tools Section */}
+                  <div className="space-y-4 mb-8">
+                    <h3 className="text-md font-medium text-gray-900">Tools</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                            <SiGmail className="w-5 h-5 text-red-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-sm">Gmail</div>
+                            <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-700 mt-1">Tool</Badge>
+                          </div>
+                        </div>
+                        <div className="space-y-2 text-xs text-gray-600">
+                          <div className="flex justify-between">
+                            <span>Status:</span>
+                            <Badge variant="default" className="text-xs bg-green-100 text-green-700">Connected</Badge>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>API Calls:</span>
+                            <span className="font-medium">1,234 today</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Auth:</span>
+                            <span className="font-medium">OAuth 2.0</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-1 mt-3">
+                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
+                      </div>
+
+                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <SiSlack className="w-5 h-5 text-blue-600" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-sm">Slack</div>
+                            <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-700 mt-1">Tool</Badge>
+                          </div>
+                        </div>
+                        <div className="space-y-2 text-xs text-gray-600">
+                          <div className="flex justify-between">
+                            <span>Status:</span>
+                            <Badge variant="default" className="text-xs bg-green-100 text-green-700">Connected</Badge>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>API Calls:</span>
+                            <span className="font-medium">856 today</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Auth:</span>
+                            <span className="font-medium">Bot Token</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-1 mt-3">
+                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Workflows Section */}
+                  <div className="space-y-4">
+                    <h3 className="text-md font-medium text-gray-900">Workflows</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                            <Zap className="w-5 h-5 text-white" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-sm">Content Pipeline</div>
+                            <Badge variant="secondary" className="text-xs bg-amber-100 text-amber-700 mt-1">Workflow</Badge>
+                          </div>
+                        </div>
+                        <div className="space-y-2 text-xs text-gray-600">
+                          <div className="flex justify-between">
+                            <span>Source:</span>
+                            <span className="font-medium">n8n</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Steps:</span>
+                            <span className="font-medium">5</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Success Rate:</span>
+                            <span className="font-medium text-green-600">98.2%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Executions:</span>
+                            <span className="font-medium">245 today</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-1 mt-3">
+                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
+                      </div>
+
+                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+                            <GitBranch className="w-5 h-5 text-white" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium text-sm">Data Processing</div>
+                            <Badge variant="secondary" className="text-xs bg-amber-100 text-amber-700 mt-1">Workflow</Badge>
+                          </div>
+                        </div>
+                        <div className="space-y-2 text-xs text-gray-600">
+                          <div className="flex justify-between">
+                            <span>Source:</span>
+                            <span className="font-medium">Make.com</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Steps:</span>
+                            <span className="font-medium">8</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Success Rate:</span>
+                            <span className="font-medium text-green-600">94.7%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Executions:</span>
+                            <span className="font-medium">67 today</span>
+                          </div>
+                        </div>
+                        <div className="flex gap-1 mt-3">
+                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {copilotData.components.length === 0 && (
+                    <div className="text-center py-12 text-muted-foreground">
+                      <div className="w-12 h-12 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <Plus className="w-6 h-6 text-gray-400" />
+                      </div>
+                      <p className="text-lg font-medium mb-2">No components added yet</p>
+                      <p className="text-sm">Use the buttons above to add agents, tools, or workflows to your copilot.</p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
