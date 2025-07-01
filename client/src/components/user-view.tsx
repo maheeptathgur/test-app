@@ -1,47 +1,36 @@
 import { useState } from "react";
-import { Play, MessageSquare, Star, Clock, Search } from "lucide-react";
+import { Play, MessageSquare, Star, Clock, Search, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { CopilotData } from "@/lib/types";
 
 
-export function UserView() {
+interface UserViewProps {
+  copilots: CopilotData[];
+  onToggleFavorite: (copilotId: string) => void;
+  onStartChat: (copilot: CopilotData) => void;
+}
+
+export function UserView({ copilots, onToggleFavorite, onStartChat }: UserViewProps) {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Sample copilots that would be available to end users
-  const userCopilots = [
-    {
-      id: '1',
-      name: 'Content Assistant',
-      description: 'Get help with writing, editing, and content creation',
-      category: 'content',
-      rating: 4.8,
-      totalChats: 1234,
-      lastUsed: '2 hours ago',
-      image: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=200&fit=crop&auto=format',
-    },
-    {
-      id: '2',
-      name: 'Customer Support',
-      description: 'Get instant help with your questions and issues',
-      category: 'support',
-      rating: 4.9,
-      totalChats: 2156,
-      lastUsed: 'Never',
-      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&auto=format',
-    },
-    {
-      id: '3',
-      name: 'Campaign Manager',
-      description: 'Plan and optimize your marketing campaigns',
-      category: 'marketing',
-      rating: 4.7,
-      totalChats: 987,
-      lastUsed: '1 day ago',
-      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format',
-    },
-  ];
+  // Helper function to get copilot image based on type
+  const getImageUrl = (type: string): string => {
+    switch (type.toLowerCase()) {
+      case 'general':
+        return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
+      case 'content':
+        return 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=200&fit=crop&auto=format';
+      case 'analyst':
+        return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop&auto=format';
+      case 'support':
+        return 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&auto=format';
+      default:
+        return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
+    }
+  };
 
   const recentChats = [
     {
@@ -67,10 +56,10 @@ export function UserView() {
     },
   ];
 
-  const filteredCopilots = userCopilots.filter(copilot => {
+  const filteredCopilots = (copilots || []).filter(copilot => {
     const matchesSearch = copilot.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          copilot.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesSearch;
+    return copilot.status === 'active' && matchesSearch;
   });
 
   return (
@@ -119,13 +108,25 @@ export function UserView() {
                 <CardContent className="p-0">
                   <div className="relative h-32 w-full rounded-t-lg overflow-hidden">
                     <img 
-                      src={copilot.image} 
+                      src={getImageUrl(copilot.type)} 
                       alt={copilot.name}
                       className="w-full h-full object-cover"
                     />
+                    <div className="absolute top-2 left-2">
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="h-8 w-8 p-0 bg-white/20 hover:bg-white/30"
+                        onClick={() => onToggleFavorite(copilot.id)}
+                      >
+                        <Heart 
+                          className={`h-4 w-4 ${copilot.favorite ? 'text-red-500 fill-red-500' : 'text-white'}`} 
+                        />
+                      </Button>
+                    </div>
                     <div className="absolute top-2 right-2">
-                      <Badge variant="secondary" className="bg-white/90 text-gray-700">
-                        ⭐ {copilot.rating}
+                      <Badge variant="secondary" className="bg-white/90 text-gray-700 capitalize">
+                        {copilot.type}
                       </Badge>
                     </div>
                   </div>
@@ -140,16 +141,18 @@ export function UserView() {
                       <div className="flex items-center gap-4 text-xs text-muted-foreground">
                         <span className="flex items-center gap-1">
                           <MessageSquare className="w-3 h-3" />
-                          {copilot.totalChats.toLocaleString()} chats
+                          {copilot.components.length} components
                         </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {copilot.lastUsed}
-                        </span>
+                        <Badge variant={copilot.status === 'active' ? 'default' : 'secondary'} className="text-xs capitalize">
+                          {copilot.status}
+                        </Badge>
                       </div>
                     </div>
                     
-                    <Button className="w-full bg-[#008062] hover:bg-[#00d2a0]">
+                    <Button 
+                      className="w-full bg-[#008062] hover:bg-[#00d2a0]"
+                      onClick={() => onStartChat(copilot)}
+                    >
                       <Play className="w-4 h-4 mr-2" />
                       Start Chat
                     </Button>
