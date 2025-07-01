@@ -156,8 +156,7 @@ function AgentsScreen() {
                 <Bot className="w-8 h-8 text-blue-600" />
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{agent.name}</h3>
-                  <p className="text-sm text-gray-500 mb-2">Serves: <span className="font-medium text-[#008062]">{agent.copilot}</span></p>
-                  <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'} className="text-xs">
+                  <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'} className="text-xs mb-2">
                     {agent.status}
                   </Badge>
                 </div>
