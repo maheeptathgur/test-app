@@ -165,6 +165,7 @@ Changelog:
 - July 1, 2025. Updated Tools screen to use 4-card per row layout with distinctive tool logos (Gmail, Slack, Google Analytics, Airtable, OpenAI, Unsplash, Google Drive, Notion) using colored Lucide icons for better visual identification and compact card design
 - July 1, 2025. Removed outer Card wrapper from Tools screen and improved responsive card layout - cards now use equal height with flex layout, better spacing, larger text, and improved information hierarchy for better readability across screen sizes
 - July 1, 2025. Applied consistent card layout design to Agents and Workflows screens - all three screens now use the same responsive grid system (1-2-3-4 columns), equal height cards with flex layout, improved typography, and better information hierarchy for unified user experience
+- July 1, 2025. Removed categories from Agents screen - now displays all agents in a single grid layout without category groupings for simplified interface
 - July 1, 2025. Redesigned Workflows screen to distinguish between imported automation (n8n/Make.com) and custom chains - shows workflow steps, execution statistics, success rates, tool/agent dependencies, and deployment status with proper source attribution
 ```
 
