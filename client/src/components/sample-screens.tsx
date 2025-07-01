@@ -481,7 +481,7 @@ function ToolsScreen() {
                     case 'notion':
                       return <SiNotion className="w-8 h-8 text-black" />;
                     case 'n8n':
-                      return <Activity className="w-8 h-8 text-orange-500" />;
+                      return <img src="/attached_assets/n8n-color_1751393955985.png" alt="n8n" className="w-8 h-8" />;
                     default:
                       return <Globe className="w-8 h-8 text-gray-500" />;
                   }
