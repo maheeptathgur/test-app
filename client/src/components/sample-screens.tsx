@@ -35,6 +35,7 @@ export function SampleScreen({ section }: SampleScreenProps) {
   const [configureAgent, setConfigureAgent] = useState<any>(null);
   const [testAgent, setTestAgent] = useState<any>(null);
   const [editWorkflow, setEditWorkflow] = useState<string | null>(null);
+  const [configureTool, setConfigureTool] = useState<any>(null);
 
   const handleAgentConfigure = (agent: any) => {
     setConfigureAgent(agent);
@@ -57,6 +58,14 @@ export function SampleScreen({ section }: SampleScreenProps) {
     setEditWorkflow(null);
   };
 
+  const handleToolConfigure = (tool: any) => {
+    setConfigureTool(tool);
+  };
+
+  const handleBackToTools = () => {
+    setConfigureTool(null);
+  };
+
   // Show Configure screen if an agent is being configured
   if (configureAgent) {
     return <AgentConfigureScreen agent={configureAgent} onBack={handleBackToAgents} />;
@@ -71,11 +80,16 @@ export function SampleScreen({ section }: SampleScreenProps) {
   if (editWorkflow) {
     return <WorkflowEditor workflowId={editWorkflow} onBack={handleBackToWorkflows} />;
   }
+
+  // Show Tool Configure screen if a tool is being configured
+  if (configureTool) {
+    return <ToolConfigureScreen tool={configureTool} onBack={handleBackToTools} />;
+  }
   switch (section) {
     case 'agents':
       return <AgentsScreen onAgentConfigure={handleAgentConfigure} onAgentTest={handleAgentTest} />;
     case 'tools':
-      return <ToolsScreen />;
+      return <ToolsScreen onToolConfigure={handleToolConfigure} />;
     case 'workflows':
       return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
     case 'knowledge-base':
