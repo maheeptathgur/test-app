@@ -139,6 +139,7 @@ Changelog:
 - July 1, 2025. Removed admin dashboard header from User View page to show clean end-user interface
 - July 1, 2025. Updated User View banner to use real background image with dark overlay for better text contrast
 - July 1, 2025. Removed horizontal borders from sidebar for cleaner, more seamless appearance
+- July 1, 2025. Redesigned User View sidebar to show current copilot with dropdown for switching, recent conversations grouped by month, pricing plans button, and user account dropdown menu
 ```
 
 ## User Preferences
