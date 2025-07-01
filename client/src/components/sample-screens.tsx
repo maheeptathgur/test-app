@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
 import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield } from "lucide-react";
+import { PricingScreen } from "./pricing-screen";
 
 interface SampleScreenProps {
   section: NavigationSection;
@@ -31,6 +32,8 @@ export function SampleScreen({ section }: SampleScreenProps) {
       return <AnalyticsScreen />;
     case 'users':
       return <UsersScreen />;
+    case 'pricing':
+      return <PricingScreen />;
     default:
       return <div>Unknown section</div>;
   }

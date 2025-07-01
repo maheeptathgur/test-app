@@ -736,8 +736,8 @@ export default function Dashboard() {
           {!sidebarCollapsed && (
             <Button 
               variant="outline"
-              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
-              onClick={() => window.open('https://www.knolli.com/pricing', '_blank')}
+              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors mb-4"
+              onClick={() => handleSectionChange('pricing')}
             >
               Pricing Plans
             </Button>
@@ -746,9 +746,9 @@ export default function Dashboard() {
             <Button 
               variant="outline"
               size="sm"
-              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
+              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors mb-4"
               title="Pricing Plans"
-              onClick={() => window.open('https://www.knolli.com/pricing', '_blank')}
+              onClick={() => handleSectionChange('pricing')}
             >
               $
             </Button>
@@ -756,7 +756,7 @@ export default function Dashboard() {
         </div>
 
         {/* User Profile */}
-        <div className="p-6 border-t border-sidebar-border">
+        <div className="px-6 pb-6">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
