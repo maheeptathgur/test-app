@@ -776,7 +776,7 @@ export default function Dashboard() {
               {sidebarCollapsed ? <PanelLeftOpen className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
             </Button>
           </div>
-          {!sidebarCollapsed && (
+          {!sidebarCollapsed && activeSection !== 'user-view' && (
             <WorkspaceSelector
               currentWorkspace={currentWorkspace}
               workspaces={workspaces}
@@ -785,6 +785,12 @@ export default function Dashboard() {
               isInChatMode={!!chatCopilot}
               onCopilotSelect={handleStartChat}
             />
+          )}
+          {!sidebarCollapsed && activeSection === 'user-view' && (
+            <div className="text-center">
+              <h2 className="text-lg font-semibold text-sidebar-foreground">Welcome back!</h2>
+              <p className="text-sm text-muted-foreground">Choose an assistant to get started</p>
+            </div>
           )}
         </div>
 
