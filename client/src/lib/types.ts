@@ -27,4 +27,4 @@ export interface ChatMessage {
   timestamp: string;
 }
 
-export type NavigationSection = 'copilots' | 'agents' | 'tools' | 'workflows' | 'knowledge-base' | 'profile-fields' | 'subscriptions' | 'conversations' | 'analytics' | 'users' | 'pricing';
+export type NavigationSection = 'copilots' | 'agents' | 'tools' | 'workflows' | 'knowledge-base' | 'profile-fields' | 'subscriptions' | 'conversations' | 'analytics' | 'users' | 'pricing' | 'workspace-settings' | 'user-view';

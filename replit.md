@@ -133,6 +133,8 @@ Changelog:
 - July 1, 2025. Improved text contrast by changing color from #999999 to #4E5964 for better readability throughout the interface
 - July 1, 2025. Fixed collapsed sidebar design issues and updated Knolli logo to use circular icon version when collapsed
 - July 1, 2025. Added "Add Workspace" link to workspace selector dropdown menu with proper styling
+- July 1, 2025. Created comprehensive Workspace Settings screen with tabs for general settings, members, security, billing, and integrations
+- July 1, 2025. Created User View preview screen showing what the platform looks like to end users (not admin mode)
 ```
 
 ## User Preferences
