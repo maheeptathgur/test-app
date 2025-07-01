@@ -779,29 +779,35 @@ export default function Dashboard() {
           {/* User Profile */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button 
-                variant="ghost" 
-                className={`w-full ${sidebarCollapsed ? 'p-2' : 'p-3'} h-auto bg-[#008062] hover:bg-[#00d2a0] text-white justify-start`}
-              >
-                <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'gap-3 w-full'}`}>
-                  <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0" title={sidebarCollapsed ? "John Doe" : undefined}>
-                    <img 
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&auto=format&face=center" 
-                      alt="John Doe"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  {!sidebarCollapsed && (
-                    <>
-                      <div className="flex-1 min-w-0 text-left">
-                        <div className="text-sm font-medium text-white truncate">John Doe</div>
-                        <div className="text-xs text-white/80 truncate">john.doe@company.com</div>
-                      </div>
-                      <ChevronDown className="w-4 h-4 text-white/80" />
-                    </>
-                  )}
+              {sidebarCollapsed ? (
+                <div className="w-8 h-8 rounded-full overflow-hidden mx-auto border-2 border-[#008062] cursor-pointer hover:border-[#00d2a0] transition-colors" title="John Doe">
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&auto=format&face=center" 
+                    alt="John Doe"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              </Button>
+              ) : (
+                <Button 
+                  variant="ghost" 
+                  className="w-full p-3 h-auto bg-[#008062] hover:bg-[#00d2a0] text-white justify-start"
+                >
+                  <div className="flex items-center gap-3 w-full">
+                    <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                      <img 
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&auto=format&face=center" 
+                        alt="John Doe"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0 text-left">
+                      <div className="text-sm font-medium text-white truncate">John Doe</div>
+                      <div className="text-xs text-white/80 truncate">john.doe@company.com</div>
+                    </div>
+                    <ChevronDown className="w-4 h-4 text-white/80" />
+                  </div>
+                </Button>
+              )}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuItem>
