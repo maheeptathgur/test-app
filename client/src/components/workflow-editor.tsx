@@ -156,7 +156,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
   return (
     <div className="h-full flex flex-col" style={{ backgroundColor: '#f2f2f2' }}>
       {/* Header */}
-      <div className="flex items-center justify-between p-6 border-b bg-[#ffffff00]">
+      <div className="flex items-center justify-between p-6 bg-[#ffffff00]">
         <div className="flex items-center gap-4">
           <Button variant="ghost" onClick={onBack} className="gap-2">
             <ArrowLeft className="w-4 h-4" />
