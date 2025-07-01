@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Workspace } from "@/lib/types";
 
 interface WorkspaceSelectorProps {
@@ -43,6 +43,23 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
             </div>
           </DropdownMenuItem>
         ))}
+        
+        <DropdownMenuSeparator className="my-2" />
+        
+        <DropdownMenuItem
+          onClick={() => {
+            // Placeholder action for adding workspace
+            console.log('Add workspace clicked');
+          }}
+          className="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-accent hover:text-accent-foreground"
+        >
+          <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
+            <Plus className="w-4 h-4 text-gray-600" />
+          </div>
+          <div>
+            <div className="text-sm font-medium" style={{ color: '#008062' }}>Add Workspace</div>
+          </div>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
