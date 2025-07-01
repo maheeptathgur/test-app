@@ -507,17 +507,14 @@ function ToolsScreen() {
       </div>
 
       {/* Tools Grid */}
-      <Card>
-        <CardHeader className="pb-4">
-          <div className="flex items-center justify-between">
-            <CardTitle className="text-lg">
-              {selectedCategory === "All Categories" ? "All Tools" : `${selectedCategory} Tools`}
-            </CardTitle>
-            <Badge variant="secondary">{filteredTools.length} integrations</Badge>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-lg font-semibold">
+          {selectedCategory === "All Categories" ? "All Tools" : `${selectedCategory} Tools`}
+        </h2>
+        <Badge variant="secondary">{filteredTools.length} integrations</Badge>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredTools.map((tool) => {
                 // Define logos for each tool
                 const getToolLogo = (toolName: string) => {
@@ -544,32 +541,32 @@ function ToolsScreen() {
                 };
 
                 return (
-                  <Card key={tool.id} className="hover:shadow-md transition-shadow">
-                    <CardHeader className="pb-3">
-                      <div className="flex items-center gap-3 mb-2">
+                  <Card key={tool.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-start gap-3">
                         {getToolLogo(tool.name)}
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-gray-900 text-sm">{tool.name}</h3>
-                          <p className="text-xs text-gray-500">by {tool.provider}</p>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{tool.name}</h3>
+                          <p className="text-sm text-gray-500 mb-2">by {tool.provider}</p>
+                          <Badge variant={tool.status === 'Connected' ? 'default' : 'secondary'} className="text-xs">
+                            {tool.status}
+                          </Badge>
                         </div>
-                        <Badge variant={tool.status === 'Connected' ? 'default' : 'secondary'} className="text-xs">
-                          {tool.status}
-                        </Badge>
                       </div>
                     </CardHeader>
-                    <CardContent className="pt-0">
-                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">{tool.description}</p>
+                    <CardContent className="pt-0 flex-1 flex flex-col">
+                      <p className="text-sm text-gray-600 mb-4 flex-grow">{tool.description}</p>
                       
-                      <div className="space-y-3">
+                      <div className="space-y-4 mt-auto">
                         <div>
-                          <p className="text-xs font-medium text-gray-700 mb-1">Used by</p>
+                          <p className="text-sm font-medium text-gray-700 mb-2">Used by Copilots</p>
                           <div className="flex flex-wrap gap-1">
                             {tool.usedBy.length > 0 ? tool.usedBy.slice(0, 2).map((copilot, idx) => (
                               <Badge key={idx} variant="outline" className="text-xs">
                                 {copilot}
                               </Badge>
                             )) : (
-                              <span className="text-xs text-gray-400">Not in use</span>
+                              <span className="text-sm text-gray-400">Not in use</span>
                             )}
                             {tool.usedBy.length > 2 && (
                               <Badge variant="outline" className="text-xs">
@@ -579,26 +576,29 @@ function ToolsScreen() {
                           </div>
                         </div>
                         
-                        <div className="flex items-center justify-between text-xs">
+                        <div className="grid grid-cols-2 gap-4 text-sm">
                           <div>
-                            <span className="font-medium text-gray-700">{tool.totalCalls.toLocaleString()}</span>
-                            <span className="text-gray-500"> calls</span>
+                            <p className="font-medium text-gray-700">{tool.totalCalls.toLocaleString()}</p>
+                            <p className="text-xs text-gray-500">API calls</p>
                           </div>
-                          <span className="text-gray-500">{tool.authType}</span>
+                          <div>
+                            <p className="font-medium text-gray-700">{tool.authType}</p>
+                            <p className="text-xs text-gray-500">Authentication</p>
+                          </div>
                         </div>
                         
-                        <div className="text-xs text-gray-500">
+                        <div className="text-sm text-gray-500 border-t pt-3">
                           Last used: {tool.lastUsed}
                         </div>
                         
                         <div className="pt-2">
                           {tool.status === 'Connected' ? (
-                            <div className="flex gap-1">
-                              <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                              <Button variant="outline" size="sm" className="text-xs">Test</Button>
+                            <div className="flex gap-2">
+                              <Button variant="outline" size="sm" className="flex-1">Configure</Button>
+                              <Button variant="outline" size="sm" className="flex-1">Test</Button>
                             </div>
                           ) : (
-                            <Button size="sm" className="w-full bg-[#008062] hover:bg-[#00d2a0] text-white text-xs">
+                            <Button size="sm" className="w-full bg-[#008062] hover:bg-[#00d2a0] text-white">
                               Connect
                             </Button>
                           )}
@@ -609,8 +609,6 @@ function ToolsScreen() {
                 );
               })}
             </div>
-          </CardContent>
-        </Card>
     </div>
   );
 }
