@@ -156,6 +156,7 @@ Changelog:
 - July 1, 2025. Simplified Workspace Settings by removing integrations, billing, and members tabs, keeping only General and Security tabs for focused essential configuration
 - July 1, 2025. Created user-specific sidebar for User View mode showing "Your Assistants" and "Recent Chats" sections with simplified profile options, removing admin features like pricing plans and administrative navigation for authentic end-user experience
 - July 1, 2025. Replaced workspace selector with simple welcome message in User View mode to eliminate administrative complexity and create a more personal, user-focused experience
+- July 1, 2025. Implemented favorite system for copilots replacing rating feature - users can mark copilots as favorites with heart icon on cards, and only favorited copilots appear in User View sidebar for personalized assistant access
 ```
 
 ## User Preferences

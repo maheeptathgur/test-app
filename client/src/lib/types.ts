@@ -14,6 +14,7 @@ export interface CopilotData {
   avatar: string;
   avatarColor: string;
   type: string;
+  favorite: boolean;
   components: Array<{
     name: string;
     type: 'agent' | 'tool' | 'workflow';
