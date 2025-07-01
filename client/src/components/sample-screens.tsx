@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
-import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown } from "lucide-react";
+import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -499,86 +499,97 @@ function ToolsScreen() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4">
-              {tools.map((tool) => (
-                <div key={tool.id} className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {tools.map((tool) => {
+                // Define logos for each tool
+                const getToolLogo = (toolName: string) => {
+                  switch (toolName.toLowerCase()) {
+                    case 'gmail':
+                      return <Mail className="w-8 h-8 text-red-500" />;
+                    case 'slack':
+                      return <MessageCircle className="w-8 h-8 text-purple-500" />;
+                    case 'google analytics':
+                      return <TrendingUp className="w-8 h-8 text-orange-500" />;
+                    case 'airtable':
+                      return <Database className="w-8 h-8 text-yellow-500" />;
+                    case 'openai api':
+                      return <Bot className="w-8 h-8 text-green-500" />;
+                    case 'unsplash':
+                      return <Camera className="w-8 h-8 text-blue-500" />;
+                    case 'google drive':
+                      return <Cloud className="w-8 h-8 text-blue-600" />;
+                    case 'notion':
+                      return <FileText className="w-8 h-8 text-gray-700" />;
+                    default:
+                      return <Globe className="w-8 h-8 text-gray-500" />;
+                  }
+                };
+
+                return (
+                  <Card key={tool.id} className="hover:shadow-md transition-shadow">
+                    <CardHeader className="pb-3">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-gray-900">{tool.name}</h3>
+                        {getToolLogo(tool.name)}
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-900 text-sm">{tool.name}</h3>
+                          <p className="text-xs text-gray-500">by {tool.provider}</p>
+                        </div>
                         <Badge variant={tool.status === 'Connected' ? 'default' : 'secondary'} className="text-xs">
                           {tool.status}
                         </Badge>
-                        <span className="text-sm text-gray-500">
-                          by <span className="font-medium">{tool.provider}</span>
-                        </span>
-                        <Badge variant="outline" className="text-xs">
-                          {tool.type}
-                        </Badge>
                       </div>
-                      <p className="text-sm text-gray-600 mb-3">{tool.description}</p>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <p className="text-sm text-gray-600 mb-3 line-clamp-2">{tool.description}</p>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                      <div className="space-y-3">
                         <div>
-                          <p className="font-medium text-gray-700 mb-1">Used by Copilots</p>
+                          <p className="text-xs font-medium text-gray-700 mb-1">Used by</p>
                           <div className="flex flex-wrap gap-1">
-                            {tool.usedBy.length > 0 ? tool.usedBy.map((copilot, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
+                            {tool.usedBy.length > 0 ? tool.usedBy.slice(0, 2).map((copilot, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs">
                                 {copilot}
                               </Badge>
                             )) : (
                               <span className="text-xs text-gray-400">Not in use</span>
                             )}
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <p className="font-medium text-gray-700 mb-1">Available Endpoints</p>
-                          <div className="flex flex-wrap gap-1">
-                            {tool.endpoints.slice(0, 2).map((endpoint, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
-                                {endpoint}
-                              </Badge>
-                            ))}
-                            {tool.endpoints.length > 2 && (
+                            {tool.usedBy.length > 2 && (
                               <Badge variant="outline" className="text-xs">
-                                +{tool.endpoints.length - 2} more
+                                +{tool.usedBy.length - 2}
                               </Badge>
                             )}
                           </div>
                         </div>
                         
-                        <div>
-                          <p className="font-medium text-gray-700 mb-1">Authentication</p>
-                          <Badge variant="outline" className="text-xs">
-                            {tool.authType}
-                          </Badge>
+                        <div className="flex items-center justify-between text-xs">
+                          <div>
+                            <span className="font-medium text-gray-700">{tool.totalCalls.toLocaleString()}</span>
+                            <span className="text-gray-500"> calls</span>
+                          </div>
+                          <span className="text-gray-500">{tool.authType}</span>
+                        </div>
+                        
+                        <div className="text-xs text-gray-500">
+                          Last used: {tool.lastUsed}
+                        </div>
+                        
+                        <div className="pt-2">
+                          {tool.status === 'Connected' ? (
+                            <div className="flex gap-1">
+                              <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                              <Button variant="outline" size="sm" className="text-xs">Test</Button>
+                            </div>
+                          ) : (
+                            <Button size="sm" className="w-full bg-[#008062] hover:bg-[#00d2a0] text-white text-xs">
+                              Connect
+                            </Button>
+                          )}
                         </div>
                       </div>
-                    </div>
-                    
-                    <div className="flex flex-col items-end gap-2 ml-6">
-                      <div className="text-right">
-                        <p className="text-sm font-medium text-gray-900">{tool.totalCalls.toLocaleString()} calls</p>
-                        <p className="text-xs text-gray-500">Last: {tool.lastUsed}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        {tool.status === 'Connected' ? (
-                          <>
-                            <Button variant="outline" size="sm">Configure</Button>
-                            <Button variant="outline" size="sm">Test</Button>
-                            <Button variant="outline" size="sm">Disconnect</Button>
-                          </>
-                        ) : (
-                          <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
-                            Connect
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </CardContent>
         </Card>
