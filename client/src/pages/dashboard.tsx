@@ -17,6 +17,8 @@ import { CreateCopilotModal } from "@/components/create-copilot-modal";
 import { EditCopilotModal } from "@/components/edit-copilot-modal";
 import { CopilotConfiguration } from "@/components/copilot-configuration";
 import { SampleScreen } from "@/components/sample-screens";
+import { WorkspaceSettings } from "@/components/workspace-settings";
+import { UserView } from "@/components/user-view";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
@@ -95,10 +97,13 @@ const navigationItems = [
   { id: 'tools', label: 'Tools', icon: Settings },
   { id: 'workflows', label: 'Workflows', icon: BarChart3 },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
+  { id: 'profile-fields', label: 'Profile Fields', icon: UserCog },
   { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
   { id: 'conversations', label: 'Conversations', icon: MessageSquare },
   { id: 'analytics', label: 'Analytics', icon: TrendingUp },
   { id: 'users', label: 'Users', icon: Shield },
+  { id: 'workspace-settings', label: 'Workspace Settings', icon: Settings },
+  { id: 'user-view', label: 'User View', icon: User },
 ] as const;
 
 export default function Dashboard() {
@@ -513,6 +518,18 @@ export default function Dashboard() {
           title: 'Pricing Plans',
           subtitle: 'Choose the plan that fits your needs',
           content: <SampleScreen section="pricing" />,
+        };
+      case 'workspace-settings':
+        return {
+          title: 'Workspace Settings',
+          subtitle: 'Configure your workspace preferences and integrations',
+          content: <WorkspaceSettings />,
+        };
+      case 'user-view':
+        return {
+          title: 'User View Preview',
+          subtitle: 'See what your workspace looks like to end users',
+          content: <UserView />,
         };
       default:
         return {
