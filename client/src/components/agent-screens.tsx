@@ -51,8 +51,8 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
       </div>
 
       {/* Tab Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-1 gap-6">
+        <div>
           {activeTab === "general" && (
             <Card>
               <CardHeader>
@@ -199,57 +199,6 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
               </CardContent>
             </Card>
           )}
-        </div>
-
-        {/* Right Sidebar - Agent Preview */}
-        <div className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Agent Preview</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
-                    {agent.icon}
-                  </div>
-                  <div>
-                    <p className="font-medium">{agent.name}</p>
-                    <p className="text-sm text-gray-500">{agent.status}</p>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <p className="text-sm font-medium">Current Configuration</p>
-                  <div className="text-sm text-gray-600 space-y-1">
-                    <p>• Tools: {agent.tools.length} connected</p>
-                    <p>• Workflows: {agent.workflows.length} active</p>
-                    <p>• Knowledge sources: 3 connected</p>
-                    <p>• Last updated: Just now</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Quick Actions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <Button variant="outline" className="w-full">
-                <Play className="w-4 h-4 mr-2" />
-                Test Agent
-              </Button>
-              <Button variant="outline" className="w-full">
-                <Copy className="w-4 h-4 mr-2" />
-                Clone Configuration
-              </Button>
-              <Button variant="outline" className="w-full">
-                <Download className="w-4 h-4 mr-2" />
-                Export Settings
-              </Button>
-            </CardContent>
-          </Card>
         </div>
       </div>
 
