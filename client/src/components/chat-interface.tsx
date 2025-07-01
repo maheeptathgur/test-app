@@ -120,24 +120,34 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
             <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-foreground">Target User Profile</h3>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => isEditingProfile ? handleSaveProfile() : setIsEditingProfile(true)}
-                  className="gap-2"
-                >
-                  {isEditingProfile ? (
-                    <>
-                      <Check className="h-3 w-3" />
-                      Save
-                    </>
-                  ) : (
-                    <>
-                      <Edit3 className="h-3 w-3" />
-                      Edit
-                    </>
-                  )}
-                </Button>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => isEditingProfile ? handleSaveProfile() : setIsEditingProfile(true)}
+                    className="gap-2"
+                  >
+                    {isEditingProfile ? (
+                      <>
+                        <Check className="h-3 w-3" />
+                        Save
+                      </>
+                    ) : (
+                      <>
+                        <Edit3 className="h-3 w-3" />
+                        Edit
+                      </>
+                    )}
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowProfileFields(false)}
+                    className="h-8 w-8 p-0"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
