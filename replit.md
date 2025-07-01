@@ -159,6 +159,7 @@ Changelog:
 - July 1, 2025. Implemented favorite system for copilots replacing rating feature - users can mark copilots as favorites with heart icon on cards, and only favorited copilots appear in User View sidebar for personalized assistant access
 - July 1, 2025. Restricted favorite functionality to User View only, removing heart icons from admin dashboard to maintain clear separation between administrative management and end-user personalization features
 - July 1, 2025. Removed "Recent Chats" section from default User View sidebar - now only appears when an assistant is selected for chatting, creating cleaner initial user experience focused on assistant selection
+- July 1, 2025. Added searchable assistant dropdown to workspace selector when in chat mode, showing favorites first with proper Heart icons, allowing users to switch between assistants during conversations with real-time search functionality
 ```
 
 ## User Preferences
