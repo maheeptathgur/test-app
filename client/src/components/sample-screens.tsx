@@ -167,27 +167,26 @@ function AgentsScreen() {
               
               <div className="space-y-4 mt-auto">
                 <div>
-                  <p className="text-sm font-medium text-gray-700 mb-2">Tools & Workflows</p>
                   <div className="flex flex-wrap gap-1 mb-2">
                     {agent.tools.slice(0, 2).map((tool, idx) => (
-                      <Badge key={idx} variant="outline" className="text-xs">
+                      <Badge key={idx} className="text-xs bg-blue-100 text-blue-600 hover:bg-blue-200">
                         {tool}
                       </Badge>
                     ))}
                     {agent.tools.length > 2 && (
-                      <Badge variant="outline" className="text-xs">
+                      <Badge className="text-xs bg-blue-100 text-blue-600 hover:bg-blue-200">
                         +{agent.tools.length - 2} tools
                       </Badge>
                     )}
                   </div>
                   <div className="flex flex-wrap gap-1">
                     {agent.workflows.slice(0, 1).map((workflow, idx) => (
-                      <Badge key={idx} variant="outline" className="text-xs">
+                      <Badge key={idx} className="text-xs bg-green-100 text-green-600 hover:bg-green-200">
                         {workflow}
                       </Badge>
                     ))}
                     {agent.workflows.length > 1 && (
-                      <Badge variant="outline" className="text-xs">
+                      <Badge className="text-xs bg-green-100 text-green-600 hover:bg-green-200">
                         +{agent.workflows.length - 1} workflows
                       </Badge>
                     )}
