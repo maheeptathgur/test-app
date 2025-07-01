@@ -206,11 +206,6 @@ function AgentsScreen() {
                         {workflow}
                       </Badge>
                     ))}
-                    {agent.workflows.length > 1 && (
-                      <Badge className="text-xs bg-green-100 text-green-600 hover:bg-green-200">
-                        +{agent.workflows.length - 1} workflows
-                      </Badge>
-                    )}
                   </div>
                 </div>
                 
