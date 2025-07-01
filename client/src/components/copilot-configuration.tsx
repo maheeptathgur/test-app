@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy } from "lucide-react";
+import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
 
@@ -154,7 +154,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         <Tabs defaultValue="general" className="h-full flex flex-col">
           <div className="bg-muted/20">
             <div className="max-w-4xl mx-auto px-6 pt-4 pb-4">
-              <TabsList className="grid w-full grid-cols-3">
+              <TabsList className="grid w-full grid-cols-4">
                 <TabsTrigger value="general" className="flex items-center gap-2">
                   <Settings className="w-4 h-4" />
                   General
@@ -162,6 +162,10 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 <TabsTrigger value="components" className="flex items-center gap-2">
                   <Bot className="w-4 h-4" />
                   Components
+                </TabsTrigger>
+                <TabsTrigger value="knowledge" className="flex items-center gap-2">
+                  <BookOpen className="w-4 h-4" />
+                  Knowledge Base
                 </TabsTrigger>
                 <TabsTrigger value="profile" className="flex items-center gap-2">
                   <Users className="w-4 h-4" />
@@ -585,6 +589,103 @@ function MyComponent() {
                         No components added yet. Use the buttons above to add agents, tools, or workflows.
                       </div>
                     )}
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="knowledge" className="p-0 m-0 h-full">
+              <div className="max-w-4xl mx-auto p-6 space-y-6">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-lg font-semibold text-foreground">Knowledge Base</h2>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm">
+                        <Plus className="w-4 h-4 mr-1" />
+                        Add Document
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        <Link className="w-4 h-4 mr-1" />
+                        Add URL
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {/* Sample knowledge base items */}
+                    <div className="flex items-center justify-between p-4 border rounded-lg bg-white">
+                      <div className="flex items-center gap-3">
+                        <FileText className="w-5 h-5 text-blue-500" />
+                        <div>
+                          <div className="font-medium">Product Documentation</div>
+                          <div className="text-sm text-muted-foreground">Comprehensive guide for product features</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="text-xs">PDF</Badge>
+                        <Button variant="ghost" size="sm">
+                          <ExternalLink className="w-4 h-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-4 border rounded-lg bg-white">
+                      <div className="flex items-center gap-3">
+                        <Link className="w-5 h-5 text-green-500" />
+                        <div>
+                          <div className="font-medium">Company Knowledge Base</div>
+                          <div className="text-sm text-muted-foreground">https://company.com/docs</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="text-xs">URL</Badge>
+                        <Button variant="ghost" size="sm">
+                          <ExternalLink className="w-4 h-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between p-4 border rounded-lg bg-white">
+                      <div className="flex items-center gap-3">
+                        <FileText className="w-5 h-5 text-purple-500" />
+                        <div>
+                          <div className="font-medium">FAQ Document</div>
+                          <div className="text-sm text-muted-foreground">Frequently asked questions and answers</div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="text-xs">DOCX</Badge>
+                        <Button variant="ghost" size="sm">
+                          <ExternalLink className="w-4 h-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                    
+                    {/* Empty state for no knowledge base items */}
+                    <div className="text-center py-8 text-muted-foreground border-2 border-dashed rounded-lg">
+                      <BookOpen className="mx-auto h-12 w-12 mb-3" />
+                      <h3 className="font-medium mb-2">No additional knowledge sources</h3>
+                      <p className="text-sm mb-4">Add documents or URLs to enhance your copilot's knowledge</p>
+                      <div className="flex gap-2 justify-center">
+                        <Button variant="outline" size="sm">
+                          <Plus className="w-4 h-4 mr-1" />
+                          Add Document
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <Link className="w-4 h-4 mr-1" />
+                          Add URL
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
