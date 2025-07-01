@@ -195,16 +195,7 @@ function AgentsScreen() {
                   </div>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="font-medium text-gray-700">{agent.requests}</p>
-                    <p className="text-xs text-gray-500">Tasks completed</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-700">{agent.knowledgeBase}</p>
-                    <p className="text-xs text-gray-500">Knowledge base</p>
-                  </div>
-                </div>
+                
                 
                 <div className="text-sm text-gray-500 border-t pt-3">
                   Last active: {agent.lastActive}
