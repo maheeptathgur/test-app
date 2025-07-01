@@ -5,13 +5,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 
 export function WorkspaceSettings() {
+  const [activeTab, setActiveTab] = useState("general");
   const [workspaceName, setWorkspaceName] = useState("My Workspace");
   const [workspaceDescription, setWorkspaceDescription] = useState("A comprehensive workspace for managing AI copilots and workflows");
   const [allowPublicAccess, setAllowPublicAccess] = useState(false);
@@ -20,13 +21,32 @@ export function WorkspaceSettings() {
 
   return (
     <div className="space-y-6">
-      <Tabs defaultValue="general" className="w-full">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="general">General</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
-        </TabsList>
+      <div className="w-full">
+        <nav className="flex space-x-8 border-b border-border">
+          <button
+            onClick={() => setActiveTab("general")}
+            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "general"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+            }`}
+          >
+            General
+          </button>
+          <button
+            onClick={() => setActiveTab("security")}
+            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "security"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+            }`}
+          >
+            Security
+          </button>
+        </nav>
 
-        <TabsContent value="general" className="space-y-6">
+        {activeTab === "general" && (
+        <div className="space-y-6 mt-6">
           <Card>
             <CardHeader>
               <CardTitle>Workspace Information</CardTitle>
@@ -145,11 +165,11 @@ export function WorkspaceSettings() {
               Save Changes
             </Button>
           </div>
-        </TabsContent>
+        </div>
+        )}
 
-
-
-        <TabsContent value="security" className="space-y-6">
+        {activeTab === "security" && (
+        <div className="space-y-6 mt-6">
           <Card>
             <CardHeader>
               <CardTitle>Security Settings</CardTitle>
@@ -205,8 +225,9 @@ export function WorkspaceSettings() {
               </div>
             </CardContent>
           </Card>
-        </TabsContent>
-      </Tabs>
+        </div>
+        )}
+      </div>
     </div>
   );
 }

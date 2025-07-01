@@ -167,6 +167,8 @@ Changelog:
 - July 1, 2025. Applied consistent card layout design to Agents and Workflows screens - all three screens now use the same responsive grid system (1-2-3-4 columns), equal height cards with flex layout, improved typography, and better information hierarchy for unified user experience
 - July 1, 2025. Removed categories from Agents screen - now displays all agents in a single grid layout without category groupings for simplified interface
 - July 1, 2025. Redesigned Workflows screen to distinguish between imported automation (n8n/Make.com) and custom chains - shows workflow steps, execution statistics, success rates, tool/agent dependencies, and deployment status with proper source attribution
+- July 1, 2025. Created dedicated Configure and Test screens for agents with comprehensive functionality - Configure screen includes tabs for General Settings, Behavior & Prompts, Tools & Integrations, Knowledge Base, and Permissions with proper form controls and agent preview sidebar; Test screen provides interactive testing interface with simulated test execution, results display, quick test scenarios, and performance metrics tracking
+- July 1, 2025. Implemented consistent tab structure across agent configuration screens using custom navigation with border-bottom styling, hover effects, and active state highlighting using brand colors (#008062) instead of shadcn/ui Tabs component for better visual consistency
 ```
 
 ## User Preferences
