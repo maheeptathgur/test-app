@@ -434,16 +434,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                       </div>
                     </div>
                     
-                    <div className="space-y-2">
-                      <Label htmlFor="apiKey">API Key</Label>
-                      <Input
-                        id="apiKey"
-                        type="password"
-                        value={apiKey}
-                        onChange={(e) => setApiKey(e.target.value)}
-                        placeholder="Enter your API key for the selected provider"
-                      />
-                    </div>
+                    
 
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
