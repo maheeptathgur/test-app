@@ -147,6 +147,8 @@ Changelog:
 - July 1, 2025. Enhanced Knowledge Base with MD document creation and AI suggestions features - added Create MD button and AI Suggestions modal with checkbox selection for generating customized documentation
 - July 1, 2025. Improved Knowledge Base document management with inline editing, user attribution, timestamps, View/Edit buttons, better trash icon hover states, and comprehensive document metadata display
 - July 1, 2025. Applied enhanced Knowledge Base layout to workspace-level Knowledge Base section with same inline editing, AI suggestions, and document management features tailored for team-wide documentation
+- July 1, 2025. Disabled toast notifications throughout the interface to eliminate popup notifications when switching between pages for cleaner user experience
+- July 1, 2025. Added "User Documents" tab to copilot configuration interface allowing management of user-uploaded documents with file statistics, upload functionality, and comprehensive document metadata display including uploader attribution, timestamps, file sizes, and status indicators
 ```
 
 ## User Preferences

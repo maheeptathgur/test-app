@@ -7,9 +7,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check } from "lucide-react";
+import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
 
@@ -237,7 +238,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         <Tabs defaultValue="general" className="h-full flex flex-col">
           <div className="bg-muted/20">
             <div className="max-w-4xl mx-auto px-6 pt-4 pb-4">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="grid w-full grid-cols-5">
                 <TabsTrigger value="general" className="flex items-center gap-2">
                   <Settings className="w-4 h-4" />
                   General
@@ -249,6 +250,10 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 <TabsTrigger value="knowledge" className="flex items-center gap-2">
                   <BookOpen className="w-4 h-4" />
                   Knowledge Base
+                </TabsTrigger>
+                <TabsTrigger value="user-docs" className="flex items-center gap-2">
+                  <Upload className="w-4 h-4" />
+                  User Documents
                 </TabsTrigger>
                 <TabsTrigger value="profile" className="flex items-center gap-2">
                   <Users className="w-4 h-4" />
@@ -902,6 +907,192 @@ function MyComponent() {
                       </div>
                     </div>
 
+                  </div>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="user-docs" className="p-0 m-0 h-full">
+              <div className="max-w-4xl mx-auto p-6 space-y-6">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-lg font-semibold text-foreground">User Documents</h2>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm">
+                        <Upload className="w-4 h-4 mr-1" />
+                        Upload Files
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        <FolderOpen className="w-4 h-4 mr-1" />
+                        Create Folder
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="text-center">
+                          <p className="text-3xl font-bold text-brand-primary">24</p>
+                          <p className="text-sm text-muted-foreground">Total Files</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="text-center">
+                          <p className="text-3xl font-bold text-blue-600">2.4 GB</p>
+                          <p className="text-sm text-muted-foreground">Storage Used</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="text-center">
+                          <p className="text-3xl font-bold text-green-600">18</p>
+                          <p className="text-sm text-muted-foreground">Active</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardContent className="p-6">
+                        <div className="text-center">
+                          <p className="text-3xl font-bold text-orange-600">6</p>
+                          <p className="text-sm text-muted-foreground">Processing</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    {/* Sample user documents */}
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-3 flex-1">
+                          <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium">customer-feedback-q4.xlsx</div>
+                            <div className="text-sm text-muted-foreground">Q4 customer satisfaction survey results</div>
+                            <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                              <span>Uploaded by John Smith</span>
+                              <span>•</span>
+                              <span>2 days ago</span>
+                              <span>•</span>
+                              <span>1.2 MB</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 ml-4">
+                          <Badge variant="secondary" className="text-xs">XLSX</Badge>
+                          <Badge variant="default" className="text-xs bg-green-100 text-green-700">Active</Badge>
+                          <Button variant="ghost" size="sm" title="Download">
+                            <Download className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" title="View">
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-3 flex-1">
+                          <FileText className="w-5 h-5 text-green-500 mt-0.5" />
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium">product-requirements.docx</div>
+                            <div className="text-sm text-muted-foreground">Detailed product requirements document</div>
+                            <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                              <span>Uploaded by Sarah Johnson</span>
+                              <span>•</span>
+                              <span>5 days ago</span>
+                              <span>•</span>
+                              <span>845 KB</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 ml-4">
+                          <Badge variant="secondary" className="text-xs">DOCX</Badge>
+                          <Badge variant="default" className="text-xs bg-green-100 text-green-700">Active</Badge>
+                          <Button variant="ghost" size="sm" title="Download">
+                            <Download className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" title="View">
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-3 flex-1">
+                          <FileText className="w-5 h-5 text-purple-500 mt-0.5" />
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium">team-meeting-notes.pdf</div>
+                            <div className="text-sm text-muted-foreground">Weekly team meeting notes and action items</div>
+                            <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                              <span>Uploaded by Mike Chen</span>
+                              <span>•</span>
+                              <span>1 week ago</span>
+                              <span>•</span>
+                              <span>564 KB</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 ml-4">
+                          <Badge variant="secondary" className="text-xs">PDF</Badge>
+                          <Badge variant="outline" className="text-xs text-orange-600">Processing</Badge>
+                          <Button variant="ghost" size="sm" title="Download">
+                            <Download className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" title="View">
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-3 flex-1">
+                          <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
+                          <div className="flex-1 min-w-0">
+                            <div className="font-medium">user-research-findings.pptx</div>
+                            <div className="text-sm text-muted-foreground">User research insights and recommendations</div>
+                            <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                              <span>Uploaded by Emma Wilson</span>
+                              <span>•</span>
+                              <span>3 days ago</span>
+                              <span>•</span>
+                              <span>3.1 MB</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 ml-4">
+                          <Badge variant="secondary" className="text-xs">PPTX</Badge>
+                          <Badge variant="default" className="text-xs bg-green-100 text-green-700">Active</Badge>
+                          <Button variant="ghost" size="sm" title="Download">
+                            <Download className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" title="View">
+                            <Eye className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
