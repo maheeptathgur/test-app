@@ -83,6 +83,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   // Component selection modal state
   const [componentModalOpen, setComponentModalOpen] = useState(false);
   const [componentModalType, setComponentModalType] = useState<'agent' | 'tool' | 'workflow'>('agent');
+  const [selectedComponents, setSelectedComponents] = useState<string[]>([]);
 
   // Available workspace components
   const workspaceComponents = {
@@ -92,8 +93,15 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         name: 'Content Creator', 
         description: 'Creates and optimizes marketing content',
         specialization: 'Content Creation',
-        tools: 3,
-        workflows: 2,
+        tools: [
+          { name: 'OpenAI', color: 'bg-green-100 text-green-700' },
+          { name: 'Unsplash', color: 'bg-blue-100 text-blue-700' },
+          { name: 'Google Drive', color: 'bg-yellow-100 text-yellow-700' }
+        ],
+        workflows: [
+          { name: 'Content Pipeline', color: 'bg-amber-100 text-amber-700' },
+          { name: 'Publishing Flow', color: 'bg-purple-100 text-purple-700' }
+        ],
         tasks: 156
       },
       { 
@@ -101,8 +109,17 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         name: 'Data Analyst', 
         description: 'Analyzes data and generates insights',
         specialization: 'Data Analysis',
-        tools: 4,
-        workflows: 3,
+        tools: [
+          { name: 'Google Analytics', color: 'bg-orange-100 text-orange-700' },
+          { name: 'Airtable', color: 'bg-red-100 text-red-700' },
+          { name: 'Excel', color: 'bg-green-100 text-green-700' },
+          { name: 'Python', color: 'bg-blue-100 text-blue-700' }
+        ],
+        workflows: [
+          { name: 'Data Processing', color: 'bg-green-100 text-green-700' },
+          { name: 'Report Generation', color: 'bg-blue-100 text-blue-700' },
+          { name: 'Analytics Dashboard', color: 'bg-purple-100 text-purple-700' }
+        ],
         tasks: 89
       },
       { 
@@ -110,8 +127,13 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         name: 'Customer Support Agent', 
         description: 'Handles customer inquiries and support',
         specialization: 'Customer Support',
-        tools: 2,
-        workflows: 1,
+        tools: [
+          { name: 'Gmail', color: 'bg-red-100 text-red-700' },
+          { name: 'Slack', color: 'bg-blue-100 text-blue-700' }
+        ],
+        workflows: [
+          { name: 'Support Ticket', color: 'bg-green-100 text-green-700' }
+        ],
         tasks: 234
       }
     ],
@@ -273,16 +295,35 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
   const addComponent = (type: 'agent' | 'tool' | 'workflow') => {
     setComponentModalType(type);
+    setSelectedComponents([]);
     setComponentModalOpen(true);
   };
 
-  const handleComponentSelect = (componentName: string, componentType: string) => {
-    const newComponent = {
-      name: componentName,
-      type: componentType
-    };
-    handleCopilotChange('components', [...copilotData.components, newComponent]);
+  const toggleComponentSelection = (componentId: string) => {
+    setSelectedComponents(prev => 
+      prev.includes(componentId) 
+        ? prev.filter(id => id !== componentId)
+        : [...prev, componentId]
+    );
+  };
+
+  const handleSaveSelectedComponents = () => {
+    const componentsToAdd = selectedComponents.map(id => {
+      const allComponents = [
+        ...workspaceComponents.agents.map(a => ({ ...a, type: 'agent' })),
+        ...workspaceComponents.tools.map(t => ({ ...t, type: 'tool' })),
+        ...workspaceComponents.workflows.map(w => ({ ...w, type: 'workflow' }))
+      ];
+      const component = allComponents.find(c => c.id === id);
+      return {
+        name: component?.name || '',
+        type: component?.type || ''
+      };
+    });
+
+    handleCopilotChange('components', [...copilotData.components, ...componentsToAdd]);
     setComponentModalOpen(false);
+    setSelectedComponents([]);
   };
 
   const removeComponent = (index: number) => {
@@ -1720,32 +1761,59 @@ function MyComponent() {
           
           <div className="space-y-4 mt-4">
             {componentModalType === 'agent' && workspaceComponents.agents.map((agent) => (
-              <div key={agent.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer" onClick={() => handleComponentSelect(agent.name, 'agent')}>
-                <div className="flex items-center gap-3">
+              <div key={agent.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="flex items-start gap-3">
+                  <Checkbox
+                    checked={selectedComponents.includes(agent.id)}
+                    onCheckedChange={() => toggleComponentSelection(agent.id)}
+                    className="mt-1"
+                  />
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
                     <PenTool className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1">
                     <div className="font-medium">{agent.name}</div>
                     <div className="text-sm text-muted-foreground">{agent.description}</div>
-                    <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                    <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
                       <span>Specialization: {agent.specialization}</span>
-                      <span>•</span>
-                      <span>{agent.tools} tools</span>
-                      <span>•</span>
-                      <span>{agent.workflows} workflows</span>
                       <span>•</span>
                       <span>{agent.tasks} tasks completed</span>
                     </div>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      <span className="text-xs text-muted-foreground">Tools:</span>
+                      {agent.tools.map((tool, idx) => (
+                        <Badge key={idx} variant="secondary" className={`text-xs ${tool.color}`}>
+                          {tool.name}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      <span className="text-xs text-muted-foreground">Workflows:</span>
+                      {agent.workflows.map((workflow, idx) => (
+                        <Badge key={idx} variant="secondary" className={`text-xs ${workflow.color}`}>
+                          {workflow.name}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
-                  <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700">Agent</Badge>
+                  <div className="flex flex-col gap-2">
+                    <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700">Agent</Badge>
+                    <Button variant="outline" size="sm" className="text-xs">
+                      Learn More
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
 
             {componentModalType === 'tool' && workspaceComponents.tools.map((tool) => (
-              <div key={tool.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer" onClick={() => handleComponentSelect(tool.name, 'tool')}>
-                <div className="flex items-center gap-3">
+              <div key={tool.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="flex items-start gap-3">
+                  <Checkbox
+                    checked={selectedComponents.includes(tool.id)}
+                    onCheckedChange={() => toggleComponentSelection(tool.id)}
+                    className="mt-1"
+                  />
                   <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
                     {tool.name === 'Gmail' && <SiGmail className="w-5 h-5 text-red-600" />}
                     {tool.name === 'Slack' && <SiSlack className="w-5 h-5 text-blue-600" />}
@@ -1763,14 +1831,24 @@ function MyComponent() {
                       <span>Auth: {tool.auth}</span>
                     </div>
                   </div>
-                  <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-700">Tool</Badge>
+                  <div className="flex flex-col gap-2">
+                    <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-700">Tool</Badge>
+                    <Button variant="outline" size="sm" className="text-xs">
+                      Learn More
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
 
             {componentModalType === 'workflow' && workspaceComponents.workflows.map((workflow) => (
-              <div key={workflow.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer" onClick={() => handleComponentSelect(workflow.name, 'workflow')}>
-                <div className="flex items-center gap-3">
+              <div key={workflow.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                <div className="flex items-start gap-3">
+                  <Checkbox
+                    checked={selectedComponents.includes(workflow.id)}
+                    onCheckedChange={() => toggleComponentSelection(workflow.id)}
+                    className="mt-1"
+                  />
                   <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
                     <Zap className="w-5 h-5 text-white" />
                   </div>
@@ -1787,15 +1865,28 @@ function MyComponent() {
                       <span>{workflow.executions} executions today</span>
                     </div>
                   </div>
-                  <Badge variant="secondary" className="text-xs bg-amber-100 text-amber-700">Workflow</Badge>
+                  <div className="flex flex-col gap-2">
+                    <Badge variant="secondary" className="text-xs bg-amber-100 text-amber-700">Workflow</Badge>
+                    <Button variant="outline" size="sm" className="text-xs">
+                      Learn More
+                    </Button>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
           
-          <div className="flex justify-end gap-2 pt-4 border-t">
-            <Button variant="outline" onClick={() => setComponentModalOpen(false)}>
-              Cancel
+          <div className="flex justify-between items-center pt-4 border-t">
+            <p className="text-sm text-muted-foreground">
+              {selectedComponents.length} component{selectedComponents.length !== 1 ? 's' : ''} selected
+            </p>
+            <Button 
+              onClick={handleSaveSelectedComponents}
+              disabled={selectedComponents.length === 0}
+              className="gap-2"
+            >
+              <Save className="w-4 h-4" />
+              Add Selected ({selectedComponents.length})
             </Button>
           </div>
         </DialogContent>

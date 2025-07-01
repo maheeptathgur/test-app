@@ -169,6 +169,9 @@ Changelog:
 - July 1, 2025. Redesigned Workflows screen to distinguish between imported automation (n8n/Make.com) and custom chains - shows workflow steps, execution statistics, success rates, tool/agent dependencies, and deployment status with proper source attribution
 - July 1, 2025. Created dedicated Configure and Test screens for agents with comprehensive functionality - Configure screen includes tabs for General Settings, Behavior & Prompts, Tools & Integrations, Knowledge Base, and Permissions with proper form controls and agent preview sidebar; Test screen provides interactive testing interface with simulated test execution, results display, quick test scenarios, and performance metrics tracking
 - July 1, 2025. Implemented consistent tab structure across agent configuration screens using custom navigation with border-bottom styling, hover effects, and active state highlighting using brand colors (#008062) instead of shadcn/ui Tabs component for better visual consistency
+- July 1, 2025. Enhanced component selection modal in copilot configuration with multiple selection capability using checkboxes, color-coded badge system for tools and workflows, Learn More buttons for each component, removed redundant cancel button, and replaced single-click selection with save button for batch component addition
+- July 1, 2025. Removed Permissions & Access tab from agent configuration to simplify interface to 4 essential tabs: General Settings, Tools & Integrations, Knowledge Base, and Test
+- July 1, 2025. Added custom quick test inputs management in General Settings tab allowing users to create and delete personalized test scenarios that dynamically appear in the Test tab
 ```
 
 ## User Preferences
