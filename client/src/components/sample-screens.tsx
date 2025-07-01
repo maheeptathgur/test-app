@@ -9,10 +9,8 @@ import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSq
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
 import { PricingScreen } from "./pricing-screen";
-import { KnowledgeBaseScreen } from "./knowledge-base-screen";
 
 interface SampleScreenProps {
   section: NavigationSection;
@@ -258,7 +256,6 @@ function KnowledgeBaseScreen() {
   const [editingDocument, setEditingDocument] = useState<string | null>(null);
   const [tempTitle, setTempTitle] = useState("");
   const [tempDescription, setTempDescription] = useState("");
-  const [activeTab, setActiveTab] = useState("workspace");
 
   // Sample AI-suggested documents
   const suggestedDocs = [
@@ -323,36 +320,26 @@ function KnowledgeBaseScreen() {
 
   return (
     <div className="space-y-6">
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <div className="flex items-center justify-between">
-          <TabsList>
-            <TabsTrigger value="workspace">Workspace</TabsTrigger>
-            <TabsTrigger value="content-writer">Content Writer</TabsTrigger>
-            <TabsTrigger value="data-analyst">Data Analyst</TabsTrigger>
-            <TabsTrigger value="sales-assistant">Sales Assistant</TabsTrigger>
-            <TabsTrigger value="customer-support">Customer Support</TabsTrigger>
-          </TabsList>
-          <div className="flex gap-2">
-            <Button variant="outline" size="sm">
-              <Plus className="w-4 h-4 mr-1" />
-              Add Document
-            </Button>
-            <Button variant="outline" size="sm">
-              <Link className="w-4 h-4 mr-1" />
-              Add URL
-            </Button>
-            <Button variant="outline" size="sm">
-              <FileText className="w-4 h-4 mr-1" />
-              Create MD
-            </Button>
-            <Button variant="outline" size="sm" onClick={() => setSuggestDocsOpen(true)}>
-              <Bot className="w-4 h-4 mr-1" />
-              AI Suggestions
-            </Button>
-          </div>
+      <div className="flex items-center justify-end">
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm">
+            <Plus className="w-4 h-4 mr-1" />
+            Add Document
+          </Button>
+          <Button variant="outline" size="sm">
+            <Link className="w-4 h-4 mr-1" />
+            Add URL
+          </Button>
+          <Button variant="outline" size="sm">
+            <FileText className="w-4 h-4 mr-1" />
+            Create MD
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => setSuggestDocsOpen(true)}>
+            <Bot className="w-4 h-4 mr-1" />
+            AI Suggestions
+          </Button>
         </div>
-
-        <TabsContent value="workspace" className="space-y-6 mt-6">
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
@@ -655,313 +642,6 @@ function KnowledgeBaseScreen() {
           </div>
         </div>
       </div>
-        </TabsContent>
-
-        {/* Content Writer Tab */}
-        <TabsContent value="content-writer" className="space-y-6 mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-brand-primary">12</p>
-                  <p className="text-sm text-muted-foreground">Documents</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-green-600">8</p>
-                  <p className="text-sm text-muted-foreground">Writing Guides</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-blue-600">1,234</p>
-                  <p className="text-sm text-muted-foreground">Views</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-orange-600">4</p>
-                  <p className="text-sm text-muted-foreground">Templates</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="space-y-4">
-            <div className="p-4 border rounded-lg bg-white">
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-3 flex-1">
-                  <FileText className="w-5 h-5 text-purple-500 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium">Content Style Guide</div>
-                    <div className="text-sm text-muted-foreground">Brand voice and writing standards for content creation</div>
-                    <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                      <span>Created by Content Team</span>
-                      <span>•</span>
-                      <span>2 weeks ago</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 ml-4">
-                  <Badge variant="secondary" className="text-xs">PDF</Badge>
-                  <Button variant="ghost" size="sm" title="View/Edit">
-                    <Eye className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" title="Rename">
-                    <Edit3 className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            <div className="p-4 border rounded-lg bg-white">
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-3 flex-1">
-                  <FileText className="w-5 h-5 text-green-500 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium">Blog Post Templates</div>
-                    <div className="text-sm text-muted-foreground">Standardized templates for different types of blog content</div>
-                    <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                      <span>Created by Sarah Johnson</span>
-                      <span>•</span>
-                      <span>1 week ago</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 ml-4">
-                  <Badge variant="secondary" className="text-xs">DOCX</Badge>
-                  <Button variant="ghost" size="sm" title="View/Edit">
-                    <Eye className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" title="Rename">
-                    <Edit3 className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </TabsContent>
-
-        {/* Data Analyst Tab */}
-        <TabsContent value="data-analyst" className="space-y-6 mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-brand-primary">8</p>
-                  <p className="text-sm text-muted-foreground">Documents</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-green-600">15</p>
-                  <p className="text-sm text-muted-foreground">Data Sources</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-blue-600">892</p>
-                  <p className="text-sm text-muted-foreground">Views</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-orange-600">23</p>
-                  <p className="text-sm text-muted-foreground">Reports</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="space-y-4">
-            <div className="p-4 border rounded-lg bg-white">
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-3 flex-1">
-                  <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium">Data Analysis Methodology</div>
-                    <div className="text-sm text-muted-foreground">Standard procedures for data collection and analysis</div>
-                    <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                      <span>Created by Analytics Team</span>
-                      <span>•</span>
-                      <span>3 weeks ago</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 ml-4">
-                  <Badge variant="secondary" className="text-xs">PDF</Badge>
-                  <Button variant="ghost" size="sm" title="View/Edit">
-                    <Eye className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" title="Rename">
-                    <Edit3 className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </TabsContent>
-
-        {/* Sales Assistant Tab */}
-        <TabsContent value="sales-assistant" className="space-y-6 mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-brand-primary">16</p>
-                  <p className="text-sm text-muted-foreground">Documents</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-green-600">9</p>
-                  <p className="text-sm text-muted-foreground">Scripts</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-blue-600">2,156</p>
-                  <p className="text-sm text-muted-foreground">Views</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-orange-600">12</p>
-                  <p className="text-sm text-muted-foreground">Playbooks</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="space-y-4">
-            <div className="p-4 border rounded-lg bg-white">
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-3 flex-1">
-                  <FileText className="w-5 h-5 text-green-500 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium">Sales Playbook</div>
-                    <div className="text-sm text-muted-foreground">Complete sales process and objection handling guide</div>
-                    <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                      <span>Created by Sales Team</span>
-                      <span>•</span>
-                      <span>1 week ago</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 ml-4">
-                  <Badge variant="secondary" className="text-xs">PDF</Badge>
-                  <Button variant="ghost" size="sm" title="View/Edit">
-                    <Eye className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" title="Rename">
-                    <Edit3 className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </TabsContent>
-
-        {/* Customer Support Tab */}
-        <TabsContent value="customer-support" className="space-y-6 mt-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-brand-primary">22</p>
-                  <p className="text-sm text-muted-foreground">Documents</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-green-600">35</p>
-                  <p className="text-sm text-muted-foreground">FAQs</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-blue-600">3,827</p>
-                  <p className="text-sm text-muted-foreground">Views</p>
-                </div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-6">
-                <div className="text-center">
-                  <p className="text-3xl font-bold text-orange-600">18</p>
-                  <p className="text-sm text-muted-foreground">Workflows</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="space-y-4">
-            <div className="p-4 border rounded-lg bg-white">
-              <div className="flex items-start justify-between">
-                <div className="flex items-start gap-3 flex-1">
-                  <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
-                  <div className="flex-1 min-w-0">
-                    <div className="font-medium">Customer Support Guidelines</div>
-                    <div className="text-sm text-muted-foreground">Standard procedures for handling customer inquiries</div>
-                    <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
-                      <span>Created by Support Team</span>
-                      <span>•</span>
-                      <span>4 days ago</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 ml-4">
-                  <Badge variant="secondary" className="text-xs">PDF</Badge>
-                  <Button variant="ghost" size="sm" title="View/Edit">
-                    <Eye className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" title="Rename">
-                    <Edit3 className="w-4 h-4" />
-                  </Button>
-                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </TabsContent>
-      </Tabs>
 
       {/* AI Document Suggestions Modal */}
       <Dialog open={suggestDocsOpen} onOpenChange={setSuggestDocsOpen}>
@@ -969,10 +649,10 @@ function KnowledgeBaseScreen() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Bot className="w-5 h-5" />
-              AI Document Suggestions
+              AI Workspace Document Suggestions
             </DialogTitle>
             <DialogDescription>
-              Select the documents you'd like our AI to generate for the selected knowledge base. These will be customized for the specific copilot or workspace.
+              Select the documents you'd like our AI to generate for your workspace knowledge base. These will be customized for your team's needs.
             </DialogDescription>
           </DialogHeader>
           
