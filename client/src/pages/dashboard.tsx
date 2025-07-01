@@ -717,7 +717,7 @@ export default function Dashboard() {
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
         {/* Logo and Toggle */}
-        <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'} border-b border-sidebar-border`}>
+        <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'}`}>
           <div className={`flex items-center ${sidebarCollapsed ? 'flex-col gap-3' : 'justify-between'} mb-4`}>
             <img 
               src={sidebarCollapsed ? knolliIcon : knolliLogo}
@@ -770,7 +770,7 @@ export default function Dashboard() {
         </nav>
 
         {/* Pricing Plans Button and User Profile */}
-        <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'} border-t border-sidebar-border space-y-3`}>
+        <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'} space-y-3`}>
           {/* Pricing Plans Button */}
           {!sidebarCollapsed && (
             <Button 

@@ -138,6 +138,7 @@ Changelog:
 - July 1, 2025. Updated User View welcome banner to 3:1 aspect ratio with proper vertical centering
 - July 1, 2025. Removed admin dashboard header from User View page to show clean end-user interface
 - July 1, 2025. Updated User View banner to use real background image with dark overlay for better text contrast
+- July 1, 2025. Removed horizontal borders from sidebar for cleaner, more seamless appearance
 ```
 
 ## User Preferences
