@@ -154,7 +154,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
   ];
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col" style={{ backgroundColor: '#f2f2f2' }}>
       {/* Header */}
       <div className="flex items-center justify-between p-6 border-b bg-white">
         <div className="flex items-center gap-4">
@@ -204,7 +204,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
       {/* Tab Content */}
       <div className="flex-1 overflow-auto">
         {activeTab === 'steps' && (
-          <div className="p-6 space-y-6">
+          <div className="p-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Workflow Steps</h2>
@@ -261,11 +261,11 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                         <div className="space-y-3">
                           <div>
                             <Label className="text-xs font-medium text-gray-700">Step Name</Label>
-                            <Input value={step.name} className="mt-1" />
+                            <Input defaultValue={step.name} className="mt-1" />
                           </div>
                           <div>
                             <Label className="text-xs font-medium text-gray-700">Description</Label>
-                            <Textarea value={step.description} className="mt-1" rows={2} />
+                            <Textarea defaultValue={step.description} className="mt-1" rows={2} />
                           </div>
                         </div>
                         <div className="space-y-3">
@@ -310,7 +310,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         )}
 
         {activeTab === 'settings' && (
-          <div className="p-6 space-y-6">
+          <div className="p-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
             <div>
               <h2 className="text-lg font-semibold text-gray-900">Workflow Settings</h2>
               <p className="text-sm text-gray-600">Configure general workflow properties and behavior</p>
@@ -433,7 +433,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         )}
 
         {activeTab === 'variables' && (
-          <div className="p-6 space-y-6">
+          <div className="p-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Workflow Variables</h2>
@@ -452,11 +452,11 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                       <div>
                         <Label>Variable Name</Label>
-                        <Input value={variable.name} className="mt-1" />
+                        <Input defaultValue={variable.name} className="mt-1" />
                       </div>
                       <div>
                         <Label>Type</Label>
-                        <Select value={variable.type}>
+                        <Select defaultValue={variable.type}>
                           <SelectTrigger className="mt-1">
                             <SelectValue />
                           </SelectTrigger>
@@ -470,7 +470,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                       </div>
                       <div>
                         <Label>Default Value</Label>
-                        <Input value={variable.value} className="mt-1" />
+                        <Input defaultValue={variable.value} className="mt-1" />
                       </div>
                       <div className="flex gap-2">
                         <Button variant="outline" size="sm" className="gap-1">
@@ -489,7 +489,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         )}
 
         {activeTab === 'testing' && (
-          <div className="p-6 space-y-6">
+          <div className="p-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
             <div>
               <h2 className="text-lg font-semibold text-gray-900">Workflow Testing</h2>
               <p className="text-sm text-gray-600">Test your workflow with sample data</p>
