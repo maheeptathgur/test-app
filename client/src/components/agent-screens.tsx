@@ -14,6 +14,13 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
   const [testMessage, setTestMessage] = useState("");
   const [testResults, setTestResults] = useState<any[]>([]);
   const [isRunning, setIsRunning] = useState(false);
+  const [quickInputs, setQuickInputs] = useState([
+    "How would you help with content optimization?",
+    "Explain your main capabilities",
+    "What tools do you have access to?",
+    "How do you handle complex requests?"
+  ]);
+  const [newQuickInput, setNewQuickInput] = useState("");
 
   const runTest = () => {
     if (!testMessage.trim()) return;
@@ -38,6 +45,15 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
     }, 2000);
   };
 
+  const addQuickInput = () => {
+    if (!newQuickInput.trim()) return;
+    setQuickInputs([...quickInputs, newQuickInput.trim()]);
+    setNewQuickInput("");
+  };
+
+  const removeQuickInput = (index: number) => {
+    setQuickInputs(quickInputs.filter((_, i) => i !== index));
+  };
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -114,6 +130,57 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                 <div className="flex items-center space-x-2">
                   <Checkbox id="active" defaultChecked={agent.status === "Active"} />
                   <label htmlFor="active" className="text-sm font-medium">Agent is active</label>
+                </div>
+
+                {/* Quick Test Inputs Section */}
+                <div className="space-y-4 pt-6 border-t">
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900">Quick Test Inputs</h3>
+                    <p className="text-sm text-gray-600">Manage pre-defined test scenarios that appear in the Test tab</p>
+                  </div>
+                  
+                  {/* Add new quick input */}
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="Enter a quick test scenario..."
+                      value={newQuickInput}
+                      onChange={(e) => setNewQuickInput(e.target.value)}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter') {
+                          addQuickInput();
+                        }
+                      }}
+                      className="flex-1"
+                    />
+                    <Button onClick={addQuickInput} disabled={!newQuickInput.trim()}>
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add
+                    </Button>
+                  </div>
+
+                  {/* List of current quick inputs */}
+                  <div className="space-y-2">
+                    {quickInputs.map((input, index) => (
+                      <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <span className="text-sm text-gray-700 flex-1">{input}</span>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => removeQuickInput(index)}
+                          className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+
+                  {quickInputs.length === 0 && (
+                    <div className="text-center py-8 text-gray-500">
+                      <MessageSquare className="w-8 h-8 mx-auto mb-2 text-gray-300" />
+                      <p className="text-sm">No quick test inputs configured</p>
+                    </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -359,27 +426,24 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                         </div>
                         
                         {/* Quick Test Scenarios */}
-                        <div>
-                          <p className="text-sm font-medium text-gray-700 mb-2">Quick Test Scenarios:</p>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            {[
-                              "How would you help with content optimization?",
-                              "Explain your main capabilities",
-                              "What tools do you have access to?",
-                              "How do you handle complex requests?"
-                            ].map((scenario, idx) => (
-                              <Button
-                                key={idx}
-                                variant="outline"
-                                size="sm"
-                                className="text-left justify-start h-auto p-2"
-                                onClick={() => setTestMessage(scenario)}
-                              >
-                                <span className="text-xs">{scenario}</span>
-                              </Button>
-                            ))}
+                        {quickInputs.length > 0 && (
+                          <div>
+                            <p className="text-sm font-medium text-gray-700 mb-2">Quick Test Scenarios:</p>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                              {quickInputs.map((scenario, idx) => (
+                                <Button
+                                  key={idx}
+                                  variant="outline"
+                                  size="sm"
+                                  className="text-left justify-start h-auto p-2"
+                                  onClick={() => setTestMessage(scenario)}
+                                >
+                                  <span className="text-xs">{scenario}</span>
+                                </Button>
+                              ))}
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     </div>
                   </CardContent>
