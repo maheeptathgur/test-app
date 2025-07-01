@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -10,7 +11,6 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useState } from "react";
 import { PricingScreen } from "./pricing-screen";
 
 interface SampleScreenProps {
@@ -290,124 +290,132 @@ function AgentsScreen() {
 }
 
 function ToolsScreen() {
-  const toolsByCategory = {
-    "Communication": [
-      {
-        id: 1,
-        name: "Gmail",
-        description: "Send emails, read inbox, create drafts",
-        provider: "Google",
-        type: "API Integration",
-        status: "Connected",
-        usedBy: ["Content Manager", "Customer Support"],
-        lastUsed: "5 min ago",
-        totalCalls: 1204,
-        authType: "OAuth 2.0",
-        endpoints: ["Send Email", "Read Inbox", "Create Draft"]
-      },
-      {
-        id: 2,
-        name: "Slack",
-        description: "Send messages, create channels, manage notifications",
-        provider: "Slack Technologies",
-        type: "Webhook",
-        status: "Connected",
-        usedBy: ["Customer Support"],
-        lastUsed: "12 min ago",
-        totalCalls: 567,
-        authType: "Bot Token",
-        endpoints: ["Send Message", "Create Channel", "Upload File"]
-      }
-    ],
-    "Data & Analytics": [
-      {
-        id: 3,
-        name: "Google Analytics",
-        description: "Retrieve website traffic and performance data",
-        provider: "Google",
-        type: "API Integration",
-        status: "Connected",
-        usedBy: ["Business Intelligence"],
-        lastUsed: "2 min ago",
-        totalCalls: 892,
-        authType: "Service Account",
-        endpoints: ["Get Reports", "Get Real-time Data", "Get Dimensions"]
-      },
-      {
-        id: 4,
-        name: "Airtable",
-        description: "Create records, update databases, manage tables",
-        provider: "Airtable",
-        type: "API Integration",
-        status: "Disconnected",
-        usedBy: [],
-        lastUsed: "2 days ago",
-        totalCalls: 156,
-        authType: "API Key",
-        endpoints: ["Create Record", "Update Record", "List Records"]
-      }
-    ],
-    "Content & Media": [
-      {
-        id: 5,
-        name: "OpenAI API",
-        description: "Generate text, images, and embeddings",
-        provider: "OpenAI",
-        type: "API Integration",
-        status: "Connected",
-        usedBy: ["Content Manager", "Customer Support", "Business Intelligence"],
-        lastUsed: "30 sec ago",
-        totalCalls: 5647,
-        authType: "API Key",
-        endpoints: ["Chat Completion", "Image Generation", "Embeddings"]
-      },
-      {
-        id: 6,
-        name: "Unsplash",
-        description: "Search and download high-quality stock photos",
-        provider: "Unsplash",
-        type: "API Integration",
-        status: "Connected",
-        usedBy: ["Content Manager"],
-        lastUsed: "1 hour ago",
-        totalCalls: 234,
-        authType: "API Key",
-        endpoints: ["Search Photos", "Download Photo", "Get Collections"]
-      }
-    ],
-    "Productivity": [
-      {
-        id: 7,
-        name: "Google Drive",
-        description: "Upload, download, and manage files and folders",
-        provider: "Google",
-        type: "API Integration",
-        status: "Connected",
-        usedBy: ["Content Manager", "Customer Support"],
-        lastUsed: "15 min ago",
-        totalCalls: 445,
-        authType: "OAuth 2.0",
-        endpoints: ["Upload File", "Download File", "Create Folder"]
-      },
-      {
-        id: 8,
-        name: "Notion",
-        description: "Create pages, update databases, manage content",
-        provider: "Notion",
-        type: "API Integration",
-        status: "Connected",
-        usedBy: ["Content Manager"],
-        lastUsed: "45 min ago",
-        totalCalls: 678,
-        authType: "OAuth 2.0",
-        endpoints: ["Create Page", "Update Database", "Query Database"]
-      }
-    ]
-  };
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  
+  const allTools = [
+    {
+      id: 1,
+      name: "Gmail",
+      description: "Send emails, read inbox, create drafts",
+      provider: "Google",
+      type: "API Integration",
+      category: "Communication",
+      status: "Connected",
+      usedBy: ["Content Manager", "Customer Support"],
+      lastUsed: "5 min ago",
+      totalCalls: 1204,
+      authType: "OAuth 2.0",
+      endpoints: ["Send Email", "Read Inbox", "Create Draft"]
+    },
+    {
+      id: 2,
+      name: "Slack",
+      description: "Send messages, create channels, manage notifications",
+      provider: "Slack Technologies",
+      type: "Webhook",
+      category: "Communication",
+      status: "Connected",
+      usedBy: ["Customer Support"],
+      lastUsed: "12 min ago",
+      totalCalls: 567,
+      authType: "Bot Token",
+      endpoints: ["Send Message", "Create Channel", "Upload File"]
+    },
+    {
+      id: 3,
+      name: "Google Analytics",
+      description: "Retrieve website traffic and performance data",
+      provider: "Google",
+      type: "API Integration",
+      category: "Data & Analytics",
+      status: "Connected",
+      usedBy: ["Business Intelligence"],
+      lastUsed: "2 min ago",
+      totalCalls: 892,
+      authType: "Service Account",
+      endpoints: ["Get Reports", "Get Real-time Data", "Get Dimensions"]
+    },
+    {
+      id: 4,
+      name: "Airtable",
+      description: "Create records, update databases, manage tables",
+      provider: "Airtable",
+      type: "API Integration",
+      category: "Data & Analytics",
+      status: "Disconnected",
+      usedBy: [],
+      lastUsed: "2 days ago",
+      totalCalls: 156,
+      authType: "API Key",
+      endpoints: ["Create Record", "Update Record", "List Records"]
+    },
+    {
+      id: 5,
+      name: "OpenAI API",
+      description: "Generate text, images, and embeddings",
+      provider: "OpenAI",
+      type: "API Integration",
+      category: "Content & Media",
+      status: "Connected",
+      usedBy: ["Content Manager", "Customer Support", "Business Intelligence"],
+      lastUsed: "30 sec ago",
+      totalCalls: 5647,
+      authType: "API Key",
+      endpoints: ["Chat Completion", "Image Generation", "Embeddings"]
+    },
+    {
+      id: 6,
+      name: "Unsplash",
+      description: "Search and download high-quality stock photos",
+      provider: "Unsplash",
+      type: "API Integration",
+      category: "Content & Media",
+      status: "Connected",
+      usedBy: ["Content Manager"],
+      lastUsed: "1 hour ago",
+      totalCalls: 234,
+      authType: "API Key",
+      endpoints: ["Search Photos", "Download Photo", "Get Collections"]
+    },
+    {
+      id: 7,
+      name: "Google Drive",
+      description: "Upload, download, and manage files and folders",
+      provider: "Google",
+      type: "API Integration",
+      category: "Productivity",
+      status: "Connected",
+      usedBy: ["Content Manager", "Customer Support"],
+      lastUsed: "15 min ago",
+      totalCalls: 445,
+      authType: "OAuth 2.0",
+      endpoints: ["Upload File", "Download File", "Create Folder"]
+    },
+    {
+      id: 8,
+      name: "Notion",
+      description: "Create pages, update databases, manage content",
+      provider: "Notion",
+      type: "API Integration",
+      category: "Productivity",
+      status: "Connected",
+      usedBy: ["Content Manager"],
+      lastUsed: "45 min ago",
+      totalCalls: 678,
+      authType: "OAuth 2.0",
+      endpoints: ["Create Page", "Update Database", "Query Database"]
+    }
+  ];
 
-  const totalTools = Object.values(toolsByCategory).flat().length;
-  const connectedTools = Object.values(toolsByCategory).flat().filter(tool => tool.status === 'Connected').length;
-  const totalCalls = Object.values(toolsByCategory).flat().reduce((sum, tool) => sum + tool.totalCalls, 0);
+  const categories = ["All Categories", "Communication", "Data & Analytics", "Content & Media", "Productivity"];
+  
+  const filteredTools = selectedCategory === "All Categories" 
+    ? allTools 
+    : allTools.filter(tool => tool.category === selectedCategory);
+
+  const totalTools = allTools.length;
+  const connectedTools = allTools.filter(tool => tool.status === 'Connected').length;
+  const totalCalls = allTools.reduce((sum, tool) => sum + tool.totalCalls, 0);
 
   return (
     <div className="space-y-6">
@@ -478,10 +486,19 @@ function ToolsScreen() {
           </Button>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <Filter className="w-4 h-4 mr-2" />
-            Filter
-          </Button>
+          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <SelectTrigger className="w-48">
+              <Filter className="w-4 h-4 mr-2" />
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map(category => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <Button variant="outline" size="sm">
             <ArrowUpDown className="w-4 h-4 mr-2" />
             Sort
@@ -489,18 +506,19 @@ function ToolsScreen() {
         </div>
       </div>
 
-      {/* Tools by Category */}
-      {Object.entries(toolsByCategory).map(([category, tools]) => (
-        <Card key={category}>
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">{category} Tools</CardTitle>
-              <Badge variant="secondary">{tools.length} integrations</Badge>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {tools.map((tool) => {
+      {/* Tools Grid */}
+      <Card>
+        <CardHeader className="pb-4">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg">
+              {selectedCategory === "All Categories" ? "All Tools" : `${selectedCategory} Tools`}
+            </CardTitle>
+            <Badge variant="secondary">{filteredTools.length} integrations</Badge>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {filteredTools.map((tool) => {
                 // Define logos for each tool
                 const getToolLogo = (toolName: string) => {
                   switch (toolName.toLowerCase()) {
@@ -593,7 +611,6 @@ function ToolsScreen() {
             </div>
           </CardContent>
         </Card>
-      ))}
     </div>
   );
 }
