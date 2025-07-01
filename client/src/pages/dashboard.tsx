@@ -737,7 +737,7 @@ export default function Dashboard() {
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="ghost" 
-                className={`w-full ${sidebarCollapsed ? 'p-2' : 'p-3'} h-auto hover:bg-sidebar-accent justify-start`}
+                className={`w-full ${sidebarCollapsed ? 'p-2' : 'p-3'} h-auto hover:bg-[#00d2a0] justify-start`}
               >
                 <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'gap-3 w-full'}`}>
                   <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center" title={sidebarCollapsed ? "John Doe" : undefined}>
