@@ -840,38 +840,7 @@ export default function Dashboard() {
                     </div>
                   </div>
 
-                  {/* Recent Conversations */}
-                  <div className="space-y-3">
-                    <h3 className="text-sm font-medium text-sidebar-foreground">Recent Chats</h3>
-                    <div className="space-y-2">
-                      {conversations.slice(0, 3).map((conversation) => (
-                        <div
-                          key={conversation.id}
-                          className="p-3 rounded-lg hover:bg-sidebar-accent hover:text-sidebar-primary transition-all cursor-pointer"
-                        >
-                          <div className="flex items-start justify-between gap-2 mb-1">
-                            <div className="flex-1 min-w-0">
-                              <h4 className="text-sm font-medium truncate">{conversation.title}</h4>
-                            </div>
-                            <span className="text-xs text-muted-foreground flex-shrink-0">{conversation.timestamp}</span>
-                          </div>
-                          <p className="text-xs text-muted-foreground truncate">{conversation.lastMessage}</p>
-                          <div className="flex items-center gap-1 mt-1">
-                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                            <span className="text-xs text-muted-foreground">{conversation.copilot}</span>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="w-full text-xs"
-                      onClick={() => handleSectionChange('conversations')}
-                    >
-                      View All Conversations
-                    </Button>
-                  </div>
+
                 </>
               )}
               {sidebarCollapsed && (
