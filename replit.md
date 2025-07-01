@@ -149,6 +149,7 @@ Changelog:
 - July 1, 2025. Applied enhanced Knowledge Base layout to workspace-level Knowledge Base section with same inline editing, AI suggestions, and document management features tailored for team-wide documentation
 - July 1, 2025. Disabled toast notifications throughout the interface to eliminate popup notifications when switching between pages for cleaner user experience
 - July 1, 2025. Added "User Documents" tab to copilot configuration interface allowing management of user-uploaded documents with file statistics, upload functionality, and comprehensive document metadata display including uploader attribution, timestamps, file sizes, and status indicators
+- July 1, 2025. Implemented comprehensive search functionality and sorting/filtering capabilities for both Knowledge Base and User Documents tabs in copilot configuration, including search by name/description, filtering by file type, and sorting by various criteria (date updated, date created, name, file size, uploader)
 ```
 
 ## User Preferences
