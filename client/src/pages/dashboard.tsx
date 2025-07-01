@@ -186,7 +186,7 @@ const getTypeIcon = (type: string) => {
 
 // Table Avatar Component  
 const TableAvatar = ({ copilot }: { copilot: CopilotData }) => (
-  <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-blue-400 to-purple-600">
+  <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-400 to-purple-600">
     <img 
       src={getImageUrl(copilot.type)} 
       alt={copilot.name}
