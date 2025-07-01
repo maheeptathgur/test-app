@@ -2716,7 +2716,7 @@ function MyComponent() {
 
       {/* Create MD Modal */}
       <Dialog open={createMdModalOpen} onOpenChange={setCreateMdModalOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh]">
+        <DialogContent className="max-w-4xl max-h-[90vh] flex flex-col">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <FileText className="w-5 h-5 text-purple-500" />
@@ -2727,8 +2727,8 @@ function MyComponent() {
             </DialogDescription>
           </DialogHeader>
           
-          <div className="space-y-4 flex-1 overflow-hidden">
-            <div className="grid grid-cols-2 gap-4">
+          <div className="space-y-4 flex-1 overflow-hidden min-h-0">
+            <div className="space-y-4">
               <div>
                 <Label htmlFor="md-title">Document Title</Label>
                 <Input
@@ -2737,19 +2737,11 @@ function MyComponent() {
                 />
               </div>
               <div>
-                <Label htmlFor="md-category">Category</Label>
-                <Select>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="general">General</SelectItem>
-                    <SelectItem value="faq">FAQ</SelectItem>
-                    <SelectItem value="guide">Guide</SelectItem>
-                    <SelectItem value="policy">Policy</SelectItem>
-                    <SelectItem value="api">API Documentation</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="md-description">Description</Label>
+                <Input
+                  id="md-description"
+                  placeholder="Brief description of the document"
+                />
               </div>
             </div>
             
@@ -2793,9 +2785,9 @@ function MyComponent() {
             </div>
             
             {/* Tab Content */}
-            <div className="flex-1 min-h-0">
+            <div className="flex-1 min-h-0 max-h-96">
               {mdEditorTab === 'markdown' && (
-                <div className="h-full">
+                <div className="h-full max-h-96">
                   <Textarea
                     value={mdContent}
                     onChange={(e) => setMdContent(e.target.value)}
@@ -2811,8 +2803,7 @@ Write your markdown content here. You can use:
 ## Sections
 
 Add sections, lists, and more..."
-                    rows={16}
-                    className="font-mono text-sm h-full resize-none"
+                    className="font-mono text-sm h-96 resize-none"
                   />
                 </div>
               )}
@@ -2866,8 +2857,8 @@ Add sections, lists, and more..."
                   </div>
                   <div 
                     contentEditable
-                    className="p-4 min-h-80 focus:outline-none prose prose-sm max-w-none"
-                    style={{ minHeight: '320px' }}
+                    className="p-4 focus:outline-none prose prose-sm max-w-none overflow-y-auto"
+                    style={{ height: '320px' }}
                     onInput={(e) => {
                       const content = e.currentTarget.textContent || '';
                       setMdContent(content);
@@ -2882,7 +2873,7 @@ Add sections, lists, and more..."
             </div>
           </div>
           
-          <div className="flex justify-end gap-2 pt-4 border-t">
+          <div className="flex justify-end gap-2 pt-4 border-t flex-shrink-0">
             <Button variant="outline" onClick={() => setCreateMdModalOpen(false)}>
               Cancel
             </Button>
