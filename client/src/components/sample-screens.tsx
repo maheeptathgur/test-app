@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import n8nLogo from "@assets/n8n-color_1751393955985.png";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -481,7 +482,7 @@ function ToolsScreen() {
                     case 'notion':
                       return <SiNotion className="w-8 h-8 text-black" />;
                     case 'n8n':
-                      return <img src="/attached_assets/n8n-color_1751393955985.png" alt="n8n" className="w-8 h-8" />;
+                      return <img src={n8nLogo} alt="n8n" className="w-8 h-8" />;
                     default:
                       return <Globe className="w-8 h-8 text-gray-500" />;
                   }
