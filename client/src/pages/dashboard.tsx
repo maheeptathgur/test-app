@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2 } from "lucide-react";
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import knolliIcon from "@assets/favicon-256_1751332849559.png";
@@ -163,6 +163,7 @@ export default function Dashboard() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+  const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
 
   const showNotification = (message: string) => {
@@ -248,6 +249,11 @@ export default function Dashboard() {
     ));
     showNotification(`Updated configuration for: ${updatedCopilot.name}`);
     setConfiguringCopilot(null);
+  };
+
+  const handleDeleteConversation = (conversationId: string) => {
+    setConversations(prev => prev.filter(conv => conv.id !== conversationId));
+    showNotification('Conversation deleted');
   };
 
   const handleToggleAttachment = (show: boolean) => {
@@ -820,10 +826,10 @@ export default function Dashboard() {
                 </div>
               )}
               <div className="space-y-2">
-                {recentConversations.map((conversation) => (
+                {conversations.map((conversation) => (
                   <div
                     key={conversation.id}
-                    className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg cursor-pointer transition-all ${
+                    className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg transition-all group ${
                       conversation.isActive 
                         ? 'bg-sidebar-accent text-sidebar-primary' 
                         : 'hover:bg-sidebar-accent hover:text-sidebar-primary'
@@ -831,17 +837,47 @@ export default function Dashboard() {
                     title={sidebarCollapsed ? conversation.title : undefined}
                   >
                     {sidebarCollapsed ? (
-                      <div className="w-6 h-6 rounded bg-sidebar-primary/20 flex items-center justify-center">
-                        <MessageSquare className="w-3 h-3" />
+                      <div className="flex items-center justify-between">
+                        <div className="w-6 h-6 rounded bg-sidebar-primary/20 flex items-center justify-center cursor-pointer">
+                          <MessageSquare className="w-3 h-3" />
+                        </div>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteConversation(conversation.id);
+                          }}
+                          className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                          title="Delete conversation"
+                        >
+                          <Trash2 className="w-3 h-3" />
+                        </Button>
                       </div>
                     ) : (
                       <div className="space-y-2">
                         <div className="flex items-start justify-between gap-2">
-                          <h4 className="text-sm font-medium truncate">{conversation.title}</h4>
-                          <span className="text-xs text-muted-foreground flex-shrink-0">{conversation.timestamp}</span>
+                          <div className="flex-1 min-w-0 cursor-pointer">
+                            <h4 className="text-sm font-medium truncate">{conversation.title}</h4>
+                          </div>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            <span className="text-xs text-muted-foreground">{conversation.timestamp}</span>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteConversation(conversation.id);
+                              }}
+                              className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                              title="Delete conversation"
+                            >
+                              <Trash2 className="w-3 h-3" />
+                            </Button>
+                          </div>
                         </div>
-                        <p className="text-xs text-muted-foreground truncate">{conversation.lastMessage}</p>
-                        <div className="flex items-center gap-1">
+                        <p className="text-xs text-muted-foreground truncate cursor-pointer">{conversation.lastMessage}</p>
+                        <div className="flex items-center gap-1 cursor-pointer">
                           <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
                           <span className="text-xs text-muted-foreground">{conversation.copilot}</span>
                         </div>

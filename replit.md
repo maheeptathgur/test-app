@@ -143,6 +143,7 @@ Changelog:
 - July 1, 2025. Implemented dynamic sidebar that switches to recent conversations list when in chat mode, replacing standard navigation menu with conversation history
 - July 1, 2025. Modified workspace selector to show available copilots when in chat mode instead of workspaces for easy assistant switching
 - July 1, 2025. Removed top border from chat input area for seamless conversation interface
+- July 1, 2025. Added delete functionality to recent conversations with hover-activated trash icon and confirmation toast
 ```
 
 ## User Preferences
