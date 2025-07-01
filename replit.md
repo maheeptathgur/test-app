@@ -123,6 +123,9 @@ Changelog:
 - June 30, 2025. Moved scope settings to advanced settings section and added dynamic code generation feature for public/embedded copilots showing JavaScript, iframe, and React integration code with copy functionality
 - June 30, 2025. Implemented collapsible attachment sidebar positioned between main sidebar and content area, opens when chat attach button is clicked, automatically collapses main sidebar, provides comprehensive file upload interface with drag-and-drop, displays all files with file sizes and timestamps, and includes connected sources integration for Google Drive, GitHub, and Notion
 - June 30, 2025. Fixed layout issues: resolved white bar at bottom of interface, corrected chat interface backgrounds to white, added Google Drive icon with proper hover effects, updated hover colors to #00d2a0, and fixed table styling with proper white background and rounded corners
+- July 1, 2025. Added Knowledge Base tab to copilot configuration for managing copilot-specific documents and URLs
+- July 1, 2025. Converted user profile area into interactive dropdown button with profile settings, account settings, and sign out options
+- July 1, 2025. Added Pricing Plans button above user profile with internal pricing screen navigation and comprehensive plan comparison interface
 ```
 
 ## User Preferences
