@@ -78,9 +78,11 @@ export function UserView() {
   return (
     <div className="space-y-6">
       {/* Welcome Header */}
-      <div className="text-center py-8 bg-gradient-to-r from-[#008062] to-[#00d2a0] text-white rounded-lg">
-        <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
-        <p className="text-lg opacity-90">Choose an AI assistant to help you with your tasks</p>
+      <div className="text-center py-16 bg-gradient-to-r from-[#008062] to-[#00d2a0] text-white rounded-lg" style={{ aspectRatio: '3/1' }}>
+        <div className="flex flex-col justify-center h-full">
+          <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
+          <p className="text-lg opacity-90">Choose an AI assistant to help you with your tasks</p>
+        </div>
       </div>
 
       {/* Search and Filter */}
