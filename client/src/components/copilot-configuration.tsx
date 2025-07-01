@@ -1141,92 +1141,143 @@ function MyComponent() {
             <TabsContent value="profile" className="p-0 m-0 h-full">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
-                  <h2 className="text-lg font-semibold mb-2 text-foreground">Target User Profile</h2>
-                  <p className="text-sm text-muted-foreground mb-4">Define the type of user this copilot is designed for</p>
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <h2 className="text-lg font-semibold text-foreground">Profile Fields</h2>
+                      <p className="text-sm text-muted-foreground">Configure which profile fields this copilot should collect from users</p>
+                    </div>
+                    <Button variant="outline" size="sm">
+                      <Plus className="w-4 h-4 mr-1" />
+                      Add Field
+                    </Button>
+                  </div>
+                  
                   <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="title">Typical Job Title</Label>
-                        <Input
-                          id="title"
-                          value={profileData.title}
-                          onChange={(e) => handleProfileChange('title', e.target.value)}
-                          placeholder="e.g., Senior Product Manager"
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="industry">Industry</Label>
-                        <Select value={profileData.industry} onValueChange={(value) => handleProfileChange('industry', value)}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Technology">Technology</SelectItem>
-                            <SelectItem value="Healthcare">Healthcare</SelectItem>
-                            <SelectItem value="Finance">Finance</SelectItem>
-                            <SelectItem value="Education">Education</SelectItem>
-                            <SelectItem value="Retail">Retail</SelectItem>
-                            <SelectItem value="Manufacturing">Manufacturing</SelectItem>
-                            <SelectItem value="Consulting">Consulting</SelectItem>
-                            <SelectItem value="Media">Media</SelectItem>
-                            <SelectItem value="Other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="department">Department</Label>
-                        <Select value={profileData.department} onValueChange={(value) => handleProfileChange('department', value)}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="Product">Product</SelectItem>
-                            <SelectItem value="Engineering">Engineering</SelectItem>
-                            <SelectItem value="Marketing">Marketing</SelectItem>
-                            <SelectItem value="Sales">Sales</SelectItem>
-                            <SelectItem value="Operations">Operations</SelectItem>
-                            <SelectItem value="Finance">Finance</SelectItem>
-                            <SelectItem value="HR">Human Resources</SelectItem>
-                            <SelectItem value="Design">Design</SelectItem>
-                            <SelectItem value="Other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="experience">Experience Level</Label>
-                        <Select value={profileData.experience} onValueChange={(value) => handleProfileChange('experience', value)}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="0-2 years">0-2 years</SelectItem>
-                            <SelectItem value="3-5 years">3-5 years</SelectItem>
-                            <SelectItem value="6-10 years">6-10 years</SelectItem>
-                            <SelectItem value="11-15 years">11-15 years</SelectItem>
-                            <SelectItem value="15+ years">15+ years</SelectItem>
-                          </SelectContent>
-                        </Select>
+                    {/* Sample profile fields */}
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Badge variant="secondary" className="text-xs">Text</Badge>
+                          <div>
+                            <div className="font-medium">Job Title</div>
+                            <div className="text-sm text-muted-foreground">User's current job title or role</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
+                          <Button variant="ghost" size="sm" title="Edit Field">
+                            <Edit3 className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="expertise">Key Areas of Expertise</Label>
-                      <Textarea
-                        id="expertise"
-                        value={profileData.expertise}
-                        onChange={(e) => handleProfileChange('expertise', e.target.value)}
-                        placeholder="e.g., Product strategy, user experience, data analysis"
-                        rows={2}
-                      />
+
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Badge variant="secondary" className="text-xs">Select</Badge>
+                          <div>
+                            <div className="font-medium">Industry</div>
+                            <div className="text-sm text-muted-foreground">Industry sector the user works in</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
+                          <Button variant="ghost" size="sm" title="Edit Field">
+                            <Edit3 className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="goals">Typical Goals & Objectives</Label>
-                      <Textarea
-                        id="goals"
-                        value={profileData.goals}
-                        onChange={(e) => handleProfileChange('goals', e.target.value)}
-                        placeholder="e.g., Launch innovative products that solve real user problems"
-                        rows={2}
-                      />
+
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Badge variant="secondary" className="text-xs">Select</Badge>
+                          <div>
+                            <div className="font-medium">Experience Level</div>
+                            <div className="text-sm text-muted-foreground">Years of professional experience</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
+                          <Button variant="ghost" size="sm" title="Edit Field">
+                            <Edit3 className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Badge variant="secondary" className="text-xs">Text Area</Badge>
+                          <div>
+                            <div className="font-medium">Areas of Expertise</div>
+                            <div className="text-sm text-muted-foreground">Key skills and areas of expertise</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
+                          <Button variant="ghost" size="sm" title="Edit Field">
+                            <Edit3 className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Badge variant="secondary" className="text-xs">Text</Badge>
+                          <div>
+                            <div className="font-medium">Company Size</div>
+                            <div className="text-sm text-muted-foreground">Number of employees at user's company</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
+                          <Button variant="ghost" size="sm" title="Edit Field">
+                            <Edit3 className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <Badge variant="secondary" className="text-xs">Text Area</Badge>
+                          <div>
+                            <div className="font-medium">Goals & Objectives</div>
+                            <div className="text-sm text-muted-foreground">Professional goals and objectives</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
+                          <Button variant="ghost" size="sm" title="Edit Field">
+                            <Edit3 className="w-4 h-4" />
+                          </Button>
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
