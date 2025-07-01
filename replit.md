@@ -172,6 +172,7 @@ Changelog:
 - July 1, 2025. Enhanced component selection modal in copilot configuration with multiple selection capability using checkboxes, color-coded badge system for tools and workflows, Learn More buttons for each component, removed redundant cancel button, and replaced single-click selection with save button for batch component addition
 - July 1, 2025. Removed Permissions & Access tab from agent configuration to simplify interface to 4 essential tabs: General Settings, Tools & Integrations, Knowledge Base, and Test
 - July 1, 2025. Added custom quick test inputs management in General Settings tab allowing users to create and delete personalized test scenarios that dynamically appear in the Test tab
+- July 1, 2025. Created comprehensive Workflow Editor screen accessible from Edit buttons in workflows - includes tabs for Workflow Steps (expandable step configuration with visual flow), Settings (basic info, triggers, error handling, notifications), Variables (reusable workflow variables), and Testing (sample data input, test execution, results display, test history) with full step management capabilities
 ```
 
 ## User Preferences
