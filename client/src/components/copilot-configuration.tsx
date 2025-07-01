@@ -737,31 +737,7 @@ function MyComponent() {
                         </Button>
                       </div>
                     </div>
-                    
-                    {/* Empty state for no knowledge base items */}
-                    <div className="text-center py-8 text-muted-foreground border-2 border-dashed rounded-lg">
-                      <BookOpen className="mx-auto h-12 w-12 mb-3" />
-                      <h3 className="font-medium mb-2">No additional knowledge sources</h3>
-                      <p className="text-sm mb-4">Add documents or URLs to enhance your copilot's knowledge</p>
-                      <div className="flex gap-2 justify-center">
-                        <Button variant="outline" size="sm">
-                          <Plus className="w-4 h-4 mr-1" />
-                          Add Document
-                        </Button>
-                        <Button variant="outline" size="sm">
-                          <Link className="w-4 h-4 mr-1" />
-                          Add URL
-                        </Button>
-                        <Button variant="outline" size="sm">
-                          <FileText className="w-4 h-4 mr-1" />
-                          Create MD
-                        </Button>
-                        <Button variant="outline" size="sm" onClick={() => setSuggestDocsOpen(true)}>
-                          <Bot className="w-4 h-4 mr-1" />
-                          AI Suggestions
-                        </Button>
-                      </div>
-                    </div>
+
                   </div>
                 </div>
               </div>
