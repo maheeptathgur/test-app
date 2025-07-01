@@ -141,6 +141,8 @@ Changelog:
 - July 1, 2025. Removed horizontal borders from sidebar for cleaner, more seamless appearance
 - July 1, 2025. Renamed "Attachments" to "Documents" and removed redundant "All Files" header for cleaner interface
 - July 1, 2025. Implemented dynamic sidebar that switches to recent conversations list when in chat mode, replacing standard navigation menu with conversation history
+- July 1, 2025. Modified workspace selector to show available copilots when in chat mode instead of workspaces for easy assistant switching
+- July 1, 2025. Removed top border from chat input area for seamless conversation interface
 ```
 
 ## User Preferences
