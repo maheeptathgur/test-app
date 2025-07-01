@@ -6,21 +6,47 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
-import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle } from "lucide-react";
+import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle, ArrowLeft, Copy, Download, Loader2, Play, RotateCcw, Upload } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PricingScreen } from "./pricing-screen";
+import { AgentConfigureScreen, AgentTestScreen } from "./agent-screens";
 
 interface SampleScreenProps {
   section: NavigationSection;
 }
 
 export function SampleScreen({ section }: SampleScreenProps) {
+  const [configureAgent, setConfigureAgent] = useState<any>(null);
+  const [testAgent, setTestAgent] = useState<any>(null);
+
+  const handleAgentConfigure = (agent: any) => {
+    setConfigureAgent(agent);
+  };
+
+  const handleAgentTest = (agent: any) => {
+    setTestAgent(agent);
+  };
+
+  const handleBackToAgents = () => {
+    setConfigureAgent(null);
+    setTestAgent(null);
+  };
+
+  // Show Configure screen if an agent is being configured
+  if (configureAgent) {
+    return <AgentConfigureScreen agent={configureAgent} onBack={handleBackToAgents} />;
+  }
+
+  // Show Test screen if an agent is being tested
+  if (testAgent) {
+    return <AgentTestScreen agent={testAgent} onBack={handleBackToAgents} />;
+  }
   switch (section) {
     case 'agents':
-      return <AgentsScreen />;
+      return <AgentsScreen onAgentConfigure={handleAgentConfigure} onAgentTest={handleAgentTest} />;
     case 'tools':
       return <ToolsScreen />;
     case 'workflows':
@@ -43,7 +69,7 @@ export function SampleScreen({ section }: SampleScreenProps) {
   }
 }
 
-function AgentsScreen() {
+function AgentsScreen({ onAgentConfigure, onAgentTest }: { onAgentConfigure?: (agent: any) => void; onAgentTest?: (agent: any) => void; } = {}) {
   const agents = [
     { 
       id: 1, 
@@ -215,8 +241,22 @@ function AgentsScreen() {
                 
                 <div className="pt-2">
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1">Configure</Button>
-                    <Button variant="outline" size="sm" className="flex-1">Test</Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => onAgentConfigure?.(agent)}
+                    >
+                      Configure
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => onAgentTest?.(agent)}
+                    >
+                      Test
+                    </Button>
                   </div>
                 </div>
               </div>
