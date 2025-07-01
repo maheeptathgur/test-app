@@ -75,7 +75,6 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
             { id: "general", label: "General Settings" },
             { id: "tools", label: "Tools & Integrations" },
             { id: "knowledge", label: "Knowledge Base" },
-            { id: "permissions", label: "Permissions" },
             { id: "test", label: "Test" }
           ].map((tab) => (
             <button
@@ -357,31 +356,6 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
             <KnowledgeBaseTab agentName={agent.name} />
           )}
 
-          {activeTab === "permissions" && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Permissions & Access</CardTitle>
-                <CardDescription>Control what {agent.name} can access and modify</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {[
-                    { name: "Read company data", enabled: true },
-                    { name: "Send emails", enabled: true },
-                    { name: "Create calendar events", enabled: false },
-                    { name: "Access customer information", enabled: true },
-                    { name: "Modify databases", enabled: false },
-                    { name: "Generate reports", enabled: true }
-                  ].map((permission, idx) => (
-                    <div key={idx} className="flex items-center justify-between p-3 border rounded-lg">
-                      <span className="font-medium">{permission.name}</span>
-                      <Checkbox defaultChecked={permission.enabled} />
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          )}
 
           {activeTab === "test" && (
             <div className="space-y-6">
