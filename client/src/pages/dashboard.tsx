@@ -790,7 +790,89 @@ export default function Dashboard() {
 
         {/* Navigation */}
         <nav className={`flex-1 ${sidebarCollapsed ? 'px-2' : 'px-6'} py-6 overflow-y-auto`}>
-          {chatCopilot ? (
+          {activeSection === 'user-view' ? (
+            // User View: Simplified navigation for end users
+            <div className="space-y-6">
+              {!sidebarCollapsed && (
+                <>
+                  {/* Quick Access Assistants */}
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium text-sidebar-foreground">Your Assistants</h3>
+                    <div className="space-y-2">
+                      {copilots.filter(c => c.status === 'active').slice(0, 4).map((copilot) => (
+                        <Button
+                          key={copilot.id}
+                          variant="ghost"
+                          onClick={() => handleStartChat(copilot)}
+                          className="w-full justify-start gap-3 text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent p-3"
+                        >
+                          <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
+                            {copilot.avatar}
+                          </div>
+                          <div className="flex-1 min-w-0 text-left">
+                            <div className="text-sm font-medium truncate">{copilot.name}</div>
+                            <div className="text-xs text-muted-foreground truncate">{copilot.type}</div>
+                          </div>
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Recent Conversations */}
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium text-sidebar-foreground">Recent Chats</h3>
+                    <div className="space-y-2">
+                      {conversations.slice(0, 3).map((conversation) => (
+                        <div
+                          key={conversation.id}
+                          className="p-3 rounded-lg hover:bg-sidebar-accent hover:text-sidebar-primary transition-all cursor-pointer"
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-1">
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-sm font-medium truncate">{conversation.title}</h4>
+                            </div>
+                            <span className="text-xs text-muted-foreground flex-shrink-0">{conversation.timestamp}</span>
+                          </div>
+                          <p className="text-xs text-muted-foreground truncate">{conversation.lastMessage}</p>
+                          <div className="flex items-center gap-1 mt-1">
+                            <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                            <span className="text-xs text-muted-foreground">{conversation.copilot}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full text-xs"
+                      onClick={() => handleSectionChange('conversations')}
+                    >
+                      View All Conversations
+                    </Button>
+                  </div>
+                </>
+              )}
+              {sidebarCollapsed && (
+                <div className="space-y-4">
+                  {/* Assistant Icons */}
+                  {copilots.filter(c => c.status === 'active').slice(0, 4).map((copilot) => (
+                    <Button
+                      key={copilot.id}
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleStartChat(copilot)}
+                      className="w-full p-2 text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent"
+                      title={copilot.name}
+                    >
+                      <div className={`w-6 h-6 ${copilot.avatarColor} rounded text-xs font-semibold flex items-center justify-center`}>
+                        {copilot.avatar}
+                      </div>
+                    </Button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : chatCopilot ? (
             // Recent Conversations List
             <div className="space-y-3">
               {!sidebarCollapsed && (
@@ -882,7 +964,7 @@ export default function Dashboard() {
               </div>
             </div>
           ) : (
-            // Regular Navigation Menu
+            // Regular Admin Navigation Menu
             <ul className="space-y-2">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
@@ -911,26 +993,30 @@ export default function Dashboard() {
 
         {/* Pricing Plans Button and User Profile */}
         <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'} space-y-3`}>
-          {/* Pricing Plans Button */}
-          {!sidebarCollapsed && (
-            <Button 
-              variant="outline"
-              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
-              onClick={() => handleSectionChange('pricing')}
-            >
-              Pricing Plans
-            </Button>
-          )}
-          {sidebarCollapsed && (
-            <Button 
-              variant="outline"
-              size="sm"
-              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
-              title="Pricing Plans"
-              onClick={() => handleSectionChange('pricing')}
-            >
-              $
-            </Button>
+          {/* Pricing Plans Button - Hidden in user view */}
+          {activeSection !== 'user-view' && (
+            <>
+              {!sidebarCollapsed && (
+                <Button 
+                  variant="outline"
+                  className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
+                  onClick={() => handleSectionChange('pricing')}
+                >
+                  Pricing Plans
+                </Button>
+              )}
+              {sidebarCollapsed && (
+                <Button 
+                  variant="outline"
+                  size="sm"
+                  className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
+                  title="Pricing Plans"
+                  onClick={() => handleSectionChange('pricing')}
+                >
+                  $
+                </Button>
+              )}
+            </>
           )}
 
           {/* User Profile */}
@@ -967,19 +1053,41 @@ export default function Dashboard() {
               )}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuItem>
-                <User className="w-4 h-4 mr-2" />
-                Profile Settings
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Settings className="w-4 h-4 mr-2" />
-                Account Settings
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-red-600 hover:text-red-700">
-                <LogOut className="w-4 h-4 mr-2" />
-                Sign Out
-              </DropdownMenuItem>
+              {activeSection === 'user-view' ? (
+                // Simplified user profile options
+                <>
+                  <DropdownMenuItem>
+                    <User className="w-4 h-4 mr-2" />
+                    My Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Settings className="w-4 h-4 mr-2" />
+                    Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="text-red-600 hover:text-red-700">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </>
+              ) : (
+                // Admin profile options
+                <>
+                  <DropdownMenuItem>
+                    <User className="w-4 h-4 mr-2" />
+                    Profile Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Settings className="w-4 h-4 mr-2" />
+                    Account Settings
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="text-red-600 hover:text-red-700">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
