@@ -98,23 +98,161 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                 <CardDescription>Manage which tools {agent.name} can access</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {agent.tools.map((tool: string, idx: number) => (
-                    <div key={idx} className="flex items-center justify-between p-3 border rounded-lg">
-                      <div className="flex items-center space-x-3">
+                <div className="space-y-6">
+                  {/* Available Tools Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {/* Gmail Tool */}
+                    <div className="p-4 border rounded-lg bg-white flex flex-col h-full">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
+                            <SiGmail className="w-5 h-5 text-red-600" />
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="font-medium text-gray-900 truncate">Gmail</h3>
+                            <p className="text-sm text-[#4E5964]">Email Management</p>
+                          </div>
+                        </div>
                         <Checkbox defaultChecked />
-                        <div>
-                          <p className="font-medium">{tool}</p>
-                          <p className="text-sm text-gray-500">Connected and configured</p>
+                      </div>
+                      <div className="flex-1 space-y-2 text-sm text-[#4E5964]">
+                        <div className="flex justify-between">
+                          <span>Status:</span>
+                          <span className="font-medium text-green-600">Connected</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>API Calls:</span>
+                          <span className="font-medium">1,234 today</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Auth:</span>
+                          <span className="font-medium">OAuth 2.0</span>
                         </div>
                       </div>
-                      <Button variant="outline" size="sm">Configure</Button>
+                      <div className="flex gap-1 mt-3">
+                        <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
+                          <Trash2 className="w-3 h-3" />
+                        </Button>
+                      </div>
                     </div>
-                  ))}
-                  <Button variant="outline" className="w-full">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add New Tool
-                  </Button>
+
+                    {/* Slack Tool */}
+                    <div className="p-4 border rounded-lg bg-white flex flex-col h-full">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <SiSlack className="w-5 h-5 text-purple-600" />
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="font-medium text-gray-900 truncate">Slack</h3>
+                            <p className="text-sm text-[#4E5964]">Team Communication</p>
+                          </div>
+                        </div>
+                        <Checkbox defaultChecked />
+                      </div>
+                      <div className="flex-1 space-y-2 text-sm text-[#4E5964]">
+                        <div className="flex justify-between">
+                          <span>Status:</span>
+                          <span className="font-medium text-green-600">Connected</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>API Calls:</span>
+                          <span className="font-medium">856 today</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Auth:</span>
+                          <span className="font-medium">Bot Token</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-1 mt-3">
+                        <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
+                          <Trash2 className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Google Analytics Tool */}
+                    <div className="p-4 border rounded-lg bg-white flex flex-col h-full">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <BarChart className="w-5 h-5 text-orange-600" />
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="font-medium text-gray-900 truncate">Google Analytics</h3>
+                            <p className="text-sm text-[#4E5964]">Data Analytics</p>
+                          </div>
+                        </div>
+                        <Checkbox />
+                      </div>
+                      <div className="flex-1 space-y-2 text-sm text-[#4E5964]">
+                        <div className="flex justify-between">
+                          <span>Status:</span>
+                          <span className="font-medium text-yellow-600">Not Connected</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>API Calls:</span>
+                          <span className="font-medium">0 today</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Auth:</span>
+                          <span className="font-medium">Service Account</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-1 mt-3">
+                        <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
+                          <Trash2 className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* OpenAI Tool */}
+                    <div className="p-4 border rounded-lg bg-white flex flex-col h-full">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                            <Bot className="w-5 h-5 text-green-600" />
+                          </div>
+                          <div className="min-w-0">
+                            <h3 className="font-medium text-gray-900 truncate">OpenAI</h3>
+                            <p className="text-sm text-[#4E5964]">AI Processing</p>
+                          </div>
+                        </div>
+                        <Checkbox defaultChecked />
+                      </div>
+                      <div className="flex-1 space-y-2 text-sm text-[#4E5964]">
+                        <div className="flex justify-between">
+                          <span>Status:</span>
+                          <span className="font-medium text-green-600">Connected</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>API Calls:</span>
+                          <span className="font-medium">2,450 today</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Auth:</span>
+                          <span className="font-medium">API Key</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-1 mt-3">
+                        <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
+                          <Trash2 className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Add New Tool Button */}
+                  <div className="border-t pt-4">
+                    <Button variant="outline" className="w-full">
+                      <Plus className="w-4 h-4 mr-2" />
+                      Add New Tool Integration
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
