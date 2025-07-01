@@ -1,305 +1,268 @@
 import { useState } from "react";
-import { Play, MessageSquare, Star, Clock, Filter, Search, ChevronDown, User, DollarSign } from "lucide-react";
+import { Play, MessageSquare, Star, Clock, Filter, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function UserView() {
-  const [selectedCopilot, setSelectedCopilot] = useState("Content Assistant");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
 
-  // Available copilots for the dropdown
-  const availableCopilots = [
+  // Sample copilots that would be available to end users
+  const userCopilots = [
     {
       id: '1',
       name: 'Content Assistant',
       description: 'Get help with writing, editing, and content creation',
-      avatar: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=40&h=40&fit=crop&auto=format',
+      category: 'content',
+      rating: 4.8,
+      totalChats: 1234,
+      lastUsed: '2 hours ago',
+      image: 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=200&fit=crop&auto=format',
     },
     {
       id: '2',
       name: 'Customer Support',
       description: 'Get instant help with your questions and issues',
-      avatar: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=40&h=40&fit=crop&auto=format',
+      category: 'support',
+      rating: 4.9,
+      totalChats: 2156,
+      lastUsed: 'Never',
+      image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&auto=format',
     },
     {
       id: '3',
       name: 'Campaign Manager',
       description: 'Plan and optimize your marketing campaigns',
-      avatar: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=40&h=40&fit=crop&auto=format',
+      category: 'marketing',
+      rating: 4.7,
+      totalChats: 987,
+      lastUsed: '1 day ago',
+      image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format',
     },
   ];
 
-  // Recent conversations grouped by month
-  const recentConversations = {
-    'January 2025': [
-      {
-        id: '1',
-        title: 'Blog post structure help',
-        lastMessage: 'Thanks for helping me with the blog post structure!',
-        timestamp: '2 hours ago',
-        unread: false,
-      },
-      {
-        id: '2',
-        title: 'Social media campaign ideas',
-        lastMessage: 'Can you help me analyze the performance metrics?',
-        timestamp: '1 day ago',
-        unread: true,
-      },
-      {
-        id: '3',
-        title: 'Content calendar planning',
-        lastMessage: 'Perfect! The social media copy looks great.',
-        timestamp: '3 days ago',
-        unread: false,
-      },
-      {
-        id: '4',
-        title: 'Email newsletter draft',
-        lastMessage: 'The newsletter template works perfectly now.',
-        timestamp: '1 week ago',
-        unread: false,
-      },
-    ],
-    'December 2024': [
-      {
-        id: '5',
-        title: 'Holiday campaign strategy',
-        lastMessage: 'The holiday campaign performed really well!',
-        timestamp: '2 weeks ago',
-        unread: false,
-      },
-      {
-        id: '6',
-        title: 'Year-end report help',
-        lastMessage: 'Thanks for helping with the annual summary.',
-        timestamp: '3 weeks ago',
-        unread: false,
-      },
-    ],
-    'November 2024': [
-      {
-        id: '7',
-        title: 'Product launch content',
-        lastMessage: 'The launch announcement was perfect.',
-        timestamp: '1 month ago',
-        unread: false,
-      },
-    ],
-  };
+  const recentChats = [
+    {
+      id: '1',
+      copilotName: 'Content Assistant',
+      lastMessage: 'Thanks for helping me with the blog post structure!',
+      timestamp: '2 hours ago',
+      unread: false,
+    },
+    {
+      id: '2',
+      copilotName: 'Campaign Manager',
+      lastMessage: 'Can you help me analyze the performance metrics?',
+      timestamp: '1 day ago',
+      unread: true,
+    },
+    {
+      id: '3',
+      copilotName: 'Content Assistant',
+      lastMessage: 'Perfect! The social media copy looks great.',
+      timestamp: '3 days ago',
+      unread: false,
+    },
+  ];
 
-  const currentCopilot = availableCopilots.find(c => c.name === selectedCopilot) || availableCopilots[0];
+  const filteredCopilots = userCopilots.filter(copilot => {
+    const matchesSearch = copilot.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         copilot.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === 'all' || copilot.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   return (
-    <div className="flex h-screen bg-background">
-      {/* Sidebar */}
-      <div className="w-64 flex flex-col bg-[#e6eeef]">
-        {/* Current Copilot */}
-        <div className="p-6">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button 
-                variant="ghost" 
-                className="w-full p-3 h-auto bg-white hover:bg-gray-50 text-left justify-start border"
-              >
-                <div className="flex items-center gap-3 w-full">
-                  <Avatar className="w-8 h-8">
-                    <AvatarImage src={currentCopilot.avatar} alt={currentCopilot.name} />
-                    <AvatarFallback>{currentCopilot.name.charAt(0)}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm font-medium text-gray-900 truncate">{currentCopilot.name}</div>
-                    <div className="text-xs text-gray-500 truncate">{currentCopilot.description}</div>
-                  </div>
-                  <ChevronDown className="w-4 h-4 text-gray-400" />
-                </div>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-64">
-              {availableCopilots.map((copilot) => (
-                <DropdownMenuItem 
-                  key={copilot.id}
-                  onClick={() => setSelectedCopilot(copilot.name)}
-                  className="p-3"
-                >
-                  <div className="flex items-center gap-3 w-full">
-                    <Avatar className="w-6 h-6">
-                      <AvatarImage src={copilot.avatar} alt={copilot.name} />
-                      <AvatarFallback className="text-xs">{copilot.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-medium truncate">{copilot.name}</div>
-                      <div className="text-xs text-gray-500 truncate">{copilot.description}</div>
-                    </div>
-                  </div>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-
-        {/* Recent Conversations */}
-        <div className="flex-1 px-6 pb-6 overflow-y-auto">
-          <h3 className="text-sm font-medium text-gray-700 mb-4">Recent Conversations</h3>
-          
-          {Object.entries(recentConversations).map(([month, conversations]) => (
-            <div key={month} className="mb-6">
-              <h4 className="text-xs font-medium text-gray-500 mb-2 uppercase tracking-wide">{month}</h4>
-              <div className="space-y-1">
-                {conversations.map((conversation) => (
-                  <Button
-                    key={conversation.id}
-                    variant="ghost"
-                    className="w-full h-auto p-3 text-left justify-start hover:bg-white/50"
-                  >
-                    <div className="flex items-start gap-2 w-full">
-                      <MessageSquare className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-gray-900 truncate mb-1">
-                          {conversation.title}
-                        </div>
-                        <div className="text-xs text-gray-500 line-clamp-2 mb-1">
-                          {conversation.lastMessage}
-                        </div>
-                        <div className="text-xs text-gray-400">
-                          {conversation.timestamp}
-                        </div>
-                      </div>
-                      {conversation.unread && (
-                        <div className="w-2 h-2 bg-[#008062] rounded-full flex-shrink-0 mt-1" />
-                      )}
-                    </div>
-                  </Button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Pricing Plans Button and User Profile */}
-        <div className="p-6 space-y-3">
-          {/* Pricing Plans Button */}
-          <Button 
-            variant="outline"
-            className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
-          >
-            <DollarSign className="w-4 h-4 mr-2" />
-            Pricing Plans
-          </Button>
-
-          {/* User Profile */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button 
-                variant="ghost" 
-                className="w-full p-3 h-auto bg-[#008062] hover:bg-[#00d2a0] text-white justify-start"
-              >
-                <div className="flex items-center gap-3 w-full">
-                  <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                    <img 
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&auto=format&face=center" 
-                      alt="John Doe"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="flex-1 min-w-0 text-left">
-                    <div className="text-sm font-medium text-white truncate">John Doe</div>
-                    <div className="text-xs text-white/80 truncate">john.doe@company.com</div>
-                  </div>
-                  <ChevronDown className="w-4 h-4 text-white/80" />
-                </div>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuItem>
-                <User className="w-4 h-4 mr-2" />
-                Profile Settings
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Account Settings
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                Sign Out
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+    <div className="space-y-6">
+      {/* Welcome Header */}
+      <div 
+        className="relative text-center text-white rounded-lg overflow-hidden"
+        style={{ aspectRatio: '3/1' }}
+      >
+        {/* Background Image */}
+        <img 
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=400&fit=crop&auto=format"
+          alt="Background"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-center h-full">
+          <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
+          <p className="text-lg opacity-90">Choose an AI assistant to help you with your tasks</p>
         </div>
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col">
-        {/* Welcome Header */}
-        <div 
-          className="relative text-center text-white rounded-lg overflow-hidden m-6"
-          style={{ aspectRatio: '3/1' }}
-        >
-          {/* Background Image */}
-          <img 
-            src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=400&fit=crop&auto=format"
-            alt="Background"
-            className="absolute inset-0 w-full h-full object-cover"
+      {/* Search and Filter */}
+      <div className="flex gap-4 items-center">
+        <div className="flex-1 relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+          <Input
+            placeholder="Search assistants..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-10"
           />
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/50"></div>
-          {/* Content */}
-          <div className="relative z-10 flex flex-col justify-center h-full">
-            <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
-            <p className="text-lg opacity-90">Continue your conversation with {currentCopilot.name}</p>
+        </div>
+        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+          <SelectTrigger className="w-48">
+            <Filter className="w-4 h-4 mr-2" />
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Categories</SelectItem>
+            <SelectItem value="content">Content</SelectItem>
+            <SelectItem value="support">Support</SelectItem>
+            <SelectItem value="marketing">Marketing</SelectItem>
+            <SelectItem value="analytics">Analytics</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Available Assistants */}
+        <div className="lg:col-span-2 space-y-4">
+          <h2 className="text-xl font-semibold">Available Assistants</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredCopilots.map((copilot) => (
+              <Card key={copilot.id} className="hover:shadow-lg transition-shadow cursor-pointer">
+                <CardContent className="p-0">
+                  <div className="relative h-32 w-full rounded-t-lg overflow-hidden">
+                    <img 
+                      src={copilot.image} 
+                      alt={copilot.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2">
+                      <Badge variant="secondary" className="bg-white/90 text-gray-700">
+                        ⭐ {copilot.rating}
+                      </Badge>
+                    </div>
+                  </div>
+                  
+                  <div className="p-4">
+                    <h3 className="font-semibold mb-2">{copilot.name}</h3>
+                    <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                      {copilot.description}
+                    </p>
+                    
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        <span className="flex items-center gap-1">
+                          <MessageSquare className="w-3 h-3" />
+                          {copilot.totalChats.toLocaleString()} chats
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {copilot.lastUsed}
+                        </span>
+                      </div>
+                    </div>
+                    
+                    <Button className="w-full bg-[#008062] hover:bg-[#00d2a0]">
+                      <Play className="w-4 h-4 mr-2" />
+                      Start Chat
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+
+          {filteredCopilots.length === 0 && (
+            <div className="text-center py-12">
+              <MessageSquare className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
+              <h3 className="text-lg font-medium text-foreground mb-2">No assistants found</h3>
+              <p className="text-muted-foreground">
+                Try adjusting your search or filter criteria
+              </p>
+            </div>
+          )}
         </div>
 
-        <div className="flex-1 px-6 pb-6 overflow-y-auto">
-          {/* Quick Actions */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            <Card className="cursor-pointer hover:shadow-md transition-shadow">
-              <CardContent className="p-4 text-center">
-                <MessageSquare className="w-8 h-8 mx-auto mb-2 text-[#008062]" />
-                <h3 className="text-sm font-medium">New Chat</h3>
-                <p className="text-xs text-muted-foreground">Start fresh conversation</p>
-              </CardContent>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-md transition-shadow">
-              <CardContent className="p-4 text-center">
-                <Star className="w-8 h-8 mx-auto mb-2 text-[#008062]" />
-                <h3 className="text-sm font-medium">Favorites</h3>
-                <p className="text-xs text-muted-foreground">Access saved chats</p>
-              </CardContent>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-md transition-shadow">
-              <CardContent className="p-4 text-center">
-                <Clock className="w-8 h-8 mx-auto mb-2 text-[#008062]" />
-                <h3 className="text-sm font-medium">History</h3>
-                <p className="text-xs text-muted-foreground">View past conversations</p>
-              </CardContent>
-            </Card>
-            <Card className="cursor-pointer hover:shadow-md transition-shadow">
-              <CardContent className="p-4 text-center">
-                <Search className="w-8 h-8 mx-auto mb-2 text-[#008062]" />
-                <h3 className="text-sm font-medium">Search</h3>
-                <p className="text-xs text-muted-foreground">Find specific content</p>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Start Chat Section */}
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="bg-white rounded-lg p-8 shadow-sm border">
-              <Avatar className="w-16 h-16 mx-auto mb-4">
-                <AvatarImage src={currentCopilot.avatar} alt={currentCopilot.name} />
-                <AvatarFallback className="text-xl">{currentCopilot.name.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <h2 className="text-2xl font-bold mb-2">{currentCopilot.name}</h2>
-              <p className="text-muted-foreground mb-6">{currentCopilot.description}</p>
-              <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white px-8 py-3 text-lg">
-                <Play className="w-5 h-5 mr-2" />
-                Start New Conversation
+        {/* Sidebar */}
+        <div className="space-y-4">
+          {/* Recent Conversations */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Recent Conversations</CardTitle>
+              <CardDescription>
+                Pick up where you left off
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {recentChats.map((chat) => (
+                <div key={chat.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
+                  <div className="w-8 h-8 bg-[#008062] rounded-full flex items-center justify-center text-white text-xs font-medium">
+                    {chat.copilotName.split(' ').map(word => word[0]).join('')}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="font-medium text-sm truncate">{chat.copilotName}</div>
+                      {chat.unread && <div className="w-2 h-2 bg-[#008062] rounded-full"></div>}
+                    </div>
+                    <p className="text-xs text-muted-foreground truncate">{chat.lastMessage}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{chat.timestamp}</p>
+                  </div>
+                </div>
+              ))}
+              
+              <Button variant="outline" className="w-full mt-3">
+                View All Conversations
               </Button>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
+
+          {/* Quick Stats */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Your Activity</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-muted-foreground">Total Conversations</span>
+                <span className="font-semibold">47</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-muted-foreground">This Week</span>
+                <span className="font-semibold">8</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-muted-foreground">Favorite Assistant</span>
+                <span className="font-semibold">Content Assistant</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-muted-foreground">Time Saved</span>
+                <span className="font-semibold text-[#008062]">12.5 hours</span>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Quick Actions */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Quick Actions</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <Button variant="outline" className="w-full justify-start">
+                <MessageSquare className="w-4 h-4 mr-2" />
+                View All Conversations
+              </Button>
+              <Button variant="outline" className="w-full justify-start">
+                <Star className="w-4 h-4 mr-2" />
+                Rate Assistants
+              </Button>
+              <Button variant="outline" className="w-full justify-start">
+                <Clock className="w-4 h-4 mr-2" />
+                Activity History
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
