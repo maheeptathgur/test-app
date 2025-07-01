@@ -849,7 +849,7 @@ export default function Dashboard() {
       {showAttachmentSidebar && (
         <div className="w-80 border-r border-sidebar-border flex flex-col h-full" style={{ backgroundColor: '#f3f4f7' }}>
           <div className="p-4 border-b flex items-center justify-between">
-            <h3 className="font-semibold text-foreground">Attachments</h3>
+            <h3 className="font-semibold text-foreground">Documents</h3>
             <Button
               variant="ghost"
               size="sm"
@@ -863,9 +863,8 @@ export default function Dashboard() {
           </div>
           
           <div className="flex-1 flex flex-col min-h-0">
-            {/* All Files - Takes up most of the space */}
+            {/* Documents - Takes up most of the space */}
             <div className="flex-1 p-4 space-y-3 overflow-y-auto min-h-0">
-              <h4 className="text-sm font-medium text-foreground">All Files</h4>
               <div className="space-y-2">
                 <div 
                   className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
