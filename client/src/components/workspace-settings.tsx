@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { ThemeSelector } from "./theme-selector";
+import { useTheme } from "../contexts/theme-context";
 
 export function WorkspaceSettings() {
   const [workspaceName, setWorkspaceName] = useState("My Workspace");
@@ -17,6 +19,7 @@ export function WorkspaceSettings() {
   const [allowPublicAccess, setAllowPublicAccess] = useState(false);
   const [enableNotifications, setEnableNotifications] = useState(true);
   const [dataRetention, setDataRetention] = useState("90");
+  const { currentTheme, setTheme } = useTheme();
 
   return (
     <div className="space-y-6">
@@ -135,6 +138,18 @@ export function WorkspaceSettings() {
                     <SelectItem value="unlimited">Unlimited</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+
+              <Separator />
+
+              <div className="space-y-2">
+                <Label>Color Theme</Label>
+                <p className="text-sm text-muted-foreground">
+                  Choose a color scheme for your workspace interface
+                </p>
+                <div className="pt-2">
+                  <ThemeSelector currentTheme={currentTheme} onThemeChange={setTheme} />
+                </div>
               </div>
             </CardContent>
           </Card>
