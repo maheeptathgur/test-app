@@ -79,6 +79,106 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [docsSearchTerm, setDocsSearchTerm] = useState('');
   const [docsSortBy, setDocsSortBy] = useState('updated');
   const [docsFilterType, setDocsFilterType] = useState('all');
+  
+  // Component selection modal state
+  const [componentModalOpen, setComponentModalOpen] = useState(false);
+  const [componentModalType, setComponentModalType] = useState<'agent' | 'tool' | 'workflow'>('agent');
+
+  // Available workspace components
+  const workspaceComponents = {
+    agents: [
+      { 
+        id: 'content-creator', 
+        name: 'Content Creator', 
+        description: 'Creates and optimizes marketing content',
+        specialization: 'Content Creation',
+        tools: 3,
+        workflows: 2,
+        tasks: 156
+      },
+      { 
+        id: 'data-analyst', 
+        name: 'Data Analyst', 
+        description: 'Analyzes data and generates insights',
+        specialization: 'Data Analysis',
+        tools: 4,
+        workflows: 3,
+        tasks: 89
+      },
+      { 
+        id: 'customer-support', 
+        name: 'Customer Support Agent', 
+        description: 'Handles customer inquiries and support',
+        specialization: 'Customer Support',
+        tools: 2,
+        workflows: 1,
+        tasks: 234
+      }
+    ],
+    tools: [
+      { 
+        id: 'gmail', 
+        name: 'Gmail', 
+        description: 'Email management and communication',
+        status: 'Connected',
+        apiCalls: 1234,
+        auth: 'OAuth 2.0'
+      },
+      { 
+        id: 'slack', 
+        name: 'Slack', 
+        description: 'Team communication and collaboration',
+        status: 'Connected',
+        apiCalls: 856,
+        auth: 'Bot Token'
+      },
+      { 
+        id: 'analytics', 
+        name: 'Google Analytics', 
+        description: 'Website and app analytics',
+        status: 'Connected',
+        apiCalls: 445,
+        auth: 'Service Account'
+      },
+      { 
+        id: 'openai', 
+        name: 'OpenAI', 
+        description: 'AI model access and completions',
+        status: 'Connected',
+        apiCalls: 2156,
+        auth: 'API Key'
+      }
+    ],
+    workflows: [
+      { 
+        id: 'content-pipeline', 
+        name: 'Content Pipeline', 
+        description: 'Automated content creation and publishing',
+        source: 'n8n',
+        steps: 5,
+        successRate: 98.2,
+        executions: 245
+      },
+      { 
+        id: 'data-processing', 
+        name: 'Data Processing', 
+        description: 'Automated data collection and analysis',
+        source: 'Make.com',
+        steps: 8,
+        successRate: 94.7,
+        executions: 67
+      },
+      { 
+        id: 'email-automation', 
+        name: 'Email Automation', 
+        description: 'Automated email campaigns and responses',
+        source: 'Zapier',
+        steps: 3,
+        successRate: 99.1,
+        executions: 189
+      }
+    ]
+  };
 
   // Sample AI-suggested documents
   const suggestedDocs = [
@@ -172,11 +272,17 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   };
 
   const addComponent = (type: 'agent' | 'tool' | 'workflow') => {
+    setComponentModalType(type);
+    setComponentModalOpen(true);
+  };
+
+  const handleComponentSelect = (componentName: string, componentType: string) => {
     const newComponent = {
-      name: `New ${type}`,
-      type: type
+      name: componentName,
+      type: componentType
     };
     handleCopilotChange('components', [...copilotData.components, newComponent]);
+    setComponentModalOpen(false);
   };
 
   const removeComponent = (index: number) => {
@@ -1595,6 +1701,102 @@ function MyComponent() {
                 Generate Selected ({selectedSuggestions.length})
               </Button>
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Component Selection Modal */}
+      <Dialog open={componentModalOpen} onOpenChange={setComponentModalOpen}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Plus className="w-5 h-5" />
+              Add {componentModalType.charAt(0).toUpperCase() + componentModalType.slice(1)}
+            </DialogTitle>
+            <DialogDescription>
+              Choose from available {componentModalType}s in your workspace to add to this copilot.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            {componentModalType === 'agent' && workspaceComponents.agents.map((agent) => (
+              <div key={agent.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer" onClick={() => handleComponentSelect(agent.name, 'agent')}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
+                    <PenTool className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-medium">{agent.name}</div>
+                    <div className="text-sm text-muted-foreground">{agent.description}</div>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                      <span>Specialization: {agent.specialization}</span>
+                      <span>•</span>
+                      <span>{agent.tools} tools</span>
+                      <span>•</span>
+                      <span>{agent.workflows} workflows</span>
+                      <span>•</span>
+                      <span>{agent.tasks} tasks completed</span>
+                    </div>
+                  </div>
+                  <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700">Agent</Badge>
+                </div>
+              </div>
+            ))}
+
+            {componentModalType === 'tool' && workspaceComponents.tools.map((tool) => (
+              <div key={tool.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer" onClick={() => handleComponentSelect(tool.name, 'tool')}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    {tool.name === 'Gmail' && <SiGmail className="w-5 h-5 text-red-600" />}
+                    {tool.name === 'Slack' && <SiSlack className="w-5 h-5 text-blue-600" />}
+                    {tool.name === 'Google Analytics' && <BarChart className="w-5 h-5 text-orange-600" />}
+                    {tool.name === 'OpenAI' && <Bot className="w-5 h-5 text-green-600" />}
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-medium">{tool.name}</div>
+                    <div className="text-sm text-muted-foreground">{tool.description}</div>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                      <span>Status: {tool.status}</span>
+                      <span>•</span>
+                      <span>{tool.apiCalls.toLocaleString()} API calls today</span>
+                      <span>•</span>
+                      <span>Auth: {tool.auth}</span>
+                    </div>
+                  </div>
+                  <Badge variant="secondary" className="text-xs bg-blue-100 text-blue-700">Tool</Badge>
+                </div>
+              </div>
+            ))}
+
+            {componentModalType === 'workflow' && workspaceComponents.workflows.map((workflow) => (
+              <div key={workflow.id} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer" onClick={() => handleComponentSelect(workflow.name, 'workflow')}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
+                    <Zap className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-medium">{workflow.name}</div>
+                    <div className="text-sm text-muted-foreground">{workflow.description}</div>
+                    <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                      <span>Source: {workflow.source}</span>
+                      <span>•</span>
+                      <span>{workflow.steps} steps</span>
+                      <span>•</span>
+                      <span>Success Rate: {workflow.successRate}%</span>
+                      <span>•</span>
+                      <span>{workflow.executions} executions today</span>
+                    </div>
+                  </div>
+                  <Badge variant="secondary" className="text-xs bg-amber-100 text-amber-700">Workflow</Badge>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-4 border-t">
+            <Button variant="outline" onClick={() => setComponentModalOpen(false)}>
+              Cancel
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
