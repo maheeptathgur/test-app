@@ -788,7 +788,6 @@ export default function Dashboard() {
           )}
           {!sidebarCollapsed && activeSection === 'user-view' && (
             <div className="text-center">
-              <h2 className="text-lg font-semibold text-sidebar-foreground">Welcome back!</h2>
               <p className="text-sm text-muted-foreground">Choose an assistant to get started</p>
             </div>
           )}
