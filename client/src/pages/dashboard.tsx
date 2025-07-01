@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User } from "lucide-react";
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
+import knolliIcon from "@assets/favicon-256_1751332849559.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -699,15 +700,13 @@ export default function Dashboard() {
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
         {/* Logo and Toggle */}
-        <div className="p-6 border-b border-sidebar-border">
-          <div className="flex items-center justify-between mb-4">
-            {!sidebarCollapsed && (
-              <img 
-                src={knolliLogo}
-                alt="Knolli Logo" 
-                className="h-8 w-auto"
-              />
-            )}
+        <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'} border-b border-sidebar-border`}>
+          <div className={`flex items-center ${sidebarCollapsed ? 'flex-col gap-3' : 'justify-between'} mb-4`}>
+            <img 
+              src={sidebarCollapsed ? knolliIcon : knolliLogo}
+              alt="Knolli Logo" 
+              className={sidebarCollapsed ? "h-8 w-8 rounded-full" : "h-8 w-auto"}
+            />
             <Button
               variant="ghost"
               size="sm"
@@ -727,7 +726,7 @@ export default function Dashboard() {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-6 py-6 overflow-y-auto">
+        <nav className={`flex-1 ${sidebarCollapsed ? 'px-2' : 'px-6'} py-6 overflow-y-auto`}>
           <ul className="space-y-2">
             {navigationItems.map((item) => {
               const Icon = item.icon;
@@ -737,7 +736,7 @@ export default function Dashboard() {
                   <Button
                     variant="ghost"
                     onClick={() => handleSectionChange(item.id as NavigationSection)}
-                    className={`w-full ${sidebarCollapsed ? 'justify-center px-2' : 'justify-start gap-3'} ${
+                    className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
                       isActive 
                         ? 'text-sidebar-primary bg-sidebar-accent' 
                         : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
@@ -754,7 +753,7 @@ export default function Dashboard() {
         </nav>
 
         {/* Pricing Plans Button and User Profile */}
-        <div className="p-6 border-t border-sidebar-border space-y-3">
+        <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'} border-t border-sidebar-border space-y-3`}>
           {/* Pricing Plans Button */}
           {!sidebarCollapsed && (
             <Button 
