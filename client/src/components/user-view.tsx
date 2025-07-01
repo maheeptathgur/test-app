@@ -91,7 +91,7 @@ export function UserView() {
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/50"></div>
         {/* Content */}
-        <div className="relative z-10 flex flex-col justify-center h-full px-8 py-16">
+        <div className="relative z-10 flex flex-col justify-center h-full">
           <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
           <p className="text-lg opacity-90">Choose an AI assistant to help you with your tasks</p>
         </div>
