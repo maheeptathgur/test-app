@@ -23,6 +23,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { PricingScreen } from "./pricing-screen";
 import { AgentConfigureScreen, AgentTestScreen } from "./agent-screens";
 import { WorkflowEditor } from "./workflow-editor";
@@ -35,8 +36,11 @@ interface SampleScreenProps {
 export function SampleScreen({ section }: SampleScreenProps) {
   const [configureAgent, setConfigureAgent] = useState<any>(null);
   const [testAgent, setTestAgent] = useState<any>(null);
-  const [editWorkflow, setEditWorkflow] = useState<string | null>(null);
+  const [editWorkflow, setEditWorkflow] = useState<string | undefined>(undefined);
   const [configureTool, setConfigureTool] = useState<any>(null);
+  const [showConnectNewTool, setShowConnectNewTool] = useState(false);
+  const [showBrowseIntegrations, setShowBrowseIntegrations] = useState(false);
+  const [showAddWorkspace, setShowAddWorkspace] = useState(false);
 
   const handleAgentConfigure = (agent: any) => {
     setConfigureAgent(agent);
@@ -56,7 +60,7 @@ export function SampleScreen({ section }: SampleScreenProps) {
   };
 
   const handleBackToWorkflows = () => {
-    setEditWorkflow(null);
+    setEditWorkflow(undefined);
   };
 
   const handleToolConfigure = (tool: any) => {
@@ -109,6 +113,207 @@ export function SampleScreen({ section }: SampleScreenProps) {
     default:
       return <div>Unknown section</div>;
   }
+  
+  // Add modals after the main render but before the function ends
+  // This is a wrapper div to contain the modals alongside the main content
+  return (
+    <>
+      {(() => {
+        // Main content logic (duplicated from above for clarity)
+        if (configureAgent) {
+          return <AgentConfigureScreen agent={configureAgent} onBack={handleBackToAgents} />;
+        }
+
+        if (testAgent) {
+          return <AgentTestScreen agent={testAgent} onBack={handleBackToAgents} />;
+        }
+
+        if (editWorkflow) {
+          return <WorkflowEditor workflowId={editWorkflow} onBack={handleBackToWorkflows} />;
+        }
+
+        if (configureTool) {
+          return <ToolConfigureScreen tool={configureTool} onBack={handleBackToTools} />;
+        }
+
+        switch (section) {
+          case 'agents':
+            return <AgentsScreen onAgentConfigure={handleAgentConfigure} onAgentTest={handleAgentTest} />;
+          case 'tools':
+            return <ToolsScreen 
+              onToolConfigure={handleToolConfigure} 
+              onConnectNewTool={() => setShowConnectNewTool(true)}
+              onBrowseIntegrations={() => setShowBrowseIntegrations(true)}
+            />;
+          case 'workflows':
+            return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
+          case 'knowledge-base':
+            return <KnowledgeBaseScreen />;
+          case 'subscriptions':
+            return <SubscriptionsScreen />;
+          case 'conversations':
+            return <ConversationsScreen />;
+          case 'analytics':
+            return <AnalyticsScreen />;
+          case 'users':
+            return <UsersScreen />;
+          case 'pricing':
+            return <PricingScreen />;
+          default:
+            return <div>Unknown section</div>;
+        }
+      })()}
+
+      {/* Connect New Tool Modal */}
+      <Dialog open={showConnectNewTool} onOpenChange={setShowConnectNewTool}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Connect New Tool</DialogTitle>
+            <DialogDescription>
+              Connect a new third-party service or API to extend your copilots' capabilities
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {[
+                { name: 'Zapier', icon: '⚡', category: 'Automation' },
+                { name: 'Microsoft Teams', icon: '💬', category: 'Communication' },
+                { name: 'Salesforce', icon: '☁️', category: 'CRM' },
+                { name: 'HubSpot', icon: '🎯', category: 'Marketing' },
+                { name: 'Jira', icon: '🔧', category: 'Project Management' },
+                { name: 'GitHub', icon: '🐙', category: 'Development' },
+              ].map((tool) => (
+                <Card key={tool.name} className="p-4 hover:shadow-md cursor-pointer transition-shadow">
+                  <div className="text-center">
+                    <div className="text-2xl mb-2">{tool.icon}</div>
+                    <div className="font-medium text-sm">{tool.name}</div>
+                    <div className="text-xs text-gray-500">{tool.category}</div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+            
+            <div className="border-t pt-4">
+              <h4 className="font-medium mb-3">Custom Integration</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-medium">Service Name</label>
+                  <Input placeholder="Enter service name..." className="mt-1" />
+                </div>
+                <div>
+                  <label className="text-sm font-medium">API Endpoint</label>
+                  <Input placeholder="https://api.example.com" className="mt-1" />
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex justify-end gap-3">
+              <Button variant="outline" onClick={() => setShowConnectNewTool(false)}>
+                Cancel
+              </Button>
+              <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+                Connect Tool
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Browse Integrations Modal */}
+      <Dialog open={showBrowseIntegrations} onOpenChange={setShowBrowseIntegrations}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>Browse Integrations</DialogTitle>
+            <DialogDescription>
+              Explore available integrations and tools from our marketplace
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-6">
+            <div className="flex gap-4">
+              <div className="flex-1">
+                <Input placeholder="Search integrations..." className="w-full" />
+              </div>
+              <Select defaultValue="all">
+                <SelectTrigger className="w-48">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Categories</SelectItem>
+                  <SelectItem value="communication">Communication</SelectItem>
+                  <SelectItem value="productivity">Productivity</SelectItem>
+                  <SelectItem value="analytics">Analytics</SelectItem>
+                  <SelectItem value="marketing">Marketing</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="space-y-8">
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Popular Integrations</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    { name: 'Slack', description: 'Team communication and collaboration', price: 'Free', users: '10M+' },
+                    { name: 'Google Workspace', description: 'Email, docs, and productivity suite', price: 'Free', users: '3B+' },
+                    { name: 'Microsoft 365', description: 'Office apps and cloud services', price: 'Paid', users: '1.3B+' },
+                    { name: 'Zoom', description: 'Video conferencing and meetings', price: 'Freemium', users: '300M+' },
+                    { name: 'Trello', description: 'Project management and collaboration', price: 'Freemium', users: '50M+' },
+                    { name: 'Asana', description: 'Work management and team coordination', price: 'Freemium', users: '100M+' },
+                  ].map((integration) => (
+                    <Card key={integration.name} className="p-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <h4 className="font-medium">{integration.name}</h4>
+                        <Badge variant="secondary" className="text-xs">{integration.price}</Badge>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-3">{integration.description}</p>
+                      <div className="flex justify-between items-center">
+                        <span className="text-xs text-gray-500">{integration.users} users</span>
+                        <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+                          Connect
+                        </Button>
+                      </div>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+              
+              <div>
+                <h3 className="text-lg font-semibold mb-4">Recently Added</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {[
+                    { name: 'Linear', description: 'Issue tracking and project planning', price: 'Paid', new: true },
+                    { name: 'Figma', description: 'Design collaboration and prototyping', price: 'Freemium', new: true },
+                    { name: 'Loom', description: 'Video messaging and screen recording', price: 'Freemium', new: true },
+                  ].map((integration) => (
+                    <Card key={integration.name} className="p-4">
+                      <div className="flex justify-between items-start mb-3">
+                        <h4 className="font-medium">{integration.name}</h4>
+                        <div className="flex gap-2">
+                          {integration.new && <Badge className="text-xs bg-green-100 text-green-700">New</Badge>}
+                          <Badge variant="secondary" className="text-xs">{integration.price}</Badge>
+                        </div>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-3">{integration.description}</p>
+                      <Button size="sm" className="w-full bg-[#008062] hover:bg-[#00d2a0] text-white">
+                        Connect
+                      </Button>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex justify-end">
+              <Button variant="outline" onClick={() => setShowBrowseIntegrations(false)}>
+                Close
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
 }
 
 function AgentsScreen({ onAgentConfigure, onAgentTest }: { onAgentConfigure?: (agent: any) => void; onAgentTest?: (agent: any) => void; } = {}) {
@@ -291,7 +496,15 @@ function AgentsScreen({ onAgentConfigure, onAgentTest }: { onAgentConfigure?: (a
   );
 }
 
-function ToolsScreen({ onToolConfigure }: { onToolConfigure?: (tool: any) => void } = {}) {
+function ToolsScreen({ 
+  onToolConfigure, 
+  onConnectNewTool, 
+  onBrowseIntegrations 
+}: { 
+  onToolConfigure?: (tool: any) => void;
+  onConnectNewTool?: () => void;
+  onBrowseIntegrations?: () => void;
+} = {}) {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   
   const allTools = [
@@ -440,10 +653,16 @@ function ToolsScreen({ onToolConfigure }: { onToolConfigure?: (tool: any) => voi
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+          <Button 
+            className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+            onClick={onConnectNewTool}
+          >
             Connect New Tool
           </Button>
-          <Button variant="outline">
+          <Button 
+            variant="outline"
+            onClick={onBrowseIntegrations}
+          >
             Browse Integrations
           </Button>
         </div>
