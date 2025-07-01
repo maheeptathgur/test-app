@@ -122,6 +122,7 @@ Changelog:
 - June 30, 2025. Restored Profile Fields section in main navigation while keeping copilot-specific profile field configuration - now supports both global field definitions and per-copilot target user personas
 - June 30, 2025. Moved scope settings to advanced settings section and added dynamic code generation feature for public/embedded copilots showing JavaScript, iframe, and React integration code with copy functionality
 - June 30, 2025. Implemented collapsible attachment sidebar positioned between main sidebar and content area, opens when chat attach button is clicked, automatically collapses main sidebar, provides comprehensive file upload interface with drag-and-drop, displays all files with file sizes and timestamps, and includes connected sources integration for Google Drive, GitHub, and Notion
+- June 30, 2025. Fixed layout issues: resolved white bar at bottom of interface, corrected chat interface backgrounds to white, added Google Drive icon with proper hover effects, updated hover colors to #00d2a0, and fixed table styling with proper white background and rounded corners
 ```
 
 ## User Preferences
