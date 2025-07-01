@@ -966,7 +966,7 @@ export default function Dashboard() {
             </div>
             
             {/* Import Options - Fixed at bottom */}
-            <div className="border-t p-4 space-y-2 flex-shrink-0">
+            <div className="p-4 space-y-2 flex-shrink-0">
               <Button className="w-full justify-start gap-2">
                 <Upload className="w-4 h-4" />
                 Upload Files
