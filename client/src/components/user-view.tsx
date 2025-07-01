@@ -220,26 +220,7 @@ export function UserView() {
 
           
 
-          {/* Quick Actions */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Quick Actions</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <Button variant="outline" className="w-full justify-start">
-                <MessageSquare className="w-4 h-4 mr-2" />
-                View All Conversations
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Star className="w-4 h-4 mr-2" />
-                Rate Assistants
-              </Button>
-              <Button variant="outline" className="w-full justify-start">
-                <Clock className="w-4 h-4 mr-2" />
-                Activity History
-              </Button>
-            </CardContent>
-          </Card>
+          
         </div>
       </div>
     </div>
