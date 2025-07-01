@@ -320,11 +320,7 @@ function KnowledgeBaseScreen() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-lg font-semibold text-foreground">Workspace Knowledge Base</h2>
-          <p className="text-sm text-muted-foreground">Centralized documentation and resources for your team</p>
-        </div>
+      <div className="flex items-center justify-end">
         <div className="flex gap-2">
           <Button variant="outline" size="sm">
             <Plus className="w-4 h-4 mr-1" />
