@@ -389,6 +389,20 @@ function ToolsScreen() {
       totalCalls: 678,
       authType: "OAuth 2.0",
       endpoints: ["Create Page", "Update Database", "Query Database"]
+    },
+    {
+      id: 9,
+      name: "n8n",
+      description: "Create and manage automated workflows between services",
+      provider: "n8n",
+      type: "Webhook",
+      category: "Productivity",
+      status: "Connected",
+      usedBy: ["Marketing Copilot", "Customer Support"],
+      lastUsed: "8 min ago",
+      totalCalls: 1456,
+      authType: "API Key",
+      endpoints: ["Trigger Workflow", "Get Executions", "Manage Workflows"]
     }
   ];
 
@@ -466,6 +480,8 @@ function ToolsScreen() {
                       return <SiGoogledrive className="w-8 h-8 text-blue-500" />;
                     case 'notion':
                       return <SiNotion className="w-8 h-8 text-black" />;
+                    case 'n8n':
+                      return <GitBranch className="w-8 h-8 text-purple-600" />;
                     default:
                       return <Globe className="w-8 h-8 text-gray-500" />;
                   }
