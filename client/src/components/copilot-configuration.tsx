@@ -915,15 +915,7 @@ function MyComponent() {
             <TabsContent value="user-docs" className="p-0 m-0 h-full">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold text-foreground">User Documents</h2>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
-                        <Upload className="w-4 h-4 mr-1" />
-                        Upload Files
-                      </Button>
-                    </div>
-                  </div>
+                  <h2 className="text-lg font-semibold text-foreground mb-4">User Documents</h2>
                   
                   
                   
