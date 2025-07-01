@@ -502,6 +502,30 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     setDeleteFieldModalOpen(false);
   };
 
+  // User Documents handlers
+  const handleDownloadDocument = (fileName: string) => {
+    console.log('Downloading document:', fileName);
+    // Simulate download
+    const link = document.createElement('a');
+    link.href = '#';
+    link.download = fileName;
+    link.click();
+  };
+
+  const handleViewDocument = (fileName: string) => {
+    console.log('Viewing document:', fileName);
+    // Simulate opening document in viewer
+    window.open('#', '_blank');
+  };
+
+  const handleDeleteDocument = (fileName: string) => {
+    console.log('Deleting document:', fileName);
+    // Show confirmation and remove document
+    if (confirm(`Are you sure you want to delete "${fileName}"? This action cannot be undone.`)) {
+      console.log('Document deleted:', fileName);
+    }
+  };
+
   if (!copilot) return null;
 
   // Navigation handlers dispatch custom events instead of showing inline screens
@@ -1610,13 +1634,13 @@ function MyComponent() {
                         <div className="flex items-center gap-2 ml-4">
                           <Badge variant="secondary" className="text-xs">XLSX</Badge>
                           <Badge variant="default" className="text-xs bg-green-100 text-green-700">Active</Badge>
-                          <Button variant="ghost" size="sm" title="Download">
+                          <Button variant="ghost" size="sm" title="Download" onClick={() => handleDownloadDocument('quarterly-sales-data.xlsx')}>
                             <Download className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" title="View">
+                          <Button variant="ghost" size="sm" title="View" onClick={() => handleViewDocument('quarterly-sales-data.xlsx')}>
                             <Eye className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteDocument('quarterly-sales-data.xlsx')}>
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </div>
@@ -1642,13 +1666,13 @@ function MyComponent() {
                         <div className="flex items-center gap-2 ml-4">
                           <Badge variant="secondary" className="text-xs">DOCX</Badge>
                           <Badge variant="default" className="text-xs bg-green-100 text-green-700">Active</Badge>
-                          <Button variant="ghost" size="sm" title="Download">
+                          <Button variant="ghost" size="sm" title="Download" onClick={() => handleDownloadDocument('product-requirements.docx')}>
                             <Download className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" title="View">
+                          <Button variant="ghost" size="sm" title="View" onClick={() => handleViewDocument('product-requirements.docx')}>
                             <Eye className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteDocument('product-requirements.docx')}>
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </div>
@@ -1674,13 +1698,13 @@ function MyComponent() {
                         <div className="flex items-center gap-2 ml-4">
                           <Badge variant="secondary" className="text-xs">PDF</Badge>
                           <Badge variant="outline" className="text-xs text-orange-600">Processing</Badge>
-                          <Button variant="ghost" size="sm" title="Download">
+                          <Button variant="ghost" size="sm" title="Download" onClick={() => handleDownloadDocument('team-meeting-notes.pdf')}>
                             <Download className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" title="View">
+                          <Button variant="ghost" size="sm" title="View" onClick={() => handleViewDocument('team-meeting-notes.pdf')}>
                             <Eye className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteDocument('team-meeting-notes.pdf')}>
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </div>
@@ -1706,13 +1730,13 @@ function MyComponent() {
                         <div className="flex items-center gap-2 ml-4">
                           <Badge variant="secondary" className="text-xs">PPTX</Badge>
                           <Badge variant="default" className="text-xs bg-green-100 text-green-700">Active</Badge>
-                          <Button variant="ghost" size="sm" title="Download">
+                          <Button variant="ghost" size="sm" title="Download" onClick={() => handleDownloadDocument('user-research-findings.pptx')}>
                             <Download className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" title="View">
+                          <Button variant="ghost" size="sm" title="View" onClick={() => handleViewDocument('user-research-findings.pptx')}>
                             <Eye className="w-4 h-4" />
                           </Button>
-                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteDocument('user-research-findings.pptx')}>
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </div>
