@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, Plus, Play, Search } from "lucide-react";
+import { ChevronDown, Plus, Play, Search, Heart } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -92,9 +92,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                       <div className="flex items-center gap-2">
                         <div className="text-sm font-medium truncate">{copilot.name}</div>
                         {copilot.favorite && (
-                          <div className="w-4 h-4 text-yellow-500 flex-shrink-0">
-                            ⭐
-                          </div>
+                          <Heart className="w-4 h-4 text-red-500 fill-red-500 flex-shrink-0" />
                         )}
                       </div>
                       <div className="text-xs text-muted-foreground capitalize">{copilot.type}</div>
