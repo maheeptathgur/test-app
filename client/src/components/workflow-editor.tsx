@@ -156,7 +156,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
   return (
     <div className="h-full flex flex-col" style={{ backgroundColor: '#f2f2f2' }}>
       {/* Header */}
-      <div className="flex items-center justify-between p-6 border-b bg-white">
+      <div className="flex items-center justify-between p-6 border-b bg-[#ffffff00]">
         <div className="flex items-center gap-4">
           <Button variant="ghost" onClick={onBack} className="gap-2">
             <ArrowLeft className="w-4 h-4" />
@@ -182,7 +182,6 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
           </Button>
         </div>
       </div>
-
       {/* Tab Navigation */}
       <div className="flex border-b bg-white px-6">
         {tabs.map((tab) => (
@@ -200,7 +199,6 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
           </button>
         ))}
       </div>
-
       {/* Tab Content */}
       <div className="flex-1 overflow-auto">
         {activeTab === 'steps' && (
