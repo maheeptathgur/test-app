@@ -1,4 +1,4 @@
-import { MoreVertical } from "lucide-react";
+import { MoreVertical, Bot, MessageSquare, BarChart3, Headphones } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -6,6 +6,37 @@ import { Badge } from "@/components/ui/badge";
 import { CopilotData } from "@/lib/types";
 import { ComponentDetailsModal } from "./component-details-modal";
 import { useState } from "react";
+
+// Helper functions for image tiles
+const getImageTileStyle = (type: string): string => {
+  switch (type.toLowerCase()) {
+    case 'general':
+      return 'bg-gradient-to-br from-blue-400 to-blue-600';
+    case 'content':
+      return 'bg-gradient-to-br from-green-400 to-green-600';
+    case 'analyst':
+      return 'bg-gradient-to-br from-purple-400 to-purple-600';
+    case 'support':
+      return 'bg-gradient-to-br from-orange-400 to-orange-600';
+    default:
+      return 'bg-gradient-to-br from-gray-400 to-gray-600';
+  }
+};
+
+const getTypeIcon = (type: string) => {
+  switch (type.toLowerCase()) {
+    case 'general':
+      return <Bot className="w-6 h-6 text-white" />;
+    case 'content':
+      return <MessageSquare className="w-6 h-6 text-white" />;
+    case 'analyst':
+      return <BarChart3 className="w-6 h-6 text-white" />;
+    case 'support':
+      return <Headphones className="w-6 h-6 text-white" />;
+    default:
+      return <Bot className="w-6 h-6 text-white" />;
+  }
+};
 
 interface CopilotCardProps {
   copilot: CopilotData;
@@ -34,8 +65,10 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
       <CardContent className="p-0">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className={`w-12 h-12 ${copilot.avatarColor} rounded-xl flex items-center justify-center`}>
-              <span className="text-lg font-semibold">{copilot.avatar}</span>
+            <div className={`w-12 h-12 rounded-xl overflow-hidden ${getImageTileStyle(copilot.type)}`}>
+              <div className="w-full h-full flex items-center justify-center">
+                {getTypeIcon(copilot.type)}
+              </div>
             </div>
             <div>
               <h3 className="font-semibold text-card-foreground">{copilot.name}</h3>
