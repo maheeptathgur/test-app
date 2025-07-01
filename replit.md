@@ -151,6 +151,7 @@ Changelog:
 - July 1, 2025. Added "User Documents" tab to copilot configuration interface allowing management of user-uploaded documents with file statistics, upload functionality, and comprehensive document metadata display including uploader attribution, timestamps, file sizes, and status indicators
 - July 1, 2025. Implemented comprehensive search functionality and sorting/filtering capabilities for both Knowledge Base and User Documents tabs in copilot configuration, including search by name/description, filtering by file type, and sorting by various criteria (date updated, date created, name, file size, uploader)
 - July 1, 2025. Enhanced workspace-level Knowledge Base section with search functionality, filtering by document type, and sorting options while removing statistics cards for cleaner interface focused on document management
+- July 1, 2025. Redesigned copilot configuration Profile tab from form-based interface to profile field management system allowing administrators to configure which profile fields the copilot should collect from users, with field types, descriptions, and required/optional settings
 ```
 
 ## User Preferences
