@@ -26,6 +26,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { PricingScreen } from "./pricing-screen";
 import { AgentConfigureScreen, AgentTestScreen } from "./agent-screens";
 import { WorkflowEditor } from "./workflow-editor";
+import { ToolConfigureScreen } from "./tool-configure-screen";
 
 interface SampleScreenProps {
   section: NavigationSection;
