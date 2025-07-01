@@ -586,7 +586,11 @@ export default function Dashboard() {
         return {
           title: 'User View Preview',
           subtitle: 'See what your workspace looks like to end users',
-          content: <UserView />,
+          content: <UserView 
+            copilots={copilots}
+            onToggleFavorite={handleToggleFavorite}
+            onStartChat={handleStartChat}
+          />,
         };
       default:
         return {
