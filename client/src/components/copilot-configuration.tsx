@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink } from "lucide-react";
+import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
 
@@ -62,6 +62,9 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   });
   const [suggestDocsOpen, setSuggestDocsOpen] = useState(false);
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
+  const [editingDocument, setEditingDocument] = useState<string | null>(null);
+  const [tempTitle, setTempTitle] = useState("");
+  const [tempDescription, setTempDescription] = useState("");
 
   // Sample AI-suggested documents
   const suggestedDocs = [
@@ -186,6 +189,26 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     setSuggestDocsOpen(false);
     setSelectedSuggestions([]);
     // Show success message
+  };
+
+  const startEditing = (docId: string, currentTitle: string, currentDescription: string) => {
+    setEditingDocument(docId);
+    setTempTitle(currentTitle);
+    setTempDescription(currentDescription);
+  };
+
+  const saveEditing = () => {
+    // In a real implementation, this would save to the backend
+    console.log('Saving document:', { title: tempTitle, description: tempDescription });
+    setEditingDocument(null);
+    setTempTitle("");
+    setTempDescription("");
+  };
+
+  const cancelEditing = () => {
+    setEditingDocument(null);
+    setTempTitle("");
+    setTempDescription("");
   };
 
   if (!copilot) return null;
@@ -681,60 +704,201 @@ function MyComponent() {
                   
                   <div className="space-y-4">
                     {/* Sample knowledge base items */}
-                    <div className="flex items-center justify-between p-4 border rounded-lg bg-white">
-                      <div className="flex items-center gap-3">
-                        <FileText className="w-5 h-5 text-blue-500" />
-                        <div>
-                          <div className="font-medium">Product Documentation</div>
-                          <div className="text-sm text-muted-foreground">Comprehensive guide for product features</div>
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-3 flex-1">
+                          <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
+                          <div className="flex-1 min-w-0">
+                            {editingDocument === 'doc1' ? (
+                              <div className="space-y-2">
+                                <Input
+                                  value={tempTitle}
+                                  onChange={(e) => setTempTitle(e.target.value)}
+                                  className="font-medium"
+                                  placeholder="Document title"
+                                />
+                                <Input
+                                  value={tempDescription}
+                                  onChange={(e) => setTempDescription(e.target.value)}
+                                  className="text-sm"
+                                  placeholder="Document description"
+                                />
+                              </div>
+                            ) : (
+                              <div>
+                                <div className="font-medium">Product Documentation</div>
+                                <div className="text-sm text-muted-foreground">Comprehensive guide for product features</div>
+                              </div>
+                            )}
+                            <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                              <span>Created by Sarah Chen</span>
+                              <span>•</span>
+                              <span>2 days ago</span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="secondary" className="text-xs">PDF</Badge>
-                        <Button variant="ghost" size="sm">
-                          <ExternalLink className="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        <div className="flex items-center gap-2 ml-4">
+                          <Badge variant="secondary" className="text-xs">PDF</Badge>
+                          {editingDocument === 'doc1' ? (
+                            <>
+                              <Button variant="ghost" size="sm" onClick={saveEditing}>
+                                <Check className="w-4 h-4 text-green-600" />
+                              </Button>
+                              <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                                <X className="w-4 h-4 text-gray-600" />
+                              </Button>
+                            </>
+                          ) : (
+                            <>
+                              <Button variant="ghost" size="sm" title="View/Edit">
+                                <Eye className="w-4 h-4" />
+                              </Button>
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                onClick={() => startEditing('doc1', 'Product Documentation', 'Comprehensive guide for product features')}
+                                title="Rename"
+                              >
+                                <Edit3 className="w-4 h-4" />
+                              </Button>
+                              <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between p-4 border rounded-lg bg-white">
-                      <div className="flex items-center gap-3">
-                        <Link className="w-5 h-5 text-green-500" />
-                        <div>
-                          <div className="font-medium">Company Knowledge Base</div>
-                          <div className="text-sm text-muted-foreground">https://company.com/docs</div>
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-3 flex-1">
+                          <FileText className="w-5 h-5 text-purple-500 mt-0.5" />
+                          <div className="flex-1 min-w-0">
+                            {editingDocument === 'doc2' ? (
+                              <div className="space-y-2">
+                                <Input
+                                  value={tempTitle}
+                                  onChange={(e) => setTempTitle(e.target.value)}
+                                  className="font-medium"
+                                  placeholder="Document title"
+                                />
+                                <Input
+                                  value={tempDescription}
+                                  onChange={(e) => setTempDescription(e.target.value)}
+                                  className="text-sm"
+                                  placeholder="Document description"
+                                />
+                              </div>
+                            ) : (
+                              <div>
+                                <div className="font-medium">FAQ Document</div>
+                                <div className="text-sm text-muted-foreground">Frequently asked questions and answers</div>
+                              </div>
+                            )}
+                            <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                              <span>Created by Mike Torres</span>
+                              <span>•</span>
+                              <span>1 week ago</span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="secondary" className="text-xs">URL</Badge>
-                        <Button variant="ghost" size="sm">
-                          <ExternalLink className="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        <div className="flex items-center gap-2 ml-4">
+                          <Badge variant="secondary" className="text-xs">DOCX</Badge>
+                          {editingDocument === 'doc2' ? (
+                            <>
+                              <Button variant="ghost" size="sm" onClick={saveEditing}>
+                                <Check className="w-4 h-4 text-green-600" />
+                              </Button>
+                              <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                                <X className="w-4 h-4 text-gray-600" />
+                              </Button>
+                            </>
+                          ) : (
+                            <>
+                              <Button variant="ghost" size="sm" title="View/Edit">
+                                <Eye className="w-4 h-4" />
+                              </Button>
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                onClick={() => startEditing('doc2', 'FAQ Document', 'Frequently asked questions and answers')}
+                                title="Rename"
+                              >
+                                <Edit3 className="w-4 h-4" />
+                              </Button>
+                              <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between p-4 border rounded-lg bg-white">
-                      <div className="flex items-center gap-3">
-                        <FileText className="w-5 h-5 text-purple-500" />
-                        <div>
-                          <div className="font-medium">FAQ Document</div>
-                          <div className="text-sm text-muted-foreground">Frequently asked questions and answers</div>
+                    <div className="p-4 border rounded-lg bg-white">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-3 flex-1">
+                          <FileText className="w-5 h-5 text-green-500 mt-0.5" />
+                          <div className="flex-1 min-w-0">
+                            {editingDocument === 'doc3' ? (
+                              <div className="space-y-2">
+                                <Input
+                                  value={tempTitle}
+                                  onChange={(e) => setTempTitle(e.target.value)}
+                                  className="font-medium"
+                                  placeholder="Document title"
+                                />
+                                <Input
+                                  value={tempDescription}
+                                  onChange={(e) => setTempDescription(e.target.value)}
+                                  className="text-sm"
+                                  placeholder="Document description"
+                                />
+                              </div>
+                            ) : (
+                              <div>
+                                <div className="font-medium">API Integration Guide</div>
+                                <div className="text-sm text-muted-foreground">Step-by-step integration documentation</div>
+                              </div>
+                            )}
+                            <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                              <span>Created by Alex Kim</span>
+                              <span>•</span>
+                              <span>3 days ago</span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Badge variant="secondary" className="text-xs">DOCX</Badge>
-                        <Button variant="ghost" size="sm">
-                          <ExternalLink className="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
+                        <div className="flex items-center gap-2 ml-4">
+                          <Badge variant="secondary" className="text-xs">MD</Badge>
+                          {editingDocument === 'doc3' ? (
+                            <>
+                              <Button variant="ghost" size="sm" onClick={saveEditing}>
+                                <Check className="w-4 h-4 text-green-600" />
+                              </Button>
+                              <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                                <X className="w-4 h-4 text-gray-600" />
+                              </Button>
+                            </>
+                          ) : (
+                            <>
+                              <Button variant="ghost" size="sm" title="View/Edit">
+                                <Eye className="w-4 h-4" />
+                              </Button>
+                              <Button 
+                                variant="ghost" 
+                                size="sm" 
+                                onClick={() => startEditing('doc3', 'API Integration Guide', 'Step-by-step integration documentation')}
+                                title="Rename"
+                              >
+                                <Edit3 className="w-4 h-4" />
+                              </Button>
+                              <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
 
