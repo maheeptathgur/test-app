@@ -70,6 +70,22 @@ const mockCopilots: CopilotData[] = [
       { name: 'Hootsuite', type: 'tool' },
     ],
   },
+  {
+    id: '4',
+    name: 'Customer Support',
+    description: 'Provides 24/7 customer support with intelligent ticket routing and automated responses.',
+    status: 'active',
+    avatar: 'CS',
+    avatarColor: 'bg-purple-100 text-purple-600',
+    type: 'support',
+    components: [
+      { name: 'Support Agent', type: 'agent' },
+      { name: 'Ticket Router', type: 'agent' },
+      { name: 'Zendesk', type: 'tool' },
+      { name: 'Intercom', type: 'tool' },
+      { name: 'Escalation Flow', type: 'workflow' },
+    ],
+  },
 ];
 
 const navigationItems = [
