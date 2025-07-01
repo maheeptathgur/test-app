@@ -163,6 +163,16 @@
     border-color: #008062 !important;
   }
 
+  /* General border hover effects */
+  button:hover {
+    border-color: #00d2a0 !important;
+  }
+
+  /* Override for specific buttons that should keep different colors */
+  .google-drive-btn:hover {
+    border-color: #008062 !important;
+  }
+
   /* Table styling */
   table {
     background-color: white;
