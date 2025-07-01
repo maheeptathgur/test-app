@@ -81,6 +81,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [fieldToDelete, setFieldToDelete] = useState<string | null>(null);
   const [deleteDocumentModalOpen, setDeleteDocumentModalOpen] = useState(false);
   const [documentToDelete, setDocumentToDelete] = useState<string | null>(null);
+  const [previewDocument, setPreviewDocument] = useState<string | null>(null);
   
   // Knowledge Base filters and search
   const [kbSearchTerm, setKbSearchTerm] = useState('');
@@ -516,8 +517,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
   const handleViewDocument = (fileName: string) => {
     console.log('Viewing document:', fileName);
-    // Simulate opening document in viewer
-    window.open('#', '_blank');
+    setPreviewDocument(fileName);
+  };
+
+  const handleExitPreview = () => {
+    setPreviewDocument(null);
   };
 
   const handleDeleteDocument = (fileName: string) => {
@@ -1577,7 +1581,7 @@ function MyComponent() {
             </div>
             )}
 
-            {activeTab === "user-docs" && (
+            {activeTab === "user-docs" && !previewDocument && (
             <div className="p-0 m-0 h-full">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
@@ -1752,6 +1756,232 @@ function MyComponent() {
                         </div>
                       </div>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            )}
+
+            {activeTab === "user-docs" && previewDocument && (
+            <div className="p-0 m-0 h-full">
+              <div className="max-w-6xl mx-auto p-6 h-full flex flex-col">
+                {/* Preview Header */}
+                <div className="flex items-center justify-between mb-6 pb-4 border-b">
+                  <div className="flex items-center gap-3">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={handleExitPreview}
+                      className="gap-2"
+                    >
+                      <X className="w-4 h-4" />
+                      Exit Preview
+                    </Button>
+                    <div className="h-6 w-px bg-border"></div>
+                    <div>
+                      <h2 className="text-lg font-semibold text-foreground">{previewDocument}</h2>
+                      <p className="text-sm text-muted-foreground">Document Preview</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Button variant="outline" size="sm" onClick={() => handleDownloadDocument(previewDocument)} className="gap-2">
+                      <Download className="w-4 h-4" />
+                      Download
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="text-red-500 hover:text-red-600 hover:bg-red-50 gap-2" 
+                      onClick={() => handleDeleteDocument(previewDocument)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Document Content Preview */}
+                <div className="flex-1 bg-white border rounded-lg overflow-hidden">
+                  <div className="h-full p-8 overflow-y-auto">
+                    {previewDocument?.endsWith('.xlsx') && (
+                      <div className="space-y-6">
+                        <div className="text-center py-8">
+                          <FileText className="w-16 h-16 mx-auto text-blue-500 mb-4" />
+                          <h3 className="text-xl font-semibold mb-2">Quarterly Sales Data</h3>
+                          <p className="text-muted-foreground">Excel Spreadsheet - 1.2 MB</p>
+                        </div>
+                        <div className="border rounded-lg p-4">
+                          <h4 className="font-medium mb-3">Sheet Preview: Q1 2024 Sales</h4>
+                          <div className="overflow-x-auto">
+                            <table className="w-full border-collapse border border-gray-300">
+                              <thead>
+                                <tr className="bg-gray-50">
+                                  <th className="border border-gray-300 p-2 text-left">Region</th>
+                                  <th className="border border-gray-300 p-2 text-left">Product</th>
+                                  <th className="border border-gray-300 p-2 text-left">Sales Rep</th>
+                                  <th className="border border-gray-300 p-2 text-right">Revenue</th>
+                                  <th className="border border-gray-300 p-2 text-right">Units Sold</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td className="border border-gray-300 p-2">North America</td>
+                                  <td className="border border-gray-300 p-2">Product A</td>
+                                  <td className="border border-gray-300 p-2">John Smith</td>
+                                  <td className="border border-gray-300 p-2 text-right">$125,000</td>
+                                  <td className="border border-gray-300 p-2 text-right">250</td>
+                                </tr>
+                                <tr>
+                                  <td className="border border-gray-300 p-2">Europe</td>
+                                  <td className="border border-gray-300 p-2">Product B</td>
+                                  <td className="border border-gray-300 p-2">Sarah Wilson</td>
+                                  <td className="border border-gray-300 p-2 text-right">$89,500</td>
+                                  <td className="border border-gray-300 p-2 text-right">179</td>
+                                </tr>
+                                <tr>
+                                  <td className="border border-gray-300 p-2">Asia Pacific</td>
+                                  <td className="border border-gray-300 p-2">Product C</td>
+                                  <td className="border border-gray-300 p-2">Mike Chen</td>
+                                  <td className="border border-gray-300 p-2 text-right">$156,200</td>
+                                  <td className="border border-gray-300 p-2 text-right">312</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {previewDocument?.endsWith('.docx') && (
+                      <div className="space-y-6 max-w-4xl">
+                        <div className="text-center py-8">
+                          <FileText className="w-16 h-16 mx-auto text-green-500 mb-4" />
+                          <h3 className="text-xl font-semibold mb-2">Product Requirements Document</h3>
+                          <p className="text-muted-foreground">Word Document - 845 KB</p>
+                        </div>
+                        <div className="prose prose-sm max-w-none">
+                          <h1>Product Requirements Document</h1>
+                          <h2>Executive Summary</h2>
+                          <p>This document outlines the detailed requirements for our next-generation analytics platform. The platform aims to provide real-time insights and automated reporting capabilities for enterprise customers.</p>
+                          
+                          <h2>Product Vision</h2>
+                          <p>To create an intuitive, powerful analytics platform that empowers businesses to make data-driven decisions quickly and confidently.</p>
+                          
+                          <h2>Key Features</h2>
+                          <ul>
+                            <li>Real-time data processing and visualization</li>
+                            <li>Customizable dashboard creation</li>
+                            <li>Advanced filtering and segmentation</li>
+                            <li>Automated alert system</li>
+                            <li>Integration with popular business tools</li>
+                          </ul>
+                          
+                          <h2>User Stories</h2>
+                          <h3>Data Analyst</h3>
+                          <p>As a data analyst, I want to create custom visualizations so that I can present insights effectively to stakeholders.</p>
+                          
+                          <h3>Business Manager</h3>
+                          <p>As a business manager, I want to receive automated alerts when key metrics change so that I can respond quickly to business opportunities.</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {previewDocument?.endsWith('.pdf') && (
+                      <div className="space-y-6">
+                        <div className="text-center py-8">
+                          <FileText className="w-16 h-16 mx-auto text-purple-500 mb-4" />
+                          <h3 className="text-xl font-semibold mb-2">Team Meeting Notes</h3>
+                          <p className="text-muted-foreground">PDF Document - 564 KB</p>
+                        </div>
+                        <div className="border rounded-lg p-6 bg-gray-50">
+                          <div className="space-y-4">
+                            <div>
+                              <h4 className="font-semibold text-lg">Weekly Team Meeting - March 15, 2024</h4>
+                              <p className="text-sm text-muted-foreground">Attendees: Mike Chen, Sarah Johnson, Emma Wilson, John Smith</p>
+                            </div>
+                            
+                            <div>
+                              <h5 className="font-medium">Agenda Items</h5>
+                              <ul className="list-disc ml-6 space-y-1">
+                                <li>Product roadmap review</li>
+                                <li>Q1 performance metrics</li>
+                                <li>Upcoming feature releases</li>
+                                <li>Team capacity planning</li>
+                              </ul>
+                            </div>
+                            
+                            <div>
+                              <h5 className="font-medium">Key Decisions</h5>
+                              <ul className="list-disc ml-6 space-y-1">
+                                <li>Approved budget increase for analytics platform</li>
+                                <li>Decided to prioritize mobile app development</li>
+                                <li>Set launch date for Q2 feature release</li>
+                              </ul>
+                            </div>
+                            
+                            <div>
+                              <h5 className="font-medium">Action Items</h5>
+                              <ul className="list-disc ml-6 space-y-1">
+                                <li>Sarah: Update project timeline by March 20</li>
+                                <li>Mike: Review technical specifications</li>
+                                <li>Emma: Conduct user research interviews</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {previewDocument?.endsWith('.pptx') && (
+                      <div className="space-y-6">
+                        <div className="text-center py-8">
+                          <FileText className="w-16 h-16 mx-auto text-orange-500 mb-4" />
+                          <h3 className="text-xl font-semibold mb-2">User Research Findings</h3>
+                          <p className="text-muted-foreground">PowerPoint Presentation - 3.1 MB</p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="border rounded-lg p-4 bg-white">
+                            <div className="aspect-video bg-blue-50 rounded border-2 border-dashed border-blue-200 flex items-center justify-center mb-3">
+                              <div className="text-center">
+                                <h4 className="font-semibold text-blue-700">Slide 1</h4>
+                                <p className="text-sm text-blue-600">Research Overview</p>
+                              </div>
+                            </div>
+                            <p className="text-sm text-muted-foreground">Introduction to user research methodology and objectives</p>
+                          </div>
+                          
+                          <div className="border rounded-lg p-4 bg-white">
+                            <div className="aspect-video bg-green-50 rounded border-2 border-dashed border-green-200 flex items-center justify-center mb-3">
+                              <div className="text-center">
+                                <h4 className="font-semibold text-green-700">Slide 2</h4>
+                                <p className="text-sm text-green-600">Key Insights</p>
+                              </div>
+                            </div>
+                            <p className="text-sm text-muted-foreground">Primary findings from user interviews and surveys</p>
+                          </div>
+                          
+                          <div className="border rounded-lg p-4 bg-white">
+                            <div className="aspect-video bg-purple-50 rounded border-2 border-dashed border-purple-200 flex items-center justify-center mb-3">
+                              <div className="text-center">
+                                <h4 className="font-semibold text-purple-700">Slide 3</h4>
+                                <p className="text-sm text-purple-600">User Personas</p>
+                              </div>
+                            </div>
+                            <p className="text-sm text-muted-foreground">Detailed personas based on research data</p>
+                          </div>
+                          
+                          <div className="border rounded-lg p-4 bg-white">
+                            <div className="aspect-video bg-orange-50 rounded border-2 border-dashed border-orange-200 flex items-center justify-center mb-3">
+                              <div className="text-center">
+                                <h4 className="font-semibold text-orange-700">Slide 4</h4>
+                                <p className="text-sm text-orange-600">Recommendations</p>
+                              </div>
+                            </div>
+                            <p className="text-sm text-muted-foreground">Actionable recommendations for product improvements</p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
