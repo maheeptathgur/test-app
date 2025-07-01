@@ -108,6 +108,21 @@
     height: 100vh;
     overflow: hidden;
   }
+  
+  /* Fix input focus ring borders */
+  input:focus-visible,
+  textarea:focus-visible {
+    @apply ring-2 ring-primary ring-offset-2;
+    border-color: hsl(var(--primary)) !important;
+    outline: none;
+  }
+  
+  input:focus,
+  textarea:focus {
+    @apply ring-2 ring-primary ring-offset-2;
+    border-color: hsl(var(--primary)) !important;
+    outline: none;
+  }
 }
 
 @layer components {
