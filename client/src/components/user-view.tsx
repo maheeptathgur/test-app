@@ -78,8 +78,22 @@ export function UserView() {
   return (
     <div className="space-y-6">
       {/* Welcome Header */}
-      <div className="text-center py-16 bg-gradient-to-r from-[#008062] to-[#00d2a0] text-white rounded-lg" style={{ aspectRatio: '3/1' }}>
-        <div className="flex flex-col justify-center h-full">
+      <div 
+        className="relative text-center py-16 text-white rounded-lg overflow-hidden" 
+        style={{ aspectRatio: '3/1' }}
+      >
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200&h=400&fit=crop&auto=format)',
+          }}
+        />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/50" />
+        
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-center h-full">
           <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
           <p className="text-lg opacity-90">Choose an AI assistant to help you with your tasks</p>
         </div>
