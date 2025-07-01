@@ -19,6 +19,7 @@ import { CopilotConfiguration } from "@/components/copilot-configuration";
 import { SampleScreen } from "@/components/sample-screens";
 import { WorkspaceSettings } from "@/components/workspace-settings";
 import { UserView } from "@/components/user-view";
+import { DeleteConfirmationModal } from "@/components/delete-confirmation-modal";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
@@ -166,6 +167,8 @@ export default function Dashboard() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [copilotToDelete, setCopilotToDelete] = useState<CopilotData | null>(null);
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
@@ -220,10 +223,21 @@ export default function Dashboard() {
   };
 
   const handleDeleteCopilot = (copilot: CopilotData) => {
-    if (confirm(`Are you sure you want to delete ${copilot.name}?`)) {
-      setCopilots(prev => prev.filter(c => c.id !== copilot.id));
-      showNotification(`Deleted ${copilot.name}`);
+    setCopilotToDelete(copilot);
+    setDeleteConfirmOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (copilotToDelete) {
+      setCopilots(prev => prev.filter(c => c.id !== copilotToDelete.id));
+      showNotification(`Deleted ${copilotToDelete.name}`);
+      setCopilotToDelete(null);
     }
+  };
+
+  const handleCancelDelete = () => {
+    setCopilotToDelete(null);
+    setDeleteConfirmOpen(false);
   };
 
   const handleCreateCopilot = (data: { name: string; description: string; type: string }) => {
@@ -1272,6 +1286,14 @@ export default function Dashboard() {
         copilot={editingCopilot}
         onClose={() => setEditingCopilot(null)}
         onUpdateCopilot={handleUpdateCopilot}
+      />
+
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmationModal
+        isOpen={deleteConfirmOpen}
+        copilotName={copilotToDelete?.name || ''}
+        onClose={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
       />
     </div>
   );
