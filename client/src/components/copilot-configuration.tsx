@@ -70,6 +70,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [editingDocument, setEditingDocument] = useState<string | null>(null);
   const [tempTitle, setTempTitle] = useState("");
   const [tempDescription, setTempDescription] = useState("");
+  const [addFieldModalOpen, setAddFieldModalOpen] = useState(false);
+  const [newFieldName, setNewFieldName] = useState("");
+  const [newFieldDescription, setNewFieldDescription] = useState("");
+  const [newFieldType, setNewFieldType] = useState("text");
+  const [newFieldRequired, setNewFieldRequired] = useState(false);
   
   // Knowledge Base filters and search
   const [kbSearchTerm, setKbSearchTerm] = useState('');
@@ -395,6 +400,35 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     window.dispatchEvent(new CustomEvent('navigate-to-workflow-edit', { 
       detail: { id: workflow.id, name: workflow.name } 
     }));
+  };
+
+  const handleAddField = () => {
+    setAddFieldModalOpen(true);
+  };
+
+  const handleSaveNewField = () => {
+    // In a real implementation, this would save the new field to the backend
+    console.log('Saving new field:', {
+      name: newFieldName,
+      description: newFieldDescription,
+      type: newFieldType,
+      required: newFieldRequired
+    });
+    
+    // Reset form and close modal
+    setNewFieldName("");
+    setNewFieldDescription("");
+    setNewFieldType("text");
+    setNewFieldRequired(false);
+    setAddFieldModalOpen(false);
+  };
+
+  const handleCancelAddField = () => {
+    setNewFieldName("");
+    setNewFieldDescription("");
+    setNewFieldType("text");
+    setNewFieldRequired(false);
+    setAddFieldModalOpen(false);
   };
 
   if (!copilot) return null;
@@ -1628,7 +1662,7 @@ function MyComponent() {
                       <h2 className="text-lg font-semibold text-foreground">Profile Fields</h2>
                       <p className="text-sm text-muted-foreground">Configure which profile fields this copilot should collect from users</p>
                     </div>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={handleAddField}>
                       <Plus className="w-4 h-4 mr-1" />
                       Add Field
                     </Button>
@@ -1984,6 +2018,86 @@ function MyComponent() {
             >
               <Save className="w-4 h-4" />
               Add Selected ({selectedComponents.length})
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Field Modal */}
+      <Dialog open={addFieldModalOpen} onOpenChange={setAddFieldModalOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Plus className="w-5 h-5" />
+              Add Profile Field
+            </DialogTitle>
+            <DialogDescription>
+              Create a new profile field that this copilot will collect from users.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="field-name">Field Name</Label>
+              <Input
+                id="field-name"
+                value={newFieldName}
+                onChange={(e) => setNewFieldName(e.target.value)}
+                placeholder="e.g., Job Title, Company, Department"
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="field-description">Description</Label>
+              <Textarea
+                id="field-description"
+                value={newFieldDescription}
+                onChange={(e) => setNewFieldDescription(e.target.value)}
+                placeholder="Describe what information this field collects..."
+                rows={2}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="field-type">Field Type</Label>
+              <Select value={newFieldType} onValueChange={setNewFieldType}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select field type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="text">Text</SelectItem>
+                  <SelectItem value="textarea">Text Area</SelectItem>
+                  <SelectItem value="select">Select</SelectItem>
+                  <SelectItem value="number">Number</SelectItem>
+                  <SelectItem value="email">Email</SelectItem>
+                  <SelectItem value="date">Date</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="field-required"
+                checked={newFieldRequired}
+                onCheckedChange={setNewFieldRequired}
+              />
+              <Label htmlFor="field-required" className="text-sm">
+                This field is required
+              </Label>
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-4 border-t">
+            <Button variant="outline" onClick={handleCancelAddField}>
+              Cancel
+            </Button>
+            <Button 
+              onClick={handleSaveNewField}
+              disabled={!newFieldName.trim() || !newFieldDescription.trim()}
+              className="gap-2"
+            >
+              <Save className="w-4 h-4" />
+              Add Field
             </Button>
           </div>
         </DialogContent>
