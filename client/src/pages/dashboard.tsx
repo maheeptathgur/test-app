@@ -19,8 +19,6 @@ import { CopilotConfiguration } from "@/components/copilot-configuration";
 import { SampleScreen } from "@/components/sample-screens";
 import { WorkspaceSettings } from "@/components/workspace-settings";
 import { UserView } from "@/components/user-view";
-import { ThemeSelector } from "@/components/theme-selector";
-import { useTheme } from "../contexts/theme-context";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
@@ -171,7 +169,6 @@ export default function Dashboard() {
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
-  const { currentTheme, setTheme } = useTheme();
 
   const showNotification = (message: string) => {
     toast({
@@ -1012,11 +1009,6 @@ export default function Dashboard() {
                 </Button>
               )}
             </>
-          )}
-
-          {/* Theme Selector */}
-          {!sidebarCollapsed && (
-            <ThemeSelector currentTheme={currentTheme} onThemeChange={setTheme} />
           )}
 
           {/* User Profile */}
