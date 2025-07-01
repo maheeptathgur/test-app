@@ -103,12 +103,14 @@ export function SampleScreen({ section }: SampleScreenProps) {
             return <ToolsScreen 
               onToolConfigure={handleToolConfigure} 
               onConnectNewTool={() => {
-                console.log('Connect New Tool clicked');
+                console.log('Connect New Tool clicked - setting state to true');
                 setShowConnectNewTool(true);
+                console.log('showConnectNewTool state:', true);
               }}
               onBrowseIntegrations={() => {
-                console.log('Browse Integrations clicked');
+                console.log('Browse Integrations clicked - setting state to true');
                 setShowBrowseIntegrations(true);
+                console.log('showBrowseIntegrations state:', true);
               }}
             />;
           case 'workflows':
@@ -131,6 +133,7 @@ export function SampleScreen({ section }: SampleScreenProps) {
       })()}
 
       {/* Connect New Tool Modal */}
+      {console.log('Rendering Connect New Tool Modal, open:', showConnectNewTool)}
       <Dialog open={showConnectNewTool} onOpenChange={setShowConnectNewTool}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
