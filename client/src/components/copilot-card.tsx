@@ -1,4 +1,4 @@
-import { MoreVertical, Bot, MessageSquare, BarChart3, Headphones } from "lucide-react";
+import { MoreVertical, Bot, MessageSquare, BarChart3, Headphones, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -8,33 +8,33 @@ import { ComponentDetailsModal } from "./component-details-modal";
 import { useState } from "react";
 
 // Helper functions for image tiles
-const getImageTileStyle = (type: string): string => {
+const getImageUrl = (type: string): string => {
   switch (type.toLowerCase()) {
     case 'general':
-      return 'bg-gradient-to-br from-blue-400 to-blue-600';
+      return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
     case 'content':
-      return 'bg-gradient-to-br from-green-400 to-green-600';
+      return 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=200&fit=crop&auto=format';
     case 'analyst':
-      return 'bg-gradient-to-br from-purple-400 to-purple-600';
+      return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop&auto=format';
     case 'support':
-      return 'bg-gradient-to-br from-orange-400 to-orange-600';
+      return 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&auto=format';
     default:
-      return 'bg-gradient-to-br from-gray-400 to-gray-600';
+      return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
   }
 };
 
 const getTypeIcon = (type: string) => {
   switch (type.toLowerCase()) {
     case 'general':
-      return <Bot className="w-6 h-6 text-white" />;
+      return <Bot className="w-6 h-6 text-white drop-shadow-md" />;
     case 'content':
-      return <MessageSquare className="w-6 h-6 text-white" />;
+      return <MessageSquare className="w-6 h-6 text-white drop-shadow-md" />;
     case 'analyst':
-      return <BarChart3 className="w-6 h-6 text-white" />;
+      return <BarChart3 className="w-6 h-6 text-white drop-shadow-md" />;
     case 'support':
-      return <Headphones className="w-6 h-6 text-white" />;
+      return <Headphones className="w-6 h-6 text-white drop-shadow-md" />;
     default:
-      return <Bot className="w-6 h-6 text-white" />;
+      return <Bot className="w-6 h-6 text-white drop-shadow-md" />;
   }
 };
 
@@ -62,28 +62,34 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
   };
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
-      {/* Image tile header */}
-      <div className={`h-36 w-full ${getImageTileStyle(copilot.type)} flex items-center justify-center relative`}>
-        {getTypeIcon(copilot.type)}
-        <div className="absolute top-3 right-3">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-white/20 hover:bg-white/30">
-                <MoreVertical className="h-4 w-4 text-white" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => onEdit(copilot)}>Edit</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onDuplicate(copilot)}>Duplicate</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onArchive(copilot)}>Archive</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onDelete(copilot)} className="text-red-600">Delete</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
-
       {/* Card content */}
       <CardContent className="p-6">
+        {/* Image tile header */}
+        <div className="relative h-36 w-full rounded-lg overflow-hidden mb-4">
+          <img 
+            src={getImageUrl(copilot.type)} 
+            alt={`${copilot.type} copilot`}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+            {getTypeIcon(copilot.type)}
+          </div>
+          <div className="absolute top-3 right-3">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-white/20 hover:bg-white/30">
+                  <MoreVertical className="h-4 w-4 text-white" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => onEdit(copilot)}>Edit</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onDuplicate(copilot)}>Duplicate</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onArchive(copilot)}>Archive</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => onDelete(copilot)} className="text-red-600">Delete</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </div>
         <div className="mb-4">
           <h3 className="font-semibold text-card-foreground mb-2">{copilot.name}</h3>
           <Badge variant={copilot.status === 'active' ? 'default' : 'secondary'} className="text-xs capitalize">
@@ -114,6 +120,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           onClick={() => onStartChat(copilot)}
           className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
         >
+          <Play className="w-4 h-4 mr-2" />
           Start Chat
         </Button>
       </CardContent>
