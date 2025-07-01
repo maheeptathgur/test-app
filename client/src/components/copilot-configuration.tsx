@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download } from "lucide-react";
+import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download, Search, Filter, SortAsc } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
 
@@ -66,6 +66,16 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [editingDocument, setEditingDocument] = useState<string | null>(null);
   const [tempTitle, setTempTitle] = useState("");
   const [tempDescription, setTempDescription] = useState("");
+  
+  // Knowledge Base filters and search
+  const [kbSearchTerm, setKbSearchTerm] = useState('');
+  const [kbSortBy, setKbSortBy] = useState('updated');
+  const [kbFilterType, setKbFilterType] = useState('all');
+  
+  // User Documents filters and search
+  const [docsSearchTerm, setDocsSearchTerm] = useState('');
+  const [docsSortBy, setDocsSortBy] = useState('updated');
+  const [docsFilterType, setDocsFilterType] = useState('all');
 
   // Sample AI-suggested documents
   const suggestedDocs = [
@@ -707,6 +717,43 @@ function MyComponent() {
                     </div>
                   </div>
                   
+                  {/* Search and Filter Controls */}
+                  <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                    <div className="relative flex-1">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                      <Input
+                        placeholder="Search knowledge base..."
+                        value={kbSearchTerm}
+                        onChange={(e) => setKbSearchTerm(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
+                    <Select value={kbFilterType} onValueChange={setKbFilterType}>
+                      <SelectTrigger className="w-full sm:w-40">
+                        <Filter className="w-4 h-4 mr-2" />
+                        <SelectValue placeholder="Filter by type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Types</SelectItem>
+                        <SelectItem value="document">Documents</SelectItem>
+                        <SelectItem value="url">URLs</SelectItem>
+                        <SelectItem value="markdown">Markdown</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select value={kbSortBy} onValueChange={setKbSortBy}>
+                      <SelectTrigger className="w-full sm:w-40">
+                        <SortAsc className="w-4 h-4 mr-2" />
+                        <SelectValue placeholder="Sort by" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="updated">Last Updated</SelectItem>
+                        <SelectItem value="created">Date Created</SelectItem>
+                        <SelectItem value="name">Name A-Z</SelectItem>
+                        <SelectItem value="size">File Size</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
                   <div className="space-y-4">
                     {/* Sample knowledge base items */}
                     <div className="p-4 border rounded-lg bg-white">
@@ -917,7 +964,45 @@ function MyComponent() {
                 <div>
                   <h2 className="text-lg font-semibold text-foreground mb-4">User Documents</h2>
                   
-                  
+                  {/* Search and Filter Controls */}
+                  <div className="flex flex-col sm:flex-row gap-4 mb-6">
+                    <div className="relative flex-1">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                      <Input
+                        placeholder="Search user documents..."
+                        value={docsSearchTerm}
+                        onChange={(e) => setDocsSearchTerm(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
+                    <Select value={docsFilterType} onValueChange={setDocsFilterType}>
+                      <SelectTrigger className="w-full sm:w-40">
+                        <Filter className="w-4 h-4 mr-2" />
+                        <SelectValue placeholder="Filter by type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">All Types</SelectItem>
+                        <SelectItem value="xlsx">Excel Files</SelectItem>
+                        <SelectItem value="docx">Word Documents</SelectItem>
+                        <SelectItem value="pdf">PDF Files</SelectItem>
+                        <SelectItem value="pptx">PowerPoint</SelectItem>
+                        <SelectItem value="txt">Text Files</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <Select value={docsSortBy} onValueChange={setDocsSortBy}>
+                      <SelectTrigger className="w-full sm:w-40">
+                        <SortAsc className="w-4 h-4 mr-2" />
+                        <SelectValue placeholder="Sort by" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="updated">Last Updated</SelectItem>
+                        <SelectItem value="created">Date Uploaded</SelectItem>
+                        <SelectItem value="name">Name A-Z</SelectItem>
+                        <SelectItem value="size">File Size</SelectItem>
+                        <SelectItem value="uploader">Uploader</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                   
                   <div className="space-y-4">
                     {/* Sample user documents */}
