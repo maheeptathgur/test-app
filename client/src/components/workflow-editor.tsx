@@ -183,7 +183,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         </div>
       </div>
       {/* Tab Navigation */}
-      <div className="flex px-6 bg-[#ffffff00]">
+      <div className="flex border-b px-6 bg-[#ffffff00]">
         {tabs.map((tab) => (
           <button
             key={tab.id}
