@@ -111,17 +111,12 @@
   
   /* Fix input focus ring borders */
   input:focus-visible,
-  textarea:focus-visible {
-    @apply ring-2 ring-primary ring-offset-2;
-    border-color: hsl(var(--primary)) !important;
-    outline: none;
-  }
-  
+  textarea:focus-visible,
   input:focus,
   textarea:focus {
-    @apply ring-2 ring-primary ring-offset-2;
-    border-color: hsl(var(--primary)) !important;
     outline: none;
+    border: 2px solid hsl(var(--primary)) !important;
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2) !important;
   }
 }
 
