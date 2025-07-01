@@ -970,8 +970,8 @@ export default function Dashboard() {
                   <div className="flex items-center gap-3">
                     <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
                     {activeSection === 'copilots' && (
-                      <Badge variant="secondary" className="text-sm">
-                        {copilots.length}
+                      <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+                        {copilots.length} Copilots
                       </Badge>
                     )}
                   </div>
