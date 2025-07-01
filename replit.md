@@ -153,6 +153,7 @@ Changelog:
 - July 1, 2025. Enhanced workspace-level Knowledge Base section with search functionality, filtering by document type, and sorting options while removing statistics cards for cleaner interface focused on document management
 - July 1, 2025. Redesigned copilot configuration Profile tab from form-based interface to profile field management system allowing administrators to configure which profile fields the copilot should collect from users, with field types, descriptions, and required/optional settings
 - July 1, 2025. Removed workspace-level "Profile Fields" navigation item since profile fields now only exist at the copilot level for better organization and to avoid redundancy
+- July 1, 2025. Simplified Workspace Settings by removing integrations, billing, and members tabs, keeping only General and Security tabs for focused essential configuration
 ```
 
 ## User Preferences
