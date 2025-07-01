@@ -152,6 +152,7 @@ Changelog:
 - July 1, 2025. Implemented comprehensive search functionality and sorting/filtering capabilities for both Knowledge Base and User Documents tabs in copilot configuration, including search by name/description, filtering by file type, and sorting by various criteria (date updated, date created, name, file size, uploader)
 - July 1, 2025. Enhanced workspace-level Knowledge Base section with search functionality, filtering by document type, and sorting options while removing statistics cards for cleaner interface focused on document management
 - July 1, 2025. Redesigned copilot configuration Profile tab from form-based interface to profile field management system allowing administrators to configure which profile fields the copilot should collect from users, with field types, descriptions, and required/optional settings
+- July 1, 2025. Removed workspace-level "Profile Fields" navigation item since profile fields now only exist at the copilot level for better organization and to avoid redundancy
 ```
 
 ## User Preferences

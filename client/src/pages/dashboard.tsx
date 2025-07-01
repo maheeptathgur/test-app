@@ -140,7 +140,6 @@ const navigationItems = [
   { id: 'tools', label: 'Tools', icon: Settings },
   { id: 'workflows', label: 'Workflows', icon: BarChart3 },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
-  { id: 'profile-fields', label: 'Profile Fields', icon: UserCog },
   { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
   { id: 'conversations', label: 'Conversations', icon: MessageSquare },
   { id: 'analytics', label: 'Analytics', icon: TrendingUp },
@@ -532,12 +531,7 @@ export default function Dashboard() {
           subtitle: 'Manage knowledge articles and documentation for your copilots',
           content: <SampleScreen section="knowledge-base" />,
         };
-      case 'profile-fields':
-        return {
-          title: 'Profile Fields',
-          subtitle: 'Custom fields to collect additional user information',
-          content: <SampleScreen section="profile-fields" />,
-        };
+
       case 'subscriptions':
         return {
           title: 'Subscriptions',
