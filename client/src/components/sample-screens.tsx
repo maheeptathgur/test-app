@@ -44,90 +44,84 @@ export function SampleScreen({ section }: SampleScreenProps) {
 }
 
 function AgentsScreen() {
-  const agentsByCategory = {
-    "Content Creation": [
-      { 
-        id: 1, 
-        name: "SEO Writer", 
-        copilot: "Content Manager", 
-        description: "Creates optimized blog posts and articles",
-        tools: ["Content Research", "Keyword Analysis"],
-        workflows: ["Blog Post Generation", "Meta Description"],
-        status: "Active", 
-        requests: 156,
-        knowledgeBase: "SEO Guidelines",
-        lastActive: "2 min ago"
-      },
-      { 
-        id: 2, 
-        name: "SEO Optimizer", 
-        copilot: "Content Manager", 
-        description: "Optimizes existing content for search engines",
-        tools: ["SEO Analyzer", "Keyword Density"],
-        workflows: ["Content Optimization", "SERP Analysis"],
-        status: "Active", 
-        requests: 89,
-        knowledgeBase: "SEO Best Practices",
-        lastActive: "5 min ago"
-      },
-    ],
-    "Data Analysis": [
-      { 
-        id: 3, 
-        name: "Performance Analyst", 
-        copilot: "Business Intelligence", 
-        description: "Analyzes website and content performance metrics",
-        tools: ["Analytics API", "Report Builder"],
-        workflows: ["Performance Report", "Traffic Analysis"],
-        status: "Active", 
-        requests: 234,
-        knowledgeBase: "Analytics Guidelines",
-        lastActive: "1 min ago"
-      },
-      { 
-        id: 4, 
-        name: "Competitor Researcher", 
-        copilot: "Business Intelligence", 
-        description: "Researches competitor strategies and market trends",
-        tools: ["Web Scraper", "Market Data API"],
-        workflows: ["Competitor Analysis", "Market Research"],
-        status: "Active", 
-        requests: 67,
-        knowledgeBase: "Market Research Data",
-        lastActive: "8 min ago"
-      },
-    ],
-    "Customer Support": [
-      { 
-        id: 5, 
-        name: "Ticket Classifier", 
-        copilot: "Customer Support", 
-        description: "Categorizes and prioritizes support tickets",
-        tools: ["NLP Classifier", "Priority Scorer"],
-        workflows: ["Ticket Routing", "Escalation Rules"],
-        status: "Active", 
-        requests: 445,
-        knowledgeBase: "Support Categories",
-        lastActive: "30 sec ago"
-      },
-      { 
-        id: 6, 
-        name: "FAQ Generator", 
-        copilot: "Customer Support", 
-        description: "Creates and updates FAQ content from tickets",
-        tools: ["Content Extractor", "FAQ Builder"],
-        workflows: ["FAQ Creation", "Content Updates"],
-        status: "Inactive", 
-        requests: 23,
-        knowledgeBase: "Support Documentation",
-        lastActive: "2 hours ago"
-      },
-    ]
-  };
+  const agents = [
+    { 
+      id: 1, 
+      name: "SEO Writer", 
+      copilot: "Content Manager", 
+      description: "Creates optimized blog posts and articles",
+      tools: ["Content Research", "Keyword Analysis"],
+      workflows: ["Blog Post Generation", "Meta Description"],
+      status: "Active", 
+      requests: 156,
+      knowledgeBase: "SEO Guidelines",
+      lastActive: "2 min ago"
+    },
+    { 
+      id: 2, 
+      name: "SEO Optimizer", 
+      copilot: "Content Manager", 
+      description: "Optimizes existing content for search engines",
+      tools: ["SEO Analyzer", "Keyword Density"],
+      workflows: ["Content Optimization", "SERP Analysis"],
+      status: "Active", 
+      requests: 89,
+      knowledgeBase: "SEO Best Practices",
+      lastActive: "5 min ago"
+    },
+    { 
+      id: 3, 
+      name: "Performance Analyst", 
+      copilot: "Business Intelligence", 
+      description: "Analyzes website and content performance metrics",
+      tools: ["Analytics API", "Report Builder"],
+      workflows: ["Performance Report", "Traffic Analysis"],
+      status: "Active", 
+      requests: 234,
+      knowledgeBase: "Analytics Guidelines",
+      lastActive: "1 min ago"
+    },
+    { 
+      id: 4, 
+      name: "Competitor Researcher", 
+      copilot: "Business Intelligence", 
+      description: "Researches competitor strategies and market trends",
+      tools: ["Web Scraper", "Market Data API"],
+      workflows: ["Competitor Analysis", "Market Research"],
+      status: "Active", 
+      requests: 67,
+      knowledgeBase: "Market Research Data",
+      lastActive: "8 min ago"
+    },
+    { 
+      id: 5, 
+      name: "Ticket Classifier", 
+      copilot: "Customer Support", 
+      description: "Categorizes and prioritizes support tickets",
+      tools: ["NLP Classifier", "Priority Scorer"],
+      workflows: ["Ticket Routing", "Escalation Rules"],
+      status: "Active", 
+      requests: 445,
+      knowledgeBase: "Support Categories",
+      lastActive: "30 sec ago"
+    },
+    { 
+      id: 6, 
+      name: "FAQ Generator", 
+      copilot: "Customer Support", 
+      description: "Creates and updates FAQ content from tickets",
+      tools: ["Content Extractor", "FAQ Builder"],
+      workflows: ["FAQ Creation", "Content Updates"],
+      status: "Inactive", 
+      requests: 23,
+      knowledgeBase: "Support Documentation",
+      lastActive: "2 hours ago"
+    }
+  ];
 
-  const totalAgents = Object.values(agentsByCategory).flat().length;
-  const activeAgents = Object.values(agentsByCategory).flat().filter(agent => agent.status === 'Active').length;
-  const totalRequests = Object.values(agentsByCategory).flat().reduce((sum, agent) => sum + agent.requests, 0);
+  const totalAgents = agents.length;
+  const activeAgents = agents.filter(agent => agent.status === 'Active').length;
+  const totalRequests = agents.reduce((sum, agent) => sum + agent.requests, 0);
 
   return (
     <div className="space-y-6">
@@ -209,89 +203,80 @@ function AgentsScreen() {
         </div>
       </div>
 
-      {/* Agents by Category */}
-      {Object.entries(agentsByCategory).map(([category, agents]) => (
-        <div key={category} className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">{category} Agents</h2>
-            <Badge variant="secondary">{agents.length} agents</Badge>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {agents.map((agent) => (
-              <Card key={agent.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
-                <CardHeader className="pb-4">
-                  <div className="flex items-start gap-3">
-                    <Bot className="w-8 h-8 text-blue-600" />
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{agent.name}</h3>
-                      <p className="text-sm text-gray-500 mb-2">Serves: <span className="font-medium text-[#008062]">{agent.copilot}</span></p>
-                      <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'} className="text-xs">
-                        {agent.status}
+      {/* All Agents */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {agents.map((agent) => (
+          <Card key={agent.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
+            <CardHeader className="pb-4">
+              <div className="flex items-start gap-3">
+                <Bot className="w-8 h-8 text-blue-600" />
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{agent.name}</h3>
+                  <p className="text-sm text-gray-500 mb-2">Serves: <span className="font-medium text-[#008062]">{agent.copilot}</span></p>
+                  <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'} className="text-xs">
+                    {agent.status}
+                  </Badge>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pt-0 flex-1 flex flex-col">
+              <p className="text-sm text-gray-600 mb-4 flex-grow">{agent.description}</p>
+              
+              <div className="space-y-4 mt-auto">
+                <div>
+                  <p className="text-sm font-medium text-gray-700 mb-2">Tools & Workflows</p>
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {agent.tools.slice(0, 2).map((tool, idx) => (
+                      <Badge key={idx} variant="outline" className="text-xs">
+                        {tool}
                       </Badge>
-                    </div>
+                    ))}
+                    {agent.tools.length > 2 && (
+                      <Badge variant="outline" className="text-xs">
+                        +{agent.tools.length - 2} tools
+                      </Badge>
+                    )}
                   </div>
-                </CardHeader>
-                <CardContent className="pt-0 flex-1 flex flex-col">
-                  <p className="text-sm text-gray-600 mb-4 flex-grow">{agent.description}</p>
-                  
-                  <div className="space-y-4 mt-auto">
-                    <div>
-                      <p className="text-sm font-medium text-gray-700 mb-2">Tools & Workflows</p>
-                      <div className="flex flex-wrap gap-1 mb-2">
-                        {agent.tools.slice(0, 2).map((tool, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {tool}
-                          </Badge>
-                        ))}
-                        {agent.tools.length > 2 && (
-                          <Badge variant="outline" className="text-xs">
-                            +{agent.tools.length - 2} tools
-                          </Badge>
-                        )}
-                      </div>
-                      <div className="flex flex-wrap gap-1">
-                        {agent.workflows.slice(0, 1).map((workflow, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {workflow}
-                          </Badge>
-                        ))}
-                        {agent.workflows.length > 1 && (
-                          <Badge variant="outline" className="text-xs">
-                            +{agent.workflows.length - 1} workflows
-                          </Badge>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <p className="font-medium text-gray-700">{agent.requests}</p>
-                        <p className="text-xs text-gray-500">Tasks completed</p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-gray-700">{agent.knowledgeBase}</p>
-                        <p className="text-xs text-gray-500">Knowledge base</p>
-                      </div>
-                    </div>
-                    
-                    <div className="text-sm text-gray-500 border-t pt-3">
-                      Last active: {agent.lastActive}
-                    </div>
-                    
-                    <div className="pt-2">
-                      <div className="flex gap-2">
-                        <Button variant="outline" size="sm" className="flex-1">Configure</Button>
-                        <Button variant="outline" size="sm" className="flex-1">Test</Button>
-                      </div>
-                    </div>
+                  <div className="flex flex-wrap gap-1">
+                    {agent.workflows.slice(0, 1).map((workflow, idx) => (
+                      <Badge key={idx} variant="outline" className="text-xs">
+                        {workflow}
+                      </Badge>
+                    ))}
+                    {agent.workflows.length > 1 && (
+                      <Badge variant="outline" className="text-xs">
+                        +{agent.workflows.length - 1} workflows
+                      </Badge>
+                    )}
                   </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      ))}
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className="font-medium text-gray-700">{agent.requests}</p>
+                    <p className="text-xs text-gray-500">Tasks completed</p>
+                  </div>
+                  <div>
+                    <p className="font-medium text-gray-700">{agent.knowledgeBase}</p>
+                    <p className="text-xs text-gray-500">Knowledge base</p>
+                  </div>
+                </div>
+                
+                <div className="text-sm text-gray-500 border-t pt-3">
+                  Last active: {agent.lastActive}
+                </div>
+                
+                <div className="pt-2">
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" className="flex-1">Configure</Button>
+                    <Button variant="outline" size="sm" className="flex-1">Test</Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
