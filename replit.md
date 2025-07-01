@@ -139,6 +139,8 @@ Changelog:
 - July 1, 2025. Removed admin dashboard header from User View page to show clean end-user interface
 - July 1, 2025. Updated User View banner to use real background image with dark overlay for better text contrast
 - July 1, 2025. Removed horizontal borders from sidebar for cleaner, more seamless appearance
+- July 1, 2025. Renamed "Attachments" to "Documents" and removed redundant "All Files" header for cleaner interface
+- July 1, 2025. Implemented dynamic sidebar that switches to recent conversations list when in chat mode, replacing standard navigation menu with conversation history
 ```
 
 ## User Preferences
