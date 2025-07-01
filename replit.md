@@ -144,6 +144,7 @@ Changelog:
 - July 1, 2025. Modified workspace selector to show available copilots when in chat mode instead of workspaces for easy assistant switching
 - July 1, 2025. Removed top border from chat input area for seamless conversation interface
 - July 1, 2025. Added delete functionality to recent conversations with hover-activated trash icon and confirmation toast
+- July 1, 2025. Enhanced Knowledge Base with MD document creation and AI suggestions features - added Create MD button and AI Suggestions modal with checkbox selection for generating customized documentation
 ```
 
 ## User Preferences
