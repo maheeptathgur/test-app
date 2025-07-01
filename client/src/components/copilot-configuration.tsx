@@ -2727,13 +2727,14 @@ function MyComponent() {
             </DialogDescription>
           </DialogHeader>
           
-          <div className="space-y-4 flex-1 overflow-hidden min-h-0">
-            <div className="space-y-4">
+          <div className="space-y-4 flex-1 overflow-visible min-h-0 p-1">
+            <div className="space-y-4 px-1">
               <div>
                 <Label htmlFor="md-title">Document Title</Label>
                 <Input
                   id="md-title"
                   placeholder="Enter document title"
+                  className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-0"
                 />
               </div>
               <div>
@@ -2741,6 +2742,7 @@ function MyComponent() {
                 <Input
                   id="md-description"
                   placeholder="Brief description of the document"
+                  className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-0"
                 />
               </div>
             </div>
