@@ -961,7 +961,7 @@ export default function Dashboard() {
       {/* Main Content */}
       <div className="flex-1 overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
         {/* Combined scrollable content */}
-        <div className={`${chatCopilot || configuringCopilot ? 'h-full' : 'p-8 overflow-y-auto'}`}>
+        <div className={`${chatCopilot || configuringCopilot ? 'h-full' : 'h-full p-8 overflow-y-auto'}`}>
           {/* Top Bar - Hidden when in chat or configuration mode */}
           {!chatCopilot && !configuringCopilot && (
             <div className="mb-8">
