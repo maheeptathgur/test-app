@@ -805,7 +805,6 @@ export default function Dashboard() {
           )}
           {!sidebarCollapsed && activeSection === 'user-view' && (
             <div className="text-center">
-              <p className="text-sm text-muted-foreground">Choose an assistant to get started</p>
             </div>
           )}
         </div>
