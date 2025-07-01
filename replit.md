@@ -131,6 +131,8 @@ Changelog:
 - July 1, 2025. Added Play icon to "Start Chat" buttons and updated account profile to use real face photo
 - July 1, 2025. Added 4th copilot "Customer Support" with support type, realistic components, and active status
 - July 1, 2025. Improved text contrast by changing color from #999999 to #4E5964 for better readability throughout the interface
+- July 1, 2025. Fixed collapsed sidebar design issues and updated Knolli logo to use circular icon version when collapsed
+- July 1, 2025. Added "Add Workspace" link to workspace selector dropdown menu with proper styling
 ```
 
 ## User Preferences
