@@ -929,40 +929,7 @@ function MyComponent() {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="text-center">
-                          <p className="text-3xl font-bold text-brand-primary">24</p>
-                          <p className="text-sm text-muted-foreground">Total Files</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="text-center">
-                          <p className="text-3xl font-bold text-blue-600">2.4 GB</p>
-                          <p className="text-sm text-muted-foreground">Storage Used</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="text-center">
-                          <p className="text-3xl font-bold text-green-600">18</p>
-                          <p className="text-sm text-muted-foreground">Active</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                    <Card>
-                      <CardContent className="p-6">
-                        <div className="text-center">
-                          <p className="text-3xl font-bold text-orange-600">6</p>
-                          <p className="text-sm text-muted-foreground">Processing</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
+                  
                   
                   <div className="space-y-4">
                     {/* Sample user documents */}
