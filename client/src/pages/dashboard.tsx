@@ -210,7 +210,13 @@ export default function Dashboard() {
   };
 
   const handleArchiveCopilot = (copilot: CopilotData) => {
-    showNotification(`Archived copilot: ${copilot.name}`);
+    setCopilots(prev => prev.map(c => 
+      c.id === copilot.id 
+        ? { ...c, status: c.status === 'active' ? 'archived' : 'active' }
+        : c
+    ));
+    const newStatus = copilot.status === 'active' ? 'archived' : 'active';
+    showNotification(`${newStatus === 'archived' ? 'Archived' : 'Restored'} copilot: ${copilot.name}`);
   };
 
   const handleDeleteCopilot = (copilot: CopilotData) => {
