@@ -2768,17 +2768,6 @@ function MyComponent() {
                   Markdown
                 </button>
                 <button
-                  onClick={() => setMdEditorTab('preview')}
-                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
-                    mdEditorTab === 'preview'
-                      ? 'border-primary text-primary'
-                      : 'border-transparent text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  <Eye className="w-4 h-4 inline mr-2" />
-                  Preview
-                </button>
-                <button
                   onClick={() => setMdEditorTab('rtf')}
                   className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                     mdEditorTab === 'rtf'
@@ -2788,6 +2777,17 @@ function MyComponent() {
                 >
                   <Edit3 className="w-4 h-4 inline mr-2" />
                   Rich Text
+                </button>
+                <button
+                  onClick={() => setMdEditorTab('preview')}
+                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    mdEditorTab === 'preview'
+                      ? 'border-primary text-primary'
+                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Eye className="w-4 h-4 inline mr-2" />
+                  Preview
                 </button>
               </div>
             </div>
@@ -2831,7 +2831,7 @@ Add sections, lists, and more..."
                           .replace(/`(.+?)`/g, '<code>$1</code>')
                           .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
                           .replace(/^- (.+)/gm, '<li>$1</li>')
-                          .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+                          .replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>')
                           .replace(/\n/g, '<br>')
                       }} />
                     ) : (
@@ -2872,9 +2872,11 @@ Add sections, lists, and more..."
                       const content = e.currentTarget.textContent || '';
                       setMdContent(content);
                     }}
-                  >
-                    <p className="text-muted-foreground">Start typing your rich text content here...</p>
-                  </div>
+                    suppressContentEditableWarning={true}
+                    dangerouslySetInnerHTML={{ 
+                      __html: mdContent || '<p class="text-muted-foreground">Start typing your rich text content here...</p>'
+                    }}
+                  />
                 </div>
               )}
             </div>
