@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
-import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe } from "lucide-react";
+import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -149,11 +149,32 @@ function AgentsScreen() {
 
       {/* All Agents */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {agents.map((agent) => (
+        {agents.map((agent) => {
+          // Get appropriate icon for each agent based on their function
+          const getAgentIcon = (agentName: string) => {
+            switch (agentName) {
+              case 'Content Writer':
+                return <PenTool className="w-8 h-8 text-purple-600" />;
+              case 'SEO Optimizer':
+                return <TrendingUp className="w-8 h-8 text-green-600" />;
+              case 'Performance Analyst':
+                return <BarChart className="w-8 h-8 text-blue-600" />;
+              case 'Competitor Researcher':
+                return <Binoculars className="w-8 h-8 text-orange-600" />;
+              case 'Ticket Classifier':
+                return <Tags className="w-8 h-8 text-red-600" />;
+              case 'FAQ Generator':
+                return <HelpCircle className="w-8 h-8 text-indigo-600" />;
+              default:
+                return <Bot className="w-8 h-8 text-gray-600" />;
+            }
+          };
+
+          return (
           <Card key={agent.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
             <CardHeader className="pb-4">
               <div className="flex items-start gap-3">
-                <Bot className="w-8 h-8 text-blue-600" />
+                {getAgentIcon(agent.name)}
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{agent.name}</h3>
                   <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'} className="text-xs mb-2">
@@ -206,7 +227,8 @@ function AgentsScreen() {
               </div>
             </CardContent>
           </Card>
-        ))}
+        );
+        })}
       </div>
     </div>
   );
