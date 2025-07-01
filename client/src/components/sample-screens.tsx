@@ -211,79 +211,86 @@ function AgentsScreen() {
 
       {/* Agents by Category */}
       {Object.entries(agentsByCategory).map(([category, agents]) => (
-        <Card key={category}>
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">{category} Agents</CardTitle>
-              <Badge variant="secondary">{agents.length} agents</Badge>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4">
-              {agents.map((agent) => (
-                <div key={agent.id} className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-gray-900">{agent.name}</h3>
-                        <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'} className="text-xs">
-                          {agent.status}
-                        </Badge>
-                        <span className="text-sm text-gray-500">
-                          Serves: <span className="font-medium text-[#008062]">{agent.copilot}</span>
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600 mb-3">{agent.description}</p>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                        <div>
-                          <p className="font-medium text-gray-700 mb-1">Tools ({agent.tools.length})</p>
-                          <div className="flex flex-wrap gap-1">
-                            {agent.tools.map((tool, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
-                                {tool}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <p className="font-medium text-gray-700 mb-1">Workflows ({agent.workflows.length})</p>
-                          <div className="flex flex-wrap gap-1">
-                            {agent.workflows.map((workflow, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
-                                {workflow}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <p className="font-medium text-gray-700 mb-1">Knowledge Base</p>
-                          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
-                            {agent.knowledgeBase}
+        <div key={category} className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold">{category} Agents</h2>
+            <Badge variant="secondary">{agents.length} agents</Badge>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {agents.map((agent) => (
+              <Card key={agent.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
+                <CardHeader className="pb-4">
+                  <div className="flex items-start gap-3">
+                    <Bot className="w-8 h-8 text-blue-600" />
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{agent.name}</h3>
+                      <p className="text-sm text-gray-500 mb-2">Serves: <span className="font-medium text-[#008062]">{agent.copilot}</span></p>
+                      <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'} className="text-xs">
+                        {agent.status}
+                      </Badge>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0 flex-1 flex flex-col">
+                  <p className="text-sm text-gray-600 mb-4 flex-grow">{agent.description}</p>
+                  
+                  <div className="space-y-4 mt-auto">
+                    <div>
+                      <p className="text-sm font-medium text-gray-700 mb-2">Tools & Workflows</p>
+                      <div className="flex flex-wrap gap-1 mb-2">
+                        {agent.tools.slice(0, 2).map((tool, idx) => (
+                          <Badge key={idx} variant="outline" className="text-xs">
+                            {tool}
                           </Badge>
-                        </div>
+                        ))}
+                        {agent.tools.length > 2 && (
+                          <Badge variant="outline" className="text-xs">
+                            +{agent.tools.length - 2} tools
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {agent.workflows.slice(0, 1).map((workflow, idx) => (
+                          <Badge key={idx} variant="outline" className="text-xs">
+                            {workflow}
+                          </Badge>
+                        ))}
+                        {agent.workflows.length > 1 && (
+                          <Badge variant="outline" className="text-xs">
+                            +{agent.workflows.length - 1} workflows
+                          </Badge>
+                        )}
                       </div>
                     </div>
                     
-                    <div className="flex flex-col items-end gap-2 ml-6">
-                      <div className="text-right">
-                        <p className="text-sm font-medium text-gray-900">{agent.requests} tasks</p>
-                        <p className="text-xs text-gray-500">Last: {agent.lastActive}</p>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <p className="font-medium text-gray-700">{agent.requests}</p>
+                        <p className="text-xs text-gray-500">Tasks completed</p>
                       </div>
+                      <div>
+                        <p className="font-medium text-gray-700">{agent.knowledgeBase}</p>
+                        <p className="text-xs text-gray-500">Knowledge base</p>
+                      </div>
+                    </div>
+                    
+                    <div className="text-sm text-gray-500 border-t pt-3">
+                      Last active: {agent.lastActive}
+                    </div>
+                    
+                    <div className="pt-2">
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm">Configure</Button>
-                        <Button variant="outline" size="sm">View Logs</Button>
-                        <Button variant="outline" size="sm">Test</Button>
+                        <Button variant="outline" size="sm" className="flex-1">Configure</Button>
+                        <Button variant="outline" size="sm" className="flex-1">Test</Button>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   );
@@ -818,122 +825,103 @@ function WorkflowsScreen() {
 
       {/* Workflows by Type */}
       {Object.entries(workflowsByType).map(([type, workflows]) => (
-        <Card key={type}>
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">{type}</CardTitle>
-              <Badge variant="secondary">{workflows.length} workflows</Badge>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <div className="grid gap-4">
-              {workflows.map((workflow) => (
-                <div key={workflow.id} className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
-                  <div className="flex items-start justify-between">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="font-semibold text-gray-900">{workflow.name}</h3>
-                        <Badge variant={workflow.status === 'Active' ? 'default' : workflow.status === 'Paused' ? 'secondary' : 'outline'} className="text-xs">
-                          {workflow.status}
-                        </Badge>
-                        <span className="text-sm text-gray-500">
-                          Source: <span className="font-medium">{workflow.source}</span>
-                        </span>
-                        <Badge variant="outline" className="text-xs">
-                          {workflow.trigger}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-gray-600 mb-3">{workflow.description}</p>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
-                        <div>
-                          <p className="font-medium text-gray-700 mb-1">Workflow Steps ({workflow.steps.length})</p>
-                          <div className="text-xs text-gray-600">
-                            {workflow.steps.slice(0, 2).join(" → ")}
-                            {workflow.steps.length > 2 && ` → +${workflow.steps.length - 2} more`}
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <p className="font-medium text-gray-700 mb-1">Tools ({workflow.tools.length})</p>
-                          <div className="flex flex-wrap gap-1">
-                            {workflow.tools.slice(0, 2).map((tool, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
-                                {tool}
-                              </Badge>
-                            ))}
-                            {workflow.tools.length > 2 && (
-                              <Badge variant="outline" className="text-xs">
-                                +{workflow.tools.length - 2}
-                              </Badge>
-                            )}
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <p className="font-medium text-gray-700 mb-1">Agents ({workflow.agents.length})</p>
-                          <div className="flex flex-wrap gap-1">
-                            {workflow.agents.slice(0, 2).map((agent, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
-                                {agent}
-                              </Badge>
-                            ))}
-                            {workflow.agents.length > 2 && (
-                              <Badge variant="outline" className="text-xs">
-                                +{workflow.agents.length - 2}
-                              </Badge>
-                            )}
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <p className="font-medium text-gray-700 mb-1">Used by</p>
-                          <div className="flex flex-wrap gap-1">
-                            {workflow.usedBy.length > 0 ? workflow.usedBy.map((copilot, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
-                                {copilot}
-                              </Badge>
-                            )) : (
-                              <span className="text-xs text-gray-400">Not assigned</span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
+        <div key={type} className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold">{type}</h2>
+            <Badge variant="secondary">{workflows.length} workflows</Badge>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {workflows.map((workflow) => (
+              <Card key={workflow.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
+                <CardHeader className="pb-4">
+                  <div className="flex items-start gap-3">
+                    <GitBranch className="w-8 h-8 text-purple-600" />
+                    <div className="flex-1 min-w-0">
+                      <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{workflow.name}</h3>
+                      <p className="text-sm text-gray-500 mb-2">Source: <span className="font-medium">{workflow.source}</span></p>
+                      <Badge variant={workflow.status === 'Active' ? 'default' : workflow.status === 'Paused' ? 'secondary' : 'outline'} className="text-xs">
+                        {workflow.status}
+                      </Badge>
                     </div>
-                    
-                    <div className="flex flex-col items-end gap-2 ml-6">
-                      <div className="text-right">
-                        <p className="text-sm font-medium text-gray-900">{workflow.executions.toLocaleString()} runs</p>
-                        <p className="text-xs text-gray-500">{workflow.successRate}% success</p>
-                        <p className="text-xs text-gray-500">Last: {workflow.lastRun}</p>
-                        <p className="text-xs text-gray-500">Avg: {workflow.avgDuration}</p>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0 flex-1 flex flex-col">
+                  <p className="text-sm text-gray-600 mb-4 flex-grow">{workflow.description}</p>
+                  
+                  <div className="space-y-4 mt-auto">
+                    <div>
+                      <p className="text-sm font-medium text-gray-700 mb-2">Tools & Agents</p>
+                      <div className="flex flex-wrap gap-1 mb-2">
+                        {workflow.tools.slice(0, 2).map((tool, idx) => (
+                          <Badge key={idx} variant="outline" className="text-xs">
+                            {tool}
+                          </Badge>
+                        ))}
+                        {workflow.tools.length > 2 && (
+                          <Badge variant="outline" className="text-xs">
+                            +{workflow.tools.length - 2} tools
+                          </Badge>
+                        )}
                       </div>
-                      <div className="flex gap-2">
-                        {workflow.status === 'Active' ? (
-                          <>
-                            <Button variant="outline" size="sm">Edit</Button>
-                            <Button variant="outline" size="sm">Pause</Button>
-                            <Button variant="outline" size="sm">Logs</Button>
-                          </>
-                        ) : workflow.status === 'Paused' ? (
-                          <>
-                            <Button variant="outline" size="sm">Edit</Button>
-                            <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">Resume</Button>
-                          </>
-                        ) : (
-                          <>
-                            <Button variant="outline" size="sm">Edit</Button>
-                            <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">Deploy</Button>
-                          </>
+                      <div className="flex flex-wrap gap-1">
+                        {workflow.agents.slice(0, 1).map((agent, idx) => (
+                          <Badge key={idx} variant="outline" className="text-xs">
+                            {agent}
+                          </Badge>
+                        ))}
+                        {workflow.agents.length > 1 && (
+                          <Badge variant="outline" className="text-xs">
+                            +{workflow.agents.length - 1} agents
+                          </Badge>
                         )}
                       </div>
                     </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <p className="font-medium text-gray-700">{workflow.executions.toLocaleString()}</p>
+                        <p className="text-xs text-gray-500">Executions</p>
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-700">{workflow.successRate}%</p>
+                        <p className="text-xs text-gray-500">Success rate</p>
+                      </div>
+                    </div>
+                    
+                    <div className="text-sm">
+                      <p className="font-medium text-gray-700">{workflow.steps.length} steps</p>
+                      <p className="text-xs text-gray-500">{workflow.trigger}</p>
+                    </div>
+                    
+                    <div className="text-sm text-gray-500 border-t pt-3">
+                      Last run: {workflow.lastRun} • Avg: {workflow.avgDuration}
+                    </div>
+                    
+                    <div className="pt-2">
+                      {workflow.status === 'Active' ? (
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm" className="flex-1">Edit</Button>
+                          <Button variant="outline" size="sm" className="flex-1">Pause</Button>
+                        </div>
+                      ) : workflow.status === 'Paused' ? (
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm" className="flex-1">Edit</Button>
+                          <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white">Resume</Button>
+                        </div>
+                      ) : (
+                        <div className="flex gap-2">
+                          <Button variant="outline" size="sm" className="flex-1">Edit</Button>
+                          <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white">Deploy</Button>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
       ))}
     </div>
   );
