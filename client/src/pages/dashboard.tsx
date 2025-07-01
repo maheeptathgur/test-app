@@ -812,7 +812,7 @@ export default function Dashboard() {
 
         {/* Navigation */}
         <nav className={`flex-1 ${sidebarCollapsed ? 'px-2' : 'px-6'} py-6 overflow-y-auto`}>
-          {activeSection === 'user-view' ? (
+          {activeSection === 'user-view' && !chatCopilot ? (
             // User View: Simplified navigation for end users
             <div className="space-y-6">
               {!sidebarCollapsed && (
