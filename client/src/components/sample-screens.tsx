@@ -21,6 +21,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PricingScreen } from "./pricing-screen";
 import { AgentConfigureScreen, AgentTestScreen } from "./agent-screens";
@@ -275,7 +276,7 @@ function AgentsScreen({ onAgentConfigure, onAgentTest }: { onAgentConfigure?: (a
   );
 }
 
-function ToolsScreen() {
+function ToolsScreen({ onToolConfigure }: { onToolConfigure?: (tool: any) => void } = {}) {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   
   const allTools = [
@@ -541,10 +542,7 @@ function ToolsScreen() {
                         
                         <div className="pt-2">
                           {tool.status === 'Connected' ? (
-                            <div className="flex gap-2">
-                              <Button variant="outline" size="sm" className="flex-1">Configure</Button>
-                              <Button variant="outline" size="sm" className="flex-1">Test</Button>
-                            </div>
+                            <Button variant="outline" size="sm" className="w-full" onClick={() => onToolConfigure?.(tool)}>Configure</Button>
                           ) : (
                             <Button size="sm" className="w-full bg-[#008062] hover:bg-[#00d2a0] text-white">
                               Connect
