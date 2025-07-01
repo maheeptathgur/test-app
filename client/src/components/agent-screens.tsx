@@ -5,7 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Copy, Download, Loader2, Play, Plus, RotateCcw, Upload, MessageSquare, FileText, Link, Bot, Search, Filter, SortAsc, Eye, Edit3, Check, X, Trash2 } from "lucide-react";
+import { ArrowLeft, Copy, Download, Loader2, Play, Plus, RotateCcw, Upload, MessageSquare, FileText, Link, Bot, Search, Filter, SortAsc, Eye, Edit3, Check, X, Trash2, BarChart } from "lucide-react";
+import { SiGmail, SiSlack } from "react-icons/si";
 
 // Agent Configuration Screen
 export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: () => void }) {
