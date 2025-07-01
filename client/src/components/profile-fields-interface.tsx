@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { Badge } from "@/components/ui/badge";
 import { X, Save, Settings, Bot, Users, Workflow, Database, Plus, Trash2 } from "lucide-react";
 import { CopilotData } from "@/lib/types";
@@ -32,6 +32,7 @@ interface ProfileData {
 }
 
 export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfigurationProps) {
+  const [activeTab, setActiveTab] = useState("general");
   const [copilotData, setCopilotData] = useState<CopilotData>(copilot);
   const [profileData, setProfileData] = useState<ProfileData>({
     title: "Senior Product Manager",
@@ -100,26 +101,48 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
       {/* Content */}
       <div className="flex-1 overflow-hidden">
-        <Tabs defaultValue="general" className="h-full flex flex-col">
+        <div className="h-full flex flex-col">
           <div className="border-b px-6 pt-4">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="general" className="flex items-center gap-2">
+            <nav className="flex space-x-8">
+              <button
+                onClick={() => setActiveTab("general")}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${
+                  activeTab === "general"
+                    ? "border-[#008062] text-[#008062]"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+                }`}
+              >
                 <Settings className="w-4 h-4" />
                 General
-              </TabsTrigger>
-              <TabsTrigger value="components" className="flex items-center gap-2">
+              </button>
+              <button
+                onClick={() => setActiveTab("components")}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${
+                  activeTab === "components"
+                    ? "border-[#008062] text-[#008062]"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+                }`}
+              >
                 <Bot className="w-4 h-4" />
                 Components
-              </TabsTrigger>
-              <TabsTrigger value="profile" className="flex items-center gap-2">
+              </button>
+              <button
+                onClick={() => setActiveTab("profile")}
+                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${
+                  activeTab === "profile"
+                    ? "border-[#008062] text-[#008062]"
+                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+                }`}
+              >
                 <Users className="w-4 h-4" />
                 Profile Fields
-              </TabsTrigger>
-            </TabsList>
+              </button>
+            </nav>
           </div>
 
           <div className="flex-1 overflow-y-auto">
-            <TabsContent value="general" className="p-6 m-0 h-full">
+            {activeTab === "general" && (
+            <div className="p-6 m-0 h-full">
               <div className="max-w-4xl mx-auto space-y-6">
                 <Card>
                   <CardHeader>
@@ -164,9 +187,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                   </CardContent>
                 </Card>
               </div>
-            </TabsContent>
+            </div>
+            )}
 
-            <TabsContent value="components" className="p-6 m-0 h-full">
+            {activeTab === "components" && (
+            <div className="p-6 m-0 h-full">
               <div className="max-w-4xl mx-auto space-y-6">
                 <Card>
                   <CardHeader>
@@ -230,9 +255,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                   </CardContent>
                 </Card>
               </div>
-            </TabsContent>
+            </div>
+            )}
 
-            <TabsContent value="profile" className="p-6 m-0 h-full">
+            {activeTab === "profile" && (
+            <div className="p-6 m-0 h-full">
               <div className="max-w-4xl mx-auto space-y-6">
                 <Card>
                   <CardHeader>
@@ -327,9 +354,10 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                   </CardContent>
                 </Card>
               </div>
-            </TabsContent>
+            </div>
+            )}
           </div>
-        </Tabs>
+        </div>
       </div>
 
       {/* Footer */}

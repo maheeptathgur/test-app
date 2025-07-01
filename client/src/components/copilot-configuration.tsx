@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
@@ -35,6 +35,8 @@ interface ProfileData {
 }
 
 export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfigurationProps) {
+  const [activeTab, setActiveTab] = useState("general");
+  const [codeTab, setCodeTab] = useState("javascript");
   const [copilotData, setCopilotData] = useState<CopilotData>(copilot);
   const [systemPrompt, setSystemPrompt] = useState("You are a helpful AI assistant focused on providing accurate and relevant information.");
   const [conversationStarters, setConversationStarters] = useState([
@@ -245,36 +247,43 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
       {/* Content */}
       <div className="flex-1 overflow-hidden">
-        <Tabs defaultValue="general" className="h-full flex flex-col">
+        <div className="h-full flex flex-col">
           <div className="bg-muted/20">
             <div className="max-w-4xl mx-auto px-6 pt-4 pb-4">
-              <TabsList className="grid w-full grid-cols-5">
-                <TabsTrigger value="general" className="flex items-center gap-2">
-                  <Settings className="w-4 h-4" />
-                  General
-                </TabsTrigger>
-                <TabsTrigger value="components" className="flex items-center gap-2">
-                  <Bot className="w-4 h-4" />
-                  Components
-                </TabsTrigger>
-                <TabsTrigger value="knowledge" className="flex items-center gap-2">
-                  <BookOpen className="w-4 h-4" />
-                  Knowledge Base
-                </TabsTrigger>
-                <TabsTrigger value="user-docs" className="flex items-center gap-2">
-                  <Upload className="w-4 h-4" />
-                  User Documents
-                </TabsTrigger>
-                <TabsTrigger value="profile" className="flex items-center gap-2">
-                  <Users className="w-4 h-4" />
-                  Profile Fields
-                </TabsTrigger>
-              </TabsList>
+              {/* Configuration Tabs */}
+              <div className="border-b border-gray-200">
+                <nav className="-mb-px flex space-x-8">
+                  {[
+                    { id: "general", label: "General", icon: Settings },
+                    { id: "components", label: "Components", icon: Bot },
+                    { id: "knowledge", label: "Knowledge Base", icon: BookOpen },
+                    { id: "user-docs", label: "User Documents", icon: Upload },
+                    { id: "profile", label: "Profile Fields", icon: Users }
+                  ].map((tab) => {
+                    const IconComponent = tab.icon;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
+                          activeTab === tab.id
+                            ? 'border-[#008062] text-[#008062]'
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        }`}
+                      >
+                        <IconComponent className="w-4 h-4" />
+                        {tab.label}
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
             </div>
           </div>
 
           <div className="flex-1 overflow-y-auto">
-            <TabsContent value="general" className="p-0 m-0 h-full">
+            {activeTab === "general" && (
+            <div className="p-0 m-0 h-full">
               <div className="max-w-4xl mx-auto p-6 space-y-8">
                 {/* Copilot Configuration */}
                 <div>
@@ -507,13 +516,41 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                             <Code className="w-4 h-4" />
                             <Label className="text-sm font-medium">Integration Code</Label>
                           </div>
-                          <Tabs defaultValue="javascript" className="w-full">
-                            <TabsList className="grid w-full grid-cols-3">
-                              <TabsTrigger value="javascript">JavaScript</TabsTrigger>
-                              <TabsTrigger value="iframe">iframe</TabsTrigger>
-                              <TabsTrigger value="react">React</TabsTrigger>
-                            </TabsList>
-                            <TabsContent value="javascript" className="mt-3">
+                          <div className="w-full">
+                            <nav className="flex space-x-8 border-b border-border">
+                              <button
+                                onClick={() => setCodeTab("javascript")}
+                                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                  codeTab === "javascript"
+                                    ? "border-[#008062] text-[#008062]"
+                                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+                                }`}
+                              >
+                                JavaScript
+                              </button>
+                              <button
+                                onClick={() => setCodeTab("iframe")}
+                                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                  codeTab === "iframe"
+                                    ? "border-[#008062] text-[#008062]"
+                                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+                                }`}
+                              >
+                                iframe
+                              </button>
+                              <button
+                                onClick={() => setCodeTab("react")}
+                                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                  codeTab === "react"
+                                    ? "border-[#008062] text-[#008062]"
+                                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+                                }`}
+                              >
+                                React
+                              </button>
+                            </nav>
+                            {codeTab === "javascript" && (
+                            <div className="mt-3">
                               <div className="relative">
                                 <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
                                   <code>{`<!-- Add this to your HTML -->
@@ -548,8 +585,10 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                   <Copy className="w-3 h-3" />
                                 </Button>
                               </div>
-                            </TabsContent>
-                            <TabsContent value="iframe" className="mt-3">
+                            </div>
+                            )}
+                            {codeTab === "iframe" && (
+                            <div className="mt-3">
                               <div className="relative">
                                 <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
                                   <code>{`<iframe 
@@ -578,8 +617,10 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                   <Copy className="w-3 h-3" />
                                 </Button>
                               </div>
-                            </TabsContent>
-                            <TabsContent value="react" className="mt-3">
+                            </div>
+                            )}
+                            {codeTab === "react" && (
+                            <div className="mt-3">
                               <div className="relative">
                                 <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
                                   <code>{`import { KnolliWidget } from '@knolli/react';
@@ -618,17 +659,20 @@ function MyComponent() {
                                   <Copy className="w-3 h-3" />
                                 </Button>
                               </div>
-                            </TabsContent>
-                          </Tabs>
+                            </div>
+                            )}
+                          </div>
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
               </div>
-            </TabsContent>
+            </div>
+            )}
 
-            <TabsContent value="components" className="p-0 m-0 h-full">
+            {activeTab === "components" && (
+            <div className="p-0 m-0 h-full">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -690,9 +734,11 @@ function MyComponent() {
                   </div>
                 </div>
               </div>
-            </TabsContent>
+            </div>
+            )}
 
-            <TabsContent value="knowledge" className="p-0 m-0 h-full">
+            {activeTab === "knowledge" && (
+            <div className="p-0 m-0 h-full">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -957,9 +1003,11 @@ function MyComponent() {
                   </div>
                 </div>
               </div>
-            </TabsContent>
+            </div>
+            )}
 
-            <TabsContent value="user-docs" className="p-0 m-0 h-full">
+            {activeTab === "user-docs" && (
+            <div className="p-0 m-0 h-full">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
                   <h2 className="text-lg font-semibold text-foreground mb-4">User Documents</h2>
@@ -1136,9 +1184,11 @@ function MyComponent() {
                   </div>
                 </div>
               </div>
-            </TabsContent>
+            </div>
+            )}
 
-            <TabsContent value="profile" className="p-0 m-0 h-full">
+            {activeTab === "profile" && (
+            <div className="p-0 m-0 h-full">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -1282,9 +1332,10 @@ function MyComponent() {
                   </div>
                 </div>
               </div>
-            </TabsContent>
+            </div>
+            )}
           </div>
-        </Tabs>
+        </div>
       </div>
 
       {/* Footer */}
