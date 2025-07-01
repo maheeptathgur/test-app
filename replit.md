@@ -136,6 +136,7 @@ Changelog:
 - July 1, 2025. Created comprehensive Workspace Settings screen with tabs for general settings, members, security, billing, and integrations
 - July 1, 2025. Created User View preview screen showing what the platform looks like to end users (not admin mode)
 - July 1, 2025. Updated User View welcome banner to 3:1 aspect ratio with proper vertical centering
+- July 1, 2025. Removed admin dashboard header from User View page to show clean end-user interface
 ```
 
 ## User Preferences
