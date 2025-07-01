@@ -7,6 +7,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
 import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
@@ -58,6 +60,48 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     goals: "Launch innovative products that solve real user problems",
     preferences: "Prefer data-driven decisions and collaborative approaches"
   });
+  const [suggestDocsOpen, setSuggestDocsOpen] = useState(false);
+  const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
+
+  // Sample AI-suggested documents
+  const suggestedDocs = [
+    {
+      id: "onboarding-guide",
+      title: "User Onboarding Guide",
+      description: "Step-by-step guide to help new users get started with your product",
+      category: "User Experience"
+    },
+    {
+      id: "troubleshooting-faq",
+      title: "Common Troubleshooting FAQ",
+      description: "Frequently asked questions and solutions for common issues",
+      category: "Support"
+    },
+    {
+      id: "api-reference",
+      title: "API Reference Documentation",
+      description: "Complete reference for all available API endpoints and parameters",
+      category: "Technical"
+    },
+    {
+      id: "best-practices",
+      title: "Best Practices Guide",
+      description: "Industry best practices and recommendations for optimal usage",
+      category: "Guidelines"
+    },
+    {
+      id: "integration-examples",
+      title: "Integration Code Examples",
+      description: "Code samples and examples for common integration scenarios",
+      category: "Technical"
+    },
+    {
+      id: "feature-comparison",
+      title: "Feature Comparison Matrix",
+      description: "Detailed comparison of features across different plans or versions",
+      category: "Product"
+    }
+  ];
 
   const handleCopilotChange = (field: keyof CopilotData, value: any) => {
     setCopilotData(prev => ({
@@ -126,6 +170,22 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const handleSave = () => {
     onSave(copilotData);
     onClose();
+  };
+
+  const handleSuggestionToggle = (suggestionId: string) => {
+    setSelectedSuggestions(prev => 
+      prev.includes(suggestionId) 
+        ? prev.filter(id => id !== suggestionId)
+        : [...prev, suggestionId]
+    );
+  };
+
+  const handleGenerateSelectedDocs = () => {
+    // In a real implementation, this would call an API to generate the documents
+    console.log('Generating documents:', selectedSuggestions);
+    setSuggestDocsOpen(false);
+    setSelectedSuggestions([]);
+    // Show success message
   };
 
   if (!copilot) return null;
@@ -608,6 +668,14 @@ function MyComponent() {
                         <Link className="w-4 h-4 mr-1" />
                         Add URL
                       </Button>
+                      <Button variant="outline" size="sm">
+                        <FileText className="w-4 h-4 mr-1" />
+                        Create MD
+                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => setSuggestDocsOpen(true)}>
+                        <Bot className="w-4 h-4 mr-1" />
+                        AI Suggestions
+                      </Button>
                     </div>
                   </div>
                   
@@ -683,6 +751,14 @@ function MyComponent() {
                         <Button variant="outline" size="sm">
                           <Link className="w-4 h-4 mr-1" />
                           Add URL
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <FileText className="w-4 h-4 mr-1" />
+                          Create MD
+                        </Button>
+                        <Button variant="outline" size="sm" onClick={() => setSuggestDocsOpen(true)}>
+                          <Bot className="w-4 h-4 mr-1" />
+                          AI Suggestions
                         </Button>
                       </div>
                     </div>
@@ -801,6 +877,66 @@ function MyComponent() {
           </Button>
         </div>
       </div>
+
+      {/* AI Document Suggestions Modal */}
+      <Dialog open={suggestDocsOpen} onOpenChange={setSuggestDocsOpen}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Bot className="w-5 h-5" />
+              AI Document Suggestions
+            </DialogTitle>
+            <DialogDescription>
+              Select the documents you'd like our AI to generate for your knowledge base. These will be customized based on your copilot's purpose and configuration.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            {suggestedDocs.map((doc) => (
+              <div key={doc.id} className="flex items-start space-x-3 p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                <Checkbox
+                  id={doc.id}
+                  checked={selectedSuggestions.includes(doc.id)}
+                  onCheckedChange={() => handleSuggestionToggle(doc.id)}
+                  className="mt-1"
+                />
+                <div className="flex-1 space-y-1">
+                  <div className="flex items-center gap-2">
+                    <label htmlFor={doc.id} className="text-sm font-medium cursor-pointer">
+                      {doc.title}
+                    </label>
+                    <Badge variant="outline" className="text-xs">
+                      {doc.category}
+                    </Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {doc.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex justify-between items-center pt-4 border-t">
+            <p className="text-sm text-muted-foreground">
+              {selectedSuggestions.length} document{selectedSuggestions.length !== 1 ? 's' : ''} selected
+            </p>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setSuggestDocsOpen(false)}>
+                Cancel
+              </Button>
+              <Button 
+                onClick={handleGenerateSelectedDocs}
+                disabled={selectedSuggestions.length === 0}
+                className="gap-2"
+              >
+                <Bot className="w-4 h-4" />
+                Generate Selected ({selectedSuggestions.length})
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
