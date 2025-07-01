@@ -30,7 +30,6 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
         <nav className="-mb-px flex space-x-8">
           {[
             { id: "general", label: "General Settings" },
-            { id: "behavior", label: "Behavior & Prompts" },
             { id: "tools", label: "Tools & Integrations" },
             { id: "knowledge", label: "Knowledge Base" },
             { id: "permissions", label: "Permissions" }
@@ -76,21 +75,6 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   />
                 </div>
                 
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="active" defaultChecked={agent.status === "Active"} />
-                  <label htmlFor="active" className="text-sm font-medium">Agent is active</label>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {activeTab === "behavior" && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Behavior & Prompts</CardTitle>
-                <CardDescription>Define how {agent.name} interacts and responds</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium">System Prompt</label>
                   <textarea 
@@ -99,30 +83,9 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008062]"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Response Style</label>
-                  <Select defaultValue="professional">
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="professional">Professional</SelectItem>
-                      <SelectItem value="casual">Casual & Friendly</SelectItem>
-                      <SelectItem value="technical">Technical & Detailed</SelectItem>
-                      <SelectItem value="concise">Concise & Direct</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Creativity Level</label>
-                  <div className="px-3 py-2 border border-gray-300 rounded-md">
-                    <input type="range" min="0" max="100" defaultValue="70" className="w-full" />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
-                      <span>Conservative</span>
-                      <span>Balanced</span>
-                      <span>Creative</span>
-                    </div>
-                  </div>
+                <div className="flex items-center space-x-2">
+                  <Checkbox id="active" defaultChecked={agent.status === "Active"} />
+                  <label htmlFor="active" className="text-sm font-medium">Agent is active</label>
                 </div>
               </CardContent>
             </Card>
