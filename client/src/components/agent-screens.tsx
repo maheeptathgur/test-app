@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Copy, Download, Loader2, Play, Plus, RotateCcw, Upload, MessageSquare } from "lucide-react";
+import { ArrowLeft, Copy, Download, Loader2, Play, Plus, RotateCcw, Upload, MessageSquare, FileText, Link, Bot, Search, Filter, SortAsc, Eye, Edit3, Check, X, Trash2 } from "lucide-react";
 
 // Agent Configuration Screen
 export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: () => void }) {
@@ -171,34 +171,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
           )}
 
           {activeTab === "knowledge" && (
-            <Card>
-              <CardHeader>
-                <CardTitle>Knowledge Base</CardTitle>
-                <CardDescription>Manage {agent.name}'s knowledge sources</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                    <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-600">Drop files here or click to upload</p>
-                    <Button variant="outline" size="sm" className="mt-2">Choose Files</Button>
-                  </div>
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium">Connected Knowledge Sources</p>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between p-2 bg-gray-50 rounded">
-                        <span className="text-sm">Company Documentation (45 docs)</span>
-                        <Button variant="outline" size="sm">Manage</Button>
-                      </div>
-                      <div className="flex items-center justify-between p-2 bg-gray-50 rounded">
-                        <span className="text-sm">FAQ Database (128 entries)</span>
-                        <Button variant="outline" size="sm">Manage</Button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <KnowledgeBaseTab agentName={agent.name} />
           )}
 
           {activeTab === "permissions" && (
@@ -506,5 +479,306 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
         </div>
       </div>
     </div>
+  );
+}
+
+// Knowledge Base Tab Component
+function KnowledgeBaseTab({ agentName }: { agentName: string }) {
+  const [editingDocument, setEditingDocument] = useState<string | null>(null);
+  const [tempTitle, setTempTitle] = useState("");
+  const [tempDescription, setTempDescription] = useState("");
+  
+  // Search and filtering state
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterType, setFilterType] = useState('all');
+  const [sortBy, setSortBy] = useState('updated');
+
+  const startEditing = (docId: string, currentTitle: string, currentDescription: string) => {
+    setEditingDocument(docId);
+    setTempTitle(currentTitle);
+    setTempDescription(currentDescription);
+  };
+
+  const saveEditing = () => {
+    console.log('Saving agent document:', { title: tempTitle, description: tempDescription });
+    setEditingDocument(null);
+    setTempTitle("");
+    setTempDescription("");
+  };
+
+  const cancelEditing = () => {
+    setEditingDocument(null);
+    setTempTitle("");
+    setTempDescription("");
+  };
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Knowledge Base</CardTitle>
+        <CardDescription>Manage {agentName}'s knowledge sources and documentation</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        {/* Action Buttons */}
+        <div className="flex items-center justify-end">
+          <div className="flex gap-2">
+            <Button variant="outline" size="sm">
+              <Plus className="w-4 h-4 mr-1" />
+              Add Document
+            </Button>
+            <Button variant="outline" size="sm">
+              <Link className="w-4 h-4 mr-1" />
+              Add URL
+            </Button>
+            <Button variant="outline" size="sm">
+              <FileText className="w-4 h-4 mr-1" />
+              Create MD
+            </Button>
+            <Button variant="outline" size="sm">
+              <Bot className="w-4 h-4 mr-1" />
+              AI Suggestions
+            </Button>
+          </div>
+        </div>
+
+        {/* Search and Filter Controls */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="relative flex-1">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+            <Input
+              placeholder="Search knowledge base..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+          <Select value={filterType} onValueChange={setFilterType}>
+            <SelectTrigger className="w-full sm:w-40">
+              <Filter className="w-4 h-4 mr-2" />
+              <SelectValue placeholder="Filter by type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Types</SelectItem>
+              <SelectItem value="document">Documents</SelectItem>
+              <SelectItem value="url">URLs</SelectItem>
+              <SelectItem value="markdown">Markdown</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="w-full sm:w-40">
+              <SortAsc className="w-4 h-4 mr-2" />
+              <SelectValue placeholder="Sort by" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="updated">Last Updated</SelectItem>
+              <SelectItem value="created">Date Created</SelectItem>
+              <SelectItem value="name">Name A-Z</SelectItem>
+              <SelectItem value="creator">Creator</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Knowledge Base Documents */}
+        <div className="space-y-4">
+          <div className="p-4 border rounded-lg bg-white">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start gap-3 flex-1">
+                <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
+                <div className="flex-1 min-w-0">
+                  {editingDocument === 'agent1' ? (
+                    <div className="space-y-2">
+                      <Input
+                        value={tempTitle}
+                        onChange={(e) => setTempTitle(e.target.value)}
+                        className="font-medium"
+                        placeholder="Document title"
+                      />
+                      <Input
+                        value={tempDescription}
+                        onChange={(e) => setTempDescription(e.target.value)}
+                        className="text-sm"
+                        placeholder="Document description"
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="font-medium">Agent Training Guide</div>
+                      <div className="text-sm text-muted-foreground">Comprehensive guide for agent behavior and capabilities</div>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                    <span>Created by System Admin</span>
+                    <span>•</span>
+                    <span>2 days ago</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 ml-4">
+                <Badge variant="secondary" className="text-xs">PDF</Badge>
+                {editingDocument === 'agent1' ? (
+                  <>
+                    <Button variant="ghost" size="sm" onClick={saveEditing}>
+                      <Check className="w-4 h-4 text-green-600" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                      <X className="w-4 h-4 text-gray-600" />
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="ghost" size="sm" title="View/Edit">
+                      <Eye className="w-4 h-4" />
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={() => startEditing('agent1', 'Agent Training Guide', 'Comprehensive guide for agent behavior and capabilities')}
+                      title="Rename"
+                    >
+                      <Edit3 className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 border rounded-lg bg-white">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start gap-3 flex-1">
+                <FileText className="w-5 h-5 text-green-500 mt-0.5" />
+                <div className="flex-1 min-w-0">
+                  {editingDocument === 'agent2' ? (
+                    <div className="space-y-2">
+                      <Input
+                        value={tempTitle}
+                        onChange={(e) => setTempTitle(e.target.value)}
+                        className="font-medium"
+                        placeholder="Document title"
+                      />
+                      <Input
+                        value={tempDescription}
+                        onChange={(e) => setTempDescription(e.target.value)}
+                        className="text-sm"
+                        placeholder="Document description"
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="font-medium">Knowledge Base Endpoints</div>
+                      <div className="text-sm text-muted-foreground">API documentation and endpoint references for the agent</div>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                    <span>Created by Tech Lead</span>
+                    <span>•</span>
+                    <span>1 week ago</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 ml-4">
+                <Badge variant="secondary" className="text-xs">MD</Badge>
+                {editingDocument === 'agent2' ? (
+                  <>
+                    <Button variant="ghost" size="sm" onClick={saveEditing}>
+                      <Check className="w-4 h-4 text-green-600" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                      <X className="w-4 h-4 text-gray-600" />
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="ghost" size="sm" title="View/Edit">
+                      <Eye className="w-4 h-4" />
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={() => startEditing('agent2', 'Knowledge Base Endpoints', 'API documentation and endpoint references for the agent')}
+                      title="Rename"
+                    >
+                      <Edit3 className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 border rounded-lg bg-white">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start gap-3 flex-1">
+                <FileText className="w-5 h-5 text-purple-500 mt-0.5" />
+                <div className="flex-1 min-w-0">
+                  {editingDocument === 'agent3' ? (
+                    <div className="space-y-2">
+                      <Input
+                        value={tempTitle}
+                        onChange={(e) => setTempTitle(e.target.value)}
+                        className="font-medium"
+                        placeholder="Document title"
+                      />
+                      <Input
+                        value={tempDescription}
+                        onChange={(e) => setTempDescription(e.target.value)}
+                        className="text-sm"
+                        placeholder="Document description"
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="font-medium">Specialized Workflows</div>
+                      <div className="text-sm text-muted-foreground">Documentation of specialized workflows this agent can execute</div>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                    <span>Created by Product Manager</span>
+                    <span>•</span>
+                    <span>4 days ago</span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 ml-4">
+                <Badge variant="secondary" className="text-xs">DOCX</Badge>
+                {editingDocument === 'agent3' ? (
+                  <>
+                    <Button variant="ghost" size="sm" onClick={saveEditing}>
+                      <Check className="w-4 h-4 text-green-600" />
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                      <X className="w-4 h-4 text-gray-600" />
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button variant="ghost" size="sm" title="View/Edit">
+                      <Eye className="w-4 h-4" />
+                    </Button>
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={() => startEditing('agent3', 'Specialized Workflows', 'Documentation of specialized workflows this agent can execute')}
+                      title="Rename"
+                    >
+                      <Edit3 className="w-4 h-4" />
+                    </Button>
+                    <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
