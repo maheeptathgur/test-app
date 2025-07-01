@@ -1,4 +1,4 @@
-import { MoreVertical, Bot, MessageSquare, BarChart3, Headphones, Play } from "lucide-react";
+import { MoreVertical, Bot, MessageSquare, BarChart3, Headphones, Play, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -45,9 +45,10 @@ interface CopilotCardProps {
   onDuplicate: (copilot: CopilotData) => void;
   onArchive: (copilot: CopilotData) => void;
   onDelete: (copilot: CopilotData) => void;
+  onToggleFavorite: (copilotId: string) => void;
 }
 
-export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchive, onDelete }: CopilotCardProps) {
+export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchive, onDelete, onToggleFavorite }: CopilotCardProps) {
   const [selectedComponent, setSelectedComponent] = useState<{ name: string; type: 'agent' | 'tool' | 'workflow' } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -73,6 +74,18 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           />
           <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
             {getTypeIcon(copilot.type)}
+          </div>
+          <div className="absolute top-3 left-3">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="h-8 w-8 p-0 bg-white/20 hover:bg-white/30"
+              onClick={() => onToggleFavorite(copilot.id)}
+            >
+              <Heart 
+                className={`h-4 w-4 ${copilot.favorite ? 'text-red-500 fill-red-500' : 'text-white'}`} 
+              />
+            </Button>
           </div>
           <div className="absolute top-3 right-3">
             <DropdownMenu>

@@ -79,6 +79,7 @@ const mockCopilots: CopilotData[] = [
     avatar: 'CA',
     avatarColor: 'bg-blue-100 text-blue-600',
     type: 'content',
+    favorite: true,
     components: [
       { name: 'Content Writer', type: 'agent' },
       { name: 'SEO Optimizer', type: 'agent' },
@@ -94,6 +95,7 @@ const mockCopilots: CopilotData[] = [
     avatar: 'CM',
     avatarColor: 'bg-green-100 text-green-600',
     type: 'general',
+    favorite: true,
     components: [
       { name: 'Campaign Planning', type: 'workflow' },
       { name: 'Media Planner', type: 'agent' },
@@ -109,6 +111,7 @@ const mockCopilots: CopilotData[] = [
     avatar: 'SA',
     avatarColor: 'bg-orange-100 text-orange-600',
     type: 'analyst',
+    favorite: false,
     components: [
       { name: 'Data Analyst', type: 'agent' },
       { name: 'Trend Spotter', type: 'agent' },
@@ -124,6 +127,7 @@ const mockCopilots: CopilotData[] = [
     avatar: 'CS',
     avatarColor: 'bg-purple-100 text-purple-600',
     type: 'support',
+    favorite: false,
     components: [
       { name: 'Support Agent', type: 'agent' },
       { name: 'Ticket Router', type: 'agent' },
@@ -223,6 +227,7 @@ export default function Dashboard() {
       avatar: avatarInitials,
       avatarColor: colors[Math.floor(Math.random() * colors.length)],
       type: data.type,
+      favorite: false,
       components: [],
     };
     
@@ -253,6 +258,14 @@ export default function Dashboard() {
   const handleDeleteConversation = (conversationId: string) => {
     setConversations(prev => prev.filter(conv => conv.id !== conversationId));
     showNotification('Conversation deleted');
+  };
+
+  const handleToggleFavorite = (copilotId: string) => {
+    setCopilots(prev => prev.map(copilot =>
+      copilot.id === copilotId
+        ? { ...copilot, favorite: !copilot.favorite }
+        : copilot
+    ));
   };
 
   const handleToggleAttachment = (show: boolean) => {
@@ -419,6 +432,7 @@ export default function Dashboard() {
                       onDuplicate={handleDuplicateCopilot}
                       onArchive={handleArchiveCopilot}
                       onDelete={handleDeleteCopilot}
+                      onToggleFavorite={handleToggleFavorite}
                     />
                   ))}
                 </div>
@@ -662,6 +676,7 @@ export default function Dashboard() {
                       onDuplicate={handleDuplicateCopilot}
                       onArchive={handleArchiveCopilot}
                       onDelete={handleDeleteCopilot}
+                      onToggleFavorite={handleToggleFavorite}
                     />
                   ))}
                 </div>
@@ -804,7 +819,7 @@ export default function Dashboard() {
                   <div className="space-y-3">
                     <h3 className="text-sm font-medium text-sidebar-foreground">Your Assistants</h3>
                     <div className="space-y-2">
-                      {copilots.filter(c => c.status === 'active').slice(0, 4).map((copilot) => (
+                      {copilots.filter(c => c.status === 'active' && c.favorite).slice(0, 4).map((copilot) => (
                         <Button
                           key={copilot.id}
                           variant="ghost"
@@ -860,7 +875,7 @@ export default function Dashboard() {
               {sidebarCollapsed && (
                 <div className="space-y-4">
                   {/* Assistant Icons */}
-                  {copilots.filter(c => c.status === 'active').slice(0, 4).map((copilot) => (
+                  {copilots.filter(c => c.status === 'active' && c.favorite).slice(0, 4).map((copilot) => (
                     <Button
                       key={copilot.id}
                       variant="ghost"
