@@ -23,6 +23,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { PricingScreen } from "./pricing-screen";
 import { AgentConfigureScreen, AgentTestScreen } from "./agent-screens";
+import { WorkflowEditor } from "./workflow-editor";
 
 interface SampleScreenProps {
   section: NavigationSection;
@@ -31,6 +32,7 @@ interface SampleScreenProps {
 export function SampleScreen({ section }: SampleScreenProps) {
   const [configureAgent, setConfigureAgent] = useState<any>(null);
   const [testAgent, setTestAgent] = useState<any>(null);
+  const [editWorkflow, setEditWorkflow] = useState<string | null>(null);
 
   const handleAgentConfigure = (agent: any) => {
     setConfigureAgent(agent);
@@ -45,6 +47,14 @@ export function SampleScreen({ section }: SampleScreenProps) {
     setTestAgent(null);
   };
 
+  const handleWorkflowEdit = (workflowId: string) => {
+    setEditWorkflow(workflowId);
+  };
+
+  const handleBackToWorkflows = () => {
+    setEditWorkflow(null);
+  };
+
   // Show Configure screen if an agent is being configured
   if (configureAgent) {
     return <AgentConfigureScreen agent={configureAgent} onBack={handleBackToAgents} />;
@@ -54,13 +64,18 @@ export function SampleScreen({ section }: SampleScreenProps) {
   if (testAgent) {
     return <AgentTestScreen agent={testAgent} onBack={handleBackToAgents} />;
   }
+
+  // Show Workflow Editor if a workflow is being edited
+  if (editWorkflow) {
+    return <WorkflowEditor workflowId={editWorkflow} onBack={handleBackToWorkflows} />;
+  }
   switch (section) {
     case 'agents':
       return <AgentsScreen onAgentConfigure={handleAgentConfigure} onAgentTest={handleAgentTest} />;
     case 'tools':
       return <ToolsScreen />;
     case 'workflows':
-      return <WorkflowsScreen />;
+      return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
     case 'knowledge-base':
       return <KnowledgeBaseScreen />;
 
@@ -529,7 +544,7 @@ function ToolsScreen() {
   );
 }
 
-function WorkflowsScreen() {
+function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: string) => void } = {}) {
   const workflowsByType = {
     "Imported Workflows": [
       {
@@ -756,17 +771,17 @@ function WorkflowsScreen() {
                     <div className="pt-2">
                       {workflow.status === 'Active' ? (
                         <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="flex-1">Edit</Button>
+                          <Button variant="outline" size="sm" className="flex-1" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>Edit</Button>
                           <Button variant="outline" size="sm" className="flex-1">Pause</Button>
                         </div>
                       ) : workflow.status === 'Paused' ? (
                         <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="flex-1">Edit</Button>
+                          <Button variant="outline" size="sm" className="flex-1" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>Edit</Button>
                           <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white">Resume</Button>
                         </div>
                       ) : (
                         <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="flex-1">Edit</Button>
+                          <Button variant="outline" size="sm" className="flex-1" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>Edit</Button>
                           <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white">Deploy</Button>
                         </div>
                       )}
