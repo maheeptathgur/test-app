@@ -94,7 +94,11 @@ export function SampleScreen({ section }: SampleScreenProps) {
     case 'agents':
       return <AgentsScreen onAgentConfigure={handleAgentConfigure} onAgentTest={handleAgentTest} />;
     case 'tools':
-      return <ToolsScreen onToolConfigure={handleToolConfigure} />;
+      return <ToolsScreen 
+        onToolConfigure={handleToolConfigure}
+        onConnectNewTool={() => setShowConnectNewTool(true)}
+        onBrowseIntegrations={() => setShowBrowseIntegrations(true)}
+      />;
     case 'workflows':
       return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
     case 'knowledge-base':
