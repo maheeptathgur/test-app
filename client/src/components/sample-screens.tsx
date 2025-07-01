@@ -72,57 +72,7 @@ export function SampleScreen({ section }: SampleScreenProps) {
   };
 
   // Show Configure screen if an agent is being configured
-  if (configureAgent) {
-    return <AgentConfigureScreen agent={configureAgent} onBack={handleBackToAgents} />;
-  }
-
-  // Show Test screen if an agent is being tested
-  if (testAgent) {
-    return <AgentTestScreen agent={testAgent} onBack={handleBackToAgents} />;
-  }
-
-  // Show Workflow Editor if a workflow is being edited
-  if (editWorkflow) {
-    return <WorkflowEditor workflowId={editWorkflow} onBack={handleBackToWorkflows} />;
-  }
-
-  // Show Tool Configure screen if a tool is being configured
-  if (configureTool) {
-    return <ToolConfigureScreen tool={configureTool} onBack={handleBackToTools} />;
-  }
-  switch (section) {
-    case 'agents':
-      return <AgentsScreen onAgentConfigure={handleAgentConfigure} onAgentTest={handleAgentTest} />;
-    case 'tools':
-      return <ToolsScreen 
-        onToolConfigure={handleToolConfigure}
-        onConnectNewTool={() => {
-          console.log('Connect New Tool clicked (first switch)');
-          setShowConnectNewTool(true);
-        }}
-        onBrowseIntegrations={() => {
-          console.log('Browse Integrations clicked (first switch)');
-          setShowBrowseIntegrations(true);
-        }}
-      />;
-    case 'workflows':
-      return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
-    case 'knowledge-base':
-      return <KnowledgeBaseScreen />;
-
-    case 'subscriptions':
-      return <SubscriptionsScreen />;
-    case 'conversations':
-      return <ConversationsScreen />;
-    case 'analytics':
-      return <AnalyticsScreen />;
-    case 'users':
-      return <UsersScreen />;
-    case 'pricing':
-      return <PricingScreen />;
-    default:
-      return <div>Unknown section</div>;
-  }
+  // All conditional rendering moved to the JSX return to ensure modals are always included
   
   // Add modals after the main render but before the function ends
   // This is a wrapper div to contain the modals alongside the main content
