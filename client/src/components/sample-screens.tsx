@@ -290,92 +290,625 @@ function AgentsScreen() {
 }
 
 function ToolsScreen() {
-  const tools = [
-    { id: 1, name: "Document Parser", category: "Processing", usage: 89, status: "Active" },
-    { id: 2, name: "Email Generator", category: "Communication", usage: 67, status: "Active" },
-    { id: 3, name: "Data Validator", category: "Analysis", usage: 45, status: "Inactive" },
-    { id: 4, name: "Image Analyzer", category: "AI/ML", usage: 78, status: "Active" }
-  ];
+  const toolsByCategory = {
+    "Communication": [
+      {
+        id: 1,
+        name: "Gmail",
+        description: "Send emails, read inbox, create drafts",
+        provider: "Google",
+        type: "API Integration",
+        status: "Connected",
+        usedBy: ["Content Manager", "Customer Support"],
+        lastUsed: "5 min ago",
+        totalCalls: 1204,
+        authType: "OAuth 2.0",
+        endpoints: ["Send Email", "Read Inbox", "Create Draft"]
+      },
+      {
+        id: 2,
+        name: "Slack",
+        description: "Send messages, create channels, manage notifications",
+        provider: "Slack Technologies",
+        type: "Webhook",
+        status: "Connected",
+        usedBy: ["Customer Support"],
+        lastUsed: "12 min ago",
+        totalCalls: 567,
+        authType: "Bot Token",
+        endpoints: ["Send Message", "Create Channel", "Upload File"]
+      }
+    ],
+    "Data & Analytics": [
+      {
+        id: 3,
+        name: "Google Analytics",
+        description: "Retrieve website traffic and performance data",
+        provider: "Google",
+        type: "API Integration",
+        status: "Connected",
+        usedBy: ["Business Intelligence"],
+        lastUsed: "2 min ago",
+        totalCalls: 892,
+        authType: "Service Account",
+        endpoints: ["Get Reports", "Get Real-time Data", "Get Dimensions"]
+      },
+      {
+        id: 4,
+        name: "Airtable",
+        description: "Create records, update databases, manage tables",
+        provider: "Airtable",
+        type: "API Integration",
+        status: "Disconnected",
+        usedBy: [],
+        lastUsed: "2 days ago",
+        totalCalls: 156,
+        authType: "API Key",
+        endpoints: ["Create Record", "Update Record", "List Records"]
+      }
+    ],
+    "Content & Media": [
+      {
+        id: 5,
+        name: "OpenAI API",
+        description: "Generate text, images, and embeddings",
+        provider: "OpenAI",
+        type: "API Integration",
+        status: "Connected",
+        usedBy: ["Content Manager", "Customer Support", "Business Intelligence"],
+        lastUsed: "30 sec ago",
+        totalCalls: 5647,
+        authType: "API Key",
+        endpoints: ["Chat Completion", "Image Generation", "Embeddings"]
+      },
+      {
+        id: 6,
+        name: "Unsplash",
+        description: "Search and download high-quality stock photos",
+        provider: "Unsplash",
+        type: "API Integration",
+        status: "Connected",
+        usedBy: ["Content Manager"],
+        lastUsed: "1 hour ago",
+        totalCalls: 234,
+        authType: "API Key",
+        endpoints: ["Search Photos", "Download Photo", "Get Collections"]
+      }
+    ],
+    "Productivity": [
+      {
+        id: 7,
+        name: "Google Drive",
+        description: "Upload, download, and manage files and folders",
+        provider: "Google",
+        type: "API Integration",
+        status: "Connected",
+        usedBy: ["Content Manager", "Customer Support"],
+        lastUsed: "15 min ago",
+        totalCalls: 445,
+        authType: "OAuth 2.0",
+        endpoints: ["Upload File", "Download File", "Create Folder"]
+      },
+      {
+        id: 8,
+        name: "Notion",
+        description: "Create pages, update databases, manage content",
+        provider: "Notion",
+        type: "API Integration",
+        status: "Connected",
+        usedBy: ["Content Manager"],
+        lastUsed: "45 min ago",
+        totalCalls: 678,
+        authType: "OAuth 2.0",
+        endpoints: ["Create Page", "Update Database", "Query Database"]
+      }
+    ]
+  };
+
+  const totalTools = Object.values(toolsByCategory).flat().length;
+  const connectedTools = Object.values(toolsByCategory).flat().filter(tool => tool.status === 'Connected').length;
+  const totalCalls = Object.values(toolsByCategory).flat().reduce((sum, tool) => sum + tool.totalCalls, 0);
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-end">
-        <Button className="bg-brand-primary hover:bg-brand-primary/90">
-          <Wrench className="w-4 h-4 mr-2" />
-          Add Tool
-        </Button>
+      {/* Tools Overview Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center">
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <Wrench className="w-6 h-6 text-blue-600" />
+              </div>
+              <div className="ml-4">
+                <p className="text-sm font-medium text-gray-600">Total Tools</p>
+                <p className="text-2xl font-bold text-gray-900">{totalTools}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center">
+              <div className="p-2 bg-green-100 rounded-lg">
+                <Shield className="w-6 h-6 text-green-600" />
+              </div>
+              <div className="ml-4">
+                <p className="text-sm font-medium text-gray-600">Connected</p>
+                <p className="text-2xl font-bold text-gray-900">{connectedTools}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center">
+              <div className="p-2 bg-orange-100 rounded-lg">
+                <MessageSquare className="w-6 h-6 text-orange-600" />
+              </div>
+              <div className="ml-4">
+                <p className="text-sm font-medium text-gray-600">Total API Calls</p>
+                <p className="text-2xl font-bold text-gray-900">{totalCalls.toLocaleString()}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center">
+              <div className="p-2 bg-purple-100 rounded-lg">
+                <BarChart3 className="w-6 h-6 text-purple-600" />
+              </div>
+              <div className="ml-4">
+                <p className="text-sm font-medium text-gray-600">Avg Response</p>
+                <p className="text-2xl font-bold text-gray-900">245ms</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {tools.map((tool) => (
-          <Card key={tool.id}>
-            <CardHeader className="pb-3">
-              <CardTitle className="text-lg">{tool.name}</CardTitle>
-              <CardDescription>{tool.category}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div>
-                  <div className="flex justify-between text-sm mb-1">
-                    <span>Usage</span>
-                    <span>{tool.usage}%</span>
-                  </div>
-                  <Progress value={tool.usage} className="h-2" />
-                </div>
-                <div className="flex items-center justify-between">
-                  <Badge variant={tool.status === 'Active' ? 'default' : 'secondary'}>
-                    {tool.status}
-                  </Badge>
-                  <Button variant="outline" size="sm">Configure</Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+      {/* Action Bar */}
+      <div className="flex justify-between items-center">
+        <div className="flex gap-4">
+          <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+            Connect New Tool
+          </Button>
+          <Button variant="outline">
+            Browse Integrations
+          </Button>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm">
+            <Filter className="w-4 h-4 mr-2" />
+            Filter
+          </Button>
+          <Button variant="outline" size="sm">
+            <ArrowUpDown className="w-4 h-4 mr-2" />
+            Sort
+          </Button>
+        </div>
       </div>
+
+      {/* Tools by Category */}
+      {Object.entries(toolsByCategory).map(([category, tools]) => (
+        <Card key={category}>
+          <CardHeader className="pb-4">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">{category} Tools</CardTitle>
+              <Badge variant="secondary">{tools.length} integrations</Badge>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4">
+              {tools.map((tool) => (
+                <div key={tool.id} className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="font-semibold text-gray-900">{tool.name}</h3>
+                        <Badge variant={tool.status === 'Connected' ? 'default' : 'secondary'} className="text-xs">
+                          {tool.status}
+                        </Badge>
+                        <span className="text-sm text-gray-500">
+                          by <span className="font-medium">{tool.provider}</span>
+                        </span>
+                        <Badge variant="outline" className="text-xs">
+                          {tool.type}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-3">{tool.description}</p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Used by Copilots</p>
+                          <div className="flex flex-wrap gap-1">
+                            {tool.usedBy.length > 0 ? tool.usedBy.map((copilot, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
+                                {copilot}
+                              </Badge>
+                            )) : (
+                              <span className="text-xs text-gray-400">Not in use</span>
+                            )}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Available Endpoints</p>
+                          <div className="flex flex-wrap gap-1">
+                            {tool.endpoints.slice(0, 2).map((endpoint, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
+                                {endpoint}
+                              </Badge>
+                            ))}
+                            {tool.endpoints.length > 2 && (
+                              <Badge variant="outline" className="text-xs">
+                                +{tool.endpoints.length - 2} more
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Authentication</p>
+                          <Badge variant="outline" className="text-xs">
+                            {tool.authType}
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-col items-end gap-2 ml-6">
+                      <div className="text-right">
+                        <p className="text-sm font-medium text-gray-900">{tool.totalCalls.toLocaleString()} calls</p>
+                        <p className="text-xs text-gray-500">Last: {tool.lastUsed}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        {tool.status === 'Connected' ? (
+                          <>
+                            <Button variant="outline" size="sm">Configure</Button>
+                            <Button variant="outline" size="sm">Test</Button>
+                            <Button variant="outline" size="sm">Disconnect</Button>
+                          </>
+                        ) : (
+                          <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+                            Connect
+                          </Button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }
 
 function WorkflowsScreen() {
-  const workflows = [
-    { id: 1, name: "Customer Onboarding", steps: 8, status: "Running", executions: 156 },
-    { id: 2, name: "Support Ticket Routing", steps: 5, status: "Paused", executions: 89 },
-    { id: 3, name: "Content Approval", steps: 12, status: "Running", executions: 234 },
-    { id: 4, name: "Data Backup", steps: 3, status: "Running", executions: 45 }
-  ];
+  const workflowsByType = {
+    "Imported Workflows": [
+      {
+        id: 1,
+        name: "Lead Qualification Pipeline",
+        description: "Automatically qualifies and routes incoming leads through multiple channels",
+        source: "n8n",
+        trigger: "New form submission",
+        steps: ["Validate Data", "Score Lead", "Enrich Contact", "Route to Sales", "Send Welcome Email"],
+        tools: ["HubSpot", "Clearbit", "Gmail"],
+        agents: ["Lead Scorer"],
+        status: "Active",
+        executions: 1456,
+        successRate: 94,
+        lastRun: "2 min ago",
+        avgDuration: "45s",
+        usedBy: ["Marketing Copilot"],
+        schedule: "Real-time trigger"
+      },
+      {
+        id: 2,
+        name: "Content Publishing Automation",
+        description: "Schedules and publishes content across multiple social media platforms",
+        source: "Make.com",
+        trigger: "Content approval",
+        steps: ["Format Content", "Schedule Posts", "Cross-post", "Track Engagement", "Generate Report"],
+        tools: ["Buffer", "Twitter API", "LinkedIn API", "Google Analytics"],
+        agents: ["Content Formatter", "Engagement Tracker"],
+        status: "Active",
+        executions: 892,
+        successRate: 98,
+        lastRun: "15 min ago",
+        avgDuration: "2m 30s",
+        usedBy: ["Content Manager"],
+        schedule: "Daily at 9 AM"
+      },
+      {
+        id: 3,
+        name: "Customer Support Escalation",
+        description: "Automatically escalates high-priority tickets to appropriate team members",
+        source: "n8n",
+        trigger: "Ticket priority change",
+        steps: ["Analyze Ticket", "Determine Priority", "Assign Specialist", "Notify Team", "Update Customer"],
+        tools: ["Zendesk", "Slack", "Gmail"],
+        agents: ["Ticket Classifier", "Priority Scorer"],
+        status: "Paused",
+        executions: 567,
+        successRate: 87,
+        lastRun: "3 hours ago",
+        avgDuration: "1m 15s",
+        usedBy: ["Customer Support"],
+        schedule: "Real-time trigger"
+      }
+    ],
+    "Custom Workflows": [
+      {
+        id: 4,
+        name: "SEO Content Optimization",
+        description: "Automated SEO analysis and optimization of blog posts",
+        source: "Custom Chain",
+        trigger: "New draft published",
+        steps: ["Extract Content", "Keyword Analysis", "SEO Score", "Generate Suggestions", "Apply Optimizations"],
+        tools: ["OpenAI API", "SEMrush API"],
+        agents: ["SEO Writer", "SEO Optimizer", "Content Reviewer"],
+        status: "Active",
+        executions: 234,
+        successRate: 91,
+        lastRun: "8 min ago",
+        avgDuration: "3m 45s",
+        usedBy: ["Content Manager"],
+        schedule: "On-demand"
+      },
+      {
+        id: 5,
+        name: "Performance Data Collection",
+        description: "Gathers and consolidates performance metrics from multiple sources",
+        source: "Custom Chain",
+        trigger: "Daily schedule",
+        steps: ["Collect Analytics", "Process Data", "Generate Insights", "Create Dashboard", "Send Report"],
+        tools: ["Google Analytics", "Google Search Console", "Airtable"],
+        agents: ["Performance Analyst", "Report Generator"],
+        status: "Active",
+        executions: 67,
+        successRate: 96,
+        lastRun: "1 hour ago",
+        avgDuration: "5m 20s",
+        usedBy: ["Business Intelligence"],
+        schedule: "Daily at 6 AM"
+      },
+      {
+        id: 6,
+        name: "Knowledge Base Auto-Update",
+        description: "Automatically updates FAQ and knowledge base from support conversations",
+        source: "Custom Chain",
+        trigger: "Support conversation end",
+        steps: ["Analyze Conversation", "Extract Key Info", "Check Existing Docs", "Generate Updates", "Review & Publish"],
+        tools: ["Notion", "OpenAI API"],
+        agents: ["FAQ Generator", "Content Reviewer"],
+        status: "Draft",
+        executions: 0,
+        successRate: 0,
+        lastRun: "Never",
+        avgDuration: "N/A",
+        usedBy: [],
+        schedule: "Real-time trigger"
+      }
+    ]
+  };
+
+  const totalWorkflows = Object.values(workflowsByType).flat().length;
+  const activeWorkflows = Object.values(workflowsByType).flat().filter(wf => wf.status === 'Active').length;
+  const totalExecutions = Object.values(workflowsByType).flat().reduce((sum, wf) => sum + wf.executions, 0);
+  const avgSuccessRate = Math.round(
+    Object.values(workflowsByType).flat()
+      .filter(wf => wf.executions > 0)
+      .reduce((sum, wf) => sum + wf.successRate, 0) / 
+    Object.values(workflowsByType).flat().filter(wf => wf.executions > 0).length
+  );
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-end">
-        <Button className="bg-brand-primary hover:bg-brand-primary/90">
-          <GitBranch className="w-4 h-4 mr-2" />
-          Create Workflow
-        </Button>
+      {/* Workflow Overview Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center">
+              <div className="p-2 bg-blue-100 rounded-lg">
+                <GitBranch className="w-6 h-6 text-blue-600" />
+              </div>
+              <div className="ml-4">
+                <p className="text-sm font-medium text-gray-600">Total Workflows</p>
+                <p className="text-2xl font-bold text-gray-900">{totalWorkflows}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center">
+              <div className="p-2 bg-green-100 rounded-lg">
+                <Shield className="w-6 h-6 text-green-600" />
+              </div>
+              <div className="ml-4">
+                <p className="text-sm font-medium text-gray-600">Active</p>
+                <p className="text-2xl font-bold text-gray-900">{activeWorkflows}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center">
+              <div className="p-2 bg-orange-100 rounded-lg">
+                <MessageSquare className="w-6 h-6 text-orange-600" />
+              </div>
+              <div className="ml-4">
+                <p className="text-sm font-medium text-gray-600">Total Executions</p>
+                <p className="text-2xl font-bold text-gray-900">{totalExecutions.toLocaleString()}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center">
+              <div className="p-2 bg-purple-100 rounded-lg">
+                <BarChart3 className="w-6 h-6 text-purple-600" />
+              </div>
+              <div className="ml-4">
+                <p className="text-sm font-medium text-gray-600">Success Rate</p>
+                <p className="text-2xl font-bold text-gray-900">{avgSuccessRate}%</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {workflows.map((workflow) => (
-          <Card key={workflow.id}>
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-lg">{workflow.name}</CardTitle>
-                <Badge variant={workflow.status === 'Running' ? 'default' : 'secondary'}>
-                  {workflow.status}
-                </Badge>
-              </div>
-              <CardDescription>{workflow.steps} steps • {workflow.executions} executions</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex gap-2">
-                <Button variant="outline" size="sm">Edit</Button>
-                <Button variant="outline" size="sm">Run</Button>
-                <Button variant="outline" size="sm">History</Button>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+      {/* Action Bar */}
+      <div className="flex justify-between items-center">
+        <div className="flex gap-4">
+          <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+            Create Custom Workflow
+          </Button>
+          <Button variant="outline">
+            Import from n8n
+          </Button>
+          <Button variant="outline">
+            Import from Make.com
+          </Button>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm">
+            <Filter className="w-4 h-4 mr-2" />
+            Filter
+          </Button>
+          <Button variant="outline" size="sm">
+            <ArrowUpDown className="w-4 h-4 mr-2" />
+            Sort
+          </Button>
+        </div>
       </div>
+
+      {/* Workflows by Type */}
+      {Object.entries(workflowsByType).map(([type, workflows]) => (
+        <Card key={type}>
+          <CardHeader className="pb-4">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">{type}</CardTitle>
+              <Badge variant="secondary">{workflows.length} workflows</Badge>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4">
+              {workflows.map((workflow) => (
+                <div key={workflow.id} className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="font-semibold text-gray-900">{workflow.name}</h3>
+                        <Badge variant={workflow.status === 'Active' ? 'default' : workflow.status === 'Paused' ? 'secondary' : 'outline'} className="text-xs">
+                          {workflow.status}
+                        </Badge>
+                        <span className="text-sm text-gray-500">
+                          Source: <span className="font-medium">{workflow.source}</span>
+                        </span>
+                        <Badge variant="outline" className="text-xs">
+                          {workflow.trigger}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-3">{workflow.description}</p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Workflow Steps ({workflow.steps.length})</p>
+                          <div className="text-xs text-gray-600">
+                            {workflow.steps.slice(0, 2).join(" → ")}
+                            {workflow.steps.length > 2 && ` → +${workflow.steps.length - 2} more`}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Tools ({workflow.tools.length})</p>
+                          <div className="flex flex-wrap gap-1">
+                            {workflow.tools.slice(0, 2).map((tool, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
+                                {tool}
+                              </Badge>
+                            ))}
+                            {workflow.tools.length > 2 && (
+                              <Badge variant="outline" className="text-xs">
+                                +{workflow.tools.length - 2}
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Agents ({workflow.agents.length})</p>
+                          <div className="flex flex-wrap gap-1">
+                            {workflow.agents.slice(0, 2).map((agent, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
+                                {agent}
+                              </Badge>
+                            ))}
+                            {workflow.agents.length > 2 && (
+                              <Badge variant="outline" className="text-xs">
+                                +{workflow.agents.length - 2}
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Used by</p>
+                          <div className="flex flex-wrap gap-1">
+                            {workflow.usedBy.length > 0 ? workflow.usedBy.map((copilot, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
+                                {copilot}
+                              </Badge>
+                            )) : (
+                              <span className="text-xs text-gray-400">Not assigned</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex flex-col items-end gap-2 ml-6">
+                      <div className="text-right">
+                        <p className="text-sm font-medium text-gray-900">{workflow.executions.toLocaleString()} runs</p>
+                        <p className="text-xs text-gray-500">{workflow.successRate}% success</p>
+                        <p className="text-xs text-gray-500">Last: {workflow.lastRun}</p>
+                        <p className="text-xs text-gray-500">Avg: {workflow.avgDuration}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        {workflow.status === 'Active' ? (
+                          <>
+                            <Button variant="outline" size="sm">Edit</Button>
+                            <Button variant="outline" size="sm">Pause</Button>
+                            <Button variant="outline" size="sm">Logs</Button>
+                          </>
+                        ) : workflow.status === 'Paused' ? (
+                          <>
+                            <Button variant="outline" size="sm">Edit</Button>
+                            <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">Resume</Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button variant="outline" size="sm">Edit</Button>
+                            <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">Deploy</Button>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }

@@ -161,6 +161,8 @@ Changelog:
 - July 1, 2025. Removed "Recent Chats" section from default User View sidebar - now only appears when an assistant is selected for chatting, creating cleaner initial user experience focused on assistant selection
 - July 1, 2025. Added searchable assistant dropdown to workspace selector when in chat mode, showing favorites first with proper Heart icons, allowing users to switch between assistants during conversations with real-time search functionality
 - July 1, 2025. Redesigned Agents screen to reflect specialized sub-assistant concept - agents are now organized by category (Content Creation, Data Analysis, Customer Support) with detailed cards showing which copilot they serve, their tools, workflows, knowledge bases, and task counts for better hierarchy visualization
+- July 1, 2025. Redesigned Tools screen to emphasize 3rd party integrations - categorized by Communication, Data & Analytics, Content & Media, and Productivity with connection status, API call tracking, authentication types, endpoint information, and which copilots use each tool
+- July 1, 2025. Redesigned Workflows screen to distinguish between imported automation (n8n/Make.com) and custom chains - shows workflow steps, execution statistics, success rates, tool/agent dependencies, and deployment status with proper source attribution
 ```
 
 ## User Preferences
