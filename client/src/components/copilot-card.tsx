@@ -61,28 +61,15 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
     setSelectedComponent(null);
   };
   return (
-    <Card className="p-6 hover:shadow-lg transition-shadow">
-      <CardContent className="p-0">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className={`w-12 h-12 rounded-xl overflow-hidden ${getImageTileStyle(copilot.type)}`}>
-              <div className="w-full h-full flex items-center justify-center">
-                {getTypeIcon(copilot.type)}
-              </div>
-            </div>
-            <div>
-              <h3 className="font-semibold text-card-foreground">{copilot.name}</h3>
-              <div className="flex items-center gap-2 mt-1">
-                <Badge variant={copilot.status === 'active' ? 'default' : 'secondary'} className="text-xs capitalize">
-                  {copilot.status}
-                </Badge>
-              </div>
-            </div>
-          </div>
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+      {/* Image tile header */}
+      <div className={`h-24 w-full ${getImageTileStyle(copilot.type)} flex items-center justify-center relative`}>
+        {getTypeIcon(copilot.type)}
+        <div className="absolute top-3 right-3">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                <MoreVertical className="h-4 w-4" />
+              <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-white/20 hover:bg-white/30">
+                <MoreVertical className="h-4 w-4 text-white" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -92,6 +79,16 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
               <DropdownMenuItem onClick={() => onDelete(copilot)} className="text-red-600">Delete</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+        </div>
+      </div>
+
+      {/* Card content */}
+      <CardContent className="p-6">
+        <div className="mb-4">
+          <h3 className="font-semibold text-card-foreground mb-2">{copilot.name}</h3>
+          <Badge variant={copilot.status === 'active' ? 'default' : 'secondary'} className="text-xs capitalize">
+            {copilot.status}
+          </Badge>
         </div>
         
         <p className="text-muted-foreground text-sm mb-4">{copilot.description}</p>
