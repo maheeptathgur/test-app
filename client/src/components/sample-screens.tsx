@@ -196,9 +196,7 @@ function AgentsScreen() {
                 
                 
                 
-                <div className="text-sm text-gray-500 border-t pt-3">
-                  Last active: {agent.lastActive}
-                </div>
+                
                 
                 <div className="pt-2">
                   <div className="flex gap-2">
