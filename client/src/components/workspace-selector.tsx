@@ -30,7 +30,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
           <DropdownMenuItem
             key={workspace.id}
             onClick={() => onWorkspaceChange(workspace)}
-            className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer ${
+            className={`flex items-center gap-3 p-3 mb-1 rounded-lg cursor-pointer ${
               workspace.id === currentWorkspace.id ? 'bg-accent text-accent-foreground' : ''
             }`}
           >
