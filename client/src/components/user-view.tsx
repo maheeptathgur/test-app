@@ -218,30 +218,7 @@ export function UserView() {
             </CardContent>
           </Card>
 
-          {/* Quick Stats */}
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Your Activity</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Total Conversations</span>
-                <span className="font-semibold">47</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">This Week</span>
-                <span className="font-semibold">8</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Favorite Assistant</span>
-                <span className="font-semibold">Content Assistant</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Time Saved</span>
-                <span className="font-semibold text-[#008062]">12.5 hours</span>
-              </div>
-            </CardContent>
-          </Card>
+          
 
           {/* Quick Actions */}
           <Card>
