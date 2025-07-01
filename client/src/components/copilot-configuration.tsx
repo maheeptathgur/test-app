@@ -79,6 +79,8 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [editingFieldId, setEditingFieldId] = useState<string | null>(null);
   const [deleteFieldModalOpen, setDeleteFieldModalOpen] = useState(false);
   const [fieldToDelete, setFieldToDelete] = useState<string | null>(null);
+  const [deleteDocumentModalOpen, setDeleteDocumentModalOpen] = useState(false);
+  const [documentToDelete, setDocumentToDelete] = useState<string | null>(null);
   
   // Knowledge Base filters and search
   const [kbSearchTerm, setKbSearchTerm] = useState('');
@@ -519,11 +521,19 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   };
 
   const handleDeleteDocument = (fileName: string) => {
-    console.log('Deleting document:', fileName);
-    // Show confirmation and remove document
-    if (confirm(`Are you sure you want to delete "${fileName}"? This action cannot be undone.`)) {
-      console.log('Document deleted:', fileName);
-    }
+    setDocumentToDelete(fileName);
+    setDeleteDocumentModalOpen(true);
+  };
+
+  const handleConfirmDeleteDocument = () => {
+    console.log('Document deleted:', documentToDelete);
+    setDocumentToDelete(null);
+    setDeleteDocumentModalOpen(false);
+  };
+
+  const handleCancelDeleteDocument = () => {
+    setDocumentToDelete(null);
+    setDeleteDocumentModalOpen(false);
   };
 
   if (!copilot) return null;
@@ -2302,6 +2312,35 @@ function MyComponent() {
             >
               <Trash2 className="w-4 h-4" />
               Delete Field
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Document Confirmation Modal */}
+      <Dialog open={deleteDocumentModalOpen} onOpenChange={setDeleteDocumentModalOpen}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Trash2 className="w-5 h-5 text-red-500" />
+              Delete Document
+            </DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete "{documentToDelete}"? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="flex justify-end gap-2 pt-4">
+            <Button variant="outline" onClick={handleCancelDeleteDocument}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive"
+              onClick={handleConfirmDeleteDocument}
+              className="gap-2"
+            >
+              <Trash2 className="w-4 h-4" />
+              Delete Document
             </Button>
           </div>
         </DialogContent>
