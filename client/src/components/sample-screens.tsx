@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
-import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc } from "lucide-react";
+import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -44,23 +44,95 @@ export function SampleScreen({ section }: SampleScreenProps) {
 }
 
 function AgentsScreen() {
-  const agents = [
-    { id: 1, name: "Customer Support Agent", type: "Support", status: "Active", requests: 245 },
-    { id: 2, name: "Sales Assistant", type: "Sales", status: "Active", requests: 189 },
-    { id: 3, name: "Technical Helper", type: "Technical", status: "Inactive", requests: 67 },
-    { id: 4, name: "Content Reviewer", type: "Content", status: "Active", requests: 123 }
-  ];
+  const agentsByCategory = {
+    "Content Creation": [
+      { 
+        id: 1, 
+        name: "SEO Writer", 
+        copilot: "Content Manager", 
+        description: "Creates optimized blog posts and articles",
+        tools: ["Content Research", "Keyword Analysis"],
+        workflows: ["Blog Post Generation", "Meta Description"],
+        status: "Active", 
+        requests: 156,
+        knowledgeBase: "SEO Guidelines",
+        lastActive: "2 min ago"
+      },
+      { 
+        id: 2, 
+        name: "SEO Optimizer", 
+        copilot: "Content Manager", 
+        description: "Optimizes existing content for search engines",
+        tools: ["SEO Analyzer", "Keyword Density"],
+        workflows: ["Content Optimization", "SERP Analysis"],
+        status: "Active", 
+        requests: 89,
+        knowledgeBase: "SEO Best Practices",
+        lastActive: "5 min ago"
+      },
+    ],
+    "Data Analysis": [
+      { 
+        id: 3, 
+        name: "Performance Analyst", 
+        copilot: "Business Intelligence", 
+        description: "Analyzes website and content performance metrics",
+        tools: ["Analytics API", "Report Builder"],
+        workflows: ["Performance Report", "Traffic Analysis"],
+        status: "Active", 
+        requests: 234,
+        knowledgeBase: "Analytics Guidelines",
+        lastActive: "1 min ago"
+      },
+      { 
+        id: 4, 
+        name: "Competitor Researcher", 
+        copilot: "Business Intelligence", 
+        description: "Researches competitor strategies and market trends",
+        tools: ["Web Scraper", "Market Data API"],
+        workflows: ["Competitor Analysis", "Market Research"],
+        status: "Active", 
+        requests: 67,
+        knowledgeBase: "Market Research Data",
+        lastActive: "8 min ago"
+      },
+    ],
+    "Customer Support": [
+      { 
+        id: 5, 
+        name: "Ticket Classifier", 
+        copilot: "Customer Support", 
+        description: "Categorizes and prioritizes support tickets",
+        tools: ["NLP Classifier", "Priority Scorer"],
+        workflows: ["Ticket Routing", "Escalation Rules"],
+        status: "Active", 
+        requests: 445,
+        knowledgeBase: "Support Categories",
+        lastActive: "30 sec ago"
+      },
+      { 
+        id: 6, 
+        name: "FAQ Generator", 
+        copilot: "Customer Support", 
+        description: "Creates and updates FAQ content from tickets",
+        tools: ["Content Extractor", "FAQ Builder"],
+        workflows: ["FAQ Creation", "Content Updates"],
+        status: "Inactive", 
+        requests: 23,
+        knowledgeBase: "Support Documentation",
+        lastActive: "2 hours ago"
+      },
+    ]
+  };
+
+  const totalAgents = Object.values(agentsByCategory).flat().length;
+  const activeAgents = Object.values(agentsByCategory).flat().filter(agent => agent.status === 'Active').length;
+  const totalRequests = Object.values(agentsByCategory).flat().reduce((sum, agent) => sum + agent.requests, 0);
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-end">
-        <Button className="bg-brand-primary hover:bg-brand-primary/90">
-          <Bot className="w-4 h-4 mr-2" />
-          Create Agent
-        </Button>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      {/* Agent Overview Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
@@ -69,7 +141,7 @@ function AgentsScreen() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Agents</p>
-                <p className="text-2xl font-bold text-gray-900">12</p>
+                <p className="text-2xl font-bold text-gray-900">{totalAgents}</p>
               </div>
             </div>
           </CardContent>
@@ -82,7 +154,7 @@ function AgentsScreen() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Active</p>
-                <p className="text-2xl font-bold text-gray-900">9</p>
+                <p className="text-2xl font-bold text-gray-900">{activeAgents}</p>
               </div>
             </div>
           </CardContent>
@@ -94,8 +166,8 @@ function AgentsScreen() {
                 <MessageSquare className="w-6 h-6 text-orange-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Requests Today</p>
-                <p className="text-2xl font-bold text-gray-900">624</p>
+                <p className="text-sm font-medium text-gray-600">Total Tasks</p>
+                <p className="text-2xl font-bold text-gray-900">{totalRequests}</p>
               </div>
             </div>
           </CardContent>
@@ -108,53 +180,111 @@ function AgentsScreen() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Avg Response</p>
-                <p className="text-2xl font-bold text-gray-900">1.2s</p>
+                <p className="text-2xl font-bold text-gray-900">0.8s</p>
               </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Agent Performance</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Agent Name</TableHead>
-                <TableHead>Type</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Requests</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
+      {/* Action Bar */}
+      <div className="flex justify-between items-center">
+        <div className="flex gap-4">
+          <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+            Create New Agent
+          </Button>
+          <Button variant="outline">
+            Import Agent Template
+          </Button>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm">
+            <Filter className="w-4 h-4 mr-2" />
+            Filter
+          </Button>
+          <Button variant="outline" size="sm">
+            <ArrowUpDown className="w-4 h-4 mr-2" />
+            Sort
+          </Button>
+        </div>
+      </div>
+
+      {/* Agents by Category */}
+      {Object.entries(agentsByCategory).map(([category, agents]) => (
+        <Card key={category}>
+          <CardHeader className="pb-4">
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">{category} Agents</CardTitle>
+              <Badge variant="secondary">{agents.length} agents</Badge>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="grid gap-4">
               {agents.map((agent) => (
-                <TableRow key={agent.id}>
-                  <TableCell className="font-medium">{agent.name}</TableCell>
-                  <TableCell>
-                    <Badge variant="secondary">{agent.type}</Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'}>
-                      {agent.status}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>{agent.requests}</TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">Edit</Button>
-                      <Button variant="outline" size="sm">View</Button>
+                <div key={agent.id} className="border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="font-semibold text-gray-900">{agent.name}</h3>
+                        <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'} className="text-xs">
+                          {agent.status}
+                        </Badge>
+                        <span className="text-sm text-gray-500">
+                          Serves: <span className="font-medium text-[#008062]">{agent.copilot}</span>
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 mb-3">{agent.description}</p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Tools ({agent.tools.length})</p>
+                          <div className="flex flex-wrap gap-1">
+                            {agent.tools.map((tool, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
+                                {tool}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Workflows ({agent.workflows.length})</p>
+                          <div className="flex flex-wrap gap-1">
+                            {agent.workflows.map((workflow, idx) => (
+                              <Badge key={idx} variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
+                                {workflow}
+                              </Badge>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <p className="font-medium text-gray-700 mb-1">Knowledge Base</p>
+                          <Badge variant="outline" className="text-xs cursor-pointer hover:bg-gray-100">
+                            {agent.knowledgeBase}
+                          </Badge>
+                        </div>
+                      </div>
                     </div>
-                  </TableCell>
-                </TableRow>
+                    
+                    <div className="flex flex-col items-end gap-2 ml-6">
+                      <div className="text-right">
+                        <p className="text-sm font-medium text-gray-900">{agent.requests} tasks</p>
+                        <p className="text-xs text-gray-500">Last: {agent.lastActive}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm">Configure</Button>
+                        <Button variant="outline" size="sm">View Logs</Button>
+                        <Button variant="outline" size="sm">Test</Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
     </div>
   );
 }
