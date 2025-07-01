@@ -166,8 +166,7 @@ export default function Dashboard() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
-  const [copilotSearchQuery, setCopilotSearchQuery] = useState('');
-  const [showCopilotDropdown, setShowCopilotDropdown] = useState(false);
+
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
 
@@ -178,36 +177,9 @@ export default function Dashboard() {
     });
   };
 
-  // Filter and sort copilots for dropdown
-  const getFilteredCopilots = () => {
-    const activeCopilots = copilots.filter(c => c.status === 'active');
-    
-    // Filter by search query
-    const searchFiltered = activeCopilots.filter(copilot =>
-      copilot.name.toLowerCase().includes(copilotSearchQuery.toLowerCase()) ||
-      copilot.type.toLowerCase().includes(copilotSearchQuery.toLowerCase())
-    );
 
-    // Sort: favorites first, then alphabetically
-    return searchFiltered.sort((a, b) => {
-      if (a.favorite && !b.favorite) return -1;
-      if (!a.favorite && b.favorite) return 1;
-      return a.name.localeCompare(b.name);
-    });
-  };
 
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      const target = event.target as Element;
-      if (showCopilotDropdown && !target.closest('.copilot-dropdown-container')) {
-        setShowCopilotDropdown(false);
-      }
-    };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showCopilotDropdown]);
 
   const handleWorkspaceChange = (workspace: Workspace) => {
     setCurrentWorkspace(workspace);
@@ -836,76 +808,7 @@ export default function Dashboard() {
               onCopilotSelect={handleStartChat}
             />
           )}
-          {!sidebarCollapsed && activeSection === 'user-view' && !chatCopilot && (
-            <div className="relative copilot-dropdown-container">
-              <Button
-                variant="outline"
-                onClick={() => setShowCopilotDropdown(!showCopilotDropdown)}
-                className="w-full justify-between text-left bg-white border-2 border-[#dadde2] hover:border-[#008062] transition-colors"
-              >
-                <span className="text-sm text-muted-foreground">Select an assistant</span>
-                <ChevronDown className="w-4 h-4" />
-              </Button>
-              
-              {showCopilotDropdown && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-[#dadde2] rounded-lg shadow-lg z-50 max-h-80 overflow-hidden">
-                  {/* Search Input */}
-                  <div className="p-3 border-b border-[#dadde2]">
-                    <div className="relative">
-                      <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
-                      <Input
-                        placeholder="Search assistants..."
-                        value={copilotSearchQuery}
-                        onChange={(e) => setCopilotSearchQuery(e.target.value)}
-                        className="pl-10 border-[#dadde2] focus:border-[#008062]"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Copilot List */}
-                  <div className="max-h-64 overflow-y-auto">
-                    {getFilteredCopilots().length === 0 ? (
-                      <div className="p-4 text-center text-muted-foreground text-sm">
-                        No assistants found
-                      </div>
-                    ) : (
-                      getFilteredCopilots().map((copilot) => (
-                        <div
-                          key={copilot.id}
-                          onClick={() => {
-                            handleStartChat(copilot);
-                            setShowCopilotDropdown(false);
-                            setCopilotSearchQuery('');
-                          }}
-                          className="flex items-center gap-3 p-3 hover:bg-[#f8f9fa] cursor-pointer transition-colors border-b border-[#f0f0f0] last:border-b-0"
-                        >
-                          <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold flex-shrink-0`}>
-                            {copilot.avatar}
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2">
-                              <div className="text-sm font-medium truncate">{copilot.name}</div>
-                              {copilot.favorite && (
-                                <div className="w-4 h-4 text-yellow-500 flex-shrink-0">
-                                  ⭐
-                                </div>
-                              )}
-                            </div>
-                            <div className="text-xs text-muted-foreground truncate">{copilot.type}</div>
-                          </div>
-                          <div className="flex-shrink-0">
-                            <div className="w-4 h-4 text-[#008062] opacity-0 group-hover:opacity-100">
-                              <Check className="w-4 h-4" />
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
+
         </div>
 
         {/* Navigation */}

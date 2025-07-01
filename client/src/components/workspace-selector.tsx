@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ChevronDown, Plus, Play } from "lucide-react";
+import { ChevronDown, Plus, Play, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Workspace, CopilotData } from "@/lib/types";
@@ -14,6 +15,27 @@ interface WorkspaceSelectorProps {
 }
 
 export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceChange, copilots, isInChatMode, onCopilotSelect }: WorkspaceSelectorProps) {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Filter and sort copilots: favorites first, then others
+  const getFilteredCopilots = () => {
+    if (!copilots) return [];
+    
+    const activeCopilots = copilots.filter(c => c.status === 'active');
+    
+    // Filter by search query
+    const searchFiltered = activeCopilots.filter(copilot =>
+      copilot.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      copilot.type.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    // Separate favorites and non-favorites
+    const favorites = searchFiltered.filter(c => c.favorite).sort((a, b) => a.name.localeCompare(b.name));
+    const nonFavorites = searchFiltered.filter(c => !c.favorite).sort((a, b) => a.name.localeCompare(b.name));
+    
+    // Return favorites first, then non-favorites
+    return [...favorites, ...nonFavorites];
+  };
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -34,22 +56,54 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
         {isInChatMode && copilots && onCopilotSelect ? (
           // Show copilots from current workspace when in chat mode
           <>
-            {copilots.filter(copilot => copilot.status === 'active').map((copilot) => (
-              <DropdownMenuItem
-                key={copilot.id}
-                onClick={() => onCopilotSelect(copilot)}
-                className="flex items-center gap-3 p-3 mb-1 rounded-lg cursor-pointer hover:bg-accent"
-              >
-                <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center font-semibold text-sm`}>
-                  {copilot.avatar}
+            {/* Search Input */}
+            <div className="p-2 border-b border-border">
+              <div className="relative">
+                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+                <Input
+                  placeholder="Search assistants..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="pl-10 border-border focus:border-[#008062] h-8 text-sm"
+                />
+              </div>
+            </div>
+            
+            {/* Copilot List */}
+            <div className="max-h-64 overflow-y-auto">
+              {getFilteredCopilots().length === 0 ? (
+                <div className="p-3 text-center text-muted-foreground text-sm">
+                  No assistants found
                 </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-medium truncate">{copilot.name}</div>
-                  <div className="text-xs text-muted-foreground capitalize">{copilot.type}</div>
-                </div>
-                <Play className="w-4 h-4 text-muted-foreground" />
-              </DropdownMenuItem>
-            ))}
+              ) : (
+                getFilteredCopilots().map((copilot) => (
+                  <DropdownMenuItem
+                    key={copilot.id}
+                    onClick={() => {
+                      onCopilotSelect(copilot);
+                      setSearchQuery('');
+                    }}
+                    className="flex items-center gap-3 p-3 mb-1 rounded-lg cursor-pointer hover:bg-accent"
+                  >
+                    <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center font-semibold text-sm`}>
+                      {copilot.avatar}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <div className="text-sm font-medium truncate">{copilot.name}</div>
+                        {copilot.favorite && (
+                          <div className="w-4 h-4 text-yellow-500 flex-shrink-0">
+                            ⭐
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-xs text-muted-foreground capitalize">{copilot.type}</div>
+                    </div>
+                    <Play className="w-4 h-4 text-muted-foreground" />
+                  </DropdownMenuItem>
+                ))
+              )}
+            </div>
             
             <DropdownMenuSeparator className="my-2" />
             
