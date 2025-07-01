@@ -737,19 +737,19 @@ export default function Dashboard() {
             <DropdownMenuTrigger asChild>
               <Button 
                 variant="ghost" 
-                className={`w-full ${sidebarCollapsed ? 'p-2' : 'p-3'} h-auto hover:bg-[#00d2a0] justify-start`}
+                className={`w-full ${sidebarCollapsed ? 'p-2' : 'p-3'} h-auto bg-[#008062] hover:bg-[#00d2a0] text-white justify-start`}
               >
                 <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'gap-3 w-full'}`}>
-                  <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center" title={sidebarCollapsed ? "John Doe" : undefined}>
-                    <span className="text-sm font-medium text-muted-foreground">JD</span>
+                  <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center" title={sidebarCollapsed ? "John Doe" : undefined}>
+                    <span className="text-sm font-medium text-white">JD</span>
                   </div>
                   {!sidebarCollapsed && (
                     <>
                       <div className="flex-1 min-w-0 text-left">
-                        <div className="text-sm font-medium text-sidebar-foreground truncate">John Doe</div>
-                        <div className="text-xs text-muted-foreground truncate">john.doe@company.com</div>
+                        <div className="text-sm font-medium text-white truncate">John Doe</div>
+                        <div className="text-xs text-white/80 truncate">john.doe@company.com</div>
                       </div>
-                      <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                      <ChevronDown className="w-4 h-4 text-white/80" />
                     </>
                   )}
                 </div>
