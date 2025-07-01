@@ -490,9 +490,10 @@ function KnowledgeBaseScreen() {
         </TabsContent>
 
         <TabsContent value="workspace" className="space-y-4 mt-6">
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
-              <div className="flex items-start gap-3 flex-1">
+          <div className="space-y-4">
+            <div className="p-4 border rounded-lg bg-white">
+              <div className="flex items-start justify-between">
+                <div className="flex items-start gap-3 flex-1">
                 <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
                 <div className="flex-1 min-w-0">
                   <div>
@@ -550,6 +551,7 @@ function KnowledgeBaseScreen() {
                 </Button>
               </div>
             </div>
+          </div>
           </div>
         </TabsContent>
 
@@ -649,8 +651,9 @@ function KnowledgeBaseScreen() {
         </TabsContent>
 
         <TabsContent value="uploads" className="space-y-4 mt-6">
-          <div className="p-4 border rounded-lg bg-white">
-            <div className="flex items-start justify-between">
+          <div className="space-y-4">
+            <div className="p-4 border rounded-lg bg-white">
+              <div className="flex items-start justify-between">
               <div className="flex items-start gap-3 flex-1">
                 <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
                 <div className="flex-1 min-w-0">
@@ -740,6 +743,7 @@ function KnowledgeBaseScreen() {
                 </Button>
               </div>
             </div>
+          </div>
           </div>
         </TabsContent>
       </Tabs>
@@ -1006,7 +1010,6 @@ function KnowledgeBaseScreen() {
               )}
             </div>
           </div>
-        </div>
         </TabsContent>
       </Tabs>
 
