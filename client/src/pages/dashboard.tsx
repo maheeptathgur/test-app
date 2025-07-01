@@ -781,6 +781,9 @@ export default function Dashboard() {
               currentWorkspace={currentWorkspace}
               workspaces={workspaces}
               onWorkspaceChange={handleWorkspaceChange}
+              copilots={copilots}
+              isInChatMode={!!chatCopilot}
+              onCopilotSelect={handleStartChat}
             />
           )}
         </div>
