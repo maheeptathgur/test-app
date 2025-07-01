@@ -186,7 +186,7 @@ const getTypeIcon = (type: string) => {
 
 // Table Avatar Component  
 const TableAvatar = ({ copilot }: { copilot: CopilotData }) => (
-  <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-400 to-purple-600">
+  <div className="relative w-8 h-8 rounded-full overflow-hidden bg-gradient-to-br from-blue-400 to-purple-600">
     <img 
       src={getImageUrl(copilot.type)} 
       alt={copilot.name}
@@ -522,9 +522,7 @@ export default function Dashboard() {
                         <TableRow key={copilot.id}>
                           <TableCell className="font-medium">
                             <div className="flex items-center gap-3">
-                              <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
-                                {copilot.avatar}
-                              </div>
+                              <TableAvatar copilot={copilot} />
                               {copilot.name}
                             </div>
                           </TableCell>
