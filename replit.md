@@ -145,6 +145,7 @@ Changelog:
 - July 1, 2025. Removed top border from chat input area for seamless conversation interface
 - July 1, 2025. Added delete functionality to recent conversations with hover-activated trash icon and confirmation toast
 - July 1, 2025. Enhanced Knowledge Base with MD document creation and AI suggestions features - added Create MD button and AI Suggestions modal with checkbox selection for generating customized documentation
+- July 1, 2025. Improved Knowledge Base document management with inline editing, user attribution, timestamps, View/Edit buttons, better trash icon hover states, and comprehensive document metadata display
 ```
 
 ## User Preferences
