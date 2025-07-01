@@ -147,6 +147,7 @@ Changelog:
 - July 1, 2025. Enhanced Knowledge Base with MD document creation and AI suggestions features - added Create MD button and AI Suggestions modal with checkbox selection for generating customized documentation
 - July 1, 2025. Improved Knowledge Base document management with inline editing, user attribution, timestamps, View/Edit buttons, better trash icon hover states, and comprehensive document metadata display
 - July 1, 2025. Applied enhanced Knowledge Base layout to workspace-level Knowledge Base section with same inline editing, AI suggestions, and document management features tailored for team-wide documentation
+- July 1, 2025. Enhanced workspace Knowledge Base with tabbed interface organizing documents by source (All, Workspace, Copilots, User Uploads) with consistent document management features across all tabs
 ```
 
 ## User Preferences
