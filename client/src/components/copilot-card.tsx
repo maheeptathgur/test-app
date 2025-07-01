@@ -63,7 +63,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       {/* Image tile header */}
-      <div className={`h-24 w-full ${getImageTileStyle(copilot.type)} flex items-center justify-center relative`}>
+      <div className={`h-36 w-full ${getImageTileStyle(copilot.type)} flex items-center justify-center relative`}>
         {getTypeIcon(copilot.type)}
         <div className="absolute top-3 right-3">
           <DropdownMenu>
