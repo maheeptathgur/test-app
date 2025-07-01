@@ -38,6 +38,12 @@
   --radius: 0.5rem;
   --sidebar-background: #e6eeef;
   --sidebar-foreground: var(--brand-neutral-dark);
+
+  /* Dynamic theme colors - can be updated via JavaScript */
+  --color-primary: #008062;
+  --color-secondary: #e6eeef;
+  --color-accent: #00d2a0;
+  --color-background: #ffffff;
   --sidebar-primary: var(--brand-primary);
   --sidebar-primary-foreground: hsl(0, 0%, 100%);
   --sidebar-accent: hsl(0, 0%, 100%);
