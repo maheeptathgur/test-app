@@ -96,8 +96,14 @@ export function SampleScreen({ section }: SampleScreenProps) {
     case 'tools':
       return <ToolsScreen 
         onToolConfigure={handleToolConfigure}
-        onConnectNewTool={() => setShowConnectNewTool(true)}
-        onBrowseIntegrations={() => setShowBrowseIntegrations(true)}
+        onConnectNewTool={() => {
+          console.log('Connect New Tool clicked (first switch)');
+          setShowConnectNewTool(true);
+        }}
+        onBrowseIntegrations={() => {
+          console.log('Browse Integrations clicked (first switch)');
+          setShowBrowseIntegrations(true);
+        }}
       />;
     case 'workflows':
       return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
@@ -146,8 +152,14 @@ export function SampleScreen({ section }: SampleScreenProps) {
           case 'tools':
             return <ToolsScreen 
               onToolConfigure={handleToolConfigure} 
-              onConnectNewTool={() => setShowConnectNewTool(true)}
-              onBrowseIntegrations={() => setShowBrowseIntegrations(true)}
+              onConnectNewTool={() => {
+                console.log('Connect New Tool clicked');
+                setShowConnectNewTool(true);
+              }}
+              onBrowseIntegrations={() => {
+                console.log('Browse Integrations clicked');
+                setShowBrowseIntegrations(true);
+              }}
             />;
           case 'workflows':
             return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
@@ -659,13 +671,19 @@ function ToolsScreen({
         <div className="flex gap-4">
           <Button 
             className="bg-[#008062] hover:bg-[#00d2a0] text-white"
-            onClick={onConnectNewTool}
+            onClick={() => {
+              console.log('Button clicked - Connect New Tool', onConnectNewTool);
+              onConnectNewTool?.();
+            }}
           >
             Connect New Tool
           </Button>
           <Button 
             variant="outline"
-            onClick={onBrowseIntegrations}
+            onClick={() => {
+              console.log('Button clicked - Browse Integrations', onBrowseIntegrations);
+              onBrowseIntegrations?.();
+            }}
           >
             Browse Integrations
           </Button>
