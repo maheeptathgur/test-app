@@ -87,6 +87,8 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [addDocumentModalOpen, setAddDocumentModalOpen] = useState(false);
   const [addUrlModalOpen, setAddUrlModalOpen] = useState(false);
   const [createMdModalOpen, setCreateMdModalOpen] = useState(false);
+  const [mdEditorTab, setMdEditorTab] = useState<'markdown' | 'preview' | 'rtf'>('markdown');
+  const [mdContent, setMdContent] = useState('');
   
   // Knowledge Base filters and search
   const [kbSearchTerm, setKbSearchTerm] = useState('');
@@ -540,6 +542,12 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
   const handleCreateMd = () => {
     setCreateMdModalOpen(true);
+    setMdEditorTab('markdown');
+    setMdContent('');
+  };
+
+  const handlePreviewToggle = () => {
+    setMdEditorTab(mdEditorTab === 'preview' ? 'markdown' : 'preview');
   };
 
   const handleDeleteDocument = (fileName: string) => {
@@ -2708,7 +2716,7 @@ function MyComponent() {
 
       {/* Create MD Modal */}
       <Dialog open={createMdModalOpen} onOpenChange={setCreateMdModalOpen}>
-        <DialogContent className="max-w-2xl">
+        <DialogContent className="max-w-4xl max-h-[90vh]">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <FileText className="w-5 h-5 text-purple-500" />
@@ -2719,7 +2727,7 @@ function MyComponent() {
             </DialogDescription>
           </DialogHeader>
           
-          <div className="space-y-4">
+          <div className="space-y-4 flex-1 overflow-hidden">
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="md-title">Document Title</Label>
@@ -2745,11 +2753,53 @@ function MyComponent() {
               </div>
             </div>
             
-            <div>
-              <Label htmlFor="md-content">Content</Label>
-              <Textarea
-                id="md-content"
-                placeholder="# Your Markdown Content
+            {/* Editor Tabs */}
+            <div className="border-b border-border">
+              <div className="flex space-x-1">
+                <button
+                  onClick={() => setMdEditorTab('markdown')}
+                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    mdEditorTab === 'markdown'
+                      ? 'border-primary text-primary'
+                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <FileText className="w-4 h-4 inline mr-2" />
+                  Markdown
+                </button>
+                <button
+                  onClick={() => setMdEditorTab('preview')}
+                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    mdEditorTab === 'preview'
+                      ? 'border-primary text-primary'
+                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Eye className="w-4 h-4 inline mr-2" />
+                  Preview
+                </button>
+                <button
+                  onClick={() => setMdEditorTab('rtf')}
+                  className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+                    mdEditorTab === 'rtf'
+                      ? 'border-primary text-primary'
+                      : 'border-transparent text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Edit3 className="w-4 h-4 inline mr-2" />
+                  Rich Text
+                </button>
+              </div>
+            </div>
+            
+            {/* Tab Content */}
+            <div className="flex-1 min-h-0">
+              {mdEditorTab === 'markdown' && (
+                <div className="h-full">
+                  <Textarea
+                    value={mdContent}
+                    onChange={(e) => setMdContent(e.target.value)}
+                    placeholder="# Your Markdown Content
 
 Write your markdown content here. You can use:
 
@@ -2761,29 +2811,86 @@ Write your markdown content here. You can use:
 ## Sections
 
 Add sections, lists, and more..."
-                rows={12}
-                className="font-mono text-sm"
-              />
+                    rows={16}
+                    className="font-mono text-sm h-full resize-none"
+                  />
+                </div>
+              )}
+              
+              {mdEditorTab === 'preview' && (
+                <div className="h-96 overflow-y-auto border rounded-lg p-4 bg-white">
+                  <div className="prose prose-sm max-w-none">
+                    {mdContent ? (
+                      <div dangerouslySetInnerHTML={{ 
+                        __html: mdContent
+                          .replace(/^# (.+)/gm, '<h1>$1</h1>')
+                          .replace(/^## (.+)/gm, '<h2>$1</h2>')
+                          .replace(/^### (.+)/gm, '<h3>$1</h3>')
+                          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                          .replace(/\*(.+?)\*/g, '<em>$1</em>')
+                          .replace(/`(.+?)`/g, '<code>$1</code>')
+                          .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
+                          .replace(/^- (.+)/gm, '<li>$1</li>')
+                          .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+                          .replace(/\n/g, '<br>')
+                      }} />
+                    ) : (
+                      <p className="text-muted-foreground">Start typing in the Markdown tab to see a preview here.</p>
+                    )}
+                  </div>
+                </div>
+              )}
+              
+              {mdEditorTab === 'rtf' && (
+                <div className="h-96 overflow-y-auto border rounded-lg">
+                  <div className="border-b p-2 bg-gray-50 flex gap-1">
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                      <strong>B</strong>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                      <em>I</em>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                      <u>U</u>
+                    </Button>
+                    <div className="h-6 w-px bg-border mx-1"></div>
+                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs">
+                      H1
+                    </Button>
+                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs">
+                      H2
+                    </Button>
+                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs">
+                      Link
+                    </Button>
+                  </div>
+                  <div 
+                    contentEditable
+                    className="p-4 min-h-80 focus:outline-none prose prose-sm max-w-none"
+                    style={{ minHeight: '320px' }}
+                    onInput={(e) => {
+                      const content = e.currentTarget.textContent || '';
+                      setMdContent(content);
+                    }}
+                  >
+                    <p className="text-muted-foreground">Start typing your rich text content here...</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           
-          <div className="flex justify-between gap-2 pt-4">
-            <Button variant="outline" className="gap-2">
-              <Eye className="w-4 h-4" />
-              Preview
+          <div className="flex justify-end gap-2 pt-4 border-t">
+            <Button variant="outline" onClick={() => setCreateMdModalOpen(false)}>
+              Cancel
             </Button>
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={() => setCreateMdModalOpen(false)}>
-                Cancel
-              </Button>
-              <Button onClick={() => {
-                console.log('Creating markdown document');
-                setCreateMdModalOpen(false);
-              }}>
-                <FileText className="w-4 h-4 mr-2" />
-                Create Document
-              </Button>
-            </div>
+            <Button onClick={() => {
+              console.log('Creating markdown document with content:', mdContent);
+              setCreateMdModalOpen(false);
+            }}>
+              <FileText className="w-4 h-4 mr-2" />
+              Create Document
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
