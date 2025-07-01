@@ -162,4 +162,9 @@
   .google-drive-btn:hover {
     border-color: #008062 !important;
   }
+
+  /* Table styling */
+  table {
+    background-color: white;
+  }
 }
