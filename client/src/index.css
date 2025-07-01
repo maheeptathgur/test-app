@@ -167,4 +167,25 @@
   table {
     background-color: white;
   }
+  
+  .border.rounded-lg table {
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .border.rounded-lg table thead tr:first-child th:first-child {
+    border-top-left-radius: 0.5rem;
+  }
+  
+  .border.rounded-lg table thead tr:first-child th:last-child {
+    border-top-right-radius: 0.5rem;
+  }
+  
+  .border.rounded-lg table tbody tr:last-child td:first-child {
+    border-bottom-left-radius: 0.5rem;
+  }
+  
+  .border.rounded-lg table tbody tr:last-child td:last-child {
+    border-bottom-right-radius: 0.5rem;
+  }
 }
