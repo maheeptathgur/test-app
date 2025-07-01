@@ -27,6 +27,49 @@ const workspaces: Workspace[] = [
   { id: '3', name: 'Enterprise', type: 'Organization', avatar: 'E', color: 'bg-purple-500' },
 ];
 
+const recentConversations = [
+  {
+    id: '1',
+    title: 'Marketing Campaign Ideas',
+    copilot: 'Content Assistant',
+    lastMessage: 'Here are 5 creative campaign concepts for the Q2 launch...',
+    timestamp: '2 hours ago',
+    isActive: false,
+  },
+  {
+    id: '2',
+    title: 'Product Pricing Strategy',
+    copilot: 'Business Analyst',
+    lastMessage: 'Based on the competitive analysis, I recommend...',
+    timestamp: 'Yesterday',
+    isActive: false,
+  },
+  {
+    id: '3',
+    title: 'Customer Support Guidelines',
+    copilot: 'Customer Support',
+    lastMessage: 'I\'ve drafted the new response templates for...',
+    timestamp: '2 days ago',
+    isActive: false,
+  },
+  {
+    id: '4',
+    title: 'Q4 Performance Review',
+    copilot: 'Business Analyst',
+    lastMessage: 'The quarterly metrics show significant growth in...',
+    timestamp: '1 week ago',
+    isActive: false,
+  },
+  {
+    id: '5',
+    title: 'Blog Content Calendar',
+    copilot: 'Content Assistant',
+    lastMessage: 'I\'ve created a 30-day content schedule focusing on...',
+    timestamp: '1 week ago',
+    isActive: false,
+  },
+];
+
 const mockCopilots: CopilotData[] = [
   {
     id: '1',
@@ -744,29 +787,93 @@ export default function Dashboard() {
 
         {/* Navigation */}
         <nav className={`flex-1 ${sidebarCollapsed ? 'px-2' : 'px-6'} py-6 overflow-y-auto`}>
-          <ul className="space-y-2">
-            {navigationItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeSection === item.id;
-              return (
-                <li key={item.id}>
+          {chatCopilot ? (
+            // Recent Conversations List
+            <div className="space-y-3">
+              {!sidebarCollapsed && (
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-medium text-sidebar-foreground">Recent Conversations</h3>
                   <Button
                     variant="ghost"
-                    onClick={() => handleSectionChange(item.id as NavigationSection)}
-                    className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
-                      isActive 
-                        ? 'text-sidebar-primary bg-sidebar-accent' 
-                        : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
-                    }`}
-                    title={sidebarCollapsed ? item.label : undefined}
+                    size="sm"
+                    onClick={() => setChatCopilot(null)}
+                    className="text-sidebar-foreground hover:text-sidebar-primary"
                   >
-                    <Icon className="w-5 h-5" />
-                    {!sidebarCollapsed && item.label}
+                    <X className="w-4 h-4" />
                   </Button>
-                </li>
-              );
-            })}
-          </ul>
+                </div>
+              )}
+              {sidebarCollapsed && (
+                <div className="flex justify-center mb-4">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setChatCopilot(null)}
+                    className="text-sidebar-foreground hover:text-sidebar-primary"
+                    title="Close chat"
+                  >
+                    <X className="w-4 h-4" />
+                  </Button>
+                </div>
+              )}
+              <div className="space-y-2">
+                {recentConversations.map((conversation) => (
+                  <div
+                    key={conversation.id}
+                    className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg cursor-pointer transition-all ${
+                      conversation.isActive 
+                        ? 'bg-sidebar-accent text-sidebar-primary' 
+                        : 'hover:bg-sidebar-accent hover:text-sidebar-primary'
+                    }`}
+                    title={sidebarCollapsed ? conversation.title : undefined}
+                  >
+                    {sidebarCollapsed ? (
+                      <div className="w-6 h-6 rounded bg-sidebar-primary/20 flex items-center justify-center">
+                        <MessageSquare className="w-3 h-3" />
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        <div className="flex items-start justify-between gap-2">
+                          <h4 className="text-sm font-medium truncate">{conversation.title}</h4>
+                          <span className="text-xs text-muted-foreground flex-shrink-0">{conversation.timestamp}</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground truncate">{conversation.lastMessage}</p>
+                        <div className="flex items-center gap-1">
+                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                          <span className="text-xs text-muted-foreground">{conversation.copilot}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            // Regular Navigation Menu
+            <ul className="space-y-2">
+              {navigationItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeSection === item.id;
+                return (
+                  <li key={item.id}>
+                    <Button
+                      variant="ghost"
+                      onClick={() => handleSectionChange(item.id as NavigationSection)}
+                      className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
+                        isActive 
+                          ? 'text-sidebar-primary bg-sidebar-accent' 
+                          : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
+                      }`}
+                      title={sidebarCollapsed ? item.label : undefined}
+                    >
+                      <Icon className="w-5 h-5" />
+                      {!sidebarCollapsed && item.label}
+                    </Button>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </nav>
 
         {/* Pricing Plans Button and User Profile */}
