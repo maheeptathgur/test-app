@@ -155,6 +155,7 @@ Changelog:
 - July 1, 2025. Removed workspace-level "Profile Fields" navigation item since profile fields now only exist at the copilot level for better organization and to avoid redundancy
 - July 1, 2025. Simplified Workspace Settings by removing integrations, billing, and members tabs, keeping only General and Security tabs for focused essential configuration
 - July 1, 2025. Created user-specific sidebar for User View mode showing "Your Assistants" and "Recent Chats" sections with simplified profile options, removing admin features like pricing plans and administrative navigation for authentic end-user experience
+- July 1, 2025. Replaced workspace selector with simple welcome message in User View mode to eliminate administrative complexity and create a more personal, user-focused experience
 ```
 
 ## User Preferences
