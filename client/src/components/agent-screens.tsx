@@ -75,20 +75,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008062]"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Specialization</label>
-                  <Select defaultValue={agent.specialization}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="content-creation">Content Creation</SelectItem>
-                      <SelectItem value="data-analysis">Data Analysis</SelectItem>
-                      <SelectItem value="customer-support">Customer Support</SelectItem>
-                      <SelectItem value="automation">Process Automation</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                
                 <div className="flex items-center space-x-2">
                   <Checkbox id="active" defaultChecked={agent.status === "Active"} />
                   <label htmlFor="active" className="text-sm font-medium">Agent is active</label>
