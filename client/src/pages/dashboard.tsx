@@ -731,6 +731,30 @@ export default function Dashboard() {
           </ul>
         </nav>
 
+        {/* Pricing Plans Button */}
+        <div className="p-6 border-t border-sidebar-border">
+          {!sidebarCollapsed && (
+            <Button 
+              variant="outline"
+              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
+              onClick={() => window.open('https://www.knolli.com/pricing', '_blank')}
+            >
+              Pricing Plans
+            </Button>
+          )}
+          {sidebarCollapsed && (
+            <Button 
+              variant="outline"
+              size="sm"
+              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
+              title="Pricing Plans"
+              onClick={() => window.open('https://www.knolli.com/pricing', '_blank')}
+            >
+              $
+            </Button>
+          )}
+        </div>
+
         {/* User Profile */}
         <div className="p-6 border-t border-sidebar-border">
           <DropdownMenu>
