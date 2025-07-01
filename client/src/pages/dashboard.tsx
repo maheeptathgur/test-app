@@ -339,7 +339,7 @@ export default function Dashboard() {
 
               {/* Content */}
               {viewMode === 'grid' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {filteredCopilots.map((copilot) => (
                     <CopilotCard
                       key={copilot.id}
@@ -575,7 +575,7 @@ export default function Dashboard() {
 
               {/* Content */}
               {viewMode === 'grid' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {filteredCopilots.map((copilot) => (
                     <CopilotCard
                       key={copilot.id}
@@ -769,8 +769,12 @@ export default function Dashboard() {
                 className={`w-full ${sidebarCollapsed ? 'p-2' : 'p-3'} h-auto bg-[#008062] hover:bg-[#00d2a0] text-white justify-start`}
               >
                 <div className={`flex items-center ${sidebarCollapsed ? 'justify-center' : 'gap-3 w-full'}`}>
-                  <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center" title={sidebarCollapsed ? "John Doe" : undefined}>
-                    <span className="text-sm font-medium text-white">JD</span>
+                  <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0" title={sidebarCollapsed ? "John Doe" : undefined}>
+                    <img 
+                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&auto=format&face=center" 
+                      alt="John Doe"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   {!sidebarCollapsed && (
                     <>
