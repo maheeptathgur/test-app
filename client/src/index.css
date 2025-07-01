@@ -12,7 +12,7 @@
   --brand-accent: hsl(166, 100%, 41%); /* #00d2a0 - Vibrant teal accent */
   --brand-neutral-light: hsl(0, 0%, 98%); /* #fafafa - Almost white */
   --brand-neutral: hsl(0, 0%, 95%); /* #f2f2f2 - Light gray */
-  --brand-neutral-medium: hsl(0, 0%, 60%); /* #999999 - Medium gray */
+  --brand-neutral-medium: hsl(210, 12%, 35%); /* #4E5964 - Medium gray with better contrast */
   --brand-neutral-dark: hsl(0, 0%, 20%); /* #333333 - Dark gray */
   
   /* Semantic Colors */
@@ -56,7 +56,7 @@
   --brand-accent: hsl(166, 100%, 45%); /* Brighter accent for dark theme */
   --brand-neutral-light: hsl(0, 0%, 8%); /* Very dark gray */
   --brand-neutral: hsl(0, 0%, 12%); /* Dark gray */
-  --brand-neutral-medium: hsl(0, 0%, 70%); /* Light gray for text */
+  --brand-neutral-medium: hsl(210, 12%, 65%); /* Light gray for text with better contrast */
   --brand-neutral-dark: hsl(0, 0%, 95%); /* Light text */
 
   --background: var(--brand-neutral-light);
