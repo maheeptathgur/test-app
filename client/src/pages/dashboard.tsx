@@ -967,7 +967,14 @@ export default function Dashboard() {
             <div className="mb-8">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
+                  <div className="flex items-center gap-3">
+                    <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
+                    {activeSection === 'copilots' && (
+                      <Badge variant="secondary" className="text-sm">
+                        {copilots.length}
+                      </Badge>
+                    )}
+                  </div>
                   <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
                 </div>
                 {activeSection === 'copilots' && (
