@@ -728,7 +728,7 @@ function MyComponent() {
                         </div>
                         <div className="flex gap-1 mt-3">
                           <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
                         </div>
@@ -764,7 +764,7 @@ function MyComponent() {
                         </div>
                         <div className="flex gap-1 mt-3">
                           <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
                         </div>
@@ -802,7 +802,7 @@ function MyComponent() {
                         </div>
                         <div className="flex gap-1 mt-3">
                           <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
                         </div>
@@ -834,7 +834,7 @@ function MyComponent() {
                         </div>
                         <div className="flex gap-1 mt-3">
                           <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
                         </div>
@@ -876,7 +876,7 @@ function MyComponent() {
                         </div>
                         <div className="flex gap-1 mt-3">
                           <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
                         </div>
@@ -912,7 +912,7 @@ function MyComponent() {
                         </div>
                         <div className="flex gap-1 mt-3">
                           <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700">
+                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
                         </div>
