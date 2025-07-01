@@ -184,19 +184,29 @@ const getTypeIcon = (type: string) => {
   }
 };
 
-// Table Avatar Component  
-const TableAvatar = ({ copilot }: { copilot: CopilotData }) => (
-  <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-400 to-purple-600">
-    <img 
-      src={getImageUrl(copilot.type)} 
-      alt={copilot.name}
-      className="w-full h-full object-cover opacity-60"
-    />
-    <div className="absolute inset-0 flex items-center justify-center">
+// Table Avatar Component with solid colors and icons
+const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
+  const getAvatarStyle = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'general':
+        return 'bg-blue-500';
+      case 'content':
+        return 'bg-green-500';
+      case 'analyst':
+        return 'bg-purple-500';
+      case 'support':
+        return 'bg-orange-500';
+      default:
+        return 'bg-gray-500';
+    }
+  };
+
+  return (
+    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${getAvatarStyle(copilot.type)}`}>
       {getTypeIcon(copilot.type)}
     </div>
-  </div>
-);
+  );
+};
 
 export default function Dashboard() {
   const [currentWorkspace, setCurrentWorkspace] = useState<Workspace>(workspaces[0]);
