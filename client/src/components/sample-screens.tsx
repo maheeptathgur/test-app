@@ -44,90 +44,98 @@ export function SampleScreen({ section }: SampleScreenProps) {
 }
 
 function AgentsScreen() {
-  const agentsByCategory = {
-    "Content Creation": [
-      { 
-        id: 1, 
-        name: "SEO Writer", 
-        copilot: "Content Manager", 
-        description: "Creates optimized blog posts and articles",
-        tools: ["Content Research", "Keyword Analysis"],
-        workflows: ["Blog Post Generation", "Meta Description"],
-        status: "Active", 
-        requests: 156,
-        knowledgeBase: "SEO Guidelines",
-        lastActive: "2 min ago"
-      },
-      { 
-        id: 2, 
-        name: "SEO Optimizer", 
-        copilot: "Content Manager", 
-        description: "Optimizes existing content for search engines",
-        tools: ["SEO Analyzer", "Keyword Density"],
-        workflows: ["Content Optimization", "SERP Analysis"],
-        status: "Active", 
-        requests: 89,
-        knowledgeBase: "SEO Best Practices",
-        lastActive: "5 min ago"
-      },
-    ],
-    "Data Analysis": [
-      { 
-        id: 3, 
-        name: "Performance Analyst", 
-        copilot: "Business Intelligence", 
-        description: "Analyzes website and content performance metrics",
-        tools: ["Analytics API", "Report Builder"],
-        workflows: ["Performance Report", "Traffic Analysis"],
-        status: "Active", 
-        requests: 234,
-        knowledgeBase: "Analytics Guidelines",
-        lastActive: "1 min ago"
-      },
-      { 
-        id: 4, 
-        name: "Competitor Researcher", 
-        copilot: "Business Intelligence", 
-        description: "Researches competitor strategies and market trends",
-        tools: ["Web Scraper", "Market Data API"],
-        workflows: ["Competitor Analysis", "Market Research"],
-        status: "Active", 
-        requests: 67,
-        knowledgeBase: "Market Research Data",
-        lastActive: "8 min ago"
-      },
-    ],
-    "Customer Support": [
-      { 
-        id: 5, 
-        name: "Ticket Classifier", 
-        copilot: "Customer Support", 
-        description: "Categorizes and prioritizes support tickets",
-        tools: ["NLP Classifier", "Priority Scorer"],
-        workflows: ["Ticket Routing", "Escalation Rules"],
-        status: "Active", 
-        requests: 445,
-        knowledgeBase: "Support Categories",
-        lastActive: "30 sec ago"
-      },
-      { 
-        id: 6, 
-        name: "FAQ Generator", 
-        copilot: "Customer Support", 
-        description: "Creates and updates FAQ content from tickets",
-        tools: ["Content Extractor", "FAQ Builder"],
-        workflows: ["FAQ Creation", "Content Updates"],
-        status: "Inactive", 
-        requests: 23,
-        knowledgeBase: "Support Documentation",
-        lastActive: "2 hours ago"
-      },
-    ]
-  };
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  
+  const allAgents = [
+    { 
+      id: 1, 
+      name: "SEO Writer", 
+      copilot: "Content Manager", 
+      description: "Creates optimized blog posts and articles",
+      tools: ["Content Research", "Keyword Analysis"],
+      workflows: ["Blog Post Generation", "Meta Description"],
+      status: "Active", 
+      category: "Content Creation",
+      requests: 156,
+      knowledgeBase: "SEO Guidelines",
+      lastActive: "2 min ago"
+    },
+    { 
+      id: 2, 
+      name: "SEO Optimizer", 
+      copilot: "Content Manager", 
+      description: "Optimizes existing content for search engines",
+      tools: ["SEO Analyzer", "Keyword Density"],
+      workflows: ["Content Optimization", "SERP Analysis"],
+      status: "Active", 
+      category: "Content Creation",
+      requests: 89,
+      knowledgeBase: "SEO Best Practices",
+      lastActive: "5 min ago"
+    },
+    { 
+      id: 3, 
+      name: "Performance Analyst", 
+      copilot: "Business Intelligence", 
+      description: "Analyzes website and content performance metrics",
+      tools: ["Analytics API", "Report Builder"],
+      workflows: ["Performance Report", "Traffic Analysis"],
+      status: "Active", 
+      category: "Data Analysis",
+      requests: 234,
+      knowledgeBase: "Analytics Guidelines",
+      lastActive: "1 min ago"
+    },
+    { 
+      id: 4, 
+      name: "Competitor Researcher", 
+      copilot: "Business Intelligence", 
+      description: "Researches competitor strategies and market trends",
+      tools: ["Web Scraper", "Market Data API"],
+      workflows: ["Competitor Analysis", "Market Research"],
+      status: "Active", 
+      category: "Data Analysis",
+      requests: 67,
+      knowledgeBase: "Market Research Data",
+      lastActive: "8 min ago"
+    },
+    { 
+      id: 5, 
+      name: "Ticket Classifier", 
+      copilot: "Customer Support", 
+      description: "Categorizes and prioritizes support tickets",
+      tools: ["NLP Classifier", "Priority Scorer"],
+      workflows: ["Ticket Routing", "Escalation Rules"],
+      status: "Active", 
+      category: "Customer Support",
+      requests: 445,
+      knowledgeBase: "Support Categories",
+      lastActive: "30 sec ago"
+    },
+    { 
+      id: 6, 
+      name: "FAQ Generator", 
+      copilot: "Customer Support", 
+      description: "Creates and updates FAQ content from tickets",
+      tools: ["Content Extractor", "FAQ Builder"],
+      workflows: ["FAQ Creation", "Content Updates"],
+      status: "Inactive", 
+      category: "Customer Support",
+      requests: 23,
+      knowledgeBase: "Support Documentation",
+      lastActive: "2 hours ago"
+    }
+  ];
 
-  const totalAgents = Object.values(agentsByCategory).flat().length;
-  const activeAgents = Object.values(agentsByCategory).flat().filter(agent => agent.status === 'Active').length;
-  const totalRequests = Object.values(agentsByCategory).flat().reduce((sum, agent) => sum + agent.requests, 0);
+  const categories = ["All Categories", "Content Creation", "Data Analysis", "Customer Support"];
+  
+  const filteredAgents = selectedCategory === "All Categories" 
+    ? allAgents 
+    : allAgents.filter(agent => agent.category === selectedCategory);
+
+  const totalAgents = allAgents.length;
+  const activeAgents = allAgents.filter(agent => agent.status === 'Active').length;
+  const totalRequests = allAgents.reduce((sum, agent) => sum + agent.requests, 0);
 
   return (
     <div className="space-y-6">
@@ -198,10 +206,19 @@ function AgentsScreen() {
           </Button>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <Filter className="w-4 h-4 mr-2" />
-            Filter
-          </Button>
+          <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <SelectTrigger className="w-48">
+              <Filter className="w-4 h-4 mr-2" />
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map(category => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
           <Button variant="outline" size="sm">
             <ArrowUpDown className="w-4 h-4 mr-2" />
             Sort
@@ -209,16 +226,16 @@ function AgentsScreen() {
         </div>
       </div>
 
-      {/* Agents by Category */}
-      {Object.entries(agentsByCategory).map(([category, agents]) => (
-        <div key={category} className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">{category} Agents</h2>
-            <Badge variant="secondary">{agents.length} agents</Badge>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {agents.map((agent) => (
+      {/* Agents Grid */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-lg font-semibold">
+          {selectedCategory === "All Categories" ? "All Agents" : `${selectedCategory} Agents`}
+        </h2>
+        <Badge variant="secondary">{filteredAgents.length} agents</Badge>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {filteredAgents.map((agent) => (
               <Card key={agent.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
                 <CardHeader className="pb-4">
                   <div className="flex items-start gap-3">
