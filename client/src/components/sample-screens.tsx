@@ -134,7 +134,10 @@ export function SampleScreen({ section }: SampleScreenProps) {
 
       {/* Connect New Tool Modal */}
       {console.log('Rendering Connect New Tool Modal, open:', showConnectNewTool)}
-      <Dialog open={showConnectNewTool} onOpenChange={setShowConnectNewTool}>
+      <Dialog open={showConnectNewTool} onOpenChange={(open) => {
+        console.log('Dialog onOpenChange called with:', open);
+        setShowConnectNewTool(open);
+      }}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Connect New Tool</DialogTitle>
@@ -190,6 +193,7 @@ export function SampleScreen({ section }: SampleScreenProps) {
       </Dialog>
 
       {/* Browse Integrations Modal */}
+      {console.log('Rendering Browse Integrations Modal, open:', showBrowseIntegrations)}
       <Dialog open={showBrowseIntegrations} onOpenChange={setShowBrowseIntegrations}>
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
@@ -624,7 +628,9 @@ function ToolsScreen({
         <div className="flex gap-4">
           <Button 
             className="bg-[#008062] hover:bg-[#00d2a0] text-white"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
               console.log('Button clicked - Connect New Tool', onConnectNewTool);
               onConnectNewTool?.();
             }}
@@ -633,7 +639,9 @@ function ToolsScreen({
           </Button>
           <Button 
             variant="outline"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
               console.log('Button clicked - Browse Integrations', onBrowseIntegrations);
               onBrowseIntegrations?.();
             }}
@@ -996,17 +1004,17 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                       {workflow.status === 'Active' ? (
                         <div className="flex gap-2">
                           <Button variant="outline" size="sm" className="flex-1" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>Edit</Button>
-                          <Button variant="outline" size="sm" className="flex-1">Pause</Button>
+                          <Button variant="outline" size="sm" className="flex-1" onClick={() => console.log('Pausing workflow:', workflow.name)}>Pause</Button>
                         </div>
                       ) : workflow.status === 'Paused' ? (
                         <div className="flex gap-2">
                           <Button variant="outline" size="sm" className="flex-1" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>Edit</Button>
-                          <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white">Resume</Button>
+                          <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white" onClick={() => console.log('Resuming workflow:', workflow.name)}>Resume</Button>
                         </div>
                       ) : (
                         <div className="flex gap-2">
                           <Button variant="outline" size="sm" className="flex-1" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>Edit</Button>
-                          <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white">Deploy</Button>
+                          <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white" onClick={() => console.log('Deploying workflow:', workflow.name)}>Deploy</Button>
                         </div>
                       )}
                     </div>
