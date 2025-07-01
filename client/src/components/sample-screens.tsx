@@ -5,7 +5,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
-import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield } from "lucide-react";
+import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
 import { PricingScreen } from "./pricing-screen";
 
 interface SampleScreenProps {
@@ -247,36 +251,114 @@ function WorkflowsScreen() {
 }
 
 function KnowledgeBaseScreen() {
-  const articles = [
-    { id: 1, title: "Getting Started Guide", category: "Basics", views: 1234, status: "Published" },
-    { id: 2, title: "API Documentation", category: "Technical", views: 856, status: "Published" },
-    { id: 3, title: "Troubleshooting Common Issues", category: "Support", views: 567, status: "Draft" },
-    { id: 4, title: "Best Practices", category: "Guidelines", views: 432, status: "Published" }
+  const [suggestDocsOpen, setSuggestDocsOpen] = useState(false);
+  const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
+  const [editingDocument, setEditingDocument] = useState<string | null>(null);
+  const [tempTitle, setTempTitle] = useState("");
+  const [tempDescription, setTempDescription] = useState("");
+
+  // Sample AI-suggested documents
+  const suggestedDocs = [
+    {
+      id: "workspace-onboarding",
+      title: "Workspace Onboarding Guide",
+      description: "Complete guide for new team members joining the workspace",
+      category: "User Experience"
+    },
+    {
+      id: "company-policies",
+      title: "Company Policies & Guidelines",
+      description: "Essential policies and guidelines for all team members",
+      category: "Guidelines"
+    },
+    {
+      id: "tech-standards",
+      title: "Technical Standards Documentation",
+      description: "Development standards and best practices for the team",
+      category: "Technical"
+    },
+    {
+      id: "project-templates",
+      title: "Project Management Templates",
+      description: "Standardized templates for project planning and execution",
+      category: "Templates"
+    }
   ];
+
+  const handleSuggestionToggle = (suggestionId: string) => {
+    setSelectedSuggestions(prev => 
+      prev.includes(suggestionId) 
+        ? prev.filter(id => id !== suggestionId)
+        : [...prev, suggestionId]
+    );
+  };
+
+  const handleGenerateSelectedDocs = () => {
+    console.log('Generating workspace documents:', selectedSuggestions);
+    setSuggestDocsOpen(false);
+    setSelectedSuggestions([]);
+  };
+
+  const startEditing = (docId: string, currentTitle: string, currentDescription: string) => {
+    setEditingDocument(docId);
+    setTempTitle(currentTitle);
+    setTempDescription(currentDescription);
+  };
+
+  const saveEditing = () => {
+    console.log('Saving workspace document:', { title: tempTitle, description: tempDescription });
+    setEditingDocument(null);
+    setTempTitle("");
+    setTempDescription("");
+  };
+
+  const cancelEditing = () => {
+    setEditingDocument(null);
+    setTempTitle("");
+    setTempDescription("");
+  };
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-end">
-        <Button className="bg-brand-primary hover:bg-brand-primary/90">
-          <BookOpen className="w-4 h-4 mr-2" />
-          New Article
-        </Button>
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-semibold text-foreground">Workspace Knowledge Base</h2>
+          <p className="text-sm text-muted-foreground">Centralized documentation and resources for your team</p>
+        </div>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm">
+            <Plus className="w-4 h-4 mr-1" />
+            Add Document
+          </Button>
+          <Button variant="outline" size="sm">
+            <Link className="w-4 h-4 mr-1" />
+            Add URL
+          </Button>
+          <Button variant="outline" size="sm">
+            <FileText className="w-4 h-4 mr-1" />
+            Create MD
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => setSuggestDocsOpen(true)}>
+            <Bot className="w-4 h-4 mr-1" />
+            AI Suggestions
+          </Button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card>
           <CardContent className="p-6">
             <div className="text-center">
-              <p className="text-3xl font-bold text-brand-primary">24</p>
-              <p className="text-sm text-gray-600">Total Articles</p>
+              <p className="text-3xl font-bold text-brand-primary">18</p>
+              <p className="text-sm text-muted-foreground">Total Documents</p>
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-6">
             <div className="text-center">
-              <p className="text-3xl font-bold text-green-600">18</p>
-              <p className="text-sm text-gray-600">Published</p>
+              <p className="text-3xl font-bold text-green-600">15</p>
+              <p className="text-sm text-muted-foreground">Published</p>
             </div>
           </CardContent>
         </Card>
@@ -284,52 +366,346 @@ function KnowledgeBaseScreen() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-blue-600">3,489</p>
-              <p className="text-sm text-gray-600">Total Views</p>
+              <p className="text-sm text-muted-foreground">Total Views</p>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-6">
+            <div className="text-center">
+              <p className="text-3xl font-bold text-orange-600">127</p>
+              <p className="text-sm text-muted-foreground">Contributors</p>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Recent Articles</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Title</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Views</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {articles.map((article) => (
-                <TableRow key={article.id}>
-                  <TableCell className="font-medium">{article.title}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{article.category}</Badge>
-                  </TableCell>
-                  <TableCell>{article.views}</TableCell>
-                  <TableCell>
-                    <Badge variant={article.status === 'Published' ? 'default' : 'secondary'}>
-                      {article.status}
+      <div className="space-y-4">
+        {/* Knowledge base documents */}
+        <div className="p-4 border rounded-lg bg-white">
+          <div className="flex items-start justify-between">
+            <div className="flex items-start gap-3 flex-1">
+              <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                {editingDocument === 'workspace1' ? (
+                  <div className="space-y-2">
+                    <Input
+                      value={tempTitle}
+                      onChange={(e) => setTempTitle(e.target.value)}
+                      className="font-medium"
+                      placeholder="Document title"
+                    />
+                    <Input
+                      value={tempDescription}
+                      onChange={(e) => setTempDescription(e.target.value)}
+                      className="text-sm"
+                      placeholder="Document description"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <div className="font-medium">Company Handbook</div>
+                    <div className="text-sm text-muted-foreground">Complete guide to company policies and procedures</div>
+                  </div>
+                )}
+                <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                  <span>Created by Jennifer Walsh</span>
+                  <span>•</span>
+                  <span>5 days ago</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 ml-4">
+              <Badge variant="secondary" className="text-xs">PDF</Badge>
+              {editingDocument === 'workspace1' ? (
+                <>
+                  <Button variant="ghost" size="sm" onClick={saveEditing}>
+                    <Check className="w-4 h-4 text-green-600" />
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                    <X className="w-4 h-4 text-gray-600" />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="ghost" size="sm" title="View/Edit">
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => startEditing('workspace1', 'Company Handbook', 'Complete guide to company policies and procedures')}
+                    title="Rename"
+                  >
+                    <Edit3 className="w-4 h-4" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-white">
+          <div className="flex items-start justify-between">
+            <div className="flex items-start gap-3 flex-1">
+              <FileText className="w-5 h-5 text-green-500 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                {editingDocument === 'workspace2' ? (
+                  <div className="space-y-2">
+                    <Input
+                      value={tempTitle}
+                      onChange={(e) => setTempTitle(e.target.value)}
+                      className="font-medium"
+                      placeholder="Document title"
+                    />
+                    <Input
+                      value={tempDescription}
+                      onChange={(e) => setTempDescription(e.target.value)}
+                      className="text-sm"
+                      placeholder="Document description"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <div className="font-medium">Development Guidelines</div>
+                    <div className="text-sm text-muted-foreground">Coding standards and development best practices</div>
+                  </div>
+                )}
+                <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                  <span>Created by David Park</span>
+                  <span>•</span>
+                  <span>1 week ago</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 ml-4">
+              <Badge variant="secondary" className="text-xs">MD</Badge>
+              {editingDocument === 'workspace2' ? (
+                <>
+                  <Button variant="ghost" size="sm" onClick={saveEditing}>
+                    <Check className="w-4 h-4 text-green-600" />
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                    <X className="w-4 h-4 text-gray-600" />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="ghost" size="sm" title="View/Edit">
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => startEditing('workspace2', 'Development Guidelines', 'Coding standards and development best practices')}
+                    title="Rename"
+                  >
+                    <Edit3 className="w-4 h-4" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-white">
+          <div className="flex items-start justify-between">
+            <div className="flex items-start gap-3 flex-1">
+              <FileText className="w-5 h-5 text-purple-500 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                {editingDocument === 'workspace3' ? (
+                  <div className="space-y-2">
+                    <Input
+                      value={tempTitle}
+                      onChange={(e) => setTempTitle(e.target.value)}
+                      className="font-medium"
+                      placeholder="Document title"
+                    />
+                    <Input
+                      value={tempDescription}
+                      onChange={(e) => setTempDescription(e.target.value)}
+                      className="text-sm"
+                      placeholder="Document description"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <div className="font-medium">Security Protocols</div>
+                    <div className="text-sm text-muted-foreground">Security guidelines and access management procedures</div>
+                  </div>
+                )}
+                <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                  <span>Created by Lisa Chen</span>
+                  <span>•</span>
+                  <span>3 days ago</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 ml-4">
+              <Badge variant="secondary" className="text-xs">DOCX</Badge>
+              {editingDocument === 'workspace3' ? (
+                <>
+                  <Button variant="ghost" size="sm" onClick={saveEditing}>
+                    <Check className="w-4 h-4 text-green-600" />
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                    <X className="w-4 h-4 text-gray-600" />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="ghost" size="sm" title="View/Edit">
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => startEditing('workspace3', 'Security Protocols', 'Security guidelines and access management procedures')}
+                    title="Rename"
+                  >
+                    <Edit3 className="w-4 h-4" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className="p-4 border rounded-lg bg-white">
+          <div className="flex items-start justify-between">
+            <div className="flex items-start gap-3 flex-1">
+              <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
+              <div className="flex-1 min-w-0">
+                {editingDocument === 'workspace4' ? (
+                  <div className="space-y-2">
+                    <Input
+                      value={tempTitle}
+                      onChange={(e) => setTempTitle(e.target.value)}
+                      className="font-medium"
+                      placeholder="Document title"
+                    />
+                    <Input
+                      value={tempDescription}
+                      onChange={(e) => setTempDescription(e.target.value)}
+                      className="text-sm"
+                      placeholder="Document description"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <div className="font-medium">Team Onboarding Checklist</div>
+                    <div className="text-sm text-muted-foreground">Step-by-step checklist for new team member onboarding</div>
+                  </div>
+                )}
+                <div className="flex items-center gap-4 mt-2 text-xs text-muted-foreground">
+                  <span>Created by Rachel Green</span>
+                  <span>•</span>
+                  <span>6 days ago</span>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 ml-4">
+              <Badge variant="secondary" className="text-xs">PDF</Badge>
+              {editingDocument === 'workspace4' ? (
+                <>
+                  <Button variant="ghost" size="sm" onClick={saveEditing}>
+                    <Check className="w-4 h-4 text-green-600" />
+                  </Button>
+                  <Button variant="ghost" size="sm" onClick={cancelEditing}>
+                    <X className="w-4 h-4 text-gray-600" />
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button variant="ghost" size="sm" title="View/Edit">
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={() => startEditing('workspace4', 'Team Onboarding Checklist', 'Step-by-step checklist for new team member onboarding')}
+                    title="Rename"
+                  >
+                    <Edit3 className="w-4 h-4" />
+                  </Button>
+                  <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete">
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* AI Document Suggestions Modal */}
+      <Dialog open={suggestDocsOpen} onOpenChange={setSuggestDocsOpen}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Bot className="w-5 h-5" />
+              AI Workspace Document Suggestions
+            </DialogTitle>
+            <DialogDescription>
+              Select the documents you'd like our AI to generate for your workspace knowledge base. These will be customized for your team's needs.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            {suggestedDocs.map((doc) => (
+              <div key={doc.id} className="flex items-start space-x-3 p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                <Checkbox
+                  id={doc.id}
+                  checked={selectedSuggestions.includes(doc.id)}
+                  onCheckedChange={() => handleSuggestionToggle(doc.id)}
+                  className="mt-1"
+                />
+                <div className="flex-1 space-y-1">
+                  <div className="flex items-center gap-2">
+                    <label htmlFor={doc.id} className="text-sm font-medium cursor-pointer">
+                      {doc.title}
+                    </label>
+                    <Badge variant="outline" className="text-xs">
+                      {doc.category}
                     </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm">Edit</Button>
-                      <Button variant="outline" size="sm">View</Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {doc.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="flex justify-between items-center pt-4 border-t">
+            <p className="text-sm text-muted-foreground">
+              {selectedSuggestions.length} document{selectedSuggestions.length !== 1 ? 's' : ''} selected
+            </p>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setSuggestDocsOpen(false)}>
+                Cancel
+              </Button>
+              <Button 
+                onClick={handleGenerateSelectedDocs}
+                disabled={selectedSuggestions.length === 0}
+                className="gap-2"
+              >
+                <Bot className="w-4 h-4" />
+                Generate Selected ({selectedSuggestions.length})
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
