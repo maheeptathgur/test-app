@@ -83,6 +83,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [documentToDelete, setDocumentToDelete] = useState<string | null>(null);
   const [previewDocument, setPreviewDocument] = useState<string | null>(null);
   
+  // Knowledge Base modals
+  const [addDocumentModalOpen, setAddDocumentModalOpen] = useState(false);
+  const [addUrlModalOpen, setAddUrlModalOpen] = useState(false);
+  const [createMdModalOpen, setCreateMdModalOpen] = useState(false);
+  
   // Knowledge Base filters and search
   const [kbSearchTerm, setKbSearchTerm] = useState('');
   const [kbSortBy, setKbSortBy] = useState('updated');
@@ -522,6 +527,19 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
   const handleExitPreview = () => {
     setPreviewDocument(null);
+  };
+
+  // Knowledge Base handlers
+  const handleAddDocument = () => {
+    setAddDocumentModalOpen(true);
+  };
+
+  const handleAddUrl = () => {
+    setAddUrlModalOpen(true);
+  };
+
+  const handleCreateMd = () => {
+    setCreateMdModalOpen(true);
   };
 
   const handleDeleteDocument = (fileName: string) => {
@@ -1319,15 +1337,15 @@ function MyComponent() {
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-semibold text-foreground">Knowledge Base</h2>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" onClick={handleAddDocument}>
                         <Plus className="w-4 h-4 mr-1" />
                         Add Document
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" onClick={handleAddUrl}>
                         <Link className="w-4 h-4 mr-1" />
                         Add URL
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" onClick={handleCreateMd}>
                         <FileText className="w-4 h-4 mr-1" />
                         Create MD
                       </Button>
@@ -2572,6 +2590,200 @@ function MyComponent() {
               <Trash2 className="w-4 h-4" />
               Delete Document
             </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Document Modal */}
+      <Dialog open={addDocumentModalOpen} onOpenChange={setAddDocumentModalOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Plus className="w-5 h-5 text-blue-500" />
+              Add Document
+            </DialogTitle>
+            <DialogDescription>
+              Upload a document to your knowledge base for this copilot.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-8 text-center">
+              <Upload className="w-8 h-8 mx-auto text-muted-foreground mb-3" />
+              <p className="text-sm text-muted-foreground mb-2">
+                Drag and drop files here, or click to browse
+              </p>
+              <Button variant="outline" size="sm">
+                Choose Files
+              </Button>
+            </div>
+            
+            <div className="space-y-3">
+              <div>
+                <Label htmlFor="doc-title">Document Title</Label>
+                <Input
+                  id="doc-title"
+                  placeholder="Enter document title"
+                />
+              </div>
+              <div>
+                <Label htmlFor="doc-description">Description</Label>
+                <Textarea
+                  id="doc-description"
+                  placeholder="Brief description of the document"
+                  rows={3}
+                />
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-4">
+            <Button variant="outline" onClick={() => setAddDocumentModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => {
+              console.log('Adding document to knowledge base');
+              setAddDocumentModalOpen(false);
+            }}>
+              <Plus className="w-4 h-4 mr-2" />
+              Add Document
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add URL Modal */}
+      <Dialog open={addUrlModalOpen} onOpenChange={setAddUrlModalOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Link className="w-5 h-5 text-green-500" />
+              Add URL
+            </DialogTitle>
+            <DialogDescription>
+              Add a website or online resource to your knowledge base.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="url-input">Website URL</Label>
+              <Input
+                id="url-input"
+                type="url"
+                placeholder="https://example.com"
+              />
+            </div>
+            <div>
+              <Label htmlFor="url-title">Title</Label>
+              <Input
+                id="url-title"
+                placeholder="Enter a title for this resource"
+              />
+            </div>
+            <div>
+              <Label htmlFor="url-description">Description</Label>
+              <Textarea
+                id="url-description"
+                placeholder="Brief description of the content"
+                rows={3}
+              />
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-4">
+            <Button variant="outline" onClick={() => setAddUrlModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => {
+              console.log('Adding URL to knowledge base');
+              setAddUrlModalOpen(false);
+            }}>
+              <Link className="w-4 h-4 mr-2" />
+              Add URL
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Create MD Modal */}
+      <Dialog open={createMdModalOpen} onOpenChange={setCreateMdModalOpen}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <FileText className="w-5 h-5 text-purple-500" />
+              Create Markdown Document
+            </DialogTitle>
+            <DialogDescription>
+              Create a new markdown document for your knowledge base.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="md-title">Document Title</Label>
+                <Input
+                  id="md-title"
+                  placeholder="Enter document title"
+                />
+              </div>
+              <div>
+                <Label htmlFor="md-category">Category</Label>
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="general">General</SelectItem>
+                    <SelectItem value="faq">FAQ</SelectItem>
+                    <SelectItem value="guide">Guide</SelectItem>
+                    <SelectItem value="policy">Policy</SelectItem>
+                    <SelectItem value="api">API Documentation</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            
+            <div>
+              <Label htmlFor="md-content">Content</Label>
+              <Textarea
+                id="md-content"
+                placeholder="# Your Markdown Content
+
+Write your markdown content here. You can use:
+
+- **Bold text**
+- *Italic text*
+- [Links](https://example.com)
+- `Code snippets`
+
+## Sections
+
+Add sections, lists, and more..."
+                rows={12}
+                className="font-mono text-sm"
+              />
+            </div>
+          </div>
+          
+          <div className="flex justify-between gap-2 pt-4">
+            <Button variant="outline" className="gap-2">
+              <Eye className="w-4 h-4" />
+              Preview
+            </Button>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => setCreateMdModalOpen(false)}>
+                Cancel
+              </Button>
+              <Button onClick={() => {
+                console.log('Creating markdown document');
+                setCreateMdModalOpen(false);
+              }}>
+                <FileText className="w-4 h-4 mr-2" />
+                Create Document
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
