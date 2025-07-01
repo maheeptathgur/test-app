@@ -984,8 +984,8 @@ export default function Dashboard() {
       <div className="flex-1 overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
         {/* Combined scrollable content */}
         <div className={`${chatCopilot || configuringCopilot ? 'h-full' : 'h-full p-8 overflow-y-auto'}`}>
-          {/* Top Bar - Hidden when in chat or configuration mode */}
-          {!chatCopilot && !configuringCopilot && (
+          {/* Top Bar - Hidden when in chat, configuration, or user-view mode */}
+          {!chatCopilot && !configuringCopilot && activeSection !== 'user-view' && (
             <div className="mb-8">
               <div className="flex items-center justify-between">
                 <div>
