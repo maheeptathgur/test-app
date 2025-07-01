@@ -7,6 +7,16 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
 import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle, ArrowLeft, Copy, Download, Loader2, Play, RotateCcw, Upload } from "lucide-react";
+import { 
+  SiGmail,
+  SiSlack,
+  SiGoogleanalytics,
+  SiAirtable,
+  SiOpenai,
+  SiUnsplash,
+  SiGoogledrive,
+  SiNotion
+} from 'react-icons/si';
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -422,25 +432,25 @@ function ToolsScreen() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredTools.map((tool) => {
-                // Define logos for each tool
+                // Define real platform logos for each tool
                 const getToolLogo = (toolName: string) => {
                   switch (toolName.toLowerCase()) {
                     case 'gmail':
-                      return <Mail className="w-8 h-8 text-red-500" />;
+                      return <SiGmail className="w-8 h-8 text-red-500" />;
                     case 'slack':
-                      return <MessageCircle className="w-8 h-8 text-purple-500" />;
+                      return <SiSlack className="w-8 h-8 text-purple-500" />;
                     case 'google analytics':
-                      return <TrendingUp className="w-8 h-8 text-orange-500" />;
+                      return <SiGoogleanalytics className="w-8 h-8 text-orange-500" />;
                     case 'airtable':
-                      return <Database className="w-8 h-8 text-yellow-500" />;
+                      return <SiAirtable className="w-8 h-8 text-yellow-600" />;
                     case 'openai api':
-                      return <Bot className="w-8 h-8 text-green-500" />;
+                      return <SiOpenai className="w-8 h-8 text-green-600" />;
                     case 'unsplash':
-                      return <Camera className="w-8 h-8 text-blue-500" />;
+                      return <SiUnsplash className="w-8 h-8 text-black" />;
                     case 'google drive':
-                      return <Cloud className="w-8 h-8 text-blue-600" />;
+                      return <SiGoogledrive className="w-8 h-8 text-blue-500" />;
                     case 'notion':
-                      return <FileText className="w-8 h-8 text-gray-700" />;
+                      return <SiNotion className="w-8 h-8 text-black" />;
                     default:
                       return <Globe className="w-8 h-8 text-gray-500" />;
                   }
