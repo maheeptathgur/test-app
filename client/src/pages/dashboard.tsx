@@ -202,7 +202,7 @@ const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
   };
 
   return (
-    <div className={`w-10 h-10 rounded-full flex items-center justify-center ${getAvatarStyle(copilot.type)}`}>
+    <div className={`w-10 h-10 aspect-square rounded-full flex items-center justify-center flex-shrink-0 ${getAvatarStyle(copilot.type)}`}>
       {getTypeIcon(copilot.type)}
     </div>
   );
