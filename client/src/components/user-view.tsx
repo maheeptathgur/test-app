@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { Play, MessageSquare, Star, Clock, Filter, Search } from "lucide-react";
+import { Play, MessageSquare, Star, Clock, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 
 export function UserView() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
 
   // Sample copilots that would be available to end users
   const userCopilots = [
@@ -71,8 +70,7 @@ export function UserView() {
   const filteredCopilots = userCopilots.filter(copilot => {
     const matchesSearch = copilot.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          copilot.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || copilot.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    return matchesSearch;
   });
 
   return (
@@ -97,7 +95,7 @@ export function UserView() {
         </div>
       </div>
 
-      {/* Search and Filter */}
+      {/* Search */}
       <div className="flex gap-4 items-center">
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
@@ -108,19 +106,6 @@ export function UserView() {
             className="pl-10"
           />
         </div>
-        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-          <SelectTrigger className="w-48">
-            <Filter className="w-4 h-4 mr-2" />
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Categories</SelectItem>
-            <SelectItem value="content">Content</SelectItem>
-            <SelectItem value="support">Support</SelectItem>
-            <SelectItem value="marketing">Marketing</SelectItem>
-            <SelectItem value="analytics">Analytics</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
