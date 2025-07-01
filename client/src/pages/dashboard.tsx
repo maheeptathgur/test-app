@@ -491,6 +491,12 @@ export default function Dashboard() {
           subtitle: 'Manage user accounts and permissions',
           content: <SampleScreen section="users" />,
         };
+      case 'pricing':
+        return {
+          title: 'Pricing Plans',
+          subtitle: 'Choose the plan that fits your needs',
+          content: <SampleScreen section="pricing" />,
+        };
       default:
         return {
           title: 'Copilots',
@@ -731,12 +737,13 @@ export default function Dashboard() {
           </ul>
         </nav>
 
-        {/* Pricing Plans Button */}
-        <div className="p-6 border-t border-sidebar-border">
+        {/* Pricing Plans Button and User Profile */}
+        <div className="p-6 border-t border-sidebar-border space-y-3">
+          {/* Pricing Plans Button */}
           {!sidebarCollapsed && (
             <Button 
               variant="outline"
-              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors mb-4"
+              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
               onClick={() => handleSectionChange('pricing')}
             >
               Pricing Plans
@@ -746,17 +753,15 @@ export default function Dashboard() {
             <Button 
               variant="outline"
               size="sm"
-              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors mb-4"
+              className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
               title="Pricing Plans"
               onClick={() => handleSectionChange('pricing')}
             >
               $
             </Button>
           )}
-        </div>
 
-        {/* User Profile */}
-        <div className="px-6 pb-6">
+          {/* User Profile */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button 
