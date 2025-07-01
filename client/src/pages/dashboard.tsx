@@ -848,7 +848,7 @@ export default function Dashboard() {
                             e.stopPropagation();
                             handleDeleteConversation(conversation.id);
                           }}
-                          className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                          className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
                           title="Delete conversation"
                         >
                           <Trash2 className="w-3 h-3" />
@@ -869,7 +869,7 @@ export default function Dashboard() {
                                 e.stopPropagation();
                                 handleDeleteConversation(conversation.id);
                               }}
-                              className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-700"
+                              className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
                               title="Delete conversation"
                             >
                               <Trash2 className="w-3 h-3" />
