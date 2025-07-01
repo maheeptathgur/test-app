@@ -261,7 +261,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
         </div>
       </div>
       
-      <div className="border-t bg-white">
+      <div className="bg-white">
         <div className="max-w-4xl mx-auto p-6">
           <div className="flex gap-3">
             <Button 
