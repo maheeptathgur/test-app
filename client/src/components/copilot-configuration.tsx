@@ -14,6 +14,9 @@ import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy,
 import { SiGmail, SiSlack } from "react-icons/si";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
+import { AgentConfigureScreen } from "./agent-screens";
+import { ToolConfigureScreen } from "./tool-configure-screen";
+import { WorkflowEditor } from "./workflow-editor";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
@@ -39,6 +42,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [activeTab, setActiveTab] = useState("general");
   const [codeTab, setCodeTab] = useState("javascript");
   const [copilotData, setCopilotData] = useState<CopilotData>(copilot);
+  const [configScreen, setConfigScreen] = useState<{ type: string; data: any } | null>(null);
   const [systemPrompt, setSystemPrompt] = useState("You are a helpful AI assistant focused on providing accurate and relevant information.");
   const [conversationStarters, setConversationStarters] = useState([
     "How can you help me today?",
@@ -249,6 +253,22 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     }));
   };
 
+  const handleAgentConfigure = (agent: any) => {
+    setConfigScreen({ type: 'agent', data: agent });
+  };
+
+  const handleToolConfigure = (tool: any) => {
+    setConfigScreen({ type: 'tool', data: tool });
+  };
+
+  const handleWorkflowConfigure = (workflow: any) => {
+    setConfigScreen({ type: 'workflow', data: workflow });
+  };
+
+  const handleBackFromConfig = () => {
+    setConfigScreen(null);
+  };
+
   const handleProfileChange = (field: keyof ProfileData, value: string) => {
     setProfileData(prev => ({
       ...prev,
@@ -373,6 +393,20 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   };
 
   if (!copilot) return null;
+
+  // Show configuration screens when configScreen is set
+  if (configScreen) {
+    switch (configScreen.type) {
+      case 'agent':
+        return <AgentConfigureScreen agent={configScreen.data} onBack={handleBackFromConfig} />;
+      case 'tool':
+        return <ToolConfigureScreen tool={configScreen.data} onBack={handleBackFromConfig} />;
+      case 'workflow':
+        return <WorkflowEditor workflowId={configScreen.data.id} onBack={handleBackFromConfig} />;
+      default:
+        return null;
+    }
+  }
 
   return (
     <div className="flex flex-col h-full bg-background">
@@ -865,7 +899,19 @@ function MyComponent() {
                           </div>
                         </div>
                         <div className="flex gap-1 mt-3">
-                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="flex-1 text-xs"
+                            onClick={() => handleAgentConfigure({ 
+                              id: 'content-creator', 
+                              name: 'Content Creator', 
+                              description: 'Creates and manages content across platforms',
+                              specialization: 'Content Creation'
+                            })}
+                          >
+                            Configure
+                          </Button>
                           <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
@@ -901,7 +947,19 @@ function MyComponent() {
                           </div>
                         </div>
                         <div className="flex gap-1 mt-3">
-                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="flex-1 text-xs"
+                            onClick={() => handleAgentConfigure({ 
+                              id: 'data-analyst', 
+                              name: 'Data Analyst', 
+                              description: 'Analyzes data and generates insights',
+                              specialization: 'Data Analysis'
+                            })}
+                          >
+                            Configure
+                          </Button>
                           <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
@@ -939,7 +997,19 @@ function MyComponent() {
                           </div>
                         </div>
                         <div className="flex gap-1 mt-3">
-                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="flex-1 text-xs"
+                            onClick={() => handleToolConfigure({ 
+                              id: 'gmail', 
+                              name: 'Gmail', 
+                              description: 'Email management and communication',
+                              status: 'Connected'
+                            })}
+                          >
+                            Configure
+                          </Button>
                           <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
@@ -971,7 +1041,19 @@ function MyComponent() {
                           </div>
                         </div>
                         <div className="flex gap-1 mt-3">
-                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="flex-1 text-xs"
+                            onClick={() => handleToolConfigure({ 
+                              id: 'slack', 
+                              name: 'Slack', 
+                              description: 'Team communication and collaboration',
+                              status: 'Connected'
+                            })}
+                          >
+                            Configure
+                          </Button>
                           <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
@@ -1013,7 +1095,18 @@ function MyComponent() {
                           </div>
                         </div>
                         <div className="flex gap-1 mt-3">
-                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="flex-1 text-xs"
+                            onClick={() => handleWorkflowConfigure({ 
+                              id: 'content-pipeline', 
+                              name: 'Content Pipeline', 
+                              description: 'Automated content creation and publishing workflow'
+                            })}
+                          >
+                            Configure
+                          </Button>
                           <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
@@ -1049,7 +1142,18 @@ function MyComponent() {
                           </div>
                         </div>
                         <div className="flex gap-1 mt-3">
-                          <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="flex-1 text-xs"
+                            onClick={() => handleWorkflowConfigure({ 
+                              id: 'data-processing', 
+                              name: 'Data Processing', 
+                              description: 'Automated data analysis and reporting workflow'
+                            })}
+                          >
+                            Configure
+                          </Button>
                           <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
                             <Trash2 className="w-3 h-3" />
                           </Button>
