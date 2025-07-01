@@ -184,20 +184,6 @@ const getTypeIcon = (type: string) => {
   }
 };
 
-// Table Avatar Component  
-const TableAvatar = ({ copilot }: { copilot: CopilotData }) => (
-  <div className="relative w-8 h-8 rounded-lg overflow-hidden bg-gradient-to-br from-blue-400 to-purple-600">
-    <img 
-      src={getImageUrl(copilot.type)} 
-      alt={copilot.name}
-      className="w-full h-full object-cover opacity-60"
-    />
-    <div className="absolute inset-0 flex items-center justify-center">
-      {getTypeIcon(copilot.type)}
-    </div>
-  </div>
-);
-
 export default function Dashboard() {
   const [currentWorkspace, setCurrentWorkspace] = useState<Workspace>(workspaces[0]);
   const [activeSection, setActiveSection] = useState<NavigationSection>('copilots');
@@ -769,7 +755,9 @@ export default function Dashboard() {
                         <TableRow key={copilot.id}>
                           <TableCell className="font-medium">
                             <div className="flex items-center gap-3">
-                              <TableAvatar copilot={copilot} />
+                              <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
+                                {copilot.avatar}
+                              </div>
                               {copilot.name}
                             </div>
                           </TableCell>
