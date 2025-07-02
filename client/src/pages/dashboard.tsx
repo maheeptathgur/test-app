@@ -435,6 +435,23 @@ export default function Dashboard() {
     showNotification('Conversation deleted');
   };
 
+  const handleLoadConversation = (conversation: any) => {
+    // Find the copilot associated with this conversation
+    const copilot = copilots.find(c => c.name === conversation.copilot);
+    if (copilot) {
+      // Start chat with the copilot
+      setChatCopilot(copilot);
+      
+      // Mark this conversation as active and others as inactive
+      setConversations(prev => prev.map(conv => ({
+        ...conv,
+        isActive: conv.id === conversation.id
+      })));
+      
+      showNotification(`Opened conversation: ${conversation.title}`);
+    }
+  };
+
   const handleToggleFavorite = (copilotId: string) => {
     setCopilots(prev => prev.map(copilot =>
       copilot.id === copilotId
@@ -1076,12 +1093,13 @@ export default function Dashboard() {
                 {conversations.map((conversation) => (
                   <div
                     key={conversation.id}
-                    className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg transition-all group ${
+                    className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg transition-all group cursor-pointer ${
                       conversation.isActive 
                         ? 'bg-sidebar-accent text-sidebar-primary' 
                         : 'hover:bg-sidebar-accent hover:text-sidebar-primary'
                     }`}
                     title={sidebarCollapsed ? conversation.title : undefined}
+                    onClick={() => handleLoadConversation(conversation)}
                   >
                     {sidebarCollapsed ? (
                       <div className="flex items-center justify-between">
