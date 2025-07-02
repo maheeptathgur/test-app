@@ -638,19 +638,30 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       <Plus className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-48">
-                    <DropdownMenuItem onClick={() => console.log('Add Agent')}>
-                      <Bot className="w-4 h-4 mr-2" />
-                      Add Agent
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => console.log('Add Tool')}>
-                      <Wrench className="w-4 h-4 mr-2" />
-                      Add Tool
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => console.log('Add Workflow')}>
-                      <Workflow className="w-4 h-4 mr-2" />
-                      Add Workflow
-                    </DropdownMenuItem>
+                  <DropdownMenuContent align="end" className="w-56">
+                    {/* Available Agents */}
+                    {copilot?.components.filter(c => c.type === 'agent').map((agent) => (
+                      <DropdownMenuItem key={agent.name} onClick={() => console.log('Selected agent:', agent.name)}>
+                        <Bot className="w-4 h-4 mr-2" />
+                        {agent.name}
+                      </DropdownMenuItem>
+                    ))}
+                    
+                    {/* Available Tools */}
+                    {copilot?.components.filter(c => c.type === 'tool').map((tool) => (
+                      <DropdownMenuItem key={tool.name} onClick={() => console.log('Selected tool:', tool.name)}>
+                        <Wrench className="w-4 h-4 mr-2" />
+                        {tool.name}
+                      </DropdownMenuItem>
+                    ))}
+                    
+                    {/* Available Workflows */}
+                    {copilot?.components.filter(c => c.type === 'workflow').map((workflow) => (
+                      <DropdownMenuItem key={workflow.name} onClick={() => console.log('Selected workflow:', workflow.name)}>
+                        <Workflow className="w-4 h-4 mr-2" />
+                        {workflow.name}
+                      </DropdownMenuItem>
+                    ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <Textarea
