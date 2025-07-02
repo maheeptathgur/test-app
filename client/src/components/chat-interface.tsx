@@ -357,12 +357,42 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               </div>
                             </div>
                           </div>
-                          <div className="h-96 bg-gray-100">
-                            <iframe
-                              src="data:application/pdf;base64,JVBERi0xLjQKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMiAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL1R5cGUgL1BhZ2VzCi9LaWRzIFszIDAgUl0KL0NvdW50IDEKPD4KZW5kb2JqCjMgMCBvYmoKPDwKL1R5cGUgL1BhZ2UKL1BhcmVudCAyIDAgUgovTWVkaWFCb3ggWzAgMCA2MTIgNzkyXQovQ29udGVudHMgNCAwIFIKL1Jlc291cmNlcyA8PAovRm9udCA8PAovRjEgNSAwIFIKPj4KPj4KPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0xlbmd0aCAyNDcKPj4Kc3RyZWFtCkJUCi9GMSA0OCBUZgozMCA3MjAgVGQKKFByb2plY3QgQnJpZWY6IFExIE1hcmtldGluZyBDYW1wYWlnbikgVGoKMCAtNjAgVGQKKEV4ZWN1dGl2ZSBTdW1tYXJ5OikgVGoKMCAtNjAgVGQKKFRoaXMgZG9jdW1lbnQgb3V0bGluZXMgdGhlIGtleSBzdHJhdGVnaWVzKSBUagowIC02MCBUZAooYW5kIGluaXRpYXRpdmVzIGZvciB0aGUgZmlyc3QgcXVhcnRlci4pIFRqCkVUCmVuZHN0cmVhbQplbmRvYmoKNSAwIG9iago8PAovVHlwZSAvRm9udAovU3VidHlwZSAvVHlwZTEKL0Jhc2VGb250IC9IZWx2ZXRpY2EKPj4KZW5kb2JqCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDU4IDAwMDAwIG4gCjAwMDAwMDAxMTUgMDAwMDAgbiAKMDAwMDAwMDI5NSAwMDAwMCBuIAowMDAwMDAwNjE1IDAwMDAwIG4gCnRyYWlsZXIKPDwKL1NpemUgNgovUm9vdCAxIDAgUgo+PgpzdGFydHhyZWYKNzI0CiUlRU9G"
-                              className="w-full h-full border-0"
-                              title="PDF Preview"
-                            />
+                          <div className="h-96 bg-white overflow-y-auto p-6 text-sm leading-relaxed">
+                            <div className="space-y-4">
+                              <div className="text-center border-b pb-4">
+                                <h1 className="text-xl font-bold text-gray-900">Project Brief: Q1 Marketing Campaign</h1>
+                                <p className="text-gray-600 mt-2">Strategic Planning Document</p>
+                              </div>
+                              
+                              <div>
+                                <h2 className="text-lg font-semibold text-gray-900 mb-2">Executive Summary</h2>
+                                <p className="text-gray-700 mb-3">
+                                  This document outlines the key strategies and initiatives for the first quarter marketing campaign. 
+                                  Our primary focus will be on brand awareness, customer acquisition, and market expansion.
+                                </p>
+                                <p className="text-gray-700 mb-3">
+                                  The campaign targets a 25% increase in brand recognition and a 15% growth in customer base 
+                                  through integrated digital and traditional marketing channels.
+                                </p>
+                              </div>
+                              
+                              <div>
+                                <h2 className="text-lg font-semibold text-gray-900 mb-2">Budget Allocation</h2>
+                                <div className="bg-gray-50 p-3 rounded">
+                                  <p className="text-gray-700">• Digital Advertising: $150,000 (60%)</p>
+                                  <p className="text-gray-700">• Content Creation: $50,000 (20%)</p>
+                                  <p className="text-gray-700">• Events & PR: $35,000 (14%)</p>
+                                  <p className="text-gray-700">• Analytics & Tools: $15,000 (6%)</p>
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <h2 className="text-lg font-semibold text-gray-900 mb-2">Timeline</h2>
+                                <p className="text-gray-700">
+                                  Campaign launch scheduled for January 15th, with key milestones throughout the quarter...
+                                </p>
+                              </div>
+                            </div>
                           </div>
                           <div className="p-3 border-t bg-gray-50">
                             <div className="flex gap-2">
