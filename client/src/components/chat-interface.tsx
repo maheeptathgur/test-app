@@ -419,7 +419,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         <div className="max-w-4xl mx-auto p-6">
           {/* Floating Attached Files Display */}
           {selectedFiles.length > 0 && (
-            <div className="absolute -top-8 left-6 flex items-center">
+            <div className="absolute -top-4 left-6 flex items-center">
               <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs">
                 <Paperclip className="w-3 h-3" />
                 <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
