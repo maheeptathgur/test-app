@@ -1226,16 +1226,42 @@ export default function Dashboard() {
             (<div className="space-y-3">
               
               {sidebarCollapsed && (
-                <div className="flex justify-center mb-4">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setChatCopilot(null)}
-                    className="text-sidebar-foreground hover:text-sidebar-primary"
-                    title="Close chat"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
+                <div className="space-y-3">
+                  {/* Copilot Icons when collapsed in conversation mode */}
+                  <div className="space-y-2">
+                    <div className="text-center text-xs text-muted-foreground mb-2">Assistants</div>
+                    {copilots.filter(c => c.status === 'active').slice(0, 6).map((copilot) => (
+                      <Button
+                        key={copilot.id}
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleStartChat(copilot)}
+                        className={`w-full p-2 ${
+                          chatCopilot?.id === copilot.id 
+                            ? 'text-sidebar-primary bg-sidebar-accent' 
+                            : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
+                        }`}
+                        title={copilot.name}
+                      >
+                        <div className={`w-6 h-6 ${copilot.avatarColor} rounded-full text-xs font-semibold flex items-center justify-center`}>
+                          {copilot.avatar}
+                        </div>
+                      </Button>
+                    ))}
+                  </div>
+                  
+                  {/* Close chat button */}
+                  <div className="flex justify-center border-t border-sidebar-border pt-3">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setChatCopilot(null)}
+                      className="text-sidebar-foreground hover:text-sidebar-primary"
+                      title="Close chat"
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               )}
               <div className="space-y-1">
@@ -1296,54 +1322,29 @@ export default function Dashboard() {
             </div>)
           ) : (
             // Regular Admin Navigation Menu
-            (<div className="space-y-4">
-              {/* Copilot Icons when collapsed */}
-              {sidebarCollapsed && (
-                <div className="space-y-2">
-                  <div className="text-center text-xs text-muted-foreground mb-3">Copilots</div>
-                  {copilots.filter(c => c.status === 'active').slice(0, 6).map((copilot) => (
+            (<ul className="space-y-2">
+              {navigationItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeSection === item.id;
+                return (
+                  <li key={item.id}>
                     <Button
-                      key={copilot.id}
                       variant="ghost"
-                      size="sm"
-                      onClick={() => handleStartChat(copilot)}
-                      className="w-full p-2 text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent"
-                      title={copilot.name}
+                      onClick={() => handleSectionChange(item.id as NavigationSection)}
+                      className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
+                        isActive 
+                          ? 'text-sidebar-primary bg-sidebar-accent' 
+                          : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
+                      }`}
+                      title={sidebarCollapsed ? item.label : undefined}
                     >
-                      <div className={`w-6 h-6 ${copilot.avatarColor} rounded-full text-xs font-semibold flex items-center justify-center`}>
-                        {copilot.avatar}
-                      </div>
+                      <Icon className="w-5 h-5" />
+                      {!sidebarCollapsed && item.label}
                     </Button>
-                  ))}
-                  <div className="border-t border-sidebar-border my-3"></div>
-                </div>
-              )}
-              
-              {/* Navigation Items */}
-              <ul className="space-y-2">
-                {navigationItems.map((item) => {
-                  const Icon = item.icon;
-                  const isActive = activeSection === item.id;
-                  return (
-                    <li key={item.id}>
-                      <Button
-                        variant="ghost"
-                        onClick={() => handleSectionChange(item.id as NavigationSection)}
-                        className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
-                          isActive 
-                            ? 'text-sidebar-primary bg-sidebar-accent' 
-                            : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
-                        }`}
-                        title={sidebarCollapsed ? item.label : undefined}
-                      >
-                        <Icon className="w-5 h-5" />
-                        {!sidebarCollapsed && item.label}
-                      </Button>
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>)
+                  </li>
+                );
+              })}
+            </ul>)
           )}
         </nav>
 
