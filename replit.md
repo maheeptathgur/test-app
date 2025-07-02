@@ -180,7 +180,7 @@ Changelog:
 - July 2, 2025. Fixed conversation data mismatches and added markdown formatting support to chat messages - bold text, bullet points, numbered lists, and other formatting now render properly without requiring user interaction
 - July 2, 2025. Fixed sidebar content display to show exclusively either conversations OR copilot selector - removed workspace selector when in chat mode to ensure clean separation between conversation history and copilot selection interface
 - July 2, 2025. Implemented conversation filtering by active copilot - sidebar now shows only conversations belonging to the currently selected copilot, while maintaining workspace selector dropdown for copilot switching, creating focused conversation history per assistant
-- July 2, 2025. Increased chat area max width from 768px to 800px (max-w-2xl to max-w-3xl) for better readability and more comfortable conversation layout
+- July 2, 2025. Increased chat area max width to 960px (max-w-4xl) for better readability and more comfortable conversation layout
 ```
 
 ## User Preferences
