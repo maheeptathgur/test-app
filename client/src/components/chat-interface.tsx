@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ChatMessage, CopilotData, ProfileField } from "@/lib/types";
 
@@ -28,6 +29,60 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
   const [expandedAttachments, setExpandedAttachments] = useState(false);
   const [activeComponent, setActiveComponent] = useState<{name: string; type: string} | null>(null);
+
+  // Function to render message content with @mentions as badges
+  const renderMessageWithMentions = (content: string) => {
+    const mentionRegex = /@(\w+(?:\s+\w+)*)/g;
+    const parts = content.split(mentionRegex);
+    
+    return (
+      <span className="whitespace-pre-wrap">
+        {parts.map((part, index) => {
+          // Check if this part is a mention (odd indices after split)
+          if (index % 2 === 1) {
+            // Find the component type for styling
+            const component = copilot?.components?.find(c => 
+              c.name.toLowerCase() === part.toLowerCase()
+            );
+            
+            let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-full text-xs font-medium";
+            let iconElement = null;
+            
+            if (component) {
+              switch (component.type) {
+                case 'agent':
+                  badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+                  iconElement = <Bot className="w-3 h-3 mr-1" />;
+                  break;
+                case 'tool':
+                  badgeClass += " bg-green-100 text-green-800 border border-green-200";
+                  iconElement = <Wrench className="w-3 h-3 mr-1" />;
+                  break;
+                case 'workflow':
+                  badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
+                  iconElement = <Workflow className="w-3 h-3 mr-1" />;
+                  break;
+              }
+            } else {
+              // Unknown component
+              badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
+            }
+            
+            return (
+              <span 
+                key={index} 
+                className={badgeClass}
+              >
+                {iconElement}
+                {part}
+              </span>
+            );
+          }
+          return part;
+        })}
+      </span>
+    );
+  };
   const [feedbackForms, setFeedbackForms] = useState<Record<string, { type: 'dislike' | 'askHuman'; text: string; visible: boolean; submitted: boolean }>>({});
   const [likedMessages, setLikedMessages] = useState<Set<string>>(new Set());
   const [copiedMessages, setCopiedMessages] = useState<Set<string>>(new Set());
@@ -143,18 +198,14 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     const value = e.target.value;
     const cursorPosition = e.target.selectionStart;
     
-    console.log('Input changed:', value, 'cursor at:', cursorPosition);
     setInputValue(value);
     
     // Check if we're typing @ and should show autocomplete
     const textBeforeCursor = value.substring(0, cursorPosition);
     const lastAtIndex = textBeforeCursor.lastIndexOf('@');
     
-    console.log('Text before cursor:', textBeforeCursor, 'last @ at:', lastAtIndex);
-    
     if (lastAtIndex >= 0) {
       const textAfterAt = textBeforeCursor.substring(lastAtIndex + 1);
-      console.log('Text after @:', textAfterAt);
       
       // Only show if we haven't typed a space after @
       if (!textAfterAt.includes(' ') && textAfterAt.length >= 0) {
@@ -163,55 +214,36 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           component.name.toLowerCase().includes(searchTerm)
         ) || [];
         
-        console.log('Search term:', searchTerm, 'suggestions found:', suggestions.length);
-        
         if (suggestions.length > 0) {
-          console.log('Showing dropdown with suggestions:', suggestions);
           setHandleSuggestions(suggestions);
           setHandleTriggerPosition(lastAtIndex);
           setShowHandleDropdown(true);
           setSelectedHandleIndex(0);
         } else {
-          console.log('No suggestions, hiding dropdown');
           setShowHandleDropdown(false);
         }
       } else {
-        console.log('Space found after @, hiding dropdown');
         setShowHandleDropdown(false);
       }
     } else {
-      console.log('No @ found, hiding dropdown');
       setShowHandleDropdown(false);
     }
   };
 
   const insertHandle = (componentName: string) => {
     const textarea = textareaRef.current;
-    if (!textarea) {
-      console.log('No textarea ref');
-      return;
-    }
+    if (!textarea) return;
     
     const cursorPosition = textarea.selectionStart;
     const textBeforeCursor = inputValue.substring(0, cursorPosition);
     const textAfterCursor = inputValue.substring(cursorPosition);
     
-    console.log('insertHandle called with:', componentName);
-    console.log('Current inputValue:', inputValue);
-    console.log('Cursor position:', cursorPosition);
-    console.log('Text before cursor:', textBeforeCursor);
-    console.log('Text after cursor:', textAfterCursor);
-    
     // Find the @ that triggered this autocomplete
     const lastAtIndex = textBeforeCursor.lastIndexOf('@');
-    console.log('Last @ index:', lastAtIndex);
     
     // Build the new value by replacing from @ to cursor with @componentName
     const beforeAt = inputValue.substring(0, lastAtIndex);
     const newValue = `${beforeAt}@${componentName} ${textAfterCursor}`;
-    
-    console.log('Before @:', beforeAt);
-    console.log('New value:', newValue);
     
     setInputValue(newValue);
     setShowHandleDropdown(false);
@@ -220,9 +252,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     setTimeout(() => {
       textarea.focus();
       const newCursorPosition = beforeAt.length + componentName.length + 2; // +2 for @ and space
-      console.log('Setting cursor to position:', newCursorPosition);
       textarea.setSelectionRange(newCursorPosition, newCursorPosition);
-      console.log('Cursor set, actual position:', textarea.selectionStart);
     }, 10);
   };
 
@@ -640,7 +670,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             return (
                               <div key={index} className="flex items-start gap-2 mb-1">
                                 <span className="text-xs mt-1">•</span>
-                                <span dangerouslySetInnerHTML={{ __html: formatMarkdown(content) }} />
+                                <span>{renderMessageWithMentions(content)}</span>
                               </div>
                             );
                           }
@@ -651,7 +681,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               return (
                                 <div key={index} className="flex items-start gap-2 mb-1">
                                   <span className="text-xs mt-1">{match[1]}.</span>
-                                  <span dangerouslySetInnerHTML={{ __html: formatMarkdown(match[2]) }} />
+                                  <span>{renderMessageWithMentions(match[2])}</span>
                                 </div>
                               );
                             }
@@ -659,7 +689,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           // Regular line with markdown formatting
                           return (
                             <div key={index} className={line.trim() === '' ? 'mb-2' : 'mb-1'}>
-                              <span dangerouslySetInnerHTML={{ __html: formatMarkdown(line) }} />
+                              {renderMessageWithMentions(line)}
                             </div>
                           );
                         })}
@@ -901,7 +931,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       <div 
                         className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto"
                         onMouseDown={(e) => {
-                          console.log('Dropdown mouse down event');
                           e.preventDefault(); // Prevent textarea blur
                         }}
                       >
@@ -915,7 +944,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             }`}
                             onMouseDown={(e) => {
                               e.preventDefault(); // Prevent textarea blur
-                              console.log('Dropdown item clicked:', suggestion.name);
                               insertHandle(suggestion.name);
                             }}
                           >
