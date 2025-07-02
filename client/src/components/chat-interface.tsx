@@ -438,6 +438,67 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
               
               <div className="flex-1 space-y-6 overflow-y-auto">
+                {/* Welcome screen with available tools when no messages */}
+                {messages.length === 0 && copilot && (
+                  <div className="flex-1 flex items-center justify-center">
+                    <div className="max-w-2xl text-center space-y-6">
+                      <div className="space-y-2">
+                        <h2 className="text-2xl font-semibold text-gray-900">Welcome to {copilot.name}</h2>
+                        <p className="text-gray-600">{copilot.description}</p>
+                      </div>
+                      
+                      {/* Available Tools Overview */}
+                      {copilot.components && copilot.components.length > 0 && (
+                        <div className="space-y-4">
+                          <h3 className="text-lg font-medium text-gray-900">Available Tools & Capabilities</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            {/* Agents */}
+                            {copilot.components.filter(c => c.type === 'agent').map((agent) => (
+                              <div key={agent.name} className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg text-left">
+                                <Bot className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                                <div>
+                                  <div className="font-medium text-gray-900">{agent.name}</div>
+                                  <div className="text-sm text-gray-600">Specialized assistant</div>
+                                </div>
+                              </div>
+                            ))}
+                            
+                            {/* Tools */}
+                            {copilot.components.filter(c => c.type === 'tool').map((tool) => (
+                              <div key={tool.name} className="flex items-center gap-3 p-3 bg-green-50 rounded-lg text-left">
+                                <Wrench className="w-5 h-5 text-green-600 flex-shrink-0" />
+                                <div>
+                                  <div className="font-medium text-gray-900">{tool.name}</div>
+                                  <div className="text-sm text-gray-600">Integration tool</div>
+                                </div>
+                              </div>
+                            ))}
+                            
+                            {/* Workflows */}
+                            {copilot.components.filter(c => c.type === 'workflow').map((workflow) => (
+                              <div key={workflow.name} className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg text-left">
+                                <Workflow className="w-5 h-5 text-purple-600 flex-shrink-0" />
+                                <div>
+                                  <div className="font-medium text-gray-900">{workflow.name}</div>
+                                  <div className="text-sm text-gray-600">Automated workflow</div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                          
+                          <div className="text-sm text-gray-500 mt-4">
+                            Use the <Plus className="w-4 h-4 inline mx-1" /> button below to activate tools during our conversation.
+                          </div>
+                        </div>
+                      )}
+                      
+                      <div className="pt-4">
+                        <p className="text-gray-500">Start typing below to begin our conversation.</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
                 {messages.map((message) => (
                   <div
                     key={message.id}
