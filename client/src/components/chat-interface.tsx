@@ -641,7 +641,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col">
           <div className="flex-1 overflow-y-auto">
-            <div className="w-full h-full flex flex-col p-6">
+            <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
               {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
                 <div className="mb-6 mt-8 p-4 bg-muted/50 rounded-lg border">
                   <div className="flex items-center justify-between mb-3">
@@ -761,7 +761,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className="p-4 rounded-lg max-w-[90%] text-foreground pt-[6px] pb-[6px]"
+                      className={`p-4 rounded-lg text-foreground pt-[6px] pb-[6px] ${
+                        message.sender === 'user' ? 'max-w-[70%]' : 'w-full'
+                      }`}
                       style={message.sender === 'user' ? { backgroundColor: '#e6eeef' } : {}}
                     >
                       <div className="whitespace-pre-wrap" style={{ fontSize: '.9375em' }}>
@@ -918,7 +920,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           
           {/* Prompt Bar - moved inside chat area */}
           <div className="bg-white relative">
-            <div className="w-full p-3 relative">
+            <div className="max-w-4xl mx-auto p-3 relative">
               <div className="flex gap-3 relative items-end">
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
