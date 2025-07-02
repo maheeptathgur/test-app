@@ -188,6 +188,56 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     };
   }, [showHandleDropdown]);
 
+  // Convert markdown to HTML for rich text display with @mention support
+  const formatMarkdown = (text: string): string => {
+    let formattedText = text
+      // Bold text **text**
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Italic text *text*
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      // Code `text`
+      .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+    
+    // Handle @mentions
+    const componentNames = copilot?.components?.map(c => c.name) || [];
+    const escapedNames = componentNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).sort((a, b) => b.length - a.length);
+    
+    if (escapedNames.length > 0) {
+      const mentionRegex = new RegExp(`@(${escapedNames.join('|')})\\b`, 'gi');
+      
+      formattedText = formattedText.replace(mentionRegex, (match, componentName) => {
+        const component = copilot?.components?.find(c => 
+          c.name.toLowerCase().trim() === componentName.toLowerCase().trim()
+        );
+        
+        let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-full text-xs font-medium";
+        let iconSvg = '';
+        
+        if (component) {
+          switch (component.type) {
+            case 'agent':
+              badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+              iconSvg = '<svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.11 3.89 23 5 23H19C20.11 23 21 22.11 21 21V9M17 9H19V21H5V3H13V9H17Z"/></svg>';
+              break;
+            case 'tool':
+              badgeClass += " bg-green-100 text-green-800 border border-green-200";
+              iconSvg = '<svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19L13.6 9.9C14.5 7.6 14 4.9 12.1 3C10.1 1 7.1 0.6 4.7 1.7L9 6L6 9L1.6 4.7C0.4 7.1 0.9 10.1 2.9 12.1C4.8 14 7.5 14.5 9.8 13.6L18.9 22.7C19.3 23.1 19.9 23.1 20.3 22.7L22.6 20.4C23.1 20 23.1 19.3 22.7 19Z"/></svg>';
+              break;
+            case 'workflow':
+              badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
+              iconSvg = '<svg class="w-3 h-3 mr-1" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6A2,2 0 0,1 10,4A2,2 0 0,1 12,2M21,9V7L15,1H5C3.89,1 3,1.89 3,3V21A2,2 0 0,0 5,23H19A2,2 0 0,0 21,21V9M17,9H19V21H5V3H13V9H17Z"/></svg>';
+              break;
+          }
+        } else {
+          badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
+        }
+        
+        return `<span class="${badgeClass}">${iconSvg}@${componentName}</span>`;
+      });
+    }
+    
+    return formattedText;
+  };
 
 
   // Handler functions for interaction buttons
@@ -781,11 +831,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               );
                             }
                           }
-                          // Regular line with @mention support
+                          // Regular line with markdown formatting and @mention support
                           return (
-                            <div key={index} className="mt-[0px] mb-[0px]">
-                              {renderMessageWithMentions(line)}
-                            </div>
+                            <div 
+                              key={index} 
+                              className="mt-[0px] mb-[0px]"
+                              dangerouslySetInnerHTML={{ 
+                                __html: formatMarkdown(line)
+                              }}
+                            />
                           );
                         })}
                       </div>
