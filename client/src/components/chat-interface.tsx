@@ -415,25 +415,25 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         )}
       </div>
       
-      <div className="bg-white">
+      <div className="bg-white relative">
         <div className="max-w-4xl mx-auto p-6">
-          {/* Attached Files Display */}
+          {/* Floating Attached Files Display */}
           {selectedFiles.length > 0 && (
-            <div className="mb-3 flex items-center gap-2 px-3 py-2 bg-muted/20 rounded-md border text-sm">
-              <Paperclip className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-              <span className="text-muted-foreground flex-shrink-0">
-                {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}:
-              </span>
-              <div className="flex items-center gap-1 flex-1 min-w-0">
-                {selectedFiles.slice(0, 3).map((fileName) => (
-                  <div key={fileName} className="flex items-center gap-1 text-xs bg-white px-2 py-1 rounded border">
-                    {getFileIcon(fileName)}
-                    <span className="truncate max-w-[100px]">{fileName}</span>
-                  </div>
-                ))}
-                {selectedFiles.length > 3 && (
-                  <span className="text-xs text-muted-foreground">+{selectedFiles.length - 3} more</span>
-                )}
+            <div className="absolute -top-8 left-6 right-6 flex items-center justify-center">
+              <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs">
+                <Paperclip className="w-3 h-3" />
+                <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
+                <div className="flex items-center gap-1">
+                  {selectedFiles.slice(0, 2).map((fileName) => (
+                    <div key={fileName} className="flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full">
+                      {getFileIcon(fileName)}
+                      <span className="truncate max-w-[80px]">{fileName.split('.')[0]}</span>
+                    </div>
+                  ))}
+                  {selectedFiles.length > 2 && (
+                    <span className="bg-white/20 px-2 py-0.5 rounded-full">+{selectedFiles.length - 2}</span>
+                  )}
+                </div>
               </div>
             </div>
           )}
