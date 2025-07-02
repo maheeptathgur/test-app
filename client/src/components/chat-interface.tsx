@@ -1002,13 +1002,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       className="min-h-12 max-h-24 resize-none w-full relative z-10 bg-transparent"
                       style={{ 
                         paddingRight: activeComponent ? '120px' : '12px',
-                        color: inputContent && inputContent.includes('@') ? 'transparent' : 'inherit'
+                        color: inputContent && (inputContent.includes('@') || copilot?.components?.some(c => inputContent.includes(c.name))) ? 'transparent' : 'inherit'
                       }}
                       rows={1}
                     />
                     
-                    {/* Badge overlay that shows when @mentions are present */}
-                    {inputContent && inputContent.includes('@') && (
+                    {/* Badge overlay that shows when @mentions or component names are present */}
+                    {inputContent && (inputContent.includes('@') || copilot?.components?.some(c => inputContent.includes(c.name))) && (
                       <div 
                         className="absolute inset-0 px-3 py-2 text-sm pointer-events-none whitespace-pre-wrap break-words"
                         style={{ 
