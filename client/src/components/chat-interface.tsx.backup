@@ -86,8 +86,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
 
 
-
-
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
 
@@ -394,17 +392,20 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               }}
               title="Drag to resize"
             />
+            {/* Close Button */}
             <Button
               variant="ghost"
               size="sm"
               className="absolute top-1 right-1 h-5 w-5 p-0 z-20 bg-white/90 hover:bg-[#00d2a0] shadow-md rounded-full transition-colors"
               onClick={() => {
+                // Clear selected files to close the preview pane
                 window.dispatchEvent(new CustomEvent('clearSelectedFiles'));
               }}
               title="Close Preview"
             >
               <X className="h-3 w-3 hover:text-white transition-colors" />
             </Button>
+            {/* Document Content */}
             <div className="flex-1 p-4 overflow-y-auto min-h-0">
               {(() => {
                 const lastFile = selectedFiles[selectedFiles.length - 1];
