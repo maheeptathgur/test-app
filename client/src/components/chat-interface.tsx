@@ -13,11 +13,10 @@ interface ChatInterfaceProps {
   onClose: () => void;
   onToggleAttachment?: (show: boolean) => void;
   selectedFiles?: string[];
-  initialMessages?: ChatMessage[];
 }
 
-export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, selectedFiles = [], initialMessages = [] }: ChatInterfaceProps) {
-  const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
+export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, selectedFiles = [] }: ChatInterfaceProps) {
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [showProfileFields, setShowProfileFields] = useState(false);
   const [isEditingProfile, setIsEditingProfile] = useState(false);
@@ -55,11 +54,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
-
-  // Update messages when initialMessages change (for loading conversations)
-  useEffect(() => {
-    setMessages(initialMessages);
-  }, [initialMessages]);
 
   // Reset document preview visibility when files change
   useEffect(() => {
