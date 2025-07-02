@@ -20,7 +20,7 @@ import { SampleScreen } from "@/components/sample-screens";
 import { WorkspaceSettings } from "@/components/workspace-settings";
 import { UserView } from "@/components/user-view";
 import { DeleteConfirmationModal } from "@/components/delete-confirmation-modal";
-import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
+import { Workspace, CopilotData, NavigationSection, ChatMessage } from "@/lib/types";
 
 const workspaces: Workspace[] = [
   { id: '1', name: 'My Workspace', type: 'Personal', avatar: 'M', color: 'bg-blue-500' },
@@ -352,7 +352,7 @@ export default function Dashboard() {
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [copilotToDelete, setCopilotToDelete] = useState<CopilotData | null>(null);
-  const [conversationHistory, setConversationHistory] = useState<any[]>([]);
+  const [conversationHistory, setConversationHistory] = useState<ChatMessage[]>([]);
   
   // State for tracking which specific agent/tool/workflow to configure
   const [configureAgent, setConfigureAgent] = useState<{id: string, name: string} | null>(null);
