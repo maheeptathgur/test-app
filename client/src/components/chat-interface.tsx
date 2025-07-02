@@ -493,8 +493,17 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               }`}
                               onClick={() => handleLikeMessage(message.id)}
                             >
-                              <ThumbsUp className="w-3 h-3 mr-1" />
-                              Like
+                              {likedMessages.has(message.id) ? (
+                                <>
+                                  <Check className="w-3 h-3 mr-1" />
+                                  Liked
+                                </>
+                              ) : (
+                                <>
+                                  <ThumbsUp className="w-3 h-3 mr-1" />
+                                  Like
+                                </>
+                              )}
                             </Button>
                             <Button
                               variant="ghost"
