@@ -206,77 +206,192 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         </div>
       </div>
       
-      <div className="flex-1 overflow-y-auto">
-        <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
-          {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
-            <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="font-semibold text-foreground">Target User Profile</h3>
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => isEditingProfile ? handleSaveProfile() : setIsEditingProfile(true)}
-                    className="gap-2"
-                  >
-                    {isEditingProfile ? (
-                      <>
-                        <Check className="h-3 w-3" />
-                        Save
-                      </>
-                    ) : (
-                      <>
-                        <Edit3 className="h-3 w-3" />
-                        Edit
-                      </>
-                    )}
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowProfileFields(false)}
-                    className="h-8 w-8 p-0"
-                  >
-                    <X className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                {copilot.profileFields.map((field) => (
-                  <div key={field.id} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
-                    <div className="flex items-center gap-1 mb-1">
-                      <span className="text-muted-foreground block">{field.label}:</span>
-                      {field.required && <span className="text-red-500">*</span>}
-                    </div>
-                    {field.description && (
-                      <p className="text-xs text-muted-foreground mb-2">{field.description}</p>
-                    )}
-                    {renderProfileField(field)}
+      <div className="flex-1 overflow-hidden flex">
+        {/* Main Chat Area */}
+        <div className="flex-1 overflow-y-auto">
+          <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
+            {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
+              <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="font-semibold text-foreground">Target User Profile</h3>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => isEditingProfile ? handleSaveProfile() : setIsEditingProfile(true)}
+                      className="gap-2"
+                    >
+                      {isEditingProfile ? (
+                        <>
+                          <Check className="h-3 w-3" />
+                          Save
+                        </>
+                      ) : (
+                        <>
+                          <Edit3 className="h-3 w-3" />
+                          Edit
+                        </>
+                      )}
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setShowProfileFields(false)}
+                      className="h-8 w-8 p-0"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
-          <div className="flex-1 space-y-6 overflow-y-auto">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-[70%] p-4 rounded-lg ${
-                    message.sender === 'user'
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-foreground'
-                  }`}
-                >
-                  {message.content}
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  {copilot.profileFields.map((field) => (
+                    <div key={field.id} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
+                      <div className="flex items-center gap-1 mb-1">
+                        <span className="text-muted-foreground block">{field.label}:</span>
+                        {field.required && <span className="text-red-500">*</span>}
+                      </div>
+                      {field.description && (
+                        <p className="text-xs text-muted-foreground mb-2">{field.description}</p>
+                      )}
+                      {renderProfileField(field)}
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-            <div ref={messagesEndRef} />
+            )}
+            <div className="flex-1 space-y-6 overflow-y-auto">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-[70%] p-4 rounded-lg ${
+                      message.sender === 'user'
+                        ? 'bg-primary text-primary-foreground'
+                        : 'bg-muted text-foreground'
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                </div>
+              ))}
+              <div ref={messagesEndRef} />
+            </div>
           </div>
         </div>
+        
+        {/* File Preview Pane */}
+        {selectedFiles.length > 0 && (
+          <div className="w-80 border-l border-border bg-muted/20 flex flex-col">
+            <div className="p-4 border-b">
+              <h3 className="font-semibold text-foreground">File Preview</h3>
+              <p className="text-sm text-muted-foreground">
+                {selectedFiles[selectedFiles.length - 1]}
+              </p>
+            </div>
+            <div className="flex-1 p-4 overflow-y-auto">
+              {(() => {
+                const lastFile = selectedFiles[selectedFiles.length - 1];
+                const extension = lastFile.toLowerCase().split('.').pop();
+                
+                switch (extension) {
+                  case 'pdf':
+                    return (
+                      <div className="space-y-4">
+                        <div className="aspect-[3/4] bg-white border rounded-lg p-4 text-sm">
+                          <div className="text-center mb-4">
+                            <FileText className="w-12 h-12 mx-auto text-blue-500 mb-2" />
+                            <h4 className="font-semibold">PDF Document</h4>
+                          </div>
+                          <div className="space-y-2 text-xs text-muted-foreground">
+                            <p><strong>Pages:</strong> 12</p>
+                            <p><strong>Size:</strong> 1.2 MB</p>
+                            <p><strong>Created:</strong> 2 hours ago</p>
+                          </div>
+                          <div className="mt-4 p-3 bg-muted/50 rounded text-xs">
+                            <p className="font-medium mb-1">Content Preview:</p>
+                            <p>"Project Brief: Q1 Marketing Campaign...</p>
+                            <p>Executive Summary: This document outlines...</p>
+                            <p>Budget allocation and timeline details...</p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  case 'jpg':
+                  case 'jpeg':
+                  case 'png':
+                    return (
+                      <div className="space-y-4">
+                        <div className="aspect-square bg-white border rounded-lg p-4">
+                          <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded flex items-center justify-center">
+                            <Image className="w-16 h-16 text-gray-400" />
+                          </div>
+                        </div>
+                        <div className="text-sm space-y-1">
+                          <p><strong>Dimensions:</strong> 1920x1080</p>
+                          <p><strong>Size:</strong> 856 KB</p>
+                          <p><strong>Format:</strong> PNG</p>
+                        </div>
+                      </div>
+                    );
+                  case 'mp3':
+                  case 'wav':
+                    return (
+                      <div className="space-y-4">
+                        <div className="aspect-video bg-white border rounded-lg p-4 flex items-center justify-center">
+                          <div className="text-center">
+                            <Music className="w-16 h-16 mx-auto text-purple-500 mb-2" />
+                            <h4 className="font-semibold">Audio File</h4>
+                          </div>
+                        </div>
+                        <div className="text-sm space-y-1">
+                          <p><strong>Duration:</strong> 3:24</p>
+                          <p><strong>Size:</strong> 4.8 MB</p>
+                          <p><strong>Format:</strong> MP3</p>
+                          <p><strong>Bitrate:</strong> 320 kbps</p>
+                        </div>
+                      </div>
+                    );
+                  case 'mp4':
+                  case 'avi':
+                    return (
+                      <div className="space-y-4">
+                        <div className="aspect-video bg-white border rounded-lg p-4 flex items-center justify-center">
+                          <div className="text-center">
+                            <Video className="w-16 h-16 mx-auto text-red-500 mb-2" />
+                            <h4 className="font-semibold">Video File</h4>
+                          </div>
+                        </div>
+                        <div className="text-sm space-y-1">
+                          <p><strong>Duration:</strong> 5:42</p>
+                          <p><strong>Size:</strong> 24.5 MB</p>
+                          <p><strong>Resolution:</strong> 1080p</p>
+                          <p><strong>Format:</strong> MP4</p>
+                        </div>
+                      </div>
+                    );
+                  default:
+                    return (
+                      <div className="space-y-4">
+                        <div className="aspect-square bg-white border rounded-lg p-4 flex items-center justify-center">
+                          <div className="text-center">
+                            <File className="w-16 h-16 mx-auto text-gray-500 mb-2" />
+                            <h4 className="font-semibold">Document</h4>
+                          </div>
+                        </div>
+                        <div className="text-sm space-y-1">
+                          <p><strong>Type:</strong> {extension?.toUpperCase()}</p>
+                          <p><strong>Size:</strong> 540 KB</p>
+                          <p><strong>Modified:</strong> 2 weeks ago</p>
+                        </div>
+                      </div>
+                    );
+                }
+              })()}
+            </div>
+          </div>
+        )}
       </div>
       
       <div className="bg-white">
