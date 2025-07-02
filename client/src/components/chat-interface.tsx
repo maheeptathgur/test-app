@@ -24,6 +24,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [profileData, setProfileData] = useState<Record<string, string>>({});
   const [documentPaneWidth, setDocumentPaneWidth] = useState(320); // 320px = w-80 default
   const [isResizing, setIsResizing] = useState(false);
+  const [showDocumentPreview, setShowDocumentPreview] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
 
@@ -52,6 +53,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Reset document preview visibility when files change
+  useEffect(() => {
+    if (selectedFiles.length > 0) {
+      setShowDocumentPreview(true);
+    }
+  }, [selectedFiles]);
 
   // Handle mouse events for resizing
   useEffect(() => {
@@ -220,7 +228,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     <div 
       className="flex flex-col h-full overflow-hidden bg-white transition-all duration-300"
       style={{ 
-        marginRight: selectedFiles.length > 0 ? `${documentPaneWidth}px` : '0px' 
+        marginRight: selectedFiles.length > 0 && showDocumentPreview ? `${documentPaneWidth}px` : '0px' 
       }}
     >
       <div className="flex items-center justify-between p-6 border-b bg-white">
@@ -381,7 +389,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         </div>
         
         {/* File Preview Pane */}
-        {selectedFiles.length > 0 && (
+        {selectedFiles.length > 0 && showDocumentPreview && (
           <div 
             className="fixed top-0 right-0 bottom-0 border-l border-border bg-muted/20 flex flex-col z-50"
             style={{ width: `${documentPaneWidth}px` }}
@@ -402,8 +410,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               size="sm"
               className="absolute top-1 right-1 h-5 w-5 p-0 z-20 bg-white/90 hover:bg-[#00d2a0] shadow-md rounded-full transition-colors"
               onClick={() => {
-                // Clear selected files to close the preview pane
-                window.dispatchEvent(new CustomEvent('clearSelectedFiles'));
+                // Only hide the document preview, keep the attachment display
+                setShowDocumentPreview(false);
               }}
               title="Close Preview"
             >
