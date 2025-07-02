@@ -140,18 +140,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   useEffect(() => {
     if (isOpen && copilot) {
-      // Check if we have conversation messages to load, otherwise show default greeting
+      // Load conversation messages if available, otherwise start with empty array
       if (copilot.conversationMessages && copilot.conversationMessages.length > 0) {
         setMessages(copilot.conversationMessages);
       } else {
-        setMessages([
-          {
-            id: '1',
-            content: `Hello! I'm ${copilot.name}. How can I help you today?`,
-            sender: 'bot',
-            timestamp: new Date().toISOString(),
-          }
-        ]);
+        setMessages([]);
       }
       
       // Initialize profile data with empty values for each field
