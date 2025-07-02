@@ -459,36 +459,26 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         marginRight: selectedFiles.length > 0 && showDocumentPreview ? `${documentPaneWidth}px` : '0px' 
       }}
     >
-      <div className="flex items-center justify-between p-3 border-b bg-white">
-        <div className="flex items-center gap-2">
-          <div className={`w-8 h-8 ${copilot.avatarColor} rounded-full flex items-center justify-center text-xs font-semibold`}>
-            {copilot.avatar}
-          </div>
-          <div>
-            <h1 className="text-lg font-semibold text-foreground">{copilot.name}</h1>
-            <p className="text-xs text-muted-foreground">{copilot.description}</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-1">
-          <Button 
-            variant="outline" 
-            size="sm"
-            className="h-7 w-7 p-0" 
-            onClick={() => setShowProfileFields(!showProfileFields)}
-            title="Toggle Profile Fields"
-          >
-            <UserCog className="h-3 w-3" />
-          </Button>
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={onClose} 
-            className="h-7 w-7 p-0"
-            title="Close Chat"
-          >
-            <X className="h-3 w-3" />
-          </Button>
-        </div>
+      {/* Top right controls only */}
+      <div className="absolute top-3 right-3 z-10 flex items-center gap-1">
+        <Button 
+          variant="outline" 
+          size="sm"
+          className="h-7 w-7 p-0 bg-white/90 hover:bg-white shadow-sm" 
+          onClick={() => setShowProfileFields(!showProfileFields)}
+          title="Toggle Profile Fields"
+        >
+          <UserCog className="h-3 w-3" />
+        </Button>
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={onClose} 
+          className="h-7 w-7 p-0 bg-white/90 hover:bg-white shadow-sm"
+          title="Close Chat"
+        >
+          <X className="h-3 w-3" />
+        </Button>
       </div>
       <div className="flex-1 overflow-hidden flex">
         {/* Main Chat Area */}
