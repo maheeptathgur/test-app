@@ -1011,13 +1011,27 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       placeholder="Type your message... Use @ to mention tools, agents, or workflows"
                       className="min-h-12 max-h-24 resize-none w-full relative z-10 bg-transparent"
                       style={{ 
-                        color: inputContent && (inputContent.includes('@') || copilot?.components?.some(c => inputContent.includes(c.name))) ? 'transparent' : 'inherit'
+                        color: inputContent && (inputContent.includes('@') || (() => {
+                          // Check if any component name exists as a complete word in the input
+                          const componentNames = copilot?.components?.map(c => c.name) || [];
+                          return componentNames.some(name => {
+                            const regex = new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+                            return regex.test(inputContent);
+                          });
+                        })()) ? 'transparent' : 'inherit'
                       }}
                       rows={1}
                     />
                     
                     {/* Badge overlay that shows when @mentions or component names are present */}
-                    {inputContent && (inputContent.includes('@') || copilot?.components?.some(c => inputContent.includes(c.name))) && (
+                    {inputContent && (inputContent.includes('@') || (() => {
+                      // Check if any component name exists as a complete word in the input
+                      const componentNames = copilot?.components?.map(c => c.name) || [];
+                      return componentNames.some(name => {
+                        const regex = new RegExp(`\\b${name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+                        return regex.test(inputContent);
+                      });
+                    })()) && (
                       <div 
                         className="absolute inset-0 px-3 py-2 text-sm pointer-events-none whitespace-pre-wrap break-words"
                         style={{ 
