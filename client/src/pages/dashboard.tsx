@@ -352,7 +352,7 @@ export default function Dashboard() {
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [copilotToDelete, setCopilotToDelete] = useState<CopilotData | null>(null);
-  const [conversationHistory, setConversationHistory] = useState([]);
+  const [conversationHistory, setConversationHistory] = useState<any[]>([]);
   
   // State for tracking which specific agent/tool/workflow to configure
   const [configureAgent, setConfigureAgent] = useState<{id: string, name: string} | null>(null);
