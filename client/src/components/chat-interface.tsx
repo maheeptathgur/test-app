@@ -217,7 +217,12 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   if (!isOpen || !copilot) return null;
 
   return (
-    <div className="flex flex-col h-full overflow-hidden bg-white">
+    <div 
+      className="flex flex-col h-full overflow-hidden bg-white transition-all duration-300"
+      style={{ 
+        marginRight: selectedFiles.length > 0 ? `${documentPaneWidth}px` : '0px' 
+      }}
+    >
       <div className="flex items-center justify-between p-6 border-b bg-white">
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-sm font-semibold`}>
@@ -379,7 +384,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         {/* File Preview Pane */}
         {selectedFiles.length > 0 && (
           <div 
-            className="border-l border-border bg-muted/20 flex flex-col h-full relative"
+            className="fixed top-0 right-0 bottom-0 border-l border-border bg-muted/20 flex flex-col z-50"
             style={{ width: `${documentPaneWidth}px` }}
           >
             {/* Resize Handle */}
