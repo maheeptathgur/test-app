@@ -209,7 +209,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       <div className="flex-1 overflow-hidden flex">
         {/* Main Chat Area */}
         <div className="flex-1 overflow-y-auto">
-          <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
+          <div className="max-w-2xl mx-auto h-full flex flex-col p-6">
             {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
               <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
                 <div className="flex items-center justify-between mb-3">
@@ -410,7 +410,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       </div>
       
       <div className="bg-white relative">
-        <div className="max-w-4xl mx-auto p-3">
+        <div className="max-w-2xl mx-auto p-3">
           {/* Floating Attached Files Display */}
           {selectedFiles.length > 0 && (
             <div className="absolute -top-4 left-[3.75rem] flex items-center">
