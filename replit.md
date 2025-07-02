@@ -196,6 +196,7 @@ Changelog:
 - July 2, 2025. Added top margin spacing to profile fields and conversation area to prevent overlap with floating top-right buttons, ensuring proper visual hierarchy and preventing content from being hidden behind controls
 - July 2, 2025. Enhanced @mention functionality with visual badges - @mentions in chat messages now display as color-coded badges with appropriate icons (blue for agents, green for tools, purple for workflows) replacing plain text mentions for better visual identification and improved readability
 - July 2, 2025. Fixed @mention badge rendering with precise regex matching - implemented exact component name matching, sorted names by length for proper precedence, and added regex escaping for special characters to ensure accurate badge conversion in chat messages
+- July 2, 2025. Implemented live badge rendering in input field using contentEditable - @mentions now display as colored badges while typing, with HTML badge generation, cursor positioning for contentEditable elements, and CSS placeholder styling for enhanced user experience during message composition
 ```
 
 ## User Preferences

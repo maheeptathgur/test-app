@@ -432,20 +432,24 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     setInputContent(newValue);
     setShowHandleDropdown(false);
     
-    // Focus back to editable div and position cursor after the inserted component name and space
+    // Focus back to editable div and position cursor at the end
     setTimeout(() => {
       editableDiv.focus();
-      const newCursorPosition = beforeAt.length + componentName.length + 2; // +2 for @ and space
       
-      // Set cursor position in contentEditable
-      const range = document.createRange();
-      const selection = window.getSelection();
-      
-      if (editableDiv.firstChild) {
-        range.setStart(editableDiv.firstChild, Math.min(newCursorPosition, editableDiv.textContent?.length || 0));
-        range.collapse(true);
+      // Simple approach: just place cursor at the end
+      try {
+        const range = document.createRange();
+        const selection = window.getSelection();
+        
+        // Place cursor at the very end of the content
+        range.selectNodeContents(editableDiv);
+        range.collapse(false); // false = collapse to end
         selection?.removeAllRanges();
         selection?.addRange(range);
+      } catch (error) {
+        console.log('Cursor positioning error (non-critical):', error);
+        // Just focus without positioning if there's an error
+        editableDiv.focus();
       }
     }, 10);
   };
