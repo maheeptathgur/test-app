@@ -305,14 +305,21 @@ export default function Dashboard() {
       setConfiguringCopilot(null); // Close copilot config
     };
 
+    // Handle clearing selected files from document preview pane
+    const handleClearSelectedFiles = () => {
+      setSelectedFiles([]);
+    };
+
     window.addEventListener('navigate-to-agent-configure', handleAgentConfigure as EventListener);
     window.addEventListener('navigate-to-tool-configure', handleToolConfigure as EventListener);
     window.addEventListener('navigate-to-workflow-edit', handleWorkflowConfigure as EventListener);
+    window.addEventListener('clearSelectedFiles', handleClearSelectedFiles);
 
     return () => {
       window.removeEventListener('navigate-to-agent-configure', handleAgentConfigure as EventListener);
       window.removeEventListener('navigate-to-tool-configure', handleToolConfigure as EventListener);
       window.removeEventListener('navigate-to-workflow-edit', handleWorkflowConfigure as EventListener);
+      window.removeEventListener('clearSelectedFiles', handleClearSelectedFiles);
     };
   }, []);
 
