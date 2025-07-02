@@ -66,15 +66,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         switch (component.type) {
           case 'agent':
             badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
-            iconHTML = '<svg class="w-3 h-3 mr-1 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
+            iconHTML = '<svg class="w-3 h-3 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
             break;
           case 'tool':
             badgeClass += " bg-green-100 text-green-800 border border-green-200";
-            iconHTML = '<svg class="w-3 h-3 mr-1 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>';
+            iconHTML = '<svg class="w-3 h-3 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>';
             break;
           case 'workflow':
             badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
-            iconHTML = '<svg class="w-3 h-3 mr-1 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M18 20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12ZM9 9h6M9 15h6M9 12h6"/></svg>';
+            iconHTML = '<svg class="w-3 h-3 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M18 20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12ZM9 9h6M9 15h6M9 12h6"/></svg>';
             break;
           default:
             badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
@@ -85,7 +85,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         iconHTML = '<svg class="w-3 h-3 mr-1 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/></svg>';
       }
       
-      return `<span class="${badgeClass}" contenteditable="false">${iconHTML}@${componentName}</span>`;
+      const closeHTML = '<svg class="w-3 h-3 inline ml-1 cursor-pointer hover:bg-black/10 rounded" fill="currentColor" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>';
+      return `<span class="${badgeClass}" contenteditable="false">${iconHTML}${componentName}${closeHTML}</span>`;
     });
     
     // Replace newlines with <br> tags
