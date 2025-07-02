@@ -1281,28 +1281,25 @@ export default function Dashboard() {
                         </Button>
                       </div>
                     ) : (
-                      <div className="space-y-2">
+                      <div className="space-y-1">
                         <div className="flex items-start justify-between gap-2">
                           <div className="flex-1 min-w-0 cursor-pointer">
                             <h4 className="text-sm font-medium truncate">{conversation.title}</h4>
                           </div>
-                          <div className="flex items-center gap-2 flex-shrink-0">
-                            <span className="text-xs text-muted-foreground">{conversation.timestamp}</span>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleDeleteConversation(conversation.id);
-                              }}
-                              className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
-                              title="Delete conversation"
-                            >
-                              <Trash2 className="w-3 h-3" />
-                            </Button>
-                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteConversation(conversation.id);
+                            }}
+                            className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-600 hover:bg-red-50 flex-shrink-0"
+                            title="Delete conversation"
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </Button>
                         </div>
-                        <p className="text-xs text-muted-foreground truncate cursor-pointer">{conversation.lastMessage}</p>
+                        <span className="text-xs text-muted-foreground cursor-pointer">{conversation.timestamp}</span>
                       </div>
                     )}
                   </div>
