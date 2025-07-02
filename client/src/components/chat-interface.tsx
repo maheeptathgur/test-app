@@ -345,7 +345,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       className={`max-w-[70%] p-4 rounded-lg ${
                         message.sender === 'user'
                           ? 'bg-primary text-primary-foreground'
-                          : 'bg-muted text-foreground'
+                          : 'text-foreground'
                       }`}
                     >
                       <div className="whitespace-pre-wrap" style={{ fontSize: '.9375em' }}>
