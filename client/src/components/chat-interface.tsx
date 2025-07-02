@@ -28,7 +28,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
   const [expandedAttachments, setExpandedAttachments] = useState(false);
   const [activeComponent, setActiveComponent] = useState<{name: string; type: string} | null>(null);
-  const [feedbackForms, setFeedbackForms] = useState<Record<string, { type: 'dislike' | 'askHuman'; text: string; visible: boolean }>>({});
+  const [feedbackForms, setFeedbackForms] = useState<Record<string, { type: 'dislike' | 'askHuman'; text: string; visible: boolean; submitted: boolean }>>({});
   const [likedMessages, setLikedMessages] = useState<Set<string>>(new Set());
   const [copiedMessages, setCopiedMessages] = useState<Set<string>>(new Set());
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -79,7 +79,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       [messageId]: {
         type: 'dislike',
         text: '',
-        visible: true
+        visible: true,
+        submitted: false
       }
     }));
   };
@@ -90,7 +91,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       [messageId]: {
         type: 'askHuman',
         text: '',
-        visible: true
+        visible: true,
+        submitted: false
       }
     }));
   };
@@ -101,11 +103,12 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       // In a real app, this would send the feedback to a server
       console.log(`Feedback submitted for message ${messageId}:`, feedback);
       
-      // Hide the feedback form
+      // Mark as submitted and hide the form
       setFeedbackForms(prev => ({
         ...prev,
         [messageId]: {
           ...prev[messageId],
+          submitted: true,
           visible: false
         }
       }));
@@ -484,65 +487,83 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       {/* Interaction buttons for AI responses */}
                       {message.sender === 'bot' && (
                         <div className="mt-3 pt-2 border-t border-gray-100">
-                          <div className="flex items-center gap-2">
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900 ${
-                                copiedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
-                              }`}
-                              onClick={() => handleCopyMessage(message.content, message.id)}
-                            >
-                              {copiedMessages.has(message.id) ? (
-                                <>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900 ${
+                                  copiedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
+                                }`}
+                                onClick={() => handleCopyMessage(message.content, message.id)}
+                              >
+                                {copiedMessages.has(message.id) ? (
+                                  <>
+                                    <Check className="w-3 h-3 mr-1" />
+                                    Copied
+                                  </>
+                                ) : (
+                                  <>
+                                    <Copy className="w-3 h-3 mr-1" />
+                                    Copy
+                                  </>
+                                )}
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900 ${
+                                  likedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
+                                }`}
+                                onClick={() => handleLikeMessage(message.id)}
+                              >
+                                {likedMessages.has(message.id) ? (
+                                  <>
+                                    <Check className="w-3 h-3 mr-1" />
+                                    Liked
+                                  </>
+                                ) : (
+                                  <>
+                                    <ThumbsUp className="w-3 h-3 mr-1" />
+                                    Like
+                                  </>
+                                )}
+                              </Button>
+                              {feedbackForms[message.id]?.type === 'dislike' && feedbackForms[message.id]?.submitted ? (
+                                <div className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded h-8 flex items-center">
                                   <Check className="w-3 h-3 mr-1" />
-                                  Copied
-                                </>
+                                  Sent
+                                </div>
                               ) : (
-                                <>
-                                  <Copy className="w-3 h-3 mr-1" />
-                                  Copy
-                                </>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900"
+                                  onClick={() => handleDislikeMessage(message.id)}
+                                >
+                                  <ThumbsDown className="w-3 h-3 mr-1" />
+                                  Dislike
+                                </Button>
                               )}
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900 ${
-                                likedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
-                              }`}
-                              onClick={() => handleLikeMessage(message.id)}
-                            >
-                              {likedMessages.has(message.id) ? (
-                                <>
-                                  <Check className="w-3 h-3 mr-1" />
-                                  Liked
-                                </>
-                              ) : (
-                                <>
-                                  <ThumbsUp className="w-3 h-3 mr-1" />
-                                  Like
-                                </>
-                              )}
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900"
-                              onClick={() => handleDislikeMessage(message.id)}
-                            >
-                              <ThumbsDown className="w-3 h-3 mr-1" />
-                              Dislike
-                            </Button>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900"
-                              onClick={() => handleAskHuman(message.id)}
-                            >
-                              <MessageCircle className="w-3 h-3 mr-1" />
-                              Ask a human
-                            </Button>
+                            </div>
+                            
+                            {/* Ask a human on the far right */}
+                            {feedbackForms[message.id]?.type === 'askHuman' && feedbackForms[message.id]?.submitted ? (
+                              <div className="text-xs text-green-600 bg-green-50 px-2 py-1 rounded h-8 flex items-center">
+                                <Check className="w-3 h-3 mr-1" />
+                                Sent
+                              </div>
+                            ) : (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900"
+                                onClick={() => handleAskHuman(message.id)}
+                              >
+                                <MessageCircle className="w-3 h-3 mr-1" />
+                                Ask a human
+                              </Button>
+                            )}
                           </div>
                           
                           {/* Feedback form */}
