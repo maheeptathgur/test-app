@@ -32,18 +32,25 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   // Function to render message content with @mentions as badges
   const renderMessageWithMentions = (content: string) => {
-    const mentionRegex = /@(\w+(?:\s+\w+)*)/g;
+    // Updated regex to better handle component names with spaces
+    const mentionRegex = /@([A-Za-z]+(?:\s+[A-Za-z]+)*)/g;
     const parts = content.split(mentionRegex);
+    
+    console.log('renderMessageWithMentions called with:', content);
+    console.log('Split parts:', parts);
+    console.log('Available components:', copilot?.components);
     
     return (
       <span className="whitespace-pre-wrap">
         {parts.map((part, index) => {
           // Check if this part is a mention (odd indices after split)
           if (index % 2 === 1) {
+            console.log('Processing mention:', part);
             // Find the component type for styling
             const component = copilot?.components?.find(c => 
-              c.name.toLowerCase() === part.toLowerCase()
+              c.name.toLowerCase().trim() === part.toLowerCase().trim()
             );
+            console.log('Found component:', component);
             
             let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-full text-xs font-medium";
             let iconElement = null;
@@ -64,7 +71,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   break;
               }
             } else {
-              // Unknown component
+              // Unknown component - still show as badge but gray
               badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
             }
             
@@ -74,7 +81,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 className={badgeClass}
               >
                 {iconElement}
-                {part}
+                @{part}
               </span>
             );
           }
