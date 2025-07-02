@@ -200,6 +200,7 @@ Changelog:
 - July 2, 2025. Added realistic descriptions to all copilot components (HubSpot: CRM platform, Mailchimp: Email marketing, etc.) and updated chat welcome screen to display specific tool descriptions instead of generic text
 - July 2, 2025. Fixed chat interface layout to use full width by removing max-w-4xl constraints from both chat container and input area, and improved welcome screen responsive display from MD breakpoint to SM breakpoint for better mobile compatibility
 - July 2, 2025. Implemented proper chat width constraints: restored 960px (max-w-4xl) container for chat area, AI messages now use full width within container, user messages constrained to 70% width for better readability and visual hierarchy
+- July 2, 2025. Updated floating attached files display to use brand colors: changed from black/70 background to #008062 brand color for better consistency with website color palette
 ```
 
 ## User Preferences

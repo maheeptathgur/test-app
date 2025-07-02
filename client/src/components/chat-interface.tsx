@@ -925,19 +925,19 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
                   <div className="absolute -top-8 left-0">
-                    <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs mt-[-6px] mb-[-6px]">
+                    <div className="flex items-center gap-2 px-3 py-1 bg-[#008062] backdrop-blur-sm rounded-full text-white text-xs mt-[-6px] mb-[-6px]">
                       <Paperclip className="w-3 h-3" />
                       <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
                       <div className="flex items-center gap-1 flex-wrap">
                         {(expandedAttachments ? selectedFiles : selectedFiles.slice(0, 2)).map((fileName) => (
-                          <div key={fileName} className="flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full">
+                          <div key={fileName} className="flex items-center gap-1 bg-white/30 px-2 py-0.5 rounded-full">
                             {getFileIcon(fileName)}
                             <span className="truncate max-w-[80px]">{fileName.split('.')[0]}</span>
                           </div>
                         ))}
                         {selectedFiles.length > 2 && !expandedAttachments && (
                           <button 
-                            className="bg-white/20 px-2 py-0.5 rounded-full hover:bg-white/30 transition-colors cursor-pointer"
+                            className="bg-white/30 px-2 py-0.5 rounded-full hover:bg-white/40 transition-colors cursor-pointer"
                             onClick={() => setExpandedAttachments(true)}
                           >
                             +{selectedFiles.length - 2}
@@ -945,7 +945,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                         )}
                         {expandedAttachments && selectedFiles.length > 2 && (
                           <button 
-                            className="bg-white/20 px-2 py-0.5 rounded-full hover:bg-white/30 transition-colors cursor-pointer"
+                            className="bg-white/30 px-2 py-0.5 rounded-full hover:bg-white/40 transition-colors cursor-pointer"
                             onClick={() => setExpandedAttachments(false)}
                           >
                             −
