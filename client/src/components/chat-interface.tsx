@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { ChatMessage, CopilotData, ProfileField } from "@/lib/types";
 
 interface ChatInterfaceProps {
@@ -627,17 +628,31 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 >
                   <Paperclip className="h-4 w-4" />
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="h-12 px-3 self-end"
-                  onClick={() => {
-                    // Add agent/tool/workflow functionality
-                    console.log('Add agent, tool, or workflow');
-                  }}
-                  title="Add Agent, Tool, or Workflow"
-                >
-                  <Plus className="h-4 w-4" />
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button 
+                      variant="outline" 
+                      className="h-12 px-3 self-end"
+                      title="Add Agent, Tool, or Workflow"
+                    >
+                      <Plus className="h-4 w-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48">
+                    <DropdownMenuItem onClick={() => console.log('Add Agent')}>
+                      <Bot className="w-4 h-4 mr-2" />
+                      Add Agent
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => console.log('Add Tool')}>
+                      <Wrench className="w-4 h-4 mr-2" />
+                      Add Tool
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => console.log('Add Workflow')}>
+                      <Workflow className="w-4 h-4 mr-2" />
+                      Add Workflow
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <Textarea
                   ref={textareaRef}
                   value={inputValue}
