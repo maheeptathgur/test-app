@@ -189,6 +189,7 @@ Changelog:
 - July 2, 2025. Removed Play icon from copilot dropdown menu items in workspace selector for cleaner interface
 - July 2, 2025. Added white background to table wrapper divs to fix white corners showing through rounded borders
 - July 2, 2025. Added interaction buttons to AI responses - copy, like, dislike, and ask a human buttons appear below each bot message with feedback forms for dislike and ask human options that allow users to submit single-line feedback
+- July 2, 2025. Removed intro chat message requirement - users can now begin conversations directly without any pre-filled greeting messages, creating a cleaner conversation start experience
 ```
 
 ## User Preferences
