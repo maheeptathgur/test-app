@@ -66,7 +66,7 @@ const recentConversations = [
   {
     id: '2',
     title: 'Product Pricing Strategy',
-    copilot: 'Business Analyst',
+    copilot: 'Social Analyst',
     lastMessage: 'Based on the competitive analysis, I recommend...',
     timestamp: 'Yesterday',
     isActive: false,
@@ -110,7 +110,7 @@ const recentConversations = [
   {
     id: '4',
     title: 'Q4 Performance Review',
-    copilot: 'Business Analyst',
+    copilot: 'Social Analyst',
     lastMessage: 'The quarterly metrics show significant growth in...',
     timestamp: '1 week ago',
     isActive: false,
@@ -518,13 +518,11 @@ export default function Dashboard() {
   };
 
   const handleLoadConversation = (conversation: any) => {
-    console.log('Loading conversation:', conversation.title, 'Messages:', conversation.messages?.length);
     // Find the copilot associated with this conversation
     const copilot = copilots.find(c => c.name === conversation.copilot);
     if (copilot) {
       // Start chat with the copilot and pass conversation messages
       const copilotWithMessages = { ...copilot, conversationMessages: conversation.messages || [] };
-      console.log('Setting copilot with messages:', copilotWithMessages.name, copilotWithMessages.conversationMessages?.length);
       setChatCopilot(copilotWithMessages);
       
       // Mark this conversation as active and others as inactive

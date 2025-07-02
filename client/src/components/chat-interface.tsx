@@ -33,10 +33,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     if (isOpen && copilot) {
       // Check if we have conversation messages to load, otherwise show default greeting
       if (copilot.conversationMessages && copilot.conversationMessages.length > 0) {
-        console.log('Loading conversation messages:', copilot.conversationMessages.length);
         setMessages(copilot.conversationMessages);
       } else {
-        console.log('No conversation messages, showing default greeting');
         setMessages([
           {
             id: '1',
