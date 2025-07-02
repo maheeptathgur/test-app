@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import { WorkspaceSelector } from "@/components/workspace-selector";
 import { CopilotCard } from "@/components/copilot-card";
-import { ChatInterface } from "@/components/chat-interface-backup";
+import { ChatInterface } from "@/components/chat-interface";
 import { CreateCopilotModal } from "@/components/create-copilot-modal";
 import { EditCopilotModal } from "@/components/edit-copilot-modal";
 import { CopilotConfiguration } from "@/components/copilot-configuration";
