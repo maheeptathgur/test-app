@@ -468,7 +468,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             <Button
                               variant="ghost"
                               size="sm"
-                              className={`h-8 px-3 text-xs hover:bg-gray-200 ${
+                              className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900 ${
                                 copiedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
                               }`}
                               onClick={() => handleCopyMessage(message.content, message.id)}
@@ -488,7 +488,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             <Button
                               variant="ghost"
                               size="sm"
-                              className={`h-8 px-3 text-xs hover:bg-gray-200 ${
+                              className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900 ${
                                 likedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
                               }`}
                               onClick={() => handleLikeMessage(message.id)}
@@ -499,7 +499,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="h-8 px-3 text-xs hover:bg-gray-200"
+                              className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900"
                               onClick={() => handleDislikeMessage(message.id)}
                             >
                               <ThumbsDown className="w-3 h-3 mr-1" />
@@ -508,7 +508,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="h-8 px-3 text-xs hover:bg-gray-200"
+                              className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900"
                               onClick={() => handleAskHuman(message.id)}
                             >
                               <MessageCircle className="w-3 h-3 mr-1" />
