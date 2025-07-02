@@ -45,24 +45,17 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     const escapedNames = sortedNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     const mentionRegex = new RegExp(`@(${escapedNames.join('|')})`, 'gi');
     
-    console.log('renderMessageWithMentions called with:', content);
-    console.log('Available components:', componentNames);
-    console.log('Regex pattern:', mentionRegex);
-    
     const parts = content.split(mentionRegex);
-    console.log('Split parts:', parts);
     
     return (
       <span className="whitespace-pre-wrap">
         {parts.map((part, index) => {
           // Check if this part is a mention (odd indices after split)
           if (index % 2 === 1) {
-            console.log('Processing mention:', part);
             // Find the component type for styling
             const component = copilot?.components?.find(c => 
               c.name.toLowerCase().trim() === part.toLowerCase().trim()
             );
-            console.log('Found component:', component);
             
             let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-full text-xs font-medium";
             let iconElement = null;

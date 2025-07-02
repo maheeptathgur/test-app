@@ -195,6 +195,7 @@ Changelog:
 - July 2, 2025. Removed title bar from chat interface while keeping profile and close buttons at top right - welcome screen displays copilot name and description so header was redundant, creating cleaner interface with more space for conversation
 - July 2, 2025. Added top margin spacing to profile fields and conversation area to prevent overlap with floating top-right buttons, ensuring proper visual hierarchy and preventing content from being hidden behind controls
 - July 2, 2025. Enhanced @mention functionality with visual badges - @mentions in chat messages now display as color-coded badges with appropriate icons (blue for agents, green for tools, purple for workflows) replacing plain text mentions for better visual identification and improved readability
+- July 2, 2025. Fixed @mention badge rendering with precise regex matching - implemented exact component name matching, sorted names by length for proper precedence, and added regex escaping for special characters to ensure accurate badge conversion in chat messages
 ```
 
 ## User Preferences
