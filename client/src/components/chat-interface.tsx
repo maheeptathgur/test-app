@@ -283,14 +283,14 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         
         {/* File Preview Pane */}
         {selectedFiles.length > 0 && (
-          <div className="w-80 border-l border-border bg-muted/20 flex flex-col">
+          <div className="w-80 border-l border-border bg-muted/20 flex flex-col h-full">
             <div className="p-4 border-b">
               <h3 className="font-semibold text-foreground">File Preview</h3>
               <p className="text-sm text-muted-foreground">
                 {selectedFiles[selectedFiles.length - 1]}
               </p>
             </div>
-            <div className="flex-1 p-4 overflow-y-auto">
+            <div className="flex-1 p-4 overflow-y-auto min-h-0">
               {(() => {
                 const lastFile = selectedFiles[selectedFiles.length - 1];
                 const extension = lastFile.toLowerCase().split('.').pop();
@@ -299,22 +299,25 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'pdf':
                     return (
                       <div className="space-y-4">
-                        <div className="aspect-[3/4] bg-white border rounded-lg p-4 text-sm">
+                        <div className="bg-white border rounded-lg p-4 text-sm">
                           <div className="text-center mb-4">
                             <FileText className="w-12 h-12 mx-auto text-blue-500 mb-2" />
                             <h4 className="font-semibold">PDF Document</h4>
                           </div>
-                          <div className="space-y-2 text-xs text-muted-foreground">
+                          <div className="space-y-2 text-xs text-muted-foreground mb-4">
                             <p><strong>Pages:</strong> 12</p>
                             <p><strong>Size:</strong> 1.2 MB</p>
                             <p><strong>Created:</strong> 2 hours ago</p>
                           </div>
-                          <div className="mt-4 p-3 bg-muted/50 rounded text-xs">
+                          <div className="p-3 bg-muted/50 rounded text-xs mb-4">
                             <p className="font-medium mb-1">Content Preview:</p>
                             <p>"Project Brief: Q1 Marketing Campaign...</p>
                             <p>Executive Summary: This document outlines...</p>
                             <p>Budget allocation and timeline details...</p>
                           </div>
+                          <Button size="sm" variant="outline" className="w-full">
+                            Open PDF
+                          </Button>
                         </div>
                       </div>
                     );
@@ -323,15 +326,18 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'png':
                     return (
                       <div className="space-y-4">
-                        <div className="aspect-square bg-white border rounded-lg p-4">
-                          <div className="w-full h-full bg-gradient-to-br from-blue-100 to-purple-100 rounded flex items-center justify-center">
+                        <div className="bg-white border rounded-lg p-4">
+                          <div className="aspect-square bg-gradient-to-br from-blue-100 to-purple-100 rounded flex items-center justify-center mb-4">
                             <Image className="w-16 h-16 text-gray-400" />
                           </div>
-                        </div>
-                        <div className="text-sm space-y-1">
-                          <p><strong>Dimensions:</strong> 1920x1080</p>
-                          <p><strong>Size:</strong> 856 KB</p>
-                          <p><strong>Format:</strong> PNG</p>
+                          <div className="text-xs text-muted-foreground space-y-1 mb-4">
+                            <p><strong>Dimensions:</strong> 1920x1080</p>
+                            <p><strong>Size:</strong> 856 KB</p>
+                            <p><strong>Format:</strong> PNG</p>
+                          </div>
+                          <Button size="sm" variant="outline" className="w-full">
+                            View Image
+                          </Button>
                         </div>
                       </div>
                     );
@@ -339,17 +345,23 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'wav':
                     return (
                       <div className="space-y-4">
-                        <div className="aspect-video bg-white border rounded-lg p-4 flex items-center justify-center">
-                          <div className="text-center">
+                        <div className="bg-white border rounded-lg p-4">
+                          <div className="text-center mb-4">
                             <Music className="w-16 h-16 mx-auto text-purple-500 mb-2" />
                             <h4 className="font-semibold">Audio File</h4>
                           </div>
-                        </div>
-                        <div className="text-sm space-y-1">
-                          <p><strong>Duration:</strong> 3:24</p>
-                          <p><strong>Size:</strong> 4.8 MB</p>
-                          <p><strong>Format:</strong> MP3</p>
-                          <p><strong>Bitrate:</strong> 320 kbps</p>
+                          <div className="space-y-3">
+                            <audio controls className="w-full">
+                              <source src="#" type="audio/mpeg" />
+                              Your browser does not support the audio element.
+                            </audio>
+                            <div className="text-xs text-muted-foreground space-y-1">
+                              <p><strong>Duration:</strong> 3:24</p>
+                              <p><strong>Size:</strong> 4.8 MB</p>
+                              <p><strong>Format:</strong> MP3</p>
+                              <p><strong>Bitrate:</strong> 320 kbps</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     );
@@ -357,33 +369,42 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'avi':
                     return (
                       <div className="space-y-4">
-                        <div className="aspect-video bg-white border rounded-lg p-4 flex items-center justify-center">
-                          <div className="text-center">
+                        <div className="bg-white border rounded-lg p-4">
+                          <div className="text-center mb-4">
                             <Video className="w-16 h-16 mx-auto text-red-500 mb-2" />
                             <h4 className="font-semibold">Video File</h4>
                           </div>
-                        </div>
-                        <div className="text-sm space-y-1">
-                          <p><strong>Duration:</strong> 5:42</p>
-                          <p><strong>Size:</strong> 24.5 MB</p>
-                          <p><strong>Resolution:</strong> 1080p</p>
-                          <p><strong>Format:</strong> MP4</p>
+                          <div className="space-y-3">
+                            <video controls className="w-full rounded">
+                              <source src="#" type="video/mp4" />
+                              Your browser does not support the video element.
+                            </video>
+                            <div className="text-xs text-muted-foreground space-y-1">
+                              <p><strong>Duration:</strong> 5:42</p>
+                              <p><strong>Size:</strong> 24.5 MB</p>
+                              <p><strong>Resolution:</strong> 1080p</p>
+                              <p><strong>Format:</strong> MP4</p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     );
                   default:
                     return (
                       <div className="space-y-4">
-                        <div className="aspect-square bg-white border rounded-lg p-4 flex items-center justify-center">
-                          <div className="text-center">
+                        <div className="bg-white border rounded-lg p-4">
+                          <div className="text-center mb-4">
                             <File className="w-16 h-16 mx-auto text-gray-500 mb-2" />
                             <h4 className="font-semibold">Document</h4>
                           </div>
-                        </div>
-                        <div className="text-sm space-y-1">
-                          <p><strong>Type:</strong> {extension?.toUpperCase()}</p>
-                          <p><strong>Size:</strong> 540 KB</p>
-                          <p><strong>Modified:</strong> 2 weeks ago</p>
+                          <div className="text-xs text-muted-foreground space-y-1 mb-4">
+                            <p><strong>Type:</strong> {extension?.toUpperCase()}</p>
+                            <p><strong>Size:</strong> 540 KB</p>
+                            <p><strong>Modified:</strong> 2 weeks ago</p>
+                          </div>
+                          <Button size="sm" variant="outline" className="w-full">
+                            Open File
+                          </Button>
                         </div>
                       </div>
                     );
