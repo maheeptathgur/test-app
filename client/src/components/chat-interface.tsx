@@ -28,6 +28,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [expandedAttachments, setExpandedAttachments] = useState(false);
   const [feedbackForms, setFeedbackForms] = useState<Record<string, { type: 'dislike' | 'askHuman'; text: string; visible: boolean }>>({});
   const [likedMessages, setLikedMessages] = useState<Set<string>>(new Set());
+  const [copiedMessages, setCopiedMessages] = useState<Set<string>>(new Set());
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
 
@@ -43,8 +44,18 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   };
 
   // Handler functions for interaction buttons
-  const handleCopyMessage = (content: string) => {
+  const handleCopyMessage = (content: string, messageId: string) => {
     navigator.clipboard.writeText(content);
+    setCopiedMessages(prev => new Set(prev).add(messageId));
+    
+    // Reset copy state after 2 seconds
+    setTimeout(() => {
+      setCopiedMessages(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(messageId);
+        return newSet;
+      });
+    }, 2000);
   };
 
   const handleLikeMessage = (messageId: string) => {
@@ -457,16 +468,27 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="h-8 px-3 text-xs hover:bg-gray-100"
-                              onClick={() => handleCopyMessage(message.content)}
+                              className={`h-8 px-3 text-xs hover:bg-gray-200 ${
+                                copiedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
+                              }`}
+                              onClick={() => handleCopyMessage(message.content, message.id)}
                             >
-                              <Copy className="w-3 h-3 mr-1" />
-                              Copy
+                              {copiedMessages.has(message.id) ? (
+                                <>
+                                  <Check className="w-3 h-3 mr-1" />
+                                  Copied
+                                </>
+                              ) : (
+                                <>
+                                  <Copy className="w-3 h-3 mr-1" />
+                                  Copy
+                                </>
+                              )}
                             </Button>
                             <Button
                               variant="ghost"
                               size="sm"
-                              className={`h-8 px-3 text-xs hover:bg-gray-100 ${
+                              className={`h-8 px-3 text-xs hover:bg-gray-200 ${
                                 likedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
                               }`}
                               onClick={() => handleLikeMessage(message.id)}
@@ -477,7 +499,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="h-8 px-3 text-xs hover:bg-gray-100"
+                              className="h-8 px-3 text-xs hover:bg-gray-200"
                               onClick={() => handleDislikeMessage(message.id)}
                             >
                               <ThumbsDown className="w-3 h-3 mr-1" />
@@ -486,7 +508,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             <Button
                               variant="ghost"
                               size="sm"
-                              className="h-8 px-3 text-xs hover:bg-gray-100"
+                              className="h-8 px-3 text-xs hover:bg-gray-200"
                               onClick={() => handleAskHuman(message.id)}
                             >
                               <MessageCircle className="w-3 h-3 mr-1" />
