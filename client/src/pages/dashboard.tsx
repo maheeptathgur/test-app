@@ -1250,11 +1250,11 @@ export default function Dashboard() {
                   </Button>
                 </div>
               )}
-              <div className="space-y-2">
+              <div className="space-y-1">
                 {conversations.filter(conversation => conversation.copilot === chatCopilot?.name).map((conversation) => (
                   <div
                     key={conversation.id}
-                    className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg transition-all group cursor-pointer ${
+                    className={`${sidebarCollapsed ? 'p-1.5' : 'p-2'} rounded-lg transition-all group cursor-pointer ${
                       conversation.isActive 
                         ? 'bg-sidebar-accent text-sidebar-primary' 
                         : 'hover:bg-sidebar-accent hover:text-sidebar-primary'
@@ -1264,7 +1264,7 @@ export default function Dashboard() {
                   >
                     {sidebarCollapsed ? (
                       <div className="flex items-center justify-between">
-                        <div className="w-6 h-6 rounded bg-sidebar-primary/20 flex items-center justify-center cursor-pointer">
+                        <div className="w-5 h-5 rounded bg-sidebar-primary/20 flex items-center justify-center cursor-pointer">
                           <MessageSquare className="w-3 h-3" />
                         </div>
                         <Button
@@ -1274,17 +1274,17 @@ export default function Dashboard() {
                             e.stopPropagation();
                             handleDeleteConversation(conversation.id);
                           }}
-                          className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
+                          className="opacity-0 group-hover:opacity-100 h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
                           title="Delete conversation"
                         >
                           <Trash2 className="w-3 h-3" />
                         </Button>
                       </div>
                     ) : (
-                      <div className="space-y-1">
+                      <div className="space-y-0.5">
                         <div className="flex items-start justify-between gap-2">
                           <div className="flex-1 min-w-0 cursor-pointer">
-                            <h4 className="text-sm font-medium truncate">{conversation.title}</h4>
+                            <h4 className="text-sm font-medium truncate leading-tight">{conversation.title}</h4>
                           </div>
                           <Button
                             variant="ghost"
@@ -1293,13 +1293,13 @@ export default function Dashboard() {
                               e.stopPropagation();
                               handleDeleteConversation(conversation.id);
                             }}
-                            className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-600 hover:bg-red-50 flex-shrink-0"
+                            className="opacity-0 group-hover:opacity-100 h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50 flex-shrink-0"
                             title="Delete conversation"
                           >
                             <Trash2 className="w-3 h-3" />
                           </Button>
                         </div>
-                        <span className="text-xs text-muted-foreground cursor-pointer">{conversation.timestamp}</span>
+                        <span className="text-xs text-muted-foreground cursor-pointer leading-tight">{conversation.timestamp}</span>
                       </div>
                     )}
                   </div>
