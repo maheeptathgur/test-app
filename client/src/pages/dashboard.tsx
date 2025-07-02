@@ -1144,11 +1144,11 @@ export default function Dashboard() {
               )}
             </div>)
           ) : chatCopilot ? (
-            // Recent Conversations List
+            // Current Copilot Info - No conversation list
             (<div className="space-y-3">
               {!sidebarCollapsed && (
                 <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm font-medium text-sidebar-foreground">Recent Conversations</h3>
+                  <h3 className="text-sm font-medium text-sidebar-foreground">Current Assistant</h3>
                   <Button
                     variant="ghost"
                     size="sm"
@@ -1172,67 +1172,29 @@ export default function Dashboard() {
                   </Button>
                 </div>
               )}
-              <div className="space-y-2">
-                {conversations.map((conversation) => (
-                  <div
-                    key={conversation.id}
-                    className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg transition-all group cursor-pointer ${
-                      conversation.isActive 
-                        ? 'bg-sidebar-accent text-sidebar-primary' 
-                        : 'hover:bg-sidebar-accent hover:text-sidebar-primary'
-                    }`}
-                    title={sidebarCollapsed ? conversation.title : undefined}
-                    onClick={() => handleLoadConversation(conversation)}
-                  >
-                    {sidebarCollapsed ? (
-                      <div className="flex items-center justify-between">
-                        <div className="w-6 h-6 rounded bg-sidebar-primary/20 flex items-center justify-center cursor-pointer">
-                          <MessageSquare className="w-3 h-3" />
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteConversation(conversation.id);
-                          }}
-                          className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
-                          title="Delete conversation"
-                        >
-                          <Trash2 className="w-3 h-3" />
-                        </Button>
-                      </div>
-                    ) : (
-                      <div className="space-y-2">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="flex-1 min-w-0 cursor-pointer">
-                            <h4 className="text-sm font-medium truncate">{conversation.title}</h4>
-                          </div>
-                          <div className="flex items-center gap-2 flex-shrink-0">
-                            <span className="text-xs text-muted-foreground">{conversation.timestamp}</span>
-                            <Button
-                              variant="ghost"
-                              size="sm"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleDeleteConversation(conversation.id);
-                              }}
-                              className="opacity-0 group-hover:opacity-100 h-6 w-6 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
-                              title="Delete conversation"
-                            >
-                              <Trash2 className="w-3 h-3" />
-                            </Button>
-                          </div>
-                        </div>
-                        <p className="text-xs text-muted-foreground truncate cursor-pointer">{conversation.lastMessage}</p>
-                        <div className="flex items-center gap-1 cursor-pointer">
-                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                          <span className="text-xs text-muted-foreground">{conversation.copilot}</span>
-                        </div>
-                      </div>
-                    )}
+              
+              {/* Current Copilot Display */}
+              <div className={`${sidebarCollapsed ? 'p-2' : 'p-4'} rounded-lg bg-sidebar-accent/50`}>
+                {sidebarCollapsed ? (
+                  <div className="flex justify-center">
+                    <div className={`w-8 h-8 ${chatCopilot.avatarColor} rounded text-sm font-semibold flex items-center justify-center`}>
+                      {chatCopilot.avatar}
+                    </div>
                   </div>
-                ))}
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-10 h-10 ${chatCopilot.avatarColor} rounded-lg text-sm font-semibold flex items-center justify-center`}>
+                        {chatCopilot.avatar}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-sm font-medium text-sidebar-foreground truncate">{chatCopilot.name}</h4>
+                        <p className="text-xs text-muted-foreground truncate">{chatCopilot.type}</p>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted-foreground">{chatCopilot.description}</p>
+                  </div>
+                )}
               </div>
             </div>)
           ) : (
