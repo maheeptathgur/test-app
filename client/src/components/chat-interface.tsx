@@ -436,6 +436,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
     setMessages(prev => [...prev, userMessage]);
     setInputValue("");
+    setInputContent("");
 
     // Simulate bot response
     setTimeout(() => {
