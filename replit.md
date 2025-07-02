@@ -175,6 +175,7 @@ Changelog:
 - July 1, 2025. Created comprehensive Workflow Editor screen accessible from Edit buttons in workflows - includes tabs for Workflow Steps (expandable step configuration with visual flow), Settings (basic info, triggers, error handling, notifications), Variables (reusable workflow variables), and Testing (sample data input, test execution, results display, test history) with full step management capabilities
 - July 2, 2025. Reduced attachment sidebar width from w-80 to w-64 for better space utilization
 - July 2, 2025. Added comprehensive file preview pane to the right of chat interface that displays the last selected file with detailed metadata, file type detection, and custom previews for PDF, images, audio, video, and documents with appropriate icons and information
+- July 2, 2025. Modified layout so document preview pane extends to full screen height (top to bottom) while chat interface adjusts accordingly for better document viewing experience
 ```
 
 ## User Preferences
