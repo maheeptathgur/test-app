@@ -143,14 +143,18 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     const value = e.target.value;
     const cursorPosition = e.target.selectionStart;
     
+    console.log('Input changed:', value, 'cursor at:', cursorPosition);
     setInputValue(value);
     
     // Check if we're typing @ and should show autocomplete
     const textBeforeCursor = value.substring(0, cursorPosition);
     const lastAtIndex = textBeforeCursor.lastIndexOf('@');
     
+    console.log('Text before cursor:', textBeforeCursor, 'last @ at:', lastAtIndex);
+    
     if (lastAtIndex >= 0) {
       const textAfterAt = textBeforeCursor.substring(lastAtIndex + 1);
+      console.log('Text after @:', textAfterAt);
       
       // Only show if we haven't typed a space after @
       if (!textAfterAt.includes(' ') && textAfterAt.length >= 0) {
@@ -159,18 +163,24 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           component.name.toLowerCase().includes(searchTerm)
         ) || [];
         
+        console.log('Search term:', searchTerm, 'suggestions found:', suggestions.length);
+        
         if (suggestions.length > 0) {
+          console.log('Showing dropdown with suggestions:', suggestions);
           setHandleSuggestions(suggestions);
           setHandleTriggerPosition(lastAtIndex);
           setShowHandleDropdown(true);
           setSelectedHandleIndex(0);
         } else {
+          console.log('No suggestions, hiding dropdown');
           setShowHandleDropdown(false);
         }
       } else {
+        console.log('Space found after @, hiding dropdown');
         setShowHandleDropdown(false);
       }
     } else {
+      console.log('No @ found, hiding dropdown');
       setShowHandleDropdown(false);
     }
   };
@@ -887,7 +897,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     
                     {/* Handle Autocomplete Dropdown */}
                     {showHandleDropdown && handleSuggestions.length > 0 && (
-                      <div className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
+                      <div 
+                        className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto"
+                        onMouseDown={(e) => {
+                          console.log('Dropdown mouse down event');
+                          e.preventDefault(); // Prevent textarea blur
+                        }}
+                      >
                         {handleSuggestions.map((suggestion, index) => (
                           <div
                             key={`${suggestion.type}-${suggestion.name}`}
@@ -896,7 +912,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 ? 'bg-blue-50 border-l-2 border-blue-500' 
                                 : 'hover:bg-gray-50'
                             }`}
-                            onClick={() => insertHandle(suggestion.name)}
+                            onClick={() => {
+                              console.log('Dropdown item clicked:', suggestion.name);
+                              insertHandle(suggestion.name);
+                            }}
                           >
                             {suggestion.type === 'agent' && <Bot className="w-4 h-4 text-blue-600" />}
                             {suggestion.type === 'tool' && <Wrench className="w-4 h-4 text-green-600" />}
