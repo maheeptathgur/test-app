@@ -518,11 +518,14 @@ export default function Dashboard() {
   };
 
   const handleLoadConversation = (conversation: any) => {
+    console.log('Loading conversation:', conversation.title, 'Messages:', conversation.messages?.length);
     // Find the copilot associated with this conversation
     const copilot = copilots.find(c => c.name === conversation.copilot);
     if (copilot) {
       // Start chat with the copilot and pass conversation messages
-      setChatCopilot({ ...copilot, conversationMessages: conversation.messages || [] });
+      const copilotWithMessages = { ...copilot, conversationMessages: conversation.messages || [] };
+      console.log('Setting copilot with messages:', copilotWithMessages.name, copilotWithMessages.conversationMessages?.length);
+      setChatCopilot(copilotWithMessages);
       
       // Mark this conversation as active and others as inactive
       setConversations(prev => prev.map(conv => ({
