@@ -188,16 +188,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     };
   }, [showHandleDropdown]);
 
-  // Simple markdown formatter for chat messages
-  const formatMarkdown = (text: string): string => {
-    return text
-      // Bold text **text**
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      // Italic text *text*
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      // Code `text`
-      .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
-  };
+
 
   // Handler functions for interaction buttons
   const handleCopyMessage = (content: string, messageId: string) => {
@@ -790,7 +781,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               );
                             }
                           }
-                          // Regular line with markdown formatting
+                          // Regular line with @mention support
                           return (
                             <div key={index} className="mt-[0px] mb-[0px]">
                               {renderMessageWithMentions(line)}
