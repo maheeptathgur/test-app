@@ -190,15 +190,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   // Convert markdown to HTML for rich text display with @mention support
   const formatMarkdown = (text: string): string => {
-    let formattedText = text
-      // Bold text **text**
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      // Italic text *text*
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      // Code `text`
-      .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+    let formattedText = text;
     
-    // Handle @mentions
+    // Handle @mentions first to preserve them
     const componentNames = copilot?.components?.map(c => c.name) || [];
     const escapedNames = componentNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).sort((a, b) => b.length - a.length);
     
@@ -236,7 +230,60 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       });
     }
     
-    return formattedText;
+    // Split into lines and process each line for different markdown elements
+    const lines = formattedText.split('\n');
+    const processedLines = lines.map((line, index) => {
+      // Skip empty lines
+      if (!line.trim()) {
+        return '<br/>';
+      }
+      
+      // Handle headers
+      if (line.startsWith('**') && line.endsWith('**') && line.includes(':')) {
+        const headerText = line.replace(/^\*\*(.*?)\*\*$/, '$1');
+        return `<div class="font-semibold text-gray-900 mt-3 mb-1">${headerText}</div>`;
+      }
+      
+      // Handle bullet points
+      if (line.trim().startsWith('- ')) {
+        const content = line.substring(line.indexOf('- ') + 2);
+        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1 flex-shrink-0">•</span><span>${content}</span></div>`;
+      }
+      
+      // Handle numbered lists
+      if (/^\d+\.\s/.test(line.trim())) {
+        const match = line.match(/^(\d+)\.\s(.+)$/);
+        if (match) {
+          return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1 flex-shrink-0">${match[1]}.</span><span>${match[2]}</span></div>`;
+        }
+      }
+      
+      // Handle checkmarks/emojis at start of line
+      if (line.trim().startsWith('✅')) {
+        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">✅</span><span>${line.substring(line.indexOf('✅') + 1).trim()}</span></div>`;
+      }
+      
+      if (line.trim().startsWith('📈')) {
+        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">📈</span><span>${line.substring(line.indexOf('📈') + 1).trim()}</span></div>`;
+      }
+      
+      if (line.trim().startsWith('⚠️')) {
+        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">⚠️</span><span>${line.substring(line.indexOf('⚠️') + 1).trim()}</span></div>`;
+      }
+      
+      // Apply inline formatting to regular lines
+      let processedLine = line
+        // Bold text **text**
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Italic text *text*
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Code `text`
+        .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+      
+      return `<div class="mb-1">${processedLine}</div>`;
+    });
+    
+    return processedLines.join('');
   };
 
 
@@ -807,42 +854,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       }`}
                       style={message.sender === 'user' ? { backgroundColor: '#e6eeef' } : {}}
                     >
-                      <div className="whitespace-pre-wrap" style={{ fontSize: '.9375em' }}>
-                        {message.content.split('\n').map((line, index) => {
-                          // Handle bullet points
-                          if (line.trim().startsWith('- ')) {
-                            const content = line.substring(2);
-                            return (
-                              <div key={index} className="flex items-start gap-2 mb-1">
-                                <span className="text-xs mt-1">•</span>
-                                <span>{renderMessageWithMentions(content)}</span>
-                              </div>
-                            );
-                          }
-                          // Handle numbered lists
-                          if (/^\d+\.\s/.test(line.trim())) {
-                            const match = line.match(/^(\d+)\.\s(.+)$/);
-                            if (match) {
-                              return (
-                                <div key={index} className="flex items-start gap-2 mb-1">
-                                  <span className="text-xs mt-1">{match[1]}.</span>
-                                  <span>{renderMessageWithMentions(match[2])}</span>
-                                </div>
-                              );
-                            }
-                          }
-                          // Regular line with markdown formatting and @mention support
-                          return (
-                            <div 
-                              key={index} 
-                              className="mt-[0px] mb-[0px]"
-                              dangerouslySetInnerHTML={{ 
-                                __html: formatMarkdown(line)
-                              }}
-                            />
-                          );
-                        })}
-                      </div>
+                      <div 
+                        className="whitespace-pre-wrap" 
+                        style={{ fontSize: '.9375em' }}
+                        dangerouslySetInnerHTML={{ 
+                          __html: formatMarkdown(message.content)
+                        }}
+                      />
                       
                       {/* Interaction buttons for AI responses */}
                       {message.sender === 'bot' && (
