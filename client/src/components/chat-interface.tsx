@@ -31,6 +31,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [copiedMessages, setCopiedMessages] = useState<Set<string>>(new Set());
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Simple markdown formatter for chat messages
   const formatMarkdown = (text: string): string => {
@@ -118,6 +119,22 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       }
     }));
   };
+
+  // Auto-resize textarea
+  const autoResizeTextarea = () => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      const scrollHeight = textarea.scrollHeight;
+      const lineHeight = 24; // Approximate line height
+      const maxHeight = lineHeight * 4; // 4 lines max
+      textarea.style.height = Math.min(scrollHeight, maxHeight) + 'px';
+    }
+  };
+
+  useEffect(() => {
+    autoResizeTextarea();
+  }, [inputValue]);
 
   useEffect(() => {
     if (isOpen && copilot) {
@@ -565,7 +582,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           {/* Prompt Bar - moved inside chat area */}
           <div className="bg-white relative">
             <div className="max-w-4xl mx-auto p-3 relative">
-              <div className="flex gap-3 relative">
+              <div className="flex gap-3 relative items-end">
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
                   <div className="absolute -top-8 left-0">
@@ -601,7 +618,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 )}
                 <Button 
                   variant="outline" 
-                  className="h-12 px-3"
+                  className="h-12 px-3 self-end"
                   onClick={() => {
                     setShowAttachmentSidebar(!showAttachmentSidebar);
                     onToggleAttachment?.(!showAttachmentSidebar);
@@ -609,14 +626,16 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 >
                   <Paperclip className="h-4 w-4" />
                 </Button>
-                <Input
+                <Textarea
+                  ref={textareaRef}
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Type your message..."
-                  className="flex-1 h-12"
+                  className="flex-1 min-h-12 max-h-24 resize-none"
+                  rows={1}
                 />
-                <Button onClick={handleSendMessage} className="h-12 w-12 p-0" title="Send Message">
+                <Button onClick={handleSendMessage} className="h-12 w-12 p-0 self-end" title="Send Message">
                   <Send className="h-4 w-4" />
                 </Button>
               </div>
