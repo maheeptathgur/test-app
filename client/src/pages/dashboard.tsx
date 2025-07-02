@@ -1224,19 +1224,7 @@ export default function Dashboard() {
           ) : chatCopilot ? (
             // Recent Conversations List (Clean, without workspace selector)
             (<div className="space-y-3">
-              {!sidebarCollapsed && (
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-sm font-medium text-sidebar-foreground">Recent Conversations</h3>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setChatCopilot(null)}
-                    className="text-sidebar-foreground hover:text-sidebar-primary"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                </div>
-              )}
+              
               {sidebarCollapsed && (
                 <div className="flex justify-center mb-4">
                   <Button
