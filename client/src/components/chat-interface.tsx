@@ -394,16 +394,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               </div>
                             </div>
                           </div>
-                          <div className="p-3 border-t bg-gray-50">
-                            <div className="flex gap-2">
-                              <Button size="sm" variant="outline" className="flex-1">
-                                Download
-                              </Button>
-                              <Button size="sm" variant="outline" className="flex-1">
-                                Full Screen
-                              </Button>
-                            </div>
-                          </div>
+
                         </div>
                       </div>
                     );
@@ -416,14 +407,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           <div className="aspect-square bg-gradient-to-br from-blue-100 to-purple-100 rounded flex items-center justify-center mb-4">
                             <Image className="w-16 h-16 text-gray-400" />
                           </div>
-                          <div className="text-xs text-muted-foreground space-y-1 mb-4">
+                          <div className="text-xs text-muted-foreground space-y-1">
                             <p><strong>Dimensions:</strong> 1920x1080</p>
                             <p><strong>Size:</strong> 856 KB</p>
                             <p><strong>Format:</strong> PNG</p>
                           </div>
-                          <Button size="sm" variant="outline" className="w-full">
-                            View Image
-                          </Button>
                         </div>
                       </div>
                     );
@@ -475,22 +463,176 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                         </div>
                       </div>
                     );
+                  case 'pptx':
+                  case 'ppt':
+                    return (
+                      <div className="space-y-4">
+                        <div className="bg-white border rounded-lg overflow-hidden">
+                          <div className="p-3 border-b bg-gray-50">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <FileText className="w-4 h-4 text-orange-500" />
+                                <span className="text-sm font-medium">presentation.pptx</span>
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                15 slides • 3.2 MB
+                              </div>
+                            </div>
+                          </div>
+                          <div className="h-96 bg-white overflow-y-auto p-4">
+                            <div className="space-y-6">
+                              <div className="border rounded-lg p-4 bg-gradient-to-r from-blue-50 to-purple-50">
+                                <div className="text-center">
+                                  <h1 className="text-lg font-bold text-gray-900">Q1 Marketing Strategy</h1>
+                                  <p className="text-gray-600 mt-1">Presentation Deck</p>
+                                  <p className="text-sm text-gray-500 mt-2">Slide 1 of 15</p>
+                                </div>
+                              </div>
+                              
+                              <div className="border rounded-lg p-4">
+                                <h2 className="font-semibold text-gray-900 mb-2">Agenda</h2>
+                                <ul className="text-sm text-gray-700 space-y-1">
+                                  <li>• Market Analysis Overview</li>
+                                  <li>• Target Audience Segmentation</li>
+                                  <li>• Campaign Strategy & Timeline</li>
+                                  <li>• Budget Allocation</li>
+                                  <li>• Success Metrics & KPIs</li>
+                                </ul>
+                                <p className="text-xs text-gray-500 mt-2">Slide 2 of 15</p>
+                              </div>
+                              
+                              <div className="border rounded-lg p-4">
+                                <h2 className="font-semibold text-gray-900 mb-2">Market Analysis</h2>
+                                <p className="text-sm text-gray-700 mb-2">Key findings from Q4 performance:</p>
+                                <div className="bg-gray-50 p-3 rounded text-sm">
+                                  <p>📈 25% increase in brand awareness</p>
+                                  <p>🎯 Target demographics shifted to 25-40 age group</p>
+                                  <p>📱 Mobile engagement up 40%</p>
+                                </div>
+                                <p className="text-xs text-gray-500 mt-2">Slide 3 of 15</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  case 'csv':
+                    return (
+                      <div className="space-y-4">
+                        <div className="bg-white border rounded-lg overflow-hidden">
+                          <div className="p-3 border-b bg-gray-50">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <FileText className="w-4 h-4 text-green-500" />
+                                <span className="text-sm font-medium">data_export.csv</span>
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                1,247 rows • 540 KB
+                              </div>
+                            </div>
+                          </div>
+                          <div className="h-96 bg-white overflow-auto">
+                            <table className="w-full text-xs">
+                              <thead className="bg-gray-50 sticky top-0">
+                                <tr>
+                                  <th className="p-2 text-left border-r">Customer ID</th>
+                                  <th className="p-2 text-left border-r">Name</th>
+                                  <th className="p-2 text-left border-r">Email</th>
+                                  <th className="p-2 text-left border-r">Purchase Date</th>
+                                  <th className="p-2 text-left">Amount</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr className="border-b hover:bg-gray-50">
+                                  <td className="p-2 border-r">CUST001</td>
+                                  <td className="p-2 border-r">Sarah Johnson</td>
+                                  <td className="p-2 border-r">sarah.j@email.com</td>
+                                  <td className="p-2 border-r">2024-01-15</td>
+                                  <td className="p-2">$299.99</td>
+                                </tr>
+                                <tr className="border-b hover:bg-gray-50">
+                                  <td className="p-2 border-r">CUST002</td>
+                                  <td className="p-2 border-r">Mike Chen</td>
+                                  <td className="p-2 border-r">mike.chen@email.com</td>
+                                  <td className="p-2 border-r">2024-01-15</td>
+                                  <td className="p-2">$149.50</td>
+                                </tr>
+                                <tr className="border-b hover:bg-gray-50">
+                                  <td className="p-2 border-r">CUST003</td>
+                                  <td className="p-2 border-r">Emily Davis</td>
+                                  <td className="p-2 border-r">emily.d@email.com</td>
+                                  <td className="p-2 border-r">2024-01-14</td>
+                                  <td className="p-2">$89.99</td>
+                                </tr>
+                                <tr className="border-b hover:bg-gray-50">
+                                  <td className="p-2 border-r">CUST004</td>
+                                  <td className="p-2 border-r">James Wilson</td>
+                                  <td className="p-2 border-r">j.wilson@email.com</td>
+                                  <td className="p-2 border-r">2024-01-14</td>
+                                  <td className="p-2">$399.00</td>
+                                </tr>
+                                <tr className="border-b hover:bg-gray-50">
+                                  <td className="p-2 border-r">CUST005</td>
+                                  <td className="p-2 border-r">Lisa Anderson</td>
+                                  <td className="p-2 border-r">lisa.a@email.com</td>
+                                  <td className="p-2 border-r">2024-01-13</td>
+                                  <td className="p-2">$199.99</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    );
                   default:
                     return (
                       <div className="space-y-4">
-                        <div className="bg-white border rounded-lg p-4">
-                          <div className="text-center mb-4">
-                            <File className="w-16 h-16 mx-auto text-gray-500 mb-2" />
-                            <h4 className="font-semibold">Document</h4>
+                        <div className="bg-white border rounded-lg overflow-hidden">
+                          <div className="p-3 border-b bg-gray-50">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <FileText className="w-4 h-4 text-gray-500" />
+                                <span className="text-sm font-medium">{lastFile}</span>
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                {extension?.toUpperCase()} • 540 KB
+                              </div>
+                            </div>
                           </div>
-                          <div className="text-xs text-muted-foreground space-y-1 mb-4">
-                            <p><strong>Type:</strong> {extension?.toUpperCase()}</p>
-                            <p><strong>Size:</strong> 540 KB</p>
-                            <p><strong>Modified:</strong> 2 weeks ago</p>
+                          <div className="h-96 bg-white overflow-y-auto p-6 text-sm leading-relaxed">
+                            <div className="space-y-4">
+                              <div className="text-center border-b pb-4">
+                                <h1 className="text-xl font-bold text-gray-900">Document Content</h1>
+                                <p className="text-gray-600 mt-2">{extension?.toUpperCase()} File Preview</p>
+                              </div>
+                              
+                              <div>
+                                <h2 className="text-lg font-semibold text-gray-900 mb-2">Document Overview</h2>
+                                <p className="text-gray-700 mb-3">
+                                  This document contains important information and data relevant to the current project. 
+                                  The content has been formatted for easy reading and reference.
+                                </p>
+                              </div>
+                              
+                              <div>
+                                <h2 className="text-lg font-semibold text-gray-900 mb-2">Key Points</h2>
+                                <div className="bg-gray-50 p-3 rounded">
+                                  <p className="text-gray-700">• Comprehensive analysis and findings</p>
+                                  <p className="text-gray-700">• Strategic recommendations</p>
+                                  <p className="text-gray-700">• Implementation guidelines</p>
+                                  <p className="text-gray-700">• Next steps and timeline</p>
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <h2 className="text-lg font-semibold text-gray-900 mb-2">Additional Information</h2>
+                                <p className="text-gray-700">
+                                  For complete details and full content access, this document contains all necessary 
+                                  information for review and decision making...
+                                </p>
+                              </div>
+                            </div>
                           </div>
-                          <Button size="sm" variant="outline" className="w-full">
-                            Open File
-                          </Button>
                         </div>
                       </div>
                     );
