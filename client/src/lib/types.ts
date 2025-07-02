@@ -28,6 +28,7 @@ export interface CopilotData {
   components: Array<{
     name: string;
     type: 'agent' | 'tool' | 'workflow';
+    description?: string;
   }>;
   profileFields?: ProfileField[];
   conversationMessages?: ChatMessage[];

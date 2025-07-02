@@ -714,7 +714,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 <Bot className="w-5 h-5 text-blue-600 flex-shrink-0" />
                                 <div>
                                   <div className="font-medium text-gray-900">{agent.name}</div>
-                                  <div className="text-sm text-gray-600">Specialized assistant</div>
+                                  <div className="text-sm text-gray-600">{agent.description || 'Specialized assistant'}</div>
                                 </div>
                               </div>
                             ))}
@@ -725,7 +725,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 <Wrench className="w-5 h-5 text-green-600 flex-shrink-0" />
                                 <div>
                                   <div className="font-medium text-gray-900">{tool.name}</div>
-                                  <div className="text-sm text-gray-600">Integration tool</div>
+                                  <div className="text-sm text-gray-600">{tool.description || 'Integration tool'}</div>
                                 </div>
                               </div>
                             ))}
@@ -736,7 +736,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 <Workflow className="w-5 h-5 text-purple-600 flex-shrink-0" />
                                 <div>
                                   <div className="font-medium text-gray-900">{workflow.name}</div>
-                                  <div className="text-sm text-gray-600">Automated workflow</div>
+                                  <div className="text-sm text-gray-600">{workflow.description || 'Automated workflow'}</div>
                                 </div>
                               </div>
                             ))}

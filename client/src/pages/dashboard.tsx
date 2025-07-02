@@ -242,10 +242,10 @@ const mockCopilots: CopilotData[] = [
     type: 'content',
     favorite: true,
     components: [
-      { name: 'Content Writer', type: 'agent' },
-      { name: 'SEO Optimizer', type: 'agent' },
-      { name: 'Grammarly', type: 'tool' },
-      { name: 'SEMrush', type: 'tool' },
+      { name: 'Content Writer', type: 'agent', description: 'AI assistant that creates engaging articles, blogs, and marketing copy' },
+      { name: 'SEO Optimizer', type: 'agent', description: 'Specialist in keyword research and content optimization for search engines' },
+      { name: 'Grammarly', type: 'tool', description: 'Grammar and writing enhancement tool for professional communications' },
+      { name: 'SEMrush', type: 'tool', description: 'Comprehensive SEO and competitive analysis platform' },
     ],
   },
   {
@@ -258,10 +258,10 @@ const mockCopilots: CopilotData[] = [
     type: 'general',
     favorite: true,
     components: [
-      { name: 'Campaign Planning', type: 'workflow' },
-      { name: 'Media Planner', type: 'agent' },
-      { name: 'HubSpot', type: 'tool' },
-      { name: 'Mailchimp', type: 'tool' },
+      { name: 'Campaign Planning', type: 'workflow', description: 'Automated workflow for campaign strategy, timeline, and budget planning' },
+      { name: 'Media Planner', type: 'agent', description: 'Strategic assistant for media buying, channel selection, and budget allocation' },
+      { name: 'HubSpot', type: 'tool', description: 'CRM and marketing automation platform for lead management and nurturing' },
+      { name: 'Mailchimp', type: 'tool', description: 'Email marketing platform for creating, sending, and tracking campaigns' },
     ],
     profileFields: [
       {
@@ -326,10 +326,10 @@ const mockCopilots: CopilotData[] = [
     type: 'analyst',
     favorite: false,
     components: [
-      { name: 'Data Analyst', type: 'agent' },
-      { name: 'Trend Spotter', type: 'agent' },
-      { name: 'Google Analytics', type: 'tool' },
-      { name: 'Hootsuite', type: 'tool' },
+      { name: 'Data Analyst', type: 'agent', description: 'Advanced analytics specialist for social media performance and ROI tracking' },
+      { name: 'Trend Spotter', type: 'agent', description: 'AI assistant that identifies emerging social trends and viral content patterns' },
+      { name: 'Google Analytics', type: 'tool', description: 'Web analytics platform for tracking website traffic and user behavior' },
+      { name: 'Hootsuite', type: 'tool', description: 'Social media management platform for scheduling and monitoring posts' },
     ],
   },
   {
@@ -342,11 +342,11 @@ const mockCopilots: CopilotData[] = [
     type: 'support',
     favorite: false,
     components: [
-      { name: 'Support Agent', type: 'agent' },
-      { name: 'Ticket Router', type: 'agent' },
-      { name: 'Zendesk', type: 'tool' },
-      { name: 'Intercom', type: 'tool' },
-      { name: 'Escalation Flow', type: 'workflow' },
+      { name: 'Support Agent', type: 'agent', description: 'AI customer service representative that handles common inquiries and issues' },
+      { name: 'Ticket Router', type: 'agent', description: 'Smart routing system that assigns tickets to the right team based on complexity' },
+      { name: 'Zendesk', type: 'tool', description: 'Customer service platform for ticket management and support workflows' },
+      { name: 'Intercom', type: 'tool', description: 'Live chat and customer messaging platform for real-time support' },
+      { name: 'Escalation Flow', type: 'workflow', description: 'Automated workflow for escalating complex issues to human agents' },
     ],
   },
 ];
