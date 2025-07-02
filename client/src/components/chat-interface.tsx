@@ -195,13 +195,23 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="gap-2" onClick={() => setShowProfileFields(!showProfileFields)}>
+          <Button 
+            variant="outline" 
+            size="sm"
+            className="h-8 w-8 p-0" 
+            onClick={() => setShowProfileFields(!showProfileFields)}
+            title="Toggle Profile Fields"
+          >
             <UserCog className="h-4 w-4" />
-            Profile Fields
           </Button>
-          <Button variant="outline" onClick={onClose} className="gap-2">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={onClose} 
+            className="h-8 w-8 p-0"
+            title="Close Chat"
+          >
             <X className="h-4 w-4" />
-            Close Chat
           </Button>
         </div>
       </div>
@@ -324,9 +334,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   placeholder="Type your message..."
                   className="flex-1 h-12"
                 />
-                <Button onClick={handleSendMessage} className="h-12 px-6">
-                  <Send className="h-4 w-4 mr-2" />
-                  Send
+                <Button onClick={handleSendMessage} className="h-12 w-12 p-0" title="Send Message">
+                  <Send className="h-4 w-4" />
                 </Button>
               </div>
             </div>
