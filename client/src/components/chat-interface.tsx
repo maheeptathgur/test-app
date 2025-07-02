@@ -234,34 +234,34 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         marginRight: selectedFiles.length > 0 && showDocumentPreview ? `${documentPaneWidth}px` : '0px' 
       }}
     >
-      <div className="flex items-center justify-between p-6 border-b bg-white">
-        <div className="flex items-center gap-3">
-          <div className={`w-10 h-10 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-sm font-semibold`}>
+      <div className="flex items-center justify-between p-3 border-b bg-white">
+        <div className="flex items-center gap-2">
+          <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
             {copilot.avatar}
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-foreground">{copilot.name}</h1>
-            <p className="text-sm text-muted-foreground">{copilot.description}</p>
+            <h1 className="text-lg font-semibold text-foreground">{copilot.name}</h1>
+            <p className="text-xs text-muted-foreground">{copilot.description}</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           <Button 
             variant="outline" 
             size="sm"
-            className="h-8 w-8 p-0" 
+            className="h-7 w-7 p-0" 
             onClick={() => setShowProfileFields(!showProfileFields)}
             title="Toggle Profile Fields"
           >
-            <UserCog className="h-4 w-4" />
+            <UserCog className="h-3 w-3" />
           </Button>
           <Button 
             variant="outline" 
             size="sm"
             onClick={onClose} 
-            className="h-8 w-8 p-0"
+            className="h-7 w-7 p-0"
             title="Close Chat"
           >
-            <X className="h-4 w-4" />
+            <X className="h-3 w-3" />
           </Button>
         </div>
       </div>
