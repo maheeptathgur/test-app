@@ -284,12 +284,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         {/* File Preview Pane */}
         {selectedFiles.length > 0 && (
           <div className="w-80 border-l border-border bg-muted/20 flex flex-col h-full">
-            <div className="p-4 border-b">
-              <h3 className="font-semibold text-foreground">File Preview</h3>
-              <p className="text-sm text-muted-foreground">
-                {selectedFiles[selectedFiles.length - 1]}
-              </p>
-            </div>
             <div className="flex-1 p-4 overflow-y-auto min-h-0">
               {(() => {
                 const lastFile = selectedFiles[selectedFiles.length - 1];
