@@ -27,7 +27,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [isResizing, setIsResizing] = useState(false);
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
   const [expandedAttachments, setExpandedAttachments] = useState(false);
-  const [activeComponents, setActiveComponents] = useState<Array<{name: string; type: string}>>([]);
+  const [activeComponent, setActiveComponent] = useState<{name: string; type: string} | null>(null);
   const [feedbackForms, setFeedbackForms] = useState<Record<string, { type: 'dislike' | 'askHuman'; text: string; visible: boolean }>>({});
   const [likedMessages, setLikedMessages] = useState<Set<string>>(new Set());
   const [copiedMessages, setCopiedMessages] = useState<Set<string>>(new Set());
@@ -258,14 +258,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   const handleAddComponent = (name: string, type: string) => {
     console.log('Selected', type + ':', name);
-    const newComponent = { name, type };
-    setActiveComponents(prev => {
-      // Check if component is already active
-      if (prev.some(comp => comp.name === name && comp.type === type)) {
-        return prev;
-      }
-      return [...prev, newComponent];
-    });
+    setActiveComponent({ name, type });
   };
 
   const getFileIcon = (fileName: string) => {
@@ -446,29 +439,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   </div>
                 </div>
               )}
-              {/* Active Components Indicator */}
-              {activeComponents.length > 0 && (
-                <div className="px-6 py-3 border-b bg-blue-50">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-sm font-medium text-blue-700">Active:</span>
-                    {activeComponents.map((component, index) => (
-                      <div key={`${component.type}-${component.name}`} className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">
-                        {component.type === 'agent' && <Bot className="w-3 h-3" />}
-                        {component.type === 'tool' && <Wrench className="w-3 h-3" />}
-                        {component.type === 'workflow' && <Workflow className="w-3 h-3" />}
-                        <span>{component.name}</span>
-                        <button 
-                          onClick={() => setActiveComponents(prev => prev.filter((_, i) => i !== index))}
-                          className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
-                          title="Remove"
-                        >
-                          <X className="w-2.5 h-2.5" />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+
               
               <div className="flex-1 space-y-6 overflow-y-auto">
                 {messages.map((message) => (
@@ -621,6 +592,25 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           {/* Prompt Bar - moved inside chat area */}
           <div className="bg-white relative">
             <div className="max-w-4xl mx-auto p-3 relative">
+              {/* Active Component Indicator */}
+              {activeComponent && (
+                <div className="mb-2 flex items-center justify-between">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm">
+                    {activeComponent.type === 'agent' && <Bot className="w-4 h-4" />}
+                    {activeComponent.type === 'tool' && <Wrench className="w-4 h-4" />}
+                    {activeComponent.type === 'workflow' && <Workflow className="w-4 h-4" />}
+                    <span className="font-medium">{activeComponent.name}</span>
+                    <span className="text-xs text-blue-600">• Active</span>
+                    <button 
+                      onClick={() => setActiveComponent(null)}
+                      className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
+                      title="Remove"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                </div>
+              )}
               <div className="flex gap-3 relative items-end">
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
