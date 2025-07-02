@@ -592,25 +592,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           {/* Prompt Bar - moved inside chat area */}
           <div className="bg-white relative">
             <div className="max-w-4xl mx-auto p-3 relative">
-              {/* Active Component Indicator */}
-              {activeComponent && (
-                <div className="mb-2 flex items-center justify-between">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm">
-                    {activeComponent.type === 'agent' && <Bot className="w-4 h-4" />}
-                    {activeComponent.type === 'tool' && <Wrench className="w-4 h-4" />}
-                    {activeComponent.type === 'workflow' && <Workflow className="w-4 h-4" />}
-                    <span className="font-medium">{activeComponent.name}</span>
-                    <span className="text-xs text-blue-600">• Active</span>
-                    <button 
-                      onClick={() => setActiveComponent(null)}
-                      className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
-                      title="Remove"
-                    >
-                      <X className="w-3 h-3" />
-                    </button>
-                  </div>
-                </div>
-              )}
               <div className="flex gap-3 relative items-end">
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
@@ -691,15 +672,34 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
-                <Textarea
-                  ref={textareaRef}
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  onKeyPress={handleKeyPress}
-                  placeholder="Type your message..."
-                  className="flex-1 min-h-12 max-h-24 resize-none"
-                  rows={1}
-                />
+                <div className="flex-1 relative">
+                  {/* Active Component Indicator inside input */}
+                  {activeComponent && (
+                    <div className="absolute left-3 top-3 z-10 flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">
+                      {activeComponent.type === 'agent' && <Bot className="w-3 h-3" />}
+                      {activeComponent.type === 'tool' && <Wrench className="w-3 h-3" />}
+                      {activeComponent.type === 'workflow' && <Workflow className="w-3 h-3" />}
+                      <span className="font-medium">{activeComponent.name}</span>
+                      <button 
+                        onClick={() => setActiveComponent(null)}
+                        className="ml-0.5 hover:bg-blue-200 rounded-full p-0.5"
+                        title="Remove"
+                      >
+                        <X className="w-2.5 h-2.5" />
+                      </button>
+                    </div>
+                  )}
+                  <Textarea
+                    ref={textareaRef}
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Type your message..."
+                    className={`min-h-12 max-h-24 resize-none w-full ${activeComponent ? 'pt-8' : ''}`}
+                    style={{ paddingLeft: activeComponent ? '12px' : '12px' }}
+                    rows={1}
+                  />
+                </div>
                 <Button onClick={handleSendMessage} className="h-12 w-12 p-0 self-end" title="Send Message">
                   <Send className="h-4 w-4" />
                 </Button>
