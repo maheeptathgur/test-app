@@ -1077,13 +1077,13 @@ export default function Dashboard() {
               {sidebarCollapsed ? <PanelLeftOpen className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
             </Button>
           </div>
-          {!sidebarCollapsed && (activeSection !== 'user-view' || (activeSection === 'user-view' && chatCopilot)) && (
+          {!sidebarCollapsed && !chatCopilot && activeSection !== 'user-view' && (
             <WorkspaceSelector
               currentWorkspace={currentWorkspace}
               workspaces={workspaces}
               onWorkspaceChange={handleWorkspaceChange}
               copilots={copilots}
-              isInChatMode={!!chatCopilot}
+              isInChatMode={false}
               onCopilotSelect={handleStartChat}
             />
           )}
