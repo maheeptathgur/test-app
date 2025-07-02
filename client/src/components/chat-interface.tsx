@@ -344,9 +344,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     <div
                       className={`max-w-[70%] p-4 rounded-lg ${
                         message.sender === 'user'
-                          ? 'bg-primary text-primary-foreground'
+                          ? 'text-foreground'
                           : 'text-foreground'
                       }`}
+                      style={message.sender === 'user' ? { backgroundColor: '#e6eeef' } : {}}
                     >
                       <div className="whitespace-pre-wrap" style={{ fontSize: '.9375em' }}>
                         {message.content.split('\n').map((line, index) => {
