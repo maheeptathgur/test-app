@@ -199,6 +199,7 @@ Changelog:
 - July 2, 2025. Implemented live badge rendering in input field using contentEditable - @mentions now display as colored badges while typing, with HTML badge generation, cursor positioning for contentEditable elements, and CSS placeholder styling for enhanced user experience during message composition
 - July 2, 2025. Added realistic descriptions to all copilot components (HubSpot: CRM platform, Mailchimp: Email marketing, etc.) and updated chat welcome screen to display specific tool descriptions instead of generic text
 - July 2, 2025. Fixed chat interface layout to use full width by removing max-w-4xl constraints from both chat container and input area, and improved welcome screen responsive display from MD breakpoint to SM breakpoint for better mobile compatibility
+- July 2, 2025. Increased message bubble width from 70% to 90% for better space utilization in the full-width chat interface
 ```
 
 ## User Preferences
