@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -433,15 +433,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 </div>
               )}
               <div className="flex-1 space-y-6 overflow-y-auto">
-                {/* Agent Activity Indicator */}
-                <div className="flex justify-center">
-                  <div className="inline-flex items-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-full text-sm border border-blue-200">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                    <span className="font-medium">Content Creation Agent</span>
-                    <span className="text-xs text-blue-600">• Writing article draft</span>
-                  </div>
-                </div>
-                
                 {messages.map((message) => (
                   <div
                     key={message.id}
@@ -635,6 +626,17 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   }}
                 >
                   <Paperclip className="h-4 w-4" />
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="h-12 px-3 self-end"
+                  onClick={() => {
+                    // Add agent/tool/workflow functionality
+                    console.log('Add agent, tool, or workflow');
+                  }}
+                  title="Add Agent, Tool, or Workflow"
+                >
+                  <Plus className="h-4 w-4" />
                 </Button>
                 <Textarea
                   ref={textareaRef}
