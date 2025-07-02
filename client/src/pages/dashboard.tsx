@@ -20,7 +20,7 @@ import { SampleScreen } from "@/components/sample-screens";
 import { WorkspaceSettings } from "@/components/workspace-settings";
 import { UserView } from "@/components/user-view";
 import { DeleteConfirmationModal } from "@/components/delete-confirmation-modal";
-import { Workspace, CopilotData, NavigationSection, ChatMessage } from "@/lib/types";
+import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
   { id: '1', name: 'My Workspace', type: 'Personal', avatar: 'M', color: 'bg-blue-500' },
@@ -36,26 +36,6 @@ const recentConversations = [
     lastMessage: 'Here are 5 creative campaign concepts for the Q2 launch...',
     timestamp: '2 hours ago',
     isActive: false,
-    messages: [
-      {
-        id: '1-1',
-        content: 'Hi! I need help brainstorming marketing campaign ideas for our Q2 product launch. The product is a new fitness tracking app.',
-        sender: 'user' as const,
-        timestamp: '2 hours ago'
-      },
-      {
-        id: '1-2',
-        content: 'Great! I\'d love to help you brainstorm marketing campaign ideas for your fitness tracking app. Here are 5 creative campaign concepts for the Q2 launch:\n\n**1. "Track Your Journey" Challenge Campaign**\n- 30-day social media challenge where users share their fitness progress\n- Gamification with weekly prizes and ultimate grand prize\n- User-generated content builds community and social proof\n\n**2. "Fitness Without Borders" Influencer Collaboration**\n- Partner with micro-influencers from different countries\n- Showcase diverse fitness cultures and routines\n- Create localized content for different markets\n\n**3. "From Couch to 5K" Transformation Stories**\n- Document real users\' transformation journeys\n- Before/after testimonials and progress tracking\n- Emotional storytelling approach\n\n**4. "Smart Goals, Smarter Results" Educational Series**\n- Weekly fitness tips and goal-setting workshops\n- Expert collaborations with trainers and nutritionists\n- Position your app as the smart choice for goal achievement\n\n**5. "Workout Buddy" Referral Program**\n- Incentivize users to invite friends\n- Collaborative challenges for friend groups\n- Social features highlighting community aspect\n\nWhich of these resonates most with your brand vision?',
-        sender: 'bot' as const,
-        timestamp: '2 hours ago'
-      },
-      {
-        id: '1-3',
-        content: 'I love the "Track Your Journey" challenge idea! Can you help me develop this concept further? What specific mechanics would work best?',
-        sender: 'user' as const,
-        timestamp: '2 hours ago'
-      }
-    ]
   },
   {
     id: '2',
@@ -64,20 +44,6 @@ const recentConversations = [
     lastMessage: 'Based on the competitive analysis, I recommend...',
     timestamp: 'Yesterday',
     isActive: false,
-    messages: [
-      {
-        id: '2-1',
-        content: 'I need help developing a pricing strategy for our SaaS product. We\'re competing with established players but offer unique AI features.',
-        sender: 'user' as const,
-        timestamp: 'Yesterday'
-      },
-      {
-        id: '2-2',
-        content: 'Based on the competitive analysis, I recommend a value-based pricing strategy with three tiers:\n\n**Starter Plan - $29/month**\n- Core features without AI\n- Up to 5 users\n- Basic support\n- Position as entry point for small teams\n\n**Professional Plan - $79/month** (Most Popular)\n- All core features + AI capabilities\n- Up to 25 users\n- Priority support + training\n- Sweet spot for growing businesses\n\n**Enterprise Plan - $199/month**\n- Full feature set + advanced AI\n- Unlimited users\n- Dedicated success manager\n- Custom integrations\n\n**Key considerations:**\n- Price anchoring with the high-end plan\n- Clear value differentiation through AI features\n- Room for annual discount (15-20%)\n- Freemium option to drive adoption\n\nThis positions you 15-20% below premium competitors while highlighting your AI advantage. Would you like me to break down the revenue projections?',
-        sender: 'bot' as const,
-        timestamp: 'Yesterday'
-      }
-    ]
   },
   {
     id: '3',
@@ -86,20 +52,6 @@ const recentConversations = [
     lastMessage: 'I\'ve drafted the new response templates for...',
     timestamp: '2 days ago',
     isActive: false,
-    messages: [
-      {
-        id: '3-1',
-        content: 'We need to update our customer support guidelines to be more empathetic and solution-focused. Can you help draft new response templates?',
-        sender: 'user' as const,
-        timestamp: '2 days ago'
-      },
-      {
-        id: '3-2',
-        content: 'I\'ve drafted new response templates for common support scenarios, focusing on empathy and solutions:\n\n**For Technical Issues:**\n"I understand how frustrating technical issues can be, especially when you\'re trying to [specific task]. Let me help you resolve this right away. I\'ve found that [solution] typically resolves this issue within minutes. If that doesn\'t work, I\'ll personally ensure we find an alternative solution for you."\n\n**For Billing Concerns:**\n"I completely understand your concern about this charge, and I want to make sure we get this sorted out for you today. Let me review your account details and explain exactly what happened. [Specific explanation]. Here\'s what I\'ll do to make this right..."\n\n**For Feature Requests:**\n"Thank you for taking the time to share this suggestion! It\'s feedback like yours that helps us improve our product. I\'ve added your request to our product roadmap for consideration. In the meantime, here are a couple of workarounds that might help you achieve what you\'re looking for..."\n\nEach template includes acknowledgment, empathy, immediate action, and follow-up commitment. Would you like me to develop templates for specific scenarios?',
-        sender: 'bot' as const,
-        timestamp: '2 days ago'
-      }
-    ]
   },
   {
     id: '4',
@@ -108,20 +60,6 @@ const recentConversations = [
     lastMessage: 'The quarterly metrics show significant growth in...',
     timestamp: '1 week ago',
     isActive: false,
-    messages: [
-      {
-        id: '4-1',
-        content: 'Can you help me analyze our Q4 performance metrics and prepare a summary for the board meeting?',
-        sender: 'user' as const,
-        timestamp: '1 week ago'
-      },
-      {
-        id: '4-2',
-        content: 'The quarterly metrics show significant growth in key areas:\n\n**Revenue Performance:**\n- Q4 Revenue: $2.8M (32% YoY growth)\n- Recurring Revenue: $2.1M (94% of total)\n- New Customer Acquisition: 847 customers (+28%)\n\n**Operational Efficiency:**\n- Customer Acquisition Cost: $89 (down 15%)\n- Lifetime Value: $1,247 (up 22%)\n- Churn Rate: 3.2% (industry best-in-class)\n\n**Key Highlights:**\n- Exceeded revenue targets by 12%\n- Improved unit economics across all metrics\n- Strong product-market fit indicators\n- Successful expansion into two new markets\n\n**Areas for Focus:**\n- Scale customer success team (growing satisfaction scores)\n- Invest in product development (high feature request volume)\n- Expand marketing in high-performing channels\n\nThe data supports continued growth trajectory and validates our strategic investments. Ready for detailed breakdown by segment?',
-        sender: 'bot' as const,
-        timestamp: '1 week ago'
-      }
-    ]
   },
   {
     id: '5',
@@ -130,20 +68,6 @@ const recentConversations = [
     lastMessage: 'I\'ve created a 30-day content schedule focusing on...',
     timestamp: '1 week ago',
     isActive: false,
-    messages: [
-      {
-        id: '5-1',
-        content: 'I need help creating a content calendar for our company blog. We want to publish 3 times per week and focus on thought leadership.',
-        sender: 'user' as const,
-        timestamp: '1 week ago'
-      },
-      {
-        id: '5-2',
-        content: 'I\'ve created a 30-day content schedule focusing on thought leadership:\n\n**Week 1: Industry Insights**\n- Monday: "The Future of Remote Work: 5 Trends Shaping 2024"\n- Wednesday: "AI in Business: Beyond the Hype to Real Applications"\n- Friday: "Customer Experience Revolution: What We Learned from 1000+ Surveys"\n\n**Week 2: Expert Perspectives**\n- Monday: "Interview: How [Industry Leader] Built a $100M Company"\n- Wednesday: "Data-Driven Decision Making: A Framework for Startups"\n- Friday: "The Psychology of User Adoption: Behavioral Insights"\n\n**Week 3: Deep Dives**\n- Monday: "Complete Guide to Product-Market Fit Validation"\n- Wednesday: "Building High-Performance Teams: 7 Non-Negotiable Principles"\n- Friday: "Scaling Customer Success: From 10 to 10,000 Customers"\n\n**Week 4: Forward-Looking**\n- Monday: "Predictions: How Technology Will Transform Your Industry"\n- Wednesday: "Building for the Next Decade: Strategic Planning"\n- Friday: "Monthly Roundup: Key Insights and What\'s Next"\n\nEach post includes SEO optimization, social media snippets, and email newsletter integration. Would you like me to develop specific outlines for any of these topics?',
-        sender: 'bot' as const,
-        timestamp: '1 week ago'
-      }
-    ]
   },
 ];
 
@@ -352,7 +276,6 @@ export default function Dashboard() {
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [copilotToDelete, setCopilotToDelete] = useState<CopilotData | null>(null);
-  const [conversationHistory, setConversationHistory] = useState<any[]>([]);
   
   // State for tracking which specific agent/tool/workflow to configure
   const [configureAgent, setConfigureAgent] = useState<{id: string, name: string} | null>(null);
@@ -423,21 +346,6 @@ export default function Dashboard() {
 
   const handleStartChat = (copilot: CopilotData) => {
     setChatCopilot(copilot);
-    // Clear conversation history for new chats
-    setConversationHistory([]);
-  };
-
-  const handleLoadConversation = (conversationId: string) => {
-    const conversation = conversations.find(c => c.id === conversationId);
-    if (conversation) {
-      // Find the copilot that matches this conversation
-      const copilot = copilots.find(c => c.name === conversation.copilot);
-      if (copilot) {
-        setChatCopilot(copilot);
-        // Set the conversation history to load existing messages
-        setConversationHistory(conversation.messages);
-      }
-    }
   };
 
   const handleEditCopilot = (copilot: CopilotData) => {
@@ -591,7 +499,6 @@ export default function Dashboard() {
             onClose={() => setChatCopilot(null)}
             onToggleAttachment={handleToggleAttachment}
             selectedFiles={selectedFiles}
-            initialMessages={conversationHistory}
           />
         ),
       };
@@ -1169,13 +1076,12 @@ export default function Dashboard() {
                 {conversations.map((conversation) => (
                   <div
                     key={conversation.id}
-                    className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg transition-all group cursor-pointer ${
+                    className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg transition-all group ${
                       conversation.isActive 
                         ? 'bg-sidebar-accent text-sidebar-primary' 
                         : 'hover:bg-sidebar-accent hover:text-sidebar-primary'
                     }`}
                     title={sidebarCollapsed ? conversation.title : undefined}
-                    onClick={() => handleLoadConversation(conversation.id)}
                   >
                     {sidebarCollapsed ? (
                       <div className="flex items-center justify-between">

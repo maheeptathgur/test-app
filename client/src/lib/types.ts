@@ -30,7 +30,6 @@ export interface CopilotData {
     type: 'agent' | 'tool' | 'workflow';
   }>;
   profileFields?: ProfileField[];
-  conversationMessages?: ChatMessage[];
 }
 
 export interface ChatMessage {
