@@ -179,14 +179,21 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     const textarea = textareaRef.current;
     if (!textarea) return;
     
-    const beforeAt = inputValue.substring(0, handleTriggerPosition);
-    const afterHandle = inputValue.substring(textarea.selectionStart);
-    const newValue = `${beforeAt}@${componentName} ${afterHandle}`;
+    const cursorPosition = textarea.selectionStart;
+    const textBeforeCursor = inputValue.substring(0, cursorPosition);
+    const textAfterCursor = inputValue.substring(cursorPosition);
+    
+    // Find the @ that triggered this autocomplete
+    const lastAtIndex = textBeforeCursor.lastIndexOf('@');
+    
+    // Build the new value by replacing from @ to cursor with @componentName
+    const beforeAt = inputValue.substring(0, lastAtIndex);
+    const newValue = `${beforeAt}@${componentName} ${textAfterCursor}`;
     
     setInputValue(newValue);
     setShowHandleDropdown(false);
     
-    // Focus back to textarea and position cursor
+    // Focus back to textarea and position cursor after the inserted component name and space
     setTimeout(() => {
       textarea.focus();
       const newCursorPosition = beforeAt.length + componentName.length + 2; // +2 for @ and space
