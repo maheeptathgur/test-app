@@ -1264,37 +1264,14 @@ export default function Dashboard() {
                   </div>
                 </div>
               )}
-              <div className="space-y-1">
-                {conversations.filter(conversation => conversation.copilot === chatCopilot?.name).map((conversation) => (
-                  <div
-                    key={conversation.id}
-                    className={`${sidebarCollapsed ? 'p-1.5' : 'p-2'} rounded-lg transition-all group cursor-pointer ${
-                      conversation.isActive 
-                        ? 'bg-sidebar-accent text-sidebar-primary' 
-                        : 'bg-white/50 hover:bg-sidebar-accent hover:text-sidebar-primary'
-                    }`}
-                    title={sidebarCollapsed ? conversation.title : undefined}
-                    onClick={() => handleLoadConversation(conversation)}
-                  >
-                    {sidebarCollapsed ? (
-                      <div className="flex items-center justify-between">
-                        <div className="w-5 h-5 rounded bg-sidebar-primary/20 flex items-center justify-center cursor-pointer">
-                          <MessageSquare className="w-3 h-3" />
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteConversation(conversation.id);
-                          }}
-                          className="opacity-0 group-hover:opacity-100 h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
-                          title="Delete conversation"
-                        >
-                          <Trash2 className="w-3 h-3" />
-                        </Button>
-                      </div>
-                    ) : (
+              {!sidebarCollapsed && (
+                <div className="space-y-1">
+                  {conversations.filter(conversation => conversation.copilot === chatCopilot?.name).map((conversation) => (
+                    <div
+                      key={conversation.id}
+                      className="p-2 rounded-lg transition-all group cursor-pointer bg-white/50 hover:bg-sidebar-accent hover:text-sidebar-primary"
+                      onClick={() => handleLoadConversation(conversation)}
+                    >
                       <div className="space-y-0.5">
                         <div className="flex items-start justify-between gap-2">
                           <div className="flex-1 min-w-0 cursor-pointer">
@@ -1315,10 +1292,10 @@ export default function Dashboard() {
                         </div>
                         <span className="text-xs text-muted-foreground cursor-pointer leading-tight">{conversation.timestamp}</span>
                       </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>)
           ) : (
             // Regular Admin Navigation Menu
