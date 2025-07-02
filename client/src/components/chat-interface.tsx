@@ -254,7 +254,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           </Button>
         </div>
       </div>
-      
       <div className="flex-1 overflow-hidden flex">
         {/* Main Chat Area */}
         <div className="flex-1 flex flex-col">
@@ -337,7 +336,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               {/* Floating Attached Files Display */}
               {selectedFiles.length > 0 && (
                 <div className="absolute -top-8" style={{ left: '0px' }}>
-                  <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs">
+                  <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs ml-[12px] mr-[12px]">
                     <Paperclip className="w-3 h-3" />
                     <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
                     <div className="flex items-center gap-1">
