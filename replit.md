@@ -190,6 +190,7 @@ Changelog:
 - July 2, 2025. Added white background to table wrapper divs to fix white corners showing through rounded borders
 - July 2, 2025. Added interaction buttons to AI responses - copy, like, dislike, and ask a human buttons appear below each bot message with feedback forms for dislike and ask human options that allow users to submit single-line feedback
 - July 2, 2025. Removed intro chat message requirement - users can now begin conversations directly without any pre-filled greeting messages, creating a cleaner conversation start experience
+- July 2, 2025. Added welcome screen with tools overview - when no messages exist, displays copilot name, description, and grid of available agents, tools, and workflows with color-coded categories (blue for agents, green for tools, purple for workflows) to help new users understand available capabilities before starting conversations
 ```
 
 ## User Preferences
