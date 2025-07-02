@@ -36,6 +36,32 @@ const recentConversations = [
     lastMessage: 'Here are 5 creative campaign concepts for the Q2 launch...',
     timestamp: '2 hours ago',
     isActive: false,
+    messages: [
+      {
+        id: 'm1',
+        content: 'I need some fresh marketing campaign ideas for our Q2 product launch.',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm2', 
+        content: 'Here are 5 creative campaign concepts for the Q2 launch:\n\n1. **"Transform Your Tomorrow"** - Focus on how the product changes daily routines\n2. **"Early Adopter Advantage"** - Exclusive access for first 1000 customers\n3. **"Behind the Scenes"** - Show the development journey and team stories\n4. **"Customer Co-Creation"** - Feature real customer feedback in ads\n5. **"Future-Forward"** - Highlight cutting-edge technology aspects\n\nEach campaign includes social media, email, and video components. Would you like me to elaborate on any specific concept?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000 + 30000).toISOString(),
+      },
+      {
+        id: 'm3',
+        content: 'I really like the "Transform Your Tomorrow" concept. Can you develop that further?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000 + 60000).toISOString(),
+      },
+      {
+        id: 'm4',
+        content: 'Perfect choice! Here\'s a detailed breakdown of "Transform Your Tomorrow":\n\n**Core Message:** Show how small daily changes lead to big life improvements\n\n**Campaign Elements:**\n- **Video Series:** "Day in the Life" transformations\n- **Interactive Tool:** "My Tomorrow Calculator" \n- **Social Challenge:** #TransformTomorrowChallenge\n- **Influencer Partnerships:** Productivity and lifestyle experts\n\n**Timeline:** 6-week rollout with weekly themes\n**Budget Allocation:** 40% video, 30% social, 20% influencer, 10% interactive\n\nShall I create a detailed timeline and content calendar?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000 + 120000).toISOString(),
+      }
+    ]
   },
   {
     id: '2',
@@ -44,6 +70,20 @@ const recentConversations = [
     lastMessage: 'Based on the competitive analysis, I recommend...',
     timestamp: 'Yesterday',
     isActive: false,
+    messages: [
+      {
+        id: 'm5',
+        content: 'We need to finalize our pricing strategy for the new product. What does the competitive landscape look like?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm6',
+        content: 'Based on the competitive analysis, I recommend a tiered pricing strategy:\n\n**Competitive Landscape:**\n- Competitor A: $29/month (basic features)\n- Competitor B: $49/month (advanced features)\n- Competitor C: $79/month (enterprise focus)\n\n**Recommended Pricing:**\n- **Starter:** $25/month - Undercut competition by 15%\n- **Professional:** $45/month - Match market rate\n- **Enterprise:** $89/month - Premium positioning\n\n**Key Differentiators:** Our unique AI features justify premium pricing in enterprise tier.\n\nThis strategy captures price-sensitive customers while maximizing revenue from enterprise clients.',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000 + 30000).toISOString(),
+      }
+    ]
   },
   {
     id: '3',
@@ -52,6 +92,20 @@ const recentConversations = [
     lastMessage: 'I\'ve drafted the new response templates for...',
     timestamp: '2 days ago',
     isActive: false,
+    messages: [
+      {
+        id: 'm7',
+        content: 'Can you help me create standardized response templates for common customer inquiries?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm8',
+        content: 'I\'ve drafted the new response templates for common scenarios:\n\n**1. Account Access Issues**\n"Hi [Name], I understand how frustrating login issues can be. Let me help you regain access immediately..."\n\n**2. Billing Questions**\n"Thank you for reaching out about your billing. I\'ll review your account and provide a detailed explanation..."\n\n**3. Feature Requests**\n"We love hearing feature ideas from customers like you! I\'ll make sure your suggestion reaches our product team..."\n\n**4. Technical Problems**\n"I\'m sorry you\'re experiencing technical difficulties. Let\'s troubleshoot this step by step..."\n\nEach template includes personalization fields and escalation triggers. Would you like me to add more scenarios?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000 + 30000).toISOString(),
+      }
+    ]
   },
   {
     id: '4',
@@ -60,6 +114,20 @@ const recentConversations = [
     lastMessage: 'The quarterly metrics show significant growth in...',
     timestamp: '1 week ago',
     isActive: false,
+    messages: [
+      {
+        id: 'm9',
+        content: 'I need to prepare the Q4 performance review. Can you analyze our key metrics?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm10',
+        content: 'The quarterly metrics show significant growth in multiple areas:\n\n**Revenue Growth:** +34% QoQ, exceeding target by 12%\n**Customer Acquisition:** 2,847 new customers (vs 2,200 target)\n**Customer Retention:** 94.2% (industry average: 89%)\n**Product Usage:** +28% active daily users\n\n**Key Wins:**\n- Enterprise segment grew 45%\n- Customer satisfaction score: 4.7/5\n- Support ticket resolution improved by 22%\n\n**Areas for Improvement:**\n- Mobile app engagement still below target\n- Churn rate in month 2-3 needs attention\n\nShall I prepare detailed charts and a presentation deck?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000 + 30000).toISOString(),
+      }
+    ]
   },
   {
     id: '5',
@@ -68,6 +136,20 @@ const recentConversations = [
     lastMessage: 'I\'ve created a 30-day content schedule focusing on...',
     timestamp: '1 week ago',
     isActive: false,
+    messages: [
+      {
+        id: 'm11',
+        content: 'We need a comprehensive blog content calendar for the next month. Can you help plan this out?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm12',
+        content: 'I\'ve created a 30-day content schedule focusing on audience engagement and SEO:\n\n**Week 1: Foundation Topics**\n- Mon: "Getting Started Guide" (How-to)\n- Wed: "Industry Trends 2024" (Analysis)\n- Fri: "Customer Success Story: TechCorp" (Case Study)\n\n**Week 2: Deep Dives**\n- Mon: "Advanced Features Walkthrough" (Tutorial)\n- Wed: "ROI Calculator Guide" (Tool)\n- Fri: "Expert Interview: Sarah Chen" (Interview)\n\n**Week 3: Community Focus**\n- Mon: "User-Generated Content Showcase" (Community)\n- Wed: "Common Mistakes to Avoid" (Tips)\n- Fri: "Behind the Scenes: Development" (Culture)\n\n**Week 4: Forward-Looking**\n- Mon: "Future of the Industry" (Prediction)\n- Wed: "Product Roadmap Preview" (Update)\n- Fri: "Month in Review" (Roundup)\n\nEach post includes target keywords, social media hooks, and email newsletter integration.',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000 + 30000).toISOString(),
+      }
+    ]
   },
 ];
 
@@ -439,8 +521,8 @@ export default function Dashboard() {
     // Find the copilot associated with this conversation
     const copilot = copilots.find(c => c.name === conversation.copilot);
     if (copilot) {
-      // Start chat with the copilot
-      setChatCopilot(copilot);
+      // Start chat with the copilot and pass conversation messages
+      setChatCopilot({ ...copilot, conversationMessages: conversation.messages || [] });
       
       // Mark this conversation as active and others as inactive
       setConversations(prev => prev.map(conv => ({
