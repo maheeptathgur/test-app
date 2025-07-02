@@ -348,22 +348,12 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       }}
     >
       <div className="flex items-center justify-between p-3 border-b bg-white">
-        <div className="flex items-center gap-3">
-          <div className="relative">
-            <div className={`w-8 h-8 ${copilot.avatarColor} rounded-full flex items-center justify-center text-xs font-semibold`}>
-              {copilot.avatar}
-            </div>
-            {/* Active indicator */}
-            <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+        <div className="flex items-center gap-2">
+          <div className={`w-8 h-8 ${copilot.avatarColor} rounded-full flex items-center justify-center text-xs font-semibold`}>
+            {copilot.avatar}
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-lg font-semibold text-foreground">{copilot.name}</h1>
-              <div className="flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-700 rounded-full text-xs font-medium">
-                <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                Active
-              </div>
-            </div>
+            <h1 className="text-lg font-semibold text-foreground">{copilot.name}</h1>
             <p className="text-xs text-muted-foreground">{copilot.description}</p>
           </div>
         </div>
@@ -443,6 +433,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 </div>
               )}
               <div className="flex-1 space-y-6 overflow-y-auto">
+                {/* Agent Activity Indicator */}
+                <div className="flex justify-center">
+                  <div className="inline-flex items-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-full text-sm border border-blue-200">
+                    <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                    <span className="font-medium">Content Creation Agent</span>
+                    <span className="text-xs text-blue-600">• Writing article draft</span>
+                  </div>
+                </div>
+                
                 {messages.map((message) => (
                   <div
                     key={message.id}
