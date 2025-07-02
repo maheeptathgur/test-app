@@ -222,7 +222,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       const newCursorPosition = beforeAt.length + componentName.length + 2; // +2 for @ and space
       console.log('Setting cursor to position:', newCursorPosition);
       textarea.setSelectionRange(newCursorPosition, newCursorPosition);
-    }, 0);
+      console.log('Cursor set, actual position:', textarea.selectionStart);
+    }, 10);
   };
 
   const handleUpdateFeedback = (messageId: string, text: string) => {
@@ -912,7 +913,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 ? 'bg-blue-50 border-l-2 border-blue-500' 
                                 : 'hover:bg-gray-50'
                             }`}
-                            onClick={() => {
+                            onMouseDown={(e) => {
+                              e.preventDefault(); // Prevent textarea blur
                               console.log('Dropdown item clicked:', suggestion.name);
                               insertHandle(suggestion.name);
                             }}
