@@ -31,9 +31,32 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [feedbackForms, setFeedbackForms] = useState<Record<string, { type: 'dislike' | 'askHuman'; text: string; visible: boolean; submitted: boolean }>>({});
   const [likedMessages, setLikedMessages] = useState<Set<string>>(new Set());
   const [copiedMessages, setCopiedMessages] = useState<Set<string>>(new Set());
+  const [showHandleDropdown, setShowHandleDropdown] = useState(false);
+  const [handleSuggestions, setHandleSuggestions] = useState<Array<{name: string; type: string}>>([]);
+  const [selectedHandleIndex, setSelectedHandleIndex] = useState(0);
+  const [handleTriggerPosition, setHandleTriggerPosition] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Auto-scroll to bottom when new messages are added
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  // Close handle dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showHandleDropdown && textareaRef.current && !textareaRef.current.contains(event.target as Node)) {
+        setShowHandleDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showHandleDropdown]);
 
   // Simple markdown formatter for chat messages
   const formatMarkdown = (text: string): string => {
@@ -113,6 +136,62 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         }
       }));
     }
+  };
+
+  // Handle @ mentions and autocomplete
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    const cursorPosition = e.target.selectionStart;
+    
+    setInputValue(value);
+    
+    // Check if we're typing @ and should show autocomplete
+    const textBeforeCursor = value.substring(0, cursorPosition);
+    const lastAtIndex = textBeforeCursor.lastIndexOf('@');
+    
+    if (lastAtIndex >= 0) {
+      const textAfterAt = textBeforeCursor.substring(lastAtIndex + 1);
+      
+      // Only show if we haven't typed a space after @
+      if (!textAfterAt.includes(' ') && textAfterAt.length >= 0) {
+        const searchTerm = textAfterAt.toLowerCase();
+        const suggestions = copilot?.components?.filter(component => 
+          component.name.toLowerCase().includes(searchTerm)
+        ) || [];
+        
+        if (suggestions.length > 0) {
+          setHandleSuggestions(suggestions);
+          setHandleTriggerPosition(lastAtIndex);
+          setShowHandleDropdown(true);
+          setSelectedHandleIndex(0);
+        } else {
+          setShowHandleDropdown(false);
+        }
+      } else {
+        setShowHandleDropdown(false);
+      }
+    } else {
+      setShowHandleDropdown(false);
+    }
+  };
+
+  const insertHandle = (componentName: string) => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+    
+    const beforeAt = inputValue.substring(0, handleTriggerPosition);
+    const afterHandle = inputValue.substring(textarea.selectionStart);
+    const newValue = `${beforeAt}@${componentName} ${afterHandle}`;
+    
+    setInputValue(newValue);
+    setShowHandleDropdown(false);
+    
+    // Focus back to textarea and position cursor
+    setTimeout(() => {
+      textarea.focus();
+      const newCursorPosition = beforeAt.length + componentName.length + 2; // +2 for @ and space
+      textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+    }, 0);
   };
 
   const handleUpdateFeedback = (messageId: string, text: string) => {
@@ -233,6 +312,29 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (showHandleDropdown) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setSelectedHandleIndex(prev => 
+          prev < handleSuggestions.length - 1 ? prev + 1 : 0
+        );
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setSelectedHandleIndex(prev => 
+          prev > 0 ? prev - 1 : handleSuggestions.length - 1
+        );
+      } else if (e.key === 'Enter' || e.key === 'Tab') {
+        e.preventDefault();
+        if (handleSuggestions[selectedHandleIndex]) {
+          insertHandle(handleSuggestions[selectedHandleIndex].name);
+        }
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        setShowHandleDropdown(false);
+      }
+      return;
+    }
+
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -764,16 +866,43 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       </button>
                     </div>
                   )}
-                  <Textarea
-                    ref={textareaRef}
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Type your message..."
-                    className="min-h-12 max-h-24 resize-none w-full"
-                    style={{ paddingRight: activeComponent ? '120px' : '12px' }}
-                    rows={1}
-                  />
+                  <div className="relative">
+                    <Textarea
+                      ref={textareaRef}
+                      value={inputValue}
+                      onChange={handleInputChange}
+                      onKeyDown={handleKeyPress}
+                      placeholder="Type your message... Use @ to mention tools, agents, or workflows"
+                      className="min-h-12 max-h-24 resize-none w-full"
+                      style={{ paddingRight: activeComponent ? '120px' : '12px' }}
+                      rows={1}
+                    />
+                    
+                    {/* Handle Autocomplete Dropdown */}
+                    {showHandleDropdown && handleSuggestions.length > 0 && (
+                      <div className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto">
+                        {handleSuggestions.map((suggestion, index) => (
+                          <div
+                            key={`${suggestion.type}-${suggestion.name}`}
+                            className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors ${
+                              index === selectedHandleIndex 
+                                ? 'bg-blue-50 border-l-2 border-blue-500' 
+                                : 'hover:bg-gray-50'
+                            }`}
+                            onClick={() => insertHandle(suggestion.name)}
+                          >
+                            {suggestion.type === 'agent' && <Bot className="w-4 h-4 text-blue-600" />}
+                            {suggestion.type === 'tool' && <Wrench className="w-4 h-4 text-green-600" />}
+                            {suggestion.type === 'workflow' && <Workflow className="w-4 h-4 text-purple-600" />}
+                            <div className="flex-1">
+                              <div className="font-medium text-sm">@{suggestion.name}</div>
+                              <div className="text-xs text-gray-500 capitalize">{suggestion.type}</div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <Button onClick={handleSendMessage} className="h-12 w-12 p-0 self-end" title="Send Message">
                   <Send className="h-4 w-4" />
