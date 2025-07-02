@@ -604,11 +604,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`p-4 rounded-lg ${
-                        message.sender === 'user'
-                          ? 'max-w-[70%] text-foreground'
-                          : 'w-full text-foreground'
-                      }`}
+                      className="p-4 rounded-lg max-w-[70%] text-foreground pt-[10px] pb-[10px]"
                       style={message.sender === 'user' ? { backgroundColor: '#e6eeef' } : {}}
                     >
                       <div className="whitespace-pre-wrap" style={{ fontSize: '.9375em' }}>
