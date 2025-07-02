@@ -187,6 +187,7 @@ Changelog:
 - July 2, 2025. Made conversation cards more compact by reducing padding from p-3 to p-2, spacing from space-y-2 to space-y-1, and tightening line height with leading-tight for better space efficiency
 - July 2, 2025. Added subtle background shading to conversation cards with bg-white/50 for better visibility against sidebar background
 - July 2, 2025. Removed Play icon from copilot dropdown menu items in workspace selector for cleaner interface
+- July 2, 2025. Added white background to table wrapper divs to fix white corners showing through rounded borders
 ```
 
 ## User Preferences
