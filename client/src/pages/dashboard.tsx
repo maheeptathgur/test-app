@@ -1077,13 +1077,13 @@ export default function Dashboard() {
               {sidebarCollapsed ? <PanelLeftOpen className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
             </Button>
           </div>
-          {!sidebarCollapsed && !chatCopilot && activeSection !== 'user-view' && (
+          {!sidebarCollapsed && (activeSection !== 'user-view' || (activeSection === 'user-view' && chatCopilot)) && (
             <WorkspaceSelector
               currentWorkspace={currentWorkspace}
               workspaces={workspaces}
               onWorkspaceChange={handleWorkspaceChange}
               copilots={copilots}
-              isInChatMode={false}
+              isInChatMode={!!chatCopilot}
               onCopilotSelect={handleStartChat}
             />
           )}
@@ -1173,7 +1173,7 @@ export default function Dashboard() {
                 </div>
               )}
               <div className="space-y-2">
-                {conversations.map((conversation) => (
+                {conversations.filter(conversation => conversation.copilot === chatCopilot?.name).map((conversation) => (
                   <div
                     key={conversation.id}
                     className={`${sidebarCollapsed ? 'p-2' : 'p-3'} rounded-lg transition-all group cursor-pointer ${
