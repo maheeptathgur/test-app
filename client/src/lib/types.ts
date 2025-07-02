@@ -6,6 +6,16 @@ export interface Workspace {
   color: string;
 }
 
+export interface ProfileField {
+  id: string;
+  name: string;
+  label: string;
+  type: 'text' | 'textarea' | 'select' | 'number';
+  required: boolean;
+  description?: string;
+  options?: string[];
+}
+
 export interface CopilotData {
   id: string;
   name: string;
@@ -19,6 +29,7 @@ export interface CopilotData {
     name: string;
     type: 'agent' | 'tool' | 'workflow';
   }>;
+  profileFields?: ProfileField[];
 }
 
 export interface ChatMessage {

@@ -103,6 +103,58 @@ const mockCopilots: CopilotData[] = [
       { name: 'HubSpot', type: 'tool' },
       { name: 'Mailchimp', type: 'tool' },
     ],
+    profileFields: [
+      {
+        id: 'title',
+        name: 'title',
+        label: 'Job Title',
+        type: 'text',
+        required: true,
+        description: 'Your current position or role'
+      },
+      {
+        id: 'company',
+        name: 'company',
+        label: 'Company',
+        type: 'text',
+        required: true,
+        description: 'Name of your organization'
+      },
+      {
+        id: 'industry',
+        name: 'industry',
+        label: 'Industry',
+        type: 'select',
+        required: true,
+        description: 'Primary business sector',
+        options: ['Technology', 'Healthcare', 'Finance', 'Manufacturing', 'Retail', 'Education', 'Other']
+      },
+      {
+        id: 'budget',
+        name: 'budget',
+        label: 'Marketing Budget',
+        type: 'select',
+        required: false,
+        description: 'Monthly marketing budget range',
+        options: ['Under $10K', '$10K-$50K', '$50K-$100K', '$100K-$500K', '$500K+']
+      },
+      {
+        id: 'goals',
+        name: 'goals',
+        label: 'Campaign Goals',
+        type: 'textarea',
+        required: true,
+        description: 'What do you want to achieve with your campaigns?'
+      },
+      {
+        id: 'target_audience',
+        name: 'target_audience',
+        label: 'Target Audience',
+        type: 'textarea',
+        required: false,
+        description: 'Describe your ideal customers'
+      }
+    ]
   },
   {
     id: '3',

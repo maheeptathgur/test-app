@@ -3,8 +3,9 @@ import { X, Send, Paperclip, UserCog, Edit3, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
-import { ChatMessage, CopilotData } from "@/lib/types";
+import { ChatMessage, CopilotData, ProfileField } from "@/lib/types";
 
 interface ChatInterfaceProps {
   isOpen: boolean;
@@ -19,16 +20,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
   const [showProfileFields, setShowProfileFields] = useState(false);
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
-  const [profileData, setProfileData] = useState({
-    title: "Marketing Manager",
-    company: "TechCorp Inc.",
-    industry: "Software Technology",
-    department: "Marketing",
-    experience: "5-7 years",
-    location: "San Francisco, CA",
-    communicationStyle: "Professional, data-driven",
-    goals: "Increase brand awareness and lead generation"
-  });
+  const [profileData, setProfileData] = useState<Record<string, string>>({});
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,6 +33,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
           timestamp: new Date().toISOString(),
         }
       ]);
+      
+      // Initialize profile data with empty values for each field
+      if (copilot.profileFields) {
+        const initialData: Record<string, string> = {};
+        copilot.profileFields.forEach(field => {
+          initialData[field.name] = '';
+        });
+        setProfileData(initialData);
+      }
     }
   }, [isOpen, copilot]);
 
@@ -48,14 +49,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleProfileChange = (field: string, value: string) => {
-    setProfileData(prev => ({ ...prev, [field]: value }));
-  };
 
-  const handleSaveProfile = () => {
-    setIsEditingProfile(false);
-    // In a real app, this would save to the backend
-  };
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
@@ -88,6 +82,77 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
     }
   };
 
+  const handleProfileChange = (field: string, value: string) => {
+    setProfileData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleSaveProfile = () => {
+    setIsEditingProfile(false);
+    // Here you would typically save the profile data to a backend
+    console.log('Saving profile data:', profileData);
+  };
+
+  const renderProfileField = (field: ProfileField) => {
+    const value = profileData[field.name] || '';
+    
+    if (isEditingProfile) {
+      switch (field.type) {
+        case 'textarea':
+          return (
+            <Textarea
+              value={value}
+              onChange={(e) => handleProfileChange(field.name, e.target.value)}
+              className="min-h-[60px]"
+              placeholder={field.description}
+            />
+          );
+        case 'select':
+          return (
+            <Select value={value} onValueChange={(val) => handleProfileChange(field.name, val)}>
+              <SelectTrigger className="h-8">
+                <SelectValue placeholder={`Select ${field.label.toLowerCase()}`} />
+              </SelectTrigger>
+              <SelectContent>
+                {field.options?.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          );
+        case 'number':
+          return (
+            <Input
+              type="number"
+              value={value}
+              onChange={(e) => handleProfileChange(field.name, e.target.value)}
+              className="h-8"
+              placeholder={field.description}
+            />
+          );
+        default: // text
+          return (
+            <Input
+              value={value}
+              onChange={(e) => handleProfileChange(field.name, e.target.value)}
+              className="h-8"
+              placeholder={field.description}
+            />
+          );
+      }
+    } else {
+      return (
+        <span className="text-foreground">
+          {value || (field.required ? 'Required field - please add information' : 'Not specified')}
+        </span>
+      );
+    }
+  };
+
   if (!isOpen || !copilot) return null;
 
   return (
@@ -116,7 +181,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
       
       <div className="flex-1 overflow-y-auto">
         <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
-          {showProfileFields && (
+          {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
             <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
               <div className="flex items-center justify-between mb-3">
                 <h3 className="font-semibold text-foreground">Target User Profile</h3>
@@ -149,103 +214,19 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
                   </Button>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-muted-foreground block mb-1">Title:</span>
-                  {isEditingProfile ? (
-                    <Input
-                      value={profileData.title}
-                      onChange={(e) => handleProfileChange('title', e.target.value)}
-                      className="h-8"
-                    />
-                  ) : (
-                    <span className="text-foreground">{profileData.title}</span>
-                  )}
-                </div>
-                <div>
-                  <span className="text-muted-foreground block mb-1">Company:</span>
-                  {isEditingProfile ? (
-                    <Input
-                      value={profileData.company}
-                      onChange={(e) => handleProfileChange('company', e.target.value)}
-                      className="h-8"
-                    />
-                  ) : (
-                    <span className="text-foreground">{profileData.company}</span>
-                  )}
-                </div>
-                <div>
-                  <span className="text-muted-foreground block mb-1">Industry:</span>
-                  {isEditingProfile ? (
-                    <Input
-                      value={profileData.industry}
-                      onChange={(e) => handleProfileChange('industry', e.target.value)}
-                      className="h-8"
-                    />
-                  ) : (
-                    <span className="text-foreground">{profileData.industry}</span>
-                  )}
-                </div>
-                <div>
-                  <span className="text-muted-foreground block mb-1">Department:</span>
-                  {isEditingProfile ? (
-                    <Input
-                      value={profileData.department}
-                      onChange={(e) => handleProfileChange('department', e.target.value)}
-                      className="h-8"
-                    />
-                  ) : (
-                    <span className="text-foreground">{profileData.department}</span>
-                  )}
-                </div>
-                <div>
-                  <span className="text-muted-foreground block mb-1">Experience:</span>
-                  {isEditingProfile ? (
-                    <Input
-                      value={profileData.experience}
-                      onChange={(e) => handleProfileChange('experience', e.target.value)}
-                      className="h-8"
-                    />
-                  ) : (
-                    <span className="text-foreground">{profileData.experience}</span>
-                  )}
-                </div>
-                <div>
-                  <span className="text-muted-foreground block mb-1">Location:</span>
-                  {isEditingProfile ? (
-                    <Input
-                      value={profileData.location}
-                      onChange={(e) => handleProfileChange('location', e.target.value)}
-                      className="h-8"
-                    />
-                  ) : (
-                    <span className="text-foreground">{profileData.location}</span>
-                  )}
-                </div>
-                <div className="col-span-2">
-                  <span className="text-muted-foreground block mb-1">Communication Style:</span>
-                  {isEditingProfile ? (
-                    <Input
-                      value={profileData.communicationStyle}
-                      onChange={(e) => handleProfileChange('communicationStyle', e.target.value)}
-                      className="h-8"
-                    />
-                  ) : (
-                    <span className="text-foreground">{profileData.communicationStyle}</span>
-                  )}
-                </div>
-                <div className="col-span-2">
-                  <span className="text-muted-foreground block mb-1">Goals:</span>
-                  {isEditingProfile ? (
-                    <Textarea
-                      value={profileData.goals}
-                      onChange={(e) => handleProfileChange('goals', e.target.value)}
-                      className="min-h-[60px]"
-                    />
-                  ) : (
-                    <span className="text-foreground">{profileData.goals}</span>
-                  )}
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                {copilot.profileFields.map((field) => (
+                  <div key={field.id} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
+                    <div className="flex items-center gap-1 mb-1">
+                      <span className="text-muted-foreground block">{field.label}:</span>
+                      {field.required && <span className="text-red-500">*</span>}
+                    </div>
+                    {field.description && (
+                      <p className="text-xs text-muted-foreground mb-2">{field.description}</p>
+                    )}
+                    {renderProfileField(field)}
+                  </div>
+                ))}
               </div>
             </div>
           )}
