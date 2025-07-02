@@ -340,29 +340,28 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           
           {/* Prompt Bar - moved inside chat area */}
           <div className="bg-white relative">
-            <div className="max-w-2xl mx-auto p-3">
-              {/* Floating Attached Files Display */}
-              {selectedFiles.length > 0 && (
-                <div className="absolute -top-8" style={{ left: '0px' }}>
-                  <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs ml-0">
-                    <Paperclip className="w-3 h-3" />
-                    <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
-                    <div className="flex items-center gap-1">
-                      {selectedFiles.slice(0, 2).map((fileName) => (
-                        <div key={fileName} className="flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full">
-                          {getFileIcon(fileName)}
-                          <span className="truncate max-w-[80px]">{fileName.split('.')[0]}</span>
-                        </div>
-                      ))}
-                      {selectedFiles.length > 2 && (
-                        <span className="bg-white/20 px-2 py-0.5 rounded-full">+{selectedFiles.length - 2}</span>
-                      )}
+            <div className="max-w-2xl mx-auto p-3 relative">
+              <div className="flex gap-3 relative">
+                {/* Floating Attached Files Display */}
+                {selectedFiles.length > 0 && (
+                  <div className="absolute -top-8 left-0">
+                    <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs">
+                      <Paperclip className="w-3 h-3" />
+                      <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
+                      <div className="flex items-center gap-1">
+                        {selectedFiles.slice(0, 2).map((fileName) => (
+                          <div key={fileName} className="flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full">
+                            {getFileIcon(fileName)}
+                            <span className="truncate max-w-[80px]">{fileName.split('.')[0]}</span>
+                          </div>
+                        ))}
+                        {selectedFiles.length > 2 && (
+                          <span className="bg-white/20 px-2 py-0.5 rounded-full">+{selectedFiles.length - 2}</span>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-              
-              <div className="flex gap-3">
+                )}
                 <Button 
                   variant="outline" 
                   className="h-12 px-3"
