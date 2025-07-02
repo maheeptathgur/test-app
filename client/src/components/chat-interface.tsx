@@ -49,7 +49,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     // Sort by length descending to match longer names first
     const sortedNames = componentNames.sort((a, b) => b.length - a.length);
     const escapedNames = sortedNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-    const mentionRegex = new RegExp(`@(${escapedNames.join('|')})`, 'gi');
+    const mentionRegex = new RegExp(`\\b(${escapedNames.join('|')})\\b`, 'gi');
     
     let result = inputContent;
     
@@ -105,7 +105,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     // Sort by length descending to match longer names first (e.g., "Media Planner" before "Media")
     const sortedNames = componentNames.sort((a, b) => b.length - a.length);
     const escapedNames = sortedNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-    const mentionRegex = new RegExp(`@(${escapedNames.join('|')})`, 'gi');
+    const mentionRegex = new RegExp(`\\b(${escapedNames.join('|')})\\b`, 'gi');
     
     const parts = content.split(mentionRegex);
     
@@ -316,9 +316,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     // Find the @ that triggered this autocomplete
     const lastAtIndex = textBeforeCursor.lastIndexOf('@');
     
-    // Build the new value by replacing from @ to cursor with @componentName
+    // Build the new value by replacing from @ to cursor with componentName (without @)
     const beforeAt = inputValue.substring(0, lastAtIndex);
-    const newValue = `${beforeAt}@${componentName} ${textAfterCursor}`;
+    const newValue = `${beforeAt}${componentName} ${textAfterCursor}`;
     
     setInputValue(newValue);
     setInputContent(newValue);
