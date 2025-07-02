@@ -245,12 +245,12 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   return (
     <div 
-      className="flex flex-col h-full overflow-hidden bg-white transition-all duration-300"
+      className="flex flex-col h-full overflow-hidden transition-all duration-300"
       style={{ 
         marginRight: selectedFiles.length > 0 && showDocumentPreview ? `${documentPaneWidth}px` : '0px' 
       }}
     >
-      <div className="flex items-center justify-between p-3 border-b bg-white">
+      <div className="flex items-center justify-between p-3 border-b">
         <div className="flex items-center gap-2">
           <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
             {copilot.avatar}
@@ -342,9 +342,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-[70%] p-4 rounded-lg ${
+                      className={`w-full p-4 rounded-lg ${
                         message.sender === 'user'
-                          ? 'bg-primary text-primary-foreground'
+                          ? 'bg-muted text-foreground'
                           : 'bg-muted text-foreground'
                       }`}
                     >
