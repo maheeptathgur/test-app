@@ -188,6 +188,7 @@ Changelog:
 - July 2, 2025. Added subtle background shading to conversation cards with bg-white/50 for better visibility against sidebar background
 - July 2, 2025. Removed Play icon from copilot dropdown menu items in workspace selector for cleaner interface
 - July 2, 2025. Added white background to table wrapper divs to fix white corners showing through rounded borders
+- July 2, 2025. Added interaction buttons to AI responses - copy, like, dislike, and ask a human buttons appear below each bot message with feedback forms for dislike and ask human options that allow users to submit single-line feedback
 ```
 
 ## User Preferences

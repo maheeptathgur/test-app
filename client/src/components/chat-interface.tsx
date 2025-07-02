@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -26,6 +26,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [isResizing, setIsResizing] = useState(false);
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
   const [expandedAttachments, setExpandedAttachments] = useState(false);
+  const [feedbackForms, setFeedbackForms] = useState<Record<string, { type: 'dislike' | 'askHuman'; text: string; visible: boolean }>>({});
+  const [likedMessages, setLikedMessages] = useState<Set<string>>(new Set());
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
 
@@ -38,6 +40,72 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       // Code `text`
       .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+  };
+
+  // Handler functions for interaction buttons
+  const handleCopyMessage = (content: string) => {
+    navigator.clipboard.writeText(content);
+  };
+
+  const handleLikeMessage = (messageId: string) => {
+    setLikedMessages(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(messageId)) {
+        newSet.delete(messageId);
+      } else {
+        newSet.add(messageId);
+      }
+      return newSet;
+    });
+  };
+
+  const handleDislikeMessage = (messageId: string) => {
+    setFeedbackForms(prev => ({
+      ...prev,
+      [messageId]: {
+        type: 'dislike',
+        text: '',
+        visible: true
+      }
+    }));
+  };
+
+  const handleAskHuman = (messageId: string) => {
+    setFeedbackForms(prev => ({
+      ...prev,
+      [messageId]: {
+        type: 'askHuman',
+        text: '',
+        visible: true
+      }
+    }));
+  };
+
+  const handleSubmitFeedback = (messageId: string) => {
+    const feedback = feedbackForms[messageId];
+    if (feedback && feedback.text.trim()) {
+      // In a real app, this would send the feedback to a server
+      console.log(`Feedback submitted for message ${messageId}:`, feedback);
+      
+      // Hide the feedback form
+      setFeedbackForms(prev => ({
+        ...prev,
+        [messageId]: {
+          ...prev[messageId],
+          visible: false
+        }
+      }));
+    }
+  };
+
+  const handleUpdateFeedback = (messageId: string, text: string) => {
+    setFeedbackForms(prev => ({
+      ...prev,
+      [messageId]: {
+        ...prev[messageId],
+        text
+      }
+    }));
   };
 
   useEffect(() => {
@@ -381,6 +449,80 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           );
                         })}
                       </div>
+                      
+                      {/* Interaction buttons for AI responses */}
+                      {message.sender === 'bot' && (
+                        <div className="mt-3 pt-2 border-t border-gray-100">
+                          <div className="flex items-center gap-2">
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 px-3 text-xs hover:bg-gray-100"
+                              onClick={() => handleCopyMessage(message.content)}
+                            >
+                              <Copy className="w-3 h-3 mr-1" />
+                              Copy
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className={`h-8 px-3 text-xs hover:bg-gray-100 ${
+                                likedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
+                              }`}
+                              onClick={() => handleLikeMessage(message.id)}
+                            >
+                              <ThumbsUp className="w-3 h-3 mr-1" />
+                              Like
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 px-3 text-xs hover:bg-gray-100"
+                              onClick={() => handleDislikeMessage(message.id)}
+                            >
+                              <ThumbsDown className="w-3 h-3 mr-1" />
+                              Dislike
+                            </Button>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-8 px-3 text-xs hover:bg-gray-100"
+                              onClick={() => handleAskHuman(message.id)}
+                            >
+                              <MessageCircle className="w-3 h-3 mr-1" />
+                              Ask a human
+                            </Button>
+                          </div>
+                          
+                          {/* Feedback form */}
+                          {feedbackForms[message.id]?.visible && (
+                            <div className="mt-3 p-3 bg-gray-50 rounded-lg">
+                              <div className="text-sm font-medium text-gray-700 mb-2">
+                                {feedbackForms[message.id].type === 'dislike' 
+                                  ? "What was wrong with this response?" 
+                                  : "What would you like a human to help with?"}
+                              </div>
+                              <div className="flex gap-2">
+                                <Input
+                                  placeholder={feedbackForms[message.id].type === 'dislike' 
+                                    ? "Tell us what went wrong..." 
+                                    : "Describe what you need help with..."}
+                                  value={feedbackForms[message.id].text}
+                                  onChange={(e) => handleUpdateFeedback(message.id, e.target.value)}
+                                  className="flex-1"
+                                />
+                                <Button
+                                  size="sm"
+                                  onClick={() => handleSubmitFeedback(message.id)}
+                                  disabled={!feedbackForms[message.id].text.trim()}
+                                >
+                                  Send
+                                </Button>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
