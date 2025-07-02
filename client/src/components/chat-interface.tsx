@@ -208,75 +208,127 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       
       <div className="flex-1 overflow-hidden flex">
         {/* Main Chat Area */}
-        <div className="flex-1 overflow-y-auto">
-          <div className="max-w-2xl mx-auto h-full flex flex-col p-6">
-            {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
-              <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-semibold text-foreground">Target User Profile</h3>
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => isEditingProfile ? handleSaveProfile() : setIsEditingProfile(true)}
-                      className="gap-2"
-                    >
-                      {isEditingProfile ? (
-                        <>
-                          <Check className="h-3 w-3" />
-                          Save
-                        </>
-                      ) : (
-                        <>
-                          <Edit3 className="h-3 w-3" />
-                          Edit
-                        </>
-                      )}
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => setShowProfileFields(false)}
-                      className="h-8 w-8 p-0"
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                  {copilot.profileFields.map((field) => (
-                    <div key={field.id} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
-                      <div className="flex items-center gap-1 mb-1">
-                        <span className="text-muted-foreground block">{field.label}:</span>
-                        {field.required && <span className="text-red-500">*</span>}
-                      </div>
-                      {field.description && (
-                        <p className="text-xs text-muted-foreground mb-2">{field.description}</p>
-                      )}
-                      {renderProfileField(field)}
+        <div className="flex-1 flex flex-col">
+          <div className="flex-1 overflow-y-auto">
+            <div className="max-w-2xl mx-auto h-full flex flex-col p-6">
+              {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
+                <div className="mb-6 p-4 bg-muted/50 rounded-lg border">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="font-semibold text-foreground">Target User Profile</h3>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => isEditingProfile ? handleSaveProfile() : setIsEditingProfile(true)}
+                        className="gap-2"
+                      >
+                        {isEditingProfile ? (
+                          <>
+                            <Check className="h-3 w-3" />
+                            Save
+                          </>
+                        ) : (
+                          <>
+                            <Edit3 className="h-3 w-3" />
+                            Edit
+                          </>
+                        )}
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setShowProfileFields(false)}
+                        className="h-8 w-8 p-0"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            <div className="flex-1 space-y-6 overflow-y-auto">
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div
-                    className={`max-w-[70%] p-4 rounded-lg ${
-                      message.sender === 'user'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-foreground'
-                    }`}
-                  >
-                    {message.content}
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    {copilot.profileFields.map((field) => (
+                      <div key={field.id} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
+                        <div className="flex items-center gap-1 mb-1">
+                          <span className="text-muted-foreground block">{field.label}:</span>
+                          {field.required && <span className="text-red-500">*</span>}
+                        </div>
+                        {field.description && (
+                          <p className="text-xs text-muted-foreground mb-2">{field.description}</p>
+                        )}
+                        {renderProfileField(field)}
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
-              <div ref={messagesEndRef} />
+              )}
+              <div className="flex-1 space-y-6 overflow-y-auto">
+                {messages.map((message) => (
+                  <div
+                    key={message.id}
+                    className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[70%] p-4 rounded-lg ${
+                        message.sender === 'user'
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-muted text-foreground'
+                      }`}
+                    >
+                      {message.content}
+                    </div>
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </div>
+            </div>
+          </div>
+          
+          {/* Prompt Bar - moved inside chat area */}
+          <div className="bg-white relative border-t">
+            <div className="max-w-2xl mx-auto p-3">
+              {/* Floating Attached Files Display */}
+              {selectedFiles.length > 0 && (
+                <div className="absolute -top-4 left-[3.75rem] flex items-center">
+                  <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs">
+                    <Paperclip className="w-3 h-3" />
+                    <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
+                    <div className="flex items-center gap-1">
+                      {selectedFiles.slice(0, 2).map((fileName) => (
+                        <div key={fileName} className="flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full">
+                          {getFileIcon(fileName)}
+                          <span className="truncate max-w-[80px]">{fileName.split('.')[0]}</span>
+                        </div>
+                      ))}
+                      {selectedFiles.length > 2 && (
+                        <span className="bg-white/20 px-2 py-0.5 rounded-full">+{selectedFiles.length - 2}</span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              <div className="flex gap-3">
+                <Button 
+                  variant="outline" 
+                  className="h-12 px-3"
+                  onClick={() => {
+                    setShowAttachmentSidebar(!showAttachmentSidebar);
+                    onToggleAttachment?.(!showAttachmentSidebar);
+                  }}
+                >
+                  <Paperclip className="h-4 w-4" />
+                </Button>
+                <Input
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Type your message..."
+                  className="flex-1 h-12"
+                />
+                <Button onClick={handleSendMessage} className="h-12 px-6">
+                  <Send className="h-4 w-4 mr-2" />
+                  Send
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -407,55 +459,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             </div>
           </div>
         )}
-      </div>
-      
-      <div className="bg-white relative">
-        <div className="max-w-2xl mx-auto p-3">
-          {/* Floating Attached Files Display */}
-          {selectedFiles.length > 0 && (
-            <div className="absolute -top-4 left-[3.75rem] flex items-center">
-              <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs">
-                <Paperclip className="w-3 h-3" />
-                <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
-                <div className="flex items-center gap-1">
-                  {selectedFiles.slice(0, 2).map((fileName) => (
-                    <div key={fileName} className="flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full">
-                      {getFileIcon(fileName)}
-                      <span className="truncate max-w-[80px]">{fileName.split('.')[0]}</span>
-                    </div>
-                  ))}
-                  {selectedFiles.length > 2 && (
-                    <span className="bg-white/20 px-2 py-0.5 rounded-full">+{selectedFiles.length - 2}</span>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-          
-          <div className="flex gap-3">
-            <Button 
-              variant="outline" 
-              className="h-12 px-3"
-              onClick={() => {
-                setShowAttachmentSidebar(!showAttachmentSidebar);
-                onToggleAttachment?.(!showAttachmentSidebar);
-              }}
-            >
-              <Paperclip className="h-4 w-4" />
-            </Button>
-            <Input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Type your message..."
-              className="flex-1 h-12"
-            />
-            <Button onClick={handleSendMessage} className="h-12 px-6">
-              <Send className="h-4 w-4 mr-2" />
-              Send
-            </Button>
-          </div>
-        </div>
       </div>
     </div>
   );
