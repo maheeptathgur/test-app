@@ -331,7 +331,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           </div>
           
           {/* Prompt Bar - moved inside chat area */}
-          <div className="bg-white relative border-t">
+          <div className="bg-white relative">
             <div className="max-w-2xl mx-auto p-3">
               {/* Floating Attached Files Display */}
               {selectedFiles.length > 0 && (
