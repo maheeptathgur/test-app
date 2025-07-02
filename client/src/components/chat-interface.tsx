@@ -348,7 +348,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           : 'bg-muted text-foreground'
                       }`}
                     >
-                      <div className="whitespace-pre-wrap">
+                      <div className="whitespace-pre-wrap" style={{ fontSize: '.9375em' }}>
                         {message.content.split('\n').map((line, index) => {
                           // Handle bullet points
                           if (line.trim().startsWith('- ')) {
