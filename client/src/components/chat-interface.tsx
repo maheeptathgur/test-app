@@ -345,25 +345,35 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'pdf':
                     return (
                       <div className="space-y-4">
-                        <div className="bg-white border rounded-lg p-4 text-sm">
-                          <div className="text-center mb-4">
-                            <FileText className="w-12 h-12 mx-auto text-blue-500 mb-2" />
-                            <h4 className="font-semibold">PDF Document</h4>
+                        <div className="bg-white border rounded-lg overflow-hidden">
+                          <div className="p-3 border-b bg-gray-50">
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <FileText className="w-4 h-4 text-blue-500" />
+                                <span className="text-sm font-medium">Project_Brief.pdf</span>
+                              </div>
+                              <div className="text-xs text-muted-foreground">
+                                12 pages • 1.2 MB
+                              </div>
+                            </div>
                           </div>
-                          <div className="space-y-2 text-xs text-muted-foreground mb-4">
-                            <p><strong>Pages:</strong> 12</p>
-                            <p><strong>Size:</strong> 1.2 MB</p>
-                            <p><strong>Created:</strong> 2 hours ago</p>
+                          <div className="h-96 bg-gray-100">
+                            <iframe
+                              src="data:application/pdf;base64,JVBERi0xLjQKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMiAwIFIKPj4KZW5kb2JqCjIgMCBvYmoKPDwKL1R5cGUgL1BhZ2VzCi9LaWRzIFszIDAgUl0KL0NvdW50IDEKPD4KZW5kb2JqCjMgMCBvYmoKPDwKL1R5cGUgL1BhZ2UKL1BhcmVudCAyIDAgUgovTWVkaWFCb3ggWzAgMCA2MTIgNzkyXQovQ29udGVudHMgNCAwIFIKL1Jlc291cmNlcyA8PAovRm9udCA8PAovRjEgNSAwIFIKPj4KPj4KPj4KZW5kb2JqCjQgMCBvYmoKPDwKL0xlbmd0aCAyNDcKPj4Kc3RyZWFtCkJUCi9GMSA0OCBUZgozMCA3MjAgVGQKKFByb2plY3QgQnJpZWY6IFExIE1hcmtldGluZyBDYW1wYWlnbikgVGoKMCAtNjAgVGQKKEV4ZWN1dGl2ZSBTdW1tYXJ5OikgVGoKMCAtNjAgVGQKKFRoaXMgZG9jdW1lbnQgb3V0bGluZXMgdGhlIGtleSBzdHJhdGVnaWVzKSBUagowIC02MCBUZAooYW5kIGluaXRpYXRpdmVzIGZvciB0aGUgZmlyc3QgcXVhcnRlci4pIFRqCkVUCmVuZHN0cmVhbQplbmRvYmoKNSAwIG9iago8PAovVHlwZSAvRm9udAovU3VidHlwZSAvVHlwZTEKL0Jhc2VGb250IC9IZWx2ZXRpY2EKPj4KZW5kb2JqCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAwOSAwMDAwMCBuIAowMDAwMDAwMDU4IDAwMDAwIG4gCjAwMDAwMDAxMTUgMDAwMDAgbiAKMDAwMDAwMDI5NSAwMDAwMCBuIAowMDAwMDAwNjE1IDAwMDAwIG4gCnRyYWlsZXIKPDwKL1NpemUgNgovUm9vdCAxIDAgUgo+PgpzdGFydHhyZWYKNzI0CiUlRU9G"
+                              className="w-full h-full border-0"
+                              title="PDF Preview"
+                            />
                           </div>
-                          <div className="p-3 bg-muted/50 rounded text-xs mb-4">
-                            <p className="font-medium mb-1">Content Preview:</p>
-                            <p>"Project Brief: Q1 Marketing Campaign...</p>
-                            <p>Executive Summary: This document outlines...</p>
-                            <p>Budget allocation and timeline details...</p>
+                          <div className="p-3 border-t bg-gray-50">
+                            <div className="flex gap-2">
+                              <Button size="sm" variant="outline" className="flex-1">
+                                Download
+                              </Button>
+                              <Button size="sm" variant="outline" className="flex-1">
+                                Full Screen
+                              </Button>
+                            </div>
                           </div>
-                          <Button size="sm" variant="outline" className="w-full">
-                            Open PDF
-                          </Button>
                         </div>
                       </div>
                     );
