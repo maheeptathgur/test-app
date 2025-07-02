@@ -344,22 +344,19 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         
         {/* File Preview Pane */}
         {selectedFiles.length > 0 && (
-          <div className="w-80 border-l border-border bg-muted/20 flex flex-col h-full">
-            <div className="p-3 border-b bg-muted/30 flex items-center justify-between">
-              <h3 className="text-sm font-medium text-foreground">Document Preview</h3>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="h-6 w-6 p-0"
-                onClick={() => {
-                  // Clear selected files to close the preview pane
-                  window.dispatchEvent(new CustomEvent('clearSelectedFiles'));
-                }}
-                title="Close Preview"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            </div>
+          <div className="w-80 border-l border-border bg-muted/20 flex flex-col h-full relative">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="absolute top-2 right-2 h-6 w-6 p-0 z-10 bg-white/80 hover:bg-white shadow-sm"
+              onClick={() => {
+                // Clear selected files to close the preview pane
+                window.dispatchEvent(new CustomEvent('clearSelectedFiles'));
+              }}
+              title="Close Preview"
+            >
+              <X className="h-4 w-4" />
+            </Button>
             <div className="flex-1 p-4 overflow-y-auto min-h-0">
               {(() => {
                 const lastFile = selectedFiles[selectedFiles.length - 1];
