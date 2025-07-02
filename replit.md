@@ -181,6 +181,7 @@ Changelog:
 - July 2, 2025. Fixed sidebar content display to show exclusively either conversations OR copilot selector - removed workspace selector when in chat mode to ensure clean separation between conversation history and copilot selection interface
 - July 2, 2025. Implemented conversation filtering by active copilot - sidebar now shows only conversations belonging to the currently selected copilot, while maintaining workspace selector dropdown for copilot switching, creating focused conversation history per assistant
 - July 2, 2025. Increased chat area max width to 960px (max-w-4xl) for better readability and more comfortable conversation layout
+- July 2, 2025. Added three sample conversations for Campaign Manager copilot covering email campaign setup, social media strategy, and performance analytics with detailed multi-message exchanges
 ```
 
 ## User Preferences

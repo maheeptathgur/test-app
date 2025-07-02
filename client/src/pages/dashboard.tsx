@@ -151,6 +151,84 @@ const recentConversations = [
       }
     ]
   },
+  {
+    id: '6',
+    title: 'Email Campaign Setup',
+    copilot: 'Campaign Manager',
+    lastMessage: 'I\'ve designed a 5-part email sequence for the product launch...',
+    timestamp: '3 hours ago',
+    isActive: false,
+    messages: [
+      {
+        id: 'm13',
+        content: 'I need to set up an email campaign for our new product launch. Can you help me design the sequence?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm14',
+        content: 'I\'ve designed a 5-part email sequence for the product launch:\n\n**Email 1: "Coming Soon" Teaser (Week -2)**\n- Build anticipation with sneak peek\n- Call-to-action: Join waitlist\n- Expected open rate: 28-35%\n\n**Email 2: "Launch Day" Announcement (Week 0)**\n- Official product reveal\n- Early bird discount (24-hour limited)\n- Expected conversion: 8-12%\n\n**Email 3: "Feature Spotlight" (Week +1)**\n- Deep dive into key features\n- Customer testimonials\n- Social proof integration\n\n**Email 4: "Success Stories" (Week +2)**\n- Case studies from beta users\n- ROI calculations\n- Urgency messaging\n\n**Email 5: "Last Chance" (Week +3)**\n- Final discount offer\n- FOMO-driven copy\n- Clear next steps\n\nEach email includes A/B testing for subject lines and personalization tokens. Would you like me to write the copy for any specific email?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000 + 30000).toISOString(),
+      },
+      {
+        id: 'm15',
+        content: 'This looks great! Can you write the copy for the launch day announcement email?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000 + 60000).toISOString(),
+      },
+      {
+        id: 'm16',
+        content: 'Here\'s the launch day email copy:\n\n**Subject Line A:** "🚀 It\'s here! [Product Name] is officially live"\n**Subject Line B:** "[FirstName], your wait is over - introducing [Product Name]"\n\n**Email Body:**\n\nHi [FirstName],\n\nThe day we\'ve all been waiting for is finally here! **[Product Name] is now officially available.**\n\nAs someone who joined our waitlist, you get **24-hour early access** plus an exclusive **20% launch discount**.\n\n**What makes [Product Name] special:**\n✅ [Key Feature 1] - Save 3 hours per week\n✅ [Key Feature 2] - Increase productivity by 40%\n✅ [Key Feature 3] - Seamless team collaboration\n\n**Your exclusive launch offer:**\n- 20% off first 3 months\n- Free premium onboarding\n- Direct access to our founder\n\n**[CTA BUTTON: Claim Your Launch Discount]**\n\n*This offer expires tomorrow at midnight.*\n\nQuestions? Reply to this email - I read every message personally.\n\nBest regards,\n[Your Name]\n\n**P.S.** Only 500 launch discounts available. Don\'t miss out!',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000 + 120000).toISOString(),
+      }
+    ]
+  },
+  {
+    id: '7',
+    title: 'Social Media Campaign Strategy',
+    copilot: 'Campaign Manager',
+    lastMessage: 'For maximum reach, I recommend a multi-platform approach...',
+    timestamp: '1 day ago',
+    isActive: false,
+    messages: [
+      {
+        id: 'm17',
+        content: 'We need a comprehensive social media strategy for our Q1 campaign. What platforms should we focus on?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm18',
+        content: 'For maximum reach, I recommend a multi-platform approach tailored to your audience:\n\n**Primary Platforms (80% of budget):**\n\n**LinkedIn** - 40% allocation\n- Target: B2B decision makers\n- Content: Thought leadership, case studies\n- Best times: Tue-Thu, 8-10am\n- Expected reach: 25K professionals\n\n**Instagram** - 25% allocation\n- Target: 25-40 age group\n- Content: Visual storytelling, behind-scenes\n- Best times: Wed-Fri, 11am-1pm\n- Expected engagement: 4.2% rate\n\n**Twitter/X** - 15% allocation\n- Target: Industry influencers\n- Content: Real-time updates, conversations\n- Best times: Daily, 9am-10am\n- Expected impressions: 50K\n\n**Secondary Platforms (20% of budget):**\n- **YouTube:** Product demos (10%)\n- **TikTok:** Creative content (10%)\n\n**Campaign Timeline:** 8-week execution\n**Total Budget Recommendation:** $15K-25K\n**Expected ROI:** 300-450%\n\nShall I create detailed content calendars for each platform?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000 + 30000).toISOString(),
+      }
+    ]
+  },
+  {
+    id: '8',
+    title: 'Campaign Performance Analytics',
+    copilot: 'Campaign Manager',
+    lastMessage: 'The mid-campaign metrics show we\'re exceeding targets...',
+    timestamp: '5 days ago',
+    isActive: false,
+    messages: [
+      {
+        id: 'm19',
+        content: 'Can you analyze the performance of our current campaign and suggest optimizations?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm20',
+        content: 'The mid-campaign metrics show we\'re exceeding targets in most areas:\n\n**Performance Summary (Weeks 1-4):**\n\n📈 **Overperforming Metrics:**\n- Click-through rate: 3.8% (vs 2.5% target) - **+52%**\n- Email open rate: 31.2% (vs 25% target) - **+25%**\n- Social engagement: 4.7% (vs 3.5% target) - **+34%**\n- Lead quality score: 8.2/10 (vs 7.0 target)\n\n⚠️ **Underperforming Areas:**\n- Conversion rate: 2.1% (vs 3.0% target) - **-30%**\n- Cost per acquisition: $87 (vs $65 target) - **+34%**\n\n**Recommended Optimizations:**\n\n1. **Landing Page A/B Test:** Current page has 40-second load time\n2. **Retargeting Campaign:** Target high-engagement, low-conversion users\n3. **Budget Reallocation:** Move 20% from LinkedIn to Instagram (better ROI)\n4. **Creative Refresh:** Top performing ad creative shows fatigue\n\n**Projected Impact:** These changes could improve conversion by 25-40% and reduce CPA to $58-65.\n\nShall I implement these optimizations and set up automated monitoring?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000 + 30000).toISOString(),
+      }
+    ]
+  },
 ];
 
 const mockCopilots: CopilotData[] = [
