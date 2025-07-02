@@ -29,6 +29,17 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
 
+  // Simple markdown formatter for chat messages
+  const formatMarkdown = (text: string): string => {
+    return text
+      // Bold text **text**
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Italic text *text*
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      // Code `text`
+      .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+  };
+
   useEffect(() => {
     if (isOpen && copilot) {
       // Check if we have conversation messages to load, otherwise show default greeting
@@ -337,7 +348,38 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           : 'bg-muted text-foreground'
                       }`}
                     >
-                      {message.content}
+                      <div className="whitespace-pre-wrap">
+                        {message.content.split('\n').map((line, index) => {
+                          // Handle bullet points
+                          if (line.trim().startsWith('- ')) {
+                            const content = line.substring(2);
+                            return (
+                              <div key={index} className="flex items-start gap-2 mb-1">
+                                <span className="text-xs mt-1">•</span>
+                                <span dangerouslySetInnerHTML={{ __html: formatMarkdown(content) }} />
+                              </div>
+                            );
+                          }
+                          // Handle numbered lists
+                          if (/^\d+\.\s/.test(line.trim())) {
+                            const match = line.match(/^(\d+)\.\s(.+)$/);
+                            if (match) {
+                              return (
+                                <div key={index} className="flex items-start gap-2 mb-1">
+                                  <span className="text-xs mt-1">{match[1]}.</span>
+                                  <span dangerouslySetInnerHTML={{ __html: formatMarkdown(match[2]) }} />
+                                </div>
+                              );
+                            }
+                          }
+                          // Regular line with markdown formatting
+                          return (
+                            <div key={index} className={line.trim() === '' ? 'mb-2' : 'mb-1'}>
+                              <span dangerouslySetInnerHTML={{ __html: formatMarkdown(line) }} />
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 ))}
