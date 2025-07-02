@@ -166,7 +166,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [handleTriggerPosition, setHandleTriggerPosition] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Auto-scroll to bottom when new messages are added
   useEffect(() => {
@@ -305,57 +305,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     }
   };
 
-  const handleContentEditableInput = (e: React.FormEvent<HTMLDivElement>) => {
-    const value = e.currentTarget.textContent || '';
-    setInputValue(value);
-    setInputContent(value);
-    
-    // Get cursor position for contentEditable
-    const selection = window.getSelection();
-    const range = selection?.getRangeAt(0);
-    const cursorPosition = range?.startOffset || 0;
-    
-    // Check if we're typing @ and should show autocomplete
-    const textBeforeCursor = value.substring(0, cursorPosition);
-    const lastAtIndex = textBeforeCursor.lastIndexOf('@');
-    
-    if (lastAtIndex >= 0) {
-      const textAfterAt = textBeforeCursor.substring(lastAtIndex + 1);
-      
-      // Only show if we haven't typed a space after @
-      if (!textAfterAt.includes(' ') && textAfterAt.length >= 0) {
-        const searchTerm = textAfterAt.toLowerCase();
-        const suggestions = copilot?.components?.filter(component => 
-          component.name.toLowerCase().includes(searchTerm)
-        ) || [];
-        
-        if (suggestions.length > 0) {
-          setHandleSuggestions(suggestions);
-          setHandleTriggerPosition(lastAtIndex);
-          setShowHandleDropdown(true);
-          setSelectedHandleIndex(0);
-        } else {
-          setShowHandleDropdown(false);
-        }
-      } else {
-        setShowHandleDropdown(false);
-      }
-    } else {
-      setShowHandleDropdown(false);
-    }
-  };
-
   const insertHandle = (componentName: string) => {
-    const editableDiv = textareaRef.current;
-    if (!editableDiv) return;
+    const textarea = textareaRef.current;
+    if (!textarea) return;
     
-    // Get current cursor position using Selection API
-    const selection = window.getSelection();
-    const range = selection?.getRangeAt(0);
-    
-    if (!range) return;
-    
-    const cursorPosition = range.startOffset;
+    const cursorPosition = textarea.selectionStart;
     const textBeforeCursor = inputValue.substring(0, cursorPosition);
     const textAfterCursor = inputValue.substring(cursorPosition);
     
@@ -370,25 +324,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     setInputContent(newValue);
     setShowHandleDropdown(false);
     
-    // Focus back to editable div and position cursor at the end
+    // Focus back to textarea and position cursor after the inserted component name and space
     setTimeout(() => {
-      editableDiv.focus();
-      
-      // Simple approach: just place cursor at the end
-      try {
-        const range = document.createRange();
-        const selection = window.getSelection();
-        
-        // Place cursor at the very end of the content
-        range.selectNodeContents(editableDiv);
-        range.collapse(false); // false = collapse to end
-        selection?.removeAllRanges();
-        selection?.addRange(range);
-      } catch (error) {
-        console.log('Cursor positioning error (non-critical):', error);
-        // Just focus without positioning if there's an error
-        editableDiv.focus();
-      }
+      textarea.focus();
+      const newCursorPosition = beforeAt.length + componentName.length + 2; // +2 for @ and space
+      textarea.setSelectionRange(newCursorPosition, newCursorPosition);
     }, 10);
   };
 
@@ -1051,23 +991,33 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     </div>
                   )}
                   <div className="relative">
-                    {/* ContentEditable div that properly displays inline badges */}
-                    <div
+                    {/* Hybrid approach: regular input with badge overlay positioned correctly */}
+                    <Textarea
                       ref={textareaRef}
-                      contentEditable
-                      suppressContentEditableWarning={true}
-                      onInput={handleContentEditableInput}
+                      value={inputValue}
+                      onChange={handleInputChange}
                       onKeyDown={handleKeyPress}
-                      className="min-h-12 max-h-24 overflow-y-auto w-full px-3 py-2 border border-input bg-background text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 rounded-md"
+                      placeholder="Type your message... Use @ to mention tools, agents, or workflows"
+                      className="min-h-12 max-h-24 resize-none w-full relative z-10 bg-transparent"
                       style={{ 
                         paddingRight: activeComponent ? '120px' : '12px',
-                        minHeight: '48px',
-                        lineHeight: '1.5',
-                        direction: 'ltr'
+                        color: inputContent && inputContent.includes('@') ? 'transparent' : 'inherit'
                       }}
-                      data-placeholder={!inputContent ? "Type your message... Use @ to mention tools, agents, or workflows" : ""}
-                      dangerouslySetInnerHTML={{ __html: renderInputWithBadges() }}
+                      rows={1}
                     />
+                    
+                    {/* Badge overlay that shows when @mentions are present */}
+                    {inputContent && inputContent.includes('@') && (
+                      <div 
+                        className="absolute inset-0 px-3 py-2 text-sm pointer-events-none whitespace-pre-wrap break-words"
+                        style={{ 
+                          paddingRight: activeComponent ? '120px' : '12px',
+                          lineHeight: '1.5',
+                          zIndex: 5
+                        }}
+                        dangerouslySetInnerHTML={{ __html: renderInputWithBadges() }}
+                      />
+                    )}
                     
                     {/* Handle Autocomplete Dropdown */}
                     {showHandleDropdown && handleSuggestions.length > 0 && (
