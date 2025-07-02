@@ -1303,10 +1303,6 @@ export default function Dashboard() {
                           </div>
                         </div>
                         <p className="text-xs text-muted-foreground truncate cursor-pointer">{conversation.lastMessage}</p>
-                        <div className="flex items-center gap-1 cursor-pointer">
-                          <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                          <span className="text-xs text-muted-foreground">{conversation.copilot}</span>
-                        </div>
                       </div>
                     )}
                   </div>
