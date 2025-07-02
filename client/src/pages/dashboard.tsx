@@ -491,6 +491,7 @@ export default function Dashboard() {
             copilot={chatCopilot}
             onClose={() => setChatCopilot(null)}
             onToggleAttachment={handleToggleAttachment}
+            selectedFiles={selectedFiles}
           />
         ),
       };

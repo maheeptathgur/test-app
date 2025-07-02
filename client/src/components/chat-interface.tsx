@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog, Edit3, Check } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,9 +12,10 @@ interface ChatInterfaceProps {
   copilot: CopilotData | null;
   onClose: () => void;
   onToggleAttachment?: (show: boolean) => void;
+  selectedFiles?: string[];
 }
 
-export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: ChatInterfaceProps) {
+export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, selectedFiles = [] }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [showProfileFields, setShowProfileFields] = useState(false);
@@ -93,6 +94,32 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
     setIsEditingProfile(false);
     // Here you would typically save the profile data to a backend
     console.log('Saving profile data:', profileData);
+  };
+
+  const getFileIcon = (fileName: string) => {
+    const extension = fileName.toLowerCase().split('.').pop();
+    switch (extension) {
+      case 'pdf':
+      case 'doc':
+      case 'docx':
+      case 'txt':
+        return <FileText className="w-4 h-4" />;
+      case 'jpg':
+      case 'jpeg':
+      case 'png':
+      case 'gif':
+        return <Image className="w-4 h-4" />;
+      case 'mp3':
+      case 'wav':
+      case 'aac':
+        return <Music className="w-4 h-4" />;
+      case 'mp4':
+      case 'avi':
+      case 'mov':
+        return <Video className="w-4 h-4" />;
+      default:
+        return <File className="w-4 h-4" />;
+    }
   };
 
   const renderProfileField = (field: ProfileField) => {
@@ -254,6 +281,29 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment }: 
       
       <div className="bg-white">
         <div className="max-w-4xl mx-auto p-6">
+          {/* Attached Files Display */}
+          {selectedFiles.length > 0 && (
+            <div className="mb-4 p-3 bg-muted/30 rounded-lg border">
+              <div className="flex items-center gap-2 mb-2">
+                <Paperclip className="w-4 h-4 text-muted-foreground" />
+                <span className="text-sm font-medium text-muted-foreground">
+                  {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} attached
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {selectedFiles.map((fileName) => (
+                  <div
+                    key={fileName}
+                    className="flex items-center gap-2 px-3 py-2 bg-white rounded-md border text-sm"
+                  >
+                    {getFileIcon(fileName)}
+                    <span className="truncate max-w-[200px]">{fileName}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
           <div className="flex gap-3">
             <Button 
               variant="outline" 
