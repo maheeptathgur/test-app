@@ -349,7 +349,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     >
       <div className="flex items-center justify-between p-3 border-b bg-white">
         <div className="flex items-center gap-2">
-          <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
+          <div className={`w-8 h-8 ${copilot.avatarColor} rounded-full flex items-center justify-center text-xs font-semibold`}>
             {copilot.avatar}
           </div>
           <div>
