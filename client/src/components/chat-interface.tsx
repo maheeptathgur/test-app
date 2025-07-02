@@ -25,6 +25,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [documentPaneWidth, setDocumentPaneWidth] = useState(320); // 320px = w-80 default
   const [isResizing, setIsResizing] = useState(false);
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
+  const [expandedAttachments, setExpandedAttachments] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
 
@@ -59,6 +60,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     if (selectedFiles.length > 0) {
       setShowDocumentPreview(true);
     }
+    // Reset expanded attachments when files change
+    setExpandedAttachments(false);
   }, [selectedFiles]);
 
   // Handle mouse events for resizing
@@ -348,15 +351,28 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     <div className="flex items-center gap-2 px-3 py-1 bg-black/70 backdrop-blur-sm rounded-full text-white text-xs">
                       <Paperclip className="w-3 h-3" />
                       <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
-                      <div className="flex items-center gap-1">
-                        {selectedFiles.slice(0, 2).map((fileName) => (
+                      <div className="flex items-center gap-1 flex-wrap">
+                        {(expandedAttachments ? selectedFiles : selectedFiles.slice(0, 2)).map((fileName) => (
                           <div key={fileName} className="flex items-center gap-1 bg-white/20 px-2 py-0.5 rounded-full">
                             {getFileIcon(fileName)}
                             <span className="truncate max-w-[80px]">{fileName.split('.')[0]}</span>
                           </div>
                         ))}
-                        {selectedFiles.length > 2 && (
-                          <span className="bg-white/20 px-2 py-0.5 rounded-full">+{selectedFiles.length - 2}</span>
+                        {selectedFiles.length > 2 && !expandedAttachments && (
+                          <button 
+                            className="bg-white/20 px-2 py-0.5 rounded-full hover:bg-white/30 transition-colors cursor-pointer"
+                            onClick={() => setExpandedAttachments(true)}
+                          >
+                            +{selectedFiles.length - 2}
+                          </button>
+                        )}
+                        {expandedAttachments && selectedFiles.length > 2 && (
+                          <button 
+                            className="bg-white/20 px-2 py-0.5 rounded-full hover:bg-white/30 transition-colors cursor-pointer"
+                            onClick={() => setExpandedAttachments(false)}
+                          >
+                            −
+                          </button>
                         )}
                       </div>
                     </div>
