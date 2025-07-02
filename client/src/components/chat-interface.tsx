@@ -765,7 +765,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           }
                           // Regular line with markdown formatting
                           return (
-                            <div key={index} className={line.trim() === '' ? 'mb-2' : 'mb-1'}>
+                            <div key={index} className="mt-[0px] mb-[0px]">
                               {renderMessageWithMentions(line)}
                             </div>
                           );
