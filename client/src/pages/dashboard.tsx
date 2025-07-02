@@ -173,13 +173,13 @@ const recentConversations = [
       },
       {
         id: 'm15',
-        content: 'This looks great! Can you write the copy for the launch day announcement email?',
+        content: 'This looks great! Can you use @HubSpot and @Mailchimp to set this up? I want to track everything through @Campaign Planning workflow.',
         sender: 'user' as const,
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000 + 60000).toISOString(),
       },
       {
         id: 'm16',
-        content: 'Here\'s the launch day email copy:\n\n**Subject Line A:** "🚀 It\'s here! [Product Name] is officially live"\n**Subject Line B:** "[FirstName], your wait is over - introducing [Product Name]"\n\n**Email Body:**\n\nHi [FirstName],\n\nThe day we\'ve all been waiting for is finally here! **[Product Name] is now officially available.**\n\nAs someone who joined our waitlist, you get **24-hour early access** plus an exclusive **20% launch discount**.\n\n**What makes [Product Name] special:**\n✅ [Key Feature 1] - Save 3 hours per week\n✅ [Key Feature 2] - Increase productivity by 40%\n✅ [Key Feature 3] - Seamless team collaboration\n\n**Your exclusive launch offer:**\n- 20% off first 3 months\n- Free premium onboarding\n- Direct access to our founder\n\n**[CTA BUTTON: Claim Your Launch Discount]**\n\n*This offer expires tomorrow at midnight.*\n\nQuestions? Reply to this email - I read every message personally.\n\nBest regards,\n[Your Name]\n\n**P.S.** Only 500 launch discounts available. Don\'t miss out!',
+        content: 'Perfect! I\'ll set this up using @HubSpot for email automation and @Mailchimp for list management. The @Campaign Planning workflow will handle the scheduling and tracking.\n\nHere\'s the launch day email copy with integrated tracking:\n\n**Subject Line A:** "🚀 It\'s here! [Product Name] is officially live"\n**Subject Line B:** "[FirstName], your wait is over - introducing [Product Name]"\n\n**Email Body:**\n\nHi [FirstName],\n\nThe day we\'ve all been waiting for is finally here! **[Product Name] is now officially available.**\n\nAs someone who joined our waitlist, you get **24-hour early access** plus an exclusive **20% launch discount**.\n\n**What makes [Product Name] special:**\n✅ [Key Feature 1] - Save 3 hours per week\n✅ [Key Feature 2] - Increase productivity by 40%\n✅ [Key Feature 3] - Seamless team collaboration\n\n**Your exclusive launch offer:**\n- 20% off first 3 months\n- Free premium onboarding\n- Direct access to our founder\n\n**[CTA BUTTON: Claim Your Launch Discount]**\n\n*This offer expires tomorrow at midnight.*\n\nThe @Media Planner agent will handle the social media promotion alongside this email campaign. Everything will be tracked through our unified dashboard.',
         sender: 'bot' as const,
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000 + 120000).toISOString(),
       }
