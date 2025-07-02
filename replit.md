@@ -178,6 +178,7 @@ Changelog:
 - July 2, 2025. Modified layout so document preview pane extends to full screen height (top to bottom) while chat interface adjusts accordingly for better document viewing experience
 - July 2, 2025. Implemented clickable conversation functionality in sidebar - users can now click on any conversation in the "Recent Chats" list to load that conversation in the chat interface, automatically switching to the associated copilot and marking the conversation as active
 - July 2, 2025. Fixed conversation data mismatches and added markdown formatting support to chat messages - bold text, bullet points, numbered lists, and other formatting now render properly without requiring user interaction
+- July 2, 2025. Fixed sidebar content display to show exclusively either conversations OR copilot selector - removed workspace selector when in chat mode to ensure clean separation between conversation history and copilot selection interface
 ```
 
 ## User Preferences
