@@ -126,7 +126,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
               <DropdownMenuItem
                 key={workspace.id}
                 onClick={() => onWorkspaceChange(workspace)}
-                className={`flex items-center gap-3 p-3 mb-1 rounded-lg cursor-pointer ${
+                className={`flex items-center gap-3 p-3 mb-1 rounded-lg cursor-pointer group ${
                   workspace.id === currentWorkspace.id ? 'bg-accent text-accent-foreground' : ''
                 }`}
               >
@@ -135,7 +135,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 </div>
                 <div>
                   <div className="text-sm font-medium">{workspace.name}</div>
-                  <div className="text-xs text-muted-foreground">{workspace.type}</div>
+                  <div className="text-xs text-muted-foreground group-hover:text-white">{workspace.type}</div>
                 </div>
               </DropdownMenuItem>
             ))}
