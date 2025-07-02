@@ -177,18 +177,31 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   const insertHandle = (componentName: string) => {
     const textarea = textareaRef.current;
-    if (!textarea) return;
+    if (!textarea) {
+      console.log('No textarea ref');
+      return;
+    }
     
     const cursorPosition = textarea.selectionStart;
     const textBeforeCursor = inputValue.substring(0, cursorPosition);
     const textAfterCursor = inputValue.substring(cursorPosition);
     
+    console.log('insertHandle called with:', componentName);
+    console.log('Current inputValue:', inputValue);
+    console.log('Cursor position:', cursorPosition);
+    console.log('Text before cursor:', textBeforeCursor);
+    console.log('Text after cursor:', textAfterCursor);
+    
     // Find the @ that triggered this autocomplete
     const lastAtIndex = textBeforeCursor.lastIndexOf('@');
+    console.log('Last @ index:', lastAtIndex);
     
     // Build the new value by replacing from @ to cursor with @componentName
     const beforeAt = inputValue.substring(0, lastAtIndex);
     const newValue = `${beforeAt}@${componentName} ${textAfterCursor}`;
+    
+    console.log('Before @:', beforeAt);
+    console.log('New value:', newValue);
     
     setInputValue(newValue);
     setShowHandleDropdown(false);
@@ -197,6 +210,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     setTimeout(() => {
       textarea.focus();
       const newCursorPosition = beforeAt.length + componentName.length + 2; // +2 for @ and space
+      console.log('Setting cursor to position:', newCursorPosition);
       textarea.setSelectionRange(newCursorPosition, newCursorPosition);
     }, 0);
   };
