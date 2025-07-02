@@ -95,7 +95,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                           <Heart className="w-4 h-4 text-red-500 fill-red-500 flex-shrink-0" />
                         )}
                       </div>
-                      <div className="text-xs text-muted-foreground capitalize">{copilot.type}</div>
+                      
                     </div>
                     <Play className="w-4 h-4 text-muted-foreground" />
                   </DropdownMenuItem>
