@@ -183,6 +183,7 @@ Changelog:
 - July 2, 2025. Increased chat area max width to 960px (max-w-4xl) for better readability and more comfortable conversation layout
 - July 2, 2025. Added three sample conversations for Campaign Manager copilot covering email campaign setup, social media strategy, and performance analytics with detailed multi-message exchanges
 - July 2, 2025. Removed copilot name from conversation cards in sidebar for cleaner interface since conversations are already filtered by active copilot
+- July 2, 2025. Simplified conversation cards to show only title and timestamp - removed last message preview and moved timestamp to line below title for cleaner layout
 ```
 
 ## User Preferences
