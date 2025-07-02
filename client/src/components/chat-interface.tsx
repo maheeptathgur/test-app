@@ -28,7 +28,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [isResizing, setIsResizing] = useState(false);
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
   const [expandedAttachments, setExpandedAttachments] = useState(false);
-  const [activeComponent, setActiveComponent] = useState<{name: string; type: string} | null>(null);
+
   const [inputContent, setInputContent] = useState<string>(''); // Track raw text content
 
 
@@ -496,7 +496,31 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   const handleAddComponent = (name: string, type: string) => {
     console.log('Selected', type + ':', name);
-    setActiveComponent({ name, type });
+    
+    const textarea = textareaRef.current;
+    if (!textarea) return;
+    
+    // Insert the component name at cursor position (or at the end if no focus)
+    const cursorPosition = textarea.selectionStart || inputValue.length;
+    const textBeforeCursor = inputValue.substring(0, cursorPosition);
+    const textAfterCursor = inputValue.substring(cursorPosition);
+    
+    // Add space before if needed
+    const spaceBeforeBadge = textBeforeCursor && !textBeforeCursor.endsWith(' ') ? ' ' : '';
+    // Add space after if needed
+    const spaceAfterBadge = textAfterCursor && !textAfterCursor.startsWith(' ') ? ' ' : '';
+    
+    const newValue = `${textBeforeCursor}${spaceBeforeBadge}${name}${spaceAfterBadge}${textAfterCursor}`;
+    
+    setInputValue(newValue);
+    setInputContent(newValue);
+    
+    // Focus back to textarea and position cursor after the inserted component name
+    setTimeout(() => {
+      textarea.focus();
+      const newCursorPosition = cursorPosition + spaceBeforeBadge.length + name.length + spaceAfterBadge.length;
+      textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+    }, 10);
   };
 
   const getFileIcon = (fileName: string) => {
@@ -976,22 +1000,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <div className="flex-1 relative">
-                  {/* Active Component Indicator on right side */}
-                  {activeComponent && (
-                    <div className="absolute right-3 top-3 z-10 flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">
-                      {activeComponent.type === 'agent' && <Bot className="w-3 h-3" />}
-                      {activeComponent.type === 'tool' && <Wrench className="w-3 h-3" />}
-                      {activeComponent.type === 'workflow' && <Workflow className="w-3 h-3" />}
-                      <span className="font-medium">{activeComponent.name}</span>
-                      <button 
-                        onClick={() => setActiveComponent(null)}
-                        className="ml-0.5 hover:bg-blue-200 rounded-full p-0.5"
-                        title="Remove"
-                      >
-                        <X className="w-2.5 h-2.5" />
-                      </button>
-                    </div>
-                  )}
+
                   <div className="relative">
                     {/* Hybrid approach: regular input with badge overlay positioned correctly */}
                     <Textarea
@@ -1002,7 +1011,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       placeholder="Type your message... Use @ to mention tools, agents, or workflows"
                       className="min-h-12 max-h-24 resize-none w-full relative z-10 bg-transparent"
                       style={{ 
-                        paddingRight: activeComponent ? '120px' : '12px',
                         color: inputContent && (inputContent.includes('@') || copilot?.components?.some(c => inputContent.includes(c.name))) ? 'transparent' : 'inherit'
                       }}
                       rows={1}
@@ -1013,7 +1021,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       <div 
                         className="absolute inset-0 px-3 py-2 text-sm pointer-events-none whitespace-pre-wrap break-words"
                         style={{ 
-                          paddingRight: activeComponent ? '120px' : '12px',
                           lineHeight: '1.5',
                           zIndex: 5
                         }}
