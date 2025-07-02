@@ -159,6 +159,24 @@
     transition: all 300ms ease-in;
   }
 
+  /* Placeholder styles for contentEditable */
+  [contenteditable][data-placeholder]:empty:before {
+    content: attr(data-placeholder);
+    color: hsl(var(--muted-foreground));
+    pointer-events: none;
+  }
+
+  .chat-input-badge {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 1px;
+    padding: 2px 6px;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
   .google-drive-icon {
     color: #008062;
   }

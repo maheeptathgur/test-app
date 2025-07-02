@@ -33,17 +33,17 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
 
 
-  // Function to render input content with @mentions as badges
+  // Function to render input content with @mentions as badges (HTML for contentEditable)
   const renderInputWithBadges = () => {
     if (!inputContent) {
-      return <span className="text-muted-foreground">Type your message... Use @ to mention tools, agents, or workflows</span>;
+      return '';
     }
     
     // Create a list of all component names to match against
     const componentNames = copilot?.components?.map(c => c.name) || [];
     
     if (componentNames.length === 0) {
-      return <span>{inputContent}</span>;
+      return inputContent.replace(/\n/g, '<br>');
     }
     
     // Sort by length descending to match longer names first
@@ -51,56 +51,45 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     const escapedNames = sortedNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
     const mentionRegex = new RegExp(`@(${escapedNames.join('|')})`, 'gi');
     
-    const parts = inputContent.split(mentionRegex);
+    let result = inputContent;
     
-    return (
-      <>
-        {parts.map((part, index) => {
-          // Check if this part is a mention (odd indices after split)
-          if (index % 2 === 1) {
-            // Find the component type for styling
-            const component = copilot?.components?.find(c => 
-              c.name.toLowerCase().trim() === part.toLowerCase().trim()
-            );
-            
-            let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-full text-xs font-medium";
-            let iconElement = null;
-            
-            if (component) {
-              switch (component.type) {
-                case 'agent':
-                  badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
-                  iconElement = <Bot className="w-3 h-3 mr-1" />;
-                  break;
-                case 'tool':
-                  badgeClass += " bg-green-100 text-green-800 border border-green-200";
-                  iconElement = <Wrench className="w-3 h-3 mr-1" />;
-                  break;
-                case 'workflow':
-                  badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
-                  iconElement = <Workflow className="w-3 h-3 mr-1" />;
-                  break;
-              }
-            } else {
-              // Unknown component - still show as badge but gray
-              badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
-            }
-            
-            return (
-              <span 
-                key={index} 
-                className={badgeClass}
-                contentEditable={false}
-              >
-                {iconElement}
-                @{part}
-              </span>
-            );
-          }
-          return <span key={index}>{part}</span>;
-        })}
-      </>
-    );
+    // Replace @mentions with styled HTML
+    result = result.replace(mentionRegex, (match, componentName) => {
+      const component = copilot?.components?.find(c => 
+        c.name.toLowerCase().trim() === componentName.toLowerCase().trim()
+      );
+      
+      let badgeClass = "chat-input-badge";
+      let iconHTML = "";
+      
+      if (component) {
+        switch (component.type) {
+          case 'agent':
+            badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+            iconHTML = '🤖 ';
+            break;
+          case 'tool':
+            badgeClass += " bg-green-100 text-green-800 border border-green-200";
+            iconHTML = '🔧 ';
+            break;
+          case 'workflow':
+            badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
+            iconHTML = '⚡ ';
+            break;
+          default:
+            badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
+            iconHTML = '📄 ';
+        }
+      } else {
+        badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
+        iconHTML = '📄 ';
+      }
+      
+      return `<span class="${badgeClass}" contenteditable="false">${iconHTML}@${componentName}</span>`;
+    });
+    
+    // Replace newlines with <br> tags
+    return result.replace(/\n/g, '<br>');
   };
 
   // Function to render message content with @mentions as badges
@@ -177,7 +166,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [handleTriggerPosition, setHandleTriggerPosition] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const resizeRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const textareaRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom when new messages are added
   useEffect(() => {
@@ -316,13 +305,57 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     }
   };
 
-
+  const handleContentEditableInput = (e: React.FormEvent<HTMLDivElement>) => {
+    const value = e.currentTarget.textContent || '';
+    setInputValue(value);
+    setInputContent(value);
+    
+    // Get cursor position for contentEditable
+    const selection = window.getSelection();
+    const range = selection?.getRangeAt(0);
+    const cursorPosition = range?.startOffset || 0;
+    
+    // Check if we're typing @ and should show autocomplete
+    const textBeforeCursor = value.substring(0, cursorPosition);
+    const lastAtIndex = textBeforeCursor.lastIndexOf('@');
+    
+    if (lastAtIndex >= 0) {
+      const textAfterAt = textBeforeCursor.substring(lastAtIndex + 1);
+      
+      // Only show if we haven't typed a space after @
+      if (!textAfterAt.includes(' ') && textAfterAt.length >= 0) {
+        const searchTerm = textAfterAt.toLowerCase();
+        const suggestions = copilot?.components?.filter(component => 
+          component.name.toLowerCase().includes(searchTerm)
+        ) || [];
+        
+        if (suggestions.length > 0) {
+          setHandleSuggestions(suggestions);
+          setHandleTriggerPosition(lastAtIndex);
+          setShowHandleDropdown(true);
+          setSelectedHandleIndex(0);
+        } else {
+          setShowHandleDropdown(false);
+        }
+      } else {
+        setShowHandleDropdown(false);
+      }
+    } else {
+      setShowHandleDropdown(false);
+    }
+  };
 
   const insertHandle = (componentName: string) => {
-    const textarea = textareaRef.current;
-    if (!textarea) return;
+    const editableDiv = textareaRef.current;
+    if (!editableDiv) return;
     
-    const cursorPosition = textarea.selectionStart;
+    // Get current cursor position using Selection API
+    const selection = window.getSelection();
+    const range = selection?.getRangeAt(0);
+    
+    if (!range) return;
+    
+    const cursorPosition = range.startOffset;
     const textBeforeCursor = inputValue.substring(0, cursorPosition);
     const textAfterCursor = inputValue.substring(cursorPosition);
     
@@ -337,11 +370,25 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     setInputContent(newValue);
     setShowHandleDropdown(false);
     
-    // Focus back to textarea and position cursor after the inserted component name and space
+    // Focus back to editable div and position cursor at the end
     setTimeout(() => {
-      textarea.focus();
-      const newCursorPosition = beforeAt.length + componentName.length + 2; // +2 for @ and space
-      textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+      editableDiv.focus();
+      
+      // Simple approach: just place cursor at the end
+      try {
+        const range = document.createRange();
+        const selection = window.getSelection();
+        
+        // Place cursor at the very end of the content
+        range.selectNodeContents(editableDiv);
+        range.collapse(false); // false = collapse to end
+        selection?.removeAllRanges();
+        selection?.addRange(range);
+      } catch (error) {
+        console.log('Cursor positioning error (non-critical):', error);
+        // Just focus without positioning if there's an error
+        editableDiv.focus();
+      }
     }, 10);
   };
 
@@ -1004,29 +1051,23 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     </div>
                   )}
                   <div className="relative">
-                    {/* Regular textarea with overlay for badge preview */}
-                    <Textarea
+                    {/* ContentEditable div that properly displays inline badges */}
+                    <div
                       ref={textareaRef}
-                      value={inputValue}
-                      onChange={handleInputChange}
+                      contentEditable
+                      suppressContentEditableWarning={true}
+                      onInput={handleContentEditableInput}
                       onKeyDown={handleKeyPress}
-                      placeholder="Type your message... Use @ to mention tools, agents, or workflows"
-                      className="min-h-12 max-h-24 resize-none w-full"
-                      style={{ paddingRight: activeComponent ? '120px' : '12px' }}
-                      rows={1}
+                      className="min-h-12 max-h-24 overflow-y-auto w-full px-3 py-2 border border-input bg-background text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 rounded-md"
+                      style={{ 
+                        paddingRight: activeComponent ? '120px' : '12px',
+                        minHeight: '48px',
+                        lineHeight: '1.5',
+                        direction: 'ltr'
+                      }}
+                      data-placeholder={!inputContent ? "Type your message... Use @ to mention tools, agents, or workflows" : ""}
+                      dangerouslySetInnerHTML={{ __html: renderInputWithBadges() }}
                     />
-                    
-                    {/* Badge preview overlay - shows when @mentions are detected */}
-                    {inputContent && inputContent.includes('@') && (
-                      <div 
-                        className="absolute inset-0 pointer-events-none px-3 py-2 text-sm overflow-hidden z-10"
-                        style={{ paddingRight: activeComponent ? '120px' : '12px' }}
-                      >
-                        <div className="whitespace-pre-wrap break-words leading-6 text-transparent select-none">
-                          {renderInputWithBadges()}
-                        </div>
-                      </div>
-                    )}
                     
                     {/* Handle Autocomplete Dropdown */}
                     {showHandleDropdown && handleSuggestions.length > 0 && (
