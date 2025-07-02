@@ -173,6 +173,8 @@ Changelog:
 - July 1, 2025. Removed Permissions & Access tab from agent configuration to simplify interface to 4 essential tabs: General Settings, Tools & Integrations, Knowledge Base, and Test
 - July 1, 2025. Added custom quick test inputs management in General Settings tab allowing users to create and delete personalized test scenarios that dynamically appear in the Test tab
 - July 1, 2025. Created comprehensive Workflow Editor screen accessible from Edit buttons in workflows - includes tabs for Workflow Steps (expandable step configuration with visual flow), Settings (basic info, triggers, error handling, notifications), Variables (reusable workflow variables), and Testing (sample data input, test execution, results display, test history) with full step management capabilities
+- July 2, 2025. Reduced attachment sidebar width from w-80 to w-64 for better space utilization
+- July 2, 2025. Added comprehensive file preview pane to the right of chat interface that displays the last selected file with detailed metadata, file type detection, and custom previews for PDF, images, audio, video, and documents with appropriate icons and information
 ```
 
 ## User Preferences
