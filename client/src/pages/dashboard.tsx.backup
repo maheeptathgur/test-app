@@ -103,58 +103,6 @@ const mockCopilots: CopilotData[] = [
       { name: 'HubSpot', type: 'tool' },
       { name: 'Mailchimp', type: 'tool' },
     ],
-    profileFields: [
-      {
-        id: 'title',
-        name: 'title',
-        label: 'Job Title',
-        type: 'text',
-        required: true,
-        description: 'Your current position or role'
-      },
-      {
-        id: 'company',
-        name: 'company',
-        label: 'Company',
-        type: 'text',
-        required: true,
-        description: 'Name of your organization'
-      },
-      {
-        id: 'industry',
-        name: 'industry',
-        label: 'Industry',
-        type: 'select',
-        required: true,
-        description: 'Primary business sector',
-        options: ['Technology', 'Healthcare', 'Finance', 'Manufacturing', 'Retail', 'Education', 'Other']
-      },
-      {
-        id: 'budget',
-        name: 'budget',
-        label: 'Marketing Budget',
-        type: 'select',
-        required: false,
-        description: 'Monthly marketing budget range',
-        options: ['Under $10K', '$10K-$50K', '$50K-$100K', '$100K-$500K', '$500K+']
-      },
-      {
-        id: 'goals',
-        name: 'goals',
-        label: 'Campaign Goals',
-        type: 'textarea',
-        required: true,
-        description: 'What do you want to achieve with your campaigns?'
-      },
-      {
-        id: 'target_audience',
-        name: 'target_audience',
-        label: 'Target Audience',
-        type: 'textarea',
-        required: false,
-        description: 'Describe your ideal customers'
-      }
-    ]
   },
   {
     id: '3',
@@ -236,30 +184,6 @@ const getTypeIcon = (type: string) => {
   }
 };
 
-// Table Avatar Component with solid colors and icons
-const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
-  const getAvatarStyle = (type: string) => {
-    switch (type.toLowerCase()) {
-      case 'general':
-        return 'bg-blue-500';
-      case 'content':
-        return 'bg-green-500';
-      case 'analyst':
-        return 'bg-purple-500';
-      case 'support':
-        return 'bg-orange-500';
-      default:
-        return 'bg-gray-500';
-    }
-  };
-
-  return (
-    <div className={`w-10 h-10 aspect-square rounded-full flex items-center justify-center flex-shrink-0 ${getAvatarStyle(copilot.type)}`}>
-      {getTypeIcon(copilot.type)}
-    </div>
-  );
-};
-
 export default function Dashboard() {
   const [currentWorkspace, setCurrentWorkspace] = useState<Workspace>(workspaces[0]);
   const [activeSection, setActiveSection] = useState<NavigationSection>('copilots');
@@ -276,45 +200,9 @@ export default function Dashboard() {
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [copilotToDelete, setCopilotToDelete] = useState<CopilotData | null>(null);
-  
-  // State for tracking which specific agent/tool/workflow to configure
-  const [configureAgent, setConfigureAgent] = useState<{id: string, name: string} | null>(null);
-  const [configureTool, setConfigureTool] = useState<{id: string, name: string} | null>(null);
-  const [configureWorkflow, setConfigureWorkflow] = useState<{id: string, name: string} | null>(null);
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
-
-  // Handle navigation events from copilot configuration
-  useEffect(() => {
-    const handleAgentConfigure = (event: CustomEvent) => {
-      setConfigureAgent(event.detail);
-      setActiveSection('agents');
-      setConfiguringCopilot(null); // Close copilot config
-    };
-
-    const handleToolConfigure = (event: CustomEvent) => {
-      setConfigureTool(event.detail);
-      setActiveSection('tools');
-      setConfiguringCopilot(null); // Close copilot config
-    };
-
-    const handleWorkflowConfigure = (event: CustomEvent) => {
-      setConfigureWorkflow(event.detail);
-      setActiveSection('workflows');
-      setConfiguringCopilot(null); // Close copilot config
-    };
-
-    window.addEventListener('navigate-to-agent-configure', handleAgentConfigure as EventListener);
-    window.addEventListener('navigate-to-tool-configure', handleToolConfigure as EventListener);
-    window.addEventListener('navigate-to-workflow-edit', handleWorkflowConfigure as EventListener);
-
-    return () => {
-      window.removeEventListener('navigate-to-agent-configure', handleAgentConfigure as EventListener);
-      window.removeEventListener('navigate-to-tool-configure', handleToolConfigure as EventListener);
-      window.removeEventListener('navigate-to-workflow-edit', handleWorkflowConfigure as EventListener);
-    };
-  }, []);
 
   const showNotification = (message: string) => {
     toast({
@@ -491,7 +379,6 @@ export default function Dashboard() {
             copilot={chatCopilot}
             onClose={() => setChatCopilot(null)}
             onToggleAttachment={handleToggleAttachment}
-            selectedFiles={selectedFiles}
           />
         ),
       };
@@ -621,7 +508,9 @@ export default function Dashboard() {
                         <TableRow key={copilot.id}>
                           <TableCell className="font-medium">
                             <div className="flex items-center gap-3">
-                              <TableAvatar copilot={copilot} />
+                              <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
+                                {copilot.avatar}
+                              </div>
                               {copilot.name}
                             </div>
                           </TableCell>
@@ -691,31 +580,19 @@ export default function Dashboard() {
         return {
           title: 'Agents',
           subtitle: 'Individual AI agents that can be combined into copilots',
-          content: <SampleScreen 
-            section="agents" 
-            configureAgent={configureAgent}
-            onClearConfigureAgent={() => setConfigureAgent(null)}
-          />,
+          content: <SampleScreen section="agents" />,
         };
       case 'tools':
         return {
           title: 'Tools',
           subtitle: 'External tools and integrations available to your copilots',
-          content: <SampleScreen 
-            section="tools" 
-            configureTool={configureTool}
-            onClearConfigureTool={() => setConfigureTool(null)}
-          />,
+          content: <SampleScreen section="tools" />,
         };
       case 'workflows':
         return {
           title: 'Workflows',
           subtitle: 'Automated workflows and processes for your copilots',
-          content: <SampleScreen 
-            section="workflows" 
-            configureWorkflow={configureWorkflow}
-            onClearConfigureWorkflow={() => setConfigureWorkflow(null)}
-          />,
+          content: <SampleScreen section="workflows" />,
         };
       case 'knowledge-base':
         return {
@@ -878,7 +755,9 @@ export default function Dashboard() {
                         <TableRow key={copilot.id}>
                           <TableCell className="font-medium">
                             <div className="flex items-center gap-3">
-                              <TableAvatar copilot={copilot} />
+                              <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
+                                {copilot.avatar}
+                              </div>
                               {copilot.name}
                             </div>
                           </TableCell>
@@ -987,7 +866,7 @@ export default function Dashboard() {
         <nav className={`flex-1 ${sidebarCollapsed ? 'px-2' : 'px-6'} py-6 overflow-y-auto`}>
           {activeSection === 'user-view' && !chatCopilot ? (
             // User View: Simplified navigation for end users
-            (<div className="space-y-6">
+            <div className="space-y-6">
               {!sidebarCollapsed && (
                 <>
                   {/* Quick Access Assistants */}
@@ -1035,10 +914,10 @@ export default function Dashboard() {
                   ))}
                 </div>
               )}
-            </div>)
+            </div>
           ) : chatCopilot ? (
             // Recent Conversations List
-            (<div className="space-y-3">
+            <div className="space-y-3">
               {!sidebarCollapsed && (
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-sm font-medium text-sidebar-foreground">Recent Conversations</h3>
@@ -1126,10 +1005,10 @@ export default function Dashboard() {
                   </div>
                 ))}
               </div>
-            </div>)
+            </div>
           ) : (
             // Regular Admin Navigation Menu
-            (<ul className="space-y-2">
+            <ul className="space-y-2">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = activeSection === item.id;
@@ -1151,7 +1030,7 @@ export default function Dashboard() {
                   </li>
                 );
               })}
-            </ul>)
+            </ul>
           )}
         </nav>
 
@@ -1219,7 +1098,7 @@ export default function Dashboard() {
             <DropdownMenuContent align="end" className="w-56">
               {activeSection === 'user-view' ? (
                 // Simplified user profile options
-                (<>
+                <>
                   <DropdownMenuItem>
                     <User className="w-4 h-4 mr-2" />
                     My Profile
@@ -1241,10 +1120,10 @@ export default function Dashboard() {
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign Out
                   </DropdownMenuItem>
-                </>)
+                </>
               ) : (
                 // Admin profile options
-                (<>
+                <>
                   <DropdownMenuItem>
                     <User className="w-4 h-4 mr-2" />
                     Profile Settings
@@ -1258,17 +1137,18 @@ export default function Dashboard() {
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign Out
                   </DropdownMenuItem>
-                </>)
+                </>
               )}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
+      
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
-        <div className="w-64 border-r border-sidebar-border flex flex-col h-full" style={{ backgroundColor: '#f3f4f7' }}>
+        <div className="w-80 border-r border-sidebar-border flex flex-col h-full" style={{ backgroundColor: '#f3f4f7' }}>
           <div className="p-4 flex items-center justify-between">
-            <h3 className="font-semibold text-foreground">Files</h3>
+            <h3 className="font-semibold text-foreground">Documents</h3>
             <Button
               variant="ghost"
               size="sm"
@@ -1397,9 +1277,9 @@ export default function Dashboard() {
           </div>
         </div>
       )}
+      
       {/* Main Content */}
-      <div className="flex-1 overflow-hidden flex">
-        <div className="flex-1 overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
+      <div className="flex-1 overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
         {/* Combined scrollable content */}
         <div className={`${chatCopilot || configuringCopilot ? 'h-full' : 'h-full p-8 overflow-y-auto'}`}>
           {/* Top Bar - Hidden when in chat, configuration, or user-view mode */}
@@ -1429,140 +1309,8 @@ export default function Dashboard() {
             {sectionContent.content}
           </div>
         </div>
-        
-        {/* File Preview Pane - Full Height */}
-        {chatCopilot && selectedFiles.length > 0 && (
-          <div className="w-80 border-l border-border bg-muted/20 flex flex-col h-full">
-            <div className="p-4 border-b">
-              <h3 className="font-semibold text-foreground">File Preview</h3>
-              <p className="text-sm text-muted-foreground">
-                {selectedFiles[selectedFiles.length - 1]}
-              </p>
-            </div>
-            <div className="flex-1 p-4 overflow-y-auto min-h-0">
-              {(() => {
-                const lastFile = selectedFiles[selectedFiles.length - 1];
-                const extension = lastFile.toLowerCase().split('.').pop();
-                
-                switch (extension) {
-                  case 'pdf':
-                    return (
-                      <div className="space-y-4">
-                        <div className="bg-white border rounded-lg p-4 text-sm">
-                          <div className="text-center mb-4">
-                            <FileText className="w-12 h-12 mx-auto text-blue-500 mb-2" />
-                            <h4 className="font-semibold">PDF Document</h4>
-                          </div>
-                          <div className="space-y-2 text-xs text-muted-foreground mb-4">
-                            <p><strong>Pages:</strong> 12</p>
-                            <p><strong>Size:</strong> 1.2 MB</p>
-                            <p><strong>Created:</strong> 2 hours ago</p>
-                          </div>
-                          <div className="p-3 bg-muted/50 rounded text-xs mb-4">
-                            <p className="font-medium mb-1">Content Preview:</p>
-                            <p>"Project Brief: Q1 Marketing Campaign...</p>
-                            <p>Executive Summary: This document outlines...</p>
-                            <p>Budget allocation and timeline details...</p>
-                          </div>
-                          <Button size="sm" variant="outline" className="w-full">
-                            Open PDF
-                          </Button>
-                        </div>
-                      </div>
-                    );
-                  case 'jpg':
-                  case 'jpeg':
-                  case 'png':
-                    return (
-                      <div className="space-y-4">
-                        <div className="bg-white border rounded-lg p-4">
-                          <div className="aspect-square bg-gradient-to-br from-blue-100 to-purple-100 rounded flex items-center justify-center mb-4">
-                            <Image className="w-16 h-16 text-gray-400" />
-                          </div>
-                          <div className="text-xs text-muted-foreground space-y-1 mb-4">
-                            <p><strong>Dimensions:</strong> 1920x1080</p>
-                            <p><strong>Size:</strong> 856 KB</p>
-                            <p><strong>Format:</strong> PNG</p>
-                          </div>
-                          <Button size="sm" variant="outline" className="w-full">
-                            View Image
-                          </Button>
-                        </div>
-                      </div>
-                    );
-                  case 'mp3':
-                  case 'wav':
-                    return (
-                      <div className="space-y-4">
-                        <div className="bg-white border rounded-lg p-4">
-                          <div className="text-center mb-4">
-                            <Music className="w-16 h-16 mx-auto text-purple-500 mb-2" />
-                            <h4 className="font-semibold">Audio File</h4>
-                          </div>
-                          <div className="space-y-3">
-                            <audio controls className="w-full">
-                              <source src="#" type="audio/mpeg" />
-                              Your browser does not support the audio element.
-                            </audio>
-                            <div className="text-xs text-muted-foreground space-y-1">
-                              <p><strong>Duration:</strong> 3:24</p>
-                              <p><strong>Size:</strong> 4.8 MB</p>
-                              <p><strong>Format:</strong> MP3</p>
-                              <p><strong>Bitrate:</strong> 320 kbps</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  case 'mp4':
-                  case 'avi':
-                    return (
-                      <div className="space-y-4">
-                        <div className="bg-white border rounded-lg p-4">
-                          <div className="text-center mb-4">
-                            <Video className="w-16 h-16 mx-auto text-red-500 mb-2" />
-                            <h4 className="font-semibold">Video File</h4>
-                          </div>
-                          <div className="space-y-3">
-                            <video controls className="w-full rounded">
-                              <source src="#" type="video/mp4" />
-                              Your browser does not support the video element.
-                            </video>
-                            <div className="text-xs text-muted-foreground space-y-1">
-                              <p><strong>Duration:</strong> 5:42</p>
-                              <p><strong>Size:</strong> 24.5 MB</p>
-                              <p><strong>Resolution:</strong> 1080p</p>
-                              <p><strong>Format:</strong> MP4</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  default:
-                    return (
-                      <div className="space-y-4">
-                        <div className="bg-white border rounded-lg p-4">
-                          <div className="text-center mb-4">
-                            <File className="w-16 h-16 mx-auto text-gray-500 mb-2" />
-                            <h4 className="font-semibold">Document</h4>
-                          </div>
-                          <div className="text-xs text-muted-foreground space-y-1 mb-4">
-                            <p><strong>Type:</strong> {extension?.toUpperCase()}</p>
-                            <p><strong>Size:</strong> 540 KB</p>
-                            <p><strong>Modified:</strong> 2 weeks ago</p>
-                          </div>
-                          <Button size="sm" variant="outline" className="w-full">
-                            Open File
-                          </Button>
-                        </div>
-                      </div>
-                    );
-                }
-              })()}
-            </div>
-          </div>
-        )}
       </div>
+      
       {/* Edit Modal */}
       <EditCopilotModal
         isOpen={!!editingCopilot}
@@ -1570,6 +1318,7 @@ export default function Dashboard() {
         onClose={() => setEditingCopilot(null)}
         onUpdateCopilot={handleUpdateCopilot}
       />
+
       {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
         isOpen={deleteConfirmOpen}

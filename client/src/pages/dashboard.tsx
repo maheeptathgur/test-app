@@ -950,7 +950,6 @@ export default function Dashboard() {
   const sectionContent = getSectionContent();
 
   return (
-    <>
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
       <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
@@ -1399,8 +1398,7 @@ export default function Dashboard() {
         </div>
       )}
       {/* Main Content */}
-      <div className="flex-1 overflow-hidden flex">
-        <div className="flex-1 overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
+      <div className="flex-1 overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
         {/* Combined scrollable content */}
         <div className={`${chatCopilot || configuringCopilot ? 'h-full' : 'h-full p-8 overflow-y-auto'}`}>
           {/* Top Bar - Hidden when in chat, configuration, or user-view mode */}
@@ -1430,36 +1428,6 @@ export default function Dashboard() {
             {sectionContent.content}
           </div>
         </div>
-        
-        {/* File Preview Pane - Full Height */}
-        {chatCopilot && selectedFiles.length > 0 && (
-          <div className="w-80 border-l border-border bg-muted/20 flex flex-col h-full">
-            <div className="p-4 border-b">
-              <h3 className="font-semibold text-foreground">File Preview</h3>
-              <p className="text-sm text-muted-foreground">
-                {selectedFiles[selectedFiles.length - 1]}
-              </p>
-            </div>
-            <div className="flex-1 p-4 overflow-y-auto min-h-0">
-              <div className="space-y-4">
-                <div className="bg-white border rounded-lg p-4">
-                  <div className="text-center mb-4">
-                    <File className="w-16 h-16 mx-auto text-gray-500 mb-2" />
-                    <h4 className="font-semibold">Document Preview</h4>
-                  </div>
-                  <div className="text-xs text-muted-foreground space-y-1 mb-4">
-                    <p><strong>File:</strong> {selectedFiles[selectedFiles.length - 1]}</p>
-                    <p><strong>Size:</strong> 540 KB</p>
-                    <p><strong>Modified:</strong> 2 weeks ago</p>
-                  </div>
-                  <Button size="sm" variant="outline" className="w-full">
-                    Open File
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
       {/* Edit Modal */}
       <EditCopilotModal
@@ -1475,9 +1443,6 @@ export default function Dashboard() {
         onClose={handleCancelDelete}
         onConfirm={handleConfirmDelete}
       />
-      </div>
-      </div>
     </div>
-    </>
   );
 }
