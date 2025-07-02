@@ -1257,7 +1257,7 @@ export default function Dashboard() {
                     className={`${sidebarCollapsed ? 'p-1.5' : 'p-2'} rounded-lg transition-all group cursor-pointer ${
                       conversation.isActive 
                         ? 'bg-sidebar-accent text-sidebar-primary' 
-                        : 'hover:bg-sidebar-accent hover:text-sidebar-primary'
+                        : 'bg-white/10 hover:bg-sidebar-accent hover:text-sidebar-primary'
                     }`}
                     title={sidebarCollapsed ? conversation.title : undefined}
                     onClick={() => handleLoadConversation(conversation)}
