@@ -32,13 +32,25 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   // Function to render message content with @mentions as badges
   const renderMessageWithMentions = (content: string) => {
-    // Updated regex to better handle component names with spaces
-    const mentionRegex = /@([A-Za-z]+(?:\s+[A-Za-z]+)*)/g;
-    const parts = content.split(mentionRegex);
+    // Create a list of all component names to match against
+    const componentNames = copilot?.components?.map(c => c.name) || [];
+    
+    // Create a regex that matches @ComponentName exactly
+    if (componentNames.length === 0) {
+      return <span className="whitespace-pre-wrap">{content}</span>;
+    }
+    
+    // Sort by length descending to match longer names first (e.g., "Media Planner" before "Media")
+    const sortedNames = componentNames.sort((a, b) => b.length - a.length);
+    const escapedNames = sortedNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const mentionRegex = new RegExp(`@(${escapedNames.join('|')})`, 'gi');
     
     console.log('renderMessageWithMentions called with:', content);
+    console.log('Available components:', componentNames);
+    console.log('Regex pattern:', mentionRegex);
+    
+    const parts = content.split(mentionRegex);
     console.log('Split parts:', parts);
-    console.log('Available components:', copilot?.components);
     
     return (
       <span className="whitespace-pre-wrap">
