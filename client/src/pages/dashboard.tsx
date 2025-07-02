@@ -986,7 +986,7 @@ export default function Dashboard() {
         <nav className={`flex-1 ${sidebarCollapsed ? 'px-2' : 'px-6'} py-6 overflow-y-auto`}>
           {activeSection === 'user-view' && !chatCopilot ? (
             // User View: Simplified navigation for end users
-            <div className="space-y-6">
+            (<div className="space-y-6">
               {!sidebarCollapsed && (
                 <>
                   {/* Quick Access Assistants */}
@@ -1034,10 +1034,10 @@ export default function Dashboard() {
                   ))}
                 </div>
               )}
-            </div>
+            </div>)
           ) : chatCopilot ? (
             // Recent Conversations List
-            <div className="space-y-3">
+            (<div className="space-y-3">
               {!sidebarCollapsed && (
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-sm font-medium text-sidebar-foreground">Recent Conversations</h3>
@@ -1125,10 +1125,10 @@ export default function Dashboard() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div>)
           ) : (
             // Regular Admin Navigation Menu
-            <ul className="space-y-2">
+            (<ul className="space-y-2">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = activeSection === item.id;
@@ -1150,7 +1150,7 @@ export default function Dashboard() {
                   </li>
                 );
               })}
-            </ul>
+            </ul>)
           )}
         </nav>
 
@@ -1218,7 +1218,7 @@ export default function Dashboard() {
             <DropdownMenuContent align="end" className="w-56">
               {activeSection === 'user-view' ? (
                 // Simplified user profile options
-                <>
+                (<>
                   <DropdownMenuItem>
                     <User className="w-4 h-4 mr-2" />
                     My Profile
@@ -1240,10 +1240,10 @@ export default function Dashboard() {
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign Out
                   </DropdownMenuItem>
-                </>
+                </>)
               ) : (
                 // Admin profile options
-                <>
+                (<>
                   <DropdownMenuItem>
                     <User className="w-4 h-4 mr-2" />
                     Profile Settings
@@ -1257,18 +1257,17 @@ export default function Dashboard() {
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign Out
                   </DropdownMenuItem>
-                </>
+                </>)
               )}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
       </div>
-      
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
         <div className="w-80 border-r border-sidebar-border flex flex-col h-full" style={{ backgroundColor: '#f3f4f7' }}>
           <div className="p-4 flex items-center justify-between">
-            <h3 className="font-semibold text-foreground">Documents</h3>
+            <h3 className="font-semibold text-foreground">Files</h3>
             <Button
               variant="ghost"
               size="sm"
@@ -1397,7 +1396,6 @@ export default function Dashboard() {
           </div>
         </div>
       )}
-      
       {/* Main Content */}
       <div className="flex-1 overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
         {/* Combined scrollable content */}
@@ -1430,7 +1428,6 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
-      
       {/* Edit Modal */}
       <EditCopilotModal
         isOpen={!!editingCopilot}
@@ -1438,7 +1435,6 @@ export default function Dashboard() {
         onClose={() => setEditingCopilot(null)}
         onUpdateCopilot={handleUpdateCopilot}
       />
-
       {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
         isOpen={deleteConfirmOpen}
