@@ -27,6 +27,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [isResizing, setIsResizing] = useState(false);
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
   const [expandedAttachments, setExpandedAttachments] = useState(false);
+  const [activeComponents, setActiveComponents] = useState<Array<{name: string; type: string}>>([]);
   const [feedbackForms, setFeedbackForms] = useState<Record<string, { type: 'dislike' | 'askHuman'; text: string; visible: boolean }>>({});
   const [likedMessages, setLikedMessages] = useState<Set<string>>(new Set());
   const [copiedMessages, setCopiedMessages] = useState<Set<string>>(new Set());
@@ -255,6 +256,18 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     console.log('Saving profile data:', profileData);
   };
 
+  const handleAddComponent = (name: string, type: string) => {
+    console.log('Selected', type + ':', name);
+    const newComponent = { name, type };
+    setActiveComponents(prev => {
+      // Check if component is already active
+      if (prev.some(comp => comp.name === name && comp.type === type)) {
+        return prev;
+      }
+      return [...prev, newComponent];
+    });
+  };
+
   const getFileIcon = (fileName: string) => {
     const extension = fileName.toLowerCase().split('.').pop();
     switch (extension) {
@@ -433,6 +446,30 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   </div>
                 </div>
               )}
+              {/* Active Components Indicator */}
+              {activeComponents.length > 0 && (
+                <div className="px-6 py-3 border-b bg-blue-50">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-sm font-medium text-blue-700">Active:</span>
+                    {activeComponents.map((component, index) => (
+                      <div key={`${component.type}-${component.name}`} className="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-full text-xs">
+                        {component.type === 'agent' && <Bot className="w-3 h-3" />}
+                        {component.type === 'tool' && <Wrench className="w-3 h-3" />}
+                        {component.type === 'workflow' && <Workflow className="w-3 h-3" />}
+                        <span>{component.name}</span>
+                        <button 
+                          onClick={() => setActiveComponents(prev => prev.filter((_, i) => i !== index))}
+                          className="ml-1 hover:bg-blue-200 rounded-full p-0.5"
+                          title="Remove"
+                        >
+                          <X className="w-2.5 h-2.5" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
               <div className="flex-1 space-y-6 overflow-y-auto">
                 {messages.map((message) => (
                   <div
@@ -641,7 +678,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   <DropdownMenuContent align="end" className="w-56">
                     {/* Available Agents */}
                     {copilot?.components.filter(c => c.type === 'agent').map((agent) => (
-                      <DropdownMenuItem key={agent.name} onClick={() => console.log('Selected agent:', agent.name)}>
+                      <DropdownMenuItem key={agent.name} onClick={() => handleAddComponent(agent.name, 'agent')}>
                         <Bot className="w-4 h-4 mr-2" />
                         {agent.name}
                       </DropdownMenuItem>
@@ -649,7 +686,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     
                     {/* Available Tools */}
                     {copilot?.components.filter(c => c.type === 'tool').map((tool) => (
-                      <DropdownMenuItem key={tool.name} onClick={() => console.log('Selected tool:', tool.name)}>
+                      <DropdownMenuItem key={tool.name} onClick={() => handleAddComponent(tool.name, 'tool')}>
                         <Wrench className="w-4 h-4 mr-2" />
                         {tool.name}
                       </DropdownMenuItem>
@@ -657,7 +694,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     
                     {/* Available Workflows */}
                     {copilot?.components.filter(c => c.type === 'workflow').map((workflow) => (
-                      <DropdownMenuItem key={workflow.name} onClick={() => console.log('Selected workflow:', workflow.name)}>
+                      <DropdownMenuItem key={workflow.name} onClick={() => handleAddComponent(workflow.name, 'workflow')}>
                         <Workflow className="w-4 h-4 mr-2" />
                         {workflow.name}
                       </DropdownMenuItem>
