@@ -673,9 +673,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   </DropdownMenuContent>
                 </DropdownMenu>
                 <div className="flex-1 relative">
-                  {/* Active Component Indicator inside input */}
+                  {/* Active Component Indicator on right side */}
                   {activeComponent && (
-                    <div className="absolute left-3 top-3 z-10 flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">
+                    <div className="absolute right-3 top-3 z-10 flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs">
                       {activeComponent.type === 'agent' && <Bot className="w-3 h-3" />}
                       {activeComponent.type === 'tool' && <Wrench className="w-3 h-3" />}
                       {activeComponent.type === 'workflow' && <Workflow className="w-3 h-3" />}
@@ -695,8 +695,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyPress={handleKeyPress}
                     placeholder="Type your message..."
-                    className={`min-h-12 max-h-24 resize-none w-full ${activeComponent ? 'pt-8' : ''}`}
-                    style={{ paddingLeft: activeComponent ? '12px' : '12px' }}
+                    className="min-h-12 max-h-24 resize-none w-full"
+                    style={{ paddingRight: activeComponent ? '120px' : '12px' }}
                     rows={1}
                   />
                 </div>
