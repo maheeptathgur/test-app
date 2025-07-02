@@ -342,10 +342,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`max-w-[70%] p-4 rounded-lg ${
+                      className={`p-4 rounded-lg ${
                         message.sender === 'user'
-                          ? 'text-foreground'
-                          : 'text-foreground'
+                          ? 'max-w-[70%] text-foreground'
+                          : 'w-full text-foreground'
                       }`}
                       style={message.sender === 'user' ? { backgroundColor: '#e6eeef' } : {}}
                     >
