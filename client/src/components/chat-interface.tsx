@@ -348,14 +348,14 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <Button
               variant="ghost"
               size="sm"
-              className="absolute top-2 right-2 h-6 w-6 p-0 z-20 bg-white/80 hover:bg-white shadow-sm"
+              className="absolute top-1 right-1 h-5 w-5 p-0 z-20 bg-white/90 hover:bg-white shadow-md rounded-full"
               onClick={() => {
                 // Clear selected files to close the preview pane
                 window.dispatchEvent(new CustomEvent('clearSelectedFiles'));
               }}
               title="Close Preview"
             >
-              <X className="h-4 w-4" />
+              <X className="h-3 w-3" />
             </Button>
             <div className="flex-1 p-4 overflow-y-auto min-h-0">
               {(() => {
