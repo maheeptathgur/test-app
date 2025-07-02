@@ -419,23 +419,21 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         <div className="max-w-4xl mx-auto p-6">
           {/* Attached Files Display */}
           {selectedFiles.length > 0 && (
-            <div className="mb-4 p-3 bg-muted/30 rounded-lg border">
-              <div className="flex items-center gap-2 mb-2">
-                <Paperclip className="w-4 h-4 text-muted-foreground" />
-                <span className="text-sm font-medium text-muted-foreground">
-                  {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''} attached
-                </span>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {selectedFiles.map((fileName) => (
-                  <div
-                    key={fileName}
-                    className="flex items-center gap-2 px-3 py-2 bg-white rounded-md border text-sm"
-                  >
+            <div className="mb-3 flex items-center gap-2 px-3 py-2 bg-muted/20 rounded-md border text-sm">
+              <Paperclip className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+              <span className="text-muted-foreground flex-shrink-0">
+                {selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}:
+              </span>
+              <div className="flex items-center gap-1 flex-1 min-w-0">
+                {selectedFiles.slice(0, 3).map((fileName) => (
+                  <div key={fileName} className="flex items-center gap-1 text-xs bg-white px-2 py-1 rounded border">
                     {getFileIcon(fileName)}
-                    <span className="truncate max-w-[200px]">{fileName}</span>
+                    <span className="truncate max-w-[100px]">{fileName}</span>
                   </div>
                 ))}
+                {selectedFiles.length > 3 && (
+                  <span className="text-xs text-muted-foreground">+{selectedFiles.length - 3} more</span>
+                )}
               </div>
             </div>
           )}
