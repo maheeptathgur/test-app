@@ -235,7 +235,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleSendMessage();
     }
   };
