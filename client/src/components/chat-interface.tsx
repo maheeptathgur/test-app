@@ -507,8 +507,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     
     // Add space before if needed
     const spaceBeforeBadge = textBeforeCursor && !textBeforeCursor.endsWith(' ') ? ' ' : '';
-    // Add space after if needed
-    const spaceAfterBadge = textAfterCursor && !textAfterCursor.startsWith(' ') ? ' ' : '';
+    // Always add space after to ensure word boundary detection works
+    const spaceAfterBadge = ' ';
     
     const newValue = `${textBeforeCursor}${spaceBeforeBadge}${name}${spaceAfterBadge}${textAfterCursor}`;
     
