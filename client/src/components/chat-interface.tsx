@@ -536,7 +536,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               )}
 
               
-              <div className="flex-1 space-y-6 overflow-y-auto">
+              <div className="flex-1 space-y-6 overflow-y-auto mt-8">
                 {/* Welcome screen with available tools when no messages */}
                 {messages.length === 0 && copilot && (
                   <div className="flex-1 flex items-center justify-center">

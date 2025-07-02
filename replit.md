@@ -193,6 +193,7 @@ Changelog:
 - July 2, 2025. Added welcome screen with tools overview - when no messages exist, displays copilot name, description, and grid of available agents, tools, and workflows with color-coded categories (blue for agents, green for tools, purple for workflows) to help new users understand available capabilities before starting conversations
 - July 2, 2025. Implemented @handle field functionality for quick reference to tools, agents, and workflows in chat conversations - typing @ shows autocomplete dropdown with available components, supports keyboard navigation (arrows, enter, tab, escape), click selection, and automatically inserts component names with proper formatting
 - July 2, 2025. Removed title bar from chat interface while keeping profile and close buttons at top right - welcome screen displays copilot name and description so header was redundant, creating cleaner interface with more space for conversation
+- July 2, 2025. Added top margin spacing to profile fields and conversation area to prevent overlap with floating top-right buttons, ensuring proper visual hierarchy and preventing content from being hidden behind controls
 ```
 
 ## User Preferences
