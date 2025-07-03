@@ -178,7 +178,7 @@
     vertical-align: baseline;
     line-height: 1;
     gap: 4px;
-    transform: translateY(-1px);
+    transform: translateY(1px);
   }
 
   .google-drive-icon {
