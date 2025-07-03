@@ -77,9 +77,6 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
             alt={`${copilot.type} copilot`}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-            {getTypeIcon(copilot.type)}
-          </div>
 
           <div className="absolute top-3 right-3">
             <DropdownMenu>
