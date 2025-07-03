@@ -600,6 +600,7 @@ export default function Dashboard() {
     };
 
     const handleToolConfigure = (event: CustomEvent) => {
+      console.log('Tool configure event:', event.detail);
       setConfigureTool(event.detail);
       setActiveSection('tools');
       setConfiguringCopilot(null); // Close copilot config
@@ -1794,8 +1795,18 @@ export default function Dashboard() {
         (
           <div className="h-full p-8 overflow-y-auto">
             {/* Top Bar - Hidden when in user-view, settings modes, or configuration screens */}
-            {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-             !configureAgent && !configureTool && !configureWorkflow && (
+            {(function() {
+              console.log('Header condition check:', {
+                activeSection,
+                configureAgent,
+                configureTool,
+                configureWorkflow,
+                shouldShow: activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
+                  !configureAgent && !configureTool && !configureWorkflow
+              });
+              return activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
+                !configureAgent && !configureTool && !configureWorkflow;
+            })() && (
               <div className="mb-8">
                 <div className="flex items-center justify-between">
                   <div>
