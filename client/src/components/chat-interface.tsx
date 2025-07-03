@@ -395,6 +395,18 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     }
   };
 
+  const handleCloseFeedback = (messageId: string) => {
+    // Close the feedback form without submitting
+    setFeedbackForms(prev => ({
+      ...prev,
+      [messageId]: {
+        ...prev[messageId],
+        visible: false,
+        text: '' // Clear the text when closing
+      }
+    }));
+  };
+
   // Handle @ mentions and autocomplete
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -1092,10 +1104,21 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           {/* Feedback form */}
                           {feedbackForms[message.id]?.visible && (
                             <div className="mt-3 p-3 bg-gray-50 rounded-lg">
-                              <div className="text-sm font-medium text-gray-700 mb-2">
-                                {feedbackForms[message.id].type === 'dislike' 
-                                  ? "What was wrong with this response?" 
-                                  : "What would you like a human to help with?"}
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="text-sm font-medium text-gray-700">
+                                  {feedbackForms[message.id].type === 'dislike' 
+                                    ? "What was wrong with this response?" 
+                                    : "What would you like a human to help with?"}
+                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => handleCloseFeedback(message.id)}
+                                  className="h-6 w-6 p-0 text-gray-400 hover:text-gray-600"
+                                  title="Close"
+                                >
+                                  <X className="w-3 h-3" />
+                                </Button>
                               </div>
                               <div className="flex gap-2">
                                 <Input
