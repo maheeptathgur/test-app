@@ -24,6 +24,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
   const [profileData, setProfileData] = useState<Record<string, string>>({});
+  const [initialProfileData, setInitialProfileData] = useState<Record<string, string>>({});
   const [documentPaneWidth, setDocumentPaneWidth] = useState(320); // 320px = w-80 default
   const [isResizing, setIsResizing] = useState(false);
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
@@ -606,13 +607,22 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   const handleSaveProfile = () => {
     if (!isEditingProfile) {
-      // If not editing, enable editing mode
+      // If not editing, enable editing mode and store initial data
+      setInitialProfileData({ ...profileData });
       setIsEditingProfile(true);
     } else {
-      // If editing, save the profile data
+      // If editing, save the profile data and close the profile fields
       setIsEditingProfile(false);
+      setShowProfileFields(false);
       console.log('Saving profile data:', profileData);
     }
+  };
+
+  // Check if profile data has changed from initial state
+  const hasProfileDataChanged = () => {
+    return Object.keys(profileData).some(key => 
+      profileData[key] !== (initialProfileData[key] || '')
+    );
   };
 
   const handleAddComponent = (name: string, type: string) => {
@@ -800,8 +810,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           size="sm"
                           onClick={handleSaveProfile}
                           className="gap-2"
+                          disabled={isEditingProfile && !hasProfileDataChanged()}
                         >
-                          {isEditingProfile || Object.values(profileData).some(value => value.trim() !== '') ? (
+                          {isEditingProfile ? (
                             <>
                               <Check className="h-3 w-3" />
                               Save Profile
