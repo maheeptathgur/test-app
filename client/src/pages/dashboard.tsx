@@ -291,6 +291,48 @@ const recentConversations = [
       }
     ]
   },
+  {
+    id: '9',
+    title: 'Senior Marketing Manager Resume',
+    copilot: 'Resume Assistant',
+    lastMessage: 'Generated professional resume with ATS optimization',
+    timestamp: '3 hours ago',
+    isActive: false,
+    formInputs: {
+      prompt: 'Create a professional resume for a Senior Marketing Manager position at a tech startup',
+      job_description: 'We are seeking an experienced Senior Marketing Manager to lead our growth marketing initiatives. The ideal candidate will have 5+ years of marketing experience, expertise in digital marketing, campaign management, and team leadership. Experience with SaaS products and B2B marketing is highly preferred.',
+      uploaded_file: 'sarah_chen_resume.pdf'
+    },
+    formOutput: 'Generated a comprehensive 2-page resume highlighting digital marketing expertise, campaign management experience, and leadership achievements. Optimized for ATS with relevant keywords and quantified results showing 40% revenue growth and 150% lead generation increase.'
+  },
+  {
+    id: '10',
+    title: 'Software Engineer Career Switch',
+    copilot: 'Resume Assistant',
+    lastMessage: 'Crafted career transition resume emphasizing transferable skills',
+    timestamp: 'Yesterday',
+    isActive: false,
+    formInputs: {
+      prompt: 'Help me transition from project management to software engineering role',
+      job_description: 'Junior Software Engineer position at a fintech company. Looking for candidates with programming fundamentals, problem-solving skills, and ability to learn quickly. Previous experience in tech industry is a plus.',
+      uploaded_file: 'mike_project_manager_resume.docx'
+    },
+    formOutput: 'Created a strategic career transition resume emphasizing technical project management experience, programming bootcamp completion, and transferable skills. Highlighted relevant projects and technical certifications while maintaining professional credibility for the career switch.'
+  },
+  {
+    id: '11',
+    title: 'Executive Level Resume Optimization',
+    copilot: 'Resume Assistant',
+    lastMessage: 'Enhanced executive resume with strategic leadership focus',
+    timestamp: '2 days ago',
+    isActive: false,
+    formInputs: {
+      prompt: 'Optimize my executive resume for VP of Sales positions in enterprise software companies',
+      job_description: 'VP of Sales role leading a team of 20+ sales professionals. Responsible for $50M+ revenue target, enterprise client relationships, and go-to-market strategy. Requires 10+ years of B2B sales leadership experience.',
+      uploaded_file: 'robert_vp_sales_resume.pdf'
+    },
+    formOutput: 'Refined executive-level resume showcasing P&L responsibility, team leadership of 25+ professionals, and consistent revenue growth. Emphasized strategic partnerships, market expansion achievements, and board-level presentation experience with quantified results exceeding $75M in closed deals.'
+  },
 ];
 
 const mockCopilots: CopilotData[] = [
