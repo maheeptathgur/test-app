@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow, Users, TrendingUp, Mail, Calendar, Target, DollarSign, Eye, BarChart3, Clock, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -33,6 +33,161 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [expandedComponents, setExpandedComponents] = useState<Set<string>>(new Set());
 
   const [inputContent, setInputContent] = useState<string>(''); // Track raw text content
+
+  // Component to render tool interfaces (like HubSpot)
+  const renderToolInterface = (toolName: string, context?: string) => {
+    if (toolName.toLowerCase().includes('hubspot')) {
+      return (
+        <div className="my-4 p-4 bg-gray-50 rounded-lg border">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+              <span className="text-white text-xs font-bold">H</span>
+            </div>
+            <h3 className="font-semibold text-gray-900">HubSpot Dashboard</h3>
+            <Badge variant="outline" className="text-xs">Live Data</Badge>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="grid grid-cols-3 gap-3 mb-4">
+            <Card className="p-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-gray-500">New Leads</p>
+                  <p className="text-lg font-bold text-green-600">47</p>
+                </div>
+                <TrendingUp className="w-4 h-4 text-green-500" />
+              </div>
+            </Card>
+            <Card className="p-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-gray-500">Active Campaigns</p>
+                  <p className="text-lg font-bold text-blue-600">8</p>
+                </div>
+                <Target className="w-4 h-4 text-blue-500" />
+              </div>
+            </Card>
+            <Card className="p-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs text-gray-500">Conversion Rate</p>
+                  <p className="text-lg font-bold text-purple-600">12.4%</p>
+                </div>
+                <BarChart3 className="w-4 h-4 text-purple-500" />
+              </div>
+            </Card>
+          </div>
+
+          {/* Recent Leads */}
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium text-gray-900">Recent High-Priority Leads</h4>
+            {[
+              { name: 'Sarah Johnson', company: 'TechCorp Inc.', score: 95, source: 'Demo Request' },
+              { name: 'Mike Chen', company: 'StartupXYZ', score: 88, source: 'Pricing Page' },
+              { name: 'Emma Davis', company: 'Enterprise Co.', score: 82, source: 'Whitepaper Download' },
+            ].map((lead, idx) => (
+              <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <span className="text-xs font-medium text-blue-600">{lead.name.split(' ').map(n => n[0]).join('')}</span>
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium">{lead.name}</p>
+                    <p className="text-xs text-gray-500">{lead.company}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary" className="text-xs">{lead.source}</Badge>
+                  <div className="flex items-center gap-1">
+                    <Star className="w-3 h-3 text-yellow-500 fill-current" />
+                    <span className="text-xs font-medium">{lead.score}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-2 mt-4">
+            <Button size="sm" variant="outline" className="text-xs">
+              <Eye className="w-3 h-3 mr-1" />
+              View All Leads
+            </Button>
+            <Button size="sm" variant="outline" className="text-xs">
+              <Mail className="w-3 h-3 mr-1" />
+              Create Campaign
+            </Button>
+            <Button size="sm" variant="outline" className="text-xs">
+              <BarChart3 className="w-3 h-3 mr-1" />
+              Analytics
+            </Button>
+          </div>
+        </div>
+      );
+    }
+
+    if (toolName.toLowerCase().includes('campaign planner') || toolName.toLowerCase().includes('media planner')) {
+      return (
+        <div className="my-4 p-4 bg-blue-50 rounded-lg border">
+          <div className="flex items-center gap-2 mb-4">
+            <Calendar className="w-5 h-5 text-blue-600" />
+            <h3 className="font-semibold text-gray-900">{toolName} Interface</h3>
+            <Badge variant="outline" className="text-xs">Planning Mode</Badge>
+          </div>
+
+          {/* Campaign Timeline */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-medium text-gray-900">Campaign Timeline</h4>
+            {[
+              { phase: 'Pre-launch', duration: '2 weeks', budget: '$30K', status: 'Planning' },
+              { phase: 'Launch Week', duration: '1 week', budget: '$50K', status: 'Ready' },
+              { phase: 'Growth Phase', duration: '5 weeks', budget: '$70K', status: 'Scheduled' },
+            ].map((phase, idx) => (
+              <div key={idx} className="flex items-center justify-between p-3 bg-white rounded border">
+                <div className="flex items-center gap-3">
+                  <div className={`w-2 h-2 rounded-full ${
+                    phase.status === 'Planning' ? 'bg-yellow-500' : 
+                    phase.status === 'Ready' ? 'bg-green-500' : 'bg-blue-500'
+                  }`} />
+                  <div>
+                    <p className="text-sm font-medium">{phase.phase}</p>
+                    <p className="text-xs text-gray-500">{phase.duration}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Badge variant="secondary" className="text-xs">{phase.status}</Badge>
+                  <span className="text-sm font-medium text-green-600">{phase.budget}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Budget Breakdown */}
+          <div className="mt-4 p-3 bg-white rounded border">
+            <h4 className="text-sm font-medium text-gray-900 mb-2">Budget Allocation</h4>
+            <div className="space-y-2">
+              {[
+                { channel: 'LinkedIn Ads', amount: '$78K', percentage: '52%' },
+                { channel: 'Google Ads', amount: '$43K', percentage: '29%' },
+                { channel: 'Email Marketing', amount: '$19K', percentage: '13%' },
+                { channel: 'PR & Outreach', amount: '$10K', percentage: '6%' },
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-center justify-between">
+                  <span className="text-xs text-gray-600">{item.channel}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-medium">{item.amount}</span>
+                    <span className="text-xs text-gray-500">({item.percentage})</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   const toggleComponentExpansion = (componentName: string) => {
     setExpandedComponents(prev => {
@@ -1018,6 +1173,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           __html: formatMarkdown(message.content)
                         }}
                       />
+                      
+                      {/* Tool Interfaces - Show when tools are mentioned */}
+                      {message.sender === 'bot' && (
+                        <>
+                          {message.content.toLowerCase().includes('@hubspot') && renderToolInterface('HubSpot')}
+                          {(message.content.toLowerCase().includes('@campaign planner') || message.content.toLowerCase().includes('campaign planner')) && renderToolInterface('Campaign Planner')}
+                          {(message.content.toLowerCase().includes('@media planner') || message.content.toLowerCase().includes('media planner')) && renderToolInterface('Media Planner')}
+                        </>
+                      )}
                       
                       {/* Interaction buttons for AI responses */}
                       {message.sender === 'bot' && (
