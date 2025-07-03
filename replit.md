@@ -210,6 +210,7 @@ Changelog:
 - July 3, 2025. Fixed profile fields editing functionality - fields now properly enable/disable based on editing state, "Edit Profile" button correctly activates editing mode, and all input types (text, textarea, select, number) work properly with disabled state when not editing
 - July 3, 2025. Enhanced Save Profile button behavior - button now disables when in editing mode until user makes changes to any field, and clicking Save Profile automatically closes the profile fields section for streamlined user experience
 - July 3, 2025. Corrected component color scheme to proper specification - tools are blue, agents are purple, workflows are amber/yellow throughout the interface (chat welcome screen, @mention badges, autocomplete dropdown, and message formatting) for consistent visual identification
+- July 3, 2025. Reorganized capabilities section into three-column layout grouped by component type - created dedicated columns for Agents (purple), Tools (blue), and Workflows (amber) with color-coded headers, more compact cards, conditional rendering, and responsive design for better organization and space efficiency
 ```
 
 ## User Preferences

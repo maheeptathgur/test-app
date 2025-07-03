@@ -845,39 +845,60 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       {copilot.components && copilot.components.length > 0 && (
                         <div className="space-y-4">
                           <h3 className="text-lg font-medium text-gray-900">Available Tools & Capabilities</h3>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {/* Agents */}
-                            {copilot.components.filter(c => c.type === 'agent').map((agent) => (
-                              <div key={agent.name} className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg text-left">
-                                <Bot className="w-5 h-5 text-purple-600 flex-shrink-0" />
-                                <div>
-                                  <div className="font-medium text-gray-900">{agent.name}</div>
-                                  <div className="text-sm text-gray-600">{agent.description || 'Specialized assistant'}</div>
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            {/* Agents Column */}
+                            {copilot.components.filter(c => c.type === 'agent').length > 0 && (
+                              <div className="space-y-3">
+                                <div className="flex items-center gap-2 mb-3">
+                                  <Bot className="w-4 h-4 text-purple-600" />
+                                  <h4 className="font-medium text-purple-900">Agents</h4>
+                                </div>
+                                <div className="space-y-2">
+                                  {copilot.components.filter(c => c.type === 'agent').map((agent) => (
+                                    <div key={agent.name} className="p-3 bg-purple-50 rounded-lg text-left border border-purple-100">
+                                      <div className="font-medium text-gray-900 text-sm">{agent.name}</div>
+                                      <div className="text-xs text-gray-600 mt-1 leading-relaxed">{agent.description || 'Specialized assistant'}</div>
+                                    </div>
+                                  ))}
                                 </div>
                               </div>
-                            ))}
+                            )}
                             
-                            {/* Tools */}
-                            {copilot.components.filter(c => c.type === 'tool').map((tool) => (
-                              <div key={tool.name} className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg text-left">
-                                <Wrench className="w-5 h-5 text-blue-600 flex-shrink-0" />
-                                <div>
-                                  <div className="font-medium text-gray-900">{tool.name}</div>
-                                  <div className="text-sm text-gray-600">{tool.description || 'Integration tool'}</div>
+                            {/* Tools Column */}
+                            {copilot.components.filter(c => c.type === 'tool').length > 0 && (
+                              <div className="space-y-3">
+                                <div className="flex items-center gap-2 mb-3">
+                                  <Wrench className="w-4 h-4 text-blue-600" />
+                                  <h4 className="font-medium text-blue-900">Tools</h4>
+                                </div>
+                                <div className="space-y-2">
+                                  {copilot.components.filter(c => c.type === 'tool').map((tool) => (
+                                    <div key={tool.name} className="p-3 bg-blue-50 rounded-lg text-left border border-blue-100">
+                                      <div className="font-medium text-gray-900 text-sm">{tool.name}</div>
+                                      <div className="text-xs text-gray-600 mt-1 leading-relaxed">{tool.description || 'Integration tool'}</div>
+                                    </div>
+                                  ))}
                                 </div>
                               </div>
-                            ))}
+                            )}
                             
-                            {/* Workflows */}
-                            {copilot.components.filter(c => c.type === 'workflow').map((workflow) => (
-                              <div key={workflow.name} className="flex items-center gap-3 p-3 bg-amber-50 rounded-lg text-left">
-                                <Workflow className="w-5 h-5 text-amber-600 flex-shrink-0" />
-                                <div>
-                                  <div className="font-medium text-gray-900">{workflow.name}</div>
-                                  <div className="text-sm text-gray-600">{workflow.description || 'Automated workflow'}</div>
+                            {/* Workflows Column */}
+                            {copilot.components.filter(c => c.type === 'workflow').length > 0 && (
+                              <div className="space-y-3">
+                                <div className="flex items-center gap-2 mb-3">
+                                  <Workflow className="w-4 h-4 text-amber-600" />
+                                  <h4 className="font-medium text-amber-900">Workflows</h4>
+                                </div>
+                                <div className="space-y-2">
+                                  {copilot.components.filter(c => c.type === 'workflow').map((workflow) => (
+                                    <div key={workflow.name} className="p-3 bg-amber-50 rounded-lg text-left border border-amber-100">
+                                      <div className="font-medium text-gray-900 text-sm">{workflow.name}</div>
+                                      <div className="text-xs text-gray-600 mt-1 leading-relaxed">{workflow.description || 'Automated workflow'}</div>
+                                    </div>
+                                  ))}
                                 </div>
                               </div>
-                            ))}
+                            )}
                           </div>
                           
                           <div className="text-sm text-gray-500 mt-4">
