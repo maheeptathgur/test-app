@@ -139,6 +139,28 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
     }, 2000);
   };
 
+  // Convert markdown to formatted HTML for display
+  const formatContent = (content: string) => {
+    return content
+      // Convert **bold** to <strong>
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      // Convert *italic* to <em>
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      // Convert `code` to <code>
+      .replace(/`(.*?)`/g, '<code style="background-color: #f3f4f6; padding: 2px 4px; border-radius: 3px; font-family: monospace;">$1</code>')
+      // Convert bullet points
+      .replace(/^- (.*$)/gim, '• $1')
+      // Convert numbered lists
+      .replace(/^(\d+)\. (.*$)/gim, '$1. $2')
+      // Convert headers
+      .replace(/^### (.*$)/gim, '<h3 style="font-size: 1.125rem; font-weight: 600; margin: 1rem 0 0.5rem 0;">$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2 style="font-size: 1.25rem; font-weight: 600; margin: 1.25rem 0 0.75rem 0;">$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1 style="font-size: 1.5rem; font-weight: 700; margin: 1.5rem 0 1rem 0;">$1</h1>')
+      // Convert line breaks
+      .replace(/\n\n/g, '<br><br>')
+      .replace(/\n/g, '<br>');
+  };
+
   const renderProfileField = (field: ProfileField) => {
     const value = profileData[field.name] || '';
     
@@ -379,11 +401,10 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
         <div className="flex-1 overflow-y-auto p-6 w-full">
           {showResult ? (
             <div className="h-full w-full">
-              <div className="h-full w-full overflow-y-auto text-foreground leading-relaxed font-sans text-base">
-                <div className="whitespace-pre-wrap">
-                  {generatedContent}
-                </div>
-              </div>
+              <div 
+                className="h-full w-full overflow-y-auto text-foreground leading-relaxed font-sans text-base"
+                dangerouslySetInnerHTML={{ __html: formatContent(generatedContent) }}
+              />
             </div>
           ) : (
             <div className="flex-1 flex items-center justify-center text-center w-full">
