@@ -196,17 +196,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     const componentNames = copilot?.components?.map(c => c.name) || [];
     const escapedNames = componentNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).sort((a, b) => b.length - a.length);
     
-    // Debug logging
-    console.log('formatMarkdown - text:', text);
-    console.log('formatMarkdown - componentNames:', componentNames);
-    console.log('formatMarkdown - escapedNames:', escapedNames);
-    
     if (escapedNames.length > 0) {
       const mentionRegex = new RegExp(`@(${escapedNames.join('|')})\\b`, 'gi');
-      console.log('formatMarkdown - mentionRegex:', mentionRegex);
       
       formattedText = formattedText.replace(mentionRegex, (match, componentName) => {
-        console.log('formatMarkdown - found match:', match, componentName);
         const component = copilot?.components?.find(c => 
           c.name.toLowerCase().trim() === componentName.toLowerCase().trim()
         );
@@ -548,15 +541,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
 
-    // Convert @mentions in the input to proper format for storage
-    let messageContent = inputValue;
-    const componentNames = copilot?.components?.map(c => c.name) || [];
-    
-    // Replace @mentions with formatted @mentions that will be preserved
-    componentNames.forEach(componentName => {
-      const regex = new RegExp(`@${componentName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
-      messageContent = messageContent.replace(regex, `@${componentName}`);
-    });
+    // Use inputContent (which preserves @mentions) instead of inputValue
+    const messageContent = inputContent || inputValue;
 
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
