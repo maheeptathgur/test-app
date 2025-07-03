@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { WorkspaceSelector } from "@/components/workspace-selector";
 import { CopilotCard } from "@/components/copilot-card";
 import { ChatInterface } from "@/components/chat-interface";
+import { FormInterface } from "@/components/form-interface";
 import { CreateCopilotModal } from "@/components/create-copilot-modal";
 import { EditCopilotModal } from "@/components/edit-copilot-modal";
 import { CopilotConfiguration } from "@/components/copilot-configuration";
@@ -430,6 +431,28 @@ const mockCopilots: CopilotData[] = [
       { id: 'support_goals', name: 'support_goals', label: 'Support Goals', type: 'textarea', required: false, description: 'What are your main support objectives?' },
     ],
   },
+  {
+    id: '5',
+    name: 'Resume Assistant',
+    description: 'AI-powered resume optimization tool that personalizes your resume based on job descriptions and career goals.',
+    status: 'active',
+    avatar: 'RA',
+    avatarColor: 'bg-indigo-100 text-indigo-600',
+    type: 'form',
+    favorite: false,
+    components: [
+      { name: 'Resume Analyzer', type: 'agent', description: 'AI agent that analyzes resume content and suggests improvements' },
+      { name: 'Job Matcher', type: 'agent', description: 'Matches resume content with job description requirements' },
+      { name: 'ATS Scanner', type: 'tool', description: 'Applicant Tracking System compatibility checker' },
+      { name: 'LinkedIn API', type: 'tool', description: 'Professional profile data integration and optimization' },
+      { name: 'Resume Optimization', type: 'workflow', description: 'Multi-step process to enhance resume effectiveness' },
+    ],
+    profileFields: [
+      { id: 'career_level', name: 'career_level', label: 'Career Level', type: 'select', required: true, description: 'What\'s your current career stage?', options: ['Entry Level', 'Mid-Level', 'Senior Level', 'Executive', 'Career Change'] },
+      { id: 'target_industry', name: 'target_industry', label: 'Target Industry', type: 'select', required: true, description: 'Which industry are you targeting?', options: ['Technology', 'Healthcare', 'Finance', 'Marketing', 'Education', 'Manufacturing', 'Other'] },
+      { id: 'job_type', name: 'job_type', label: 'Job Type', type: 'select', required: false, description: 'What type of position are you seeking?', options: ['Full-time', 'Part-time', 'Contract', 'Remote', 'Hybrid'] },
+    ]
+  },
 ];
 
 const navigationItems = [
@@ -457,6 +480,8 @@ const getImageUrl = (type: string) => {
       return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop&auto=format';
     case 'support':
       return 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&auto=format';
+    case 'form':
+      return 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=200&fit=crop&auto=format';
     default:
       return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
   }
@@ -472,6 +497,8 @@ const getTypeIcon = (type: string) => {
       return <BarChart3 className="w-4 h-4 text-white drop-shadow-md" />;
     case 'support':
       return <Headphones className="w-4 h-4 text-white drop-shadow-md" />;
+    case 'form':
+      return <FileText className="w-4 h-4 text-white drop-shadow-md" />;
     default:
       return <Bot className="w-4 h-4 text-white drop-shadow-md" />;
   }
@@ -489,6 +516,8 @@ const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
         return 'bg-purple-500';
       case 'support':
         return 'bg-orange-500';
+      case 'form':
+        return 'bg-indigo-500';
       default:
         return 'bg-gray-500';
     }
@@ -1711,7 +1740,43 @@ export default function Dashboard() {
             {sectionContent.content}
           </div>
         </div>
+        
+        {/* Form Interface for form-type copilots */}
+        {chatCopilot && chatCopilot.type === 'form' && (
+          <FormInterface
+            isOpen={!!chatCopilot}
+            copilot={chatCopilot}
+            onClose={() => {
+              setChatCopilot(null);
+              setShowAttachmentSidebar(false);
+            }}
+          />
+        )}
+        
+        {/* Chat Interface for non-form copilots */}
+        {chatCopilot && chatCopilot.type !== 'form' && (
+          <ChatInterface
+            isOpen={!!chatCopilot}
+            copilot={chatCopilot}
+            onClose={() => {
+              setChatCopilot(null);
+              setShowAttachmentSidebar(false);
+            }}
+            onToggleAttachment={setShowAttachmentSidebar}
+            selectedFiles={selectedFiles}
+          />
+        )}
+        
+        {/* Configuration Interface */}
+        {configuringCopilot && (
+          <CopilotConfiguration
+            copilot={configuringCopilot}
+            onClose={() => setConfiguringCopilot(null)}
+            onSave={handleSaveCopilotConfiguration}
+          />
+        )}
       </div>
+      
       {/* Edit Modal */}
       <EditCopilotModal
         isOpen={!!editingCopilot}
@@ -1719,6 +1784,7 @@ export default function Dashboard() {
         onClose={() => setEditingCopilot(null)}
         onUpdateCopilot={handleUpdateCopilot}
       />
+      
       {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
         isOpen={deleteConfirmOpen}
