@@ -175,7 +175,7 @@
     font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
-    vertical-align: middle;
+    vertical-align: baseline;
     line-height: 1;
     gap: 4px;
   }
