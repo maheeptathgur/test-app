@@ -321,57 +321,7 @@ Stanford University | 2015
           </div>
         </div>
 
-        {/* Profile Fields Toggle */}
-        {copilot?.profileFields && copilot.profileFields.length > 0 && (
-          <div className="p-4 border-b border-gray-200">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setShowProfileFields(!showProfileFields)}
-              className="w-full flex items-center gap-2"
-            >
-              <UserCog className="h-3 w-3" />
-              {showProfileFields ? 'Hide Profile' : 'Show Profile'}
-            </Button>
-          </div>
-        )}
 
-        {/* Profile Fields Section */}
-        {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
-          <div className="p-4 border-b border-gray-200 max-h-60 overflow-y-auto">
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h4 className="font-medium text-xs text-foreground">Tell us about yourself</h4>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    if (isEditingProfile) {
-                      setIsEditingProfile(false);
-                      setShowProfileFields(false);
-                    } else {
-                      setIsEditingProfile(true);
-                    }
-                  }}
-                  className="h-6 px-2 text-xs"
-                >
-                  {isEditingProfile ? 'Save' : 'Edit'}
-                </Button>
-              </div>
-              <div className="space-y-2">
-                {copilot.profileFields.map((field) => (
-                  <div key={field.id} className="space-y-1">
-                    <label className="text-xs font-medium text-foreground">
-                      {field.label}
-                      {field.required && <span className="text-red-500 ml-1">*</span>}
-                    </label>
-                    {renderProfileField(field)}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Sidebar Form Content */}
         <div className="flex-1 overflow-y-auto p-4">
