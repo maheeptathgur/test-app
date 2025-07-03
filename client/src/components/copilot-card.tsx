@@ -8,7 +8,12 @@ import { ComponentDetailsModal } from "./component-details-modal";
 import { useState } from "react";
 
 // Helper functions for image tiles
-const getImageUrl = (type: string): string => {
+const getImageUrl = (type: string, name?: string): string => {
+  // Special case for Campaign Manager
+  if (name === 'Campaign Manager') {
+    return '/attached_assets/campaignmanager_1751580871679.png';
+  }
+  
   switch (type.toLowerCase()) {
     case 'general':
       return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
@@ -67,7 +72,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
         {/* Image tile header */}
         <div className="relative h-36 w-full rounded-lg overflow-hidden mb-4">
           <img 
-            src={getImageUrl(copilot.type)} 
+            src={getImageUrl(copilot.type, copilot.name)} 
             alt={`${copilot.type} copilot`}
             className="w-full h-full object-cover"
           />
