@@ -247,28 +247,53 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       // Handle bullet points
       if (line.trim().startsWith('- ')) {
         const content = line.substring(line.indexOf('- ') + 2);
-        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1 flex-shrink-0">•</span><span>${content}</span></div>`;
+        // Apply inline formatting to bullet point content
+        const formattedContent = content
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1 flex-shrink-0">•</span><span>${formattedContent}</span></div>`;
       }
       
       // Handle numbered lists
       if (/^\d+\.\s/.test(line.trim())) {
         const match = line.match(/^(\d+)\.\s(.+)$/);
         if (match) {
-          return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1 flex-shrink-0">${match[1]}.</span><span>${match[2]}</span></div>`;
+          // Apply inline formatting to numbered list content
+          const formattedContent = match[2]
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+          return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1 flex-shrink-0">${match[1]}.</span><span>${formattedContent}</span></div>`;
         }
       }
       
       // Handle checkmarks/emojis at start of line
       if (line.trim().startsWith('✅')) {
-        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">✅</span><span>${line.substring(line.indexOf('✅') + 1).trim()}</span></div>`;
+        const content = line.substring(line.indexOf('✅') + 1).trim();
+        const formattedContent = content
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">✅</span><span>${formattedContent}</span></div>`;
       }
       
       if (line.trim().startsWith('📈')) {
-        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">📈</span><span>${line.substring(line.indexOf('📈') + 1).trim()}</span></div>`;
+        const content = line.substring(line.indexOf('📈') + 1).trim();
+        const formattedContent = content
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">📈</span><span>${formattedContent}</span></div>`;
       }
       
       if (line.trim().startsWith('⚠️')) {
-        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">⚠️</span><span>${line.substring(line.indexOf('⚠️') + 1).trim()}</span></div>`;
+        const content = line.substring(line.indexOf('⚠️') + 1).trim();
+        const formattedContent = content
+          .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.*?)\*/g, '<em>$1</em>')
+          .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+        return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">⚠️</span><span>${formattedContent}</span></div>`;
       }
       
       // Apply inline formatting to regular lines
