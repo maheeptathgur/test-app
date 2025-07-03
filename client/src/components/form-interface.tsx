@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { X, UserCog, FileText, Wand2, Download, RefreshCw, Check, Edit3, Upload, File } from "lucide-react";
+import { X, UserCog, FileText, Wand2, Download, RefreshCw, Check, Edit3, Upload, File, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 import { Badge } from "@/components/ui/badge";
 
@@ -164,11 +165,38 @@ Stanford University | 2015
     }, 3000);
   };
 
-  const handleDownload = () => {
+  const handleDownload = (format: string) => {
+    let content = generatedContent;
+    let mimeType = 'text/plain';
+    let fileName = 'resume';
+    
+    // Remove markdown formatting for clean downloads
+    content = content.replace(/\*\*(.*?)\*\*/g, '$1'); // Remove bold formatting
+    content = content.replace(/\*(.*?)\*/g, '$1'); // Remove italic formatting
+    
+    switch (format) {
+      case 'txt':
+        mimeType = 'text/plain';
+        fileName += '.txt';
+        break;
+      case 'docx':
+        // For demo purposes, we'll create a simple text file
+        // In a real app, you'd use a library like docx.js
+        mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+        fileName += '.docx';
+        break;
+      case 'pdf':
+        // For demo purposes, we'll create a simple text file
+        // In a real app, you'd use a library like jsPDF
+        mimeType = 'application/pdf';
+        fileName += '.pdf';
+        break;
+    }
+    
     const element = document.createElement('a');
-    const file = new Blob([generatedContent], { type: 'text/plain' });
+    const file = new Blob([content], { type: mimeType });
     element.href = URL.createObjectURL(file);
-    element.download = 'optimized_resume_content.txt';
+    element.download = fileName;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
@@ -198,7 +226,12 @@ Stanford University | 2015
       
       if (chatInput.toLowerCase().includes('shorter') || chatInput.toLowerCase().includes('concise')) {
         // Remove one experience section to make it shorter
-        updatedContent = updatedContent.replace(/\*\*Business Analyst\*\*.*?• Contributed to 20% increase in overall business efficiency through process optimization\n\n/s, '');
+        // Remove Business Analyst section to make it shorter
+        const businessAnalystStart = updatedContent.indexOf('**Business Analyst**');
+        const educationStart = updatedContent.indexOf('**EDUCATION**');
+        if (businessAnalystStart > -1 && educationStart > -1) {
+          updatedContent = updatedContent.substring(0, businessAnalystStart) + updatedContent.substring(educationStart);
+        }
       }
       
       setGeneratedContent(updatedContent);
@@ -458,10 +491,29 @@ Stanford University | 2015
             </p>
           </div>
           {showResult && (
-            <Button variant="outline" size="sm" onClick={handleDownload}>
-              <Download className="w-4 h-4 mr-2" />
-              Download
-            </Button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <Download className="w-4 h-4 mr-2" />
+                  Download
+                  <ChevronDown className="w-4 h-4 ml-2" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => handleDownload('txt')}>
+                  <FileText className="w-4 h-4 mr-2" />
+                  Download as TXT
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleDownload('docx')}>
+                  <File className="w-4 h-4 mr-2" />
+                  Download as DOCX
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={() => handleDownload('pdf')}>
+                  <FileText className="w-4 h-4 mr-2" />
+                  Download as PDF
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
         </div>
 
