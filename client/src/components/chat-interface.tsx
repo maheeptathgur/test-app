@@ -799,9 +799,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     </Button>
                   </div>
                   <form className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-4">
                       {copilot.profileFields.map((field) => (
-                        <div key={field.id} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
+                        <div key={field.id}>
                           <label className="block text-sm font-medium text-gray-700 mb-1">
                             {field.label}
                             {field.required && <span className="text-red-500 ml-1">*</span>}
