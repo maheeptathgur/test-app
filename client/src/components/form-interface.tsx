@@ -79,7 +79,7 @@ export function FormInterface({ isOpen, copilot, onClose }: FormInterfaceProps) 
       setGeneratedContent(`**JOHN SMITH**
 **${profileData.career_level || 'Senior'} ${profileData.target_industry || 'Technology'} Professional**
 
-📧 john.smith@email.com | 📱 (555) 123-4567 | 🌐 LinkedIn: /in/johnsmith | 📍 San Francisco, CA
+john.smith@email.com | (555) 123-4567 | LinkedIn: /in/johnsmith | San Francisco, CA
 
 ---
 
