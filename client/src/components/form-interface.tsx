@@ -180,9 +180,28 @@ Stanford University | 2015
     // Simulate modifying the content based on the chat input
     setIsGenerating(true);
     setTimeout(() => {
-      // Add a modification note to the generated content
-      const modification = `\n\n[MODIFICATION APPLIED: ${chatInput}]\n\nThe content has been updated based on your request. Here's the revised version:\n\n${generatedContent}`;
-      setGeneratedContent(modification);
+      // Modify the content based on the request without adding modification notes
+      let updatedContent = generatedContent;
+      
+      // Simple content modifications based on common requests
+      if (chatInput.toLowerCase().includes('more professional')) {
+        updatedContent = updatedContent.replace(/\bprofessional\b/g, 'seasoned professional');
+        updatedContent = updatedContent.replace(/\bexperience\b/g, 'extensive experience');
+      }
+      
+      if (chatInput.toLowerCase().includes('add skills') || chatInput.toLowerCase().includes('skills section')) {
+        updatedContent = updatedContent.replace(
+          '• **Tools & Software:** CRM platforms, analytics tools, project management software',
+          '• **Tools & Software:** CRM platforms, analytics tools, project management software\n• **Additional Skills:** Advanced Excel, SQL, Python, Tableau, Salesforce'
+        );
+      }
+      
+      if (chatInput.toLowerCase().includes('shorter') || chatInput.toLowerCase().includes('concise')) {
+        // Remove one experience section to make it shorter
+        updatedContent = updatedContent.replace(/\*\*Business Analyst\*\*.*?• Contributed to 20% increase in overall business efficiency through process optimization\n\n/s, '');
+      }
+      
+      setGeneratedContent(updatedContent);
       setChatInput('');
       setIsGenerating(false);
     }, 2000);
