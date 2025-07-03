@@ -6,12 +6,13 @@ import { Badge } from "@/components/ui/badge";
 import { CopilotData } from "@/lib/types";
 import { ComponentDetailsModal } from "./component-details-modal";
 import { useState } from "react";
+import campaignManagerImage from "@assets/campaignmanager_1751580871679.png";
 
 // Helper functions for image tiles
 const getImageUrl = (type: string, name?: string): string => {
   // Special case for Campaign Manager
   if (name === 'Campaign Manager') {
-    return '/attached_assets/campaignmanager_1751580871679.png';
+    return campaignManagerImage;
   }
   
   switch (type.toLowerCase()) {
