@@ -196,10 +196,17 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     const componentNames = copilot?.components?.map(c => c.name) || [];
     const escapedNames = componentNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).sort((a, b) => b.length - a.length);
     
+    // Debug logging
+    console.log('formatMarkdown - text:', text);
+    console.log('formatMarkdown - componentNames:', componentNames);
+    console.log('formatMarkdown - escapedNames:', escapedNames);
+    
     if (escapedNames.length > 0) {
       const mentionRegex = new RegExp(`@(${escapedNames.join('|')})\\b`, 'gi');
+      console.log('formatMarkdown - mentionRegex:', mentionRegex);
       
       formattedText = formattedText.replace(mentionRegex, (match, componentName) => {
+        console.log('formatMarkdown - found match:', match, componentName);
         const component = copilot?.components?.find(c => 
           c.name.toLowerCase().trim() === componentName.toLowerCase().trim()
         );
