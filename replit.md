@@ -212,6 +212,7 @@ Changelog:
 - July 3, 2025. Corrected component color scheme to proper specification - tools are blue, agents are purple, workflows are amber/yellow throughout the interface (chat welcome screen, @mention badges, autocomplete dropdown, and message formatting) for consistent visual identification
 - July 3, 2025. Reorganized capabilities section into three-column layout grouped by component type - created dedicated columns for Agents (purple), Tools (blue), and Workflows (amber) with color-coded headers, more compact cards, conditional rendering, and responsive design for better organization and space efficiency
 - July 3, 2025. Made capabilities section more compact for copilots with many components - added scrollable columns with max height (128px), component count badges, text truncation, smaller text sizes, reduced padding, and hover effects to efficiently display large numbers of capabilities without taking excessive vertical space
+- July 3, 2025. Added clickable component cards with detailed modal view - when users click on any component card in the capabilities section, a modal displays the complete description, component type badge, usage instructions, and @mention reference guide, solving truncation issues while maintaining compact layout
 ```
 
 ## User Preferences
