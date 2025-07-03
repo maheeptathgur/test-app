@@ -717,7 +717,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     } else {
       return (
         <span className="text-foreground">
-          {value || (field.required ? 'Required field - please add information' : 'Not specified')}
+          {value}
         </span>
       );
     }
