@@ -120,7 +120,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               c.name.toLowerCase().trim() === part.toLowerCase().trim()
             );
             
-            let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-full text-xs font-medium";
+            let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-md text-xs font-medium";
             let iconElement = null;
             
             if (component) {
