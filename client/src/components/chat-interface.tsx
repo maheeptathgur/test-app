@@ -120,7 +120,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               c.name.toLowerCase().trim() === part.toLowerCase().trim()
             );
             
-            let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-md text-xs font-medium align-middle";
+            let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-md text-xs font-medium align-middle mt-0.5";
             let iconElement = null;
             
             if (component) {
@@ -204,7 +204,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           c.name.toLowerCase().trim() === componentName.toLowerCase().trim()
         );
         
-        let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-md text-xs font-medium align-middle";
+        let badgeClass = "inline-flex items-center mx-1 px-2 py-1 rounded-md text-xs font-medium align-middle mt-0.5";
         let iconSvg = '';
         
         if (component) {
