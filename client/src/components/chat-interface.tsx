@@ -759,7 +759,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           <div className="flex-1 overflow-y-auto">
             <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
               {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
-                <div className="mb-6 mt-8 p-4 bg-muted/50 rounded-lg border">
+                <div className="mb-6 mt-8 p-4 rounded-lg border border-gray-200" style={{ backgroundColor: '#f8fafb' }}>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <Button
