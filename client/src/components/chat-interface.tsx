@@ -49,7 +49,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     // Sort by length descending to match longer names first
     const sortedNames = componentNames.sort((a, b) => b.length - a.length);
     const escapedNames = sortedNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-    const mentionRegex = new RegExp(`\\b(${escapedNames.join('|')})\\b`, 'gi');
+    const mentionRegex = new RegExp(`@(${escapedNames.join('|')})\\b`, 'gi');
     
     let result = inputContent;
     
@@ -149,7 +149,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 className={badgeClass}
               >
                 {iconElement}
-                @{part}
+                {part}
               </span>
             );
           }
@@ -226,7 +226,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
         }
         
-        return `<span class="${badgeClass}">${iconSvg}@${componentName}</span>`;
+        return `<span class="${badgeClass}">${iconSvg}${componentName}</span>`;
       });
     }
     
