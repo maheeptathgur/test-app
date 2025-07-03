@@ -869,7 +869,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     {copilot.components.filter(c => c.type === 'agent').length}
                                   </span>
                                 </div>
-                                <div className="space-y-1 max-h-32 overflow-y-auto">
+                                <div className="space-y-1">
                                   {copilot.components.filter(c => c.type === 'agent').map((agent) => {
                                     const isExpanded = expandedComponents.has(agent.name);
                                     return (
@@ -906,7 +906,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     {copilot.components.filter(c => c.type === 'tool').length}
                                   </span>
                                 </div>
-                                <div className="space-y-1 max-h-32 overflow-y-auto">
+                                <div className="space-y-1">
                                   {copilot.components.filter(c => c.type === 'tool').map((tool) => {
                                     const isExpanded = expandedComponents.has(tool.name);
                                     return (
@@ -943,7 +943,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     {copilot.components.filter(c => c.type === 'workflow').length}
                                   </span>
                                 </div>
-                                <div className="space-y-1 max-h-32 overflow-y-auto">
+                                <div className="space-y-1">
                                   {copilot.components.filter(c => c.type === 'workflow').map((workflow) => {
                                     const isExpanded = expandedComponents.has(workflow.name);
                                     return (
