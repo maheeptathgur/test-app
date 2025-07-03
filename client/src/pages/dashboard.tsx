@@ -21,6 +21,7 @@ import { WorkspaceSettings } from "@/components/workspace-settings";
 import { UserView } from "@/components/user-view";
 import { DeleteConfirmationModal } from "@/components/delete-confirmation-modal";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
+import { HelpBubble } from "@/components/ui/help-bubble";
 
 const workspaces: Workspace[] = [
   { id: '1', name: 'My Workspace', type: 'Personal', avatar: 'M', color: 'bg-blue-500' },
@@ -735,6 +736,14 @@ export default function Dashboard() {
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       className="pl-10"
+                    />
+                    <HelpBubble 
+                      title="Search Copilots"
+                      content="Search by copilot name or description. Results update in real-time as you type."
+                      position="bottom"
+                      trigger="hover"
+                      size="sm"
+                      className="absolute right-3 top-1/2 transform -translate-y-1/2"
                     />
                   </div>
                   
