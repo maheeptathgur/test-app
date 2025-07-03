@@ -76,40 +76,89 @@ export function FormInterface({ isOpen, copilot, onClose }: FormInterfaceProps) 
     setIsGenerating(true);
     // Simulate AI generation
     setTimeout(() => {
-      setGeneratedContent(`# Optimized Resume Content
+      setGeneratedContent(`**JOHN SMITH**
+**${profileData.career_level || 'Senior'} ${profileData.target_industry || 'Technology'} Professional**
 
-**Professional Summary**
-Dynamic ${profileData.career_level || 'professional'} with proven expertise in ${profileData.target_industry || 'technology'} seeking ${profileData.job_type || 'full-time'} opportunities. Demonstrated ability to deliver results through strategic thinking and collaborative leadership.
+📧 john.smith@email.com | 📱 (555) 123-4567 | 🌐 LinkedIn: /in/johnsmith | 📍 San Francisco, CA
 
-**Key Improvements Applied:**
+---
 
-✅ **ATS Optimization:** Added relevant keywords from job description
-✅ **Impact Metrics:** Quantified achievements with specific numbers
-✅ **Skills Alignment:** Highlighted skills matching job requirements
-✅ **Format Enhancement:** Improved structure for better readability
+**PROFESSIONAL SUMMARY**
 
-**Enhanced Skills Section:**
-- ${formData.job_description ? 'Skills extracted and matched from job posting' : 'Core competencies aligned with industry standards'}
-- Leadership and team management
-- Project coordination and delivery
-- Data analysis and reporting
-- Cross-functional collaboration
+Results-driven ${profileData.career_level || 'Senior'} professional with 7+ years of experience in ${profileData.target_industry || 'technology'} industry. Proven track record of leading cross-functional teams, delivering complex projects on time and under budget, and driving organizational growth through strategic innovation. Seeking ${profileData.job_type || 'full-time'} opportunities to leverage expertise in project management and team leadership.
 
-**Experience Highlights:**
-• Led cross-functional teams of 8+ members to deliver projects 20% ahead of schedule
-• Increased process efficiency by 35% through strategic workflow optimization
-• Managed budgets exceeding $500K while maintaining 98% accuracy
-• Developed training programs that improved team productivity by 25%
+---
 
-**Recommendations:**
-1. Add 2-3 specific achievements with quantifiable results
-2. Include relevant certifications for your target industry
-3. Customize skills section for each job application
-4. Use action verbs to start each bullet point
+**CORE COMPETENCIES**
 
-**ATS Score:** 87/100 (Excellent)
-**Keyword Match:** 92% alignment with job description
-**Overall Rating:** Highly optimized for ${profileData.target_industry || 'target'} roles`);
+• **Leadership & Management:** Team leadership, project management, strategic planning
+• **Technical Skills:** Data analysis, process optimization, system implementation
+• **Communication:** Cross-functional collaboration, client relations, presentation skills
+• **Industry Expertise:** ${profileData.target_industry || 'Technology'} sector knowledge, market analysis
+• **Tools & Software:** CRM platforms, analytics tools, project management software
+
+---
+
+**PROFESSIONAL EXPERIENCE**
+
+**Senior Project Manager** | TechCorp Solutions | January 2020 - Present
+• Led cross-functional teams of 12+ members to deliver $5M+ in revenue-generating projects
+• Improved operational efficiency by 40% through implementation of streamlined workflows
+• Managed client portfolios worth $8M+ with 99% retention rate and 25% growth year-over-year
+• Mentored 6 junior team members, resulting in 4 internal promotions within 18 months
+• Reduced project delivery time by 30% while maintaining 99.5% quality standards
+
+**Project Coordinator** | InnovateTech Inc. | June 2018 - December 2019
+• Coordinated 15+ concurrent projects with budgets ranging from $100K to $2M
+• Established project tracking systems that improved visibility and reduced delays by 25%
+• Collaborated with stakeholders across 5 departments to ensure alignment and delivery
+• Implemented agile methodologies resulting in 35% improvement in team productivity
+• Delivered 95% of projects ahead of schedule with budget variance under 5%
+
+**Business Analyst** | StartupXYZ | August 2017 - May 2018
+• Analyzed business processes and identified opportunities for improvement
+• Created detailed project documentation and requirements specifications
+• Supported senior management in strategic decision-making through data-driven insights
+• Facilitated workshops with 20+ stakeholders to gather requirements and align objectives
+• Contributed to 20% increase in overall business efficiency through process optimization
+
+---
+
+**EDUCATION**
+
+**Master of Business Administration (MBA)**
+University of California, Berkeley - Haas School of Business | 2017
+*Concentration: Technology Management*
+
+**Bachelor of Science in ${profileData.target_industry || 'Computer Science'}**
+Stanford University | 2015
+*Magna Cum Laude, GPA: 3.8/4.0*
+
+---
+
+**CERTIFICATIONS & TRAINING**
+
+• Project Management Professional (PMP) - PMI (2020)
+• Certified ScrumMaster (CSM) - Scrum Alliance (2019)
+• Lean Six Sigma Green Belt (2018)
+• ${profileData.target_industry || 'Technology'} Industry Certification (2021)
+
+---
+
+**KEY ACHIEVEMENTS**
+
+• **Innovation Award Winner** - TechCorp Solutions (2022): Led digital transformation initiative saving $2M annually
+• **Employee of the Year** - InnovateTech Inc. (2019): Recognized for exceptional project delivery and leadership
+• **Published Author**: "Effective Project Management in Tech" - Industry Journal (2021)
+• **Conference Speaker**: Presented at ${profileData.target_industry || 'Technology'} Leadership Summit 2022
+
+---
+
+**ADDITIONAL INFORMATION**
+
+• **Languages:** English (Native), Spanish (Conversational)
+• **Volunteer Work:** Project management mentor for local startup accelerator
+• **Professional Memberships:** PMI, Scrum Alliance, ${profileData.target_industry || 'Technology'} Professional Association`);
       setIsGenerating(false);
       setShowResult(true);
     }, 3000);
