@@ -23,6 +23,7 @@ export function FormInterface({ isOpen, copilot, onClose }: FormInterfaceProps) 
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedContent, setGeneratedContent] = useState<string>('');
   const [showResult, setShowResult] = useState(false);
+  const [chatInput, setChatInput] = useState('');
 
   // Initialize form data with default values
   useEffect(() => {
@@ -94,6 +95,20 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
+  };
+
+  const handleChatSend = () => {
+    if (!chatInput.trim()) return;
+    
+    // Simulate modifying the content based on the chat input
+    setIsGenerating(true);
+    setTimeout(() => {
+      // Add a modification note to the generated content
+      const modification = `\n\n[MODIFICATION APPLIED: ${chatInput}]\n\nThe content has been updated based on your request. Here's the revised version:\n\n${generatedContent}`;
+      setGeneratedContent(modification);
+      setChatInput('');
+      setIsGenerating(false);
+    }, 2000);
   };
 
   const renderProfileField = (field: ProfileField) => {
@@ -223,80 +238,80 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
                 </div>
               )}
 
-              {/* Main Content - Sidebar Layout */}
-              <div className="flex-1 flex gap-0">
+              {/* Main Content - Sidebar + Results Layout */}
+              <div className="flex-1 flex">
                 {/* Left Sidebar - Input Form */}
-                <div className="w-96 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col">
+                <div className="w-80 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col">
                   {/* Sidebar Header */}
-                  <div className="p-6 border-b border-gray-200">
+                  <div className="p-4 border-b border-gray-200">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
-                        <FileText className="w-5 h-5 text-indigo-600" />
+                      <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
+                        <FileText className="w-4 h-4 text-indigo-600" />
                       </div>
                       <div>
-                        <h2 className="text-lg font-semibold">{copilot.name}</h2>
-                        <p className="text-sm text-muted-foreground">{copilot.description}</p>
+                        <h3 className="font-semibold text-sm">{copilot.name}</h3>
+                        <p className="text-xs text-muted-foreground">{copilot.description}</p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Sidebar Content */}
-                  <div className="flex-1 overflow-y-auto p-6">
-                    <div className="space-y-6">
+                  {/* Sidebar Form Content */}
+                  <div className="flex-1 overflow-y-auto p-4">
+                    <div className="space-y-4">
                       <div>
-                        <label className="text-sm font-medium text-foreground mb-2 block">
+                        <label className="text-xs font-medium text-foreground mb-1 block">
                           Your Prompt <span className="text-red-500">*</span>
                         </label>
                         <Textarea
-                          placeholder="Please enter your prompt"
+                          placeholder="Enter your prompt"
                           value={formData.prompt || ''}
                           onChange={(e) => handleFormChange('prompt', e.target.value)}
-                          className="min-h-[100px] resize-none"
+                          className="min-h-[80px] resize-none text-sm"
                         />
                       </div>
                       
                       <div>
-                        <label className="text-sm font-medium text-foreground mb-2 block">
+                        <label className="text-xs font-medium text-foreground mb-1 block">
                           Job Description
                         </label>
                         <Textarea
-                          placeholder="Paste the job description here to optimize your resume for this specific role"
+                          placeholder="Paste job description to optimize for this role"
                           value={formData.job_description || ''}
                           onChange={(e) => handleFormChange('job_description', e.target.value)}
-                          className="min-h-[120px] resize-none"
+                          className="min-h-[100px] resize-none text-sm"
                         />
                       </div>
                       
                       <div>
-                        <label className="text-sm font-medium text-foreground mb-2 block">
+                        <label className="text-xs font-medium text-foreground mb-1 block">
                           Current Resume
                         </label>
                         <Textarea
-                          placeholder="Paste your current resume content here"
+                          placeholder="Paste your current resume content"
                           value={formData.current_resume || ''}
                           onChange={(e) => handleFormChange('current_resume', e.target.value)}
-                          className="min-h-[200px] resize-none"
+                          className="min-h-[150px] resize-none text-sm"
                         />
                       </div>
                     </div>
                   </div>
                   
-                  {/* Sidebar Footer */}
-                  <div className="p-6 border-t border-gray-200">
+                  {/* Sidebar Generate Button */}
+                  <div className="p-4 border-t border-gray-200">
                     <Button 
                       onClick={handleGenerate}
                       disabled={!formData.prompt?.trim() || isGenerating}
                       className="w-full"
-                      size="lg"
+                      size="sm"
                     >
                       {isGenerating ? (
                         <>
-                          <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                          <RefreshCw className="w-3 h-3 mr-2 animate-spin" />
                           Generating...
                         </>
                       ) : (
                         <>
-                          <Wand2 className="w-4 h-4 mr-2" />
+                          <Wand2 className="w-3 h-3 mr-2" />
                           Generate
                         </>
                       )}
@@ -304,31 +319,29 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
                   </div>
                 </div>
 
-                {/* Main Content Area - Results */}
+                {/* Right Side - Results and Chat */}
                 <div className="flex-1 flex flex-col bg-white">
                   {/* Results Header */}
-                  <div className="p-6 border-b border-gray-200">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <h2 className="text-lg font-semibold">Your AI-Generated Results</h2>
-                        <p className="text-sm text-muted-foreground">
-                          {showResult ? 'Fine-tune your content or generate a new version.' : 'Your generated response will appear here.'}
-                        </p>
-                      </div>
-                      {showResult && (
-                        <Button variant="outline" size="sm" onClick={handleDownload}>
-                          <Download className="w-4 h-4 mr-2" />
-                          Download
-                        </Button>
-                      )}
+                  <div className="flex items-center justify-between p-4 border-b border-gray-200">
+                    <div>
+                      <h2 className="font-semibold text-foreground">AI-Generated Results</h2>
+                      <p className="text-sm text-muted-foreground">
+                        {showResult ? 'Use the chat below to refine your content' : 'Generated content will appear here'}
+                      </p>
                     </div>
+                    {showResult && (
+                      <Button variant="outline" size="sm" onClick={handleDownload}>
+                        <Download className="w-4 h-4 mr-2" />
+                        Download
+                      </Button>
+                    )}
                   </div>
 
                   {/* Results Content */}
-                  <div className="flex-1 p-6">
+                  <div className="flex-1 overflow-y-auto p-4">
                     {showResult ? (
                       <div className="h-full">
-                        <div className="prose prose-sm max-w-none h-full overflow-y-auto p-6 bg-gray-50 rounded-lg border">
+                        <div className="prose prose-sm max-w-none h-full overflow-y-auto p-4 bg-gray-50 rounded-lg border">
                           <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed">
                             {generatedContent}
                           </pre>
@@ -348,6 +361,38 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
                       </div>
                     )}
                   </div>
+
+                  {/* Chat Input Area - Only shown after generation */}
+                  {showResult && (
+                    <div className="border-t border-gray-200 p-4">
+                      <div className="flex gap-3">
+                        <Textarea
+                          placeholder="Ask me to modify the content, add sections, change tone..."
+                          className="flex-1 min-h-[60px] resize-none"
+                          rows={2}
+                          value={chatInput}
+                          onChange={(e) => setChatInput(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' && !e.shiftKey) {
+                              e.preventDefault();
+                              handleChatSend();
+                            }
+                          }}
+                        />
+                        <Button 
+                          size="sm" 
+                          className="self-end"
+                          onClick={handleChatSend}
+                          disabled={!chatInput.trim() || isGenerating}
+                        >
+                          {isGenerating ? 'Updating...' : 'Send'}
+                        </Button>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        Ask for changes like "make it more professional" or "add a skills section"
+                      </p>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
