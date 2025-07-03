@@ -763,7 +763,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 <div className="mb-6 mt-8 p-4 rounded-lg border border-gray-200" style={{ backgroundColor: '#f8fafb' }}>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-medium text-gray-900">Tell us about yourself</h3>
+                      <h3 className="font-medium text-gray-900">Personalize your experience</h3>
                       <span className="text-sm text-gray-500">Help {copilot.name} provide better assistance</span>
                     </div>
                     <Button
