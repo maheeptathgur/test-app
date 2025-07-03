@@ -61,9 +61,9 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
     setSelectedComponent(null);
   };
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
       {/* Card content */}
-      <CardContent className="p-6">
+      <CardContent className="p-6 h-full flex flex-col">
         {/* Image tile header */}
         <div className="relative h-36 w-full rounded-lg overflow-hidden mb-4">
           <img 
@@ -91,39 +91,42 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
             </DropdownMenu>
           </div>
         </div>
-        <div className="mb-4">
-          <h3 className="font-semibold text-card-foreground mb-2">{copilot.name}</h3>
-          <Badge variant={copilot.status === 'active' ? 'default' : 'secondary'} className="text-xs capitalize">
-            {copilot.status}
-          </Badge>
-        </div>
         
-        <p className="text-muted-foreground text-sm mb-4">{copilot.description}</p>
-        
-        <div className="flex flex-wrap gap-2 mb-4">
-          {copilot.components.map((component, index) => (
-            <Badge
-              key={index}
-              variant="secondary"
-              className={`text-xs font-medium cursor-pointer hover:shadow-md transition-shadow ${
-                component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
-                component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
-                'bg-amber-100 text-amber-700 hover:bg-amber-200'
-              }`}
-              onClick={() => handleComponentClick(component)}
-            >
-              {component.name}
+        <div className="flex-1 flex flex-col">
+          <div className="mb-4">
+            <h3 className="font-semibold text-card-foreground mb-2">{copilot.name}</h3>
+            <Badge variant={copilot.status === 'active' ? 'default' : 'secondary'} className="text-xs capitalize">
+              {copilot.status}
             </Badge>
-          ))}
+          </div>
+          
+          <p className="text-muted-foreground text-sm mb-4">{copilot.description}</p>
+          
+          <div className="flex flex-wrap gap-2 mb-4 flex-1">
+            {copilot.components.map((component, index) => (
+              <Badge
+                key={index}
+                variant="secondary"
+                className={`text-xs font-medium cursor-pointer hover:shadow-md transition-shadow ${
+                  component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
+                  component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
+                  'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                }`}
+                onClick={() => handleComponentClick(component)}
+              >
+                {component.name}
+              </Badge>
+            ))}
+          </div>
+          
+          <Button 
+            onClick={() => onStartChat(copilot)}
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground mt-auto"
+          >
+            <Play className="w-4 h-4 mr-2" />
+            Start Chat
+          </Button>
         </div>
-        
-        <Button 
-          onClick={() => onStartChat(copilot)}
-          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
-        >
-          <Play className="w-4 h-4 mr-2" />
-          Start Chat
-        </Button>
       </CardContent>
 
       <ComponentDetailsModal
