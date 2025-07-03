@@ -797,20 +797,21 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       <div className="flex gap-2">
                         <Button
                           type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setShowProfileFields(false)}
-                        >
-                          Skip for now
-                        </Button>
-                        <Button
-                          type="button"
                           size="sm"
                           onClick={handleSaveProfile}
                           className="gap-2"
                         >
-                          <Check className="h-3 w-3" />
-                          Save Profile
+                          {Object.values(profileData).some(value => value.trim() !== '') ? (
+                            <>
+                              <Check className="h-3 w-3" />
+                              Save Profile
+                            </>
+                          ) : (
+                            <>
+                              <Edit3 className="h-3 w-3" />
+                              Edit Profile
+                            </>
+                          )}
                         </Button>
                       </div>
                     </div>
