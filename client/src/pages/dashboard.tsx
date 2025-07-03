@@ -525,8 +525,6 @@ export default function Dashboard() {
   };
 
   const handleStartChat = (copilot: CopilotData) => {
-    console.log('Starting chat with copilot:', copilot);
-    console.log('Profile fields:', copilot.profileFields);
     setChatCopilot(copilot);
   };
 
