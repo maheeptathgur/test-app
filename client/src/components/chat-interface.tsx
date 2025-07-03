@@ -761,7 +761,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
                 <div className="mb-6 mt-8 p-4 bg-muted/50 rounded-lg border">
                   <div className="flex items-center justify-between mb-3">
-                    <h3 className="font-semibold text-foreground">Target User Profile</h3>
                     <div className="flex items-center gap-2">
                       <Button
                         variant="outline"
