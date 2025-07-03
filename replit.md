@@ -207,6 +207,7 @@ Changelog:
 - July 3, 2025. Fixed profile fields toggle functionality - profile fields only appear for copilots that have them configured (Campaign Manager has 6 fields, Content Assistant has none), ensuring the UserCog button works correctly and shows appropriate form when profile fields exist
 - July 3, 2025. Added profile fields to all copilots: Content Assistant (5 fields for content creation), Social Analyst (4 fields for analytics), and Customer Support (5 fields for support operations), ensuring each copilot has relevant intake questions for their specific use case
 - July 3, 2025. Updated profile form interface: removed "Skip for now" button and made the action button dynamic - starts as "Edit Profile" and changes to "Save Profile" when user enters any information, creating a more intuitive user experience
+- July 3, 2025. Fixed profile fields editing functionality - fields now properly enable/disable based on editing state, "Edit Profile" button correctly activates editing mode, and all input types (text, textarea, select, number) work properly with disabled state when not editing
 ```
 
 ## User Preferences

@@ -605,9 +605,14 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   };
 
   const handleSaveProfile = () => {
-    setIsEditingProfile(false);
-    // Here you would typically save the profile data to a backend
-    console.log('Saving profile data:', profileData);
+    if (!isEditingProfile) {
+      // If not editing, enable editing mode
+      setIsEditingProfile(true);
+    } else {
+      // If editing, save the profile data
+      setIsEditingProfile(false);
+      console.log('Saving profile data:', profileData);
+    }
   };
 
   const handleAddComponent = (name: string, type: string) => {
@@ -668,58 +673,53 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const renderProfileField = (field: ProfileField) => {
     const value = profileData[field.name] || '';
     
-    if (isEditingProfile) {
-      switch (field.type) {
-        case 'textarea':
-          return (
-            <Textarea
-              value={value}
-              onChange={(e) => handleProfileChange(field.name, e.target.value)}
-              className="min-h-[60px]"
-              placeholder={field.description}
-            />
-          );
-        case 'select':
-          return (
-            <Select value={value} onValueChange={(val) => handleProfileChange(field.name, val)}>
-              <SelectTrigger className="h-8">
-                <SelectValue placeholder={`Select ${field.label.toLowerCase()}`} />
-              </SelectTrigger>
-              <SelectContent>
-                {field.options?.map((option) => (
-                  <SelectItem key={option} value={option}>
-                    {option}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          );
-        case 'number':
-          return (
-            <Input
-              type="number"
-              value={value}
-              onChange={(e) => handleProfileChange(field.name, e.target.value)}
-              className="h-8"
-              placeholder={field.description}
-            />
-          );
-        default: // text
-          return (
-            <Input
-              value={value}
-              onChange={(e) => handleProfileChange(field.name, e.target.value)}
-              className="h-8"
-              placeholder={field.description}
-            />
-          );
-      }
-    } else {
-      return (
-        <span className="text-foreground">
-          {value}
-        </span>
-      );
+    switch (field.type) {
+      case 'textarea':
+        return (
+          <Textarea
+            value={value}
+            onChange={(e) => handleProfileChange(field.name, e.target.value)}
+            className="min-h-[60px]"
+            placeholder={field.description}
+            disabled={!isEditingProfile}
+          />
+        );
+      case 'select':
+        return (
+          <Select value={value} onValueChange={(val) => handleProfileChange(field.name, val)} disabled={!isEditingProfile}>
+            <SelectTrigger className="h-8">
+              <SelectValue placeholder={`Select ${field.label.toLowerCase()}`} />
+            </SelectTrigger>
+            <SelectContent>
+              {field.options?.map((option) => (
+                <SelectItem key={option} value={option}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        );
+      case 'number':
+        return (
+          <Input
+            type="number"
+            value={value}
+            onChange={(e) => handleProfileChange(field.name, e.target.value)}
+            className="h-8"
+            placeholder={field.description}
+            disabled={!isEditingProfile}
+          />
+        );
+      default: // text
+        return (
+          <Input
+            value={value}
+            onChange={(e) => handleProfileChange(field.name, e.target.value)}
+            className="h-8"
+            placeholder={field.description}
+            disabled={!isEditingProfile}
+          />
+        );
     }
   };
 
@@ -801,7 +801,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           onClick={handleSaveProfile}
                           className="gap-2"
                         >
-                          {Object.values(profileData).some(value => value.trim() !== '') ? (
+                          {isEditingProfile || Object.values(profileData).some(value => value.trim() !== '') ? (
                             <>
                               <Check className="h-3 w-3" />
                               Save Profile
