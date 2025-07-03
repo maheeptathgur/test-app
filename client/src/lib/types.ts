@@ -32,6 +32,9 @@ export interface CopilotData {
   }>;
   profileFields?: ProfileField[];
   conversationMessages?: ChatMessage[];
+  formInputs?: Record<string, any>;
+  formOutput?: string;
+  conversationTitle?: string;
 }
 
 export interface ChatMessage {
