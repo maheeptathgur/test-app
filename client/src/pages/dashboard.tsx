@@ -156,6 +156,64 @@ const recentConversations = [
   },
   {
     id: '6',
+    title: 'Product Launch Campaign Planning',
+    copilot: 'Campaign Manager',
+    lastMessage: 'Perfect! I\'ve created the complete campaign in HubSpot...',
+    timestamp: '1 hour ago',
+    isActive: false,
+    messages: [
+      {
+        id: 'm13a',
+        content: 'We need to plan a comprehensive marketing campaign for our new SaaS product launching next month. Budget is $150K and we want to target B2B professionals.',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 60 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm14a',
+        content: 'I\'ll help you create a comprehensive launch campaign! Let me start by using the @Campaign Planner to develop the strategy.\n\n**Campaign Foundation:**\n- **Target:** B2B professionals (decision makers)\n- **Budget:** $150K over 8 weeks\n- **Goal:** Generate 500 qualified leads, 50 demos\n\n**Recommended Campaign Structure:**\n1. **Pre-launch Buzz** (2 weeks) - $30K\n2. **Launch Week Push** (1 week) - $50K  \n3. **Sustained Growth** (5 weeks) - $70K\n\nWould you like me to use the @Media Planner to break down channel allocation and then set everything up in @HubSpot?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 58 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm15a',
+        content: 'Yes, please break down the media allocation and then set up the campaigns.',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 55 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm16a',
+        content: 'Excellent! I\'ve used the @Media Planner to optimize your channel mix:\n\n**Media Allocation Breakdown:**\n\n**Phase 1 - Pre-launch ($30K):**\n- LinkedIn Ads: $18K (60%) - Targeting decision makers\n- Google Ads: $7K (23%) - Brand + competitor keywords\n- Content Marketing: $5K (17%) - Blog posts, whitepapers\n\n**Phase 2 - Launch Week ($50K):**\n- LinkedIn Ads: $25K (50%) - Boosted reach\n- Google Ads: $15K (30%) - Product launch keywords\n- PR & Outreach: $10K (20%) - Media outreach\n\n**Phase 3 - Sustained Growth ($70K):**\n- LinkedIn Ads: $35K (50%) - Lead nurturing\n- Google Ads: $21K (30%) - Conversion optimization\n- Email Marketing: $14K (20%) - Automated sequences\n\nShall I now create these campaigns in @HubSpot with automated workflows?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 50 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm17a',
+        content: 'Perfect allocation! Yes, please set up the HubSpot campaigns and workflows.',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm18a',
+        content: 'Perfect! I\'ve created the complete campaign in @HubSpot with automated workflows:\n\n**✅ Created in HubSpot:**\n\n**1. Lead Capture Forms:**\n- Product demo request form\n- Whitepaper download forms\n- Newsletter signup (with UTM tracking)\n\n**2. Automated Workflows:**\n- **Demo Request Flow:** Instant email + sales notification\n- **Lead Nurturing Sequence:** 7-email drip campaign\n- **Retargeting Lists:** For LinkedIn/Google remarketing\n\n**3. Campaign Tracking:**\n- UTM parameters for all channels\n- Conversion tracking setup\n- ROI dashboard configured\n\n**4. Lead Scoring:**\n- +20 points: Demo request\n- +15 points: Whitepaper download\n- +10 points: Email engagement\n- +25 points: Pricing page visit\n\n**Next Steps:**\n- Campaigns are ready to activate\n- All tracking pixels installed\n- Sales team has been notified\n\nWould you like me to walk through the reporting dashboard or make any adjustments to the automation rules?',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 40 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm19a',
+        content: 'This looks comprehensive! Can you show me what the lead scoring breakdown will look like and how leads will be prioritized?',
+        sender: 'user' as const,
+        timestamp: new Date(Date.now() - 35 * 60 * 1000).toISOString(),
+      },
+      {
+        id: 'm20a',
+        content: 'Great question! Here\'s how the @HubSpot lead scoring and prioritization works:\n\n**Lead Scoring Breakdown:**\n\n**High Priority (80+ points):**\n- Demo request + pricing page visit + email engagement\n- Auto-assigned to senior sales rep within 5 minutes\n- Immediate follow-up email triggered\n\n**Medium Priority (40-79 points):**\n- Whitepaper download + multiple page visits\n- Added to "warm prospects" workflow\n- Follow-up within 24 hours\n\n**Low Priority (10-39 points):**\n- Newsletter signup or single page visit\n- Enters nurturing sequence\n- Weekly check-in emails\n\n**Negative Scoring:**\n- -10 points: Unsubscribe from emails\n- -5 points: No activity for 30 days\n\n**Smart Prioritization Features:**\n- Company size bonus (+15 for 100+ employees)\n- Industry match bonus (+10 for target sectors)\n- Geographic targeting (+5 for primary markets)\n\nThe system automatically routes high-scoring leads to your best closers and provides context cards showing their engagement history. Sales gets a notification like: "Hot lead! 95 points - Requested demo + visited pricing 3x + downloaded ROI calculator"',
+        sender: 'bot' as const,
+        timestamp: new Date(Date.now() - 30 * 60 * 1000).toISOString(),
+      }
+    ]
+  },
+  {
+    id: '7',
     title: 'Email Campaign Setup',
     copilot: 'Campaign Manager',
     lastMessage: 'I\'ve designed a 5-part email sequence for the product launch...',
@@ -163,25 +221,25 @@ const recentConversations = [
     isActive: false,
     messages: [
       {
-        id: 'm13',
+        id: 'm13b',
         content: 'I need to set up an email campaign for our new product launch. Can you help me design the sequence?',
         sender: 'user' as const,
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
       },
       {
-        id: 'm14',
+        id: 'm14b',
         content: 'I\'ve designed a 5-part email sequence for the product launch:\n\n**Email 1: "Coming Soon" Teaser (Week -2)**\n- Build anticipation with sneak peek\n- Call-to-action: Join waitlist\n- Expected open rate: 28-35%\n\n**Email 2: "Launch Day" Announcement (Week 0)**\n- Official product reveal\n- Early bird discount (24-hour limited)\n- Expected conversion: 8-12%\n\n**Email 3: "Feature Spotlight" (Week +1)**\n- Deep dive into key features\n- Customer testimonials\n- Social proof integration\n\n**Email 4: "Success Stories" (Week +2)**\n- Case studies from beta users\n- ROI calculations\n- Urgency messaging\n\n**Email 5: "Last Chance" (Week +3)**\n- Final discount offer\n- FOMO-driven copy\n- Clear next steps\n\nEach email includes A/B testing for subject lines and personalization tokens. Would you like me to write the copy for any specific email?',
         sender: 'bot' as const,
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000 + 30000).toISOString(),
       },
       {
-        id: 'm15',
+        id: 'm15b',
         content: 'This looks great! Can you use @HubSpot and @Mailchimp to set this up? I want to track everything through @Campaign Planning workflow.',
         sender: 'user' as const,
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000 + 60000).toISOString(),
       },
       {
-        id: 'm16',
+        id: 'm16b',
         content: 'Perfect! I\'ll set this up using @HubSpot for email automation and @Mailchimp for list management. The @Campaign Planning workflow will handle the scheduling and tracking.\n\nHere\'s the launch day email copy with integrated tracking:\n\n**Subject Line A:** "🚀 It\'s here! [Product Name] is officially live"\n**Subject Line B:** "[FirstName], your wait is over - introducing [Product Name]"\n\n**Email Body:**\n\nHi [FirstName],\n\nThe day we\'ve all been waiting for is finally here! **[Product Name] is now officially available.**\n\nAs someone who joined our waitlist, you get **24-hour early access** plus an exclusive **20% launch discount**.\n\n**What makes [Product Name] special:**\n✅ [Key Feature 1] - Save 3 hours per week\n✅ [Key Feature 2] - Increase productivity by 40%\n✅ [Key Feature 3] - Seamless team collaboration\n\n**Your exclusive launch offer:**\n- 20% off first 3 months\n- Free premium onboarding\n- Direct access to our founder\n\n**[CTA BUTTON: Claim Your Launch Discount]**\n\n*This offer expires tomorrow at midnight.*\n\nThe @Media Planner agent will handle the social media promotion alongside this email campaign. Everything will be tracked through our unified dashboard.',
         sender: 'bot' as const,
         timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000 + 120000).toISOString(),
