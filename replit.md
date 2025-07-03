@@ -202,6 +202,7 @@ Changelog:
 - July 2, 2025. Implemented proper chat width constraints: restored 960px (max-w-4xl) container for chat area, AI messages now use full width within container, user messages constrained to 70% width for better readability and visual hierarchy
 - July 2, 2025. Updated floating attached files display to use brand colors: changed from black/70 background to #008062 brand color for better consistency with website color palette
 - July 2, 2025. Implemented rich text markdown formatting for chat messages: restored markdown syntax in conversation data and created formatMarkdown function that converts **bold**, *italic*, and `code` text to proper HTML while preserving @mention badges with color-coded styling and icons for enhanced readability
+- July 3, 2025. Removed "Target User Profile" title from chat interface profile fields section and updated container styling with light background color (#f8fafb) and subtle gray border for cleaner appearance
 ```
 
 ## User Preferences
