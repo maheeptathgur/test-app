@@ -175,10 +175,9 @@
     font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
-    vertical-align: baseline;
+    vertical-align: text-top;
     line-height: 1;
     gap: 4px;
-    transform: translateY(1px);
   }
 
   .google-drive-icon {
