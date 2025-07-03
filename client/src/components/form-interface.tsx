@@ -311,7 +311,7 @@ Stanford University | 2015
         {/* Sidebar Header */}
         <div className="p-4 border-b border-gray-200">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0">
               <FileText className="w-4 h-4 text-indigo-600" />
             </div>
             <div>
@@ -529,7 +529,7 @@ Stanford University | 2015
           ) : (
             <div className="flex-1 flex items-center justify-center text-center w-full">
               <div className="space-y-3">
-                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto flex-shrink-0">
                   <FileText className="w-6 h-6 text-gray-400" />
                 </div>
                 <div>
