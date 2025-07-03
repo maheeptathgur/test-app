@@ -34,33 +34,33 @@ const workspaces: Workspace[] = [
 const recentConversations = [
   {
     id: '1',
-    title: 'Blog Post SEO Optimization',
+    title: 'Marketing Campaign Ideas',
     copilot: 'Content Assistant',
-    lastMessage: 'Perfect! I\'ve analyzed your content with Grammarly and SEMrush...',
+    lastMessage: 'Here are 5 creative campaign concepts for the Q2 launch...',
     timestamp: '2 hours ago',
     isActive: false,
     messages: [
       {
         id: 'm1',
-        content: 'I need help optimizing a blog post about sustainable living. Can you check the SEO and writing quality?',
+        content: 'I need some fresh marketing campaign ideas for our Q2 product launch.',
         sender: 'user' as const,
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
       },
       {
         id: 'm2', 
-        content: 'I\'ll help you optimize that blog post! Let me analyze it using @Grammarly for writing quality and @SEMrush for SEO optimization.\n\n**Writing Analysis Complete:**\n- Overall score: **92/100** (Excellent)\n- 8 suggestions for improvement\n- Strong clarity and engagement\n- Minor grammar adjustments needed\n\n**SEO Analysis Results:**\n- Target keyword: "sustainable living tips"\n- Current SEO score: **78/100** (Good)\n- Search volume: **1,200 monthly searches**\n- Keyword difficulty: **Medium (45)**\n\nWould you like me to show you the specific improvements and keyword opportunities?',
+        content: 'Here are 5 creative campaign concepts for the Q2 launch:\n\n1. **"Transform Your Tomorrow"** - Focus on how the product changes daily routines\n2. **"Early Adopter Advantage"** - Exclusive access for first 1000 customers\n3. **"Behind the Scenes"** - Show the development journey and team stories\n4. **"Customer Co-Creation"** - Feature real customer feedback in ads\n5. **"Future-Forward"** - Highlight cutting-edge technology aspects\n\nEach campaign includes social media, email, and video components. Would you like me to elaborate on any specific concept?',
         sender: 'bot' as const,
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000 + 30000).toISOString(),
       },
       {
         id: 'm3',
-        content: 'Yes, please show me the specific improvements and top keyword opportunities.',
+        content: 'I really like the "Transform Your Tomorrow" concept. Can you develop that further?',
         sender: 'user' as const,
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000 + 60000).toISOString(),
       },
       {
         id: 'm4',
-        content: 'Perfect! I\'ve analyzed your content with @Grammarly and @SEMrush. Here are the actionable improvements:\n\n**@Grammarly Writing Suggestions:**\n✅ **Clarity:** Break long sentences in paragraph 3\n✅ **Engagement:** Add more conversational transitions\n✅ **Correctness:** Fix comma usage in bullet points\n\n**@SEMrush Keyword Opportunities:**\n🔍 **"sustainable living guide"** - 2,400 searches, Low difficulty\n🔍 **"eco-friendly lifestyle tips"** - 1,800 searches, Medium difficulty\n🔍 **"green living for beginners"** - 980 searches, Low difficulty\n\n**Recommended Actions:**\n1. Add secondary keywords naturally throughout\n2. Include internal links to related content\n3. Optimize meta description with primary keyword\n4. Add alt text to images with relevant keywords\n\nImplementing these changes should boost your SEO score to 85+ and improve readability significantly!',
+        content: 'Perfect choice! Here\'s a detailed breakdown of **"Transform Your Tomorrow"**:\n\n**Core Message:** Show how small daily changes lead to big life improvements\n\n**Campaign Elements:**\n- **Video Series:** "Day in the Life" transformations\n- **Interactive Tool:** "My Tomorrow Calculator" \n- **Social Challenge:** #TransformTomorrowChallenge\n- **Influencer Partnerships:** Productivity and lifestyle experts\n\n**Timeline:** 6-week rollout with weekly themes\n**Budget Allocation:** 40% video, 30% social, 20% influencer, 10% interactive\n\nShall I create a detailed timeline and content calendar?',
         sender: 'bot' as const,
         timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000 + 120000).toISOString(),
       }
@@ -68,69 +68,45 @@ const recentConversations = [
   },
   {
     id: '2',
-    title: 'Social Media Performance Analysis',
+    title: 'Product Pricing Strategy',
     copilot: 'Social Analyst',
-    lastMessage: 'Based on Google Analytics and Hootsuite data...',
+    lastMessage: 'Based on the competitive analysis, I recommend...',
     timestamp: 'Yesterday',
     isActive: false,
     messages: [
       {
         id: 'm5',
-        content: 'Our social media engagement seems low this month. Can you analyze what\'s happening and suggest improvements?',
+        content: 'We need to finalize our pricing strategy for the new product. What does the competitive landscape look like?',
         sender: 'user' as const,
         timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
       },
       {
         id: 'm6',
-        content: 'Let me analyze your social performance using @Google Analytics and @Hootsuite data to identify the issues and opportunities.\n\n**@Google Analytics Social Traffic Analysis:**\n📊 **Social Traffic:** 24.5K users (↓18% vs last month)\n📊 **Top Referrer:** LinkedIn (45% of social traffic)\n📊 **Engagement Rate:** 3.2% average time on site\n📊 **Conversion Rate:** 2.1% from social visitors\n\n**@Hootsuite Content Performance:**\n📅 **Posts Published:** 67 this month\n👀 **Total Reach:** 156K (↓22% vs last month)\n💬 **Engagement:** 4,200 interactions (↓15%)\n⏰ **Best Times:** 2-4 PM weekdays show highest engagement\n\n**Key Issues Identified:**\n1. Posting frequency decreased by 30%\n2. Video content down 40% (highest engagement format)\n3. LinkedIn performance strong, but Instagram/Twitter lagging\n\nWould you like me to create a recovery strategy with optimized content scheduling?',
+        content: 'Based on the competitive analysis, I recommend a tiered pricing strategy:\n\n**Competitive Landscape:**\n- Competitor A: $29/month (basic features)\n- Competitor B: $49/month (advanced features)\n- Competitor C: $79/month (enterprise focus)\n\n**Recommended Pricing:**\n- **Starter:** $25/month - Undercut competition by 15%\n- **Professional:** $45/month - Match market rate\n- **Enterprise:** $89/month - Premium positioning\n\n**Key Differentiators:** Our unique AI features justify premium pricing in enterprise tier.\n\nThis strategy captures price-sensitive customers while maximizing revenue from enterprise clients.',
         sender: 'bot' as const,
         timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000 + 30000).toISOString(),
-      },
-      {
-        id: 'm7',
-        content: 'Yes, please create a recovery strategy. Focus on what will have the biggest impact quickly.',
-        sender: 'user' as const,
-        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000 + 60000).toISOString(),
-      },
-      {
-        id: 'm8',
-        content: 'Based on @Google Analytics and @Hootsuite data, here\'s your **30-day recovery strategy**:\n\n**🚀 Quick Wins (Week 1-2):**\n\n**@Hootsuite Content Calendar:**\n✅ **Double video content** - Schedule 3 videos/week (your best performing format)\n✅ **Optimize posting times** - 2-4 PM weekdays, 10 AM Saturdays\n✅ **LinkedIn focus** - 60% of effort (your top converter)\n✅ **Cross-promote blog content** - Drive traffic back to high-performing pages\n\n**📈 Expected Results:**\n- **Week 1:** 25% engagement increase\n- **Week 2:** 15% traffic boost to top pages\n- **Month End:** 35% overall performance recovery\n\n**🎯 Content Mix (Daily Schedule):**\n- **Monday:** Industry insights + LinkedIn article\n- **Tuesday:** Behind-scenes video + Twitter thread\n- **Wednesday:** Customer spotlight + Instagram story\n- **Thursday:** Tutorial/tip video + blog post promo\n- **Friday:** Weekly roundup + community question\n\n**📊 Tracking Metrics:**\nI\'ll monitor through @Google Analytics: social referral traffic, bounce rate, and conversions. @Hootsuite will track: reach, engagement rate, and optimal posting time performance.\n\nReady to implement? I can set up the content queue in Hootsuite right now!',
-        sender: 'bot' as const,
-        timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000 + 120000).toISOString(),
       }
     ]
   },
   {
     id: '3',
-    title: 'Support Ticket Management',
+    title: 'Customer Support Guidelines',
     copilot: 'Customer Support',
-    lastMessage: 'I\'ve coordinated between Zendesk and Intercom to handle...',
+    lastMessage: 'I\'ve drafted the new response templates for...',
     timestamp: '2 days ago',
     isActive: false,
     messages: [
       {
         id: 'm7',
-        content: 'We have several urgent tickets piling up and some live chat requests. Can you help me prioritize and manage the workload?',
+        content: 'Can you help me create standardized response templates for common customer inquiries?',
         sender: 'user' as const,
         timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
       },
       {
         id: 'm8',
-        content: 'I\'ll help you manage the support workload efficiently! Let me analyze the situation using @Zendesk for ticket management and @Intercom for live chat coordination.\n\n**@Zendesk Ticket Overview:**\n🚨 **7 Urgent tickets** - Require immediate attention\n📋 **23 Open tickets** - Within SLA timeframes\n⏱️ **12-minute average response time** - Good performance\n\n**@Intercom Live Chat Status:**\n💬 **5 Active conversations** - Currently in progress\n👥 **3 customers waiting** - Need immediate assistance\n📞 **Live agents:** 2 available, 1 busy\n\n**Immediate Action Plan:**\n1. **Escalate 3 critical Zendesk tickets** to senior agents\n2. **Auto-route Intercom chats** by issue type\n3. **Deploy quick resolution templates** for common issues\n\nWould you like me to implement this triage system and show you the priority queue?',
+        content: 'I\'ve drafted the new response templates for common scenarios:\n\n**1. Account Access Issues**\n"Hi [Name], I understand how frustrating login issues can be. Let me help you regain access immediately..."\n\n**2. Billing Questions**\n"Thank you for reaching out about your billing. I\'ll review your account and provide a detailed explanation..."\n\n**3. Feature Requests**\n"We love hearing feature ideas from customers like you! I\'ll make sure your suggestion reaches our product team..."\n\n**4. Technical Problems**\n"I\'m sorry you\'re experiencing technical difficulties. Let\'s troubleshoot this step by step..."\n\nEach template includes personalization fields and escalation triggers. Would you like me to add more scenarios?',
         sender: 'bot' as const,
         timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000 + 30000).toISOString(),
-      },
-      {
-        id: 'm9',
-        content: 'Yes, please implement the system and show me how the tickets will be prioritized.',
-        sender: 'user' as const,
-        timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000 + 60000).toISOString(),
-      },
-      {
-        id: 'm10',
-        content: 'Perfect! I\'ve coordinated between @Zendesk and @Intercom to handle the workload efficiently:\n\n**🎯 Priority Ticket Queue (Zendesk):**\n\n**🔴 High Priority** - Immediate action:\n- #4521: Sarah M. - Login issues (5 min ago)\n- #4520: Mike L. - Payment failure (12 min ago)\n- #4517: Tech Corp - Service outage (45 min ago)\n\n**🟡 Medium Priority** - Next 2 hours:\n- #4519: Feature request + upgrade inquiry\n- #4516: Billing question + account review\n\n**@Intercom Live Chat Management:**\n✅ **Auto-routing active:** Technical → Senior agent\n✅ **Quick responses enabled:** FAQ bot handles 60% of queries\n✅ **Escalation triggers set:** Complex issues → Zendesk tickets\n\n**📊 Efficiency Improvements:**\n- **Response time target:** Under 5 minutes for urgent\n- **Resolution rate:** 85% first-contact for standard issues\n- **Workload distribution:** Balanced across available agents\n\n**Next Steps:**\n1. High-priority tickets assigned to your best agents\n2. Intercom chats being handled with smart routing\n3. All new tickets auto-categorized by urgency\n\nThe system is now optimized for maximum efficiency! Your team can focus on complex issues while automation handles routine queries.',
-        sender: 'bot' as const,
-        timestamp: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000 + 120000).toISOString(),
       }
     ]
   },
