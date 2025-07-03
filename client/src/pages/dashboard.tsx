@@ -328,11 +328,11 @@ const mockCopilots: CopilotData[] = [
     id: '3',
     name: 'Social Analyst',
     description: 'Analyzes social media performance, tracks trends, and provides insights for optimization.',
-    status: 'archived',
+    status: 'active',
     avatar: 'SA',
     avatarColor: 'bg-orange-100 text-orange-600',
     type: 'analyst',
-    favorite: false,
+    favorite: true,
     components: [
       { name: 'Data Analyst', type: 'agent', description: 'Advanced analytics specialist for social media performance and ROI tracking' },
       { name: 'Trend Spotter', type: 'agent', description: 'AI assistant that identifies emerging social trends and viral content patterns' },
