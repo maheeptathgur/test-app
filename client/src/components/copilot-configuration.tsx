@@ -14,7 +14,6 @@ import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy,
 import { SiGmail, SiSlack } from "react-icons/si";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
-import { HelpBubble } from "@/components/ui/help-bubble";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
@@ -607,33 +606,18 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                   ].map((tab) => {
                     const IconComponent = tab.icon;
                     return (
-                      <div key={tab.id} className="relative">
-                        <button
-                          onClick={() => setActiveTab(tab.id)}
-                          className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
-                            activeTab === tab.id
-                              ? 'border-[#008062] text-[#008062]'
-                              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                          }`}
-                        >
-                          <IconComponent className="w-4 h-4" />
-                          {tab.label}
-                        </button>
-                        <HelpBubble 
-                          title={`${tab.label} Settings`}
-                          content={
-                            tab.id === 'general' ? "Basic copilot configuration including name, description, type, and deployment settings." :
-                            tab.id === 'components' ? "Manage agents, tools, and workflows that power your copilot's capabilities." :
-                            tab.id === 'knowledge' ? "Upload documents and URLs to give your copilot domain-specific knowledge." :
-                            tab.id === 'user-docs' ? "View and manage documents uploaded by users during conversations." :
-                            "Configure which information fields the copilot should collect from users for personalized responses."
-                          }
-                          position="bottom"
-                          trigger="hover"
-                          size="sm"
-                          className="absolute -top-1 -right-1"
-                        />
-                      </div>
+                      <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id)}
+                        className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
+                          activeTab === tab.id
+                            ? 'border-[#008062] text-[#008062]'
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        }`}
+                      >
+                        <IconComponent className="w-4 h-4" />
+                        {tab.label}
+                      </button>
                     );
                   })}
                 </nav>
