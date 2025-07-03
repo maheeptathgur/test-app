@@ -1307,7 +1307,10 @@ export default function Dashboard() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setChatCopilot(null)}
+                      onClick={() => {
+                        setChatCopilot(null);
+                        setShowAttachmentSidebar(false);
+                      }}
                       className="text-sidebar-foreground hover:text-sidebar-primary"
                       title="Close chat"
                     >
