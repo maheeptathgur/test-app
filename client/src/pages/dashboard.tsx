@@ -440,13 +440,7 @@ const mockCopilots: CopilotData[] = [
     avatarColor: 'bg-indigo-100 text-indigo-600',
     type: 'form',
     favorite: false,
-    components: [
-      { name: 'Resume Analyzer', type: 'agent', description: 'AI agent that analyzes resume content and suggests improvements' },
-      { name: 'Job Matcher', type: 'agent', description: 'Matches resume content with job description requirements' },
-      { name: 'ATS Scanner', type: 'tool', description: 'Applicant Tracking System compatibility checker' },
-      { name: 'LinkedIn API', type: 'tool', description: 'Professional profile data integration and optimization' },
-      { name: 'Resume Optimization', type: 'workflow', description: 'Multi-step process to enhance resume effectiveness' },
-    ],
+    components: [],
     profileFields: [
       { id: 'career_level', name: 'career_level', label: 'Career Level', type: 'select', required: true, description: 'What\'s your current career stage?', options: ['Entry Level', 'Mid-Level', 'Senior Level', 'Executive', 'Career Change'] },
       { id: 'target_industry', name: 'target_industry', label: 'Target Industry', type: 'select', required: true, description: 'Which industry are you targeting?', options: ['Technology', 'Healthcare', 'Finance', 'Marketing', 'Education', 'Manufacturing', 'Other'] },
