@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ChatMessage, CopilotData, ProfileField } from "@/lib/types";
 
 interface ChatInterfaceProps {
@@ -29,6 +30,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [isResizing, setIsResizing] = useState(false);
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
   const [expandedAttachments, setExpandedAttachments] = useState(false);
+  const [selectedComponent, setSelectedComponent] = useState<{name: string, type: string, description: string} | null>(null);
 
   const [inputContent, setInputContent] = useState<string>(''); // Track raw text content
 
@@ -858,7 +860,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 </div>
                                 <div className="space-y-1 max-h-32 overflow-y-auto">
                                   {copilot.components.filter(c => c.type === 'agent').map((agent) => (
-                                    <div key={agent.name} className="p-2 bg-purple-50 rounded text-left border border-purple-100 hover:bg-purple-100 transition-colors">
+                                    <div 
+                                      key={agent.name} 
+                                      className="p-2 bg-purple-50 rounded text-left border border-purple-100 hover:bg-purple-100 transition-colors cursor-pointer"
+                                      onClick={() => setSelectedComponent({
+                                        name: agent.name,
+                                        type: 'agent',
+                                        description: agent.description || 'Specialized assistant'
+                                      })}
+                                    >
                                       <div className="font-medium text-gray-900 text-xs truncate">{agent.name}</div>
                                       <div className="text-xs text-gray-600 truncate leading-tight">{agent.description || 'Specialized assistant'}</div>
                                     </div>
@@ -879,7 +889,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 </div>
                                 <div className="space-y-1 max-h-32 overflow-y-auto">
                                   {copilot.components.filter(c => c.type === 'tool').map((tool) => (
-                                    <div key={tool.name} className="p-2 bg-blue-50 rounded text-left border border-blue-100 hover:bg-blue-100 transition-colors">
+                                    <div 
+                                      key={tool.name} 
+                                      className="p-2 bg-blue-50 rounded text-left border border-blue-100 hover:bg-blue-100 transition-colors cursor-pointer"
+                                      onClick={() => setSelectedComponent({
+                                        name: tool.name,
+                                        type: 'tool',
+                                        description: tool.description || 'Integration tool'
+                                      })}
+                                    >
                                       <div className="font-medium text-gray-900 text-xs truncate">{tool.name}</div>
                                       <div className="text-xs text-gray-600 truncate leading-tight">{tool.description || 'Integration tool'}</div>
                                     </div>
@@ -900,7 +918,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 </div>
                                 <div className="space-y-1 max-h-32 overflow-y-auto">
                                   {copilot.components.filter(c => c.type === 'workflow').map((workflow) => (
-                                    <div key={workflow.name} className="p-2 bg-amber-50 rounded text-left border border-amber-100 hover:bg-amber-100 transition-colors">
+                                    <div 
+                                      key={workflow.name} 
+                                      className="p-2 bg-amber-50 rounded text-left border border-amber-100 hover:bg-amber-100 transition-colors cursor-pointer"
+                                      onClick={() => setSelectedComponent({
+                                        name: workflow.name,
+                                        type: 'workflow',
+                                        description: workflow.description || 'Automated workflow'
+                                      })}
+                                    >
                                       <div className="font-medium text-gray-900 text-xs truncate">{workflow.name}</div>
                                       <div className="text-xs text-gray-600 truncate leading-tight">{workflow.description || 'Automated workflow'}</div>
                                     </div>
@@ -1588,6 +1614,58 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             </div>
           </div>
         )}
+        
+        {/* Component Details Modal */}
+        <Dialog open={!!selectedComponent} onOpenChange={() => setSelectedComponent(null)}>
+          <DialogContent className="max-w-lg">
+            <DialogHeader>
+              <DialogTitle className="flex items-center gap-2">
+                {selectedComponent?.type === 'agent' && <Bot className="w-5 h-5 text-purple-600" />}
+                {selectedComponent?.type === 'tool' && <Wrench className="w-5 h-5 text-blue-600" />}
+                {selectedComponent?.type === 'workflow' && <Workflow className="w-5 h-5 text-amber-600" />}
+                {selectedComponent?.name}
+              </DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div>
+                <div className="text-sm font-medium text-gray-700 mb-2">Type</div>
+                <div className="flex items-center gap-2">
+                  {selectedComponent?.type === 'agent' && (
+                    <Badge className="bg-purple-100 text-purple-800 border border-purple-200">
+                      <Bot className="w-3 h-3 mr-1" />
+                      Agent
+                    </Badge>
+                  )}
+                  {selectedComponent?.type === 'tool' && (
+                    <Badge className="bg-blue-100 text-blue-800 border border-blue-200">
+                      <Wrench className="w-3 h-3 mr-1" />
+                      Tool
+                    </Badge>
+                  )}
+                  {selectedComponent?.type === 'workflow' && (
+                    <Badge className="bg-amber-100 text-amber-800 border border-amber-200">
+                      <Workflow className="w-3 h-3 mr-1" />
+                      Workflow
+                    </Badge>
+                  )}
+                </div>
+              </div>
+              
+              <div>
+                <div className="text-sm font-medium text-gray-700 mb-2">Description</div>
+                <div className="text-sm text-gray-600 leading-relaxed">
+                  {selectedComponent?.description}
+                </div>
+              </div>
+              
+              <div className="pt-4 border-t">
+                <div className="text-xs text-gray-500">
+                  Use <code className="px-1 py-0.5 bg-gray-100 rounded text-xs">@{selectedComponent?.name}</code> in your messages to reference this {selectedComponent?.type}.
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
   );
