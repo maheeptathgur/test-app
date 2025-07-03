@@ -28,14 +28,29 @@ export function FormInterface({ isOpen, copilot, onClose }: FormInterfaceProps) 
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Initialize form data with default values
+  // Initialize form data with default values or loaded conversation data
   useEffect(() => {
     if (copilot?.name === 'Resume Assistant') {
-      setFormData({
-        prompt: '',
-        job_description: '',
-        current_resume: ''
-      });
+      // Check if we have loaded conversation data
+      if (copilot.formInputs) {
+        setFormData({
+          prompt: copilot.formInputs.prompt || '',
+          job_description: copilot.formInputs.job_description || '',
+          current_resume: copilot.formInputs.uploaded_file || ''
+        });
+        // If we have form output, show the result
+        if (copilot.formOutput) {
+          setGeneratedContent(copilot.formOutput);
+          setShowResult(true);
+        }
+      } else {
+        // Default empty form
+        setFormData({
+          prompt: '',
+          job_description: '',
+          current_resume: ''
+        });
+      }
     }
   }, [copilot]);
 

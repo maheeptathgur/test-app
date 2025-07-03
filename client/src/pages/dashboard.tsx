@@ -762,9 +762,21 @@ export default function Dashboard() {
     // Find the copilot associated with this conversation
     const copilot = copilots.find(c => c.name === conversation.copilot);
     if (copilot) {
-      // Start chat with the copilot and pass conversation messages
-      const copilotWithMessages = { ...copilot, conversationMessages: conversation.messages || [] };
-      setChatCopilot(copilotWithMessages);
+      // Handle form-based conversations (like Resume Assistant)
+      if (conversation.formInputs && conversation.formOutput) {
+        // For form-based copilots, pass the form data
+        const copilotWithFormData = { 
+          ...copilot, 
+          formInputs: conversation.formInputs,
+          formOutput: conversation.formOutput,
+          conversationTitle: conversation.title
+        };
+        setChatCopilot(copilotWithFormData);
+      } else {
+        // Handle regular chat conversations
+        const copilotWithMessages = { ...copilot, conversationMessages: conversation.messages || [] };
+        setChatCopilot(copilotWithMessages);
+      }
       
       // Mark this conversation as active and others as inactive
       setConversations(prev => prev.map(conv => ({
