@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { X, UserCog, FileText, Wand2, Download, RefreshCw, Check, Edit3 } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { X, UserCog, FileText, Wand2, Download, RefreshCw, Check, Edit3, Upload, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -24,6 +24,8 @@ export function FormInterface({ isOpen, copilot, onClose }: FormInterfaceProps) 
   const [generatedContent, setGeneratedContent] = useState<string>('');
   const [showResult, setShowResult] = useState(false);
   const [chatInput, setChatInput] = useState('');
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Initialize form data with default values
   useEffect(() => {
@@ -38,6 +40,32 @@ export function FormInterface({ isOpen, copilot, onClose }: FormInterfaceProps) 
 
   const handleFormChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setUploadedFile(file);
+      // Read file content and set it as current_resume
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const content = e.target?.result as string;
+        setFormData(prev => ({ ...prev, current_resume: content }));
+      };
+      reader.readAsText(file);
+    }
+  };
+
+  const handleUploadClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleRemoveFile = () => {
+    setUploadedFile(null);
+    setFormData(prev => ({ ...prev, current_resume: '' }));
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
   };
 
   const handleProfileChange = (field: string, value: string) => {
@@ -263,11 +291,44 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
               <label className="text-xs font-medium text-foreground mb-1 block">
                 Current Resume
               </label>
-              <Textarea
-                placeholder="Paste your current resume content"
-                value={formData.current_resume || ''}
-                onChange={(e) => handleFormChange('current_resume', e.target.value)}
-                className="min-h-[150px] resize-none text-sm"
+              {uploadedFile ? (
+                <div className="border-2 border-dashed border-gray-200 rounded-lg p-4">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <File className="w-4 h-4 text-blue-500" />
+                      <div>
+                        <p className="text-sm font-medium text-foreground">{uploadedFile.name}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {(uploadedFile.size / 1024).toFixed(1)} KB
+                        </p>
+                      </div>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={handleRemoveFile}
+                      className="h-6 w-6 p-0"
+                    >
+                      <X className="w-3 h-3" />
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div 
+                  className="border-2 border-dashed border-gray-200 rounded-lg p-6 text-center cursor-pointer hover:border-gray-300 transition-colors"
+                  onClick={handleUploadClick}
+                >
+                  <Upload className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600 mb-1">Click to upload resume</p>
+                  <p className="text-xs text-gray-400">PDF, DOC, DOCX, or TXT files</p>
+                </div>
+              )}
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept=".pdf,.doc,.docx,.txt"
+                onChange={handleFileUpload}
+                className="hidden"
               />
             </div>
           </div>
