@@ -211,6 +211,7 @@ Changelog:
 - July 3, 2025. Enhanced Save Profile button behavior - button now disables when in editing mode until user makes changes to any field, and clicking Save Profile automatically closes the profile fields section for streamlined user experience
 - July 3, 2025. Corrected component color scheme to proper specification - tools are blue, agents are purple, workflows are amber/yellow throughout the interface (chat welcome screen, @mention badges, autocomplete dropdown, and message formatting) for consistent visual identification
 - July 3, 2025. Reorganized capabilities section into three-column layout grouped by component type - created dedicated columns for Agents (purple), Tools (blue), and Workflows (amber) with color-coded headers, more compact cards, conditional rendering, and responsive design for better organization and space efficiency
+- July 3, 2025. Made capabilities section more compact for copilots with many components - added scrollable columns with max height (128px), component count badges, text truncation, smaller text sizes, reduced padding, and hover effects to efficiently display large numbers of capabilities without taking excessive vertical space
 ```
 
 ## User Preferences

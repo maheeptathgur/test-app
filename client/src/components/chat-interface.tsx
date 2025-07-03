@@ -843,21 +843,24 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       
                       {/* Available Tools Overview */}
                       {copilot.components && copilot.components.length > 0 && (
-                        <div className="space-y-4">
+                        <div className="space-y-3">
                           <h3 className="text-lg font-medium text-gray-900">Available Capabilities</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                             {/* Agents Column */}
                             {copilot.components.filter(c => c.type === 'agent').length > 0 && (
-                              <div className="space-y-3">
-                                <div className="flex items-center gap-2 mb-3">
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2 mb-2">
                                   <Bot className="w-4 h-4 text-purple-600" />
-                                  <h4 className="font-medium text-purple-900">Agents</h4>
+                                  <h4 className="font-medium text-purple-900 text-sm">Agents</h4>
+                                  <span className="text-xs text-purple-600 bg-purple-100 px-2 py-0.5 rounded-full">
+                                    {copilot.components.filter(c => c.type === 'agent').length}
+                                  </span>
                                 </div>
-                                <div className="space-y-2">
+                                <div className="space-y-1 max-h-32 overflow-y-auto">
                                   {copilot.components.filter(c => c.type === 'agent').map((agent) => (
-                                    <div key={agent.name} className="p-3 bg-purple-50 rounded-lg text-left border border-purple-100">
-                                      <div className="font-medium text-gray-900 text-sm">{agent.name}</div>
-                                      <div className="text-xs text-gray-600 mt-1 leading-relaxed">{agent.description || 'Specialized assistant'}</div>
+                                    <div key={agent.name} className="p-2 bg-purple-50 rounded text-left border border-purple-100 hover:bg-purple-100 transition-colors">
+                                      <div className="font-medium text-gray-900 text-xs truncate">{agent.name}</div>
+                                      <div className="text-xs text-gray-600 truncate leading-tight">{agent.description || 'Specialized assistant'}</div>
                                     </div>
                                   ))}
                                 </div>
@@ -866,16 +869,19 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             
                             {/* Tools Column */}
                             {copilot.components.filter(c => c.type === 'tool').length > 0 && (
-                              <div className="space-y-3">
-                                <div className="flex items-center gap-2 mb-3">
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2 mb-2">
                                   <Wrench className="w-4 h-4 text-blue-600" />
-                                  <h4 className="font-medium text-blue-900">Tools</h4>
+                                  <h4 className="font-medium text-blue-900 text-sm">Tools</h4>
+                                  <span className="text-xs text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full">
+                                    {copilot.components.filter(c => c.type === 'tool').length}
+                                  </span>
                                 </div>
-                                <div className="space-y-2">
+                                <div className="space-y-1 max-h-32 overflow-y-auto">
                                   {copilot.components.filter(c => c.type === 'tool').map((tool) => (
-                                    <div key={tool.name} className="p-3 bg-blue-50 rounded-lg text-left border border-blue-100">
-                                      <div className="font-medium text-gray-900 text-sm">{tool.name}</div>
-                                      <div className="text-xs text-gray-600 mt-1 leading-relaxed">{tool.description || 'Integration tool'}</div>
+                                    <div key={tool.name} className="p-2 bg-blue-50 rounded text-left border border-blue-100 hover:bg-blue-100 transition-colors">
+                                      <div className="font-medium text-gray-900 text-xs truncate">{tool.name}</div>
+                                      <div className="text-xs text-gray-600 truncate leading-tight">{tool.description || 'Integration tool'}</div>
                                     </div>
                                   ))}
                                 </div>
@@ -884,16 +890,19 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             
                             {/* Workflows Column */}
                             {copilot.components.filter(c => c.type === 'workflow').length > 0 && (
-                              <div className="space-y-3">
-                                <div className="flex items-center gap-2 mb-3">
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2 mb-2">
                                   <Workflow className="w-4 h-4 text-amber-600" />
-                                  <h4 className="font-medium text-amber-900">Workflows</h4>
+                                  <h4 className="font-medium text-amber-900 text-sm">Workflows</h4>
+                                  <span className="text-xs text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full">
+                                    {copilot.components.filter(c => c.type === 'workflow').length}
+                                  </span>
                                 </div>
-                                <div className="space-y-2">
+                                <div className="space-y-1 max-h-32 overflow-y-auto">
                                   {copilot.components.filter(c => c.type === 'workflow').map((workflow) => (
-                                    <div key={workflow.name} className="p-3 bg-amber-50 rounded-lg text-left border border-amber-100">
-                                      <div className="font-medium text-gray-900 text-sm">{workflow.name}</div>
-                                      <div className="text-xs text-gray-600 mt-1 leading-relaxed">{workflow.description || 'Automated workflow'}</div>
+                                    <div key={workflow.name} className="p-2 bg-amber-50 rounded text-left border border-amber-100 hover:bg-amber-100 transition-colors">
+                                      <div className="font-medium text-gray-900 text-xs truncate">{workflow.name}</div>
+                                      <div className="text-xs text-gray-600 truncate leading-tight">{workflow.description || 'Automated workflow'}</div>
                                     </div>
                                   ))}
                                 </div>
@@ -901,8 +910,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             )}
                           </div>
                           
-                          <div className="text-sm text-gray-500 mt-4">
-                            Use the <Plus className="w-4 h-4 inline mx-1" /> button below to activate tools during our conversation.
+                          <div className="text-xs text-gray-500 mt-3">
+                            Use the <Plus className="w-3 h-3 inline mx-1" /> button below to activate tools during our conversation.
                           </div>
                         </div>
                       )}
