@@ -154,251 +154,226 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
   if (!isOpen || !copilot) return null;
 
   return (
-    <div className="flex flex-col h-full overflow-hidden bg-white">
-      <div className="flex-1 overflow-hidden flex">
-        {/* Main Form Area */}
-        <div className="flex-1 flex flex-col relative">
-          {/* Top right controls */}
-          <div className="absolute top-3 right-3 z-50 flex items-center gap-1">
-            <Button 
-              variant="outline" 
-              size="sm"
-              className="h-7 w-7 p-0 bg-white/90 hover:bg-[#00d2a0] hover:text-white shadow-sm" 
-              onClick={() => setShowProfileFields(!showProfileFields)}
-              title="Toggle Profile Fields"
-            >
-              <UserCog className="h-3 w-3" />
-            </Button>
+    <>
+      {/* Form Sidebar - positioned next to main sidebar */}
+      <div className="w-80 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col h-full">
+        {/* Sidebar Header */}
+        <div className="p-4 border-b border-gray-200">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
+                <FileText className="w-4 h-4 text-indigo-600" />
+              </div>
+              <div>
+                <h3 className="font-semibold text-sm">{copilot.name}</h3>
+                <p className="text-xs text-muted-foreground">{copilot.description}</p>
+              </div>
+            </div>
             <Button 
               variant="outline" 
               size="sm"
               onClick={onClose} 
-              className="h-7 w-7 p-0 bg-white/90 hover:bg-[#00d2a0] hover:text-white shadow-sm"
-              title="Close Form"
+              className="h-7 w-7 p-0 hover:bg-[#00d2a0] hover:text-white"
             >
               <X className="h-3 w-3" />
             </Button>
           </div>
+        </div>
 
-          <div className="flex-1 overflow-y-auto">
-            <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
-              
-              {/* Profile Fields Section */}
-              {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
-                <div className="mb-6 mt-8 p-4 rounded-lg border border-gray-200" style={{ backgroundColor: '#f8fafb' }}>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-foreground">Tell us about yourself</h3>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          if (isEditingProfile) {
-                            const hasChanges = Object.keys(profileData).some(key => profileData[key]?.trim());
-                            if (hasChanges) {
-                              setIsEditingProfile(false);
-                              setShowProfileFields(false);
-                            }
-                          } else {
-                            setIsEditingProfile(true);
-                          }
-                        }}
-                        className="flex items-center gap-1"
-                      >
-                        {isEditingProfile ? (
-                          <>
-                            <Check className="h-3 w-3" />
-                            Save Profile
-                          </>
-                        ) : (
-                          <>
-                            <Edit3 className="h-3 w-3" />
-                            Edit Profile
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  </div>
-                  <form className="space-y-4">
-                    {copilot.profileFields.map((field) => (
-                      <div key={field.id} className="space-y-1">
-                        <label className="text-sm font-medium text-foreground">
-                          {field.label}
-                          {field.required && <span className="text-red-500 ml-1">*</span>}
-                        </label>
-                        {renderProfileField(field)}
-                        {field.description && (
-                          <p className="text-xs text-muted-foreground">{field.description}</p>
-                        )}
-                      </div>
-                    ))}
-                  </form>
-                </div>
-              )}
+        {/* Profile Fields Toggle */}
+        {copilot?.profileFields && copilot.profileFields.length > 0 && (
+          <div className="p-4 border-b border-gray-200">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowProfileFields(!showProfileFields)}
+              className="w-full flex items-center gap-2"
+            >
+              <UserCog className="h-3 w-3" />
+              {showProfileFields ? 'Hide Profile' : 'Show Profile'}
+            </Button>
+          </div>
+        )}
 
-              {/* Main Content - Sidebar + Results Layout */}
-              <div className="flex-1 flex">
-                {/* Left Sidebar - Input Form */}
-                <div className="w-80 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col">
-                  {/* Sidebar Header */}
-                  <div className="p-4 border-b border-gray-200">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
-                        <FileText className="w-4 h-4 text-indigo-600" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-sm">{copilot.name}</h3>
-                        <p className="text-xs text-muted-foreground">{copilot.description}</p>
-                      </div>
-                    </div>
+        {/* Profile Fields Section */}
+        {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
+          <div className="p-4 border-b border-gray-200 max-h-60 overflow-y-auto">
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="font-medium text-xs text-foreground">Tell us about yourself</h4>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    if (isEditingProfile) {
+                      const hasChanges = Object.keys(profileData).some(key => profileData[key]?.trim());
+                      if (hasChanges) {
+                        setIsEditingProfile(false);
+                        setShowProfileFields(false);
+                      }
+                    } else {
+                      setIsEditingProfile(true);
+                    }
+                  }}
+                  className="h-6 px-2 text-xs"
+                >
+                  {isEditingProfile ? 'Save' : 'Edit'}
+                </Button>
+              </div>
+              <div className="space-y-2">
+                {copilot.profileFields.map((field) => (
+                  <div key={field.id} className="space-y-1">
+                    <label className="text-xs font-medium text-foreground">
+                      {field.label}
+                      {field.required && <span className="text-red-500 ml-1">*</span>}
+                    </label>
+                    {renderProfileField(field)}
                   </div>
-
-                  {/* Sidebar Form Content */}
-                  <div className="flex-1 overflow-y-auto p-4">
-                    <div className="space-y-4">
-                      <div>
-                        <label className="text-xs font-medium text-foreground mb-1 block">
-                          Your Prompt <span className="text-red-500">*</span>
-                        </label>
-                        <Textarea
-                          placeholder="Enter your prompt"
-                          value={formData.prompt || ''}
-                          onChange={(e) => handleFormChange('prompt', e.target.value)}
-                          className="min-h-[80px] resize-none text-sm"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="text-xs font-medium text-foreground mb-1 block">
-                          Job Description
-                        </label>
-                        <Textarea
-                          placeholder="Paste job description to optimize for this role"
-                          value={formData.job_description || ''}
-                          onChange={(e) => handleFormChange('job_description', e.target.value)}
-                          className="min-h-[100px] resize-none text-sm"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="text-xs font-medium text-foreground mb-1 block">
-                          Current Resume
-                        </label>
-                        <Textarea
-                          placeholder="Paste your current resume content"
-                          value={formData.current_resume || ''}
-                          onChange={(e) => handleFormChange('current_resume', e.target.value)}
-                          className="min-h-[150px] resize-none text-sm"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  
-                  {/* Sidebar Generate Button */}
-                  <div className="p-4 border-t border-gray-200">
-                    <Button 
-                      onClick={handleGenerate}
-                      disabled={!formData.prompt?.trim() || isGenerating}
-                      className="w-full"
-                      size="sm"
-                    >
-                      {isGenerating ? (
-                        <>
-                          <RefreshCw className="w-3 h-3 mr-2 animate-spin" />
-                          Generating...
-                        </>
-                      ) : (
-                        <>
-                          <Wand2 className="w-3 h-3 mr-2" />
-                          Generate
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </div>
-
-                {/* Right Side - Results and Chat */}
-                <div className="flex-1 flex flex-col bg-white">
-                  {/* Results Header */}
-                  <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                    <div>
-                      <h2 className="font-semibold text-foreground">AI-Generated Results</h2>
-                      <p className="text-sm text-muted-foreground">
-                        {showResult ? 'Use the chat below to refine your content' : 'Generated content will appear here'}
-                      </p>
-                    </div>
-                    {showResult && (
-                      <Button variant="outline" size="sm" onClick={handleDownload}>
-                        <Download className="w-4 h-4 mr-2" />
-                        Download
-                      </Button>
-                    )}
-                  </div>
-
-                  {/* Results Content */}
-                  <div className="flex-1 overflow-y-auto p-4">
-                    {showResult ? (
-                      <div className="h-full">
-                        <div className="prose prose-sm max-w-none h-full overflow-y-auto p-4 bg-gray-50 rounded-lg border">
-                          <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed">
-                            {generatedContent}
-                          </pre>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex-1 flex items-center justify-center text-center">
-                        <div className="space-y-3">
-                          <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto">
-                            <FileText className="w-6 h-6 text-gray-400" />
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-gray-900">Ready to generate</p>
-                            <p className="text-xs text-gray-500">Fill out the form and click Generate to see your results</p>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Chat Input Area - Only shown after generation */}
-                  {showResult && (
-                    <div className="border-t border-gray-200 p-4">
-                      <div className="flex gap-3">
-                        <Textarea
-                          placeholder="Ask me to modify the content, add sections, change tone..."
-                          className="flex-1 min-h-[60px] resize-none"
-                          rows={2}
-                          value={chatInput}
-                          onChange={(e) => setChatInput(e.target.value)}
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' && !e.shiftKey) {
-                              e.preventDefault();
-                              handleChatSend();
-                            }
-                          }}
-                        />
-                        <Button 
-                          size="sm" 
-                          className="self-end"
-                          onClick={handleChatSend}
-                          disabled={!chatInput.trim() || isGenerating}
-                        >
-                          {isGenerating ? 'Updating...' : 'Send'}
-                        </Button>
-                      </div>
-                      <p className="text-xs text-muted-foreground mt-2">
-                        Ask for changes like "make it more professional" or "add a skills section"
-                      </p>
-                    </div>
-                  )}
-                </div>
+                ))}
               </div>
             </div>
           </div>
+        )}
+
+        {/* Sidebar Form Content */}
+        <div className="flex-1 overflow-y-auto p-4">
+          <div className="space-y-4">
+            <div>
+              <label className="text-xs font-medium text-foreground mb-1 block">
+                Your Prompt <span className="text-red-500">*</span>
+              </label>
+              <Textarea
+                placeholder="Enter your prompt"
+                value={formData.prompt || ''}
+                onChange={(e) => handleFormChange('prompt', e.target.value)}
+                className="min-h-[80px] resize-none text-sm"
+              />
+            </div>
+            
+            <div>
+              <label className="text-xs font-medium text-foreground mb-1 block">
+                Job Description
+              </label>
+              <Textarea
+                placeholder="Paste job description to optimize for this role"
+                value={formData.job_description || ''}
+                onChange={(e) => handleFormChange('job_description', e.target.value)}
+                className="min-h-[100px] resize-none text-sm"
+              />
+            </div>
+            
+            <div>
+              <label className="text-xs font-medium text-foreground mb-1 block">
+                Current Resume
+              </label>
+              <Textarea
+                placeholder="Paste your current resume content"
+                value={formData.current_resume || ''}
+                onChange={(e) => handleFormChange('current_resume', e.target.value)}
+                className="min-h-[150px] resize-none text-sm"
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* Sidebar Generate Button */}
+        <div className="p-4 border-t border-gray-200">
+          <Button 
+            onClick={handleGenerate}
+            disabled={!formData.prompt?.trim() || isGenerating}
+            className="w-full"
+            size="sm"
+          >
+            {isGenerating ? (
+              <>
+                <RefreshCw className="w-3 h-3 mr-2 animate-spin" />
+                Generating...
+              </>
+            ) : (
+              <>
+                <Wand2 className="w-3 h-3 mr-2" />
+                Generate
+              </>
+            )}
+          </Button>
         </div>
       </div>
-    </div>
+
+      {/* Main Content Area - Results and Chat */}
+      <div className="flex-1 flex flex-col bg-white">
+        {/* Results Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <div>
+            <h2 className="font-semibold text-foreground">AI-Generated Results</h2>
+            <p className="text-sm text-muted-foreground">
+              {showResult ? 'Use the chat below to refine your content' : 'Generated content will appear here'}
+            </p>
+          </div>
+          {showResult && (
+            <Button variant="outline" size="sm" onClick={handleDownload}>
+              <Download className="w-4 h-4 mr-2" />
+              Download
+            </Button>
+          )}
+        </div>
+
+        {/* Results Content */}
+        <div className="flex-1 overflow-y-auto p-4">
+          {showResult ? (
+            <div className="h-full">
+              <div className="prose prose-sm max-w-none h-full overflow-y-auto p-4 bg-gray-50 rounded-lg border">
+                <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed">
+                  {generatedContent}
+                </pre>
+              </div>
+            </div>
+          ) : (
+            <div className="flex-1 flex items-center justify-center text-center">
+              <div className="space-y-3">
+                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto">
+                  <FileText className="w-6 h-6 text-gray-400" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-gray-900">Ready to generate</p>
+                  <p className="text-xs text-gray-500">Fill out the form and click Generate to see your results</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Chat Input Area - Only shown after generation */}
+        {showResult && (
+          <div className="border-t border-gray-200 p-4">
+            <div className="flex gap-3">
+              <Textarea
+                placeholder="Ask me to modify the content, add sections, change tone..."
+                className="flex-1 min-h-[60px] resize-none"
+                rows={2}
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleChatSend();
+                  }
+                }}
+              />
+              <Button 
+                size="sm" 
+                className="self-end"
+                onClick={handleChatSend}
+                disabled={!chatInput.trim() || isGenerating}
+              >
+                {isGenerating ? 'Updating...' : 'Send'}
+              </Button>
+            </div>
+            <p className="text-xs text-muted-foreground mt-2">
+              Ask for changes like "make it more professional" or "add a skills section"
+            </p>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
