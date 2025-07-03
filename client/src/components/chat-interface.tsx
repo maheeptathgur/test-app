@@ -741,12 +741,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               variant="outline" 
               size="sm"
               className="h-7 w-7 p-0 bg-white/90 hover:bg-[#00d2a0] hover:text-white shadow-sm" 
-              onClick={() => {
-                console.log('Current showProfileFields:', showProfileFields);
-                console.log('Copilot:', copilot);
-                console.log('Profile fields:', copilot?.profileFields);
-                setShowProfileFields(!showProfileFields);
-              }}
+              onClick={() => setShowProfileFields(!showProfileFields)}
               title="Toggle Profile Fields"
             >
               <UserCog className="h-3 w-3" />
@@ -763,13 +758,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           </div>
           <div className="flex-1 overflow-y-auto">
             <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
-              {showProfileFields && (
-                <div className="mb-6 mt-8 p-4 rounded-lg border border-gray-200 bg-yellow-50">
-                  <div className="text-sm text-gray-600">Debug: showProfileFields is {showProfileFields ? 'true' : 'false'}</div>
-                  <div className="text-sm text-gray-600">Copilot name: {copilot?.name}</div>
-                  <div className="text-sm text-gray-600">Profile fields count: {copilot?.profileFields?.length || 0}</div>
-                </div>
-              )}
+
               {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
                 <div className="mb-6 mt-8 p-4 rounded-lg border border-gray-200" style={{ backgroundColor: '#f8fafb' }}>
                   <div className="flex items-center justify-between mb-4">
