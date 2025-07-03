@@ -310,24 +310,14 @@ Stanford University | 2015
       <div className="w-80 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col h-full">
         {/* Sidebar Header */}
         <div className="p-4 border-b border-gray-200">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center">
-                <FileText className="w-4 h-4 text-indigo-600" />
-              </div>
-              <div>
-                <h3 className="font-semibold text-sm">{copilot.name}</h3>
-                <p className="text-xs text-muted-foreground">{copilot.description}</p>
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
+              <FileText className="w-4 h-4 text-indigo-600" />
             </div>
-            <Button 
-              variant="outline" 
-              size="sm"
-              onClick={onClose} 
-              className="h-7 w-7 p-0 hover:bg-[#00d2a0] hover:text-white"
-            >
-              <X className="h-3 w-3" />
-            </Button>
+            <div>
+              <h3 className="font-semibold text-sm">{copilot.name}</h3>
+              <p className="text-xs text-muted-foreground">{copilot.description}</p>
+            </div>
           </div>
         </div>
 
@@ -490,31 +480,41 @@ Stanford University | 2015
               {showResult ? 'Use the chat below to refine your content' : 'Generated content will appear here'}
             </p>
           </div>
-          {showResult && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
-                  <Download className="w-4 h-4 mr-2" />
-                  Download
-                  <ChevronDown className="w-4 h-4 ml-2" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => handleDownload('txt')}>
-                  <FileText className="w-4 h-4 mr-2" />
-                  Download as TXT
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleDownload('docx')}>
-                  <File className="w-4 h-4 mr-2" />
-                  Download as DOCX
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => handleDownload('pdf')}>
-                  <FileText className="w-4 h-4 mr-2" />
-                  Download as PDF
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          )}
+          <div className="flex items-center gap-2">
+            {showResult && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    <Download className="w-4 h-4 mr-2" />
+                    Download
+                    <ChevronDown className="w-4 h-4 ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem onClick={() => handleDownload('txt')}>
+                    <FileText className="w-4 h-4 mr-2" />
+                    Download as TXT
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleDownload('docx')}>
+                    <File className="w-4 h-4 mr-2" />
+                    Download as DOCX
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleDownload('pdf')}>
+                    <FileText className="w-4 h-4 mr-2" />
+                    Download as PDF
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={onClose} 
+              className="h-7 w-7 p-0 hover:bg-[#00d2a0] hover:text-white"
+            >
+              <X className="h-3 w-3" />
+            </Button>
+          </div>
         </div>
 
         {/* Results Content */}
@@ -529,7 +529,7 @@ Stanford University | 2015
           ) : (
             <div className="flex-1 flex items-center justify-center text-center w-full">
               <div className="space-y-3">
-                <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto">
+                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
                   <FileText className="w-6 h-6 text-gray-400" />
                 </div>
                 <div>
