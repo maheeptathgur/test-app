@@ -213,6 +213,7 @@ Changelog:
 - July 3, 2025. Reorganized capabilities section into three-column layout grouped by component type - created dedicated columns for Agents (purple), Tools (blue), and Workflows (amber) with color-coded headers, more compact cards, conditional rendering, and responsive design for better organization and space efficiency
 - July 3, 2025. Made capabilities section more compact for copilots with many components - added scrollable columns with max height (128px), component count badges, text truncation, smaller text sizes, reduced padding, and hover effects to efficiently display large numbers of capabilities without taking excessive vertical space
 - July 3, 2025. Added clickable component cards with detailed modal view - when users click on any component card in the capabilities section, a modal displays the complete description, component type badge, usage instructions, and @mention reference guide, solving truncation issues while maintaining compact layout
+- July 3, 2025. Implemented form-based copilot type - added new "form" copilot type with dedicated FormInterface component for structured input-based AI generation (like resume optimization), includes split-screen layout with input form on left and generated results on right, real-time content generation with download functionality, and integrated profile fields support for personalized outputs
 ```
 
 ## User Preferences
