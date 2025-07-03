@@ -430,9 +430,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     // Find the @ that triggered this autocomplete
     const lastAtIndex = textBeforeCursor.lastIndexOf('@');
     
-    // Build the new value by replacing from @ to cursor with componentName (without @)
+    // Build the new value by replacing from @ to cursor with @componentName
     const beforeAt = inputValue.substring(0, lastAtIndex);
-    const newValue = `${beforeAt}${componentName} ${textAfterCursor}`;
+    const newValue = `${beforeAt}@${componentName} ${textAfterCursor}`;
     
     setInputValue(newValue);
     setInputContent(newValue);
@@ -626,7 +626,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     // Always add space after to ensure word boundary detection works
     const spaceAfterBadge = ' ';
     
-    const newValue = `${textBeforeCursor}${spaceBeforeBadge}${name}${spaceAfterBadge}${textAfterCursor}`;
+    const newValue = `${textBeforeCursor}${spaceBeforeBadge}@${name}${spaceAfterBadge}${textAfterCursor}`;
     
     setInputValue(newValue);
     setInputContent(newValue);
