@@ -300,7 +300,7 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
       </div>
 
       {/* Main Content Area - Results and Chat */}
-      <div className="flex-1 flex flex-col bg-white">
+      <div className="flex-1 flex flex-col bg-white w-full">
         {/* Results Header */}
         <div className="flex items-center justify-between p-4 border-b border-gray-200">
           <div>
@@ -318,17 +318,17 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
         </div>
 
         {/* Results Content */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto p-4 w-full">
           {showResult ? (
-            <div className="h-full">
-              <div className="prose prose-sm max-w-none h-full overflow-y-auto p-4 bg-gray-50 rounded-lg border">
-                <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed">
+            <div className="h-full w-full">
+              <div className="prose prose-sm max-w-none h-full w-full overflow-y-auto p-4 bg-gray-50 rounded-lg border">
+                <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed w-full">
                   {generatedContent}
                 </pre>
               </div>
             </div>
           ) : (
-            <div className="flex-1 flex items-center justify-center text-center">
+            <div className="flex-1 flex items-center justify-center text-center w-full">
               <div className="space-y-3">
                 <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mx-auto">
                   <FileText className="w-6 h-6 text-gray-400" />
