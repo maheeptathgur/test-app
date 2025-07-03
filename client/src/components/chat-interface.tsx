@@ -844,7 +844,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       {/* Available Tools Overview */}
                       {copilot.components && copilot.components.length > 0 && (
                         <div className="space-y-4">
-                          <h3 className="text-lg font-medium text-gray-900">Available Tools & Capabilities</h3>
+                          <h3 className="text-lg font-medium text-gray-900">Available Capabilities</h3>
                           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             {/* Agents Column */}
                             {copilot.components.filter(c => c.type === 'agent').length > 0 && (
