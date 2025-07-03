@@ -66,15 +66,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       if (component) {
         switch (component.type) {
           case 'agent':
-            badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+            badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
             iconHTML = '<svg class="w-3 h-3 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>';
             break;
           case 'tool':
-            badgeClass += " bg-green-100 text-green-800 border border-green-200";
+            badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
             iconHTML = '<svg class="w-3 h-3 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>';
             break;
           case 'workflow':
-            badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
+            badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
             iconHTML = '<svg class="w-3 h-3 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M18 20a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12ZM9 9h6M9 15h6M9 12h6"/></svg>';
             break;
           default:
@@ -127,15 +127,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             if (component) {
               switch (component.type) {
                 case 'agent':
-                  badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+                  badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
                   iconElement = <Bot className="w-3 h-3 mr-1" />;
                   break;
                 case 'tool':
-                  badgeClass += " bg-green-100 text-green-800 border border-green-200";
+                  badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
                   iconElement = <Wrench className="w-3 h-3 mr-1" />;
                   break;
                 case 'workflow':
-                  badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
+                  badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
                   iconElement = <Workflow className="w-3 h-3 mr-1" />;
                   break;
               }
@@ -211,15 +211,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         if (component) {
           switch (component.type) {
             case 'agent':
-              badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+              badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
               iconSvg = '<svg class="w-3 h-3 mr-1 inline-block align-middle" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.89 1 3 1.89 3 3V21C3 22.11 3.89 23 5 23H19C20.11 23 21 22.11 21 21V9M17 9H19V21H5V3H13V9H17Z"/></svg>';
               break;
             case 'tool':
-              badgeClass += " bg-green-100 text-green-800 border border-green-200";
+              badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
               iconSvg = '<svg class="w-3 h-3 mr-1 inline-block align-middle" viewBox="0 0 24 24" fill="currentColor"><path d="M22.7 19L13.6 9.9C14.5 7.6 14 4.9 12.1 3C10.1 1 7.1 0.6 4.7 1.7L9 6L6 9L1.6 4.7C0.4 7.1 0.9 10.1 2.9 12.1C4.8 14 7.5 14.5 9.8 13.6L18.9 22.7C19.3 23.1 19.9 23.1 20.3 22.7L22.6 20.4C23.1 20 23.1 19.3 22.7 19Z"/></svg>';
               break;
             case 'workflow':
-              badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
+              badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
               iconSvg = '<svg class="w-3 h-3 mr-1 inline-block align-middle" viewBox="0 0 24 24" fill="currentColor"><path d="M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6A2,2 0 0,1 10,4A2,2 0 0,1 12,2M21,9V7L15,1H5C3.89,1 3,1.89 3,3V21A2,2 0 0,0 5,23H19A2,2 0 0,0 21,21V9M17,9H19V21H5V3H13V9H17Z"/></svg>';
               break;
           }
@@ -848,8 +848,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {/* Agents */}
                             {copilot.components.filter(c => c.type === 'agent').map((agent) => (
-                              <div key={agent.name} className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg text-left">
-                                <Bot className="w-5 h-5 text-blue-600 flex-shrink-0" />
+                              <div key={agent.name} className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg text-left">
+                                <Bot className="w-5 h-5 text-purple-600 flex-shrink-0" />
                                 <div>
                                   <div className="font-medium text-gray-900">{agent.name}</div>
                                   <div className="text-sm text-gray-600">{agent.description || 'Specialized assistant'}</div>
@@ -859,8 +859,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             
                             {/* Tools */}
                             {copilot.components.filter(c => c.type === 'tool').map((tool) => (
-                              <div key={tool.name} className="flex items-center gap-3 p-3 bg-green-50 rounded-lg text-left">
-                                <Wrench className="w-5 h-5 text-green-600 flex-shrink-0" />
+                              <div key={tool.name} className="flex items-center gap-3 p-3 bg-blue-50 rounded-lg text-left">
+                                <Wrench className="w-5 h-5 text-blue-600 flex-shrink-0" />
                                 <div>
                                   <div className="font-medium text-gray-900">{tool.name}</div>
                                   <div className="text-sm text-gray-600">{tool.description || 'Integration tool'}</div>
@@ -870,8 +870,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             
                             {/* Workflows */}
                             {copilot.components.filter(c => c.type === 'workflow').map((workflow) => (
-                              <div key={workflow.name} className="flex items-center gap-3 p-3 bg-purple-50 rounded-lg text-left">
-                                <Workflow className="w-5 h-5 text-purple-600 flex-shrink-0" />
+                              <div key={workflow.name} className="flex items-center gap-3 p-3 bg-amber-50 rounded-lg text-left">
+                                <Workflow className="w-5 h-5 text-amber-600 flex-shrink-0" />
                                 <div>
                                   <div className="font-medium text-gray-900">{workflow.name}</div>
                                   <div className="text-sm text-gray-600">{workflow.description || 'Automated workflow'}</div>
@@ -1178,9 +1178,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               insertHandle(suggestion.name);
                             }}
                           >
-                            {suggestion.type === 'agent' && <Bot className="w-4 h-4 text-blue-600" />}
-                            {suggestion.type === 'tool' && <Wrench className="w-4 h-4 text-green-600" />}
-                            {suggestion.type === 'workflow' && <Workflow className="w-4 h-4 text-purple-600" />}
+                            {suggestion.type === 'agent' && <Bot className="w-4 h-4 text-purple-600" />}
+                            {suggestion.type === 'tool' && <Wrench className="w-4 h-4 text-blue-600" />}
+                            {suggestion.type === 'workflow' && <Workflow className="w-4 h-4 text-amber-600" />}
                             <div className="flex-1">
                               <div className="font-medium text-sm">@{suggestion.name}</div>
                               <div className="text-xs text-gray-500 capitalize">{suggestion.type}</div>
