@@ -541,9 +541,19 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
 
+    // Convert @mentions in the input to proper format for storage
+    let messageContent = inputValue;
+    const componentNames = copilot?.components?.map(c => c.name) || [];
+    
+    // Replace @mentions with formatted @mentions that will be preserved
+    componentNames.forEach(componentName => {
+      const regex = new RegExp(`@${componentName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
+      messageContent = messageContent.replace(regex, `@${componentName}`);
+    });
+
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
-      content: inputValue,
+      content: messageContent,
       sender: 'user',
       timestamp: new Date().toISOString(),
     };
@@ -556,7 +566,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     setTimeout(() => {
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
-        content: `I understand you said: "${inputValue}". How can I help you with that?`,
+        content: `I understand you said: "${messageContent}". How can I help you with that?`,
         sender: 'bot',
         timestamp: new Date().toISOString(),
       };
