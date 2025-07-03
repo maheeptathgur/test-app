@@ -732,30 +732,30 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         marginRight: selectedFiles.length > 0 && showDocumentPreview ? `${documentPaneWidth}px` : '0px' 
       }}
     >
-      {/* Top right controls only */}
-      <div className="absolute top-3 right-3 z-10 flex items-center gap-1">
-        <Button 
-          variant="outline" 
-          size="sm"
-          className="h-7 w-7 p-0 bg-white/90 hover:bg-white shadow-sm" 
-          onClick={() => setShowProfileFields(!showProfileFields)}
-          title="Toggle Profile Fields"
-        >
-          <UserCog className="h-3 w-3" />
-        </Button>
-        <Button 
-          variant="outline" 
-          size="sm"
-          onClick={onClose} 
-          className="h-7 w-7 p-0 bg-white/90 hover:bg-white shadow-sm"
-          title="Close Chat"
-        >
-          <X className="h-3 w-3" />
-        </Button>
-      </div>
       <div className="flex-1 overflow-hidden flex">
         {/* Main Chat Area */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col relative">
+          {/* Top right controls within chat area */}
+          <div className="absolute top-3 right-3 z-50 flex items-center gap-1">
+            <Button 
+              variant="outline" 
+              size="sm"
+              className="h-7 w-7 p-0 bg-white/90 hover:bg-white shadow-sm" 
+              onClick={() => setShowProfileFields(!showProfileFields)}
+              title="Toggle Profile Fields"
+            >
+              <UserCog className="h-3 w-3" />
+            </Button>
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={onClose} 
+              className="h-7 w-7 p-0 bg-white/90 hover:bg-white shadow-sm"
+              title="Close Chat"
+            >
+              <X className="h-3 w-3" />
+            </Button>
+          </div>
           <div className="flex-1 overflow-y-auto">
             <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
               {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
