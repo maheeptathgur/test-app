@@ -740,7 +740,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <Button 
               variant="outline" 
               size="sm"
-              className="h-7 w-7 p-0 bg-white/90 hover:bg-white shadow-sm" 
+              className="h-7 w-7 p-0 bg-white/90 hover:bg-[#00d2a0] hover:text-white shadow-sm" 
               onClick={() => setShowProfileFields(!showProfileFields)}
               title="Toggle Profile Fields"
             >
@@ -750,7 +750,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               variant="outline" 
               size="sm"
               onClick={onClose} 
-              className="h-7 w-7 p-0 bg-white/90 hover:bg-white shadow-sm"
+              className="h-7 w-7 p-0 bg-white/90 hover:bg-[#00d2a0] hover:text-white shadow-sm"
               title="Close Chat"
             >
               <X className="h-3 w-3" />
