@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Badge } from "@/components/ui/badge";
 
 import { CopilotData, ProfileField } from "@/lib/types";
@@ -223,23 +223,26 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
                 </div>
               )}
 
-              {/* Main Content - Split Layout */}
-              <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Left Side - Input Form */}
-                <Card className="flex flex-col">
-                  <CardHeader className="pb-4">
+              {/* Main Content - Sidebar Layout */}
+              <div className="flex-1 flex gap-0">
+                {/* Left Sidebar - Input Form */}
+                <div className="w-96 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col">
+                  {/* Sidebar Header */}
+                  <div className="p-6 border-b border-gray-200">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center">
                         <FileText className="w-5 h-5 text-indigo-600" />
                       </div>
                       <div>
-                        <CardTitle className="text-lg">{copilot.name}</CardTitle>
+                        <h2 className="text-lg font-semibold">{copilot.name}</h2>
                         <p className="text-sm text-muted-foreground">{copilot.description}</p>
                       </div>
                     </div>
-                  </CardHeader>
-                  <CardContent className="flex-1 space-y-4">
-                    <div className="space-y-4">
+                  </div>
+
+                  {/* Sidebar Content */}
+                  <div className="flex-1 overflow-y-auto p-6">
+                    <div className="space-y-6">
                       <div>
                         <label className="text-sm font-medium text-foreground mb-2 block">
                           Your Prompt <span className="text-red-500">*</span>
@@ -276,36 +279,38 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
                         />
                       </div>
                     </div>
-                    
-                    <div className="pt-4 border-t">
-                      <Button 
-                        onClick={handleGenerate}
-                        disabled={!formData.prompt?.trim() || isGenerating}
-                        className="w-full"
-                        size="lg"
-                      >
-                        {isGenerating ? (
-                          <>
-                            <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
-                            Generating...
-                          </>
-                        ) : (
-                          <>
-                            <Wand2 className="w-4 h-4 mr-2" />
-                            Generate
-                          </>
-                        )}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                  
+                  {/* Sidebar Footer */}
+                  <div className="p-6 border-t border-gray-200">
+                    <Button 
+                      onClick={handleGenerate}
+                      disabled={!formData.prompt?.trim() || isGenerating}
+                      className="w-full"
+                      size="lg"
+                    >
+                      {isGenerating ? (
+                        <>
+                          <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                          Generating...
+                        </>
+                      ) : (
+                        <>
+                          <Wand2 className="w-4 h-4 mr-2" />
+                          Generate
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </div>
 
-                {/* Right Side - Results */}
-                <Card className="flex flex-col">
-                  <CardHeader className="pb-4">
+                {/* Main Content Area - Results */}
+                <div className="flex-1 flex flex-col bg-white">
+                  {/* Results Header */}
+                  <div className="p-6 border-b border-gray-200">
                     <div className="flex items-center justify-between">
                       <div>
-                        <CardTitle className="text-lg">Your AI-Generated Results</CardTitle>
+                        <h2 className="text-lg font-semibold">Your AI-Generated Results</h2>
                         <p className="text-sm text-muted-foreground">
                           {showResult ? 'Fine-tune your content or generate a new version.' : 'Your generated response will appear here.'}
                         </p>
@@ -317,11 +322,13 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
                         </Button>
                       )}
                     </div>
-                  </CardHeader>
-                  <CardContent className="flex-1">
+                  </div>
+
+                  {/* Results Content */}
+                  <div className="flex-1 p-6">
                     {showResult ? (
                       <div className="h-full">
-                        <div className="prose prose-sm max-w-none h-full overflow-y-auto p-4 bg-gray-50 rounded-lg">
+                        <div className="prose prose-sm max-w-none h-full overflow-y-auto p-6 bg-gray-50 rounded-lg border">
                           <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed">
                             {generatedContent}
                           </pre>
@@ -340,8 +347,8 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
                         </div>
                       </div>
                     )}
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
