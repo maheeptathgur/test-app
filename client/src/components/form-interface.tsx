@@ -318,13 +318,13 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
         </div>
 
         {/* Results Content */}
-        <div className="flex-1 overflow-y-auto p-4 w-full">
+        <div className="flex-1 overflow-y-auto p-6 w-full">
           {showResult ? (
             <div className="h-full w-full">
-              <div className="prose prose-sm max-w-none h-full w-full overflow-y-auto p-4 bg-gray-50 rounded-lg border">
-                <pre className="whitespace-pre-wrap font-sans text-sm leading-relaxed w-full">
+              <div className="prose prose-lg max-w-none h-full w-full overflow-y-auto text-foreground leading-relaxed">
+                <div className="whitespace-pre-wrap font-sans">
                   {generatedContent}
-                </pre>
+                </div>
               </div>
             </div>
           ) : (
