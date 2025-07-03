@@ -206,11 +206,8 @@ Dynamic ${profileData.career_level || 'professional'} with proven expertise in $
                   size="sm"
                   onClick={() => {
                     if (isEditingProfile) {
-                      const hasChanges = Object.keys(profileData).some(key => profileData[key]?.trim());
-                      if (hasChanges) {
-                        setIsEditingProfile(false);
-                        setShowProfileFields(false);
-                      }
+                      setIsEditingProfile(false);
+                      setShowProfileFields(false);
                     } else {
                       setIsEditingProfile(true);
                     }
