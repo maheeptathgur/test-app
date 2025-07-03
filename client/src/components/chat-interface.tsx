@@ -803,12 +803,16 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       {copilot.profileFields.map((field) => (
                         <div key={field.id}>
                           <label className="block text-sm font-medium text-gray-700 mb-1">
-                            {field.label}
-                            {field.required && <span className="text-red-500 ml-1">*</span>}
+                            <span className="flex items-center justify-between">
+                              <span>
+                                {field.label}
+                                {field.required && <span className="text-red-500 ml-1">*</span>}
+                              </span>
+                              {field.description && (
+                                <span className="text-xs text-gray-500 font-normal">{field.description}</span>
+                              )}
+                            </span>
                           </label>
-                          {field.description && (
-                            <p className="text-xs text-gray-500 mb-2">{field.description}</p>
-                          )}
                           {renderProfileField(field)}
                         </div>
                       ))}
