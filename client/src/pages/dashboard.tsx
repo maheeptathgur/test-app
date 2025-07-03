@@ -247,6 +247,13 @@ const mockCopilots: CopilotData[] = [
       { name: 'Grammarly', type: 'tool', description: 'Grammar and writing enhancement tool for professional communications' },
       { name: 'SEMrush', type: 'tool', description: 'Comprehensive SEO and competitive analysis platform' },
     ],
+    profileFields: [
+      { id: 'role', name: 'role', label: 'Your Role', type: 'text', required: true, description: 'What\'s your job title or role?' },
+      { id: 'content_type', name: 'content_type', label: 'Content Types', type: 'select', required: true, description: 'What type of content do you create most?', options: ['Blog posts', 'Social media', 'Email newsletters', 'Website copy', 'Marketing materials', 'Other'] },
+      { id: 'brand_voice', name: 'brand_voice', label: 'Brand Voice', type: 'select', required: false, description: 'What\'s your brand voice style?', options: ['Professional', 'Friendly', 'Authoritative', 'Conversational', 'Creative', 'Technical'] },
+      { id: 'target_audience', name: 'target_audience', label: 'Target Audience', type: 'textarea', required: true, description: 'Who is your primary audience?' },
+      { id: 'content_goals', name: 'content_goals', label: 'Content Goals', type: 'textarea', required: false, description: 'What do you want to achieve with your content?' },
+    ],
   },
   {
     id: '2',
@@ -331,6 +338,12 @@ const mockCopilots: CopilotData[] = [
       { name: 'Google Analytics', type: 'tool', description: 'Web analytics platform for tracking website traffic and user behavior' },
       { name: 'Hootsuite', type: 'tool', description: 'Social media management platform for scheduling and monitoring posts' },
     ],
+    profileFields: [
+      { id: 'business_type', name: 'business_type', label: 'Business Type', type: 'select', required: true, description: 'What type of business are you in?', options: ['E-commerce', 'SaaS', 'Agency', 'Retail', 'B2B Services', 'Content Creator', 'Other'] },
+      { id: 'platforms', name: 'platforms', label: 'Social Platforms', type: 'select', required: true, description: 'Which platforms do you focus on?', options: ['Instagram', 'Facebook', 'Twitter/X', 'LinkedIn', 'TikTok', 'YouTube', 'Pinterest', 'Multiple platforms'] },
+      { id: 'analytics_goals', name: 'analytics_goals', label: 'Analytics Goals', type: 'textarea', required: true, description: 'What specific insights are you looking for?' },
+      { id: 'current_metrics', name: 'current_metrics', label: 'Key Metrics', type: 'textarea', required: false, description: 'What metrics do you currently track?' },
+    ],
   },
   {
     id: '4',
@@ -347,6 +360,13 @@ const mockCopilots: CopilotData[] = [
       { name: 'Zendesk', type: 'tool', description: 'Customer service platform for ticket management and support workflows' },
       { name: 'Intercom', type: 'tool', description: 'Live chat and customer messaging platform for real-time support' },
       { name: 'Escalation Flow', type: 'workflow', description: 'Automated workflow for escalating complex issues to human agents' },
+    ],
+    profileFields: [
+      { id: 'support_role', name: 'support_role', label: 'Support Role', type: 'select', required: true, description: 'What\'s your role in customer support?', options: ['Support Manager', 'Support Agent', 'Team Lead', 'Customer Success', 'Product Manager', 'Other'] },
+      { id: 'product_type', name: 'product_type', label: 'Product Type', type: 'select', required: true, description: 'What type of product/service do you support?', options: ['Software/SaaS', 'E-commerce', 'Mobile App', 'Physical Products', 'Services', 'Other'] },
+      { id: 'support_channels', name: 'support_channels', label: 'Support Channels', type: 'select', required: true, description: 'Which channels do you use for support?', options: ['Email', 'Live Chat', 'Phone', 'Social Media', 'In-app', 'Multiple channels'] },
+      { id: 'common_issues', name: 'common_issues', label: 'Common Issues', type: 'textarea', required: false, description: 'What are the most common issues your customers face?' },
+      { id: 'support_goals', name: 'support_goals', label: 'Support Goals', type: 'textarea', required: false, description: 'What are your main support objectives?' },
     ],
   },
 ];
