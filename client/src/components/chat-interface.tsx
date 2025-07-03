@@ -186,6 +186,349 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       );
     }
 
+    if (toolName.toLowerCase().includes('grammarly')) {
+      return (
+        <div className="my-4 p-4 bg-green-50 rounded-lg border">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-6 h-6 bg-green-600 rounded flex items-center justify-center">
+              <span className="text-white text-xs font-bold">G</span>
+            </div>
+            <h3 className="font-semibold text-gray-900">Grammarly Writing Assistant</h3>
+            <Badge variant="outline" className="text-xs">Active</Badge>
+          </div>
+
+          {/* Writing Analysis */}
+          <div className="space-y-3">
+            <div className="p-3 bg-white rounded border">
+              <h4 className="text-sm font-medium text-gray-900 mb-2">Current Document Analysis</h4>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-600">92</div>
+                  <div className="text-xs text-gray-500">Overall Score</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600">8</div>
+                  <div className="text-xs text-gray-500">Suggestions</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Recent Suggestions */}
+            <div className="space-y-2">
+              <h4 className="text-sm font-medium text-gray-900">Active Suggestions</h4>
+              {[
+                { type: 'Clarity', text: 'Consider breaking this long sentence into two.', severity: 'medium' },
+                { type: 'Engagement', text: 'Try a more conversational tone here.', severity: 'low' },
+                { type: 'Correctness', text: 'Missing comma after introductory phrase.', severity: 'high' },
+              ].map((suggestion, idx) => (
+                <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border">
+                  <div className="flex items-center gap-2">
+                    <div className={`w-2 h-2 rounded-full ${
+                      suggestion.severity === 'high' ? 'bg-red-500' : 
+                      suggestion.severity === 'medium' ? 'bg-yellow-500' : 'bg-blue-500'
+                    }`} />
+                    <div>
+                      <p className="text-xs font-medium">{suggestion.type}</p>
+                      <p className="text-xs text-gray-600">{suggestion.text}</p>
+                    </div>
+                  </div>
+                  <Button size="sm" variant="outline" className="text-xs h-6">Apply</Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    if (toolName.toLowerCase().includes('semrush')) {
+      return (
+        <div className="my-4 p-4 bg-orange-50 rounded-lg border">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-6 h-6 bg-orange-600 rounded flex items-center justify-center">
+              <span className="text-white text-xs font-bold">S</span>
+            </div>
+            <h3 className="font-semibold text-gray-900">SEMrush SEO Analysis</h3>
+            <Badge variant="outline" className="text-xs">Research Mode</Badge>
+          </div>
+
+          {/* SEO Metrics */}
+          <div className="grid grid-cols-3 gap-3 mb-4">
+            <Card className="p-3">
+              <div className="text-center">
+                <p className="text-lg font-bold text-green-600">78</p>
+                <p className="text-xs text-gray-500">SEO Score</p>
+              </div>
+            </Card>
+            <Card className="p-3">
+              <div className="text-center">
+                <p className="text-lg font-bold text-blue-600">1.2K</p>
+                <p className="text-xs text-gray-500">Search Volume</p>
+              </div>
+            </Card>
+            <Card className="p-3">
+              <div className="text-center">
+                <p className="text-lg font-bold text-purple-600">45</p>
+                <p className="text-xs text-gray-500">Keyword Difficulty</p>
+              </div>
+            </Card>
+          </div>
+
+          {/* Keyword Suggestions */}
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium text-gray-900">Top Keyword Opportunities</h4>
+            {[
+              { keyword: 'content marketing strategy', volume: '2.4K', difficulty: 'Medium', cpc: '$3.20' },
+              { keyword: 'blog writing tips', volume: '1.8K', difficulty: 'Low', cpc: '$2.10' },
+              { keyword: 'SEO content optimization', volume: '980', difficulty: 'High', cpc: '$4.50' },
+            ].map((keyword, idx) => (
+              <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border">
+                <div>
+                  <p className="text-sm font-medium">{keyword.keyword}</p>
+                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                    <span>Vol: {keyword.volume}</span>
+                    <span>Diff: {keyword.difficulty}</span>
+                    <span>CPC: {keyword.cpc}</span>
+                  </div>
+                </div>
+                <Button size="sm" variant="outline" className="text-xs">Add</Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (toolName.toLowerCase().includes('google analytics')) {
+      return (
+        <div className="my-4 p-4 bg-blue-50 rounded-lg border">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center">
+              <span className="text-white text-xs font-bold">GA</span>
+            </div>
+            <h3 className="font-semibold text-gray-900">Google Analytics Dashboard</h3>
+            <Badge variant="outline" className="text-xs">Last 30 Days</Badge>
+          </div>
+
+          {/* Analytics Stats */}
+          <div className="grid grid-cols-4 gap-2 mb-4">
+            <Card className="p-2">
+              <div className="text-center">
+                <p className="text-sm font-bold text-blue-600">24.5K</p>
+                <p className="text-xs text-gray-500">Users</p>
+              </div>
+            </Card>
+            <Card className="p-2">
+              <div className="text-center">
+                <p className="text-sm font-bold text-green-600">45.2K</p>
+                <p className="text-xs text-gray-500">Sessions</p>
+              </div>
+            </Card>
+            <Card className="p-2">
+              <div className="text-center">
+                <p className="text-sm font-bold text-purple-600">3.2%</p>
+                <p className="text-xs text-gray-500">Bounce Rate</p>
+              </div>
+            </Card>
+            <Card className="p-2">
+              <div className="text-center">
+                <p className="text-sm font-bold text-orange-600">4:32</p>
+                <p className="text-xs text-gray-500">Avg Session</p>
+              </div>
+            </Card>
+          </div>
+
+          {/* Top Pages */}
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium text-gray-900">Top Performing Content</h4>
+            {[
+              { page: '/blog/social-media-trends-2024', views: '3.2K', engagement: '85%' },
+              { page: '/guide/content-strategy', views: '2.8K', engagement: '78%' },
+              { page: '/tools/analytics-dashboard', views: '1.9K', engagement: '92%' },
+            ].map((page, idx) => (
+              <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border">
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium truncate">{page.page}</p>
+                  <div className="flex items-center gap-3 text-xs text-gray-500">
+                    <span>{page.views} views</span>
+                    <span>{page.engagement} engaged</span>
+                  </div>
+                </div>
+                <Button size="sm" variant="outline" className="text-xs">View</Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (toolName.toLowerCase().includes('hootsuite')) {
+      return (
+        <div className="my-4 p-4 bg-purple-50 rounded-lg border">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-6 h-6 bg-purple-600 rounded flex items-center justify-center">
+              <span className="text-white text-xs font-bold">H</span>
+            </div>
+            <h3 className="font-semibold text-gray-900">Hootsuite Social Manager</h3>
+            <Badge variant="outline" className="text-xs">Publishing</Badge>
+          </div>
+
+          {/* Scheduled Posts */}
+          <div className="space-y-3">
+            <div className="flex items-center justify-between">
+              <h4 className="text-sm font-medium text-gray-900">Scheduled Posts</h4>
+              <Badge variant="secondary" className="text-xs">12 Queued</Badge>
+            </div>
+            
+            {[
+              { platform: 'LinkedIn', content: 'New blog post: Social Media Trends...', time: '2:00 PM', status: 'scheduled' },
+              { platform: 'Twitter', content: 'Quick tip: Always engage with your...', time: '3:30 PM', status: 'scheduled' },
+              { platform: 'Instagram', content: 'Behind the scenes: Our content team...', time: '5:00 PM', status: 'draft' },
+            ].map((post, idx) => (
+              <div key={idx} className="flex items-center gap-3 p-2 bg-white rounded border">
+                <div className={`w-8 h-8 rounded flex items-center justify-center text-xs font-medium ${
+                  post.platform === 'LinkedIn' ? 'bg-blue-100 text-blue-600' :
+                  post.platform === 'Twitter' ? 'bg-sky-100 text-sky-600' :
+                  'bg-pink-100 text-pink-600'
+                }`}>
+                  {post.platform.substring(0, 2)}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium truncate">{post.content}</p>
+                  <div className="flex items-center gap-2 text-xs text-gray-500">
+                    <Clock className="w-3 h-3" />
+                    <span>{post.time}</span>
+                    <Badge variant={post.status === 'scheduled' ? 'default' : 'secondary'} className="text-xs">
+                      {post.status}
+                    </Badge>
+                  </div>
+                </div>
+                <Button size="sm" variant="outline" className="text-xs">Edit</Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (toolName.toLowerCase().includes('zendesk')) {
+      return (
+        <div className="my-4 p-4 bg-indigo-50 rounded-lg border">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-6 h-6 bg-indigo-600 rounded flex items-center justify-center">
+              <span className="text-white text-xs font-bold">Z</span>
+            </div>
+            <h3 className="font-semibold text-gray-900">Zendesk Ticket Center</h3>
+            <Badge variant="outline" className="text-xs">Live Support</Badge>
+          </div>
+
+          {/* Ticket Stats */}
+          <div className="grid grid-cols-3 gap-3 mb-4">
+            <Card className="p-3">
+              <div className="text-center">
+                <p className="text-lg font-bold text-red-600">7</p>
+                <p className="text-xs text-gray-500">Urgent</p>
+              </div>
+            </Card>
+            <Card className="p-3">
+              <div className="text-center">
+                <p className="text-lg font-bold text-yellow-600">23</p>
+                <p className="text-xs text-gray-500">Open</p>
+              </div>
+            </Card>
+            <Card className="p-3">
+              <div className="text-center">
+                <p className="text-lg font-bold text-green-600">12m</p>
+                <p className="text-xs text-gray-500">Avg Response</p>
+              </div>
+            </Card>
+          </div>
+
+          {/* Recent Tickets */}
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium text-gray-900">Priority Tickets</h4>
+            {[
+              { id: '#4521', customer: 'Sarah M.', issue: 'Login issues after update', priority: 'high', time: '5 min ago' },
+              { id: '#4520', customer: 'Mike L.', issue: 'Billing question about renewal', priority: 'medium', time: '12 min ago' },
+              { id: '#4519', customer: 'Emma K.', issue: 'Feature request for export', priority: 'low', time: '1 hour ago' },
+            ].map((ticket, idx) => (
+              <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border">
+                <div className="flex items-center gap-3">
+                  <div className={`w-2 h-2 rounded-full ${
+                    ticket.priority === 'high' ? 'bg-red-500' : 
+                    ticket.priority === 'medium' ? 'bg-yellow-500' : 'bg-green-500'
+                  }`} />
+                  <div>
+                    <p className="text-xs font-medium">{ticket.id} - {ticket.customer}</p>
+                    <p className="text-xs text-gray-600">{ticket.issue}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-gray-500">{ticket.time}</p>
+                  <Button size="sm" variant="outline" className="text-xs mt-1">Reply</Button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    if (toolName.toLowerCase().includes('intercom')) {
+      return (
+        <div className="my-4 p-4 bg-teal-50 rounded-lg border">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="w-6 h-6 bg-teal-600 rounded flex items-center justify-center">
+              <span className="text-white text-xs font-bold">i</span>
+            </div>
+            <h3 className="font-semibold text-gray-900">Intercom Live Chat</h3>
+            <Badge variant="outline" className="text-xs">5 Active Chats</Badge>
+          </div>
+
+          {/* Active Conversations */}
+          <div className="space-y-2">
+            <h4 className="text-sm font-medium text-gray-900">Active Conversations</h4>
+            {[
+              { user: 'Alex Chen', message: 'How do I reset my password?', time: 'Just now', unread: true },
+              { user: 'Jamie Rodriguez', message: 'Is there a mobile app available?', time: '2 min ago', unread: true },
+              { user: 'Taylor Kim', message: 'Thanks for the help!', time: '5 min ago', unread: false },
+            ].map((chat, idx) => (
+              <div key={idx} className="flex items-center justify-between p-2 bg-white rounded border">
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center">
+                    <span className="text-xs font-medium text-teal-600">{chat.user.split(' ').map(n => n[0]).join('')}</span>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="text-xs font-medium">{chat.user}</p>
+                      {chat.unread && <div className="w-2 h-2 bg-teal-500 rounded-full" />}
+                    </div>
+                    <p className="text-xs text-gray-600 truncate">{chat.message}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs text-gray-500">{chat.time}</p>
+                  <Button size="sm" variant="outline" className="text-xs mt-1">Join</Button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Quick Actions */}
+          <div className="flex gap-2 mt-4">
+            <Button size="sm" variant="outline" className="text-xs">
+              <Plus className="w-3 h-3 mr-1" />
+              Start Chat
+            </Button>
+            <Button size="sm" variant="outline" className="text-xs">
+              <Users className="w-3 h-3 mr-1" />
+              Team Inbox
+            </Button>
+          </div>
+        </div>
+      );
+    }
+
     return null;
   };
 
@@ -1180,6 +1523,12 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           {message.content.toLowerCase().includes('@hubspot') && renderToolInterface('HubSpot')}
                           {(message.content.toLowerCase().includes('@campaign planner') || message.content.toLowerCase().includes('campaign planner')) && renderToolInterface('Campaign Planner')}
                           {(message.content.toLowerCase().includes('@media planner') || message.content.toLowerCase().includes('media planner')) && renderToolInterface('Media Planner')}
+                          {message.content.toLowerCase().includes('@grammarly') && renderToolInterface('Grammarly')}
+                          {message.content.toLowerCase().includes('@semrush') && renderToolInterface('SEMrush')}
+                          {message.content.toLowerCase().includes('@google analytics') && renderToolInterface('Google Analytics')}
+                          {message.content.toLowerCase().includes('@hootsuite') && renderToolInterface('Hootsuite')}
+                          {message.content.toLowerCase().includes('@zendesk') && renderToolInterface('Zendesk')}
+                          {message.content.toLowerCase().includes('@intercom') && renderToolInterface('Intercom')}
                         </>
                       )}
                       
