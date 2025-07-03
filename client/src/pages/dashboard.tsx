@@ -21,6 +21,8 @@ import { PricingScreen } from "@/components/pricing-screen";
 import { WorkspaceSettings } from "@/components/workspace-settings";
 import { UserView } from "@/components/user-view";
 import { DeleteConfirmationModal } from "@/components/delete-confirmation-modal";
+import { ProfileSettings } from "@/components/profile-settings";
+import { AccountSettings } from "@/components/account-settings";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
@@ -993,6 +995,18 @@ export default function Dashboard() {
             onStartChat={handleStartChat}
           />,
         };
+      case 'profile-settings':
+        return {
+          title: 'Profile Settings',
+          subtitle: 'Manage your personal information and preferences',
+          content: <ProfileSettings />,
+        };
+      case 'account-settings':
+        return {
+          title: 'Account Settings',
+          subtitle: 'Manage your account security, privacy, and connected services',
+          content: <AccountSettings />,
+        };
       default:
         return {
           title: 'Copilots',
@@ -1428,11 +1442,11 @@ export default function Dashboard() {
               {activeSection === 'user-view' ? (
                 // Simplified user profile options
                 (<>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleSectionChange('profile-settings')}>
                     <User className="w-4 h-4 mr-2" />
                     My Profile
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleSectionChange('account-settings')}>
                     <Settings className="w-4 h-4 mr-2" />
                     Settings
                   </DropdownMenuItem>
@@ -1453,11 +1467,11 @@ export default function Dashboard() {
               ) : (
                 // Admin profile options
                 (<>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleSectionChange('profile-settings')}>
                     <User className="w-4 h-4 mr-2" />
                     Profile Settings
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => handleSectionChange('account-settings')}>
                     <Settings className="w-4 h-4 mr-2" />
                     Account Settings
                   </DropdownMenuItem>
