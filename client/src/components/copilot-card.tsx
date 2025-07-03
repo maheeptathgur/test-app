@@ -7,12 +7,16 @@ import { CopilotData } from "@/lib/types";
 import { ComponentDetailsModal } from "./component-details-modal";
 import { useState } from "react";
 import campaignManagerImage from "@assets/campaignmanager_1751580871679.png";
+import contentAssistantImage from "@assets/contentassistant_1751581306148.png";
 
 // Helper functions for image tiles
 const getImageUrl = (type: string, name?: string): string => {
-  // Special case for Campaign Manager
+  // Special cases for specific copilots
   if (name === 'Campaign Manager') {
     return campaignManagerImage;
+  }
+  if (name === 'Content Assistant') {
+    return contentAssistantImage;
   }
   
   switch (type.toLowerCase()) {
