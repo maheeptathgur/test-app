@@ -1709,22 +1709,22 @@ export default function Dashboard() {
           </div>
         </div>
       )}
-      {/* Form Sidebar - positioned next to main sidebar for form-type copilots */}
-      {chatCopilot && chatCopilot.type === 'form' && (
-        <FormInterface
-          isOpen={!!chatCopilot}
-          copilot={chatCopilot}
-          onClose={() => {
-            setChatCopilot(null);
-            setShowAttachmentSidebar(false);
-          }}
-        />
-      )}
-      
       {/* Main Content */}
       <div className="flex-1 overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
-        {/* Chat Interface for non-form copilots */}
-        {chatCopilot && chatCopilot.type !== 'form' ? (
+        {/* Form Interface for form-type copilots */}
+        {chatCopilot && chatCopilot.type === 'form' ? (
+          <div className="h-full flex">
+            <FormInterface
+              isOpen={!!chatCopilot}
+              copilot={chatCopilot}
+              onClose={() => {
+                setChatCopilot(null);
+                setShowAttachmentSidebar(false);
+              }}
+            />
+          </div>
+        ) : /* Chat Interface for non-form copilots */
+        chatCopilot && chatCopilot.type !== 'form' ? (
           <ChatInterface
             isOpen={!!chatCopilot}
             copilot={chatCopilot}
@@ -1743,7 +1743,7 @@ export default function Dashboard() {
             onSave={handleSaveCopilotConfiguration}
           />
         ) : /* Regular Dashboard Content */
-        !chatCopilot ? (
+        (
           <div className="h-full p-8 overflow-y-auto">
             {/* Top Bar - Hidden when in user-view or settings modes */}
             {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && (
@@ -1772,7 +1772,7 @@ export default function Dashboard() {
               {sectionContent.content}
             </div>
           </div>
-        ) : null}
+        )}
       </div>
       
       {/* Edit Modal */}
