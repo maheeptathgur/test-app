@@ -760,50 +760,60 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
               {showProfileFields && copilot.profileFields && copilot.profileFields.length > 0 && (
                 <div className="mb-6 mt-8 p-4 rounded-lg border border-gray-200" style={{ backgroundColor: '#f8fafb' }}>
-                  <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => isEditingProfile ? handleSaveProfile() : setIsEditingProfile(true)}
-                        className="gap-2"
-                      >
-                        {isEditingProfile ? (
-                          <>
-                            <Check className="h-3 w-3" />
-                            Save
-                          </>
-                        ) : (
-                          <>
-                            <Edit3 className="h-3 w-3" />
-                            Edit
-                          </>
-                        )}
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setShowProfileFields(false)}
-                        className="h-8 w-8 p-0"
-                      >
-                        <X className="h-4 w-4" />
-                      </Button>
+                      <h3 className="font-medium text-gray-900">Tell us about yourself</h3>
+                      <span className="text-sm text-gray-500">Help {copilot.name} provide better assistance</span>
                     </div>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setShowProfileFields(false)}
+                      className="h-8 w-8 p-0"
+                    >
+                      <X className="h-4 w-4" />
+                    </Button>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-                    {copilot.profileFields.map((field) => (
-                      <div key={field.id} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
-                        <div className="flex items-center gap-1 mb-1">
-                          <span className="text-muted-foreground block">{field.label}:</span>
-                          {field.required && <span className="text-red-500">*</span>}
+                  <form className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {copilot.profileFields.map((field) => (
+                        <div key={field.id} className={field.type === 'textarea' ? 'md:col-span-2' : ''}>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            {field.label}
+                            {field.required && <span className="text-red-500 ml-1">*</span>}
+                          </label>
+                          {field.description && (
+                            <p className="text-xs text-gray-500 mb-2">{field.description}</p>
+                          )}
+                          {renderProfileField(field)}
                         </div>
-                        {field.description && (
-                          <p className="text-xs text-muted-foreground mb-2">{field.description}</p>
-                        )}
-                        {renderProfileField(field)}
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between pt-2">
+                      <div className="text-xs text-gray-500">
+                        This information helps personalize your experience
                       </div>
-                    ))}
-                  </div>
+                      <div className="flex gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setShowProfileFields(false)}
+                        >
+                          Skip for now
+                        </Button>
+                        <Button
+                          type="button"
+                          size="sm"
+                          onClick={handleSaveProfile}
+                          className="gap-2"
+                        >
+                          <Check className="h-3 w-3" />
+                          Save Profile
+                        </Button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               )}
 
