@@ -7,7 +7,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { HelpBubble } from "@/components/ui/help-bubble";
 
 import { ChatMessage, CopilotData, ProfileField } from "@/lib/types";
 
@@ -788,12 +787,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <h3 className="font-medium text-gray-900">Personalize your experience</h3>
-                      <HelpBubble 
-                        title="Profile Information"
-                        content="This information helps the assistant provide more personalized and relevant responses to your specific needs and context."
-                        position="bottom"
-                        trigger="hover"
-                      />
                       <span className="text-sm text-gray-500">Help {copilot.name} provide better assistance</span>
                     </div>
                     <Button
@@ -876,13 +869,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 <div className="flex items-center gap-2 mb-2">
                                   <Bot className="w-4 h-4 text-purple-600" />
                                   <h4 className="font-medium text-purple-900 text-sm">Agents</h4>
-                                  <HelpBubble 
-                                    title="AI Agents"
-                                    content="Specialized AI assistants that handle specific types of tasks. Reference them with @ to activate their expertise in conversations."
-                                    position="top"
-                                    trigger="hover"
-                                    size="sm"
-                                  />
                                   <span className="text-xs text-purple-600 bg-purple-100 px-2 py-0.5 rounded-full">
                                     {copilot.components.filter(c => c.type === 'agent').length}
                                   </span>
@@ -920,13 +906,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 <div className="flex items-center gap-2 mb-2">
                                   <Wrench className="w-4 h-4 text-blue-600" />
                                   <h4 className="font-medium text-blue-900 text-sm">Tools</h4>
-                                  <HelpBubble 
-                                    title="Integration Tools"
-                                    content="Connected services and APIs that extend the assistant's capabilities. Use @ mentions to access external platforms and data."
-                                    position="top"
-                                    trigger="hover"
-                                    size="sm"
-                                  />
                                   <span className="text-xs text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full">
                                     {copilot.components.filter(c => c.type === 'tool').length}
                                   </span>
@@ -964,13 +943,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 <div className="flex items-center gap-2 mb-2">
                                   <Workflow className="w-4 h-4 text-amber-600" />
                                   <h4 className="font-medium text-amber-900 text-sm">Workflows</h4>
-                                  <HelpBubble 
-                                    title="Automated Workflows"
-                                    content="Multi-step processes that can be triggered to perform complex tasks automatically. Reference with @ to execute entire sequences."
-                                    position="top"
-                                    trigger="hover"
-                                    size="sm"
-                                  />
                                   <span className="text-xs text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full">
                                     {copilot.components.filter(c => c.type === 'workflow').length}
                                   </span>
@@ -1191,26 +1163,16 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     </div>
                   </div>
                 )}
-                <div className="relative">
-                  <Button 
-                    variant="outline" 
-                    className="h-12 px-3 self-end"
-                    onClick={() => {
-                      setShowAttachmentSidebar(!showAttachmentSidebar);
-                      onToggleAttachment?.(!showAttachmentSidebar);
-                    }}
-                  >
-                    <Paperclip className="h-4 w-4" />
-                  </Button>
-                  <HelpBubble 
-                    title="Attach Documents"
-                    content="Upload files, images, or documents to share with the assistant. Supports PDFs, images, spreadsheets, and more."
-                    position="top"
-                    trigger="hover"
-                    size="sm"
-                    className="absolute -top-1 -right-1"
-                  />
-                </div>
+                <Button 
+                  variant="outline" 
+                  className="h-12 px-3 self-end"
+                  onClick={() => {
+                    setShowAttachmentSidebar(!showAttachmentSidebar);
+                    onToggleAttachment?.(!showAttachmentSidebar);
+                  }}
+                >
+                  <Paperclip className="h-4 w-4" />
+                </Button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button 
