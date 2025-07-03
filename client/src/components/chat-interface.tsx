@@ -885,7 +885,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-purple-200">
                                             <div className="text-xs text-gray-500">
-                                              Use <code className="px-1 py-0.5 bg-purple-100 rounded text-xs">@{agent.name}</code> to reference this agent
+                                              Use <code className="px-1 py-0.5 bg-purple-100 rounded text-xs border border-purple-200">@{agent.name}</code> to reference this agent
                                             </div>
                                           </div>
                                         )}
@@ -922,7 +922,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-blue-200">
                                             <div className="text-xs text-gray-500">
-                                              Use <code className="px-1 py-0.5 bg-blue-100 rounded text-xs">@{tool.name}</code> to reference this tool
+                                              Use <code className="px-1 py-0.5 bg-blue-100 rounded text-xs border border-blue-200">@{tool.name}</code> to reference this tool
                                             </div>
                                           </div>
                                         )}
@@ -959,7 +959,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-amber-200">
                                             <div className="text-xs text-gray-500">
-                                              Use <code className="px-1 py-0.5 bg-amber-100 rounded text-xs">@{workflow.name}</code> to reference this workflow
+                                              Use <code className="px-1 py-0.5 bg-amber-100 rounded text-xs border border-amber-200">@{workflow.name}</code> to reference this workflow
                                             </div>
                                           </div>
                                         )}
