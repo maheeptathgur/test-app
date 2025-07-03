@@ -1711,38 +1711,8 @@ export default function Dashboard() {
       )}
       {/* Main Content */}
       <div className="flex-1 overflow-hidden" style={{ backgroundColor: '#f2f2f2' }}>
-        {/* Combined scrollable content */}
-        <div className={`${chatCopilot || configuringCopilot ? 'h-full' : 'h-full p-8 overflow-y-auto'}`}>
-          {/* Top Bar - Hidden when in chat, configuration, user-view, or settings modes */}
-          {!chatCopilot && !configuringCopilot && activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && (
-            <div className="mb-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
-                    {activeSection === 'copilots' && (
-                      <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
-                        {copilots.length} Copilots
-                      </Badge>
-                    )}
-                  </div>
-                  <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
-                </div>
-                {activeSection === 'copilots' && (
-                  <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Content Body */}
-          <div className={chatCopilot || configuringCopilot ? 'h-full' : ''}>
-            {sectionContent.content}
-          </div>
-        </div>
-        
         {/* Form Interface for form-type copilots */}
-        {chatCopilot && chatCopilot.type === 'form' && (
+        {chatCopilot && chatCopilot.type === 'form' ? (
           <FormInterface
             isOpen={!!chatCopilot}
             copilot={chatCopilot}
@@ -1751,10 +1721,8 @@ export default function Dashboard() {
               setShowAttachmentSidebar(false);
             }}
           />
-        )}
-        
-        {/* Chat Interface for non-form copilots */}
-        {chatCopilot && chatCopilot.type !== 'form' && (
+        ) : /* Chat Interface for non-form copilots */
+        chatCopilot && chatCopilot.type !== 'form' ? (
           <ChatInterface
             isOpen={!!chatCopilot}
             copilot={chatCopilot}
@@ -1765,15 +1733,43 @@ export default function Dashboard() {
             onToggleAttachment={setShowAttachmentSidebar}
             selectedFiles={selectedFiles}
           />
-        )}
-        
-        {/* Configuration Interface */}
-        {configuringCopilot && (
+        ) : /* Configuration Interface */
+        configuringCopilot ? (
           <CopilotConfiguration
             copilot={configuringCopilot}
             onClose={() => setConfiguringCopilot(null)}
             onSave={handleSaveCopilotConfiguration}
           />
+        ) : (
+          /* Regular Dashboard Content */
+          <div className="h-full p-8 overflow-y-auto">
+            {/* Top Bar - Hidden when in user-view or settings modes */}
+            {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && (
+              <div className="mb-8">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
+                      {activeSection === 'copilots' && (
+                        <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+                          {copilots.length} Copilots
+                        </Badge>
+                      )}
+                    </div>
+                    <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
+                  </div>
+                  {activeSection === 'copilots' && (
+                    <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Content Body */}
+            <div>
+              {sectionContent.content}
+            </div>
+          </div>
         )}
       </div>
       
