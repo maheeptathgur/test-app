@@ -17,6 +17,7 @@ import { CreateCopilotModal } from "@/components/create-copilot-modal";
 import { EditCopilotModal } from "@/components/edit-copilot-modal";
 import { CopilotConfiguration } from "@/components/copilot-configuration";
 import { SampleScreen } from "@/components/sample-screens";
+import { PricingScreen } from "@/components/pricing-screen";
 import { WorkspaceSettings } from "@/components/workspace-settings";
 import { UserView } from "@/components/user-view";
 import { DeleteConfirmationModal } from "@/components/delete-confirmation-modal";
@@ -521,6 +522,10 @@ export default function Dashboard() {
 
   const handleSectionChange = (section: NavigationSection) => {
     setActiveSection(section);
+    // Close chat when navigating to other sections
+    if (chatCopilot) {
+      setChatCopilot(null);
+    }
     showNotification(`Switched to ${section.charAt(0).toUpperCase() + section.slice(1)}`);
   };
 
@@ -957,7 +962,7 @@ export default function Dashboard() {
         return {
           title: 'Pricing Plans',
           subtitle: 'Choose the plan that fits your needs',
-          content: <SampleScreen section="pricing" />,
+          content: <PricingScreen />,
         };
       case 'workspace-settings':
         return {
