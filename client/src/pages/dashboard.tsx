@@ -1793,8 +1793,9 @@ export default function Dashboard() {
         ) : /* Regular Dashboard Content */
         (
           <div className="h-full p-8 overflow-y-auto">
-            {/* Top Bar - Hidden when in user-view or settings modes */}
-            {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && (
+            {/* Top Bar - Hidden when in user-view, settings modes, or configuration screens */}
+            {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
+             !configureAgent && !configureTool && !configureWorkflow && (
               <div className="mb-8">
                 <div className="flex items-center justify-between">
                   <div>
