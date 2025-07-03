@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import n8nLogo from "@assets/n8n-color_1751393955985.png";
 import { Button } from "@/components/ui/button";
@@ -55,6 +55,38 @@ export function SampleScreen({
   const [showConnectNewTool, setShowConnectNewTool] = useState(false);
   const [showBrowseIntegrations, setShowBrowseIntegrations] = useState(false);
   const [showAddWorkspace, setShowAddWorkspace] = useState(false);
+
+  // Clear local state when section changes or when external clear functions are triggered
+  useEffect(() => {
+    // Clear all local configuration states when section changes
+    setLocalConfigureAgent(null);
+    setTestAgent(null);
+    setEditWorkflow(undefined);
+    setLocalConfigureTool(null);
+    setShowConnectNewTool(false);
+    setShowBrowseIntegrations(false);
+    setShowAddWorkspace(false);
+  }, [section]);
+
+  // Clear local state when external clear functions are called
+  useEffect(() => {
+    if (onClearConfigureAgent) {
+      setLocalConfigureAgent(null);
+      setTestAgent(null);
+    }
+  }, [onClearConfigureAgent]);
+
+  useEffect(() => {
+    if (onClearConfigureTool) {
+      setLocalConfigureTool(null);
+    }
+  }, [onClearConfigureTool]);
+
+  useEffect(() => {
+    if (onClearConfigureWorkflow) {
+      setEditWorkflow(undefined);
+    }
+  }, [onClearConfigureWorkflow]);
 
   const handleAgentConfigure = (agent: any) => {
     setLocalConfigureAgent(agent);
