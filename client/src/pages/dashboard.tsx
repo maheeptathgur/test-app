@@ -526,6 +526,19 @@ export default function Dashboard() {
     if (chatCopilot) {
       setChatCopilot(null);
     }
+    // Clear any active configuration states
+    if (configuringCopilot) {
+      setConfiguringCopilot(null);
+    }
+    if (configureAgent) {
+      setConfigureAgent(null);
+    }
+    if (configureTool) {
+      setConfigureTool(null);
+    }
+    if (configureWorkflow) {
+      setConfigureWorkflow(null);
+    }
     showNotification(`Switched to ${section.charAt(0).toUpperCase() + section.slice(1)}`);
   };
 
