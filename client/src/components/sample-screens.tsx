@@ -340,6 +340,8 @@ export function SampleScreen({
 }
 
 function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) => void; } = {}) {
+  const [filterStatus, setFilterStatus] = useState("All");
+  const [sortBy, setSortBy] = useState("name");
   const [agents, setAgents] = useState([
     { 
       id: 1, 
@@ -415,6 +417,24 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
     }
   ]);
 
+  // Filter and sort agents
+  const filteredAndSortedAgents = agents
+    .filter(agent => filterStatus === "All" || agent.status === filterStatus)
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "name":
+          return a.name.localeCompare(b.name);
+        case "status":
+          return a.status.localeCompare(b.status);
+        case "requests":
+          return b.requests - a.requests;
+        case "lastActive":
+          return new Date(b.lastActive).getTime() - new Date(a.lastActive).getTime();
+        default:
+          return 0;
+      }
+    });
+
   const totalAgents = agents.length;
   const activeAgents = agents.filter(agent => agent.status === 'Active').length;
   const totalRequests = agents.reduce((sum, agent) => sum + agent.requests, 0);
@@ -438,24 +458,46 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
             Create New Agent
           </Button>
           <Button variant="outline">
-            Import Agent Template
+            Go to Marketplace
           </Button>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <Filter className="w-4 h-4 mr-2" />
-            Filter
-          </Button>
-          <Button variant="outline" size="sm">
-            <ArrowUpDown className="w-4 h-4 mr-2" />
-            Sort
-          </Button>
+          <Select value={filterStatus} onValueChange={setFilterStatus}>
+            <SelectTrigger className="w-32">
+              <Filter className="w-4 h-4 mr-2" />
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="All">All</SelectItem>
+              <SelectItem value="Active">Active</SelectItem>
+              <SelectItem value="Inactive">Inactive</SelectItem>
+            </SelectContent>
+          </Select>
+          <Select value={sortBy} onValueChange={setSortBy}>
+            <SelectTrigger className="w-40">
+              <ArrowUpDown className="w-4 h-4 mr-2" />
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="name">Sort by Name</SelectItem>
+              <SelectItem value="status">Sort by Status</SelectItem>
+              <SelectItem value="requests">Sort by Requests</SelectItem>
+              <SelectItem value="lastActive">Sort by Last Active</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
       {/* All Agents */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-lg font-semibold">
+          {filterStatus === "All" ? "All Agents" : `${filterStatus} Agents`}
+        </h2>
+        <Badge variant="secondary">{filteredAndSortedAgents.length} agents</Badge>
+      </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {agents.map((agent) => {
+        {filteredAndSortedAgents.map((agent) => {
           // Get appropriate icon for each agent based on their function
           const getAgentIcon = (agentName: string) => {
             switch (agentName) {
