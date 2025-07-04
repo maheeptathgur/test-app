@@ -1168,10 +1168,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(workflow.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 text-xs truncate">{workflow.name}</div>
+                                          <div className="font-medium text-gray-900 text-[14px] truncate">{workflow.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className={`text-xs text-gray-600 leading-tight ${isExpanded ? '' : 'truncate'}`}>
+                                        <div className={`text-[14px] text-gray-600 leading-tight ${isExpanded ? '' : 'truncate'}`}>
                                           {workflow.description || 'Automated workflow'}
                                         </div>
                                         {isExpanded && (
