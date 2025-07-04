@@ -155,7 +155,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         c.name.toLowerCase().trim() === componentName.toLowerCase().trim()
       );
       
-      let badgeClass = "chat-input-badge inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-sm font-medium";
+      let badgeClass = "chat-input-badge inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium";
       
       if (component) {
         switch (component.type) {
@@ -209,7 +209,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               c.name.toLowerCase().trim() === part.toLowerCase().trim()
             );
             
-            let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded font-medium align-baseline text-sm";
+            let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium align-baseline";
             let iconElement = null;
             
             if (component) {
@@ -307,7 +307,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     let formattedText = text;
     
     // Handle @inbox first
-    formattedText = formattedText.replace(/@inbox\b/gi, '<span class="inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-sm font-medium align-baseline bg-green-100 text-green-800 border border-green-200">inbox</span>');
+    formattedText = formattedText.replace(/@inbox\b/gi, '<span class="inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium align-baseline bg-green-100 text-green-800 border border-green-200">inbox</span>');
     
     // Handle @mentions for components
     const componentNames = copilot?.components?.map(c => c.name) || [];
@@ -321,7 +321,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           c.name.toLowerCase().trim() === componentName.toLowerCase().trim()
         );
         
-        let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-sm font-medium align-baseline";
+        let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium align-baseline";
         
         if (component) {
           switch (component.type) {
@@ -1082,7 +1082,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <div className="space-y-2 flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
                                   <Bot className="w-4 h-4 text-purple-600" />
-                                  <h4 className="font-medium text-purple-900 text-sm">Agents</h4>
+                                  <h4 className="font-medium text-purple-900 text-[15px]">Agents</h4>
                                 </div>
                                 <div className="space-y-1">
                                   {copilot.components.filter(c => c.type === 'agent').map((agent) => {
@@ -1094,16 +1094,16 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(agent.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 truncate text-base">{agent.name}</div>
+                                          <div className="font-medium text-gray-900 truncate text-[14px]">{agent.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className="text-gray-600 truncate text-base">
+                                        <div className="text-gray-600 truncate text-[14px]">
                                           {agent.description || 'Specialized assistant'}
                                         </div>
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-purple-200">
-                                            <div className="text-sm text-gray-500">
-                                              Use <code className="px-1 py-0.5 bg-purple-100 rounded text-sm border border-purple-200">@{agent.name}</code> to reference this agent
+                                            <div className="text-xs text-gray-500">
+                                              Use <code className="px-1 py-0.5 bg-purple-100 rounded text-xs border border-purple-200">@{agent.name}</code> to reference this agent
                                             </div>
                                           </div>
                                         )}
@@ -1119,7 +1119,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <div className="space-y-2 flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
                                   <Wrench className="w-4 h-4 text-blue-600" />
-                                  <h4 className="font-medium text-blue-900 text-sm">Tools</h4>
+                                  <h4 className="font-medium text-blue-900 text-[15px]">Tools</h4>
                                 </div>
                                 <div className="space-y-1">
                                   {copilot.components.filter(c => c.type === 'tool').map((tool) => {
@@ -1131,16 +1131,16 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(tool.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 truncate text-base">{tool.name}</div>
+                                          <div className="font-medium text-gray-900 truncate text-[14px]">{tool.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className="text-gray-600 truncate text-base">
+                                        <div className="text-gray-600 truncate text-[14px]">
                                           {tool.description || 'Integration tool'}
                                         </div>
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-blue-200">
-                                            <div className="text-sm text-gray-500">
-                                              Use <code className="px-1 py-0.5 bg-blue-100 rounded text-sm border border-blue-200">@{tool.name}</code> to reference this tool
+                                            <div className="text-xs text-gray-500">
+                                              Use <code className="px-1 py-0.5 bg-blue-100 rounded text-xs border border-blue-200">@{tool.name}</code> to reference this tool
                                             </div>
                                           </div>
                                         )}
@@ -1168,16 +1168,16 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(workflow.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 text-base truncate">{workflow.name}</div>
+                                          <div className="font-medium text-gray-900 text-xs truncate">{workflow.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className={`text-base text-gray-600 leading-tight ${isExpanded ? '' : 'truncate'}`}>
+                                        <div className={`text-xs text-gray-600 leading-tight ${isExpanded ? '' : 'truncate'}`}>
                                           {workflow.description || 'Automated workflow'}
                                         </div>
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-amber-200">
-                                            <div className="text-sm text-gray-500">
-                                              Use <code className="px-1 py-0.5 bg-amber-100 rounded text-sm border border-amber-200">@{workflow.name}</code> to reference this workflow
+                                            <div className="text-xs text-gray-500">
+                                              Use <code className="px-1 py-0.5 bg-amber-100 rounded text-xs border border-amber-200">@{workflow.name}</code> to reference this workflow
                                             </div>
                                           </div>
                                         )}
