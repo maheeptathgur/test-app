@@ -194,8 +194,15 @@
     color: #008062;
   }
 
+  /* Force 14px font size for tool cards */
+  .bg-blue-50.p-2.rounded div {
+    font-size: 14px !important;
+    line-height: 1.2 !important;
+  }
+
   .tool-card-text {
     font-size: 14px !important;
+    line-height: 1.2 !important;
   }
 
   .google-drive-btn:hover .google-drive-icon {
