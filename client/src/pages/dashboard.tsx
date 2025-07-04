@@ -174,7 +174,7 @@ const recentConversations = [
       },
       {
         id: 'm14a',
-        content: 'I\'ll help you create a comprehensive launch campaign! Let me start by using the @Campaign Planner to develop the strategy.\n\n**Campaign Foundation:**\n- **Target:** B2B professionals (decision makers)\n- **Budget:** $150K over 8 weeks\n- **Goal:** Generate 500 qualified leads, 50 demos\n\n**Recommended Campaign Structure:**\n1. **Pre-launch Buzz** (2 weeks) - $30K\n2. **Launch Week Push** (1 week) - $50K  \n3. **Sustained Growth** (5 weeks) - $70K\n\nWould you like me to use the @Media Planner to break down channel allocation and then set everything up in @HubSpot?',
+        content: 'I\'ll help you create a comprehensive launch campaign! Let me start by using the @Campaign Planning to develop the strategy.\n\n**Campaign Foundation:**\n- **Target:** B2B professionals (decision makers)\n- **Budget:** $150K over 8 weeks\n- **Goal:** Generate 500 qualified leads, 50 demos\n\n**Recommended Campaign Structure:**\n1. **Pre-launch Buzz** (2 weeks) - $30K\n2. **Launch Week Push** (1 week) - $50K  \n3. **Sustained Growth** (5 weeks) - $70K\n\nWould you like me to use the @Media Planner to break down channel allocation and then set everything up in @HubSpot?',
         sender: 'bot' as const,
         timestamp: new Date(Date.now() - 58 * 60 * 1000).toISOString(),
       },
