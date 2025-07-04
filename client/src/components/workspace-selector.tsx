@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, Plus, Play, Search, Heart } from "lucide-react";
+import { ChevronDown, Plus, Play, Search, Heart, Zap } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -41,7 +41,11 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3 bg-sidebar-accent hover:bg-card">
           <div className={`w-8 h-8 ${currentWorkspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
-            {currentWorkspace.avatar}
+            {currentWorkspace.id === '1' ? (
+              <Zap className="w-4 h-4" />
+            ) : (
+              currentWorkspace.avatar
+            )}
           </div>
           <div className="text-left flex-1">
             <div className="text-sm font-medium text-sidebar-foreground">{currentWorkspace.name}</div>
@@ -131,7 +135,11 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 }`}
               >
                 <div className={`w-8 h-8 ${workspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
-                  {workspace.avatar}
+                  {workspace.id === '1' ? (
+                    <Zap className="w-4 h-4" />
+                  ) : (
+                    workspace.avatar
+                  )}
                 </div>
                 <div>
                   <div className="text-sm font-medium">{workspace.name}</div>
