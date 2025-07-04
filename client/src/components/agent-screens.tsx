@@ -57,15 +57,15 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-4">
-        <Button variant="outline" size="sm" onClick={onBack}>
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Agents
-        </Button>
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Configure {agent.name}</h1>
           <p className="text-gray-600">Customize agent behavior, tools, and capabilities</p>
         </div>
+        <Button variant="outline" size="sm" onClick={onBack}>
+          <X className="w-4 h-4" />
+          Close
+        </Button>
       </div>
 
       {/* Configuration Tabs */}
