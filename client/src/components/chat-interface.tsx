@@ -1156,7 +1156,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           {canScrollLeft && (
                             <button
                               onClick={() => scrollCarousel('left')}
-                              className="absolute left-2 top-2 z-10 h-8 w-8 rounded-md bg-[#008062]/80 hover:bg-[#008062] opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center"
+                              className="absolute left-2 top-2 z-10 h-8 w-8 rounded-md bg-[#008062]/80 hover:bg-[#008062] opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center ml-[0px] mr-[0px] mt-[10px] mb-[10px]"
                             >
                               <ChevronLeft className="h-4 w-4 text-white" />
                             </button>
