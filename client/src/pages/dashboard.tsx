@@ -1910,19 +1910,8 @@ export default function Dashboard() {
         (
           <div className="h-full p-8 overflow-y-auto">
             {/* Top Bar - Hidden when in user-view, settings modes, or configuration screens */}
-            {(function() {
-              console.log('Header condition check:', {
-                activeSection,
-                configureAgent,
-                configureTool,
-                configureWorkflow,
-                testAgent,
-                shouldShow: activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-                  !configureAgent && !configureTool && !configureWorkflow && !testAgent
-              });
-              return activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-                !configureAgent && !configureTool && !configureWorkflow && !testAgent;
-            })() && (
+            {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
+              !configureAgent && !configureTool && !configureWorkflow && !testAgent && (
               <div className="mb-8">
                 <div className="flex items-center justify-between">
                   <div>
