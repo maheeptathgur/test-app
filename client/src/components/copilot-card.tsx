@@ -113,7 +113,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
                     </Badge>
                   </div>
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent className="max-w-xs">
                   <p className="text-sm">{component.description || `${component.type} component`}</p>
                 </TooltipContent>
               </Tooltip>
