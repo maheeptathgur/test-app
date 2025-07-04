@@ -90,7 +90,6 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
         <div className="mb-4">
           <h3 className="font-semibold text-card-foreground mb-2">{copilot.name}</h3>
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-600">Inactive</span>
             <button
               onClick={() => onToggleStatus(copilot)}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
@@ -103,7 +102,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
                 }`}
               />
             </button>
-            <span className="text-xs text-gray-600">Active</span>
+            <span className="text-xs text-gray-600 capitalize">{copilot.status}</span>
           </div>
         </div>
         
