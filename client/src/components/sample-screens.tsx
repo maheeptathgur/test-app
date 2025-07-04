@@ -33,6 +33,7 @@ interface SampleScreenProps {
   section: NavigationSection;
   configureAgent?: {id: string, name: string} | null;
   onClearConfigureAgent?: () => void;
+  onConfigureAgent?: (agent: any) => void;
   configureTool?: {id: string, name: string} | null;
   onClearConfigureTool?: () => void;
   configureWorkflow?: {id: string, name: string} | null;
@@ -46,6 +47,7 @@ export function SampleScreen({
   section, 
   configureAgent: externalConfigureAgent, 
   onClearConfigureAgent,
+  onConfigureAgent,
   configureTool: externalConfigureTool,
   onClearConfigureTool,
   configureWorkflow: externalConfigureWorkflow,
@@ -106,7 +108,11 @@ export function SampleScreen({
   }, [onClearConfigureWorkflow]);
 
   const handleAgentConfigure = (agent: any) => {
-    setLocalConfigureAgent(agent);
+    if (onConfigureAgent) {
+      onConfigureAgent(agent);
+    } else {
+      setLocalConfigureAgent(agent);
+    }
   };
 
   const handleAgentTest = (agent: any) => {
