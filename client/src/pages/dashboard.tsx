@@ -997,6 +997,7 @@ export default function Dashboard() {
                       onDuplicate={handleDuplicateCopilot}
                       onArchive={handleArchiveCopilot}
                       onDelete={handleDeleteCopilot}
+                      onToggleStatus={handleArchiveCopilot}
                     />
                   ))}
                 </div>
@@ -1267,6 +1268,7 @@ export default function Dashboard() {
                       onDuplicate={handleDuplicateCopilot}
                       onArchive={handleArchiveCopilot}
                       onDelete={handleDeleteCopilot}
+                      onToggleStatus={handleArchiveCopilot}
                     />
                   ))}
                 </div>
