@@ -155,7 +155,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         c.name.toLowerCase().trim() === componentName.toLowerCase().trim()
       );
       
-      let badgeClass = "chat-input-badge inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium";
+      let badgeClass = "chat-input-badge inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-sm font-medium";
       
       if (component) {
         switch (component.type) {
@@ -209,7 +209,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               c.name.toLowerCase().trim() === part.toLowerCase().trim()
             );
             
-            let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium align-baseline";
+            let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded font-medium align-baseline text-sm";
             let iconElement = null;
             
             if (component) {
@@ -307,7 +307,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     let formattedText = text;
     
     // Handle @inbox first
-    formattedText = formattedText.replace(/@inbox\b/gi, '<span class="inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium align-baseline bg-green-100 text-green-800 border border-green-200">inbox</span>');
+    formattedText = formattedText.replace(/@inbox\b/gi, '<span class="inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-sm font-medium align-baseline bg-green-100 text-green-800 border border-green-200">inbox</span>');
     
     // Handle @mentions for components
     const componentNames = copilot?.components?.map(c => c.name) || [];
@@ -321,7 +321,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           c.name.toLowerCase().trim() === componentName.toLowerCase().trim()
         );
         
-        let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium align-baseline";
+        let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-sm font-medium align-baseline";
         
         if (component) {
           switch (component.type) {
