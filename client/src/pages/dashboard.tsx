@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3 } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3, Plus } from "lucide-react";
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import knolliIcon from "@assets/favicon-256_1751332849559.png";
@@ -17,6 +17,7 @@ import { CopilotCard } from "@/components/copilot-card";
 import { ChatInterface } from "@/components/chat-interface";
 import { FormInterface } from "@/components/form-interface";
 import { CreateCopilotModal } from "@/components/create-copilot-modal";
+import { CopilotCreationWizard } from "@/components/copilot-creation-wizard";
 import { EditCopilotModal } from "@/components/edit-copilot-modal";
 import { CopilotConfiguration } from "@/components/copilot-configuration";
 import { SampleScreen } from "@/components/sample-screens";
@@ -593,6 +594,9 @@ export default function Dashboard() {
   // State for editing conversation titles
   const [editingConversationId, setEditingConversationId] = useState<string | null>(null);
   const [editingConversationTitle, setEditingConversationTitle] = useState('');
+  
+  // State for creation wizard
+  const [showCreationWizard, setShowCreationWizard] = useState(false);
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
@@ -737,6 +741,7 @@ export default function Dashboard() {
     };
     
     setCopilots(prev => [...prev, newCopilot]);
+    setShowCreationWizard(false);
     showNotification(`Created new copilot: ${data.name}`);
   };
 
@@ -1891,6 +1896,12 @@ export default function Dashboard() {
             onClose={() => setConfiguringCopilot(null)}
             onSave={handleSaveCopilotConfiguration}
           />
+        ) : /* Creation Wizard */
+        showCreationWizard ? (
+          <CopilotCreationWizard
+            onCreateCopilot={handleCreateCopilot}
+            onClose={() => setShowCreationWizard(false)}
+          />
         ) : /* Regular Dashboard Content */
         (
           <div className="h-full p-8 overflow-y-auto">
@@ -1921,7 +1932,13 @@ export default function Dashboard() {
                     <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
                   </div>
                   {activeSection === 'copilots' && (
-                    <CreateCopilotModal onCreateCopilot={handleCreateCopilot} />
+                    <Button 
+                      onClick={() => setShowCreationWizard(true)}
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      New Copilot
+                    </Button>
                   )}
                 </div>
               </div>
