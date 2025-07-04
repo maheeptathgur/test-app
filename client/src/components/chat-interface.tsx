@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 import { ChatMessage, CopilotData, ProfileField } from "@/lib/types";
+import { UniversalMessagingApp } from "./universal-messaging-app";
 
 // Helper function to get conversation starters based on copilot type
 const getConversationStarters = (copilotName: string): string[] => {
@@ -16,6 +17,7 @@ const getConversationStarters = (copilotName: string): string[] => {
     case 'Campaign Manager':
       return [
         'Create a product launch campaign using @HubSpot and @Mailchimp',
+        'Show me my universal messaging center',
         'Analyze email performance with @Media Planner',
         'Set up automated posts using @Campaign Planning',
         'Build customer segments using @HubSpot'
@@ -79,6 +81,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [showDocumentPreview, setShowDocumentPreview] = useState(true);
   const [expandedAttachments, setExpandedAttachments] = useState(false);
   const [expandedComponents, setExpandedComponents] = useState<Set<string>>(new Set());
+  const [showMessagingApp, setShowMessagingApp] = useState(false);
 
   const [inputContent, setInputContent] = useState<string>(''); // Track raw text content
   
@@ -710,6 +713,18 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     // Use inputContent (which preserves @mentions) instead of inputValue
     const messageContent = inputContent || inputValue;
 
+    // Check for messaging-related keywords
+    const messagingKeywords = [
+      'messaging', 'messages', 'email', 'gmail', 'linkedin', 'whatsapp', 
+      'instagram', 'facebook', 'twitter', 'slack', 'telegram', 'discord',
+      'unified inbox', 'universal messaging', 'message center', 'communications',
+      'check messages', 'view messages', 'message app', 'messaging hub'
+    ];
+    
+    const shouldShowMessagingApp = messagingKeywords.some(keyword => 
+      messageContent.toLowerCase().includes(keyword.toLowerCase())
+    );
+
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
       content: messageContent,
@@ -721,16 +736,34 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     setInputValue("");
     setInputContent("");
 
-    // Simulate bot response
-    setTimeout(() => {
-      const botMessage: ChatMessage = {
-        id: (Date.now() + 1).toString(),
-        content: `I understand you said: "${messageContent}". How can I help you with that?`,
-        sender: 'bot',
-        timestamp: new Date().toISOString(),
-      };
-      setMessages(prev => [...prev, botMessage]);
-    }, 1000);
+    // If messaging-related keywords detected, show the messaging app
+    if (shouldShowMessagingApp) {
+      setTimeout(() => {
+        const botMessage: ChatMessage = {
+          id: (Date.now() + 1).toString(),
+          content: `I'll open your universal messaging center where you can view and manage all your messages from Gmail, LinkedIn, WhatsApp, Instagram, Facebook, Twitter, Slack, and more platforms in one place.`,
+          sender: 'bot',
+          timestamp: new Date().toISOString(),
+        };
+        setMessages(prev => [...prev, botMessage]);
+        
+        // Show the messaging app after the bot response
+        setTimeout(() => {
+          setShowMessagingApp(true);
+        }, 500);
+      }, 1000);
+    } else {
+      // Regular bot response
+      setTimeout(() => {
+        const botMessage: ChatMessage = {
+          id: (Date.now() + 1).toString(),
+          content: `I understand you said: "${messageContent}". How can I help you with that?`,
+          sender: 'bot',
+          timestamp: new Date().toISOString(),
+        };
+        setMessages(prev => [...prev, botMessage]);
+      }, 1000);
+    }
   };
 
   const handleStarterClick = (starterText: string) => {
@@ -1354,6 +1387,29 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     </div>
                   </div>
                 ))}
+                
+                {/* Universal Messaging App */}
+                {showMessagingApp && (
+                  <div className="mt-4 mb-4">
+                    <div className="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                      <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-white">
+                        <h3 className="font-medium text-gray-900">Universal Messaging Center</h3>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setShowMessagingApp(false)}
+                          className="h-6 w-6 p-0"
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                      <div className="h-96">
+                        <UniversalMessagingApp />
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
                 <div ref={messagesEndRef} />
               </div>
             </div>
