@@ -1569,7 +1569,7 @@ export default function Dashboard() {
                       />
                     </div>
                     <div className="flex-1 min-w-0 text-left">
-                      <div className="text-sm font-medium text-white truncate">John Doe</div>
+                      <div className="text-sm font-medium text-white truncate">Mandeep Taunk</div>
                       <div className="text-xs text-white/80 truncate">john.doe@company.com</div>
                     </div>
                     <ChevronDown className="w-4 h-4 text-white/80" />
@@ -1834,7 +1834,6 @@ export default function Dashboard() {
           </div>
         )}
       </div>
-      
       {/* Edit Modal */}
       <EditCopilotModal
         isOpen={!!editingCopilot}
@@ -1842,7 +1841,6 @@ export default function Dashboard() {
         onClose={() => setEditingCopilot(null)}
         onUpdateCopilot={handleUpdateCopilot}
       />
-      
       {/* Delete Confirmation Modal */}
       <DeleteConfirmationModal
         isOpen={deleteConfirmOpen}
