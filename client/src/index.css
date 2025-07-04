@@ -202,6 +202,11 @@
     line-height: 1.2 !important;
   }
 
+  /* Override text-xs to use 0.875rem (14px) */
+  .text-xs {
+    font-size: 0.875rem !important;
+  }
+
   .google-drive-btn:hover .google-drive-icon {
     color: white !important;
   }
