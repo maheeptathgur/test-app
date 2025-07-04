@@ -9,6 +9,16 @@
   pointer-events: none;
 }
 
+/* Hide scrollbars for carousel */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 :root {
   /* Brand Color Palette */
   --brand-primary: hsl(166, 100%, 25%); /* #008062 - Primary teal */

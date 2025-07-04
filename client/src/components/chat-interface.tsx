@@ -1105,25 +1105,31 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                         </div>
                       )}
                       
-                      {/* Conversation Starters */}
-                      <div className="space-y-1">
+                      {/* Conversation Starters Carousel */}
+                      <div className="space-y-2">
                         <h4 className="text-sm font-medium text-gray-900">Quick prompts</h4>
-                        <div className="space-y-0.5">
-                          {getConversationStarters(copilot.name).map((starter, index) => (
-                            <button
-                              key={index}
-                              onClick={() => handleStarterClick(starter)}
-                              className="w-full text-left text-xs text-gray-600 hover:text-gray-900 hover:bg-gray-50 py-1 px-1 rounded transition-colors leading-tight"
-                            >
-                              <span 
-                                dangerouslySetInnerHTML={{ 
-                                  __html: formatMarkdown(starter)
-                                }}
-                              />
-                            </button>
-                          ))}
+                        <div className="relative">
+                          <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                            {getConversationStarters(copilot.name).map((starter, index) => (
+                              <button
+                                key={index}
+                                onClick={() => handleStarterClick(starter)}
+                                className="flex-shrink-0 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-3 text-left transition-colors group w-64"
+                              >
+                                <div className="flex items-start gap-2">
+                                  <MessageSquare className="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0" />
+                                  <span 
+                                    className="text-xs text-gray-700 group-hover:text-gray-900 leading-tight flex-1"
+                                    dangerouslySetInnerHTML={{ 
+                                      __html: formatMarkdown(starter)
+                                    }}
+                                  />
+                                </div>
+                              </button>
+                            ))}
+                          </div>
                         </div>
-                        <p className="text-xs text-gray-500 mt-2">Or start typing below to begin our conversation.</p>
+                        <p className="text-xs text-gray-500">Or start typing below to begin our conversation.</p>
                       </div>
                     </div>
                   </div>
