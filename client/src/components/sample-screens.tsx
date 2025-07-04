@@ -484,7 +484,6 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{agent.name}</h3>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs text-gray-600">Inactive</span>
                     <button
                       onClick={() => toggleAgentStatus(agent.id)}
                       className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
@@ -499,7 +498,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                         }`}
                       />
                     </button>
-                    <span className="text-xs text-gray-600">Active</span>
+                    <span className="text-xs text-gray-600">{agent.status}</span>
                   </div>
                 </div>
               </div>
