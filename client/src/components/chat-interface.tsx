@@ -1131,7 +1131,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(tool.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 truncate !text-base">{tool.name}</div>
+                                          <div className="font-medium text-red-500 truncate !text-xl bg-yellow-200">{tool.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
                                         <div className="text-gray-600 truncate !text-base">
