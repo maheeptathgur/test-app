@@ -1117,7 +1117,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       {/* Conversation Starters */}
                       <div className="space-y-2">
                         <h3 className="text-base font-medium text-gray-900">Quick prompts to get started</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-start">
                           {getConversationStarters(copilot.name).map((starter, index) => (
                             <button
                               key={index}
