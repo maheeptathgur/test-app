@@ -22,7 +22,8 @@ import {
   Filter,
   Hash,
   AtSign,
-  Users
+  Users,
+  X
 } from "lucide-react";
 import { SiLinkedin, SiWhatsapp, SiTelegram, SiDiscord } from "react-icons/si";
 
@@ -194,7 +195,7 @@ const sampleMessages: Message[] = [
   }
 ];
 
-export function UniversalMessagingApp() {
+export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
   const [selectedPlatform, setSelectedPlatform] = useState<string | null>(null);
   const [selectedChannel, setSelectedChannel] = useState<Channel | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -340,9 +341,21 @@ export function UniversalMessagingApp() {
             {totalUnreadCount} unread across all platforms
           </p>
         </div>
-        <Badge variant="secondary" className="bg-blue-50 text-blue-700">
-          {filteredChannels.length} conversations
-        </Badge>
+        <div className="flex items-center gap-2">
+          <Badge variant="secondary" className="bg-blue-50 text-blue-700">
+            {filteredChannels.length} conversations
+          </Badge>
+          {onClose && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={onClose}
+              className="h-6 w-6 p-0"
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          )}
+        </div>
       </div>
 
       {/* Search and Filters */}
