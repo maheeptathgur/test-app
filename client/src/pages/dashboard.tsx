@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
@@ -1351,9 +1352,10 @@ export default function Dashboard() {
   const sectionContent = getSectionContent();
 
   return (
-    <div className="flex h-screen bg-background">
-      {/* Sidebar */}
-      <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
+    <TooltipProvider delayDuration={1000}>
+      <div className="flex h-screen bg-background">
+        {/* Sidebar */}
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
         {/* Logo and Toggle */}
         <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'}`}>
           <div className={`flex items-center ${sidebarCollapsed ? 'flex-col gap-3' : 'justify-between'} mb-4`}>
@@ -1541,7 +1543,14 @@ export default function Dashboard() {
                           </div>
                         ) : (
                           <div className="space-y-0.5">
-                            <h4 className="text-sm font-medium truncate leading-tight">{conversation.title}</h4>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <h4 className="text-sm font-medium truncate leading-tight cursor-help">{conversation.title}</h4>
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p className="max-w-xs">{conversation.title}</p>
+                              </TooltipContent>
+                            </Tooltip>
                             <div className="flex items-center justify-between">
                               <span className="text-xs text-muted-foreground leading-tight">{conversation.timestamp}</span>
                               <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -1939,6 +1948,7 @@ export default function Dashboard() {
         onClose={handleCancelDelete}
         onConfirm={handleConfirmDelete}
       />
-    </div>
+      </div>
+    </TooltipProvider>
   );
 }
