@@ -1396,19 +1396,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 {showMessagingApp && (
                   <div className="mt-4 mb-4">
                     <div className="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden shadow-sm">
-                      <div className="flex items-center justify-between p-3 border-b border-gray-200 bg-white">
-                        <h3 className="font-medium text-gray-900">Universal Messaging Center</h3>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setShowMessagingApp(false)}
-                          className="h-6 w-6 p-0"
-                        >
-                          <X className="w-4 h-4" />
-                        </Button>
-                      </div>
-                      <div className="h-[600px]">
-                        <UniversalMessagingApp />
+                      <div className="h-[700px]">
+                        <UniversalMessagingApp onClose={() => setShowMessagingApp(false)} />
                       </div>
                     </div>
                   </div>
