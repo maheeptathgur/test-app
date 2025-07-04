@@ -247,10 +247,6 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <span className="font-medium text-green-600">Connected</span>
                         </div>
                         <div className="flex justify-between">
-                          <span>API Calls:</span>
-                          <span className="font-medium">856 today</span>
-                        </div>
-                        <div className="flex justify-between">
                           <span>Auth:</span>
                           <span className="font-medium">Bot Token</span>
                         </div>
