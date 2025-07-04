@@ -89,6 +89,17 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   // Carousel scroll state
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  // Check scroll position and update arrow visibility
+  const updateScrollButtons = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
 
   // Carousel scroll functions
   const scrollCarousel = (direction: 'left' | 'right') => {
@@ -261,6 +272,24 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     const hasMediaRecorder = typeof window.MediaRecorder !== 'undefined';
     setRecordingSupported(!!(hasMediaDevices && hasMediaRecorder));
   }, []);
+
+  // Update scroll buttons when carousel content changes
+  useEffect(() => {
+    updateScrollButtons();
+    
+    const carousel = carouselRef.current;
+    if (carousel) {
+      carousel.addEventListener('scroll', updateScrollButtons);
+      // Also check on resize
+      const resizeObserver = new ResizeObserver(updateScrollButtons);
+      resizeObserver.observe(carousel);
+      
+      return () => {
+        carousel.removeEventListener('scroll', updateScrollButtons);
+        resizeObserver.disconnect();
+      };
+    }
+  }, [copilot?.name]); // Re-run when copilot changes (different conversation starters)
 
   // Close handle dropdown when clicking outside
   useEffect(() => {
@@ -1123,25 +1152,25 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       <div className="space-y-2">
                         <h4 className="text-sm font-medium text-gray-900">Quick prompts</h4>
                         <div className="relative group">
-                          {/* Left Arrow */}
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => scrollCarousel('left')}
-                            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-8 w-8 p-0 bg-white/80 hover:bg-white shadow-sm border opacity-0 group-hover:opacity-100 transition-opacity"
-                          >
-                            <ChevronLeft className="h-4 w-4" />
-                          </Button>
+                          {/* Left Arrow Bar with Gradient */}
+                          {canScrollLeft && (
+                            <div
+                              onClick={() => scrollCarousel('left')}
+                              className="absolute left-0 top-0 bottom-0 w-12 z-10 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-white via-white/50 to-transparent flex items-center justify-center"
+                            >
+                              <ChevronLeft className="h-5 w-5 text-gray-600" />
+                            </div>
+                          )}
                           
-                          {/* Right Arrow */}
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => scrollCarousel('right')}
-                            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-8 w-8 p-0 bg-white/80 hover:bg-white shadow-sm border opacity-0 group-hover:opacity-100 transition-opacity"
-                          >
-                            <ChevronRight className="h-4 w-4" />
-                          </Button>
+                          {/* Right Arrow Bar with Gradient */}
+                          {canScrollRight && (
+                            <div
+                              onClick={() => scrollCarousel('right')}
+                              className="absolute right-0 top-0 bottom-0 w-12 z-10 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-l from-white via-white/50 to-transparent flex items-center justify-center"
+                            >
+                              <ChevronRight className="h-5 w-5 text-gray-600" />
+                            </div>
+                          )}
                           
                           <div 
                             ref={carouselRef}
