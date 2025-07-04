@@ -1491,9 +1491,9 @@ export default function Dashboard() {
                       className="p-2 rounded-lg transition-all group cursor-pointer bg-white/50 hover:bg-sidebar-accent hover:text-sidebar-primary"
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
-                      <div className="flex items-center justify-between gap-1">
-                        <div className="flex-1 min-w-0">
-                          {editingConversationId === conversation.id ? (
+                      <div className="space-y-0.5">
+                        {editingConversationId === conversation.id ? (
+                          <div className="space-y-1">
                             <Input
                               value={editingConversationTitle}
                               onChange={(e) => setEditingConversationTitle(e.target.value)}
@@ -1509,70 +1509,70 @@ export default function Dashboard() {
                               autoFocus
                               onClick={(e) => e.stopPropagation()}
                             />
-                          ) : (
-                            <div className="space-y-0.5">
-                              <h4 className="text-sm font-medium truncate leading-tight">{conversation.title}</h4>
+                            <div className="flex items-center justify-between">
                               <span className="text-xs text-muted-foreground leading-tight">{conversation.timestamp}</span>
+                              <div className="flex items-center gap-1">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleSaveConversationTitle(conversation.id);
+                                  }}
+                                  className="h-5 w-5 p-0 text-green-600 hover:text-green-700 hover:bg-green-50"
+                                  title="Save title"
+                                >
+                                  <Check className="w-3 h-3" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleCancelEditConversationTitle();
+                                  }}
+                                  className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                                  title="Cancel"
+                                >
+                                  <X className="w-3 h-3" />
+                                </Button>
+                              </div>
                             </div>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          {editingConversationId === conversation.id ? (
-                            <>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleSaveConversationTitle(conversation.id);
-                                }}
-                                className="h-5 w-5 p-0 text-green-600 hover:text-green-700 hover:bg-green-50"
-                                title="Save title"
-                              >
-                                <Check className="w-3 h-3" />
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleCancelEditConversationTitle();
-                                }}
-                                className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
-                                title="Cancel"
-                              >
-                                <X className="w-3 h-3" />
-                              </Button>
-                            </>
-                          ) : (
-                            <>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleEditConversationTitle(conversation.id, conversation.title);
-                                }}
-                                className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
-                                title="Edit title"
-                              >
-                                <Edit3 className="w-3 h-3" />
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleDeleteConversation(conversation.id);
-                                }}
-                                className="h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
-                                title="Delete conversation"
-                              >
-                                <Trash2 className="w-3 h-3" />
-                              </Button>
-                            </>
-                          )}
-                        </div>
+                          </div>
+                        ) : (
+                          <div className="space-y-0.5">
+                            <h4 className="text-sm font-medium truncate leading-tight">{conversation.title}</h4>
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs text-muted-foreground leading-tight">{conversation.timestamp}</span>
+                              <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleEditConversationTitle(conversation.id, conversation.title);
+                                  }}
+                                  className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                                  title="Edit title"
+                                >
+                                  <Edit3 className="w-3 h-3" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteConversation(conversation.id);
+                                  }}
+                                  className="h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
+                                  title="Delete conversation"
+                                >
+                                  <Trash2 className="w-3 h-3" />
+                                </Button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
