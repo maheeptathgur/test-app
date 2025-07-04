@@ -1119,7 +1119,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <div className="space-y-2 flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
                                   <Wrench className="w-4 h-4 text-blue-600" />
-                                  <h4 className="font-medium text-blue-900 text-sm">Tools</h4>
+                                  <h4 className="font-medium text-blue-900 text-[15px]">Tools</h4>
                                 </div>
                                 <div className="space-y-1">
                                   {copilot.components.filter(c => c.type === 'tool').map((tool) => {
