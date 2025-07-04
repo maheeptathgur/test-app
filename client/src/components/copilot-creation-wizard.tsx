@@ -83,7 +83,6 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               <h2 className="text-2xl font-bold text-gray-900 mb-2">Choose what you want to build</h2>
               <p className="text-gray-600">Select the type of application you want to create.</p>
             </div>
-            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
               {/* Chat Copilot Builder - Featured */}
               <Card 
@@ -125,7 +124,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                   <div className="p-3 rounded-lg bg-blue-100 text-blue-600 mx-auto w-fit mb-3">
                     <Smartphone className="w-6 h-6" />
                   </div>
-                  <CardTitle className="text-lg text-gray-900">App Builder</CardTitle>
+                  <CardTitle className="text-lg text-gray-900">Form App Builder</CardTitle>
                   <CardDescription className="text-gray-600 text-sm">
                     Build an AI-powered app with structured form inputs and AI-generated responses
                   </CardDescription>
@@ -158,7 +157,6 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                 </CardHeader>
               </Card>
             </div>
-
             {/* Help Section */}
             <Card className="bg-gray-50 max-w-4xl mx-auto">
               <CardContent className="pt-6">
