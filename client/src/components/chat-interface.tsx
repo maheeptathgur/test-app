@@ -1377,20 +1377,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
-                {recordingSupported && (
-                  <Button 
-                    variant={isRecording ? "default" : "outline"}
-                    className={`h-12 px-3 self-end transition-colors ${
-                      isRecording 
-                        ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
-                        : 'hover:bg-gray-100'
-                    }`}
-                    onClick={toggleRecording}
-                    title={isRecording ? "Stop recording" : "Start voice input"}
-                  >
-                    {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-                  </Button>
-                )}
                 <div className="flex-1 relative">
 
                   <div className="relative">
@@ -1471,6 +1457,20 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 <Button onClick={handleSendMessage} className="h-12 w-12 p-0 self-end" title="Send Message">
                   <Send className="h-4 w-4" />
                 </Button>
+                {recordingSupported && (
+                  <Button 
+                    variant={isRecording ? "default" : "outline"}
+                    className={`h-12 px-3 self-end transition-colors ${
+                      isRecording 
+                        ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
+                        : 'hover:bg-[#00d2a0] hover:text-white'
+                    }`}
+                    onClick={toggleRecording}
+                    title={isRecording ? "Stop recording" : "Start voice input"}
+                  >
+                    {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                  </Button>
+                )}
               </div>
             </div>
           </div>
