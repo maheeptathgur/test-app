@@ -462,7 +462,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
         <div className="mt-6">
           <div className="flex items-center justify-between mb-4">
             {steps.map((step, index) => (
-              <div key={step.id} className="flex items-center">
+              <div key={step.id} className="flex flex-col items-center">
                 <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 text-sm font-medium ${
                   step.id === currentStep 
                     ? 'bg-[#008062] border-[#008062] text-white'
@@ -472,8 +472,8 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                 }`}>
                   {step.isCompleted && step.id !== currentStep ? <Check className="w-4 h-4" /> : step.id}
                 </div>
-                <div className="ml-2 hidden sm:block">
-                  <div className={`text-xs font-medium ${
+                <div className="mt-2 hidden sm:block">
+                  <div className={`text-xs font-medium text-center ${
                     step.id === currentStep 
                       ? 'text-[#008062]'
                       : step.isCompleted 
@@ -483,9 +483,6 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                     {step.title}
                   </div>
                 </div>
-                {index < steps.length - 1 && (
-                  <ChevronRight className="w-4 h-4 text-gray-300 ml-2 hidden sm:block" />
-                )}
               </div>
             ))}
           </div>
