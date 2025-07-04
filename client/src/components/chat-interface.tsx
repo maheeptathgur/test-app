@@ -152,8 +152,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         iconHTML = '<svg class="w-2.5 h-2.5 mr-1 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/></svg>';
       }
       
-      const closeHTML = '<span class="ml-1 cursor-pointer hover:bg-black/10 rounded px-1 text-xs">&times;</span>';
-      return `<span class="${badgeClass}" contenteditable="false">${iconHTML}${componentName}${closeHTML}</span>`;
+      return `<span class="${badgeClass}" contenteditable="false">${iconHTML}${componentName}</span>`;
     });
     
     // Replace newlines with <br> tags
