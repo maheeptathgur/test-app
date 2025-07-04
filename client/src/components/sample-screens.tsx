@@ -353,7 +353,11 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       status: "Active", 
       requests: 156,
       knowledgeBase: "SEO Guidelines",
-      lastActive: "2 min ago"
+      lastActive: "2 min ago",
+      usedByCopilots: ["Content Manager", "Campaign Manager"],
+      usedByWorkflows: ["Blog Post Generation", "Meta Description"],
+      lastChanged: "3 days ago",
+      usageCount90Days: 342
     },
     { 
       id: 2, 
@@ -365,7 +369,11 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       status: "Active", 
       requests: 89,
       knowledgeBase: "SEO Best Practices",
-      lastActive: "5 min ago"
+      lastActive: "5 min ago",
+      usedByCopilots: ["Content Manager"],
+      usedByWorkflows: ["Content Optimization", "SERP Analysis", "SEO Audit"],
+      lastChanged: "1 week ago",
+      usageCount90Days: 156
     },
     { 
       id: 3, 
@@ -377,7 +385,11 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       status: "Active", 
       requests: 234,
       knowledgeBase: "Analytics Guidelines",
-      lastActive: "1 min ago"
+      lastActive: "1 min ago",
+      usedByCopilots: ["Social Analyst", "Campaign Manager"],
+      usedByWorkflows: ["Performance Report", "Traffic Analysis"],
+      lastChanged: "5 days ago",
+      usageCount90Days: 478
     },
     { 
       id: 4, 
@@ -389,7 +401,11 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       status: "Active", 
       requests: 67,
       knowledgeBase: "Market Research Data",
-      lastActive: "8 min ago"
+      lastActive: "8 min ago",
+      usedByCopilots: ["Social Analyst"],
+      usedByWorkflows: ["Competitor Analysis", "Market Research", "Trend Monitoring"],
+      lastChanged: "2 weeks ago",
+      usageCount90Days: 89
     },
     { 
       id: 5, 
@@ -401,7 +417,11 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       status: "Active", 
       requests: 445,
       knowledgeBase: "Support Categories",
-      lastActive: "30 sec ago"
+      lastActive: "30 sec ago",
+      usedByCopilots: ["Customer Support"],
+      usedByWorkflows: ["Ticket Routing", "Escalation Rules"],
+      lastChanged: "1 day ago",
+      usageCount90Days: 1247
     },
     { 
       id: 6, 
@@ -413,7 +433,11 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       status: "Inactive", 
       requests: 23,
       knowledgeBase: "Support Documentation",
-      lastActive: "2 hours ago"
+      lastActive: "2 hours ago",
+      usedByCopilots: ["Customer Support"],
+      usedByWorkflows: ["FAQ Creation", "Content Updates"],
+      lastChanged: "3 weeks ago",
+      usageCount90Days: 12
     }
   ]);
 
@@ -549,11 +573,34 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
               <p className="text-sm text-gray-600 mb-4 flex-grow">{agent.description}</p>
               
               <div className="space-y-4 mt-auto">
-                
-                
-                
-                
-                
+                {/* Usage Statistics */}
+                <div className="space-y-3">
+                  <div>
+                    <p className="text-sm font-medium text-gray-700 mb-2">Used by:</p>
+                    <div className="flex flex-wrap gap-1">
+                      {agent.usedByCopilots?.map((copilot, idx) => (
+                        <Badge key={`copilot-${idx}`} className="text-xs bg-green-100 text-green-700 hover:bg-green-200">
+                          {copilot}
+                        </Badge>
+                      ))}
+                      {agent.usedByWorkflows?.slice(0, 2).map((workflow, idx) => (
+                        <Badge key={`workflow-${idx}`} className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">
+                          {workflow}
+                        </Badge>
+                      ))}
+                      {agent.usedByWorkflows && agent.usedByWorkflows.length > 2 && (
+                        <Badge className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">
+                          +{agent.usedByWorkflows.length - 2}
+                        </Badge>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="text-sm text-gray-600 space-y-1">
+                    <p>Last changed: {agent.lastChanged}</p>
+                    <p>Used {agent.usageCount90Days} times in the last 90 days</p>
+                  </div>
+                </div>
                 
                 <div className="pt-2">
                   <div className="flex gap-2">
