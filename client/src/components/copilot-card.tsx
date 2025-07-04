@@ -112,7 +112,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
             <Badge
               key={index}
               variant="secondary"
-              className={`text-xs font-medium cursor-pointer hover:shadow-md transition-shadow ${
+              className={`text-xs font-medium cursor-pointer hover:shadow-md transition-shadow !items-start ${
                 component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
                 component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
                 'bg-amber-100 text-amber-700 hover:bg-amber-200'
