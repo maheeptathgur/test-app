@@ -1070,9 +1070,6 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 <div className="flex items-center gap-2 mb-2">
                                   <Workflow className="w-4 h-4 text-amber-600" />
                                   <h4 className="font-medium text-amber-900 text-sm">Workflows</h4>
-                                  <span className="text-xs text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full">
-                                    {copilot.components.filter(c => c.type === 'workflow').length}
-                                  </span>
                                 </div>
                                 <div className="space-y-1">
                                   {copilot.components.filter(c => c.type === 'workflow').map((workflow) => {
