@@ -89,13 +89,22 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
         </div>
         <div className="mb-4">
           <h3 className="font-semibold text-card-foreground mb-2">{copilot.name}</h3>
-          <Badge 
-            variant={copilot.status === 'active' ? 'default' : 'secondary'} 
-            className="text-xs capitalize cursor-pointer hover:shadow-md transition-all"
-            onClick={() => onToggleStatus(copilot)}
-          >
-            {copilot.status}
-          </Badge>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-gray-600">Inactive</span>
+            <button
+              onClick={() => onToggleStatus(copilot)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
+              }`}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  copilot.status === 'active' ? 'translate-x-6' : 'translate-x-1'
+                }`}
+              />
+            </button>
+            <span className="text-xs text-gray-600">Active</span>
+          </div>
         </div>
         
         <p className="text-muted-foreground text-sm mb-4">{copilot.description}</p>
