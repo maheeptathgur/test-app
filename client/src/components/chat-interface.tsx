@@ -1114,12 +1114,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <button
                                 key={index}
                                 onClick={() => handleStarterClick(starter)}
-                                className="flex-shrink-0 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-3 text-left transition-colors group w-64"
+                                className="flex-shrink-0 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-3 text-left transition-colors group w-80"
                               >
                                 <div className="flex items-start gap-2">
                                   <MessageSquare className="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0" />
                                   <span 
-                                    className="text-xs text-gray-700 group-hover:text-gray-900 leading-tight flex-1"
+                                    className="text-xs text-gray-700 group-hover:text-gray-900 flex-1"
+                                    style={{ lineHeight: '1.5' }}
                                     dangerouslySetInnerHTML={{ 
                                       __html: formatMarkdown(starter)
                                     }}
