@@ -194,6 +194,10 @@
     color: #008062;
   }
 
+  .tool-card-text {
+    font-size: 14px !important;
+  }
+
   .google-drive-btn:hover .google-drive-icon {
     color: white !important;
   }
