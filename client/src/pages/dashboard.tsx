@@ -1554,8 +1554,8 @@ export default function Dashboard() {
                               <TooltipTrigger asChild>
                                 <h4 className="text-sm font-medium truncate leading-tight cursor-help">{conversation.title}</h4>
                               </TooltipTrigger>
-                              <TooltipContent>
-                                <p className="max-w-xs">{conversation.title}</p>
+                              <TooltipContent className="max-w-xs" style={{ backgroundColor: '#E0FFF8' }}>
+                                <p>{conversation.title}</p>
                               </TooltipContent>
                             </Tooltip>
                             <div className="flex items-center justify-between">
