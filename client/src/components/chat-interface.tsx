@@ -1063,7 +1063,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       
                       {/* Available Tools Overview */}
                       {copilot.components && copilot.components.length > 0 && (
-                        <div className="space-y-3">
+                        <div className="space-y-3 capabilities-section">
                           <h3 className="text-lg font-medium text-gray-900">Available Capabilities</h3>
                           <div className={`${
                             (() => {
