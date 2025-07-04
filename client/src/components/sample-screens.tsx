@@ -483,16 +483,24 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                 {getAgentIcon(agent.name)}
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{agent.name}</h3>
-                  <button
-                    onClick={() => toggleAgentStatus(agent.id)}
-                    className={`text-xs px-2 py-1 rounded-md font-medium transition-colors mb-2 ${
-                      agent.status === 'Active' 
-                        ? 'bg-[#008062] text-white hover:bg-[#00d2a0]' 
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                    }`}
-                  >
-                    {agent.status}
-                  </button>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xs text-gray-600">Inactive</span>
+                    <button
+                      onClick={() => toggleAgentStatus(agent.id)}
+                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                        agent.status === 'Active' 
+                          ? 'bg-[#008062]' 
+                          : 'bg-gray-300'
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                          agent.status === 'Active' ? 'translate-x-5' : 'translate-x-1'
+                        }`}
+                      />
+                    </button>
+                    <span className="text-xs text-gray-600">Active</span>
+                  </div>
                 </div>
               </div>
             </CardHeader>
