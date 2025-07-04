@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -9,6 +9,54 @@ import { Badge } from "@/components/ui/badge";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 import { ChatMessage, CopilotData, ProfileField } from "@/lib/types";
+
+// Helper function to get conversation starters based on copilot type
+const getConversationStarters = (copilotName: string): string[] => {
+  switch (copilotName) {
+    case 'Campaign Manager':
+      return [
+        'Help me create a multi-channel marketing campaign for a new product launch',
+        'Analyze the performance of my recent email campaign and suggest improvements',
+        'Set up automated social media posts for the next month',
+        'Create a customer segmentation strategy for better targeting'
+      ];
+    case 'Content Assistant':
+      return [
+        'Write a blog post about industry trends in my field',
+        'Create social media captions for my latest product announcement',
+        'Help me repurpose my existing content for different platforms',
+        'Generate ideas for my next content calendar'
+      ];
+    case 'Social Analyst':
+      return [
+        'Analyze my social media engagement trends from the past quarter',
+        'Compare my brand performance against key competitors',
+        'Create a report on my audience demographics and behavior',
+        'Identify the best times to post for maximum engagement'
+      ];
+    case 'Customer Support':
+      return [
+        'Help me resolve a complex customer complaint about billing',
+        'Create response templates for common support inquiries',
+        'Analyze recent support tickets to identify trending issues',
+        'Set up an automated escalation workflow for urgent cases'
+      ];
+    case 'Resume Assistant':
+      return [
+        'Help me optimize my resume for a software engineering role',
+        'Create a compelling cover letter for my dream job',
+        'Review my LinkedIn profile and suggest improvements',
+        'Tailor my resume for a specific job posting'
+      ];
+    default:
+      return [
+        'What can you help me accomplish today?',
+        'Show me your key features and capabilities',
+        'Help me get started with a common task',
+        'What are the most popular ways people use you?'
+      ];
+  }
+};
 
 interface ChatInterfaceProps {
   isOpen: boolean;
@@ -593,6 +641,16 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     }, 1000);
   };
 
+  const handleStarterClick = (starterText: string) => {
+    setInputValue(starterText);
+    setInputContent(starterText);
+    
+    // Focus the textarea after setting the value
+    setTimeout(() => {
+      textareaRef.current?.focus();
+    }, 10);
+  };
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (showHandleDropdown) {
       if (e.key === 'ArrowDown') {
@@ -993,8 +1051,27 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                         </div>
                       )}
                       
+                      {/* Conversation Starters */}
+                      <div className="space-y-3">
+                        <h3 className="text-lg font-medium text-gray-900">Get started with these prompts</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                          {getConversationStarters(copilot.name).map((starter, index) => (
+                            <button
+                              key={index}
+                              onClick={() => handleStarterClick(starter)}
+                              className="p-3 text-left bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors group"
+                            >
+                              <div className="flex items-start gap-2">
+                                <MessageSquare className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                                <span className="text-sm text-gray-700 group-hover:text-gray-900">{starter}</span>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      
                       <div className="pt-4">
-                        <p className="text-gray-500">Start typing below to begin our conversation.</p>
+                        <p className="text-gray-500">Or start typing below to begin our conversation.</p>
                       </div>
                     </div>
                   </div>
