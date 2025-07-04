@@ -1241,7 +1241,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             ))}
                           </div>
                         </div>
-                        <p className="text-xs text-gray-500">Or start typing below to begin our conversation.</p>
+                        <p className="text-gray-500 text-[14px]">Or start typing below to begin our conversation.</p>
                       </div>
                     </div>
                   </div>
