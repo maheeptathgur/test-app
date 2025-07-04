@@ -16,34 +16,34 @@ const getConversationStarters = (copilotName: string): string[] => {
     case 'Campaign Manager':
       return [
         'Create a product launch campaign using @HubSpot and @Mailchimp',
-        'Analyze email performance with @Google Analytics',
-        'Set up automated posts with @Hootsuite',
-        'Build customer segments using @HubSpot CRM'
+        'Analyze email performance with @Media Planner',
+        'Set up automated posts using @Campaign Planning',
+        'Build customer segments using @HubSpot'
       ];
     case 'Content Assistant':
       return [
         'Write a blog post with @Grammarly for quality check',
         'Create social captions using @SEMrush for optimization',
-        'Repurpose content across platforms with @Hootsuite',
-        'Plan next month\'s content calendar'
+        'Optimize content with @SEO Optimizer agent',
+        'Generate content using @Content Writer'
       ];
     case 'Social Analyst':
       return [
         'Analyze engagement trends with @Google Analytics',
-        'Compare competitor performance using @SEMrush',
-        'Generate audience report with @Hootsuite analytics',
-        'Find optimal posting times with @Social Scheduler'
+        'Compare performance using @Hootsuite analytics',
+        'Generate insights with @Data Analyst',
+        'Find trending content with @Trend Spotter'
       ];
     case 'Customer Support':
       return [
-        'Resolve billing issue using @HubSpot and @Email Tool',
-        'Create response templates with @Knowledge Base Tool',
-        'Analyze ticket trends using @Ticket Tool',
-        'Set up escalation with @Report Tool'
+        'Resolve billing issue using @CRM Integration',
+        'Create response templates with @Knowledge Base',
+        'Analyze ticket trends using @Support Analytics',
+        'Set up escalation with @Workflow Automation'
       ];
     case 'Resume Assistant':
       return [
-        'Optimize resume with @Grammarly for writing quality',
+        'Optimize resume for tech role',
         'Create compelling cover letter',
         'Review LinkedIn profile structure',
         'Tailor resume for specific job posting'
