@@ -1052,7 +1052,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           }`}>
                             {/* Agents Column */}
                             {copilot.components.filter(c => c.type === 'agent').length > 0 && (
-                              <div className="space-y-2">
+                              <div className="space-y-2 flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
                                   <Bot className="w-4 h-4 text-purple-600" />
                                   <h4 className="font-medium text-purple-900 text-sm">Agents</h4>
@@ -1086,7 +1086,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             
                             {/* Tools Column */}
                             {copilot.components.filter(c => c.type === 'tool').length > 0 && (
-                              <div className="space-y-2">
+                              <div className="space-y-2 flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
                                   <Wrench className="w-4 h-4 text-blue-600" />
                                   <h4 className="font-medium text-blue-900 text-sm">Tools</h4>
@@ -1120,7 +1120,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             
                             {/* Workflows Column */}
                             {copilot.components.filter(c => c.type === 'workflow').length > 0 && (
-                              <div className="space-y-2">
+                              <div className="space-y-2 flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-2">
                                   <Workflow className="w-4 h-4 text-amber-600" />
                                   <h4 className="font-medium text-amber-900 text-sm">Workflows</h4>
