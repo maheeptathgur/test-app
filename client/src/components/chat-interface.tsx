@@ -1113,12 +1113,12 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             <button
                               key={index}
                               onClick={() => handleStarterClick(starter)}
-                              className="p-3 text-left bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-md transition-colors group text-sm h-full flex flex-col"
+                              className="p-2 text-left bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-md transition-colors group text-xs h-full flex flex-col"
                             >
                               <div className="flex items-start gap-2 flex-1">
-                                <MessageSquare className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
+                                <MessageSquare className="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0" />
                                 <span 
-                                  className="text-gray-700 group-hover:text-gray-900 leading-relaxed flex-1"
+                                  className="text-gray-700 group-hover:text-gray-900 leading-tight flex-1"
                                   dangerouslySetInnerHTML={{ 
                                     __html: formatMarkdown(starter)
                                   }}
