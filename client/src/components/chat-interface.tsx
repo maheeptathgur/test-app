@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow, MessageSquare } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow, MessageSquare, Mic, MicOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -81,6 +81,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [expandedComponents, setExpandedComponents] = useState<Set<string>>(new Set());
 
   const [inputContent, setInputContent] = useState<string>(''); // Track raw text content
+  
+  // Voice recording state
+  const [isRecording, setIsRecording] = useState(false);
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+  const [recordingSupported, setRecordingSupported] = useState(false);
 
   const toggleComponentExpansion = (componentName: string) => {
     setExpandedComponents(prev => {
@@ -235,6 +240,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Check for voice recording support
+  useEffect(() => {
+    const hasMediaDevices = navigator.mediaDevices && navigator.mediaDevices.getUserMedia;
+    const hasMediaRecorder = typeof window.MediaRecorder !== 'undefined';
+    setRecordingSupported(!!(hasMediaDevices && hasMediaRecorder));
+  }, []);
 
   // Close handle dropdown when clicking outside
   useEffect(() => {
@@ -411,6 +423,53 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         submitted: false
       }
     }));
+  };
+
+  // Voice recording functions
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream);
+      const audioChunks: Blob[] = [];
+
+      recorder.addEventListener('dataavailable', (event) => {
+        audioChunks.push(event.data);
+      });
+
+      recorder.addEventListener('stop', () => {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        // Here you would typically send the audioBlob to a speech-to-text service
+        // For now, we'll simulate the transcription
+        setTimeout(() => {
+          const simulatedTranscription = "This is a simulated voice transcription. In a real implementation, this would be the actual speech-to-text result.";
+          setInputValue(simulatedTranscription);
+          setInputContent(simulatedTranscription);
+        }, 1000);
+      });
+
+      recorder.start();
+      setMediaRecorder(recorder);
+      setIsRecording(true);
+    } catch (error) {
+      console.error('Error accessing microphone:', error);
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder && isRecording) {
+      mediaRecorder.stop();
+      mediaRecorder.stream.getTracks().forEach(track => track.stop());
+      setIsRecording(false);
+      setMediaRecorder(null);
+    }
+  };
+
+  const toggleRecording = () => {
+    if (isRecording) {
+      stopRecording();
+    } else {
+      startRecording();
+    }
   };
 
   const handleAskHuman = (messageId: string) => {
@@ -1318,6 +1377,20 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
+                {recordingSupported && (
+                  <Button 
+                    variant={isRecording ? "default" : "outline"}
+                    className={`h-12 px-3 self-end transition-colors ${
+                      isRecording 
+                        ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
+                        : 'hover:bg-gray-100'
+                    }`}
+                    onClick={toggleRecording}
+                    title={isRecording ? "Stop recording" : "Start voice input"}
+                  >
+                    {isRecording ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                  </Button>
+                )}
                 <div className="flex-1 relative">
 
                   <div className="relative">
