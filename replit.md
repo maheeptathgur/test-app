@@ -217,8 +217,6 @@ Changelog:
 - July 4, 2025. Streamlined conversation cards and added inline title editing - redesigned conversation cards in sidebar with more compact layout, added Edit3 icon for inline title editing, supports Enter to save/Escape to cancel, includes save/cancel buttons during editing, and prevents conversation loading when editing titles
 - July 4, 2025. Added tooltip functionality to conversation titles - implemented 1-second delay tooltip using shadcn/ui Tooltip components to show full conversation titles when hovering over truncated text, with TooltipProvider wrapper and cursor-help styling
 - July 4, 2025. Implemented comprehensive 6-step copilot creation wizard - replaced simple modal with full wizard flow including: Step 1 (Choose builder type: Chat/App/Image), Step 2 (Define AI purpose), Step 3 (Choose name), Step 4 (Customize profile fields), Step 5 (Select user input types), Step 6 (Upload knowledge sources), with progress indicators, step validation, and dynamic button text
-- July 4, 2025. Converted wizard to full-screen interface replacing content area instead of modal, updated progress indicators with connecting lines between numbered circles instead of progress bar, organized builder options into 3-column layout for better space utilization
-- July 4, 2025. Implementing WhatsApp-style messaging interface with bubble design, timestamps, read receipts, and proper message alignment for enhanced chat experience
 ```
 
 ## User Preferences
