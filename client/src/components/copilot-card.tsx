@@ -104,7 +104,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
                 }`}
               />
             </button>
-            <span className="text-xs text-gray-600 capitalize">{copilot.status}</span>
+            <span className="text-xs text-gray-600">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
           </div>
         </div>
         
