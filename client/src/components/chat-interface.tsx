@@ -1108,22 +1108,18 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       {/* Conversation Starters */}
                       <div className="space-y-1">
                         <h4 className="text-sm font-medium text-gray-900">Quick prompts</h4>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 items-start">
+                        <div className="space-y-0.5">
                           {getConversationStarters(copilot.name).map((starter, index) => (
                             <button
                               key={index}
                               onClick={() => handleStarterClick(starter)}
-                              className="px-2 py-1.5 text-left bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded text-xs transition-colors group leading-tight"
+                              className="w-full text-left text-xs text-gray-600 hover:text-gray-900 hover:bg-gray-50 py-1 px-1 rounded transition-colors leading-tight"
                             >
-                              <div className="flex items-start gap-1.5">
-                                <MessageSquare className="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0" />
-                                <span 
-                                  className="text-gray-700 group-hover:text-gray-900 flex-1"
-                                  dangerouslySetInnerHTML={{ 
-                                    __html: formatMarkdown(starter)
-                                  }}
-                                />
-                              </div>
+                              <span 
+                                dangerouslySetInnerHTML={{ 
+                                  __html: formatMarkdown(starter)
+                                }}
+                              />
                             </button>
                           ))}
                         </div>
