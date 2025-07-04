@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow, MessageSquare, Mic, MicOff } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow, MessageSquare, Mic, MicOff, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -86,6 +86,21 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const [isRecording, setIsRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const [recordingSupported, setRecordingSupported] = useState(false);
+
+  // Carousel scroll state
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Carousel scroll functions
+  const scrollCarousel = (direction: 'left' | 'right') => {
+    if (carouselRef.current) {
+      const scrollAmount = 320; // Width of one card (w-80 = 320px)
+      const newScrollPosition = carouselRef.current.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount);
+      carouselRef.current.scrollTo({
+        left: newScrollPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const toggleComponentExpansion = (componentName: string) => {
     setExpandedComponents(prev => {
@@ -1107,8 +1122,32 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       {/* Conversation Starters Carousel */}
                       <div className="space-y-2">
                         <h4 className="text-sm font-medium text-gray-900">Quick prompts</h4>
-                        <div className="relative">
-                          <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+                        <div className="relative group">
+                          {/* Left Arrow */}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => scrollCarousel('left')}
+                            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-8 w-8 p-0 bg-white/80 hover:bg-white shadow-sm border opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <ChevronLeft className="h-4 w-4" />
+                          </Button>
+                          
+                          {/* Right Arrow */}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => scrollCarousel('right')}
+                            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-8 w-8 p-0 bg-white/80 hover:bg-white shadow-sm border opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <ChevronRight className="h-4 w-4" />
+                          </Button>
+                          
+                          <div 
+                            ref={carouselRef}
+                            className="flex gap-2 overflow-x-auto scrollbar-hide pb-2" 
+                            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                          >
                             {getConversationStarters(copilot.name).map((starter, index) => (
                               <button
                                 key={index}
