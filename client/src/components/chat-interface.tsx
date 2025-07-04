@@ -1189,7 +1189,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             )}
                           </div>
                           
-                          <div className="text-xs text-gray-500 mt-3">
+                          <div className="text-gray-500 mt-3 text-[14px]">
                             Use the <Plus className="w-3 h-3 inline mx-1" /> button below to activate tools during our conversation.
                           </div>
                         </div>
