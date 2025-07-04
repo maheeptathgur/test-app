@@ -3,9 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { CopilotData } from "@/lib/types";
-import { ComponentDetailsModal } from "./component-details-modal";
-import { useState } from "react";
 import campaignManagerImage from "@assets/campaignmanager_1751580871679.png";
 import contentAssistantImage from "@assets/contentassistant_1751581306148.png";
 import newCopilotImage from "@assets/image_1751664430496.png";
@@ -59,18 +58,6 @@ interface CopilotCardProps {
 }
 
 export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchive, onDelete }: CopilotCardProps) {
-  const [selectedComponent, setSelectedComponent] = useState<{ name: string; type: 'agent' | 'tool' | 'workflow' } | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleComponentClick = (component: { name: string; type: 'agent' | 'tool' | 'workflow' }) => {
-    setSelectedComponent(component);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedComponent(null);
-  };
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       {/* Card content */}
@@ -109,20 +96,29 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
         <p className="text-muted-foreground text-sm mb-4">{copilot.description}</p>
         
         <div className="flex flex-wrap gap-2 mb-4 items-start">
-          {copilot.components.map((component, index) => (
-            <Badge
-              key={index}
-              variant="secondary"
-              className={`text-xs font-medium cursor-pointer hover:shadow-md transition-shadow !items-start ${
-                component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
-                component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
-                'bg-amber-100 text-amber-700 hover:bg-amber-200'
-              }`}
-              onClick={() => handleComponentClick(component)}
-            >
-              {component.name}
-            </Badge>
-          ))}
+          <TooltipProvider>
+            {copilot.components.map((component, index) => (
+              <Tooltip key={index}>
+                <TooltipTrigger asChild>
+                  <div>
+                    <Badge
+                      variant="secondary"
+                      className={`text-xs font-medium cursor-default hover:shadow-md transition-shadow !items-start ${
+                        component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
+                        component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
+                        'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                      }`}
+                    >
+                      {component.name}
+                    </Badge>
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p className="text-sm">{component.description || `${component.type} component`}</p>
+                </TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
         </div>
         
         <Button 
@@ -133,12 +129,6 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           Start Chat
         </Button>
       </CardContent>
-
-      <ComponentDetailsModal
-        isOpen={isModalOpen}
-        component={selectedComponent}
-        onClose={closeModal}
-      />
     </Card>
   );
 }
