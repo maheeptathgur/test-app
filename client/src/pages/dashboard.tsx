@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3 } from "lucide-react";
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import knolliIcon from "@assets/favicon-256_1751332849559.png";
@@ -588,6 +588,10 @@ export default function Dashboard() {
   const [configureAgent, setConfigureAgent] = useState<{id: string, name: string} | null>(null);
   const [configureTool, setConfigureTool] = useState<{id: string, name: string} | null>(null);
   const [configureWorkflow, setConfigureWorkflow] = useState<{id: string, name: string} | null>(null);
+  
+  // State for editing conversation titles
+  const [editingConversationId, setEditingConversationId] = useState<string | null>(null);
+  const [editingConversationTitle, setEditingConversationTitle] = useState('');
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
@@ -758,6 +762,29 @@ export default function Dashboard() {
   const handleDeleteConversation = (conversationId: string) => {
     setConversations(prev => prev.filter(conv => conv.id !== conversationId));
     showNotification('Conversation deleted');
+  };
+
+  const handleEditConversationTitle = (conversationId: string, currentTitle: string) => {
+    setEditingConversationId(conversationId);
+    setEditingConversationTitle(currentTitle);
+  };
+
+  const handleSaveConversationTitle = (conversationId: string) => {
+    if (editingConversationTitle.trim()) {
+      setConversations(prev => prev.map(conv => 
+        conv.id === conversationId 
+          ? { ...conv, title: editingConversationTitle.trim() }
+          : conv
+      ));
+      showNotification('Conversation title updated');
+    }
+    setEditingConversationId(null);
+    setEditingConversationTitle('');
+  };
+
+  const handleCancelEditConversationTitle = () => {
+    setEditingConversationId(null);
+    setEditingConversationTitle('');
   };
 
   const handleLoadConversation = (conversation: any) => {
@@ -1462,27 +1489,90 @@ export default function Dashboard() {
                     <div
                       key={conversation.id}
                       className="p-2 rounded-lg transition-all group cursor-pointer bg-white/50 hover:bg-sidebar-accent hover:text-sidebar-primary"
-                      onClick={() => handleLoadConversation(conversation)}
+                      onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
-                      <div className="space-y-0.5">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="flex-1 min-w-0 cursor-pointer">
-                            <h4 className="text-sm font-medium truncate leading-tight">{conversation.title}</h4>
-                          </div>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteConversation(conversation.id);
-                            }}
-                            className="opacity-0 group-hover:opacity-100 h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50 flex-shrink-0"
-                            title="Delete conversation"
-                          >
-                            <Trash2 className="w-3 h-3" />
-                          </Button>
+                      <div className="flex items-center justify-between gap-1">
+                        <div className="flex-1 min-w-0">
+                          {editingConversationId === conversation.id ? (
+                            <Input
+                              value={editingConversationTitle}
+                              onChange={(e) => setEditingConversationTitle(e.target.value)}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  handleSaveConversationTitle(conversation.id);
+                                } else if (e.key === 'Escape') {
+                                  handleCancelEditConversationTitle();
+                                }
+                              }}
+                              onBlur={() => handleSaveConversationTitle(conversation.id)}
+                              className="h-6 text-sm px-2 py-0"
+                              autoFocus
+                              onClick={(e) => e.stopPropagation()}
+                            />
+                          ) : (
+                            <div className="space-y-0.5">
+                              <h4 className="text-sm font-medium truncate leading-tight">{conversation.title}</h4>
+                              <span className="text-xs text-muted-foreground leading-tight">{conversation.timestamp}</span>
+                            </div>
+                          )}
                         </div>
-                        <span className="text-xs text-muted-foreground cursor-pointer leading-tight">{conversation.timestamp}</span>
+                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          {editingConversationId === conversation.id ? (
+                            <>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleSaveConversationTitle(conversation.id);
+                                }}
+                                className="h-5 w-5 p-0 text-green-600 hover:text-green-700 hover:bg-green-50"
+                                title="Save title"
+                              >
+                                <Check className="w-3 h-3" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleCancelEditConversationTitle();
+                                }}
+                                className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                                title="Cancel"
+                              >
+                                <X className="w-3 h-3" />
+                              </Button>
+                            </>
+                          ) : (
+                            <>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleEditConversationTitle(conversation.id, conversation.title);
+                                }}
+                                className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                                title="Edit title"
+                              >
+                                <Edit3 className="w-3 h-3" />
+                              </Button>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteConversation(conversation.id);
+                                }}
+                                className="h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
+                                title="Delete conversation"
+                              >
+                                <Trash2 className="w-3 h-3" />
+                              </Button>
+                            </>
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))}
