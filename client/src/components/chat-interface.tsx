@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow, MessageSquare, Mic, MicOff, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, Send, Paperclip, UserCog, Edit3, Check, FileText, Image, Music, Video, File, Copy, ThumbsUp, ThumbsDown, MessageCircle, Plus, Bot, Wrench, Workflow, MessageSquare, Mic, MicOff, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -1056,7 +1056,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         className="p-2 bg-purple-50 rounded text-left border border-purple-100 hover:bg-purple-100 transition-colors cursor-pointer"
                                         onClick={() => toggleComponentExpansion(agent.name)}
                                       >
-                                        <div className="font-medium text-gray-900 text-xs truncate">{agent.name}</div>
+                                        <div className="flex items-center justify-between">
+                                          <div className="font-medium text-gray-900 text-xs truncate">{agent.name}</div>
+                                          <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                                        </div>
                                         <div className={`text-xs text-gray-600 leading-tight ${isExpanded ? '' : 'truncate'}`}>
                                           {agent.description || 'Specialized assistant'}
                                         </div>
@@ -1090,7 +1093,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         className="p-2 bg-blue-50 rounded text-left border border-blue-100 hover:bg-blue-100 transition-colors cursor-pointer"
                                         onClick={() => toggleComponentExpansion(tool.name)}
                                       >
-                                        <div className="font-medium text-gray-900 text-xs truncate">{tool.name}</div>
+                                        <div className="flex items-center justify-between">
+                                          <div className="font-medium text-gray-900 text-xs truncate">{tool.name}</div>
+                                          <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                                        </div>
                                         <div className={`text-xs text-gray-600 leading-tight ${isExpanded ? '' : 'truncate'}`}>
                                           {tool.description || 'Integration tool'}
                                         </div>
@@ -1124,7 +1130,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         className="p-2 bg-amber-50 rounded text-left border border-amber-100 hover:bg-amber-100 transition-colors cursor-pointer"
                                         onClick={() => toggleComponentExpansion(workflow.name)}
                                       >
-                                        <div className="font-medium text-gray-900 text-xs truncate">{workflow.name}</div>
+                                        <div className="flex items-center justify-between">
+                                          <div className="font-medium text-gray-900 text-xs truncate">{workflow.name}</div>
+                                          <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                                        </div>
                                         <div className={`text-xs text-gray-600 leading-tight ${isExpanded ? '' : 'truncate'}`}>
                                           {workflow.description || 'Automated workflow'}
                                         </div>
