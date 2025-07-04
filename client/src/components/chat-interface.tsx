@@ -1152,23 +1152,23 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       <div className="space-y-2">
                         <h4 className="text-sm font-medium text-gray-900">Quick prompts</h4>
                         <div className="relative group">
-                          {/* Left Arrow Bar with Gradient */}
+                          {/* Left Arrow Bar */}
                           {canScrollLeft && (
                             <div
                               onClick={() => scrollCarousel('left')}
-                              className="absolute left-0 top-0 bottom-0 w-12 z-10 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-white via-white/80 to-white/20 flex items-center justify-center"
+                              className="absolute left-0 top-0 bottom-0 w-12 z-10 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800/80 flex items-center justify-center"
                             >
-                              <ChevronLeft className="h-5 w-5 text-gray-700" />
+                              <ChevronLeft className="h-5 w-5 text-white" />
                             </div>
                           )}
                           
-                          {/* Right Arrow Bar with Gradient */}
+                          {/* Right Arrow Bar */}
                           {canScrollRight && (
                             <div
                               onClick={() => scrollCarousel('right')}
-                              className="absolute right-0 top-0 bottom-0 w-12 z-10 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-l from-white via-white/80 to-white/20 flex items-center justify-center"
+                              className="absolute right-0 top-0 bottom-0 w-12 z-10 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800/80 flex items-center justify-center"
                             >
-                              <ChevronRight className="h-5 w-5 text-gray-700" />
+                              <ChevronRight className="h-5 w-5 text-white" />
                             </div>
                           )}
                           
