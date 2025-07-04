@@ -1563,8 +1563,8 @@ export default function Dashboard() {
                   <div className="flex items-center gap-3 w-full">
                     <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                       <img 
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&auto=format&face=center" 
-                        alt="John Doe"
+                        src="/attached_assets/headshot_1751613708089.jpg" 
+                        alt="Mandeep Taunk"
                         className="w-full h-full object-cover"
                       />
                     </div>
