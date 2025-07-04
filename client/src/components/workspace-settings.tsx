@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 
 export function WorkspaceSettings() {
   const [activeTab, setActiveTab] = useState("general");
-  const [workspaceName, setWorkspaceName] = useState("My Workspace");
+  const [workspaceName, setWorkspaceName] = useState("GTM Team");
   const [workspaceDescription, setWorkspaceDescription] = useState("A comprehensive workspace for managing AI copilots and workflows");
   const [allowPublicAccess, setAllowPublicAccess] = useState(false);
   const [enableNotifications, setEnableNotifications] = useState(true);
