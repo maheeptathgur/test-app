@@ -214,6 +214,7 @@ Changelog:
 - July 3, 2025. Made capabilities section more compact for copilots with many components - added scrollable columns with max height (128px), component count badges, text truncation, smaller text sizes, reduced padding, and hover effects to efficiently display large numbers of capabilities without taking excessive vertical space
 - July 3, 2025. Added clickable component cards with detailed modal view - when users click on any component card in the capabilities section, a modal displays the complete description, component type badge, usage instructions, and @mention reference guide, solving truncation issues while maintaining compact layout
 - July 3, 2025. Implemented form-based copilot type - added new "form" copilot type with dedicated FormInterface component for structured input-based AI generation (like resume optimization), includes sidebar layout with input form on left (320px width) and main content area on right displaying results, real-time content generation with download functionality, integrated profile fields support, and chat input at bottom for post-generation modifications and refinements
+- July 4, 2025. Streamlined conversation cards and added inline title editing - redesigned conversation cards in sidebar with more compact layout, added Edit3 icon for inline title editing, supports Enter to save/Escape to cancel, includes save/cancel buttons during editing, and prevents conversation loading when editing titles
 ```
 
 ## User Preferences
