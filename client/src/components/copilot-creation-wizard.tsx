@@ -84,7 +84,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               <p className="text-gray-600">Select the type of application you want to create.</p>
             </div>
             
-            <div className="grid gap-4 max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
               {/* Chat Copilot Builder - Featured */}
               <Card 
                 className={`cursor-pointer transition-all border-2 ${
@@ -94,22 +94,20 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                 }`}
                 onClick={() => setFormData({ ...formData, builderType: "chat" })}
               >
-                <CardHeader className="flex flex-row items-center gap-4">
-                  <div className={`p-3 rounded-lg ${
+                <CardHeader className="text-center">
+                  <div className={`p-3 rounded-lg mx-auto w-fit mb-3 ${
                     formData.builderType === "chat" ? "bg-white/20" : "bg-[#008062] text-white"
                   }`}>
                     <MessageSquare className="w-6 h-6" />
                   </div>
-                  <div className="flex-1">
-                    <CardTitle className={`text-lg ${formData.builderType === "chat" ? "text-white" : "text-gray-900"}`}>
-                      Chat Copilot Builder
-                    </CardTitle>
-                    <CardDescription className={formData.builderType === "chat" ? "text-white/80" : "text-gray-600"}>
-                      Create an AI-powered chat assistant to answer questions and guide users in real time.
-                    </CardDescription>
-                  </div>
+                  <CardTitle className={`text-lg ${formData.builderType === "chat" ? "text-white" : "text-gray-900"}`}>
+                    Chat Copilot Builder
+                  </CardTitle>
+                  <CardDescription className={`${formData.builderType === "chat" ? "text-white/80" : "text-gray-600"} text-sm`}>
+                    Create an AI-powered chat assistant to answer questions and guide users in real time.
+                  </CardDescription>
                   {formData.builderType === "chat" && (
-                    <Check className="w-5 h-5 text-white" />
+                    <Check className="w-5 h-5 text-white mx-auto mt-2" />
                   )}
                 </CardHeader>
               </Card>
@@ -123,18 +121,16 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                 }`}
                 onClick={() => setFormData({ ...formData, builderType: "app" })}
               >
-                <CardHeader className="flex flex-row items-center gap-4">
-                  <div className="p-3 rounded-lg bg-blue-100 text-blue-600">
+                <CardHeader className="text-center">
+                  <div className="p-3 rounded-lg bg-blue-100 text-blue-600 mx-auto w-fit mb-3">
                     <Smartphone className="w-6 h-6" />
                   </div>
-                  <div className="flex-1">
-                    <CardTitle className="text-lg text-gray-900">App Builder</CardTitle>
-                    <CardDescription className="text-gray-600">
-                      Build an AI-powered app with structured form inputs and AI-generated responses
-                    </CardDescription>
-                  </div>
+                  <CardTitle className="text-lg text-gray-900">App Builder</CardTitle>
+                  <CardDescription className="text-gray-600 text-sm">
+                    Build an AI-powered app with structured form inputs and AI-generated responses
+                  </CardDescription>
                   {formData.builderType === "app" && (
-                    <Check className="w-5 h-5 text-[#008062]" />
+                    <Check className="w-5 h-5 text-[#008062] mx-auto mt-2" />
                   )}
                 </CardHeader>
               </Card>
@@ -148,18 +144,16 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                 }`}
                 onClick={() => setFormData({ ...formData, builderType: "image" })}
               >
-                <CardHeader className="flex flex-row items-center gap-4">
-                  <div className="p-3 rounded-lg bg-purple-100 text-purple-600">
+                <CardHeader className="text-center">
+                  <div className="p-3 rounded-lg bg-purple-100 text-purple-600 mx-auto w-fit mb-3">
                     <Image className="w-6 h-6" />
                   </div>
-                  <div className="flex-1">
-                    <CardTitle className="text-lg text-gray-900">Image App Builder</CardTitle>
-                    <CardDescription className="text-gray-600">
-                      Design an AI-powered app that generates images based on user inputs
-                    </CardDescription>
-                  </div>
+                  <CardTitle className="text-lg text-gray-900">Image App Builder</CardTitle>
+                  <CardDescription className="text-gray-600 text-sm">
+                    Design an AI-powered app that generates images based on user inputs
+                  </CardDescription>
                   {formData.builderType === "image" && (
-                    <Check className="w-5 h-5 text-[#008062]" />
+                    <Check className="w-5 h-5 text-[#008062] mx-auto mt-2" />
                   )}
                 </CardHeader>
               </Card>
