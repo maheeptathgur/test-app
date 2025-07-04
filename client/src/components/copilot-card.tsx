@@ -107,7 +107,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
         
         <p className="text-muted-foreground text-sm mb-4">{copilot.description}</p>
         
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="flex flex-wrap gap-2 mb-4 items-start">
           {copilot.components.map((component, index) => (
             <Badge
               key={index}
