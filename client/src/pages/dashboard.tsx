@@ -27,7 +27,7 @@ import { AccountSettings } from "@/components/account-settings";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
-  { id: '1', name: 'My Workspace', type: 'Personal', avatar: 'M', color: 'bg-blue-500' },
+  { id: '1', name: 'GTM Team', type: 'Personal', avatar: 'G', color: 'bg-blue-500' },
   { id: '2', name: 'Team Alpha', type: 'Shared', avatar: 'T', color: 'bg-green-500' },
   { id: '3', name: 'Enterprise', type: 'Organization', avatar: 'E', color: 'bg-purple-500' },
 ];
