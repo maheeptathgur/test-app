@@ -1,4 +1,5 @@
-import { MoreVertical, Bot, MessageSquare, BarChart3, Headphones, Play } from "lucide-react";
+import { MoreVertical, Bot, MessageSquare, BarChart3, Headphones, Play, ChevronDown } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -59,6 +60,7 @@ interface CopilotCardProps {
 }
 
 export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchive, onDelete, onToggleStatus }: CopilotCardProps) {
+  const [isComponentsExpanded, setIsComponentsExpanded] = useState(false);
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       {/* Card content */}
@@ -108,30 +110,42 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
         
         <p className="text-muted-foreground text-sm mb-4">{copilot.description}</p>
         
-        <div className="flex flex-wrap gap-2 mb-4 items-start">
-          <TooltipProvider>
-            {copilot.components.map((component, index) => (
-              <Tooltip key={index}>
-                <TooltipTrigger asChild>
-                  <div>
-                    <Badge
-                      variant="secondary"
-                      className={`text-xs font-medium cursor-help hover:shadow-md transition-shadow !items-start ${
-                        component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
-                        component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
-                        'bg-amber-100 text-amber-700 hover:bg-amber-200'
-                      }`}
-                    >
-                      {component.name}
-                    </Badge>
-                  </div>
-                </TooltipTrigger>
-                <TooltipContent className="max-w-xs" style={{ backgroundColor: '#E0FFF8' }}>
-                  <p className="text-sm">{component.description || `${component.type} component`}</p>
-                </TooltipContent>
-              </Tooltip>
-            ))}
-          </TooltipProvider>
+        <div className="mb-4">
+          <button
+            onClick={() => setIsComponentsExpanded(!isComponentsExpanded)}
+            className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors mb-2"
+          >
+            <ChevronDown className={`w-4 h-4 transition-transform ${isComponentsExpanded ? 'rotate-180' : ''}`} />
+            Components ({copilot.components.length})
+          </button>
+          
+          {isComponentsExpanded && (
+            <div className="flex flex-wrap gap-2 items-start">
+              <TooltipProvider>
+                {copilot.components.map((component, index) => (
+                  <Tooltip key={index}>
+                    <TooltipTrigger asChild>
+                      <div>
+                        <Badge
+                          variant="secondary"
+                          className={`text-xs font-medium cursor-help hover:shadow-md transition-shadow !items-start ${
+                            component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
+                            component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
+                            'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                          }`}
+                        >
+                          {component.name}
+                        </Badge>
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent className="max-w-xs" style={{ backgroundColor: '#E0FFF8' }}>
+                      <p className="text-sm">{component.description || `${component.type} component`}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                ))}
+              </TooltipProvider>
+            </div>
+          )}
         </div>
         
         <Button 
