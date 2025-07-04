@@ -3,6 +3,7 @@ import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, Mes
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import knolliIcon from "@assets/favicon-256_1751332849559.png";
+import headshotImage from "@assets/headshot_1751613708089.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -1563,7 +1564,7 @@ export default function Dashboard() {
                   <div className="flex items-center gap-3 w-full">
                     <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                       <img 
-                        src="/attached_assets/headshot_1751613708089.jpg" 
+                        src={headshotImage} 
                         alt="Mandeep Taunk"
                         className="w-full h-full object-cover"
                       />
