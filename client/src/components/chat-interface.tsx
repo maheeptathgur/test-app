@@ -17,36 +17,36 @@ const getConversationStarters = (copilotName: string): string[] => {
       return [
         'Create a product launch campaign using @HubSpot and @Mailchimp',
         'Analyze email performance with @Google Analytics',
-        'Set up automated posts with @Social Media Scheduler',
-        'Build customer segments using @Customer Data Platform'
+        'Set up automated posts with @Hootsuite',
+        'Build customer segments using @HubSpot CRM'
       ];
     case 'Content Assistant':
       return [
-        'Write a blog post with @Content Generator',
-        'Create social captions using @Brand Voice Assistant',
-        'Repurpose content across platforms with @Content Optimizer',
+        'Write a blog post with @Grammarly for quality check',
+        'Create social captions using @SEMrush for optimization',
+        'Repurpose content across platforms with @Hootsuite',
         'Plan next month\'s content calendar'
       ];
     case 'Social Analyst':
       return [
-        'Analyze engagement trends with @Social Analytics',
-        'Compare competitor performance using @Competitor Tracker',
-        'Generate audience report with @Demographic Analyzer',
-        'Find optimal posting times with @Engagement Optimizer'
+        'Analyze engagement trends with @Google Analytics',
+        'Compare competitor performance using @SEMrush',
+        'Generate audience report with @Hootsuite analytics',
+        'Find optimal posting times with @Social Scheduler'
       ];
     case 'Customer Support':
       return [
-        'Resolve billing issue using @Payment Processor and @CRM',
-        'Create response templates with @Knowledge Base',
-        'Analyze ticket trends using @Support Analytics',
-        'Set up escalation with @Workflow Automation'
+        'Resolve billing issue using @HubSpot and @Email Tool',
+        'Create response templates with @Knowledge Base Tool',
+        'Analyze ticket trends using @Ticket Tool',
+        'Set up escalation with @Report Tool'
       ];
     case 'Resume Assistant':
       return [
-        'Optimize resume for tech role',
+        'Optimize resume with @Grammarly for writing quality',
         'Create compelling cover letter',
-        'Review LinkedIn profile',
-        'Tailor resume for job posting'
+        'Review LinkedIn profile structure',
+        'Tailor resume for specific job posting'
       ];
     default:
       return [
@@ -642,12 +642,16 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   };
 
   const handleStarterClick = (starterText: string) => {
+    // Process the starter text to convert @mentions to proper format
     setInputValue(starterText);
     setInputContent(starterText);
     
     // Focus the textarea after setting the value
     setTimeout(() => {
       textareaRef.current?.focus();
+      // Trigger input change to process @mentions
+      const event = new Event('input', { bubbles: true });
+      textareaRef.current?.dispatchEvent(event);
     }, 10);
   };
 
