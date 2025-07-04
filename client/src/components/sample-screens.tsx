@@ -342,6 +342,7 @@ export function SampleScreen({
 function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) => void; } = {}) {
   const [filterStatus, setFilterStatus] = useState("All");
   const [sortBy, setSortBy] = useState("name");
+  const [expandedAgents, setExpandedAgents] = useState<Set<number>>(new Set());
   const [agents, setAgents] = useState([
     { 
       id: 1, 
@@ -473,6 +474,18 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
     );
   };
 
+  const toggleExpanded = (agentId: number) => {
+    setExpandedAgents(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(agentId)) {
+        newSet.delete(agentId);
+      } else {
+        newSet.add(agentId);
+      }
+      return newSet;
+    });
+  };
+
   return (
     <div className="space-y-6">
       {/* Action Bar */}
@@ -578,21 +591,40 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                   <div>
                     <p className="text-sm font-medium text-gray-700 mb-2">Used by:</p>
                     <div className="flex flex-wrap gap-1">
-                      {agent.usedByCopilots?.map((copilot, idx) => (
-                        <Badge key={`copilot-${idx}`} className="text-xs bg-green-100 text-green-700 hover:bg-green-200">
-                          {copilot}
-                        </Badge>
-                      ))}
-                      {agent.usedByWorkflows?.slice(0, 2).map((workflow, idx) => (
-                        <Badge key={`workflow-${idx}`} className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">
-                          {workflow}
-                        </Badge>
-                      ))}
-                      {agent.usedByWorkflows && agent.usedByWorkflows.length > 2 && (
-                        <Badge className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">
-                          +{agent.usedByWorkflows.length - 2}
-                        </Badge>
-                      )}
+                      {(() => {
+                        const allItems = [
+                          ...(agent.usedByCopilots?.map(name => ({ name, type: 'copilot' })) || []),
+                          ...(agent.usedByWorkflows?.map(name => ({ name, type: 'workflow' })) || [])
+                        ];
+                        const isExpanded = expandedAgents.has(agent.id);
+                        const visibleItems = isExpanded ? allItems : allItems.slice(0, 3);
+                        const remainingCount = allItems.length - 3;
+
+                        return (
+                          <>
+                            {visibleItems.map((item, idx) => (
+                              <Badge 
+                                key={`${item.type}-${idx}`} 
+                                className={`text-xs ${
+                                  item.type === 'copilot' 
+                                    ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                                    : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                                }`}
+                              >
+                                {item.name}
+                              </Badge>
+                            ))}
+                            {!isExpanded && remainingCount > 0 && (
+                              <button
+                                onClick={() => toggleExpanded(agent.id)}
+                                className="text-xs px-2 py-1 rounded-md bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+                              >
+                                +{remainingCount}
+                              </button>
+                            )}
+                          </>
+                        );
+                      })()}
                     </div>
                   </div>
 
