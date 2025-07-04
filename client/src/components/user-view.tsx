@@ -79,11 +79,10 @@ export function UserView({ copilots, onToggleFavorite, onStartChat }: UserViewPr
         <div className="absolute inset-0 bg-black/50"></div>
         {/* Content */}
         <div className="relative z-10 flex flex-col justify-center h-full">
-          <h1 className="text-3xl font-bold mb-2">Welcome back, John!</h1>
+          <h1 className="text-3xl font-bold mb-2">Welcome back, Mandeep!</h1>
           <p className="text-lg opacity-90">Choose an AI assistant to help you with your tasks</p>
         </div>
       </div>
-
       {/* Search */}
       <div className="flex gap-4 items-center">
         <div className="flex-1 relative">
@@ -96,7 +95,6 @@ export function UserView({ copilots, onToggleFavorite, onStartChat }: UserViewPr
           />
         </div>
       </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Available Assistants */}
         <div className="lg:col-span-2 space-y-4">
