@@ -340,7 +340,7 @@ export function SampleScreen({
 }
 
 function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) => void; } = {}) {
-  const agents = [
+  const [agents, setAgents] = useState([
     { 
       id: 1, 
       name: "SEO Writer", 
@@ -413,11 +413,21 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       knowledgeBase: "Support Documentation",
       lastActive: "2 hours ago"
     }
-  ];
+  ]);
 
   const totalAgents = agents.length;
   const activeAgents = agents.filter(agent => agent.status === 'Active').length;
   const totalRequests = agents.reduce((sum, agent) => sum + agent.requests, 0);
+
+  const toggleAgentStatus = (agentId: number) => {
+    setAgents(prevAgents => 
+      prevAgents.map(agent => 
+        agent.id === agentId 
+          ? { ...agent, status: agent.status === 'Active' ? 'Inactive' : 'Active' }
+          : agent
+      )
+    );
+  };
 
   return (
     <div className="space-y-6">
@@ -473,9 +483,16 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                 {getAgentIcon(agent.name)}
                 <div className="flex-1 min-w-0">
                   <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{agent.name}</h3>
-                  <Badge variant={agent.status === 'Active' ? 'default' : 'secondary'} className="text-xs mb-2">
+                  <button
+                    onClick={() => toggleAgentStatus(agent.id)}
+                    className={`text-xs px-2 py-1 rounded-md font-medium transition-colors mb-2 ${
+                      agent.status === 'Active' 
+                        ? 'bg-[#008062] text-white hover:bg-[#00d2a0]' 
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    }`}
+                  >
                     {agent.status}
-                  </Badge>
+                  </button>
                 </div>
               </div>
             </CardHeader>
