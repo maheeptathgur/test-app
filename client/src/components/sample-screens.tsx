@@ -37,6 +37,9 @@ interface SampleScreenProps {
   onClearConfigureTool?: () => void;
   configureWorkflow?: {id: string, name: string} | null;
   onClearConfigureWorkflow?: () => void;
+  testAgent?: {id: string, name: string} | null;
+  onClearTestAgent?: () => void;
+  onSetTestAgent?: (agent: any) => void;
 }
 
 export function SampleScreen({ 
@@ -46,21 +49,30 @@ export function SampleScreen({
   configureTool: externalConfigureTool,
   onClearConfigureTool,
   configureWorkflow: externalConfigureWorkflow,
-  onClearConfigureWorkflow 
+  onClearConfigureWorkflow,
+  testAgent: externalTestAgent,
+  onClearTestAgent,
+  onSetTestAgent
 }: SampleScreenProps) {
   const [localConfigureAgent, setLocalConfigureAgent] = useState<any>(null);
-  const [testAgent, setTestAgent] = useState<any>(null);
+  const [localTestAgent, setLocalTestAgent] = useState<any>(null);
   const [editWorkflow, setEditWorkflow] = useState<string | undefined>(undefined);
   const [localConfigureTool, setLocalConfigureTool] = useState<any>(null);
   const [showConnectNewTool, setShowConnectNewTool] = useState(false);
   const [showBrowseIntegrations, setShowBrowseIntegrations] = useState(false);
   const [showAddWorkspace, setShowAddWorkspace] = useState(false);
 
+  // Use external testAgent if provided, otherwise use local state
+  const testAgent = externalTestAgent || localTestAgent;
+  const handleSetTestAgent = externalTestAgent ? 
+    (agent: any) => { /* External test agent is managed by parent */ } : 
+    setLocalTestAgent;
+
   // Clear local state when section changes or when external clear functions are triggered
   useEffect(() => {
     // Clear all local configuration states when section changes
     setLocalConfigureAgent(null);
-    setTestAgent(null);
+    setLocalTestAgent(null);
     setEditWorkflow(undefined);
     setLocalConfigureTool(null);
     setShowConnectNewTool(false);
@@ -72,9 +84,14 @@ export function SampleScreen({
   useEffect(() => {
     if (onClearConfigureAgent) {
       setLocalConfigureAgent(null);
-      setTestAgent(null);
     }
   }, [onClearConfigureAgent]);
+
+  useEffect(() => {
+    if (onClearTestAgent) {
+      onClearTestAgent();
+    }
+  }, [onClearTestAgent]);
 
   useEffect(() => {
     if (onClearConfigureTool) {
@@ -93,12 +110,20 @@ export function SampleScreen({
   };
 
   const handleAgentTest = (agent: any) => {
-    setTestAgent(agent);
+    if (onSetTestAgent) {
+      onSetTestAgent(agent);
+    } else {
+      setLocalTestAgent(agent);
+    }
   };
 
   const handleBackToAgents = () => {
     setLocalConfigureAgent(null);
-    setTestAgent(null);
+    if (externalTestAgent !== undefined && onClearTestAgent) {
+      onClearTestAgent();
+    } else {
+      setLocalTestAgent(null);
+    }
     onClearConfigureAgent?.();
   };
 

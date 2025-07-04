@@ -590,6 +590,7 @@ export default function Dashboard() {
   const [configureAgent, setConfigureAgent] = useState<{id: string, name: string} | null>(null);
   const [configureTool, setConfigureTool] = useState<{id: string, name: string} | null>(null);
   const [configureWorkflow, setConfigureWorkflow] = useState<{id: string, name: string} | null>(null);
+  const [testAgent, setTestAgent] = useState<{id: string, name: string} | null>(null);
   
   // State for editing conversation titles
   const [editingConversationId, setEditingConversationId] = useState<string | null>(null);
@@ -1090,6 +1091,9 @@ export default function Dashboard() {
             section="agents" 
             configureAgent={configureAgent}
             onClearConfigureAgent={() => setConfigureAgent(null)}
+            testAgent={testAgent}
+            onClearTestAgent={() => setTestAgent(null)}
+            onSetTestAgent={(agent) => setTestAgent(agent)}
           />,
         };
       case 'tools':
@@ -1912,11 +1916,12 @@ export default function Dashboard() {
                 configureAgent,
                 configureTool,
                 configureWorkflow,
+                testAgent,
                 shouldShow: activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-                  !configureAgent && !configureTool && !configureWorkflow
+                  !configureAgent && !configureTool && !configureWorkflow && !testAgent
               });
               return activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-                !configureAgent && !configureTool && !configureWorkflow;
+                !configureAgent && !configureTool && !configureWorkflow && !testAgent;
             })() && (
               <div className="mb-8">
                 <div className="flex items-center justify-between">
