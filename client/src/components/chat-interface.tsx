@@ -1106,19 +1106,19 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       )}
                       
                       {/* Conversation Starters */}
-                      <div className="space-y-2">
-                        <h3 className="text-base font-medium text-gray-900">Quick prompts to get started</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-start">
+                      <div className="space-y-1">
+                        <h4 className="text-sm font-medium text-gray-900">Quick prompts</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-1 items-start">
                           {getConversationStarters(copilot.name).map((starter, index) => (
                             <button
                               key={index}
                               onClick={() => handleStarterClick(starter)}
-                              className="p-2 text-left bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-md transition-colors group text-xs h-full flex flex-col"
+                              className="px-2 py-1.5 text-left bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded text-xs transition-colors group leading-tight"
                             >
-                              <div className="flex items-start gap-2 flex-1">
+                              <div className="flex items-start gap-1.5">
                                 <MessageSquare className="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0" />
                                 <span 
-                                  className="text-gray-700 group-hover:text-gray-900 leading-tight flex-1"
+                                  className="text-gray-700 group-hover:text-gray-900 flex-1"
                                   dangerouslySetInnerHTML={{ 
                                     __html: formatMarkdown(starter)
                                   }}
@@ -1127,10 +1127,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             </button>
                           ))}
                         </div>
-                      </div>
-                      
-                      <div className="pt-4">
-                        <p className="text-gray-500">Or start typing below to begin our conversation.</p>
+                        <p className="text-xs text-gray-500 mt-2">Or start typing below to begin our conversation.</p>
                       </div>
                     </div>
                   </div>
