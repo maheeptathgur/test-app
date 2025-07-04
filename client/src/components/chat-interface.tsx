@@ -1131,10 +1131,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(tool.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 truncate tool-card-text">{tool.name}</div>
+                                          <div className="font-medium text-gray-900 truncate !text-sm">{tool.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className="text-gray-600 truncate tool-card-text">
+                                        <div className="text-gray-600 truncate !text-sm">
                                           {tool.description || 'Integration tool'}
                                         </div>
                                         {isExpanded && (
