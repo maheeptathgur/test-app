@@ -1094,10 +1094,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(agent.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 truncate text-[14px]">{agent.name}</div>
+                                          <div className="font-medium text-gray-900 truncate text-base">{agent.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className="text-gray-600 truncate text-[14px]">
+                                        <div className="text-gray-600 truncate text-base">
                                           {agent.description || 'Specialized assistant'}
                                         </div>
                                         {isExpanded && (
@@ -1131,10 +1131,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(tool.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 truncate text-[14px]">{tool.name}</div>
+                                          <div className="font-medium text-gray-900 truncate text-base">{tool.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className="text-gray-600 truncate text-[14px]">
+                                        <div className="text-gray-600 truncate text-base">
                                           {tool.description || 'Integration tool'}
                                         </div>
                                         {isExpanded && (
@@ -1168,10 +1168,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(workflow.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 text-sm truncate">{workflow.name}</div>
+                                          <div className="font-medium text-gray-900 text-base truncate">{workflow.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className={`text-sm text-gray-600 leading-tight ${isExpanded ? '' : 'truncate'}`}>
+                                        <div className={`text-base text-gray-600 leading-tight ${isExpanded ? '' : 'truncate'}`}>
                                           {workflow.description || 'Automated workflow'}
                                         </div>
                                         {isExpanded && (
