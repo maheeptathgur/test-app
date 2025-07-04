@@ -454,15 +454,27 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
         
         {/* Progress Steps */}
         <div className="mt-6">
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-4 relative">
+            {/* Connecting lines */}
+            <div className="absolute top-4 left-0 right-0 flex items-center justify-between px-4">
+              {steps.slice(0, -1).map((_, index) => (
+                <div key={index} className="flex-1 flex justify-end">
+                  <div className={`h-0.5 w-full ${
+                    index < currentStep - 1 ? 'bg-green-500' : 'bg-gray-300'
+                  }`} />
+                </div>
+              ))}
+            </div>
+            
+            {/* Step circles and labels */}
             {steps.map((step, index) => (
-              <div key={step.id} className="flex flex-col items-center">
+              <div key={step.id} className="flex flex-col items-center relative z-10">
                 <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 text-sm font-medium ${
                   step.id === currentStep 
                     ? 'bg-[#008062] border-[#008062] text-white'
                     : step.isCompleted 
                     ? 'bg-green-100 border-green-500 text-green-700'
-                    : 'bg-gray-100 border-gray-300 text-gray-500'
+                    : 'bg-white border-gray-300 text-gray-500'
                 }`}>
                   {step.isCompleted && step.id !== currentStep ? <Check className="w-4 h-4" /> : step.id}
                 </div>
@@ -480,9 +492,6 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               </div>
             ))}
           </div>
-          
-          {/* Progress Bar */}
-          <Progress value={(currentStep / 6) * 100} className="w-full" />
         </div>
       </div>
       
