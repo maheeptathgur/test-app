@@ -1091,13 +1091,7 @@ export default function Dashboard() {
             section="agents" 
             configureAgent={configureAgent}
             onClearConfigureAgent={() => setConfigureAgent(null)}
-            testAgent={testAgent}
-            onClearTestAgent={() => setTestAgent(null)}
-            onSetTestAgent={(agent) => setTestAgent(agent)}
-            onConfigureAgent={(agent) => {
-              console.log('Setting configureAgent:', agent);
-              setConfigureAgent(agent);
-            }}
+            onConfigureAgent={(agent) => setConfigureAgent(agent)}
           />,
         };
       case 'tools':
@@ -1914,12 +1908,8 @@ export default function Dashboard() {
         (
           <div className="h-full p-8 overflow-y-auto">
             {/* Top Bar - Hidden when in user-view, settings modes, or configuration screens */}
-            {(() => {
-              const shouldShowHeader = activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-                !configureAgent && !configureTool && !configureWorkflow && !testAgent;
-              console.log('Header visibility check:', { activeSection, configureAgent, configureTool, configureWorkflow, testAgent, shouldShowHeader });
-              return shouldShowHeader;
-            })() && (
+            {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
+              !configureAgent && !configureTool && !configureWorkflow && !testAgent && (
               <div className="mb-8">
                 <div className="flex items-center justify-between">
                   <div>

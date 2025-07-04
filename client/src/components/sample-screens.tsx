@@ -38,9 +38,7 @@ interface SampleScreenProps {
   onClearConfigureTool?: () => void;
   configureWorkflow?: {id: string, name: string} | null;
   onClearConfigureWorkflow?: () => void;
-  testAgent?: {id: string, name: string} | null;
-  onClearTestAgent?: () => void;
-  onSetTestAgent?: (agent: any) => void;
+
 }
 
 export function SampleScreen({ 
@@ -51,30 +49,19 @@ export function SampleScreen({
   configureTool: externalConfigureTool,
   onClearConfigureTool,
   configureWorkflow: externalConfigureWorkflow,
-  onClearConfigureWorkflow,
-  testAgent: externalTestAgent,
-  onClearTestAgent,
-  onSetTestAgent
+  onClearConfigureWorkflow
 }: SampleScreenProps) {
   const [localConfigureAgent, setLocalConfigureAgent] = useState<any>(null);
-  const [localTestAgent, setLocalTestAgent] = useState<any>(null);
   const [editWorkflow, setEditWorkflow] = useState<string | undefined>(undefined);
   const [localConfigureTool, setLocalConfigureTool] = useState<any>(null);
   const [showConnectNewTool, setShowConnectNewTool] = useState(false);
   const [showBrowseIntegrations, setShowBrowseIntegrations] = useState(false);
   const [showAddWorkspace, setShowAddWorkspace] = useState(false);
 
-  // Use external testAgent if provided, otherwise use local state
-  const testAgent = externalTestAgent || localTestAgent;
-  const handleSetTestAgent = externalTestAgent ? 
-    (agent: any) => { /* External test agent is managed by parent */ } : 
-    setLocalTestAgent;
-
   // Clear local state when section changes or when external clear functions are triggered
   useEffect(() => {
     // Clear all local configuration states when section changes
     setLocalConfigureAgent(null);
-    setLocalTestAgent(null);
     setEditWorkflow(undefined);
     setLocalConfigureTool(null);
     setShowConnectNewTool(false);
@@ -88,12 +75,6 @@ export function SampleScreen({
       setLocalConfigureAgent(null);
     }
   }, [onClearConfigureAgent]);
-
-  useEffect(() => {
-    if (onClearTestAgent) {
-      onClearTestAgent();
-    }
-  }, [onClearTestAgent]);
 
   useEffect(() => {
     if (onClearConfigureTool) {
@@ -115,21 +96,8 @@ export function SampleScreen({
     }
   };
 
-  const handleAgentTest = (agent: any) => {
-    if (onSetTestAgent) {
-      onSetTestAgent(agent);
-    } else {
-      setLocalTestAgent(agent);
-    }
-  };
-
   const handleBackToAgents = () => {
     setLocalConfigureAgent(null);
-    if (externalTestAgent !== undefined && onClearTestAgent) {
-      onClearTestAgent();
-    } else {
-      setLocalTestAgent(null);
-    }
     onClearConfigureAgent?.();
   };
 
@@ -168,9 +136,7 @@ export function SampleScreen({
           return <AgentConfigureScreen agent={agentToConfig} onBack={handleBackToAgents} />;
         }
 
-        if (testAgent) {
-          return <AgentTestScreen agent={testAgent} onBack={handleBackToAgents} />;
-        }
+
 
         if (workflowToConfig) {
           return <WorkflowEditor workflowId={workflowToConfig.id} onBack={handleBackToWorkflows} />;
@@ -182,7 +148,7 @@ export function SampleScreen({
 
         switch (section) {
           case 'agents':
-            return <AgentsScreen onAgentConfigure={handleAgentConfigure} onAgentTest={handleAgentTest} />;
+            return <AgentsScreen onAgentConfigure={handleAgentConfigure} />;
           case 'tools':
             return <ToolsScreen 
               onToolConfigure={handleToolConfigure} 
@@ -373,7 +339,7 @@ export function SampleScreen({
   );
 }
 
-function AgentsScreen({ onAgentConfigure, onAgentTest }: { onAgentConfigure?: (agent: any) => void; onAgentTest?: (agent: any) => void; } = {}) {
+function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) => void; } = {}) {
   const agents = [
     { 
       id: 1, 
@@ -528,18 +494,10 @@ function AgentsScreen({ onAgentConfigure, onAgentTest }: { onAgentConfigure?: (a
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="flex-1"
+                      className="w-full"
                       onClick={() => onAgentConfigure?.(agent)}
                     >
                       Configure
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="flex-1"
-                      onClick={() => onAgentTest?.(agent)}
-                    >
-                      Test
                     </Button>
                   </div>
                 </div>
