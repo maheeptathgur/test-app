@@ -55,9 +55,10 @@ interface CopilotCardProps {
   onDuplicate: (copilot: CopilotData) => void;
   onArchive: (copilot: CopilotData) => void;
   onDelete: (copilot: CopilotData) => void;
+  onToggleStatus: (copilot: CopilotData) => void;
 }
 
-export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchive, onDelete }: CopilotCardProps) {
+export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchive, onDelete, onToggleStatus }: CopilotCardProps) {
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       {/* Card content */}
@@ -88,7 +89,11 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
         </div>
         <div className="mb-4">
           <h3 className="font-semibold text-card-foreground mb-2">{copilot.name}</h3>
-          <Badge variant={copilot.status === 'active' ? 'default' : 'secondary'} className="text-xs capitalize">
+          <Badge 
+            variant={copilot.status === 'active' ? 'default' : 'secondary'} 
+            className="text-xs capitalize cursor-pointer hover:shadow-md transition-all"
+            onClick={() => onToggleStatus(copilot)}
+          >
             {copilot.status}
           </Badge>
         </div>
