@@ -1067,7 +1067,12 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             >
                               <div className="flex items-start gap-1.5">
                                 <MessageSquare className="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0" />
-                                <span className="text-gray-700 group-hover:text-gray-900 leading-tight">{starter}</span>
+                                <span 
+                                  className="text-gray-700 group-hover:text-gray-900 leading-tight"
+                                  dangerouslySetInnerHTML={{ 
+                                    __html: formatMarkdown(starter)
+                                  }}
+                                />
                               </div>
                             </button>
                           ))}
