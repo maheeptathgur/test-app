@@ -1038,7 +1038,18 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       {copilot.components && copilot.components.length > 0 && (
                         <div className="space-y-3">
                           <h3 className="text-lg font-medium text-gray-900">Available Capabilities</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                          <div className={`grid grid-cols-1 gap-3 ${
+                            (() => {
+                              const hasAgents = copilot.components.filter(c => c.type === 'agent').length > 0;
+                              const hasTools = copilot.components.filter(c => c.type === 'tool').length > 0;
+                              const hasWorkflows = copilot.components.filter(c => c.type === 'workflow').length > 0;
+                              const columnCount = [hasAgents, hasTools, hasWorkflows].filter(Boolean).length;
+                              
+                              if (columnCount === 3) return 'md:grid-cols-3';
+                              if (columnCount === 2) return 'md:grid-cols-2 md:justify-items-center md:max-w-2xl md:mx-auto';
+                              return 'md:grid-cols-1 md:max-w-sm md:mx-auto';
+                            })()
+                          }`}>
                             {/* Agents Column */}
                             {copilot.components.filter(c => c.type === 'agent').length > 0 && (
                               <div className="space-y-2">
