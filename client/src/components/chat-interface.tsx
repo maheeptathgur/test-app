@@ -15,45 +15,45 @@ const getConversationStarters = (copilotName: string): string[] => {
   switch (copilotName) {
     case 'Campaign Manager':
       return [
-        'Help me create a multi-channel marketing campaign for a new product launch',
-        'Analyze the performance of my recent email campaign and suggest improvements',
-        'Set up automated social media posts for the next month',
-        'Create a customer segmentation strategy for better targeting'
+        'Create a product launch campaign using @HubSpot and @Mailchimp',
+        'Analyze email performance with @Google Analytics',
+        'Set up automated posts with @Social Media Scheduler',
+        'Build customer segments using @Customer Data Platform'
       ];
     case 'Content Assistant':
       return [
-        'Write a blog post about industry trends in my field',
-        'Create social media captions for my latest product announcement',
-        'Help me repurpose my existing content for different platforms',
-        'Generate ideas for my next content calendar'
+        'Write a blog post with @Content Generator',
+        'Create social captions using @Brand Voice Assistant',
+        'Repurpose content across platforms with @Content Optimizer',
+        'Plan next month\'s content calendar'
       ];
     case 'Social Analyst':
       return [
-        'Analyze my social media engagement trends from the past quarter',
-        'Compare my brand performance against key competitors',
-        'Create a report on my audience demographics and behavior',
-        'Identify the best times to post for maximum engagement'
+        'Analyze engagement trends with @Social Analytics',
+        'Compare competitor performance using @Competitor Tracker',
+        'Generate audience report with @Demographic Analyzer',
+        'Find optimal posting times with @Engagement Optimizer'
       ];
     case 'Customer Support':
       return [
-        'Help me resolve a complex customer complaint about billing',
-        'Create response templates for common support inquiries',
-        'Analyze recent support tickets to identify trending issues',
-        'Set up an automated escalation workflow for urgent cases'
+        'Resolve billing issue using @Payment Processor and @CRM',
+        'Create response templates with @Knowledge Base',
+        'Analyze ticket trends using @Support Analytics',
+        'Set up escalation with @Workflow Automation'
       ];
     case 'Resume Assistant':
       return [
-        'Help me optimize my resume for a software engineering role',
-        'Create a compelling cover letter for my dream job',
-        'Review my LinkedIn profile and suggest improvements',
-        'Tailor my resume for a specific job posting'
+        'Optimize resume for tech role',
+        'Create compelling cover letter',
+        'Review LinkedIn profile',
+        'Tailor resume for job posting'
       ];
     default:
       return [
-        'What can you help me accomplish today?',
-        'Show me your key features and capabilities',
-        'Help me get started with a common task',
-        'What are the most popular ways people use you?'
+        'What can you help me accomplish?',
+        'Show me your capabilities',
+        'Help me get started',
+        'What do people use you for?'
       ];
   }
 };
@@ -1052,18 +1052,18 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       )}
                       
                       {/* Conversation Starters */}
-                      <div className="space-y-3">
-                        <h3 className="text-lg font-medium text-gray-900">Get started with these prompts</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div className="space-y-2">
+                        <h3 className="text-base font-medium text-gray-900">Quick prompts to get started</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                           {getConversationStarters(copilot.name).map((starter, index) => (
                             <button
                               key={index}
                               onClick={() => handleStarterClick(starter)}
-                              className="p-3 text-left bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg transition-colors group"
+                              className="p-2 text-left bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-md transition-colors group text-xs"
                             >
-                              <div className="flex items-start gap-2">
-                                <MessageSquare className="w-4 h-4 text-gray-400 mt-0.5 flex-shrink-0" />
-                                <span className="text-sm text-gray-700 group-hover:text-gray-900">{starter}</span>
+                              <div className="flex items-start gap-1.5">
+                                <MessageSquare className="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0" />
+                                <span className="text-gray-700 group-hover:text-gray-900 leading-tight">{starter}</span>
                               </div>
                             </button>
                           ))}
