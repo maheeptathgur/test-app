@@ -1152,24 +1152,24 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       <div className="space-y-2">
                         <h4 className="text-sm font-medium text-gray-900">Quick prompts</h4>
                         <div className="relative group">
-                          {/* Left Arrow Bar */}
+                          {/* Left Arrow */}
                           {canScrollLeft && (
-                            <div
+                            <button
                               onClick={() => scrollCarousel('left')}
-                              className="absolute left-0 top-0 bottom-0 w-12 z-10 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800/80 flex items-center justify-center"
+                              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 h-8 w-8 rounded-md bg-gray-800/80 hover:bg-gray-800 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center"
                             >
-                              <ChevronLeft className="h-5 w-5 text-white" />
-                            </div>
+                              <ChevronLeft className="h-4 w-4 text-white" />
+                            </button>
                           )}
                           
-                          {/* Right Arrow Bar */}
+                          {/* Right Arrow */}
                           {canScrollRight && (
-                            <div
+                            <button
                               onClick={() => scrollCarousel('right')}
-                              className="absolute right-0 top-0 bottom-0 w-12 z-10 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800/80 flex items-center justify-center"
+                              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 h-8 w-8 rounded-md bg-gray-800/80 hover:bg-gray-800 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center"
                             >
-                              <ChevronRight className="h-5 w-5 text-white" />
-                            </div>
+                              <ChevronRight className="h-4 w-4 text-white" />
+                            </button>
                           )}
                           
                           <div 
