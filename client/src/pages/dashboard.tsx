@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3 } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3, MapPin } from "lucide-react";
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import knolliIcon from "@assets/favicon-256_1751332849559.png";
@@ -592,6 +592,9 @@ export default function Dashboard() {
   // State for editing conversation titles
   const [editingConversationId, setEditingConversationId] = useState<string | null>(null);
   const [editingConversationTitle, setEditingConversationTitle] = useState('');
+  
+  // State for pinned conversations
+  const [pinnedConversations, setPinnedConversations] = useState<Set<string>>(new Set());
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
@@ -785,6 +788,20 @@ export default function Dashboard() {
   const handleCancelEditConversationTitle = () => {
     setEditingConversationId(null);
     setEditingConversationTitle('');
+  };
+
+  const handleTogglePin = (conversationId: string) => {
+    setPinnedConversations(prev => {
+      const newPinned = new Set(prev);
+      if (newPinned.has(conversationId)) {
+        newPinned.delete(conversationId);
+        showNotification('Conversation unpinned');
+      } else {
+        newPinned.add(conversationId);
+        showNotification('Conversation pinned');
+      }
+      return newPinned;
+    });
   };
 
   const handleLoadConversation = (conversation: any) => {
@@ -1485,14 +1502,25 @@ export default function Dashboard() {
               )}
               {!sidebarCollapsed && (
                 <div className="space-y-1">
-                  {conversations.filter(conversation => conversation.copilot === chatCopilot?.name).map((conversation) => (
+                  {conversations
+                    .filter(conversation => conversation.copilot === chatCopilot?.name)
+                    .sort((a, b) => {
+                      // Pin priority: pinned conversations first
+                      const aPinned = pinnedConversations.has(a.id);
+                      const bPinned = pinnedConversations.has(b.id);
+                      if (aPinned && !bPinned) return -1;
+                      if (!aPinned && bPinned) return 1;
+                      return 0; // Keep original order for same pin status
+                    })
+                    .map((conversation) => (
                     <div
                       key={conversation.id}
                       className="p-2 rounded-lg transition-all group cursor-pointer bg-white/50 hover:bg-sidebar-accent hover:text-sidebar-primary"
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
-                      <div className="flex items-center justify-between gap-1">
-                        <div className="flex-1 min-w-0">
+                      <div className="space-y-1">
+                        {/* Title and Pin Row */}
+                        <div className="flex items-start gap-1">
                           {editingConversationId === conversation.id ? (
                             <Input
                               value={editingConversationTitle}
@@ -1505,74 +1533,99 @@ export default function Dashboard() {
                                 }
                               }}
                               onBlur={() => handleSaveConversationTitle(conversation.id)}
-                              className="h-6 text-sm px-2 py-0"
+                              className="h-6 text-sm px-2 py-0 flex-1"
                               autoFocus
                               onClick={(e) => e.stopPropagation()}
                             />
                           ) : (
-                            <div className="space-y-0.5">
-                              <h4 className="text-sm font-medium truncate leading-tight">{conversation.title}</h4>
-                              <span className="text-xs text-muted-foreground leading-tight">{conversation.timestamp}</span>
-                            </div>
+                            <h4 className="text-sm font-medium leading-tight flex-1 min-w-0">
+                              {pinnedConversations.has(conversation.id) && (
+                                <MapPin className="w-3 h-3 text-[#008062] inline mr-1 flex-shrink-0" />
+                              )}
+                              {conversation.title}
+                            </h4>
                           )}
+                          
+                          {/* Action buttons - always visible for pinned conversations, on hover for others */}
+                          <div className={`flex items-center gap-1 transition-opacity ${pinnedConversations.has(conversation.id) ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+                            {editingConversationId === conversation.id ? (
+                              <>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleSaveConversationTitle(conversation.id);
+                                  }}
+                                  className="h-5 w-5 p-0 text-green-600 hover:text-green-700 hover:bg-green-50 flex-shrink-0"
+                                  title="Save title"
+                                >
+                                  <Check className="w-3 h-3" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleCancelEditConversationTitle();
+                                  }}
+                                  className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50 flex-shrink-0"
+                                  title="Cancel"
+                                >
+                                  <X className="w-3 h-3" />
+                                </Button>
+                              </>
+                            ) : (
+                              <>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleTogglePin(conversation.id);
+                                  }}
+                                  className={`h-5 w-5 p-0 flex-shrink-0 ${
+                                    pinnedConversations.has(conversation.id)
+                                      ? 'text-[#008062] hover:text-[#00d2a0] hover:bg-green-50'
+                                      : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+                                  }`}
+                                  title={pinnedConversations.has(conversation.id) ? "Unpin conversation" : "Pin conversation"}
+                                >
+                                  <MapPin className="w-3 h-3" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleEditConversationTitle(conversation.id, conversation.title);
+                                  }}
+                                  className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50 flex-shrink-0"
+                                  title="Edit title"
+                                >
+                                  <Edit3 className="w-3 h-3" />
+                                </Button>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleDeleteConversation(conversation.id);
+                                  }}
+                                  className="h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50 flex-shrink-0"
+                                  title="Delete conversation"
+                                >
+                                  <Trash2 className="w-3 h-3" />
+                                </Button>
+                              </>
+                            )}
+                          </div>
                         </div>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          {editingConversationId === conversation.id ? (
-                            <>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleSaveConversationTitle(conversation.id);
-                                }}
-                                className="h-5 w-5 p-0 text-green-600 hover:text-green-700 hover:bg-green-50"
-                                title="Save title"
-                              >
-                                <Check className="w-3 h-3" />
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleCancelEditConversationTitle();
-                                }}
-                                className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
-                                title="Cancel"
-                              >
-                                <X className="w-3 h-3" />
-                              </Button>
-                            </>
-                          ) : (
-                            <>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleEditConversationTitle(conversation.id, conversation.title);
-                                }}
-                                className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
-                                title="Edit title"
-                              >
-                                <Edit3 className="w-3 h-3" />
-                              </Button>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleDeleteConversation(conversation.id);
-                                }}
-                                className="h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
-                                title="Delete conversation"
-                              >
-                                <Trash2 className="w-3 h-3" />
-                              </Button>
-                            </>
-                          )}
-                        </div>
+                        
+                        {/* Timestamp Row */}
+                        {editingConversationId !== conversation.id && (
+                          <span className="text-xs text-muted-foreground leading-tight block">{conversation.timestamp}</span>
+                        )}
                       </div>
                     </div>
                   ))}
