@@ -17,7 +17,7 @@ const getConversationStarters = (copilotName: string): string[] => {
     case 'Campaign Manager':
       return [
         'Create a product launch campaign using @HubSpot and @Mailchimp',
-        'Show me my universal messaging center',
+        'Open my @inbox for all messages',
         'Analyze email performance with @Media Planner',
         'Set up automated posts using @Campaign Planning',
         'Build customer segments using @HubSpot'
@@ -306,7 +306,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
   const formatMarkdown = (text: string): string => {
     let formattedText = text;
     
-    // Handle @mentions first to preserve them
+    // Handle @inbox first
+    formattedText = formattedText.replace(/@inbox\b/gi, '<span class="inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium align-baseline bg-green-100 text-green-800 border border-green-200">inbox</span>');
+    
+    // Handle @mentions for components
     const componentNames = copilot?.components?.map(c => c.name) || [];
     const escapedNames = componentNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).sort((a, b) => b.length - a.length);
     
@@ -568,12 +571,22 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       // Only show if we haven't typed a space after @
       if (!textAfterAt.includes(' ') && textAfterAt.length >= 0) {
         const searchTerm = textAfterAt.toLowerCase();
-        const suggestions = copilot?.components?.filter(component => 
+        
+        // Include components from copilot
+        const componentSuggestions = copilot?.components?.filter(component => 
           component.name.toLowerCase().includes(searchTerm)
         ) || [];
         
-        if (suggestions.length > 0) {
-          setHandleSuggestions(suggestions);
+        // Add special handlers like @inbox
+        const specialHandlers = [];
+        if ('inbox'.includes(searchTerm)) {
+          specialHandlers.push({ name: 'inbox', type: 'inbox' });
+        }
+        
+        const allSuggestions = [...componentSuggestions, ...specialHandlers];
+        
+        if (allSuggestions.length > 0) {
+          setHandleSuggestions(allSuggestions);
           setHandleTriggerPosition(lastAtIndex);
           setShowHandleDropdown(true);
           setSelectedHandleIndex(0);
@@ -713,17 +726,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
     // Use inputContent (which preserves @mentions) instead of inputValue
     const messageContent = inputContent || inputValue;
 
-    // Check for messaging-related keywords
-    const messagingKeywords = [
-      'messaging', 'messages', 'email', 'gmail', 'linkedin', 'whatsapp', 
-      'instagram', 'facebook', 'twitter', 'slack', 'telegram', 'discord',
-      'unified inbox', 'universal messaging', 'message center', 'communications',
-      'check messages', 'view messages', 'message app', 'messaging hub'
-    ];
-    
-    const shouldShowMessagingApp = messagingKeywords.some(keyword => 
-      messageContent.toLowerCase().includes(keyword.toLowerCase())
-    );
+    // Check for @inbox handler
+    const shouldShowMessagingApp = messageContent.toLowerCase().includes('@inbox');
 
     const userMessage: ChatMessage = {
       id: Date.now().toString(),
@@ -741,7 +745,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       setTimeout(() => {
         const botMessage: ChatMessage = {
           id: (Date.now() + 1).toString(),
-          content: `I'll open your universal messaging center where you can view and manage all your messages from Gmail, LinkedIn, WhatsApp, Instagram, Facebook, Twitter, Slack, and more platforms in one place.`,
+          content: `Opening your @inbox - your universal messaging center where you can view and manage all your messages from Gmail, LinkedIn, WhatsApp, Instagram, Facebook, Twitter, Slack, and more platforms in one place.`,
           sender: 'bot',
           timestamp: new Date().toISOString(),
         };
@@ -1403,7 +1407,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           <X className="w-4 h-4" />
                         </Button>
                       </div>
-                      <div className="h-96">
+                      <div className="h-[600px]">
                         <UniversalMessagingApp />
                       </div>
                     </div>
@@ -1565,6 +1569,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             {suggestion.type === 'agent' && <Bot className="w-4 h-4 text-purple-600" />}
                             {suggestion.type === 'tool' && <Wrench className="w-4 h-4 text-blue-600" />}
                             {suggestion.type === 'workflow' && <Workflow className="w-4 h-4 text-amber-600" />}
+                            {suggestion.type === 'inbox' && <MessageSquare className="w-4 h-4 text-green-600" />}
                             <div className="flex-1">
                               <div className="font-medium text-sm">@{suggestion.name}</div>
                               <div className="text-xs text-gray-500 capitalize">{suggestion.type}</div>
