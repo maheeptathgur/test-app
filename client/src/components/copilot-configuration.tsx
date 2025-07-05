@@ -588,7 +588,6 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
           Close
         </Button>
       </div>
-
       {/* Content */}
       <div className="flex-1 overflow-hidden">
         <div className="h-full flex flex-col">
@@ -627,7 +626,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
           <div className="flex-1 overflow-y-auto">
             {activeTab === "general" && (
-            <div className="p-6 h-full">
+            <div className="p-6 h-full pt-[0px] pb-[0px]">
               <Card className="w-full">
                 <CardContent className="p-6 space-y-8">
                 {/* Copilot Configuration */}
@@ -2166,7 +2165,6 @@ function MyComponent() {
           </div>
         </div>
       </div>
-
       {/* Footer */}
       <div className="border-t bg-muted/50 p-6">
         <div className="max-w-4xl mx-auto flex justify-end gap-3">
@@ -2179,7 +2177,6 @@ function MyComponent() {
           </Button>
         </div>
       </div>
-
       {/* AI Document Suggestions Modal */}
       <Dialog open={suggestDocsOpen} onOpenChange={setSuggestDocsOpen}>
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
@@ -2239,7 +2236,6 @@ function MyComponent() {
           </div>
         </DialogContent>
       </Dialog>
-
       {/* Component Selection Modal */}
       <Dialog open={componentModalOpen} onOpenChange={setComponentModalOpen}>
         <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
@@ -2385,7 +2381,6 @@ function MyComponent() {
           </div>
         </DialogContent>
       </Dialog>
-
       {/* Add Field Modal */}
       <Dialog open={addFieldModalOpen} onOpenChange={setAddFieldModalOpen}>
         <DialogContent className="max-w-md">
@@ -2465,7 +2460,6 @@ function MyComponent() {
           </div>
         </DialogContent>
       </Dialog>
-
       {/* Edit Field Modal */}
       <Dialog open={editFieldModalOpen} onOpenChange={setEditFieldModalOpen}>
         <DialogContent className="max-w-md">
@@ -2545,7 +2539,6 @@ function MyComponent() {
           </div>
         </DialogContent>
       </Dialog>
-
       {/* Delete Field Confirmation Modal */}
       <Dialog open={deleteFieldModalOpen} onOpenChange={setDeleteFieldModalOpen}>
         <DialogContent className="max-w-sm">
@@ -2574,7 +2567,6 @@ function MyComponent() {
           </div>
         </DialogContent>
       </Dialog>
-
       {/* Delete Document Confirmation Modal */}
       <Dialog open={deleteDocumentModalOpen} onOpenChange={setDeleteDocumentModalOpen}>
         <DialogContent className="max-w-sm">
@@ -2603,7 +2595,6 @@ function MyComponent() {
           </div>
         </DialogContent>
       </Dialog>
-
       {/* Add Document Modal */}
       <Dialog open={addDocumentModalOpen} onOpenChange={setAddDocumentModalOpen}>
         <DialogContent className="max-w-md">
@@ -2661,7 +2652,6 @@ function MyComponent() {
           </div>
         </DialogContent>
       </Dialog>
-
       {/* Add URL Modal */}
       <Dialog open={addUrlModalOpen} onOpenChange={setAddUrlModalOpen}>
         <DialogContent className="max-w-md">
@@ -2715,7 +2705,6 @@ function MyComponent() {
           </div>
         </DialogContent>
       </Dialog>
-
       {/* Create MD Modal */}
       <Dialog open={createMdModalOpen} onOpenChange={setCreateMdModalOpen}>
         <DialogContent className="max-w-4xl max-h-[90vh] flex flex-col">
