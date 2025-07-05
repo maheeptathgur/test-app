@@ -1127,6 +1127,79 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         <h2 className="font-semibold text-foreground text-[24px]">Advanced Settings</h2>
                         <p className="text-sm text-muted-foreground">Configure AI models and advanced features</p>
                       </div>
+                      
+                      {/* Configuration Toggles */}
+                      <div className="space-y-4 pb-6 border-b border-gray-200 mb-6">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">Discoverable</span>
+                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
+                              ?
+                            </button>
+                          </div>
+                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-gray-200">
+                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1" />
+                          </button>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">Document Pane</span>
+                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
+                              ?
+                            </button>
+                          </div>
+                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-gray-200">
+                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1" />
+                          </button>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">Admin Documents in sources</span>
+                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
+                              ?
+                            </button>
+                          </div>
+                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-gray-200">
+                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1" />
+                          </button>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">Featured</span>
+                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
+                              ?
+                            </button>
+                          </div>
+                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-gray-200">
+                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1" />
+                          </button>
+                        </div>
+                        
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium">Prompt required</span>
+                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
+                              ?
+                            </button>
+                          </div>
+                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-[#008062]">
+                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6" />
+                          </button>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">Prompt label</label>
+                          <Input 
+                            type="text" 
+                            placeholder="Enter prompt label..."
+                            className="w-full"
+                          />
+                        </div>
+                      </div>
+                      
                       <div className="space-y-4">
                         <div className="space-y-2">
                           <Label htmlFor="aiProvider">AI Provider</Label>
