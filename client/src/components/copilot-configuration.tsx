@@ -625,7 +625,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       {/* Content */}
       <div>
         {activeTab === "general" && (
-            <div className="p-6 h-full pt-[7px] pb-[7px]">
+            <div className="p-6 pt-[7px] pb-[7px]">
               <Card className="w-full">
                 <CardContent className="p-6 space-y-8">
                 {/* Copilot Configuration */}
@@ -1007,7 +1007,7 @@ function MyComponent() {
             )}
 
             {activeTab === "components" && (
-            <div className="p-0 m-0 h-full">
+            <div className="p-0 m-0">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -1339,7 +1339,7 @@ function MyComponent() {
             )}
 
             {activeTab === "knowledge" && (
-            <div className="p-0 m-0 h-full">
+            <div className="p-0 m-0">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
@@ -1608,7 +1608,7 @@ function MyComponent() {
             )}
 
             {activeTab === "user-docs" && !previewDocument && (
-            <div className="p-0 m-0 h-full">
+            <div className="p-0 m-0">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
                   <h2 className="text-lg font-semibold text-foreground mb-4">User Documents</h2>
@@ -1789,8 +1789,8 @@ function MyComponent() {
             )}
 
             {activeTab === "user-docs" && previewDocument && (
-            <div className="p-0 m-0 h-full">
-              <div className="max-w-6xl mx-auto p-6 h-full flex flex-col">
+            <div className="p-0 m-0">
+              <div className="max-w-6xl mx-auto p-6 flex flex-col">
                 {/* Preview Header */}
                 <div className="flex items-center justify-between mb-6 pb-4 border-b">
                   <div className="flex items-center gap-3">
@@ -2015,7 +2015,7 @@ function MyComponent() {
             )}
 
             {activeTab === "profile" && (
-            <div className="p-0 m-0 h-full">
+            <div className="p-0 m-0">
               <div className="max-w-4xl mx-auto p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
