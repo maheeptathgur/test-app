@@ -1005,8 +1005,8 @@ function MyComponent() {
               </Card>
               
               {/* Save Footer */}
-              <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 mt-8 -mx-6 -mb-6">
-                <div className="flex justify-end gap-3">
+              <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
+                <div className="flex justify-end gap-3 max-w-7xl mx-auto">
                   <Button variant="outline" onClick={onClose}>
                     Cancel
                   </Button>
