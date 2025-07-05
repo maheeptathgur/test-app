@@ -968,7 +968,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       {/* Content */}
       <div>
         {activeTab === "general" && (
-            <div className="p-6">
+            <div className="p-6 pb-24">
               <div className="grid grid-cols-3 gap-6">
                 {/* Copilot Configuration - 2/3 width */}
                 <div className="col-span-2">
@@ -1367,7 +1367,7 @@ function MyComponent() {
             )}
 
             {activeTab === "components" && (
-            <div className="p-6">
+            <div className="p-6 pb-24">
               <Card className="w-full">
                 <CardContent className="p-6 space-y-6">
                 <div>
@@ -1704,7 +1704,7 @@ function MyComponent() {
             )}
 
             {activeTab === "knowledge" && (
-            <div className="p-6">
+            <div className="p-6 pb-24">
               <Card className="w-full">
                 <CardContent className="p-6 space-y-6">
                 <div>
@@ -1977,7 +1977,7 @@ function MyComponent() {
             )}
 
             {activeTab === "user-docs" && !previewDocument && (
-            <div className="p-6">
+            <div className="p-6 pb-24">
               <Card className="w-full">
                 <CardContent className="p-6 space-y-6">
                 <div>
@@ -2389,7 +2389,7 @@ function MyComponent() {
             )}
 
             {activeTab === "profile" && (
-            <div className="p-6">
+            <div className="p-6 pb-24">
               <Card className="w-full">
                 <CardContent className="p-6 space-y-6">
                 <div>
