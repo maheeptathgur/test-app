@@ -22,7 +22,7 @@ export function WorkspaceSettings() {
   const [dataRetention, setDataRetention] = useState("90");
 
   return (
-    <div className="space-y-6 pb-24">
+    <div className={`space-y-6 ${(activeTab === "general" || activeTab === "security") ? "pb-24" : ""}`}>
       <div className="w-full">
         <nav className="flex space-x-8 border-b border-border">
           <button
@@ -365,17 +365,19 @@ export function WorkspaceSettings() {
         )}
       </div>
       
-      {/* Save Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
-        <div className="flex justify-end gap-3">
-          <Button variant="outline">
-            Cancel
-          </Button>
-          <Button className="bg-[#008062] hover:bg-[#006b54]">
-            Save Changes
-          </Button>
+      {/* Save Footer - Only show for General and Security tabs */}
+      {(activeTab === "general" || activeTab === "security") && (
+        <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
+          <div className="flex justify-end gap-3">
+            <Button variant="outline">
+              Cancel
+            </Button>
+            <Button className="bg-[#008062] hover:bg-[#006b54]">
+              Save Changes
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
