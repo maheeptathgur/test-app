@@ -98,8 +98,28 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
           {activeTab === "general" && (
             <Card>
               <CardHeader>
-                <CardTitle>General Settings</CardTitle>
-                <CardDescription>Basic configuration for {agent.name}</CardDescription>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>General Settings</CardTitle>
+                    <CardDescription>Basic configuration for {agent.name}</CardDescription>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm font-medium text-gray-600">
+                      {agent.status === "Active" ? "Active" : "Inactive"}
+                    </span>
+                    <button
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                        agent.status === "Active" ? 'bg-[#008062]' : 'bg-gray-200'
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                          agent.status === "Active" ? 'translate-x-6' : 'translate-x-1'
+                        }`}
+                      />
+                    </button>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
@@ -126,10 +146,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008062]"
                   />
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="active" defaultChecked={agent.status === "Active"} />
-                  <label htmlFor="active" className="text-sm font-medium">Agent is active</label>
-                </div>
+
 
                 {/* Quick Test Inputs Section */}
                 <div className="space-y-4 pt-6 border-t">
