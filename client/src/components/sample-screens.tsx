@@ -95,20 +95,7 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Sync Frequency</label>
-                    <Select defaultValue="real-time">
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="real-time">Real-time</SelectItem>
-                        <SelectItem value="5min">Every 5 minutes</SelectItem>
-                        <SelectItem value="15min">Every 15 minutes</SelectItem>
-                        <SelectItem value="1hour">Every hour</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  
                 </div>
               </CardContent>
             </Card>
