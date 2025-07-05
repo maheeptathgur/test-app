@@ -500,6 +500,7 @@ const navigationItems = [
   { id: 'tools', label: 'Tools', icon: Settings },
   { id: 'workflows', label: 'Workflows', icon: BarChart3 },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
+  { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
   { id: 'workspace-settings', label: 'Settings', icon: Settings },
   { id: 'user-view', label: 'User View', icon: User },
 ] as const;
@@ -1116,6 +1117,12 @@ export default function Dashboard() {
           title: 'Knowledge Base',
           subtitle: 'Manage knowledge articles and documentation for your copilots',
           content: <SampleScreen section="knowledge-base" />,
+        };
+      case 'subscriptions':
+        return {
+          title: 'Subscriptions',
+          subtitle: 'Manage your billing, plans, and subscription settings',
+          content: <SampleScreen section="subscriptions" />,
         };
 
 
