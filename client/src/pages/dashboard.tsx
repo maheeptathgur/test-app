@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3, Plus } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3, Plus, Eye } from "lucide-react";
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import knolliIcon from "@assets/favicon-256_1751332849559.png";
@@ -1881,50 +1881,74 @@ export default function Dashboard() {
           />
         ) : /* Regular Dashboard Content */
         (
-          <div className="h-full p-8 overflow-y-auto">
-            {/* Top Bar - Hidden when in user-view, settings modes, or configuration screens */}
-            {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-              !configureAgent && !configureTool && !configureWorkflow && !testAgent && (
-              <div className="mb-8">
-                <div className="flex items-center justify-between">
+          <div className="h-full overflow-y-auto">
+            {/* User View Preview Toolbar */}
+            {activeSection === 'user-view' && (
+              <div className="bg-[#008062] text-white px-6 py-3 flex items-center justify-between border-b">
+                <div className="flex items-center gap-3">
+                  <Eye className="w-5 h-5" />
                   <div>
-                    <div className="flex items-center gap-3">
-                      <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
-                      {activeSection === 'copilots' && (
-                        <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
-                          {copilots.length} Copilots
-                        </Badge>
-                      )}
-                    </div>
-                    <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
+                    <span className="font-medium">Preview Mode</span>
+                    <span className="text-white/80 ml-2">• This is how your workspace appears to end users</span>
                   </div>
                 </div>
-                {activeSection === 'copilots' && (
-                  <div className="flex gap-3 mt-4">
-                    <Button 
-                      onClick={() => setShowCreationWizard(true)}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                    >
-                      <Plus className="w-4 h-4 mr-2" />
-                      New Copilot
-                    </Button>
-                    <Button 
-                      variant="outline"
-                      onClick={() => {
-                        // Navigate to marketplace - placeholder for now
-                        console.log('Navigate to marketplace');
-                      }}
-                    >
-                      Go to Marketplace
-                    </Button>
-                  </div>
-                )}
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => handleSectionChange('copilots')}
+                  className="text-white hover:bg-white/10 hover:text-white"
+                >
+                  <X className="w-4 h-4 mr-2" />
+                  Exit Preview
+                </Button>
               </div>
             )}
 
-            {/* Content Body */}
-            <div>
-              {sectionContent.content}
+            <div className={`${activeSection === 'user-view' ? 'h-full' : 'h-full p-8'}`}>
+              {/* Top Bar - Hidden when in user-view, settings modes, or configuration screens */}
+              {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
+                !configureAgent && !configureTool && !configureWorkflow && !testAgent && (
+                <div className="mb-8">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-3">
+                        <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
+                        {activeSection === 'copilots' && (
+                          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+                            {copilots.length} Copilots
+                          </Badge>
+                        )}
+                      </div>
+                      <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
+                    </div>
+                  </div>
+                  {activeSection === 'copilots' && (
+                    <div className="flex gap-3 mt-4">
+                      <Button 
+                        onClick={() => setShowCreationWizard(true)}
+                        className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                      >
+                        <Plus className="w-4 h-4 mr-2" />
+                        New Copilot
+                      </Button>
+                      <Button 
+                        variant="outline"
+                        onClick={() => {
+                          // Navigate to marketplace - placeholder for now
+                          console.log('Navigate to marketplace');
+                        }}
+                      >
+                        Go to Marketplace
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Content Body */}
+              <div className={activeSection === 'user-view' ? 'h-full' : ''}>
+                {sectionContent.content}
+              </div>
             </div>
           </div>
         )}
