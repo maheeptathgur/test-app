@@ -508,7 +508,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
             <Plus className="w-4 h-4 mr-2" />
             Create New Agent
           </Button>
-          <Button variant="outline">
+          <Button className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-50">
             Go to Marketplace
           </Button>
         </div>
