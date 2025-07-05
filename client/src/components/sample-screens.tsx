@@ -136,9 +136,6 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
           Cancel
         </Button>
         <div className="flex gap-3">
-          <Button variant="outline">
-            Test Connection
-          </Button>
           <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
             Save Changes
           </Button>
