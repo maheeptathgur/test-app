@@ -29,8 +29,10 @@ import { AgentConfigureScreen, AgentTestScreen } from "./agent-screens";
 import { WorkflowEditor } from "./workflow-editor";
 import { ToolConfigureScreen } from "./tool-configure-screen";
 
+type WorkspaceSection = 'subscriptions' | 'conversations' | 'analytics' | 'users';
+
 interface SampleScreenProps {
-  section: NavigationSection;
+  section: NavigationSection | WorkspaceSection;
   configureAgent?: {id: string, name: string} | null;
   onClearConfigureAgent?: () => void;
   onConfigureAgent?: (agent: any) => void;
@@ -167,13 +169,13 @@ export function SampleScreen({
             return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
           case 'knowledge-base':
             return <KnowledgeBaseScreen />;
-          case 'subscriptions':
+          case 'subscriptions' as any:
             return <SubscriptionsScreen />;
-          case 'conversations':
+          case 'conversations' as any:
             return <ConversationsScreen />;
-          case 'analytics':
+          case 'analytics' as any:
             return <AnalyticsScreen />;
-          case 'users':
+          case 'users' as any:
             return <UsersScreen />;
           case 'pricing':
             return <PricingScreen />;
