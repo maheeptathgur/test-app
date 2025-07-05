@@ -153,14 +153,14 @@ export function WorkspaceSettings() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-lg font-semibold">Avatar Image (1:1 ratio)</Label>
+                  <Label className="text-lg font-semibold">Logo Image (2:1 ratio)</Label>
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
                     <div className="flex flex-col items-center justify-center space-y-4">
-                      <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
-                        <Upload className="w-8 h-8 text-gray-400" />
+                      <div className="w-20 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+                        <Upload className="w-6 h-6 text-gray-400" />
                       </div>
                       <div className="space-y-2">
-                        <p className="text-gray-600 font-medium">Upload avatar image</p>
+                        <p className="text-gray-600 font-medium">Upload logo image</p>
                         <Button variant="outline" size="sm">
                           <Upload className="w-4 h-4 mr-2" />
                           Choose File
@@ -171,14 +171,14 @@ export function WorkspaceSettings() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label className="text-lg font-semibold">Logo Image (2:1 ratio)</Label>
+                  <Label className="text-lg font-semibold">Avatar Image (1:1 ratio)</Label>
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
                     <div className="flex flex-col items-center justify-center space-y-4">
-                      <div className="w-20 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
-                        <Upload className="w-6 h-6 text-gray-400" />
+                      <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center">
+                        <Upload className="w-8 h-8 text-gray-400" />
                       </div>
                       <div className="space-y-2">
-                        <p className="text-gray-600 font-medium">Upload logo image</p>
+                        <p className="text-gray-600 font-medium">Upload avatar image</p>
                         <Button variant="outline" size="sm">
                           <Upload className="w-4 h-4 mr-2" />
                           Choose File
