@@ -627,8 +627,9 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
           <div className="flex-1 overflow-y-auto">
             {activeTab === "general" && (
-            <div className="p-0 m-0 h-full">
-              <div className="max-w-4xl mx-auto p-6 space-y-8">
+            <div className="p-6 h-full">
+              <Card className="w-full">
+                <CardContent className="p-6 space-y-8">
                 {/* Copilot Configuration */}
                 <div>
                   <h2 className="text-lg font-semibold mb-4 text-foreground">Copilot Configuration</h2>
@@ -1002,7 +1003,8 @@ function MyComponent() {
                     </div>
                   </div>
                 </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
             )}
 
