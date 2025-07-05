@@ -238,6 +238,7 @@ Changelog:
 - July 5, 2025. Implemented 2/3 + 1/3 column layout for workspace settings - restructured Workspace Information (2/3 width) and Workspace Preferences (1/3 width) sections into responsive grid layout with brand green styling for save button and improved space utilization
 - July 5, 2025. Added sticky footer bar to workspace settings matching copilot configuration design - implemented fixed bottom positioning with Cancel and Save Changes buttons, consistent brand colors, proper layering, and sidebar-aware positioning for unified user experience
 - July 5, 2025. Fixed content visibility by adding bottom padding to workspace settings container - ensured all content remains accessible above the sticky footer with proper spacing to prevent overlap
+- July 5, 2025. Made save bar conditional in workspace settings - sticky footer only appears for General and Security tabs that require saving, hidden for data display tabs (Subscriptions, Conversations, Analytics, Users) with dynamic padding adjustment for cleaner interface
 ```
 
 ## User Preferences
