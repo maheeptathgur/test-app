@@ -10,7 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
-import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download, Search, Filter, SortAsc, PenTool, BarChart, Zap, GitBranch } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download, Search, Filter, SortAsc, PenTool, BarChart, Zap, GitBranch, HelpCircle } from "lucide-react";
 import { SiGmail, SiSlack } from "react-icons/si";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
@@ -924,7 +925,8 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   }
 
   return (
-    <div className="min-h-full bg-background">
+    <TooltipProvider>
+      <div className="min-h-full bg-background">
       {/* Header */}
       <div className="flex items-center justify-between p-6 bg-muted/50">
         <div className="flex items-center gap-3">
@@ -1327,9 +1329,14 @@ function MyComponent() {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-medium">Document Pane</span>
-                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
-                              ?
-                            </button>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Show a document preview pane alongside the chat interface</p>
+                              </TooltipContent>
+                            </Tooltip>
                           </div>
                           <button 
                             onClick={() => setDocumentPaneEnabled(!documentPaneEnabled)}
@@ -1346,9 +1353,14 @@ function MyComponent() {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-medium">Show Sources</span>
-                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
-                              ?
-                            </button>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Display source references and citations in AI responses</p>
+                              </TooltipContent>
+                            </Tooltip>
                           </div>
                           <button 
                             onClick={() => setShowSources(!showSources)}
@@ -1365,9 +1377,14 @@ function MyComponent() {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-medium">Featured</span>
-                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
-                              ?
-                            </button>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Highlight this copilot in featured listings and recommendations</p>
+                              </TooltipContent>
+                            </Tooltip>
                           </div>
                           <button 
                             onClick={() => setIsFeatured(!isFeatured)}
@@ -1384,9 +1401,14 @@ function MyComponent() {
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             <span className="text-sm font-medium">Prompt required</span>
-                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
-                              ?
-                            </button>
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Require users to enter a custom prompt before starting conversations</p>
+                              </TooltipContent>
+                            </Tooltip>
                           </div>
                           <button 
                             onClick={() => setPromptRequired(!promptRequired)}
@@ -3345,6 +3367,7 @@ Add sections, lists, and more..."
           </div>
         </DialogContent>
       </Dialog>
-    </div>
+      </div>
+    </TooltipProvider>
   );
 }
