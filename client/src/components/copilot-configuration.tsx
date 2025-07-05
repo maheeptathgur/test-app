@@ -1635,7 +1635,7 @@ function MyComponent() {
                 <CardContent className="p-6 space-y-6">
                 <div>
                   <div className="mb-6">
-                    <h2 className="text-lg font-semibold text-foreground">User Documents</h2>
+                    <h2 className="font-semibold text-foreground text-[24px]">User Documents</h2>
                     <p className="text-sm text-muted-foreground">Manage user-uploaded documents and files</p>
                   </div>
                   
