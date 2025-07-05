@@ -579,7 +579,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
             {copilotData.avatar}
           </div>
           <div>
-            <h1 className="text-xl font-semibold text-foreground">Configure {copilotData.name}</h1>
+            <h1 className="font-semibold text-foreground text-[24px]">Configure {copilotData.name}</h1>
             <p className="text-sm text-muted-foreground">Edit copilot settings, components, and profile fields</p>
           </div>
         </div>
@@ -588,7 +588,6 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
           Close
         </Button>
       </div>
-      
       {/* Tabs */}
       <div className="bg-muted/20">
         <div className="px-6 pt-4 pb-4">
@@ -621,7 +620,6 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
           </div>
         </div>
       </div>
-
       {/* Content */}
       <div>
         {activeTab === "general" && (
