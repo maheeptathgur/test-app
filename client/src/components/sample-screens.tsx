@@ -35,34 +35,61 @@ type WorkspaceSection = 'subscriptions' | 'conversations' | 'analytics' | 'users
 function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [sortBy, setSortBy] = useState('name');
+
+  // Function to get tool logo
+  const getToolLogo = (toolName: string) => {
+    switch (toolName.toLowerCase()) {
+      case 'slack': return <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center text-white font-bold">#</div>;
+      case 'google workspace': return <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white font-bold">G</div>;
+      case 'microsoft 365': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold">M</div>;
+      case 'zoom': return <div className="w-8 h-8 bg-blue-400 rounded flex items-center justify-center text-white font-bold">Z</div>;
+      case 'trello': return <div className="w-8 h-8 bg-blue-700 rounded flex items-center justify-center text-white font-bold">T</div>;
+      case 'asana': return <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center text-white font-bold">A</div>;
+      case 'linear': return <div className="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center text-white font-bold">L</div>;
+      case 'figma': return <div className="w-8 h-8 bg-purple-500 rounded flex items-center justify-center text-white font-bold">F</div>;
+      case 'loom': return <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center text-white font-bold">L</div>;
+      case 'notion': return <div className="w-8 h-8 bg-gray-800 rounded flex items-center justify-center text-white font-bold">N</div>;
+      case 'discord': return <div className="w-8 h-8 bg-indigo-500 rounded flex items-center justify-center text-white font-bold">D</div>;
+      case 'google analytics': return <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center text-white font-bold">GA</div>;
+      case 'mixpanel': return <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center text-white font-bold">M</div>;
+      case 'amplitude': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold">A</div>;
+      case 'tableau': return <div className="w-8 h-8 bg-blue-700 rounded flex items-center justify-center text-white font-bold">T</div>;
+      case 'hubspot': return <div className="w-8 h-8 bg-orange-600 rounded flex items-center justify-center text-white font-bold">H</div>;
+      case 'mailchimp': return <div className="w-8 h-8 bg-yellow-500 rounded flex items-center justify-center text-white font-bold">M</div>;
+      case 'salesforce': return <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white font-bold">S</div>;
+      case 'intercom': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold">I</div>;
+      default: return <div className="w-8 h-8 bg-gray-500 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
+    }
+  };
 
   const integrationsByCategory = {
     "Popular Integrations": [
-      { name: 'Slack', description: 'Team communication and collaboration', price: 'Free', users: '10M+', category: 'communication' },
-      { name: 'Google Workspace', description: 'Email, docs, and productivity suite', price: 'Free', users: '3B+', category: 'productivity' },
-      { name: 'Microsoft 365', description: 'Office apps and cloud services', price: 'Paid', users: '1.3B+', category: 'productivity' },
-      { name: 'Zoom', description: 'Video conferencing and meetings', price: 'Freemium', users: '300M+', category: 'communication' },
-      { name: 'Trello', description: 'Project management and collaboration', price: 'Freemium', users: '50M+', category: 'productivity' },
-      { name: 'Asana', description: 'Work management and team coordination', price: 'Freemium', users: '100M+', category: 'productivity' },
+      { name: 'Slack', description: 'Team communication and collaboration', users: '10M+', category: 'communication' },
+      { name: 'Google Workspace', description: 'Email, docs, and productivity suite', users: '3B+', category: 'productivity' },
+      { name: 'Microsoft 365', description: 'Office apps and cloud services', users: '1.3B+', category: 'productivity' },
+      { name: 'Zoom', description: 'Video conferencing and meetings', users: '300M+', category: 'communication' },
+      { name: 'Trello', description: 'Project management and collaboration', users: '50M+', category: 'productivity' },
+      { name: 'Asana', description: 'Work management and team coordination', users: '100M+', category: 'productivity' },
     ],
     "Recently Added": [
-      { name: 'Linear', description: 'Issue tracking and project planning', price: 'Paid', new: true, category: 'productivity' },
-      { name: 'Figma', description: 'Design collaboration and prototyping', price: 'Freemium', new: true, category: 'productivity' },
-      { name: 'Loom', description: 'Video messaging and screen recording', price: 'Freemium', new: true, category: 'communication' },
-      { name: 'Notion', description: 'All-in-one workspace for notes and collaboration', price: 'Freemium', new: true, category: 'productivity' },
-      { name: 'Discord', description: 'Voice, video and text communication', price: 'Free', new: true, category: 'communication' },
+      { name: 'Linear', description: 'Issue tracking and project planning', users: 'New', category: 'productivity' },
+      { name: 'Figma', description: 'Design collaboration and prototyping', users: 'New', category: 'productivity' },
+      { name: 'Loom', description: 'Video messaging and screen recording', users: 'New', category: 'communication' },
+      { name: 'Notion', description: 'All-in-one workspace for notes and collaboration', users: 'New', category: 'productivity' },
+      { name: 'Discord', description: 'Voice, video and text communication', users: 'New', category: 'communication' },
     ],
     "Analytics & Data": [
-      { name: 'Google Analytics', description: 'Web analytics and reporting', price: 'Free', category: 'analytics' },
-      { name: 'Mixpanel', description: 'Product analytics and user tracking', price: 'Freemium', category: 'analytics' },
-      { name: 'Amplitude', description: 'Digital optimization platform', price: 'Freemium', category: 'analytics' },
-      { name: 'Tableau', description: 'Data visualization and business intelligence', price: 'Paid', category: 'analytics' },
+      { name: 'Google Analytics', description: 'Web analytics and reporting', users: 'Free', category: 'analytics' },
+      { name: 'Mixpanel', description: 'Product analytics and user tracking', users: 'Popular', category: 'analytics' },
+      { name: 'Amplitude', description: 'Digital optimization platform', users: 'Popular', category: 'analytics' },
+      { name: 'Tableau', description: 'Data visualization and business intelligence', users: 'Enterprise', category: 'analytics' },
     ],
     "Marketing & Sales": [
-      { name: 'HubSpot', description: 'CRM and marketing automation', price: 'Freemium', category: 'marketing' },
-      { name: 'Mailchimp', description: 'Email marketing and automation', price: 'Freemium', category: 'marketing' },
-      { name: 'Salesforce', description: 'Customer relationship management', price: 'Paid', category: 'marketing' },
-      { name: 'Intercom', description: 'Customer messaging and support', price: 'Paid', category: 'marketing' },
+      { name: 'HubSpot', description: 'CRM and marketing automation', users: 'Popular', category: 'marketing' },
+      { name: 'Mailchimp', description: 'Email marketing and automation', users: 'Popular', category: 'marketing' },
+      { name: 'Salesforce', description: 'Customer relationship management', users: 'Enterprise', category: 'marketing' },
+      { name: 'Intercom', description: 'Customer messaging and support', users: 'Popular', category: 'marketing' },
     ]
   };
 
@@ -74,8 +101,25 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
       return matchesSearch && matchesCategory;
     });
     
-    if (filtered.length > 0) {
-      acc[categoryName] = filtered;
+    // Sort the filtered integrations
+    const sorted = filtered.sort((a, b) => {
+      switch (sortBy) {
+        case 'name':
+          return a.name.localeCompare(b.name);
+        case 'category':
+          return a.category.localeCompare(b.category);
+        case 'users':
+          // Sort by popularity (numerical values first, then text)
+          const aUsers = a.users.includes('+') ? parseInt(a.users.replace(/[^\d]/g, '')) : 0;
+          const bUsers = b.users.includes('+') ? parseInt(b.users.replace(/[^\d]/g, '')) : 0;
+          return bUsers - aUsers;
+        default:
+          return 0;
+      }
+    });
+    
+    if (sorted.length > 0) {
+      acc[categoryName] = sorted;
     }
     return acc;
   }, {} as Record<string, any[]>);
@@ -94,7 +138,7 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
         </Button>
       </div>
 
-      {/* Search and Filter */}
+      {/* Search, Filter and Sort */}
       <div className="flex gap-4">
         <div className="flex-1">
           <Input 
@@ -116,6 +160,17 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
             <SelectItem value="marketing">Marketing</SelectItem>
           </SelectContent>
         </Select>
+        <Select value={sortBy} onValueChange={setSortBy}>
+          <SelectTrigger className="w-40">
+            <SortAsc className="w-4 h-4 mr-2" />
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="name">Name</SelectItem>
+            <SelectItem value="category">Category</SelectItem>
+            <SelectItem value="users">Popularity</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Integrations by Category */}
@@ -129,16 +184,15 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {integrations.map((integration) => (
                 <Card key={integration.name} className="p-4 hover:shadow-md transition-shadow">
-                  <div className="flex justify-between items-start mb-3">
-                    <h4 className="font-medium">{integration.name}</h4>
-                    <div className="flex gap-2">
-                      {integration.new && <Badge className="text-xs bg-green-100 text-green-700">New</Badge>}
-                      <Badge variant="secondary" className="text-xs">{integration.price}</Badge>
+                  <div className="flex items-start gap-3 mb-3">
+                    {getToolLogo(integration.name)}
+                    <div className="flex-1">
+                      <h4 className="font-medium">{integration.name}</h4>
+                      <p className="text-sm text-gray-600 mt-1">{integration.description}</p>
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600 mb-3">{integration.description}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-500">{integration.users || 'New'}</span>
+                    <span className="text-xs text-gray-500">{integration.users}</span>
                     <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
                       Connect
                     </Button>
