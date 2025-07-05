@@ -1342,14 +1342,6 @@ function MyComponent() {
                     </div>
                   )}
                 </div>
-                
-                {/* Save Button */}
-                <div className="flex justify-end pt-6">
-                  <Button onClick={handleSave} className="gap-2">
-                    <Save className="h-4 w-4" />
-                    Save Configuration
-                  </Button>
-                </div>
               </div>
             </div>
             )}
@@ -1619,14 +1611,6 @@ function MyComponent() {
 
                   </div>
                 </div>
-                
-                {/* Save Button */}
-                <div className="flex justify-end pt-6">
-                  <Button onClick={handleSave} className="gap-2">
-                    <Save className="h-4 w-4" />
-                    Save Configuration
-                  </Button>
-                </div>
               </div>
             </div>
             )}
@@ -1807,14 +1791,6 @@ function MyComponent() {
                       </div>
                     </div>
                   </div>
-                </div>
-                
-                {/* Save Button */}
-                <div className="flex justify-end pt-6">
-                  <Button onClick={handleSave} className="gap-2">
-                    <Save className="h-4 w-4" />
-                    Save Configuration
-                  </Button>
                 </div>
               </div>
             </div>
@@ -2042,14 +2018,6 @@ function MyComponent() {
                     )}
                   </div>
                 </div>
-                
-                {/* Save Button */}
-                <div className="flex justify-end pt-6">
-                  <Button onClick={handleSave} className="gap-2">
-                    <Save className="h-4 w-4" />
-                    Save Configuration
-                  </Button>
-                </div>
               </div>
             </div>
             )}
@@ -2197,14 +2165,6 @@ function MyComponent() {
                       </div>
                     </div>
                   </div>
-                </div>
-                
-                {/* Save Button */}
-                <div className="flex justify-end pt-6">
-                  <Button onClick={handleSave} className="gap-2">
-                    <Save className="h-4 w-4" />
-                    Save Configuration
-                  </Button>
                 </div>
               </div>
             </div>
