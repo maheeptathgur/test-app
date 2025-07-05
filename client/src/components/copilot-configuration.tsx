@@ -1855,6 +1855,9 @@ function MyComponent() {
                       <Bot className="w-4 h-4 mr-1" />
                       AI Suggestions
                     </Button>
+                    <Button variant="outline" size="sm">
+                      Go to Marketplace
+                    </Button>
                   </div>
                   
                   {/* Search and Filter Controls */}
