@@ -580,7 +580,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
           </div>
           <div>
             <h1 className="font-semibold text-foreground text-[24px]">Configure {copilotData.name}</h1>
-            <p className="text-sm text-muted-foreground">Edit copilot settings, components, and profile fields</p>
+            <p className="text-muted-foreground text-[16px]">Edit copilot settings, components, and profile fields</p>
           </div>
         </div>
         <Button variant="outline" onClick={onClose} className="gap-2">
