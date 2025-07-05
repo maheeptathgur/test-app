@@ -219,7 +219,7 @@ Changelog:
 - July 4, 2025. Implemented comprehensive 6-step copilot creation wizard - replaced simple modal with full wizard flow including: Step 1 (Choose builder type: Chat/App/Image), Step 2 (Define AI purpose), Step 3 (Choose name), Step 4 (Customize profile fields), Step 5 (Select user input types), Step 6 (Upload knowledge sources), with progress indicators, step validation, and dynamic button text
 - July 5, 2025. Updated copilot configuration interface layout to use full page scrolling instead of sticky header/footer structure - removed overflow constraints, eliminated footer section, and restructured main container to allow natural page scrolling for better user experience with long configuration forms
 - July 5, 2025. Applied consistent styling and spacing to all copilot configuration tabs - standardized section headers with title/subtitle format, consistent space-y-6 spacing between sections, mb-6 spacing after headers, and uniform CardContent padding across all tabs (general, components, knowledge, user-docs, profile) for professional appearance matching design specifications
-- July 5, 2025. Enhanced copilot card dropdown menu button visibility - updated to use brand green color (bg-[#008062]/80) with solid green hover state (hover:bg-[#008062]) and white border for better photo visibility and consistent brand appearance
+- July 5, 2025. Enhanced copilot card dropdown menu button visibility - updated to use brand green color (bg-[#008062]/80) with solid green hover state (hover:bg-[#008062]) and no border for clean appearance and better photo visibility
 ```
 
 ## User Preferences

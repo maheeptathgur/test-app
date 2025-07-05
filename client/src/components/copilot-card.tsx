@@ -76,7 +76,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           <div className="absolute top-3 right-3">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-[#008062]/80 hover:bg-[#008062] border border-white/30">
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-[#008062]/80 hover:bg-[#008062]">
                   <MoreVertical className="h-4 w-4 text-white" />
                 </Button>
               </DropdownMenuTrigger>
