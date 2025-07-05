@@ -143,19 +143,20 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
         </div>
       </div>
       
-      {/* Success Message */}
-      {showSuccess && (
-        <div className="fixed top-4 right-4 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg shadow-lg z-20">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-            <span className="font-medium">Changes saved successfully</span>
-          </div>
-        </div>
-      )}
-
       {/* Sticky Footer */}
       <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
-        <div className="flex justify-end items-center">
+        <div className="flex justify-between items-center">
+          {/* Success Message */}
+          <div className="flex-1">
+            {showSuccess && (
+              <div className="flex items-center gap-2 text-green-600">
+                <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                <span className="text-sm font-medium">Changes saved successfully</span>
+              </div>
+            )}
+          </div>
+          
+          {/* Buttons */}
           <div className="flex gap-3">
             <Button variant="outline" onClick={onBack}>
               Cancel
