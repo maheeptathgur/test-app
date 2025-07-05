@@ -969,271 +969,272 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       <div>
         {activeTab === "general" && (
             <div className="p-6">
-              <Card className="w-full">
-                <CardContent className="p-6 space-y-6">
-                {/* Copilot Configuration */}
-                <div>
-                  <div className="mb-6">
-                    <h2 className="font-semibold text-foreground text-[24px]">Copilot Configuration</h2>
-                    <p className="text-sm text-muted-foreground">Manage basic copilot settings and behavior</p>
-                  </div>
-                  <div className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Copilot Name</Label>
-                        <Input
-                          id="name"
-                          value={copilotData.name}
-                          onChange={(e) => handleCopilotChange('name', e.target.value)}
-                          placeholder="Enter copilot name"
-                        />
+              <div className="grid grid-cols-3 gap-6">
+                {/* Copilot Configuration - 2/3 width */}
+                <div className="col-span-2">
+                  <Card className="w-full">
+                    <CardContent className="p-6">
+                      <div className="mb-6">
+                        <h2 className="font-semibold text-foreground text-[24px]">Copilot Configuration</h2>
+                        <p className="text-sm text-muted-foreground">Manage basic copilot settings and behavior</p>
                       </div>
-
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <Label htmlFor="description">Copilot Description</Label>
-                      <Textarea
-                        id="description"
-                        value={copilotData.description}
-                        onChange={(e) => handleCopilotChange('description', e.target.value)}
-                        placeholder="Describe what this copilot does"
-                        rows={3}
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <Label htmlFor="systemPrompt">System Prompt</Label>
-                      <Textarea
-                        id="systemPrompt"
-                        value={systemPrompt}
-                        onChange={(e) => setSystemPrompt(e.target.value)}
-                        placeholder="Enter the system prompt that defines how the copilot behaves"
-                        rows={4}
-                      />
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label>Icon Image (1:1 ratio)</Label>
-                        <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                          <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                          <div className="text-sm text-muted-foreground mb-2">
-                            Upload icon image
-                          </div>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => handleImageUpload('icon', e.target.files?.[0] || null)}
-                            className="hidden"
-                            id="icon-upload"
+                      <div className="space-y-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="name">Copilot Name</Label>
+                          <Input
+                            id="name"
+                            value={copilotData.name}
+                            onChange={(e) => handleCopilotChange('name', e.target.value)}
+                            placeholder="Enter copilot name"
                           />
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() => document.getElementById('icon-upload')?.click()}
-                            className="gap-2"
-                          >
-                            <Upload className="h-3 w-3" />
-                            Choose File
-                          </Button>
-                          {iconImage && (
-                            <div className="mt-2 text-xs text-muted-foreground">
-                              {iconImage.name}
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="description">Copilot Description</Label>
+                          <Textarea
+                            id="description"
+                            value={copilotData.description}
+                            onChange={(e) => handleCopilotChange('description', e.target.value)}
+                            placeholder="Describe what this copilot does"
+                            rows={3}
+                          />
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="systemPrompt">System Prompt</Label>
+                          <Textarea
+                            id="systemPrompt"
+                            value={systemPrompt}
+                            onChange={(e) => setSystemPrompt(e.target.value)}
+                            placeholder="Enter the system prompt that defines how the copilot behaves"
+                            rows={4}
+                          />
+                        </div>
+                        
+                        <div className="grid grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <Label>Icon Image (1:1 ratio)</Label>
+                            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                              <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                              <div className="text-sm text-muted-foreground mb-2">
+                                Upload icon image
+                              </div>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => handleImageUpload('icon', e.target.files?.[0] || null)}
+                                className="hidden"
+                                id="icon-upload"
+                              />
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={() => document.getElementById('icon-upload')?.click()}
+                                className="gap-2"
+                              >
+                                <Upload className="h-3 w-3" />
+                                Choose File
+                              </Button>
+                              {iconImage && (
+                                <div className="mt-2 text-xs text-muted-foreground">
+                                  {iconImage.name}
+                                </div>
+                              )}
                             </div>
-                          )}
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label>Banner Image (16:9 ratio)</Label>
+                            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                              <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                              <div className="text-sm text-muted-foreground mb-2">
+                                Upload banner image
+                              </div>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => handleImageUpload('banner', e.target.files?.[0] || null)}
+                                className="hidden"
+                                id="banner-upload"
+                              />
+                              <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={() => document.getElementById('banner-upload')?.click()}
+                                className="gap-2"
+                              >
+                                <Upload className="h-3 w-3" />
+                                Choose File
+                              </Button>
+                              {bannerImage && (
+                                <div className="mt-2 text-xs text-muted-foreground">
+                                  {bannerImage.name}
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      
-                      <div className="space-y-2">
-                        <Label>Banner Image (16:9 ratio)</Label>
-                        <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                          <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                          <div className="text-sm text-muted-foreground mb-2">
-                            Upload banner image
-                          </div>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => handleImageUpload('banner', e.target.files?.[0] || null)}
-                            className="hidden"
-                            id="banner-upload"
-                          />
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            onClick={() => document.getElementById('banner-upload')?.click()}
-                            className="gap-2"
-                          >
-                            <Upload className="h-3 w-3" />
-                            Choose File
-                          </Button>
-                          {bannerImage && (
-                            <div className="mt-2 text-xs text-muted-foreground">
-                              {bannerImage.name}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
                 </div>
                 
-                {/* Advanced Settings */}
-                <div>
-                  <h2 className="text-lg font-semibold mb-4 text-foreground">Advanced Settings</h2>
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="aiProvider">AI Provider</Label>
-                        <Select value={aiProvider} onValueChange={(value) => {
-                          setAiProvider(value);
-                          setAiModel(getAvailableModels(value)[0] || '');
-                        }}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="OpenAI">OpenAI</SelectItem>
-                            <SelectItem value="Anthropic">Anthropic</SelectItem>
-                            <SelectItem value="Google">Google</SelectItem>
-                            <SelectItem value="Meta">Meta</SelectItem>
-                            <SelectItem value="Mistral">Mistral</SelectItem>
-                          </SelectContent>
-                        </Select>
+                {/* Advanced Settings - 1/3 width */}
+                <div className="col-span-1">
+                  <Card className="w-full">
+                    <CardContent className="p-6">
+                      <div className="mb-6">
+                        <h2 className="font-semibold text-foreground text-[24px]">Advanced Settings</h2>
+                        <p className="text-sm text-muted-foreground">Configure AI models and advanced features</p>
                       </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="aiModel">AI Model</Label>
-                        <Select value={aiModel} onValueChange={setAiModel}>
-                          <SelectTrigger>
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {getAvailableModels(aiProvider).map((model) => (
-                              <SelectItem key={model} value={model}>
-                                {model}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                    
-                    
-
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <Label>Conversation Starters</Label>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={addConversationStarter}
-                          disabled={conversationStarters.length >= 5}
-                          className="gap-2"
-                        >
-                          <Plus className="h-3 w-3" />
-                          Add Starter
-                        </Button>
-                      </div>
-                      <div className="space-y-3">
-                        {conversationStarters.map((starter, index) => (
-                          <div key={index} className="flex gap-2">
-                            <Input
-                              value={starter}
-                              onChange={(e) => handleConversationStarterChange(index, e.target.value)}
-                              placeholder={`Conversation starter ${index + 1}`}
-                              className="flex-1"
-                            />
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <Label htmlFor="aiProvider">AI Provider</Label>
+                          <Select value={aiProvider} onValueChange={(value) => {
+                            setAiProvider(value);
+                            setAiModel(getAvailableModels(value)[0] || '');
+                          }}>
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="OpenAI">OpenAI</SelectItem>
+                              <SelectItem value="Anthropic">Anthropic</SelectItem>
+                              <SelectItem value="Google">Google</SelectItem>
+                              <SelectItem value="Meta">Meta</SelectItem>
+                              <SelectItem value="Mistral">Mistral</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div className="space-y-2">
+                          <Label htmlFor="aiModel">AI Model</Label>
+                          <Select value={aiModel} onValueChange={setAiModel}>
+                            <SelectTrigger>
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {getAvailableModels(aiProvider).map((model) => (
+                                <SelectItem key={model} value={model}>
+                                  {model}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div className="space-y-4">
+                          <div className="flex items-center justify-between">
+                            <Label>Conversation Starters</Label>
                             <Button
                               type="button"
                               variant="outline"
                               size="sm"
-                              onClick={() => removeConversationStarter(index)}
-                              disabled={conversationStarters.length <= 1}
+                              onClick={addConversationStarter}
+                              disabled={conversationStarters.length >= 5}
+                              className="gap-2"
                             >
-                              <Trash2 className="h-3 w-3" />
+                              <Plus className="h-3 w-3" />
+                              Add Starter
                             </Button>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    {/* Scope */}
-                    <div className="space-y-3">
-                      <Label className="text-base font-medium">Scope</Label>
-                      <p className="text-sm text-muted-foreground">
-                        Control who can access this copilot
-                      </p>
-                      <RadioGroup value={scope} onValueChange={setScope} className="space-y-3">
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="private" id="private" />
-                          <Label htmlFor="private" className="text-sm">
-                            Private - Only you can access this copilot
-                          </Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="public" id="public" />
-                          <Label htmlFor="public" className="text-sm">
-                            Public - Anyone with the link can access this copilot
-                          </Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="embedded" id="embedded" />
-                          <Label htmlFor="embedded" className="text-sm">
-                            Embedded - Can be embedded in websites and applications
-                          </Label>
-                        </div>
-                      </RadioGroup>
-                      
-                      {/* Code generation for public/embedded */}
-                      {(scope === 'public' || scope === 'embedded') && (
-                        <div className="mt-4 space-y-3">
-                          <div className="flex items-center gap-2">
-                            <Code className="w-4 h-4" />
-                            <Label className="text-sm font-medium">Integration Code</Label>
+                          <div className="space-y-3">
+                            {conversationStarters.map((starter, index) => (
+                              <div key={index} className="flex gap-2">
+                                <Input
+                                  value={starter}
+                                  onChange={(e) => handleConversationStarterChange(index, e.target.value)}
+                                  placeholder={`Conversation starter ${index + 1}`}
+                                  className="flex-1"
+                                />
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => removeConversationStarter(index)}
+                                  disabled={conversationStarters.length <= 1}
+                                >
+                                  <Trash2 className="h-3 w-3" />
+                                </Button>
+                              </div>
+                            ))}
                           </div>
-                          <div className="w-full">
-                            <nav className="flex space-x-8 border-b border-border">
-                              <button
-                                onClick={() => setCodeTab("javascript")}
-                                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                  codeTab === "javascript"
-                                    ? "border-[#008062] text-[#008062]"
-                                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
-                                }`}
-                              >
-                                JavaScript
-                              </button>
-                              <button
-                                onClick={() => setCodeTab("iframe")}
-                                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                  codeTab === "iframe"
-                                    ? "border-[#008062] text-[#008062]"
-                                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
-                                }`}
-                              >
-                                iframe
-                              </button>
-                              <button
-                                onClick={() => setCodeTab("react")}
-                                className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
-                                  codeTab === "react"
-                                    ? "border-[#008062] text-[#008062]"
-                                    : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
-                                }`}
-                              >
-                                React
-                              </button>
-                            </nav>
-                            {codeTab === "javascript" && (
-                            <div className="mt-3">
-                              <div className="relative">
-                                <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
-                                  <code>{`<!-- Add this to your HTML -->
+                        </div>
+                        
+                        {/* Scope */}
+                        <div className="space-y-3">
+                          <Label className="text-base font-medium">Scope</Label>
+                          <p className="text-sm text-muted-foreground">
+                            Control who can access this copilot
+                          </p>
+                          <RadioGroup value={scope} onValueChange={setScope} className="space-y-3">
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="private" id="private" />
+                              <Label htmlFor="private" className="text-sm">
+                                Private - Only you can access this copilot
+                              </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="public" id="public" />
+                              <Label htmlFor="public" className="text-sm">
+                                Public - Anyone with the link can access this copilot
+                              </Label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <RadioGroupItem value="embedded" id="embedded" />
+                              <Label htmlFor="embedded" className="text-sm">
+                                Embedded - Can be embedded in websites and applications
+                              </Label>
+                            </div>
+                          </RadioGroup>
+                          
+                          {/* Code generation for public/embedded */}
+                          {(scope === 'public' || scope === 'embedded') && (
+                            <div className="mt-4 space-y-3">
+                              <div className="flex items-center gap-2">
+                                <Code className="w-4 h-4" />
+                                <Label className="text-sm font-medium">Integration Code</Label>
+                              </div>
+                              <div className="w-full">
+                                <nav className="flex space-x-8 border-b border-border">
+                                  <button
+                                    onClick={() => setCodeTab("javascript")}
+                                    className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                      codeTab === "javascript"
+                                        ? "border-[#008062] text-[#008062]"
+                                        : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+                                    }`}
+                                  >
+                                    JavaScript
+                                  </button>
+                                  <button
+                                    onClick={() => setCodeTab("iframe")}
+                                    className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                      codeTab === "iframe"
+                                        ? "border-[#008062] text-[#008062]"
+                                        : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+                                    }`}
+                                  >
+                                    iframe
+                                  </button>
+                                  <button
+                                    onClick={() => setCodeTab("react")}
+                                    className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                                      codeTab === "react"
+                                        ? "border-[#008062] text-[#008062]"
+                                        : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+                                    }`}
+                                  >
+                                    React
+                                  </button>
+                                </nav>
+                                {codeTab === "javascript" && (
+                                <div className="mt-3">
+                                  <div className="relative">
+                                    <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
+                                      <code>{`<!-- Add this to your HTML -->
 <div id="knolli-copilot"></div>
 <script src="https://embed.knolli.com/widget.js"></script>
 <script>
@@ -1243,13 +1244,13 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     theme: 'light'
   });
 </script>`}</code>
-                                </pre>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="absolute top-2 right-2"
-                                  onClick={() => {
-                                    const code = `<!-- Add this to your HTML -->
+                                    </pre>
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="absolute top-2 right-2"
+                                      onClick={() => {
+                                        const code = `<!-- Add this to your HTML -->
 <div id="knolli-copilot"></div>
 <script src="https://embed.knolli.com/widget.js"></script>
 <script>
@@ -1259,51 +1260,51 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     theme: 'light'
   });
 </script>`;
-                                    navigator.clipboard.writeText(code);
-                                  }}
-                                >
-                                  <Copy className="w-3 h-3" />
-                                </Button>
-                              </div>
-                            </div>
-                            )}
-                            {codeTab === "iframe" && (
-                            <div className="mt-3">
-                              <div className="relative">
-                                <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
-                                  <code>{`<iframe 
+                                        navigator.clipboard.writeText(code);
+                                      }}
+                                    >
+                                      <Copy className="w-3 h-3" />
+                                    </Button>
+                                  </div>
+                                </div>
+                                )}
+                                {codeTab === "iframe" && (
+                                <div className="mt-3">
+                                  <div className="relative">
+                                    <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
+                                      <code>{`<iframe 
   src="https://embed.knolli.com/copilot/${copilot.id}"
   width="400"
   height="600"
   frameborder="0"
   allow="microphone">
 </iframe>`}</code>
-                                </pre>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="absolute top-2 right-2"
-                                  onClick={() => {
-                                    const code = `<iframe 
+                                    </pre>
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="absolute top-2 right-2"
+                                      onClick={() => {
+                                        const code = `<iframe 
   src="https://embed.knolli.com/copilot/${copilot.id}"
   width="400"
   height="600"
   frameborder="0"
   allow="microphone">
 </iframe>`;
-                                    navigator.clipboard.writeText(code);
-                                  }}
-                                >
-                                  <Copy className="w-3 h-3" />
-                                </Button>
-                              </div>
-                            </div>
-                            )}
-                            {codeTab === "react" && (
-                            <div className="mt-3">
-                              <div className="relative">
-                                <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
-                                  <code>{`import { KnolliWidget } from '@knolli/react';
+                                        navigator.clipboard.writeText(code);
+                                      }}
+                                    >
+                                      <Copy className="w-3 h-3" />
+                                    </Button>
+                                  </div>
+                                </div>
+                                )}
+                                {codeTab === "react" && (
+                                <div className="mt-3">
+                                  <div className="relative">
+                                    <pre className="bg-muted p-3 rounded-md text-sm overflow-x-auto">
+                                      <code>{`import { KnolliWidget } from '@knolli/react';
 
 function MyComponent() {
   return (
@@ -1315,13 +1316,13 @@ function MyComponent() {
     />
   );
 }`}</code>
-                                </pre>
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  className="absolute top-2 right-2"
-                                  onClick={() => {
-                                    const code = `import { KnolliWidget } from '@knolli/react';
+                                    </pre>
+                                    <Button
+                                      variant="outline"
+                                      size="sm"
+                                      className="absolute top-2 right-2"
+                                      onClick={() => {
+                                        const code = `import { KnolliWidget } from '@knolli/react';
 
 function MyComponent() {
   return (
@@ -1333,22 +1334,23 @@ function MyComponent() {
     />
   );
 }`;
-                                    navigator.clipboard.writeText(code);
-                                  }}
-                                >
-                                  <Copy className="w-3 h-3" />
-                                </Button>
+                                        navigator.clipboard.writeText(code);
+                                      }}
+                                    >
+                                      <Copy className="w-3 h-3" />
+                                    </Button>
+                                  </div>
+                                </div>
+                                )}
                               </div>
                             </div>
-                            )}
-                          </div>
+                          )}
                         </div>
-                      )}
-                    </div>
-                  </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-                </CardContent>
-              </Card>
+              </div>
               
               {/* Save Footer */}
               <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">

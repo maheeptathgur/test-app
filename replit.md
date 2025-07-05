@@ -222,6 +222,8 @@ Changelog:
 - July 5, 2025. Enhanced copilot card dropdown menu button visibility - updated to use brand green color (bg-[#008062]/80) with solid green hover state (hover:bg-[#008062]) and no border for clean appearance and better photo visibility
 - July 5, 2025. Reorganized copilot configuration layout - moved action buttons (Add Document, Add URL, Create MD, AI Suggestions, Add Field) below section headers and aligned to the right for consistent visual hierarchy across Knowledge Base and Profile Fields tabs
 - July 5, 2025. Implemented full-screen markdown editor - Create MD button now opens dedicated editor screen with document title/description fields, markdown/preview tabs, save/close functionality, and brand-consistent styling for comprehensive markdown document creation within knowledge base
+- July 5, 2025. Fixed RTF editor focus styling - removed competing highlight effects from textarea and applied unified focus styling with green highlight ring and proper spacing around entire editor container (toolbar + textarea together)
+- July 5, 2025. Implemented 2/3 + 1/3 column layout for General tab - restructured Copilot Configuration (2/3 width) and Advanced Settings (1/3 width) sections into responsive grid layout with separate Card components for better visual organization and efficient use of screen space
 ```
 
 ## User Preferences
