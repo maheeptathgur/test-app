@@ -1934,7 +1934,6 @@ export default function Dashboard() {
                         // Navigate to marketplace - placeholder for now
                         console.log('Navigate to marketplace');
                       }}
-                      className="border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white"
                     >
                       Go to Marketplace
                     </Button>
