@@ -175,9 +175,15 @@ export function WorkspaceSettings() {
                 <div className="space-y-2">
                   <Label>Avatar Image (1:1 ratio)</Label>
                   <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                    <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                    <div className="w-16 h-16 mx-auto mb-2 rounded-full overflow-hidden bg-white flex items-center justify-center shadow-sm">
+                      <img 
+                        src="/attached_assets/image_1751745994194.png" 
+                        alt="Avatar" 
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
                     <div className="text-sm text-muted-foreground mb-2">
-                      Upload avatar image
+                      Avatar uploaded
                     </div>
                     <Button
                       type="button"
@@ -186,7 +192,7 @@ export function WorkspaceSettings() {
                       className="gap-2"
                     >
                       <Upload className="h-3 w-3" />
-                      Choose File
+                      Change File
                     </Button>
                   </div>
                 </div>
