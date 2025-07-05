@@ -589,11 +589,17 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" onClick={() => setMdEditorOpen(false)} className="gap-2">
+            <Button 
+              type="button"
+              variant="outline" 
+              onClick={() => setMdEditorOpen(false)} 
+              className="gap-2"
+            >
               <X className="h-4 w-4" />
               Close Editor
             </Button>
             <Button 
+              type="button"
               className="gap-2 bg-[#008062] hover:bg-[#006b54]"
               onClick={() => {
                 // Save markdown document logic here
@@ -635,6 +641,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
             {/* Editor Tabs */}
             <div className="flex space-x-1 bg-muted p-1 rounded-lg inline-flex">
               <button
+                type="button"
                 onClick={() => setMdEditorTab('markdown')}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                   mdEditorTab === 'markdown' 
@@ -646,6 +653,19 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 Markdown
               </button>
               <button
+                type="button"
+                onClick={() => setMdEditorTab('rtf')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  mdEditorTab === 'rtf' 
+                    ? 'bg-white text-[#008062] shadow-sm' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <PenTool className="w-4 h-4 mr-1 inline" />
+                Rich Text
+              </button>
+              <button
+                type="button"
                 onClick={() => setMdEditorTab('preview')}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                   mdEditorTab === 'preview' 
@@ -671,6 +691,114 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 />
               </div>
             )}
+
+            {mdEditorTab === 'rtf' && (
+              <div className="w-full p-6">
+                <div className="border rounded-lg min-h-[500px] bg-white">
+                  {/* RTF Toolbar */}
+                  <div className="border-b p-3 bg-muted/30 flex items-center gap-2 flex-wrap">
+                    <div className="flex items-center gap-1">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-8 w-8 p-0"
+                        onClick={() => document.execCommand('bold', false)}
+                      >
+                        <strong>B</strong>
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-8 w-8 p-0 italic"
+                        onClick={() => document.execCommand('italic', false)}
+                      >
+                        I
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-8 w-8 p-0 underline"
+                        onClick={() => document.execCommand('underline', false)}
+                      >
+                        U
+                      </Button>
+                    </div>
+                    <Separator orientation="vertical" className="h-6" />
+                    <div className="flex items-center gap-1">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-8 px-2 text-xs"
+                        onClick={() => document.execCommand('insertUnorderedList', false)}
+                      >
+                        • List
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-8 px-2 text-xs"
+                        onClick={() => document.execCommand('insertOrderedList', false)}
+                      >
+                        1. List
+                      </Button>
+                    </div>
+                    <Separator orientation="vertical" className="h-6" />
+                    <div className="flex items-center gap-1">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-8 px-2 text-xs"
+                        onClick={() => document.execCommand('formatBlock', false, 'h1')}
+                      >
+                        H1
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-8 px-2 text-xs"
+                        onClick={() => document.execCommand('formatBlock', false, 'h2')}
+                      >
+                        H2
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="h-8 px-2 text-xs"
+                        onClick={() => document.execCommand('formatBlock', false, 'h3')}
+                      >
+                        H3
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  {/* RTF Editor */}
+                  <div
+                    contentEditable
+                    className="p-4 min-h-[450px] outline-none focus:ring-0"
+                    style={{ lineHeight: '1.6' }}
+                    suppressContentEditableWarning={true}
+                    onInput={(e) => {
+                      const target = e.target as HTMLDivElement;
+                      setMdContent(target.innerText || target.textContent || '');
+                    }}
+                    onBlur={(e) => {
+                      const target = e.target as HTMLDivElement;
+                      setMdContent(target.innerText || target.textContent || '');
+                    }}
+                  >
+                    {mdContent || 'Start writing your content here...'}
+                  </div>
+                </div>
+              </div>
+            )}
             
             {mdEditorTab === 'preview' && (
               <div className="w-full p-6 bg-white">
@@ -678,7 +806,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                   {mdContent ? (
                     <div className="whitespace-pre-wrap">{mdContent}</div>
                   ) : (
-                    <p className="text-muted-foreground italic">Start writing in the markdown tab to see preview here...</p>
+                    <p className="text-muted-foreground italic">Start writing in the markdown or rich text tab to see preview here...</p>
                   )}
                 </div>
               </div>
