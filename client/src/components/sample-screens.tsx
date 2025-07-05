@@ -294,7 +294,7 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-foreground">Browse Integrations</h1>
+          <h1 className="text-2xl font-semibold text-foreground">Browse Tools</h1>
           <p className="text-sm text-muted-foreground">Explore available integrations and tools from our marketplace</p>
         </div>
         <Button variant="outline" onClick={onBack} className="gap-2">
@@ -302,7 +302,6 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
           Close
         </Button>
       </div>
-
       {/* Search, Filter and Sort */}
       <div className="flex gap-4">
         <div className="flex-1">
@@ -337,7 +336,6 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
           </SelectContent>
         </Select>
       </div>
-
       {/* Integrations by Category */}
       <div className="space-y-8">
         {Object.entries(filteredIntegrations).map(([categoryName, integrations]) => (
@@ -368,7 +366,6 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
           </div>
         ))}
       </div>
-
       {Object.keys(filteredIntegrations).length === 0 && (
         <div className="text-center py-12 text-muted-foreground">
           <div className="w-12 h-12 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
