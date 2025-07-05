@@ -40,25 +40,190 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
   // Function to get tool logo
   const getToolLogo = (toolName: string) => {
     switch (toolName.toLowerCase()) {
-      case 'slack': return <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center"><Hash className="w-4 h-4 text-white" /></div>;
-      case 'google workspace': return <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center"><Mail className="w-4 h-4 text-white" /></div>;
-      case 'microsoft 365': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center"><Building2 className="w-4 h-4 text-white" /></div>;
-      case 'zoom': return <div className="w-8 h-8 bg-blue-400 rounded flex items-center justify-center"><Video className="w-4 h-4 text-white" /></div>;
-      case 'trello': return <div className="w-8 h-8 bg-blue-700 rounded flex items-center justify-center"><Trello className="w-4 h-4 text-white" /></div>;
-      case 'asana': return <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center"><Calendar className="w-4 h-4 text-white" /></div>;
-      case 'linear': return <div className="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center"><ArrowUpDown className="w-4 h-4 text-white" /></div>;
-      case 'figma': return <div className="w-8 h-8 bg-purple-500 rounded flex items-center justify-center"><Palette className="w-4 h-4 text-white" /></div>;
-      case 'loom': return <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center"><MonitorPlay className="w-4 h-4 text-white" /></div>;
-      case 'notion': return <div className="w-8 h-8 bg-gray-800 rounded flex items-center justify-center"><FileText className="w-4 h-4 text-white" /></div>;
-      case 'discord': return <div className="w-8 h-8 bg-indigo-500 rounded flex items-center justify-center"><MessageSquare className="w-4 h-4 text-white" /></div>;
-      case 'google analytics': return <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center"><BarChart className="w-4 h-4 text-white" /></div>;
-      case 'mixpanel': return <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center"><TrendingUp className="w-4 h-4 text-white" /></div>;
-      case 'amplitude': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center"><Activity className="w-4 h-4 text-white" /></div>;
-      case 'tableau': return <div className="w-8 h-8 bg-blue-700 rounded flex items-center justify-center"><BarChart3 className="w-4 h-4 text-white" /></div>;
-      case 'hubspot': return <div className="w-8 h-8 bg-orange-600 rounded flex items-center justify-center"><Users className="w-4 h-4 text-white" /></div>;
-      case 'mailchimp': return <div className="w-8 h-8 bg-yellow-500 rounded flex items-center justify-center"><Send className="w-4 h-4 text-white" /></div>;
-      case 'salesforce': return <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center"><Cloud className="w-4 h-4 text-white" /></div>;
-      case 'intercom': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center"><MessageCircle className="w-4 h-4 text-white" /></div>;
+      case 'slack': 
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
+              <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
+              <path d="M18.956 8.834a2.528 2.528 0 0 1 2.521-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.523 2.521h-2.521V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/>
+              <path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.521A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.523v-2.521h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/>
+            </svg>
+          </div>
+        );
+      case 'google workspace':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+            </svg>
+          </div>
+        );
+      case 'microsoft 365':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M2 2h9v9H2V2z" fill="#F25022"/>
+              <path d="M13 2h9v9h-9V2z" fill="#7FBA00"/>
+              <path d="M2 13h9v9H2v-9z" fill="#00A4EF"/>
+              <path d="M13 13h9v9h-9v-9z" fill="#FFB900"/>
+            </svg>
+          </div>
+        );
+      case 'zoom':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fill="#2D8CFF"/>
+              <path d="M16 10.5v3L12 12l4-1.5z" fill="#2D8CFF"/>
+              <rect x="8" y="9" width="4" height="6" rx="1" fill="#2D8CFF"/>
+            </svg>
+          </div>
+        );
+      case 'trello':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="2" width="20" height="20" rx="3" fill="#0079BF"/>
+              <rect x="5" y="5" width="5" height="10" rx="1" fill="white"/>
+              <rect x="14" y="5" width="5" height="6" rx="1" fill="white"/>
+            </svg>
+          </div>
+        );
+      case 'asana':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <circle cx="7" cy="12" r="5" fill="#F06A6A"/>
+              <circle cx="17" cy="12" r="5" fill="#F06A6A"/>
+              <circle cx="12" cy="7" r="5" fill="#F06A6A"/>
+            </svg>
+          </div>
+        );
+      case 'linear':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center bg-black">
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L2 12l10 10 10-10L12 2z" fill="white"/>
+            </svg>
+          </div>
+        );
+      case 'figma':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M8 24c2.208 0 4-1.792 4-4v-4H8c-2.208 0-4 1.792-4 4s1.792 4 4 4z" fill="#0ACF83"/>
+              <path d="M4 12c0-2.208 1.792-4 4-4h4v8H8c-2.208 0-4-1.792-4-4z" fill="#A259FF"/>
+              <path d="M4 4c0-2.208 1.792-4 4-4h4v8H8C5.792 8 4 6.208 4 4z" fill="#F24E1E"/>
+              <path d="M12 0h4c2.208 0 4 1.792 4 4s-1.792 4-4 4h-4V0z" fill="#FF7262"/>
+              <path d="M20 12c0 2.208-1.792 4-4 4s-4-1.792-4-4 1.792-4 4-4 4 1.792 4 4z" fill="#1ABCFE"/>
+            </svg>
+          </div>
+        );
+      case 'loom':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" fill="#625DF5"/>
+              <polygon points="10,8 16,12 10,16" fill="white"/>
+            </svg>
+          </div>
+        );
+      case 'notion':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466l1.823 1.447zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.28c.093.466 0 .933-.466.98l-.747.14v10.264c-.66.373-1.26.373-1.68.047l-3.993-6.173V18.7c0 0 .373.213 0 .42l-4.366.233c-.093-.187 0-.653.327-.746l.934-.28V9.854L7.822 9.76c-.094-.467.14-1.12.793-1.167l4.646-.326 4.553 6.98V8.92c0-.046-.327-.233.047-.374l.747-.187zm-11.423.374l4.179.04-4.179 2.24v-2.28z" fill="black"/>
+            </svg>
+          </div>
+        );
+      case 'discord':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" fill="#5865F2"/>
+            </svg>
+          </div>
+        );
+      case 'google analytics':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M12.5 6.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" fill="#F9AB00"/>
+              <path d="M7 15c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" fill="#E37400"/>
+              <path d="M17 20c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" fill="#4285F4"/>
+            </svg>
+          </div>
+        );
+      case 'mixpanel':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center bg-purple-600">
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="white">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </div>
+        );
+      case 'amplitude':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center bg-blue-600">
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="white">
+              <path d="M12 2l3.09 6.26L22 9l-5 4.87L18.18 20 12 16.77 5.82 20 7 13.87 2 9l6.91-.74L12 2z"/>
+            </svg>
+          </div>
+        );
+      case 'tableau':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <rect x="2" y="8" width="8" height="8" fill="#E97627"/>
+              <rect x="14" y="8" width="8" height="8" fill="#E97627"/>
+              <rect x="8" y="2" width="8" height="8" fill="#E97627"/>
+              <rect x="8" y="14" width="8" height="8" fill="#E97627"/>
+            </svg>
+          </div>
+        );
+      case 'hubspot':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M18.164 7.931V4.5a1.5 1.5 0 1 0-3 0v1.636A6.5 6.5 0 0 0 6.5 12v1.636a1.5 1.5 0 1 0 3 0V12a3.5 3.5 0 0 1 6.164-2.231V12a6.5 6.5 0 0 0 2.5 5.164v1.336a1.5 1.5 0 1 0 3 0V16.164A9.5 9.5 0 0 0 18.164 7.931z" fill="#FF7A59"/>
+            </svg>
+          </div>
+        );
+      case 'mailchimp':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm0 18c4.41 0 8-3.59 8-8s-3.59-8-8-8-8 3.59-8 8 3.59 8 8 8z" fill="#FFE01B"/>
+              <circle cx="9" cy="10" r="1.5" fill="black"/>
+              <circle cx="15" cy="10" r="1.5" fill="black"/>
+              <path d="M8 14c2.5 2 5.5 2 8 0" stroke="black" strokeWidth="1.5" fill="none" strokeLinecap="round"/>
+            </svg>
+          </div>
+        );
+      case 'salesforce':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M8.5 4C6.567 4 5 5.567 5 7.5S6.567 11 8.5 11H11c1.105 0 2-.895 2-2V7.5C13 5.567 11.433 4 9.5 4h-1zm7 0c1.933 0 3.5 1.567 3.5 3.5S17.433 11 15.5 11H13c-1.105 0-2-.895-2-2V7.5C11 5.567 12.567 4 14.5 4h1zm-7 9C6.567 13 5 14.567 5 16.5S6.567 20 8.5 20H11c1.105 0 2-.895 2-2v-1.5c0-1.933-1.567-3.5-3.5-3.5h-1zm7 0c1.933 0 3.5 1.567 3.5 3.5S17.433 20 15.5 20H13c-1.105 0-2-.895-2-2v-1.5c0-1.933 1.567-3.5 3.5-3.5h1z" fill="#00A1E0"/>
+            </svg>
+          </div>
+        );
+      case 'intercom':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M4 12a8 8 0 1 1 16 0v4.5c0 1.933-1.567 3.5-3.5 3.5S13 18.433 13 16.5V12a1 1 0 0 0-2 0v4.5c0 1.933-1.567 3.5-3.5 3.5S4 18.433 4 16.5V12z" fill="#338DF1"/>
+              <rect x="6" y="7" width="2" height="8" rx="1" fill="#338DF1"/>
+              <rect x="10" y="5" width="2" height="12" rx="1" fill="#338DF1"/>
+              <rect x="14" y="7" width="2" height="8" rx="1" fill="#338DF1"/>
+              <rect x="18" y="9" width="2" height="4" rx="1" fill="#338DF1"/>
+            </svg>
+          </div>
+        );
       default: return <div className="w-8 h-8 bg-gray-500 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
     }
   };
