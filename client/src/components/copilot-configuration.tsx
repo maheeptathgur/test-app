@@ -71,7 +71,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   return (
     <div className="flex flex-col h-full bg-background">
       {/* Header */}
-      <div className="flex items-center justify-between p-6 border-b bg-muted/50">
+      <div className="flex items-center justify-between p-6 bg-muted/50">
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 ${copilotData.avatarColor} rounded-lg flex items-center justify-center text-sm font-semibold`}>
             {copilotData.avatar}
