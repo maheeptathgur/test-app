@@ -354,8 +354,7 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
                       <p className="text-sm text-gray-600 mt-1">{integration.description}</p>
                     </div>
                   </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-xs text-gray-500">{integration.users}</span>
+                  <div className="flex justify-end items-center">
                     <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
                       Connect
                     </Button>
