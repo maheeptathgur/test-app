@@ -230,31 +230,31 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
 
   const integrationsByCategory = {
     "Popular Integrations": [
-      { name: 'Slack', description: 'Team communication and collaboration', users: '10M+', category: 'communication' },
-      { name: 'Google Workspace', description: 'Email, docs, and productivity suite', users: '3B+', category: 'productivity' },
-      { name: 'Microsoft 365', description: 'Office apps and cloud services', users: '1.3B+', category: 'productivity' },
-      { name: 'Zoom', description: 'Video conferencing and meetings', users: '300M+', category: 'communication' },
-      { name: 'Trello', description: 'Project management and collaboration', users: '50M+', category: 'productivity' },
-      { name: 'Asana', description: 'Work management and team coordination', users: '100M+', category: 'productivity' },
+      { name: 'Slack', description: 'Team communication and collaboration', users: '10M+', category: 'communication', connected: true },
+      { name: 'Google Workspace', description: 'Email, docs, and productivity suite', users: '3B+', category: 'productivity', connected: true },
+      { name: 'Microsoft 365', description: 'Office apps and cloud services', users: '1.3B+', category: 'productivity', connected: false },
+      { name: 'Zoom', description: 'Video conferencing and meetings', users: '300M+', category: 'communication', connected: true },
+      { name: 'Trello', description: 'Project management and collaboration', users: '50M+', category: 'productivity', connected: false },
+      { name: 'Asana', description: 'Work management and team coordination', users: '100M+', category: 'productivity', connected: false },
     ],
     "Recently Added": [
-      { name: 'Linear', description: 'Issue tracking and project planning', users: 'New', category: 'productivity' },
-      { name: 'Figma', description: 'Design collaboration and prototyping', users: 'New', category: 'productivity' },
-      { name: 'Loom', description: 'Video messaging and screen recording', users: 'New', category: 'communication' },
-      { name: 'Notion', description: 'All-in-one workspace for notes and collaboration', users: 'New', category: 'productivity' },
-      { name: 'Discord', description: 'Voice, video and text communication', users: 'New', category: 'communication' },
+      { name: 'Linear', description: 'Issue tracking and project planning', users: 'New', category: 'productivity', connected: false },
+      { name: 'Figma', description: 'Design collaboration and prototyping', users: 'New', category: 'productivity', connected: true },
+      { name: 'Loom', description: 'Video messaging and screen recording', users: 'New', category: 'communication', connected: false },
+      { name: 'Notion', description: 'All-in-one workspace for notes and collaboration', users: 'New', category: 'productivity', connected: true },
+      { name: 'Discord', description: 'Voice, video and text communication', users: 'New', category: 'communication', connected: false },
     ],
     "Analytics & Data": [
-      { name: 'Google Analytics', description: 'Web analytics and reporting', users: 'Free', category: 'analytics' },
-      { name: 'Mixpanel', description: 'Product analytics and user tracking', users: 'Popular', category: 'analytics' },
-      { name: 'Amplitude', description: 'Digital optimization platform', users: 'Popular', category: 'analytics' },
-      { name: 'Tableau', description: 'Data visualization and business intelligence', users: 'Enterprise', category: 'analytics' },
+      { name: 'Google Analytics', description: 'Web analytics and reporting', users: 'Free', category: 'analytics', connected: true },
+      { name: 'Mixpanel', description: 'Product analytics and user tracking', users: 'Popular', category: 'analytics', connected: false },
+      { name: 'Amplitude', description: 'Digital optimization platform', users: 'Popular', category: 'analytics', connected: false },
+      { name: 'Tableau', description: 'Data visualization and business intelligence', users: 'Enterprise', category: 'analytics', connected: false },
     ],
     "Marketing & Sales": [
-      { name: 'HubSpot', description: 'CRM and marketing automation', users: 'Popular', category: 'marketing' },
-      { name: 'Mailchimp', description: 'Email marketing and automation', users: 'Popular', category: 'marketing' },
-      { name: 'Salesforce', description: 'Customer relationship management', users: 'Enterprise', category: 'marketing' },
-      { name: 'Intercom', description: 'Customer messaging and support', users: 'Popular', category: 'marketing' },
+      { name: 'HubSpot', description: 'CRM and marketing automation', users: 'Popular', category: 'marketing', connected: true },
+      { name: 'Mailchimp', description: 'Email marketing and automation', users: 'Popular', category: 'marketing', connected: false },
+      { name: 'Salesforce', description: 'Customer relationship management', users: 'Enterprise', category: 'marketing', connected: false },
+      { name: 'Intercom', description: 'Customer messaging and support', users: 'Popular', category: 'marketing', connected: false },
     ]
   };
 
@@ -352,9 +352,21 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
                     <div className="flex-1">
                       <h4 className="font-medium">{integration.name}</h4>
                       <p className="text-sm text-gray-600 mt-1">{integration.description}</p>
-                      <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white mt-3">
-                        Connect
-                      </Button>
+                      {integration.connected ? (
+                        <div className="flex items-center gap-2 mt-3">
+                          <div className="flex items-center gap-2 text-green-600">
+                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                            <span className="text-sm font-medium">Connected</span>
+                          </div>
+                          <Button size="sm" variant="outline" className="text-gray-600 hover:text-gray-800">
+                            Configure
+                          </Button>
+                        </div>
+                      ) : (
+                        <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white mt-3">
+                          Connect
+                        </Button>
+                      )}
                     </div>
                   </div>
                 </Card>
