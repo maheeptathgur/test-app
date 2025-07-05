@@ -1925,28 +1925,28 @@ export default function Dashboard() {
                     </div>
                     <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
                   </div>
-                  {activeSection === 'copilots' && (
-                    <div className="flex gap-3">
-                      <Button 
-                        variant="outline"
-                        onClick={() => {
-                          // Navigate to marketplace - placeholder for now
-                          console.log('Navigate to marketplace');
-                        }}
-                        className="border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white"
-                      >
-                        Go to Marketplace
-                      </Button>
-                      <Button 
-                        onClick={() => setShowCreationWizard(true)}
-                        className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                      >
-                        <Plus className="w-4 h-4 mr-2" />
-                        New Copilot
-                      </Button>
-                    </div>
-                  )}
                 </div>
+                {activeSection === 'copilots' && (
+                  <div className="flex gap-3 mt-4">
+                    <Button 
+                      variant="outline"
+                      onClick={() => {
+                        // Navigate to marketplace - placeholder for now
+                        console.log('Navigate to marketplace');
+                      }}
+                      className="border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white"
+                    >
+                      Go to Marketplace
+                    </Button>
+                    <Button 
+                      onClick={() => setShowCreationWizard(true)}
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      New Copilot
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
 
