@@ -1045,7 +1045,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                           </div>
                           
                           <div className="space-y-2">
-                            <Label>Banner Image (16:9 ratio)</Label>
+                            <Label>Tile Image (4:3 ratio)</Label>
                             <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
                               <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
                               <div className="text-sm text-muted-foreground mb-2">
