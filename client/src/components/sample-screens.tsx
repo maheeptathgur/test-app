@@ -51,6 +51,14 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
             </svg>
           </div>
         );
+      case 'gmail':
+        return (
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
+            </svg>
+          </div>
+        );
       case 'google workspace':
         return (
           <div className="w-8 h-8 rounded flex items-center justify-center">
@@ -230,12 +238,12 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
 
   const integrationsByCategory = {
     "Popular Integrations": [
+      { name: 'Gmail', description: 'Send emails, read messages, organize inbox, and manage labels', users: '1.8B+', category: 'communication', connected: true },
       { name: 'Slack', description: 'Send messages, create channels, and manage team notifications', users: '10M+', category: 'communication', connected: true },
       { name: 'Google Workspace', description: 'Access Gmail, create documents, schedule meetings, and manage files', users: '3B+', category: 'productivity', connected: true },
       { name: 'Microsoft 365', description: 'Create Word docs, Excel sheets, PowerPoint slides, and send Outlook emails', users: '1.3B+', category: 'productivity', connected: false },
       { name: 'Zoom', description: 'Schedule meetings, start video calls, and manage webinars', users: '300M+', category: 'communication', connected: true },
       { name: 'Trello', description: 'Create boards, manage cards, assign tasks, and track project progress', users: '50M+', category: 'productivity', connected: false },
-      { name: 'Asana', description: 'Create tasks, set deadlines, assign team members, and track milestones', users: '100M+', category: 'productivity', connected: false },
     ],
     "Recently Added": [
       { name: 'Linear', description: 'Create issues, track bugs, manage sprints, and plan roadmaps', users: 'New', category: 'productivity', connected: false },
