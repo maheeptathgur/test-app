@@ -1333,7 +1333,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#008062] text-white border-[#008062]">
+                              <TooltipContent className="bg-[#e6eeef] text-gray-900 border-gray-200">
                                 <p>Show a document preview pane alongside the chat interface</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1357,7 +1357,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#008062] text-white border-[#008062]">
+                              <TooltipContent className="bg-[#e6eeef] text-gray-900 border-gray-200">
                                 <p>Display source references and citations in AI responses</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1381,7 +1381,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#008062] text-white border-[#008062]">
+                              <TooltipContent className="bg-[#e6eeef] text-gray-900 border-gray-200">
                                 <p>Highlight this copilot in featured listings and recommendations</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1405,7 +1405,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#008062] text-white border-[#008062]">
+                              <TooltipContent className="bg-[#e6eeef] text-gray-900 border-gray-200">
                                 <p>Require users to enter a custom prompt before starting conversations</p>
                               </TooltipContent>
                             </Tooltip>
