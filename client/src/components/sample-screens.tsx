@@ -54,7 +54,6 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
           Close
         </Button>
       </div>
-
       {/* Connection Settings */}
       <div className="space-y-6">
           <div className="space-y-6">
@@ -69,7 +68,7 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     <div>
                       <p className="font-medium">Connected to Gmail</p>
-                      <p className="text-sm text-gray-600">john.doe@company.com</p>
+                      <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
                     </div>
                   </div>
                   <Button variant="outline" size="sm">
@@ -101,7 +100,6 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
             </Card>
           </div>
       </div>
-
       {/* Footer Actions */}
       <div className="flex justify-between items-center pt-6 border-t">
         <Button variant="outline" onClick={onBack}>
