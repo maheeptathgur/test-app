@@ -623,12 +623,15 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       {/* Content */}
       <div>
         {activeTab === "general" && (
-            <div className="p-6 pt-[7px] pb-[7px]">
+            <div className="p-6">
               <Card className="w-full">
-                <CardContent className="p-6 space-y-8">
+                <CardContent className="p-6 space-y-6">
                 {/* Copilot Configuration */}
                 <div>
-                  <h2 className="text-lg font-semibold mb-4 text-foreground">Copilot Configuration</h2>
+                  <div className="mb-6">
+                    <h2 className="text-lg font-semibold text-foreground">Copilot Configuration</h2>
+                    <p className="text-sm text-muted-foreground">Manage basic copilot settings and behavior</p>
+                  </div>
                   <div className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -1022,7 +1025,10 @@ function MyComponent() {
                 <CardContent className="p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-lg font-semibold text-foreground">Components</h2>
+                    <div>
+                      <h2 className="text-lg font-semibold text-foreground">Components</h2>
+                      <p className="text-sm text-muted-foreground">Manage agents, tools, and workflows for this copilot</p>
+                    </div>
                     <div className="flex gap-2">
                       <Button variant="outline" size="sm" onClick={() => addComponent('agent')}>
                         <Plus className="w-4 h-4 mr-1" />
@@ -1355,8 +1361,11 @@ function MyComponent() {
               <Card className="w-full">
                 <CardContent className="p-6 space-y-6">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-lg font-semibold text-foreground">Knowledge Base</h2>
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h2 className="text-lg font-semibold text-foreground">Knowledge Base</h2>
+                      <p className="text-sm text-muted-foreground">Manage Competitor Researcher's knowledge sources and documentation</p>
+                    </div>
                     <div className="flex gap-2">
                       <Button variant="outline" size="sm" onClick={handleAddDocument}>
                         <Plus className="w-4 h-4 mr-1" />
@@ -1626,7 +1635,10 @@ function MyComponent() {
               <Card className="w-full">
                 <CardContent className="p-6 space-y-6">
                 <div>
-                  <h2 className="text-lg font-semibold text-foreground mb-4">User Documents</h2>
+                  <div className="mb-6">
+                    <h2 className="text-lg font-semibold text-foreground">User Documents</h2>
+                    <p className="text-sm text-muted-foreground">Manage user-uploaded documents and files</p>
+                  </div>
                   
                   {/* Search and Filter Controls */}
                   <div className="flex flex-col sm:flex-row gap-4 mb-6">
@@ -2035,7 +2047,7 @@ function MyComponent() {
               <Card className="w-full">
                 <CardContent className="p-6 space-y-6">
                 <div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <div>
                       <h2 className="text-lg font-semibold text-foreground">Profile Fields</h2>
                       <p className="text-sm text-muted-foreground">Configure which profile fields this copilot should collect from users</p>
