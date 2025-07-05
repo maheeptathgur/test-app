@@ -1004,12 +1004,16 @@ function MyComponent() {
                 </CardContent>
               </Card>
               
-              {/* Save Button */}
-              <div className="flex justify-end pt-6">
-                <Button onClick={handleSave} className="gap-2">
-                  <Save className="h-4 w-4" />
-                  Save Configuration
-                </Button>
+              {/* Save Footer */}
+              <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 mt-8 -mx-6 -mb-6">
+                <div className="flex justify-end gap-3">
+                  <Button variant="outline" onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button onClick={handleSave} className="bg-[#008062] hover:bg-[#006b54]">
+                    Save Changes
+                  </Button>
+                </div>
               </div>
             </div>
             )}
