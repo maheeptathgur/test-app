@@ -759,8 +759,7 @@ export default function Dashboard() {
     setCopilots(prev => prev.map(copilot => 
       copilot.id === updatedCopilot.id ? updatedCopilot : copilot
     ));
-    showNotification(`Updated configuration for: ${updatedCopilot.name}`);
-    setConfiguringCopilot(null);
+    // Note: Not closing configuration anymore - stays open after save
   };
 
   const handleDeleteConversation = (conversationId: string) => {
