@@ -578,6 +578,7 @@ export default function Dashboard() {
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'archived'>('all');
   const [sortBy, setSortBy] = useState<'name' | 'type' | 'status'>('name');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [browseIntegrationsActive, setBrowseIntegrationsActive] = useState(false);
   const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
@@ -1099,6 +1100,7 @@ export default function Dashboard() {
             section="tools" 
             configureTool={configureTool}
             onClearConfigureTool={() => setConfigureTool(null)}
+            onBrowseIntegrationsChange={setBrowseIntegrationsActive}
           />,
         };
       case 'workflows':
@@ -1910,9 +1912,9 @@ export default function Dashboard() {
         ) : /* Regular Dashboard Content */
         (
           <div className="h-full p-8 overflow-y-auto">
-            {/* Top Bar - Hidden when in user-view, settings modes, or configuration screens */}
+            {/* Top Bar - Hidden when in user-view, settings modes, configuration screens, or browse integrations */}
             {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-              !configureAgent && !configureTool && !configureWorkflow && !testAgent && (
+              !configureAgent && !configureTool && !configureWorkflow && !testAgent && !browseIntegrationsActive && (
               <div className="mb-8">
                   <div>
                     <div className="flex items-center gap-3">

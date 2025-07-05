@@ -174,7 +174,7 @@ interface SampleScreenProps {
   onClearConfigureTool?: () => void;
   configureWorkflow?: {id: string, name: string} | null;
   onClearConfigureWorkflow?: () => void;
-
+  onBrowseIntegrationsChange?: (isActive: boolean) => void;
 }
 
 export function SampleScreen({ 
@@ -185,7 +185,8 @@ export function SampleScreen({
   configureTool: externalConfigureTool,
   onClearConfigureTool,
   configureWorkflow: externalConfigureWorkflow,
-  onClearConfigureWorkflow
+  onClearConfigureWorkflow,
+  onBrowseIntegrationsChange
 }: SampleScreenProps) {
   const [localConfigureAgent, setLocalConfigureAgent] = useState<any>(null);
   const [editWorkflow, setEditWorkflow] = useState<string | undefined>(undefined);
@@ -211,6 +212,11 @@ export function SampleScreen({
       setLocalConfigureAgent(null);
     }
   }, [onClearConfigureAgent]);
+
+  // Notify dashboard when browse integrations state changes
+  useEffect(() => {
+    onBrowseIntegrationsChange?.(showBrowseIntegrations);
+  }, [showBrowseIntegrations, onBrowseIntegrationsChange]);
 
   useEffect(() => {
     if (onClearConfigureTool) {
