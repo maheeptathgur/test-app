@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
-import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle, ArrowLeft, Copy, Download, Loader2, Play, RotateCcw, Upload, Activity, ChevronDown, Hash, Video, Trello, Calendar, FigmaIcon, MonitorPlay, FileQuestion, Github, Zap, Palette, Tablet, Building2, Send } from "lucide-react";
+import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle, ArrowLeft, Copy, Download, Loader2, Play, RotateCcw, Upload, Activity, ChevronDown, Hash, Video, Trello, Calendar, FigmaIcon, MonitorPlay, FileQuestion, Github, Zap, Palette, Tablet, Building2, Send, Settings } from "lucide-react";
 import { 
   SiGmail,
   SiSlack,
@@ -32,7 +32,278 @@ import { ToolConfigureScreen } from "./tool-configure-screen";
 type WorkspaceSection = 'subscriptions' | 'conversations' | 'analytics' | 'users';
 
 // Declare BrowseIntegrationsScreen before it's used
-function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
+function GmailConfigScreen({ onBack }: { onBack: () => void }) {
+  const [activeTab, setActiveTab] = useState('connection');
+  const [emailFilters, setEmailFilters] = useState([
+    { id: 1, name: 'Priority Emails', condition: 'is:important', action: 'Label as Priority', enabled: true },
+    { id: 2, name: 'Auto-Reply', condition: 'subject:support', action: 'Send auto-reply', enabled: true },
+    { id: 3, name: 'Team Notifications', condition: 'from:team@company.com', action: 'Forward to Slack', enabled: false }
+  ]);
+
+  const tabs = [
+    { id: 'connection', label: 'Connection', icon: <Wrench className="w-4 h-4" /> },
+    { id: 'permissions', label: 'Permissions', icon: <Shield className="w-4 h-4" /> },
+    { id: 'automation', label: 'Automation', icon: <Zap className="w-4 h-4" /> },
+    { id: 'usage', label: 'Usage', icon: <Activity className="w-4 h-4" /> }
+  ];
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center gap-4">
+        <Button variant="ghost" size="sm" onClick={onBack}>
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Integrations
+        </Button>
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded flex items-center justify-center">
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
+            </svg>
+          </div>
+          <div>
+            <h1 className="text-2xl font-bold">Gmail Configuration</h1>
+            <p className="text-gray-600">Manage your Gmail integration settings and automation</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="border-b">
+        <nav className="flex space-x-8">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-2 py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
+                activeTab === tab.id
+                  ? 'border-[#008062] text-[#008062]'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              {tab.icon}
+              {tab.label}
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      {/* Tab Content */}
+      <div className="space-y-6">
+        {activeTab === 'connection' && (
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Connection Status</CardTitle>
+                <CardDescription>Your Gmail account connection and authentication details</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div>
+                      <p className="font-medium">Connected to Gmail</p>
+                      <p className="text-sm text-gray-600">john.doe@company.com</p>
+                    </div>
+                  </div>
+                  <Button variant="outline" size="sm">
+                    Reconnect
+                  </Button>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Account Email</label>
+                    <Input value="john.doe@company.com" disabled />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Connected Since</label>
+                    <Input value="March 15, 2024" disabled />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Last Sync</label>
+                    <Input value="2 minutes ago" disabled />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Sync Frequency</label>
+                    <Select defaultValue="real-time">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="real-time">Real-time</SelectItem>
+                        <SelectItem value="5min">Every 5 minutes</SelectItem>
+                        <SelectItem value="15min">Every 15 minutes</SelectItem>
+                        <SelectItem value="1hour">Every hour</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === 'permissions' && (
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Gmail Permissions</CardTitle>
+                <CardDescription>Control what data your copilots can access from Gmail</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {[
+                  { permission: 'Read emails', description: 'Allow copilots to read email content and metadata', granted: true },
+                  { permission: 'Send emails', description: 'Allow copilots to compose and send emails on your behalf', granted: true },
+                  { permission: 'Manage labels', description: 'Create, modify, and apply labels to emails', granted: true },
+                  { permission: 'Access contacts', description: 'Read and search your Gmail contacts', granted: false },
+                  { permission: 'Manage drafts', description: 'Create, edit, and delete email drafts', granted: true },
+                  { permission: 'Access attachments', description: 'Download and process email attachments', granted: false }
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                      <p className="font-medium">{item.permission}</p>
+                      <p className="text-sm text-gray-600">{item.description}</p>
+                    </div>
+                    <Switch defaultChecked={item.granted} />
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === 'automation' && (
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Email Automation Rules</CardTitle>
+                    <CardDescription>Set up automated actions based on email conditions</CardDescription>
+                  </div>
+                  <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Rule
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {emailFilters.map((filter) => (
+                    <div key={filter.id} className="flex items-center justify-between p-4 border rounded-lg">
+                      <div className="flex items-center gap-4">
+                        <Switch checked={filter.enabled} onCheckedChange={(checked) => {
+                          setEmailFilters(prev => prev.map(f => f.id === filter.id ? { ...f, enabled: checked } : f));
+                        }} />
+                        <div>
+                          <p className="font-medium">{filter.name}</p>
+                          <p className="text-sm text-gray-600">
+                            When <code className="bg-gray-100 px-1 rounded">{filter.condition}</code> → {filter.action}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Button variant="ghost" size="sm">
+                          <Edit3 className="w-4 h-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {activeTab === 'usage' && (
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-medium">API Calls (24h)</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">1,247</div>
+                  <p className="text-xs text-green-600">+12% from yesterday</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-medium">Emails Processed</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">89</div>
+                  <p className="text-xs text-gray-600">Last 24 hours</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm font-medium">Auto-replies Sent</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">23</div>
+                  <p className="text-xs text-gray-600">This week</p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Recent Activity</CardTitle>
+                <CardDescription>Latest Gmail integration actions</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {[
+                    { action: 'Email sent', details: 'Marketing campaign to lead@prospect.com', time: '2 minutes ago', type: 'send' },
+                    { action: 'Auto-reply triggered', details: 'Support inquiry from customer@example.com', time: '8 minutes ago', type: 'auto' },
+                    { action: 'Label applied', details: 'Priority label added to 3 emails', time: '15 minutes ago', type: 'organize' },
+                    { action: 'Email processed', details: 'Invoice processed and forwarded to accounting', time: '1 hour ago', type: 'process' }
+                  ].map((activity, index) => (
+                    <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                      <div className={`w-2 h-2 rounded-full ${
+                        activity.type === 'send' ? 'bg-blue-500' :
+                        activity.type === 'auto' ? 'bg-green-500' :
+                        activity.type === 'organize' ? 'bg-purple-500' :
+                        'bg-orange-500'
+                      }`}></div>
+                      <div className="flex-1">
+                        <p className="font-medium text-sm">{activity.action}</p>
+                        <p className="text-xs text-gray-600">{activity.details}</p>
+                      </div>
+                      <span className="text-xs text-gray-500">{activity.time}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+      </div>
+
+      {/* Footer Actions */}
+      <div className="flex justify-between items-center pt-6 border-t">
+        <Button variant="outline" onClick={onBack}>
+          Cancel
+        </Button>
+        <div className="flex gap-3">
+          <Button variant="outline">
+            Test Connection
+          </Button>
+          <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+            Save Changes
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BrowseIntegrationsScreen({ onBack, onGmailConfig }: { onBack: () => void; onGmailConfig: () => void }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('name');
@@ -362,7 +633,16 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
                       <p className="text-sm text-gray-600 mt-1">{integration.description}</p>
                       {integration.connected ? (
                         <div className="flex items-center gap-3 mt-3">
-                          <Button size="sm" variant="outline" className="text-gray-600 hover:text-gray-800">
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            className="text-gray-600 hover:text-gray-800"
+                            onClick={() => {
+                              if (integration.name === 'Gmail') {
+                                onGmailConfig();
+                              }
+                            }}
+                          >
                             Configure
                           </Button>
                           <div className="flex items-center gap-2 text-green-600">
@@ -425,6 +705,7 @@ export function SampleScreen({
   const [showConnectNewTool, setShowConnectNewTool] = useState(false);
   const [showBrowseIntegrations, setShowBrowseIntegrations] = useState(false);
   const [showAddWorkspace, setShowAddWorkspace] = useState(false);
+  const [showGmailConfig, setShowGmailConfig] = useState(false);
 
   // Clear local state when section changes or when external clear functions are triggered
   useEffect(() => {
@@ -435,6 +716,7 @@ export function SampleScreen({
     setShowConnectNewTool(false);
     setShowBrowseIntegrations(false);
     setShowAddWorkspace(false);
+    setShowGmailConfig(false);
   }, [section]);
 
   // Clear local state when external clear functions are called
@@ -520,7 +802,11 @@ export function SampleScreen({
         }
 
         if (showBrowseIntegrations) {
-          return <BrowseIntegrationsScreen onBack={() => setShowBrowseIntegrations(false)} />;
+          return <BrowseIntegrationsScreen onBack={() => setShowBrowseIntegrations(false)} onGmailConfig={() => setShowGmailConfig(true)} />;
+        }
+
+        if (showGmailConfig) {
+          return <GmailConfigScreen onBack={() => setShowGmailConfig(false)} />;
         }
 
         switch (section) {
