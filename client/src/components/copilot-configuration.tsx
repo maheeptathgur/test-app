@@ -571,7 +571,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   // Navigation handlers dispatch custom events instead of showing inline screens
 
   return (
-    <div className="flex flex-col h-full bg-background">
+    <div className="min-h-full bg-background">
       {/* Header */}
       <div className="flex items-center justify-between p-6 bg-muted/50">
         <div className="flex items-center gap-3">
@@ -588,44 +588,43 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
           Close
         </Button>
       </div>
-      {/* Content */}
-      <div className="flex-1 overflow-hidden">
-        <div className="h-full flex flex-col">
-          <div className="bg-muted/20">
-            <div className="px-6 pt-4 pb-4">
-              {/* Configuration Tabs */}
-              <div className="border-b border-gray-200">
-                <nav className="-mb-px flex space-x-8">
-                  {[
-                    { id: "general", label: "General", icon: Settings },
-                    { id: "components", label: "Components", icon: Bot },
-                    { id: "knowledge", label: "Knowledge Base", icon: BookOpen },
-                    { id: "user-docs", label: "User Documents", icon: Upload },
-                    { id: "profile", label: "Profile Fields", icon: Users }
-                  ].map((tab) => {
-                    const IconComponent = tab.icon;
-                    return (
-                      <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
-                          activeTab === tab.id
-                            ? 'border-[#008062] text-[#008062]'
-                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                        }`}
-                      >
-                        <IconComponent className="w-4 h-4" />
-                        {tab.label}
-                      </button>
-                    );
-                  })}
-                </nav>
-              </div>
-            </div>
+      
+      {/* Tabs */}
+      <div className="bg-muted/20">
+        <div className="px-6 pt-4 pb-4">
+          <div className="border-b border-gray-200">
+            <nav className="-mb-px flex space-x-8">
+              {[
+                { id: "general", label: "General", icon: Settings },
+                { id: "components", label: "Components", icon: Bot },
+                { id: "knowledge", label: "Knowledge Base", icon: BookOpen },
+                { id: "user-docs", label: "User Documents", icon: Upload },
+                { id: "profile", label: "Profile Fields", icon: Users }
+              ].map((tab) => {
+                const IconComponent = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
+                      activeTab === tab.id
+                        ? 'border-[#008062] text-[#008062]'
+                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    }`}
+                  >
+                    <IconComponent className="w-4 h-4" />
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </nav>
           </div>
+        </div>
+      </div>
 
-          <div className="flex-1 overflow-y-auto">
-            {activeTab === "general" && (
+      {/* Content */}
+      <div>
+        {activeTab === "general" && (
             <div className="p-6 h-full pt-[7px] pb-[7px]">
               <Card className="w-full">
                 <CardContent className="p-6 space-y-8">
@@ -2162,20 +2161,6 @@ function MyComponent() {
               </div>
             </div>
             )}
-          </div>
-        </div>
-      </div>
-      {/* Footer */}
-      <div className="border-t bg-muted/50 p-6">
-        <div className="max-w-4xl mx-auto flex justify-end gap-3">
-          <Button variant="outline" onClick={onClose}>
-            Cancel
-          </Button>
-          <Button onClick={handleSave} className="gap-2">
-            <Save className="h-4 w-4" />
-            Save Configuration
-          </Button>
-        </div>
       </div>
       {/* AI Document Suggestions Modal */}
       <Dialog open={suggestDocsOpen} onOpenChange={setSuggestDocsOpen}>
