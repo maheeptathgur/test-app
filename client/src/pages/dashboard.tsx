@@ -1335,7 +1335,29 @@ export default function Dashboard() {
 
   return (
     <TooltipProvider delayDuration={1000}>
-      <div className="flex h-screen bg-background">
+      <div className="flex flex-col h-screen bg-background">
+        {/* User View Preview Toolbar */}
+        {activeSection === 'user-view' && (
+          <div className="bg-[#008062] text-white px-6 py-3 flex items-center justify-between border-b border-[#006b52] flex-shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium">User View Preview</span>
+              <span className="text-xs text-white/80">This is how your workspace appears to end users</span>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => handleSectionChange('copilots')}
+              className="text-white hover:bg-white/10 hover:text-white gap-2"
+            >
+              <X className="w-4 h-4" />
+              Exit Preview
+            </Button>
+          </div>
+        )}
+        
+        {/* Main Application Container */}
+        <div className="flex flex-1 min-h-0 bg-background">
         {/* Sidebar */}
         <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
         {/* Logo and Toggle */}
@@ -1928,7 +1950,7 @@ export default function Dashboard() {
             </div>
           </div>
         )}
-      </div>
+        </div>
       {/* Edit Modal */}
       <EditCopilotModal
         isOpen={!!editingCopilot}
@@ -1943,6 +1965,7 @@ export default function Dashboard() {
         onClose={handleCancelDelete}
         onConfirm={handleConfirmDelete}
       />
+        </div>
       </div>
     </TooltipProvider>
   );
