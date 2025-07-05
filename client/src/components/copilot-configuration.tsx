@@ -593,7 +593,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       <div className="flex-1 overflow-hidden">
         <div className="h-full flex flex-col">
           <div className="bg-muted/20">
-            <div className="max-w-4xl mx-auto px-6 pt-4 pb-4">
+            <div className="px-6 pt-4 pb-4">
               {/* Configuration Tabs */}
               <div className="border-b border-gray-200">
                 <nav className="-mb-px flex space-x-8">
