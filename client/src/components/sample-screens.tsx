@@ -79,7 +79,7 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Account Email</label>
-                    <Input value="john.doe@company.com" disabled />
+                    <Input value="mandeep@knolli.ai" disabled />
                   </div>
                   
                   <div className="space-y-2">
