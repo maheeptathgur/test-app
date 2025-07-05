@@ -1477,6 +1477,7 @@ function MyComponent() {
                           <Select value={aiProvider} onValueChange={(value) => {
                             setAiProvider(value);
                             setAiModel(getAvailableModels(value)[0] || '');
+                            setHasChanges(true);
                           }}>
                             <SelectTrigger>
                               <SelectValue />
@@ -1493,7 +1494,10 @@ function MyComponent() {
                         
                         <div className="space-y-2">
                           <Label htmlFor="aiModel">AI Model</Label>
-                          <Select value={aiModel} onValueChange={setAiModel}>
+                          <Select value={aiModel} onValueChange={(value) => {
+                            setAiModel(value);
+                            setHasChanges(true);
+                          }}>
                             <SelectTrigger>
                               <SelectValue />
                             </SelectTrigger>
