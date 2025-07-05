@@ -638,7 +638,9 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig }: { onBack: () => voi
                             variant="outline" 
                             className="text-gray-600 hover:text-gray-800"
                             onClick={() => {
+                              console.log('Configure clicked for:', integration.name);
                               if (integration.name === 'Gmail') {
+                                console.log('Calling onGmailConfig');
                                 onGmailConfig();
                               }
                             }}
@@ -802,7 +804,10 @@ export function SampleScreen({
         }
 
         if (showBrowseIntegrations) {
-          return <BrowseIntegrationsScreen onBack={() => setShowBrowseIntegrations(false)} onGmailConfig={() => setShowGmailConfig(true)} />;
+          return <BrowseIntegrationsScreen onBack={() => setShowBrowseIntegrations(false)} onGmailConfig={() => {
+            setShowBrowseIntegrations(false);
+            setShowGmailConfig(true);
+          }} />;
         }
 
         if (showGmailConfig) {
