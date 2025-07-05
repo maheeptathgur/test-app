@@ -90,32 +90,34 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       {/* Content */}
       <div className="flex-1 overflow-hidden">
         <div className="h-full flex flex-col">
-          <div className="border-b px-6 pt-4">
-            <nav className="flex space-x-8">
-              {[
-                { id: "general", label: "General Settings", icon: Settings },
-                { id: "components", label: "Components", icon: Bot },
-                { id: "knowledge", label: "Knowledge Base", icon: BookOpen },
-                { id: "user-docs", label: "User Documents", icon: Upload },
-                { id: "profile", label: "Profile Fields", icon: Users }
-              ].map((tab) => {
-                const IconComponent = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveTab(tab.id)}
-                    className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
-                      activeTab === tab.id
-                        ? 'border-[#008062] text-[#008062]'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-                    }`}
-                  >
-                    <IconComponent className="w-4 h-4" />
-                    {tab.label}
-                  </button>
-                );
-              })}
-            </nav>
+          <div className="px-6 pt-4">
+            <div className="border-b">
+              <nav className="flex space-x-8">
+                {[
+                  { id: "general", label: "General Settings", icon: Settings },
+                  { id: "components", label: "Components", icon: Bot },
+                  { id: "knowledge", label: "Knowledge Base", icon: BookOpen },
+                  { id: "user-docs", label: "User Documents", icon: Upload },
+                  { id: "profile", label: "Profile Fields", icon: Users }
+                ].map((tab) => {
+                  const IconComponent = tab.icon;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActiveTab(tab.id)}
+                      className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
+                        activeTab === tab.id
+                          ? 'border-[#008062] text-[#008062]'
+                          : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      }`}
+                    >
+                      <IconComponent className="w-4 h-4" />
+                      {tab.label}
+                    </button>
+                  );
+                })}
+              </nav>
+            </div>
           </div>
 
           {/* Tab Content */}
