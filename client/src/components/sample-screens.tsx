@@ -98,6 +98,36 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                 </div>
               </CardContent>
             </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Permissions & Scopes</CardTitle>
+                <CardDescription>Control what actions this integration can perform</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Draft Gmail</p>
+                    <p className="text-sm text-gray-600">Create and save email drafts</p>
+                  </div>
+                  <Switch defaultChecked={true} />
+                </div>
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Send Email</p>
+                    <p className="text-sm text-gray-600">Send emails on your behalf</p>
+                  </div>
+                  <Switch defaultChecked={true} />
+                </div>
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Lookup Contacts</p>
+                    <p className="text-sm text-gray-600">Access and search your contact list</p>
+                  </div>
+                  <Switch defaultChecked={false} />
+                </div>
+              </CardContent>
+            </Card>
           </div>
       </div>
       {/* Footer Actions */}
