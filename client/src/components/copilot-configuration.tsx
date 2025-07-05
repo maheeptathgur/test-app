@@ -98,6 +98,14 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [kbSortBy, setKbSortBy] = useState('updated');
   const [kbFilterType, setKbFilterType] = useState('all');
   
+  // Advanced Settings toggles
+  const [isDiscoverable, setIsDiscoverable] = useState(false);
+  const [documentPaneEnabled, setDocumentPaneEnabled] = useState(false);
+  const [showSources, setShowSources] = useState(false);
+  const [isFeatured, setIsFeatured] = useState(false);
+  const [promptRequired, setPromptRequired] = useState(true);
+  const [promptLabel, setPromptLabel] = useState('');
+  
   // User Documents filters and search
   const [docsSearchTerm, setDocsSearchTerm] = useState('');
   const [docsSortBy, setDocsSortBy] = useState('updated');
@@ -1321,8 +1329,15 @@ function MyComponent() {
                               ?
                             </button>
                           </div>
-                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-gray-200">
-                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1" />
+                          <button 
+                            onClick={() => setIsDiscoverable(!isDiscoverable)}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                              isDiscoverable ? 'bg-[#008062]' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              isDiscoverable ? 'translate-x-6' : 'translate-x-1'
+                            }`} />
                           </button>
                         </div>
                         
@@ -1333,8 +1348,15 @@ function MyComponent() {
                               ?
                             </button>
                           </div>
-                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-gray-200">
-                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1" />
+                          <button 
+                            onClick={() => setDocumentPaneEnabled(!documentPaneEnabled)}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                              documentPaneEnabled ? 'bg-[#008062]' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              documentPaneEnabled ? 'translate-x-6' : 'translate-x-1'
+                            }`} />
                           </button>
                         </div>
                         
@@ -1345,8 +1367,15 @@ function MyComponent() {
                               ?
                             </button>
                           </div>
-                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-gray-200">
-                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1" />
+                          <button 
+                            onClick={() => setShowSources(!showSources)}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                              showSources ? 'bg-[#008062]' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              showSources ? 'translate-x-6' : 'translate-x-1'
+                            }`} />
                           </button>
                         </div>
                         
@@ -1357,8 +1386,15 @@ function MyComponent() {
                               ?
                             </button>
                           </div>
-                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-gray-200">
-                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-1" />
+                          <button 
+                            onClick={() => setIsFeatured(!isFeatured)}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                              isFeatured ? 'bg-[#008062]' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              isFeatured ? 'translate-x-6' : 'translate-x-1'
+                            }`} />
                           </button>
                         </div>
                         
@@ -1369,19 +1405,30 @@ function MyComponent() {
                               ?
                             </button>
                           </div>
-                          <button className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 bg-[#008062]">
-                            <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6" />
+                          <button 
+                            onClick={() => setPromptRequired(!promptRequired)}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                              promptRequired ? 'bg-[#008062]' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              promptRequired ? 'translate-x-6' : 'translate-x-1'
+                            }`} />
                           </button>
                         </div>
                         
-                        <div className="space-y-2">
-                          <label className="text-sm font-medium">Prompt label</label>
-                          <Input 
-                            type="text" 
-                            placeholder="Enter prompt label..."
-                            className="w-full"
-                          />
-                        </div>
+                        {promptRequired && (
+                          <div className="space-y-2">
+                            <label className="text-sm font-medium">Prompt label</label>
+                            <Input 
+                              type="text" 
+                              value={promptLabel}
+                              onChange={(e) => setPromptLabel(e.target.value)}
+                              placeholder="Enter prompt label..."
+                              className="w-full"
+                            />
+                          </div>
+                        )}
                       </div>
                       
                       <div className="space-y-4">
