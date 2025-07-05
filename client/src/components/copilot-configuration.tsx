@@ -887,7 +887,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                     value={mdContent}
                     onChange={(e) => setMdContent(e.target.value)}
                     placeholder="Start writing your content here... Use the toolbar buttons to add formatting."
-                    className="w-full h-[450px] border-0 resize-none focus-visible:ring-0 rounded-none rounded-b-lg bg-white focus:bg-white"
+                    className="w-full h-[450px] border border-gray-200 resize-none focus-visible:ring-0 focus-visible:border-[#008062] rounded-none rounded-b-lg bg-white focus:bg-white"
                     style={{ 
                       fontFamily: 'ui-sans-serif, system-ui, sans-serif',
                       backgroundColor: 'white'
