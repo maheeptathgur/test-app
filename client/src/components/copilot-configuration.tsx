@@ -2046,11 +2046,12 @@ function MyComponent() {
               <Card className="w-full">
                 <CardContent className="p-6 space-y-6">
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <h2 className="font-semibold text-foreground text-[24px]">Profile Fields</h2>
-                      <p className="text-sm text-muted-foreground">Configure which profile fields this copilot should collect from users</p>
-                    </div>
+                  <div className="mb-6">
+                    <h2 className="font-semibold text-foreground text-[24px]">Profile Fields</h2>
+                    <p className="text-sm text-muted-foreground">Configure which profile fields this copilot should collect from users</p>
+                  </div>
+                  
+                  <div className="flex justify-end mb-6">
                     <Button variant="outline" size="sm" onClick={handleAddField}>
                       <Plus className="w-4 h-4 mr-1" />
                       Add Field
