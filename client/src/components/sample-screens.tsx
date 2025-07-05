@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
-import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle, ArrowLeft, Copy, Download, Loader2, Play, RotateCcw, Upload, Activity, ChevronDown } from "lucide-react";
+import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle, ArrowLeft, Copy, Download, Loader2, Play, RotateCcw, Upload, Activity, ChevronDown, Hash, Video, Trello, Calendar, FigmaIcon, MonitorPlay, FileQuestion, Github, Zap, Palette, Tablet, Building2, Send } from "lucide-react";
 import { 
   SiGmail,
   SiSlack,
@@ -40,25 +40,25 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
   // Function to get tool logo
   const getToolLogo = (toolName: string) => {
     switch (toolName.toLowerCase()) {
-      case 'slack': return <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center text-white font-bold">#</div>;
-      case 'google workspace': return <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white font-bold">G</div>;
-      case 'microsoft 365': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold">M</div>;
-      case 'zoom': return <div className="w-8 h-8 bg-blue-400 rounded flex items-center justify-center text-white font-bold">Z</div>;
-      case 'trello': return <div className="w-8 h-8 bg-blue-700 rounded flex items-center justify-center text-white font-bold">T</div>;
-      case 'asana': return <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center text-white font-bold">A</div>;
-      case 'linear': return <div className="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center text-white font-bold">L</div>;
-      case 'figma': return <div className="w-8 h-8 bg-purple-500 rounded flex items-center justify-center text-white font-bold">F</div>;
-      case 'loom': return <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center text-white font-bold">L</div>;
-      case 'notion': return <div className="w-8 h-8 bg-gray-800 rounded flex items-center justify-center text-white font-bold">N</div>;
-      case 'discord': return <div className="w-8 h-8 bg-indigo-500 rounded flex items-center justify-center text-white font-bold">D</div>;
-      case 'google analytics': return <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center text-white font-bold">GA</div>;
-      case 'mixpanel': return <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center text-white font-bold">M</div>;
-      case 'amplitude': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold">A</div>;
-      case 'tableau': return <div className="w-8 h-8 bg-blue-700 rounded flex items-center justify-center text-white font-bold">T</div>;
-      case 'hubspot': return <div className="w-8 h-8 bg-orange-600 rounded flex items-center justify-center text-white font-bold">H</div>;
-      case 'mailchimp': return <div className="w-8 h-8 bg-yellow-500 rounded flex items-center justify-center text-white font-bold">M</div>;
-      case 'salesforce': return <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center text-white font-bold">S</div>;
-      case 'intercom': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold">I</div>;
+      case 'slack': return <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center"><Hash className="w-4 h-4 text-white" /></div>;
+      case 'google workspace': return <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center"><Mail className="w-4 h-4 text-white" /></div>;
+      case 'microsoft 365': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center"><Building2 className="w-4 h-4 text-white" /></div>;
+      case 'zoom': return <div className="w-8 h-8 bg-blue-400 rounded flex items-center justify-center"><Video className="w-4 h-4 text-white" /></div>;
+      case 'trello': return <div className="w-8 h-8 bg-blue-700 rounded flex items-center justify-center"><Trello className="w-4 h-4 text-white" /></div>;
+      case 'asana': return <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center"><Calendar className="w-4 h-4 text-white" /></div>;
+      case 'linear': return <div className="w-8 h-8 bg-indigo-600 rounded flex items-center justify-center"><ArrowUpDown className="w-4 h-4 text-white" /></div>;
+      case 'figma': return <div className="w-8 h-8 bg-purple-500 rounded flex items-center justify-center"><Palette className="w-4 h-4 text-white" /></div>;
+      case 'loom': return <div className="w-8 h-8 bg-red-500 rounded flex items-center justify-center"><MonitorPlay className="w-4 h-4 text-white" /></div>;
+      case 'notion': return <div className="w-8 h-8 bg-gray-800 rounded flex items-center justify-center"><FileText className="w-4 h-4 text-white" /></div>;
+      case 'discord': return <div className="w-8 h-8 bg-indigo-500 rounded flex items-center justify-center"><MessageSquare className="w-4 h-4 text-white" /></div>;
+      case 'google analytics': return <div className="w-8 h-8 bg-orange-500 rounded flex items-center justify-center"><BarChart className="w-4 h-4 text-white" /></div>;
+      case 'mixpanel': return <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center"><TrendingUp className="w-4 h-4 text-white" /></div>;
+      case 'amplitude': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center"><Activity className="w-4 h-4 text-white" /></div>;
+      case 'tableau': return <div className="w-8 h-8 bg-blue-700 rounded flex items-center justify-center"><BarChart3 className="w-4 h-4 text-white" /></div>;
+      case 'hubspot': return <div className="w-8 h-8 bg-orange-600 rounded flex items-center justify-center"><Users className="w-4 h-4 text-white" /></div>;
+      case 'mailchimp': return <div className="w-8 h-8 bg-yellow-500 rounded flex items-center justify-center"><Send className="w-4 h-4 text-white" /></div>;
+      case 'salesforce': return <div className="w-8 h-8 bg-blue-500 rounded flex items-center justify-center"><Cloud className="w-4 h-4 text-white" /></div>;
+      case 'intercom': return <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center"><MessageCircle className="w-4 h-4 text-white" /></div>;
       default: return <div className="w-8 h-8 bg-gray-500 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
     }
   };
