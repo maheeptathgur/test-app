@@ -352,12 +352,10 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
                     <div className="flex-1">
                       <h4 className="font-medium">{integration.name}</h4>
                       <p className="text-sm text-gray-600 mt-1">{integration.description}</p>
+                      <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white mt-3">
+                        Connect
+                      </Button>
                     </div>
-                  </div>
-                  <div className="flex justify-end items-center">
-                    <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
-                      Connect
-                    </Button>
                   </div>
                 </Card>
               ))}
