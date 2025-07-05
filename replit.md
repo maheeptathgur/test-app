@@ -230,6 +230,7 @@ Changelog:
 - July 5, 2025. Added user view preview toolbar spanning full application width with admin messaging, pulsing indicator, and exit preview functionality
 - July 5, 2025. Made user view preview toolbar thinner and lighter with reduced padding (py-2, px-4) and transparent background (/80 opacity) for more refined appearance
 - July 5, 2025. Added three specific image upload areas to Settings: Icon (1:1), Logo (2:1), and Banner (16:9) with appropriate aspect ratio preview boxes, brand-colored upload buttons, and helpful dimension guidance, replacing the old Workspace Avatar section
+- July 5, 2025. Updated image upload areas to use large dashed-border format with centered content - implemented two-column grid layout for Icon (1:1) and Banner (16:9) with prominent upload zones, hover effects, and Choose File buttons matching the provided design specification
 ```
 
 ## User Preferences
