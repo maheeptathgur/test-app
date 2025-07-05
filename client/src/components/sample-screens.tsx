@@ -505,6 +505,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
           <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+            <Plus className="w-4 h-4 mr-2" />
             Create New Agent
           </Button>
           <Button variant="outline">
