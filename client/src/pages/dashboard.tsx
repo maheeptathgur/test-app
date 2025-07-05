@@ -500,10 +500,6 @@ const navigationItems = [
   { id: 'tools', label: 'Tools', icon: Settings },
   { id: 'workflows', label: 'Workflows', icon: BarChart3 },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
-  { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
-  { id: 'conversations', label: 'Conversations', icon: MessageSquare },
-  { id: 'analytics', label: 'Analytics', icon: TrendingUp },
-  { id: 'users', label: 'Users', icon: Shield },
   { id: 'workspace-settings', label: 'Workspace Settings', icon: Settings },
   { id: 'user-view', label: 'User View', icon: User },
 ] as const;
@@ -1122,30 +1118,7 @@ export default function Dashboard() {
           content: <SampleScreen section="knowledge-base" />,
         };
 
-      case 'subscriptions':
-        return {
-          title: 'Subscriptions',
-          subtitle: 'Manage user subscriptions and billing information',
-          content: <SampleScreen section="subscriptions" />,
-        };
-      case 'conversations':
-        return {
-          title: 'Conversations',
-          subtitle: 'View and manage all user conversations with copilots',
-          content: <SampleScreen section="conversations" />,
-        };
-      case 'analytics':
-        return {
-          title: 'Analytics',
-          subtitle: 'Performance metrics and insights for your copilots',
-          content: <SampleScreen section="analytics" />,
-        };
-      case 'users':
-        return {
-          title: 'Users',
-          subtitle: 'Manage user accounts and permissions',
-          content: <SampleScreen section="users" />,
-        };
+
       case 'pricing':
         return {
           title: 'Pricing Plans',

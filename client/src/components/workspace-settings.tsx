@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database } from "lucide-react";
+import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
+import { SampleScreen } from "@/components/sample-screens";
 
 export function WorkspaceSettings() {
   const [activeTab, setActiveTab] = useState("general");
@@ -42,6 +43,46 @@ export function WorkspaceSettings() {
             }`}
           >
             Security
+          </button>
+          <button
+            onClick={() => setActiveTab("subscriptions")}
+            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "subscriptions"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+            }`}
+          >
+            Subscriptions
+          </button>
+          <button
+            onClick={() => setActiveTab("conversations")}
+            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "conversations"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+            }`}
+          >
+            Conversations
+          </button>
+          <button
+            onClick={() => setActiveTab("analytics")}
+            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "analytics"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+            }`}
+          >
+            Analytics
+          </button>
+          <button
+            onClick={() => setActiveTab("users")}
+            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "users"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+            }`}
+          >
+            Users
           </button>
         </nav>
 
@@ -226,6 +267,30 @@ export function WorkspaceSettings() {
             </CardContent>
           </Card>
         </div>
+        )}
+
+        {activeTab === "subscriptions" && (
+          <div className="mt-6">
+            <SampleScreen section={"subscriptions" as any} />
+          </div>
+        )}
+
+        {activeTab === "conversations" && (
+          <div className="mt-6">
+            <SampleScreen section={"conversations" as any} />
+          </div>
+        )}
+
+        {activeTab === "analytics" && (
+          <div className="mt-6">
+            <SampleScreen section={"analytics" as any} />
+          </div>
+        )}
+
+        {activeTab === "users" && (
+          <div className="mt-6">
+            <SampleScreen section={"users" as any} />
+          </div>
         )}
       </div>
     </div>
