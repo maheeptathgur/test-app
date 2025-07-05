@@ -1366,7 +1366,7 @@ function MyComponent() {
                     <p className="text-sm text-muted-foreground">Manage Competitor Researcher's knowledge sources and documentation</p>
                   </div>
                   
-                  <div className="flex gap-2 mb-6">
+                  <div className="flex justify-end gap-2 mb-6">
                     <Button variant="outline" size="sm" onClick={handleAddDocument}>
                       <Plus className="w-4 h-4 mr-1" />
                       Add Document
