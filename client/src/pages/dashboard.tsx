@@ -500,7 +500,7 @@ const navigationItems = [
   { id: 'tools', label: 'Tools', icon: Settings },
   { id: 'workflows', label: 'Workflows', icon: BarChart3 },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
-  { id: 'workspace-settings', label: 'Workspace Settings', icon: Settings },
+  { id: 'workspace-settings', label: 'Settings', icon: Settings },
   { id: 'user-view', label: 'User View', icon: User },
 ] as const;
 
@@ -1127,7 +1127,7 @@ export default function Dashboard() {
         };
       case 'workspace-settings':
         return {
-          title: 'Workspace Settings',
+          title: 'Settings',
           subtitle: 'Configure your workspace preferences and integrations',
           content: <WorkspaceSettings />,
         };

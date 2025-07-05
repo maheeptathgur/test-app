@@ -226,6 +226,7 @@ Changelog:
 - July 5, 2025. Implemented 2/3 + 1/3 column layout for General tab - restructured Copilot Configuration (2/3 width) and Advanced Settings (1/3 width) sections into responsive grid layout with separate Card components for better visual organization and efficient use of screen space
 - July 5, 2025. Added comprehensive configuration toggles to Advanced Settings section - implemented Discoverable, Document Pane, Admin Documents in sources, Featured, and Prompt required toggles with brand green styling, help icons, and proper prompt label input field
 - July 5, 2025. Reorganized configuration flow for better logic - moved Scope section from Advanced Settings to immediately follow Conversation Starters in main configuration area for more intuitive user experience and better information hierarchy
+- July 5, 2025. Simplified navigation label from "Workspace Settings" to "Settings" for cleaner interface
 ```
 
 ## User Preferences
