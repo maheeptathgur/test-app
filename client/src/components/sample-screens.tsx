@@ -88,8 +88,9 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
           <h1 className="text-2xl font-semibold text-foreground">Browse Integrations</h1>
           <p className="text-sm text-muted-foreground">Explore available integrations and tools from our marketplace</p>
         </div>
-        <Button variant="outline" onClick={onBack} size="sm">
+        <Button variant="outline" onClick={onBack} className="gap-2">
           <X className="h-4 w-4" />
+          Close
         </Button>
       </div>
 
