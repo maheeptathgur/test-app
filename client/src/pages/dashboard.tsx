@@ -1929,6 +1929,13 @@ export default function Dashboard() {
                 {activeSection === 'copilots' && (
                   <div className="flex gap-3 mt-4">
                     <Button 
+                      onClick={() => setShowCreationWizard(true)}
+                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                    >
+                      <Plus className="w-4 h-4 mr-2" />
+                      New Copilot
+                    </Button>
+                    <Button 
                       variant="outline"
                       onClick={() => {
                         // Navigate to marketplace - placeholder for now
@@ -1936,13 +1943,6 @@ export default function Dashboard() {
                       }}
                     >
                       Go to Marketplace
-                    </Button>
-                    <Button 
-                      onClick={() => setShowCreationWizard(true)}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                    >
-                      <Plus className="w-4 h-4 mr-2" />
-                      New Copilot
                     </Button>
                   </div>
                 )}
