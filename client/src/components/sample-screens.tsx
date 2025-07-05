@@ -230,31 +230,31 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
 
   const integrationsByCategory = {
     "Popular Integrations": [
-      { name: 'Slack', description: 'Team communication and collaboration', users: '10M+', category: 'communication', connected: true },
-      { name: 'Google Workspace', description: 'Email, docs, and productivity suite', users: '3B+', category: 'productivity', connected: true },
-      { name: 'Microsoft 365', description: 'Office apps and cloud services', users: '1.3B+', category: 'productivity', connected: false },
-      { name: 'Zoom', description: 'Video conferencing and meetings', users: '300M+', category: 'communication', connected: true },
-      { name: 'Trello', description: 'Project management and collaboration', users: '50M+', category: 'productivity', connected: false },
-      { name: 'Asana', description: 'Work management and team coordination', users: '100M+', category: 'productivity', connected: false },
+      { name: 'Slack', description: 'Send messages, create channels, and manage team notifications', users: '10M+', category: 'communication', connected: true },
+      { name: 'Google Workspace', description: 'Access Gmail, create documents, schedule meetings, and manage files', users: '3B+', category: 'productivity', connected: true },
+      { name: 'Microsoft 365', description: 'Create Word docs, Excel sheets, PowerPoint slides, and send Outlook emails', users: '1.3B+', category: 'productivity', connected: false },
+      { name: 'Zoom', description: 'Schedule meetings, start video calls, and manage webinars', users: '300M+', category: 'communication', connected: true },
+      { name: 'Trello', description: 'Create boards, manage cards, assign tasks, and track project progress', users: '50M+', category: 'productivity', connected: false },
+      { name: 'Asana', description: 'Create tasks, set deadlines, assign team members, and track milestones', users: '100M+', category: 'productivity', connected: false },
     ],
     "Recently Added": [
-      { name: 'Linear', description: 'Issue tracking and project planning', users: 'New', category: 'productivity', connected: false },
-      { name: 'Figma', description: 'Design collaboration and prototyping', users: 'New', category: 'productivity', connected: true },
-      { name: 'Loom', description: 'Video messaging and screen recording', users: 'New', category: 'communication', connected: false },
-      { name: 'Notion', description: 'All-in-one workspace for notes and collaboration', users: 'New', category: 'productivity', connected: true },
-      { name: 'Discord', description: 'Voice, video and text communication', users: 'New', category: 'communication', connected: false },
+      { name: 'Linear', description: 'Create issues, track bugs, manage sprints, and plan roadmaps', users: 'New', category: 'productivity', connected: false },
+      { name: 'Figma', description: 'Access designs, create prototypes, leave comments, and export assets', users: 'New', category: 'productivity', connected: true },
+      { name: 'Loom', description: 'Record screens, create video messages, and share visual feedback', users: 'New', category: 'communication', connected: false },
+      { name: 'Notion', description: 'Access databases, create pages, manage wikis, and organize knowledge', users: 'New', category: 'productivity', connected: true },
+      { name: 'Discord', description: 'Send messages, join voice channels, and manage server notifications', users: 'New', category: 'communication', connected: false },
     ],
     "Analytics & Data": [
-      { name: 'Google Analytics', description: 'Web analytics and reporting', users: 'Free', category: 'analytics', connected: true },
-      { name: 'Mixpanel', description: 'Product analytics and user tracking', users: 'Popular', category: 'analytics', connected: false },
-      { name: 'Amplitude', description: 'Digital optimization platform', users: 'Popular', category: 'analytics', connected: false },
-      { name: 'Tableau', description: 'Data visualization and business intelligence', users: 'Enterprise', category: 'analytics', connected: false },
+      { name: 'Google Analytics', description: 'Pull website traffic data, user behavior metrics, and conversion reports', users: 'Free', category: 'analytics', connected: true },
+      { name: 'Mixpanel', description: 'Track user events, analyze funnels, and create custom reports', users: 'Popular', category: 'analytics', connected: false },
+      { name: 'Amplitude', description: 'Monitor user journeys, segment audiences, and measure retention', users: 'Popular', category: 'analytics', connected: false },
+      { name: 'Tableau', description: 'Create dashboards, visualize data, and generate business reports', users: 'Enterprise', category: 'analytics', connected: false },
     ],
     "Marketing & Sales": [
-      { name: 'HubSpot', description: 'CRM and marketing automation', users: 'Popular', category: 'marketing', connected: true },
-      { name: 'Mailchimp', description: 'Email marketing and automation', users: 'Popular', category: 'marketing', connected: false },
-      { name: 'Salesforce', description: 'Customer relationship management', users: 'Enterprise', category: 'marketing', connected: false },
-      { name: 'Intercom', description: 'Customer messaging and support', users: 'Popular', category: 'marketing', connected: false },
+      { name: 'HubSpot', description: 'Manage contacts, track deals, send emails, and create marketing campaigns', users: 'Popular', category: 'marketing', connected: true },
+      { name: 'Mailchimp', description: 'Send newsletters, create automations, manage subscribers, and track opens', users: 'Popular', category: 'marketing', connected: false },
+      { name: 'Salesforce', description: 'Access customer data, update opportunities, create reports, and manage leads', users: 'Enterprise', category: 'marketing', connected: false },
+      { name: 'Intercom', description: 'Send customer messages, create help articles, and manage support tickets', users: 'Popular', category: 'marketing', connected: false },
     ]
   };
 
