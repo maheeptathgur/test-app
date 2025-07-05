@@ -457,10 +457,16 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
         </div>
       </div>
 
-      {/* Save Actions */}
-      <div className="flex justify-end space-x-4 pt-6 border-t">
-        <Button variant="outline" onClick={onBack}>Cancel</Button>
-        <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">Save Changes</Button>
+      {/* Save Footer */}
+      <div className="sticky bottom-0 bg-white border-t border-gray-200 px-6 py-4 mt-8 -mx-6 -mb-6">
+        <div className="flex justify-end gap-3">
+          <Button variant="outline" onClick={onBack}>
+            Cancel
+          </Button>
+          <Button className="bg-[#008062] hover:bg-[#006b54]">
+            Save Changes
+          </Button>
+        </div>
       </div>
     </div>
   );
