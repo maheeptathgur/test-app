@@ -88,193 +88,199 @@ export function WorkspaceSettings() {
         </nav>
 
         {activeTab === "general" && (
-        <div className="space-y-6 mt-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Workspace Information</CardTitle>
-              <CardDescription>
-                Basic information about your workspace
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-3 gap-6 mt-6">
+          {/* Workspace Information - 2/3 column */}
+          <div className="col-span-2">
+            <Card>
+              <CardHeader>
+                <CardTitle>Workspace Information</CardTitle>
+                <CardDescription>
+                  Basic information about your workspace
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="workspace-name">Workspace Name</Label>
+                    <Input
+                      id="workspace-name"
+                      value={workspaceName}
+                      onChange={(e) => setWorkspaceName(e.target.value)}
+                      placeholder="Enter workspace name"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="workspace-type">Workspace Type</Label>
+                    <Select defaultValue="personal">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="personal">Personal</SelectItem>
+                        <SelectItem value="team">Team</SelectItem>
+                        <SelectItem value="organization">Organization</SelectItem>
+                        <SelectItem value="enterprise">Enterprise</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                
                 <div className="space-y-2">
-                  <Label htmlFor="workspace-name">Workspace Name</Label>
-                  <Input
-                    id="workspace-name"
-                    value={workspaceName}
-                    onChange={(e) => setWorkspaceName(e.target.value)}
-                    placeholder="Enter workspace name"
+                  <Label htmlFor="workspace-description">Description</Label>
+                  <Textarea
+                    id="workspace-description"
+                    value={workspaceDescription}
+                    onChange={(e) => setWorkspaceDescription(e.target.value)}
+                    placeholder="Describe your workspace"
+                    rows={3}
                   />
                 </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label>Icon Image (1:1 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Upload icon image
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Choose File
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Logo Image (2:1 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Upload logo image
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Choose File
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Avatar Image (1:1 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <img 
+                        src={avatarImagePath} 
+                        alt="Avatar" 
+                        className="h-8 w-8 mx-auto mb-2"
+                      />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Avatar uploaded
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Change File
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Banner Image (16:9 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Upload banner image
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Choose File
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex justify-end pt-4">
+                  <Button className="bg-[#008062] hover:bg-[#00d2a0] border-0">
+                    <Save className="w-4 h-4 mr-2" />
+                    Save Changes
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Workspace Preferences - 1/3 column */}
+          <div className="col-span-1">
+            <Card>
+              <CardHeader>
+                <CardTitle>Workspace Preferences</CardTitle>
+                <CardDescription>
+                  Configure how your workspace behaves
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label>Public Access</Label>
+                    <p className="text-sm text-muted-foreground">
+                      Allow anyone with the link to view public copilots
+                    </p>
+                  </div>
+                  <Switch
+                    checked={allowPublicAccess}
+                    onCheckedChange={setAllowPublicAccess}
+                  />
+                </div>
+
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label>Email Notifications</Label>
+                    <p className="text-sm text-muted-foreground">
+                      Receive notifications about workspace activity
+                    </p>
+                  </div>
+                  <Switch
+                    checked={enableNotifications}
+                    onCheckedChange={setEnableNotifications}
+                  />
+                </div>
+
                 <div className="space-y-2">
-                  <Label htmlFor="workspace-type">Workspace Type</Label>
-                  <Select defaultValue="personal">
-                    <SelectTrigger>
+                  <Label htmlFor="data-retention">Data Retention (days)</Label>
+                  <Select value={dataRetention} onValueChange={setDataRetention}>
+                    <SelectTrigger className="w-full">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="personal">Personal</SelectItem>
-                      <SelectItem value="team">Team</SelectItem>
-                      <SelectItem value="organization">Organization</SelectItem>
-                      <SelectItem value="enterprise">Enterprise</SelectItem>
+                      <SelectItem value="30">30 days</SelectItem>
+                      <SelectItem value="90">90 days</SelectItem>
+                      <SelectItem value="180">180 days</SelectItem>
+                      <SelectItem value="365">1 year</SelectItem>
+                      <SelectItem value="unlimited">Unlimited</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="workspace-description">Description</Label>
-                <Textarea
-                  id="workspace-description"
-                  value={workspaceDescription}
-                  onChange={(e) => setWorkspaceDescription(e.target.value)}
-                  placeholder="Describe your workspace"
-                  rows={3}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label>Icon Image (1:1 ratio)</Label>
-                  <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                    <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Upload icon image
-                    </div>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      className="gap-2"
-                    >
-                      <Upload className="h-3 w-3" />
-                      Choose File
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Logo Image (2:1 ratio)</Label>
-                  <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                    <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Upload logo image
-                    </div>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      className="gap-2"
-                    >
-                      <Upload className="h-3 w-3" />
-                      Choose File
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Avatar Image (1:1 ratio)</Label>
-                  <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                    <img 
-                      src={avatarImagePath} 
-                      alt="Avatar" 
-                      className="h-8 w-8 mx-auto mb-2"
-                    />
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Avatar uploaded
-                    </div>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      className="gap-2"
-                    >
-                      <Upload className="h-3 w-3" />
-                      Change File
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label>Banner Image (16:9 ratio)</Label>
-                  <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                    <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                    <div className="text-sm text-muted-foreground mb-2">
-                      Upload banner image
-                    </div>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      className="gap-2"
-                    >
-                      <Upload className="h-3 w-3" />
-                      Choose File
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Workspace Preferences</CardTitle>
-              <CardDescription>
-                Configure how your workspace behaves
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Public Access</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Allow anyone with the link to view public copilots
-                  </p>
-                </div>
-                <Switch
-                  checked={allowPublicAccess}
-                  onCheckedChange={setAllowPublicAccess}
-                />
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label>Email Notifications</Label>
-                  <p className="text-sm text-muted-foreground">
-                    Receive notifications about workspace activity
-                  </p>
-                </div>
-                <Switch
-                  checked={enableNotifications}
-                  onCheckedChange={setEnableNotifications}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="data-retention">Data Retention (days)</Label>
-                <Select value={dataRetention} onValueChange={setDataRetention}>
-                  <SelectTrigger className="w-48">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="30">30 days</SelectItem>
-                    <SelectItem value="90">90 days</SelectItem>
-                    <SelectItem value="180">180 days</SelectItem>
-                    <SelectItem value="365">1 year</SelectItem>
-                    <SelectItem value="unlimited">Unlimited</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="flex justify-end">
-            <Button className="bg-[#008062] hover:bg-[#00d2a0]">
-              <Save className="w-4 h-4 mr-2" />
-              Save Changes
-            </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
         )}

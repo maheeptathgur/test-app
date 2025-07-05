@@ -234,7 +234,8 @@ Changelog:
 - July 5, 2025. Expanded image upload section to include four upload areas in 2x2 grid: Icon Image (1:1), Avatar Image (1:1 with circular preview), Logo Image (2:1), and Banner Image (16:9) - all with consistent dashed-border styling and appropriate aspect ratio previews
 - July 5, 2025. Reordered image upload areas in Settings to follow Icon, Logo, Avatar, Banner sequence in 2x2 grid layout for better logical organization
 - July 5, 2025. Updated image upload styling in Settings to exactly match copilot configuration format - applied consistent border-muted-foreground/25 dashed borders, p-6 padding, text-sm descriptions, h-8 w-8 Image icons, and standard outline buttons for visual consistency across the application
-- July 5, 2025. Added uploaded avatar image display in Settings workspace configuration - shows user's uploaded green lightning bolt icon in circular format with proper sizing, updated text states, and "Change File" button to reflect uploaded status
+- July 5, 2025. Added uploaded avatar image display in Settings workspace configuration - shows user's uploaded green lightning bolt icon in square format with proper sizing, updated text states, and "Change File" button to reflect uploaded status
+- July 5, 2025. Implemented 2/3 + 1/3 column layout for workspace settings - restructured Workspace Information (2/3 width) and Workspace Preferences (1/3 width) sections into responsive grid layout with brand green styling for save button and improved space utilization
 ```
 
 ## User Preferences
