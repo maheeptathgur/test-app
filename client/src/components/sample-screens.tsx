@@ -84,16 +84,13 @@ function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Button variant="outline" onClick={onBack} className="gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            Back to Tools
-          </Button>
-          <div>
-            <h1 className="text-2xl font-semibold text-foreground">Browse Integrations</h1>
-            <p className="text-sm text-muted-foreground">Explore available integrations and tools from our marketplace</p>
-          </div>
+        <div>
+          <h1 className="text-2xl font-semibold text-foreground">Browse Integrations</h1>
+          <p className="text-sm text-muted-foreground">Explore available integrations and tools from our marketplace</p>
         </div>
+        <Button variant="outline" onClick={onBack} size="sm">
+          <X className="h-4 w-4" />
+        </Button>
       </div>
 
       {/* Search and Filter */}
