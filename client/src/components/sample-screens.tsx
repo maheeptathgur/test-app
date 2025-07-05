@@ -32,6 +32,20 @@ import { ToolConfigureScreen } from "./tool-configure-screen";
 type WorkspaceSection = 'subscriptions' | 'conversations' | 'analytics' | 'users';
 
 function GmailConfigScreen({ onBack }: { onBack: () => void }) {
+  const [hasChanges, setHasChanges] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleSave = () => {
+    // Save logic here
+    setShowSuccess(true);
+    setHasChanges(false);
+    
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 3000);
+  };
+
   return (
     <>
       <div className="space-y-6 pb-20">
@@ -83,7 +97,7 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                 
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Authentication Level</label>
-                  <Select defaultValue="user">
+                  <Select defaultValue="user" onValueChange={() => setHasChanges(true)}>
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
@@ -108,35 +122,49 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                   <p className="font-medium">Draft Gmail</p>
                   <p className="text-sm text-gray-600">Create and save email drafts</p>
                 </div>
-                <Switch defaultChecked={true} />
+                <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
               </div>
               <div className="flex items-center justify-between p-3 border rounded-lg">
                 <div>
                   <p className="font-medium">Send Email</p>
                   <p className="text-sm text-gray-600">Send emails on your behalf</p>
                 </div>
-                <Switch defaultChecked={true} />
+                <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
               </div>
               <div className="flex items-center justify-between p-3 border rounded-lg">
                 <div>
                   <p className="font-medium">Lookup Contacts</p>
                   <p className="text-sm text-gray-600">Access and search your contact list</p>
                 </div>
-                <Switch defaultChecked={false} />
+                <Switch defaultChecked={false} onCheckedChange={() => setHasChanges(true)} />
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
       
+      {/* Success Message */}
+      {showSuccess && (
+        <div className="fixed top-4 right-4 bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg shadow-lg z-20">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+            <span className="font-medium">Changes saved successfully</span>
+          </div>
+        </div>
+      )}
+
       {/* Sticky Footer */}
       <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
-        <div className="flex justify-between items-center">
-          <Button variant="outline" onClick={onBack}>
-            Cancel
-          </Button>
+        <div className="flex justify-end items-center">
           <div className="flex gap-3">
-            <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+            <Button variant="outline" onClick={onBack}>
+              Cancel
+            </Button>
+            <Button 
+              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+              disabled={!hasChanges}
+              onClick={handleSave}
+            >
               Save Changes
             </Button>
           </div>
