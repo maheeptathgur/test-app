@@ -694,9 +694,9 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
             {mdEditorTab === 'rtf' && (
               <div className="w-full p-6">
-                <div className="border rounded-lg min-h-[500px] bg-white">
+                <div className="border rounded-lg min-h-[500px] bg-white focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-0 focus-within:border-primary transition-all">
                   {/* RTF Toolbar */}
-                  <div className="border-b p-3 bg-muted/30 flex items-center gap-2 flex-wrap">
+                  <div className="border-b p-3 bg-muted/30 flex items-center gap-2 flex-wrap rounded-t-lg">
                     <div className="flex items-center gap-1">
                       <Button
                         type="button"
@@ -887,7 +887,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                     value={mdContent}
                     onChange={(e) => setMdContent(e.target.value)}
                     placeholder="Start writing your content here... Use the toolbar buttons to add formatting."
-                    className="w-full h-[450px] border border-gray-200 resize-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-0 rounded-none rounded-b-lg bg-white focus:bg-white"
+                    className="w-full h-[450px] border-0 resize-none focus-visible:ring-0 rounded-none rounded-b-lg bg-white focus:bg-white"
                     style={{ 
                       fontFamily: 'ui-sans-serif, system-ui, sans-serif',
                       backgroundColor: 'white'
