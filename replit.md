@@ -227,6 +227,8 @@ Changelog:
 - July 5, 2025. Added comprehensive configuration toggles to Advanced Settings section - implemented Discoverable, Document Pane, Admin Documents in sources, Featured, and Prompt required toggles with brand green styling, help icons, and proper prompt label input field
 - July 5, 2025. Reorganized configuration flow for better logic - moved Scope section from Advanced Settings to immediately follow Conversation Starters in main configuration area for more intuitive user experience and better information hierarchy
 - July 5, 2025. Simplified navigation label from "Workspace Settings" to "Settings" for cleaner interface
+- July 5, 2025. Added user view preview toolbar spanning full application width with admin messaging, pulsing indicator, and exit preview functionality
+- July 5, 2025. Made user view preview toolbar thinner and lighter with reduced padding (py-2, px-4) and transparent background (/80 opacity) for more refined appearance
 ```
 
 ## User Preferences
