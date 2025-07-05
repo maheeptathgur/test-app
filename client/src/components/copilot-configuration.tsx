@@ -703,7 +703,21 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         variant="outline"
                         size="sm"
                         className="h-8 w-8 p-0"
-                        onClick={() => document.execCommand('bold', false)}
+                        onClick={() => {
+                          const textarea = document.getElementById('rtf-textarea') as HTMLTextAreaElement;
+                          if (textarea) {
+                            const start = textarea.selectionStart;
+                            const end = textarea.selectionEnd;
+                            const selectedText = textarea.value.substring(start, end);
+                            const newText = `**${selectedText}**`;
+                            const newValue = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+                            setMdContent(newValue);
+                            setTimeout(() => {
+                              textarea.focus();
+                              textarea.setSelectionRange(start + 2, start + 2 + selectedText.length);
+                            }, 0);
+                          }
+                        }}
                       >
                         <strong>B</strong>
                       </Button>
@@ -712,7 +726,21 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         variant="outline"
                         size="sm"
                         className="h-8 w-8 p-0 italic"
-                        onClick={() => document.execCommand('italic', false)}
+                        onClick={() => {
+                          const textarea = document.getElementById('rtf-textarea') as HTMLTextAreaElement;
+                          if (textarea) {
+                            const start = textarea.selectionStart;
+                            const end = textarea.selectionEnd;
+                            const selectedText = textarea.value.substring(start, end);
+                            const newText = `*${selectedText}*`;
+                            const newValue = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+                            setMdContent(newValue);
+                            setTimeout(() => {
+                              textarea.focus();
+                              textarea.setSelectionRange(start + 1, start + 1 + selectedText.length);
+                            }, 0);
+                          }
+                        }}
                       >
                         I
                       </Button>
@@ -720,10 +748,24 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         type="button"
                         variant="outline"
                         size="sm"
-                        className="h-8 w-8 p-0 underline"
-                        onClick={() => document.execCommand('underline', false)}
+                        className="h-8 w-8 p-0"
+                        onClick={() => {
+                          const textarea = document.getElementById('rtf-textarea') as HTMLTextAreaElement;
+                          if (textarea) {
+                            const start = textarea.selectionStart;
+                            const end = textarea.selectionEnd;
+                            const selectedText = textarea.value.substring(start, end);
+                            const newText = `~~${selectedText}~~`;
+                            const newValue = textarea.value.substring(0, start) + newText + textarea.value.substring(end);
+                            setMdContent(newValue);
+                            setTimeout(() => {
+                              textarea.focus();
+                              textarea.setSelectionRange(start + 2, start + 2 + selectedText.length);
+                            }, 0);
+                          }
+                        }}
                       >
-                        U
+                        <span className="line-through">S</span>
                       </Button>
                     </div>
                     <Separator orientation="vertical" className="h-6" />
@@ -733,7 +775,19 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         variant="outline"
                         size="sm"
                         className="h-8 px-2 text-xs"
-                        onClick={() => document.execCommand('insertUnorderedList', false)}
+                        onClick={() => {
+                          const textarea = document.getElementById('rtf-textarea') as HTMLTextAreaElement;
+                          if (textarea) {
+                            const start = textarea.selectionStart;
+                            const newText = '- ';
+                            const newValue = textarea.value.substring(0, start) + newText + textarea.value.substring(start);
+                            setMdContent(newValue);
+                            setTimeout(() => {
+                              textarea.focus();
+                              textarea.setSelectionRange(start + newText.length, start + newText.length);
+                            }, 0);
+                          }
+                        }}
                       >
                         • List
                       </Button>
@@ -742,7 +796,19 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         variant="outline"
                         size="sm"
                         className="h-8 px-2 text-xs"
-                        onClick={() => document.execCommand('insertOrderedList', false)}
+                        onClick={() => {
+                          const textarea = document.getElementById('rtf-textarea') as HTMLTextAreaElement;
+                          if (textarea) {
+                            const start = textarea.selectionStart;
+                            const newText = '1. ';
+                            const newValue = textarea.value.substring(0, start) + newText + textarea.value.substring(start);
+                            setMdContent(newValue);
+                            setTimeout(() => {
+                              textarea.focus();
+                              textarea.setSelectionRange(start + newText.length, start + newText.length);
+                            }, 0);
+                          }
+                        }}
                       >
                         1. List
                       </Button>
@@ -754,7 +820,19 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         variant="outline"
                         size="sm"
                         className="h-8 px-2 text-xs"
-                        onClick={() => document.execCommand('formatBlock', false, 'h1')}
+                        onClick={() => {
+                          const textarea = document.getElementById('rtf-textarea') as HTMLTextAreaElement;
+                          if (textarea) {
+                            const start = textarea.selectionStart;
+                            const newText = '# ';
+                            const newValue = textarea.value.substring(0, start) + newText + textarea.value.substring(start);
+                            setMdContent(newValue);
+                            setTimeout(() => {
+                              textarea.focus();
+                              textarea.setSelectionRange(start + newText.length, start + newText.length);
+                            }, 0);
+                          }
+                        }}
                       >
                         H1
                       </Button>
@@ -763,7 +841,19 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         variant="outline"
                         size="sm"
                         className="h-8 px-2 text-xs"
-                        onClick={() => document.execCommand('formatBlock', false, 'h2')}
+                        onClick={() => {
+                          const textarea = document.getElementById('rtf-textarea') as HTMLTextAreaElement;
+                          if (textarea) {
+                            const start = textarea.selectionStart;
+                            const newText = '## ';
+                            const newValue = textarea.value.substring(0, start) + newText + textarea.value.substring(start);
+                            setMdContent(newValue);
+                            setTimeout(() => {
+                              textarea.focus();
+                              textarea.setSelectionRange(start + newText.length, start + newText.length);
+                            }, 0);
+                          }
+                        }}
                       >
                         H2
                       </Button>
@@ -772,7 +862,19 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         variant="outline"
                         size="sm"
                         className="h-8 px-2 text-xs"
-                        onClick={() => document.execCommand('formatBlock', false, 'h3')}
+                        onClick={() => {
+                          const textarea = document.getElementById('rtf-textarea') as HTMLTextAreaElement;
+                          if (textarea) {
+                            const start = textarea.selectionStart;
+                            const newText = '### ';
+                            const newValue = textarea.value.substring(0, start) + newText + textarea.value.substring(start);
+                            setMdContent(newValue);
+                            setTimeout(() => {
+                              textarea.focus();
+                              textarea.setSelectionRange(start + newText.length, start + newText.length);
+                            }, 0);
+                          }
+                        }}
                       >
                         H3
                       </Button>
@@ -780,35 +882,13 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                   </div>
                   
                   {/* RTF Editor */}
-                  <div
-                    contentEditable
-                    className="p-4 min-h-[450px] outline-none focus:ring-0"
-                    style={{ 
-                      lineHeight: '1.6',
-                      direction: 'ltr',
-                      textAlign: 'left'
-                    }}
-                    suppressContentEditableWarning={true}
-                    dangerouslySetInnerHTML={{ 
-                      __html: mdContent.replace(/\n/g, '<br>') || 'Start writing your content here...'
-                    }}
-                    onInput={(e) => {
-                      const target = e.target as HTMLDivElement;
-                      const content = target.innerHTML
-                        .replace(/<br\s*\/?>/gi, '\n')
-                        .replace(/<div><br><\/div>/gi, '\n')
-                        .replace(/<div>/gi, '\n')
-                        .replace(/<\/div>/gi, '')
-                        .replace(/<[^>]*>/gi, '')
-                        .trim();
-                      setMdContent(content);
-                    }}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') {
-                        e.preventDefault();
-                        document.execCommand('insertHTML', false, '<br><br>');
-                      }
-                    }}
+                  <Textarea
+                    id="rtf-textarea"
+                    value={mdContent}
+                    onChange={(e) => setMdContent(e.target.value)}
+                    placeholder="Start writing your content here... Use the toolbar buttons to add formatting."
+                    className="w-full h-[450px] border-0 resize-none focus-visible:ring-0 rounded-none rounded-b-lg"
+                    style={{ fontFamily: 'ui-sans-serif, system-ui, sans-serif' }}
                   />
                 </div>
               </div>
