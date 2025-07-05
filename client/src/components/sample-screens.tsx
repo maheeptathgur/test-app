@@ -82,10 +82,7 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                     <label className="text-sm font-medium">Account Email</label>
                     <Input value="john.doe@company.com" disabled />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Connected Since</label>
-                    <Input value="March 15, 2024" disabled />
-                  </div>
+                  
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Authentication Level</label>
                     <Select defaultValue="user">
