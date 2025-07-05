@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon } from "lucide-react";
+import avatarImagePath from "@assets/image_1751745994194.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -176,7 +177,7 @@ export function WorkspaceSettings() {
                   <Label>Avatar Image (1:1 ratio)</Label>
                   <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
                     <img 
-                      src="@assets/image_1751745994194.png" 
+                      src={avatarImagePath} 
                       alt="Avatar" 
                       className="h-8 w-8 mx-auto mb-2"
                     />
