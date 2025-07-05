@@ -220,6 +220,7 @@ Changelog:
 - July 5, 2025. Updated copilot configuration interface layout to use full page scrolling instead of sticky header/footer structure - removed overflow constraints, eliminated footer section, and restructured main container to allow natural page scrolling for better user experience with long configuration forms
 - July 5, 2025. Applied consistent styling and spacing to all copilot configuration tabs - standardized section headers with title/subtitle format, consistent space-y-6 spacing between sections, mb-6 spacing after headers, and uniform CardContent padding across all tabs (general, components, knowledge, user-docs, profile) for professional appearance matching design specifications
 - July 5, 2025. Enhanced copilot card dropdown menu button visibility - updated to use brand green color (bg-[#008062]/80) with solid green hover state (hover:bg-[#008062]) and no border for clean appearance and better photo visibility
+- July 5, 2025. Reorganized copilot configuration layout - moved action buttons (Add Document, Add URL, Create MD, AI Suggestions, Add Field) below section headers and aligned to the right for consistent visual hierarchy across Knowledge Base and Profile Fields tabs
 ```
 
 ## User Preferences
