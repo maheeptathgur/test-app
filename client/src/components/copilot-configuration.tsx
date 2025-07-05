@@ -42,6 +42,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [codeTab, setCodeTab] = useState("javascript");
   const [copilotData, setCopilotData] = useState<CopilotData>(copilot);
   const [hasChanges, setHasChanges] = useState(false);
+  const [showSavedMessage, setShowSavedMessage] = useState(false);
   const { toast } = useToast();
 
   const [systemPrompt, setSystemPrompt] = useState("You are a helpful AI assistant focused on providing accurate and relevant information.");
@@ -375,10 +376,12 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const handleSave = () => {
     onSave(copilotData);
     setHasChanges(false);
-    toast({
-      description: "Configuration saved successfully",
-      duration: 3000,
-    });
+    setShowSavedMessage(true);
+    
+    // Hide the message after 3 seconds
+    setTimeout(() => {
+      setShowSavedMessage(false);
+    }, 3000);
   };
 
   const handleSuggestionToggle = (suggestionId: string) => {
@@ -1511,17 +1514,24 @@ function MyComponent() {
               
               {/* Save Footer */}
               <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
-                <div className="flex justify-end gap-3">
-                  <Button variant="outline" onClick={onClose}>
-                    Cancel
-                  </Button>
-                  <Button 
-                    onClick={handleSave} 
-                    disabled={!hasChanges}
-                    className="bg-[#008062] hover:bg-[#006b54] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
-                  >
-                    Save Changes
-                  </Button>
+                <div className="flex justify-between items-center">
+                  {showSavedMessage && (
+                    <div className="text-sm text-green-600 font-medium">
+                      Your changes have been saved.
+                    </div>
+                  )}
+                  <div className={`flex gap-3 ${showSavedMessage ? '' : 'ml-auto'}`}>
+                    <Button variant="outline" onClick={onClose}>
+                      Cancel
+                    </Button>
+                    <Button 
+                      onClick={handleSave} 
+                      disabled={!hasChanges}
+                      className="bg-[#008062] hover:bg-[#006b54] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                    >
+                      Save Changes
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
