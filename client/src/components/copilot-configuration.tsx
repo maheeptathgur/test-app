@@ -87,8 +87,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [addDocumentModalOpen, setAddDocumentModalOpen] = useState(false);
   const [addUrlModalOpen, setAddUrlModalOpen] = useState(false);
   const [createMdModalOpen, setCreateMdModalOpen] = useState(false);
+  const [mdEditorOpen, setMdEditorOpen] = useState(false);
   const [mdEditorTab, setMdEditorTab] = useState<'markdown' | 'preview' | 'rtf'>('markdown');
-  const [mdContent, setMdContent] = useState('');
+  const [mdContent, setMdContent] = useState('# New Document\n\nStart writing your markdown content here...');
+  const [mdTitle, setMdTitle] = useState('');
+  const [mdDescription, setMdDescription] = useState('');
   
   // Knowledge Base filters and search
   const [kbSearchTerm, setKbSearchTerm] = useState('');
@@ -541,9 +544,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   };
 
   const handleCreateMd = () => {
-    setCreateMdModalOpen(true);
+    setMdEditorOpen(true);
     setMdEditorTab('markdown');
-    setMdContent('');
+    setMdContent('# New Document\n\nStart writing your markdown content here...');
+    setMdTitle('');
+    setMdDescription('');
   };
 
   const handlePreviewToggle = () => {
@@ -569,6 +574,120 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   if (!copilot) return null;
 
   // Navigation handlers dispatch custom events instead of showing inline screens
+
+  // If markdown editor is open, show it instead of main config
+  if (mdEditorOpen) {
+    return (
+      <div className="min-h-full bg-background">
+        {/* Markdown Editor Header */}
+        <div className="flex items-center justify-between p-6 bg-muted/50 border-b">
+          <div className="flex items-center gap-3">
+            <FileText className="w-6 h-6 text-[#008062]" />
+            <div>
+              <h1 className="font-semibold text-foreground text-[24px]">Markdown Editor</h1>
+              <p className="text-muted-foreground text-[16px]">Create and edit markdown documents for {copilotData.name}</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" onClick={() => setMdEditorOpen(false)} className="gap-2">
+              <X className="h-4 w-4" />
+              Close Editor
+            </Button>
+            <Button 
+              className="gap-2 bg-[#008062] hover:bg-[#006b54]"
+              onClick={() => {
+                // Save markdown document logic here
+                console.log('Saving markdown document:', { title: mdTitle, description: mdDescription, content: mdContent });
+                setMdEditorOpen(false);
+              }}
+            >
+              <Save className="h-4 w-4" />
+              Save Document
+            </Button>
+          </div>
+        </div>
+
+        {/* Markdown Editor Content */}
+        <div className="flex flex-col h-[calc(100vh-120px)]">
+          {/* Document Info */}
+          <div className="p-6 bg-white border-b">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div className="space-y-2">
+                <Label htmlFor="md-title">Document Title</Label>
+                <Input
+                  id="md-title"
+                  value={mdTitle}
+                  onChange={(e) => setMdTitle(e.target.value)}
+                  placeholder="Enter document title"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="md-description">Description</Label>
+                <Input
+                  id="md-description"
+                  value={mdDescription}
+                  onChange={(e) => setMdDescription(e.target.value)}
+                  placeholder="Brief description of the document"
+                />
+              </div>
+            </div>
+
+            {/* Editor Tabs */}
+            <div className="flex space-x-1 bg-muted p-1 rounded-lg inline-flex">
+              <button
+                onClick={() => setMdEditorTab('markdown')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  mdEditorTab === 'markdown' 
+                    ? 'bg-white text-[#008062] shadow-sm' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <Code className="w-4 h-4 mr-1 inline" />
+                Markdown
+              </button>
+              <button
+                onClick={() => setMdEditorTab('preview')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  mdEditorTab === 'preview' 
+                    ? 'bg-white text-[#008062] shadow-sm' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                <Eye className="w-4 h-4 mr-1 inline" />
+                Preview
+              </button>
+            </div>
+          </div>
+
+          {/* Editor Area */}
+          <div className="flex-1 flex">
+            {mdEditorTab === 'markdown' && (
+              <div className="w-full p-6">
+                <Textarea
+                  value={mdContent}
+                  onChange={(e) => setMdContent(e.target.value)}
+                  placeholder="Start writing your markdown content here..."
+                  className="w-full h-full min-h-[500px] font-mono text-sm resize-none"
+                />
+              </div>
+            )}
+            
+            {mdEditorTab === 'preview' && (
+              <div className="w-full p-6 bg-white">
+                <div className="prose max-w-none">
+                  {mdContent ? (
+                    <div className="whitespace-pre-wrap">{mdContent}</div>
+                  ) : (
+                    <p className="text-muted-foreground italic">Start writing in the markdown tab to see preview here...</p>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-full bg-background">
