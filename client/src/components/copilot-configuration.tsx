@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -15,6 +15,7 @@ import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy,
 import { SiGmail, SiSlack } from "react-icons/si";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
+import { useToast } from "@/hooks/use-toast";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
@@ -40,6 +41,8 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [activeTab, setActiveTab] = useState("general");
   const [codeTab, setCodeTab] = useState("javascript");
   const [copilotData, setCopilotData] = useState<CopilotData>(copilot);
+  const [hasChanges, setHasChanges] = useState(false);
+  const { toast } = useToast();
 
   const [systemPrompt, setSystemPrompt] = useState("You are a helpful AI assistant focused on providing accurate and relevant information.");
   const [conversationStarters, setConversationStarters] = useState([
@@ -279,6 +282,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       ...prev,
       [field]: value
     }));
+    setHasChanges(true);
   };
 
 
@@ -294,17 +298,20 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     const updated = [...conversationStarters];
     updated[index] = value;
     setConversationStarters(updated);
+    setHasChanges(true);
   };
 
   const addConversationStarter = () => {
     if (conversationStarters.length < 5) {
       setConversationStarters([...conversationStarters, ""]);
+      setHasChanges(true);
     }
   };
 
   const removeConversationStarter = (index: number) => {
     if (conversationStarters.length > 1) {
       setConversationStarters(conversationStarters.filter((_, i) => i !== index));
+      setHasChanges(true);
     }
   };
 
@@ -367,7 +374,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
   const handleSave = () => {
     onSave(copilotData);
-    onClose();
+    setHasChanges(false);
+    toast({
+      description: "Configuration saved successfully",
+      duration: 3000,
+    });
   };
 
   const handleSuggestionToggle = (suggestionId: string) => {
@@ -1015,7 +1026,10 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                           <Textarea
                             id="systemPrompt"
                             value={systemPrompt}
-                            onChange={(e) => setSystemPrompt(e.target.value)}
+                            onChange={(e) => {
+                              setSystemPrompt(e.target.value);
+                              setHasChanges(true);
+                            }}
                             placeholder="Enter the system prompt that defines how the copilot behaves"
                             rows={4}
                           />
@@ -1131,7 +1145,10 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                           <p className="text-sm text-muted-foreground">
                             Control who can access this copilot
                           </p>
-                          <RadioGroup value={scope} onValueChange={setScope} className="space-y-3">
+                          <RadioGroup value={scope} onValueChange={(value) => {
+                            setScope(value);
+                            setHasChanges(true);
+                          }} className="space-y-3">
                             <div className="flex items-center space-x-2">
                               <RadioGroupItem value="private" id="private" />
                               <Label htmlFor="private" className="text-sm">
@@ -1339,7 +1356,10 @@ function MyComponent() {
                             </Tooltip>
                           </div>
                           <button 
-                            onClick={() => setDocumentPaneEnabled(!documentPaneEnabled)}
+                            onClick={() => {
+                              setDocumentPaneEnabled(!documentPaneEnabled);
+                              setHasChanges(true);
+                            }}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
                               documentPaneEnabled ? 'bg-[#008062]' : 'bg-gray-200'
                             }`}
@@ -1363,7 +1383,10 @@ function MyComponent() {
                             </Tooltip>
                           </div>
                           <button 
-                            onClick={() => setShowSources(!showSources)}
+                            onClick={() => {
+                              setShowSources(!showSources);
+                              setHasChanges(true);
+                            }}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
                               showSources ? 'bg-[#008062]' : 'bg-gray-200'
                             }`}
@@ -1387,7 +1410,10 @@ function MyComponent() {
                             </Tooltip>
                           </div>
                           <button 
-                            onClick={() => setIsFeatured(!isFeatured)}
+                            onClick={() => {
+                              setIsFeatured(!isFeatured);
+                              setHasChanges(true);
+                            }}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
                               isFeatured ? 'bg-[#008062]' : 'bg-gray-200'
                             }`}
@@ -1411,7 +1437,10 @@ function MyComponent() {
                             </Tooltip>
                           </div>
                           <button 
-                            onClick={() => setPromptRequired(!promptRequired)}
+                            onClick={() => {
+                              setPromptRequired(!promptRequired);
+                              setHasChanges(true);
+                            }}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
                               promptRequired ? 'bg-[#008062]' : 'bg-gray-200'
                             }`}
@@ -1428,7 +1457,10 @@ function MyComponent() {
                             <Input 
                               type="text" 
                               value={promptLabel}
-                              onChange={(e) => setPromptLabel(e.target.value)}
+                              onChange={(e) => {
+                                setPromptLabel(e.target.value);
+                                setHasChanges(true);
+                              }}
                               placeholder="Enter prompt label..."
                               className="w-full"
                             />
@@ -1483,7 +1515,11 @@ function MyComponent() {
                   <Button variant="outline" onClick={onClose}>
                     Cancel
                   </Button>
-                  <Button onClick={handleSave} className="bg-[#008062] hover:bg-[#006b54]">
+                  <Button 
+                    onClick={handleSave} 
+                    disabled={!hasChanges}
+                    className="bg-[#008062] hover:bg-[#006b54] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                  >
                     Save Changes
                   </Button>
                 </div>
