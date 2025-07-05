@@ -579,6 +579,7 @@ export default function Dashboard() {
   const [sortBy, setSortBy] = useState<'name' | 'type' | 'status'>('name');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [browseIntegrationsActive, setBrowseIntegrationsActive] = useState(false);
+  const [gmailConfigActive, setGmailConfigActive] = useState(false);
   const [showAttachmentSidebar, setShowAttachmentSidebar] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
@@ -1101,6 +1102,7 @@ export default function Dashboard() {
             configureTool={configureTool}
             onClearConfigureTool={() => setConfigureTool(null)}
             onBrowseIntegrationsChange={setBrowseIntegrationsActive}
+            onGmailConfigChange={setGmailConfigActive}
           />,
         };
       case 'workflows':
@@ -1912,9 +1914,9 @@ export default function Dashboard() {
         ) : /* Regular Dashboard Content */
         (
           <div className="h-full p-8 overflow-y-auto">
-            {/* Top Bar - Hidden when in user-view, settings modes, configuration screens, or browse integrations */}
+            {/* Top Bar - Hidden when in user-view, settings modes, configuration screens, browse integrations, or Gmail config */}
             {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-              !configureAgent && !configureTool && !configureWorkflow && !testAgent && !browseIntegrationsActive && (
+              !configureAgent && !configureTool && !configureWorkflow && !testAgent && !browseIntegrationsActive && !gmailConfigActive && (
               <div className="mb-8">
                   <div>
                     <div className="flex items-center gap-3">
