@@ -1515,22 +1515,25 @@ function MyComponent() {
               {/* Save Footer */}
               <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
                 <div className="flex justify-between items-center">
-                  {showSavedMessage && (
-                    <div className="text-sm text-green-600 font-medium">
-                      Your changes have been saved.
+                  <div></div>
+                  <div className="flex items-center gap-6">
+                    {showSavedMessage && (
+                      <div className="text-lg text-[#008062] font-semibold">
+                        Your changes have been saved.
+                      </div>
+                    )}
+                    <div className="flex gap-3">
+                      <Button variant="outline" onClick={onClose}>
+                        Cancel
+                      </Button>
+                      <Button 
+                        onClick={handleSave} 
+                        disabled={!hasChanges}
+                        className="bg-[#008062] hover:bg-[#006b54] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                      >
+                        Save Changes
+                      </Button>
                     </div>
-                  )}
-                  <div className={`flex gap-3 ${showSavedMessage ? '' : 'ml-auto'}`}>
-                    <Button variant="outline" onClick={onClose}>
-                      Cancel
-                    </Button>
-                    <Button 
-                      onClick={handleSave} 
-                      disabled={!hasChanges}
-                      className="bg-[#008062] hover:bg-[#006b54] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
-                    >
-                      Save Changes
-                    </Button>
                   </div>
                 </div>
               </div>
