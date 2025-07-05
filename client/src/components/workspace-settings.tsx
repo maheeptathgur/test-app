@@ -22,7 +22,7 @@ export function WorkspaceSettings() {
   const [dataRetention, setDataRetention] = useState("90");
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-24">
       <div className="w-full">
         <nav className="flex space-x-8 border-b border-border">
           <button
