@@ -1338,7 +1338,7 @@ export default function Dashboard() {
       <div className="flex flex-col h-screen bg-background">
         {/* User View Preview Toolbar */}
         {activeSection === 'user-view' && (
-          <div className="bg-[#008062] text-white px-6 py-3 flex items-center justify-between border-b border-[#006b52] flex-shrink-0">
+          <div className="bg-[#008062]/80 text-white px-4 py-2 flex items-center justify-between border-b border-[#006b52]/50 flex-shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium">User View Preview</span>
