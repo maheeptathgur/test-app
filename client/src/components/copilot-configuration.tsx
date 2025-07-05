@@ -1322,24 +1322,7 @@ function MyComponent() {
                       
                       {/* Configuration Toggles */}
                       <div className="space-y-4 pb-6 border-b border-gray-200 mb-6">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium">Discoverable</span>
-                            <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
-                              ?
-                            </button>
-                          </div>
-                          <button 
-                            onClick={() => setIsDiscoverable(!isDiscoverable)}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                              isDiscoverable ? 'bg-[#008062]' : 'bg-gray-200'
-                            }`}
-                          >
-                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                              isDiscoverable ? 'translate-x-6' : 'translate-x-1'
-                            }`} />
-                          </button>
-                        </div>
+                        
                         
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
