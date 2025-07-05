@@ -232,7 +232,7 @@ export function WorkspaceSettings() {
           <div className="col-span-1">
             <Card>
               <CardHeader>
-                <CardTitle>Workspace Preferences</CardTitle>
+                <CardTitle className="font-semibold tracking-tight text-[16px]">Workspace Preferences</CardTitle>
                 <CardDescription>
                   Configure how your workspace behaves
                 </CardDescription>
