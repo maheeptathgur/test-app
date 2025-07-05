@@ -1914,7 +1914,6 @@ export default function Dashboard() {
             {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
               !configureAgent && !configureTool && !configureWorkflow && !testAgent && (
               <div className="mb-8">
-                <div className="flex items-center justify-between">
                   <div>
                     <div className="flex items-center gap-3">
                       <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
@@ -1926,7 +1925,6 @@ export default function Dashboard() {
                     </div>
                     <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
                   </div>
-                </div>
                 {activeSection === 'copilots' && (
                   <div className="flex gap-3 mt-4">
                     <Button 
