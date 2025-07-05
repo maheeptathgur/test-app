@@ -33,19 +33,6 @@ type WorkspaceSection = 'subscriptions' | 'conversations' | 'analytics' | 'users
 
 // Declare BrowseIntegrationsScreen before it's used
 function GmailConfigScreen({ onBack }: { onBack: () => void }) {
-  const [activeTab, setActiveTab] = useState('connection');
-  const [emailFilters, setEmailFilters] = useState([
-    { id: 1, name: 'Priority Emails', condition: 'is:important', action: 'Label as Priority', enabled: true },
-    { id: 2, name: 'Auto-Reply', condition: 'subject:support', action: 'Send auto-reply', enabled: true },
-    { id: 3, name: 'Team Notifications', condition: 'from:team@company.com', action: 'Forward to Slack', enabled: false }
-  ]);
-
-  const tabs = [
-    { id: 'connection', label: 'Connection', icon: <Wrench className="w-4 h-4" /> },
-    { id: 'permissions', label: 'Permissions', icon: <Shield className="w-4 h-4" /> },
-    { id: 'automation', label: 'Automation', icon: <Zap className="w-4 h-4" /> },
-    { id: 'usage', label: 'Usage', icon: <Activity className="w-4 h-4" /> }
-  ];
 
   return (
     <div className="space-y-6">
@@ -68,29 +55,8 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
         </Button>
       </div>
 
-      {/* Tabs */}
-      <div className="border-b">
-        <nav className="flex space-x-8">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
-                activeTab === tab.id
-                  ? 'border-[#008062] text-[#008062]'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              }`}
-            >
-              {tab.icon}
-              {tab.label}
-            </button>
-          ))}
-        </nav>
-      </div>
-
-      {/* Tab Content */}
+      {/* Connection Settings */}
       <div className="space-y-6">
-        {activeTab === 'connection' && (
           <div className="space-y-6">
             <Card>
               <CardHeader>
@@ -142,147 +108,6 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
               </CardContent>
             </Card>
           </div>
-        )}
-
-        {activeTab === 'permissions' && (
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Gmail Permissions</CardTitle>
-                <CardDescription>Control what data your copilots can access from Gmail</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {[
-                  { permission: 'Read emails', description: 'Allow copilots to read email content and metadata', granted: true },
-                  { permission: 'Send emails', description: 'Allow copilots to compose and send emails on your behalf', granted: true },
-                  { permission: 'Manage labels', description: 'Create, modify, and apply labels to emails', granted: true },
-                  { permission: 'Access contacts', description: 'Read and search your Gmail contacts', granted: false },
-                  { permission: 'Manage drafts', description: 'Create, edit, and delete email drafts', granted: true },
-                  { permission: 'Access attachments', description: 'Download and process email attachments', granted: false }
-                ].map((item, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
-                    <div>
-                      <p className="font-medium">{item.permission}</p>
-                      <p className="text-sm text-gray-600">{item.description}</p>
-                    </div>
-                    <Switch defaultChecked={item.granted} />
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {activeTab === 'automation' && (
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle>Email Automation Rules</CardTitle>
-                    <CardDescription>Set up automated actions based on email conditions</CardDescription>
-                  </div>
-                  <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Add Rule
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {emailFilters.map((filter) => (
-                    <div key={filter.id} className="flex items-center justify-between p-4 border rounded-lg">
-                      <div className="flex items-center gap-4">
-                        <Switch checked={filter.enabled} onCheckedChange={(checked) => {
-                          setEmailFilters(prev => prev.map(f => f.id === filter.id ? { ...f, enabled: checked } : f));
-                        }} />
-                        <div>
-                          <p className="font-medium">{filter.name}</p>
-                          <p className="text-sm text-gray-600">
-                            When <code className="bg-gray-100 px-1 rounded">{filter.condition}</code> → {filter.action}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Button variant="ghost" size="sm">
-                          <Edit3 className="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="sm">
-                          <Trash2 className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
-
-        {activeTab === 'usage' && (
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium">API Calls (24h)</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">1,247</div>
-                  <p className="text-xs text-green-600">+12% from yesterday</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium">Emails Processed</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">89</div>
-                  <p className="text-xs text-gray-600">Last 24 hours</p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="pb-3">
-                  <CardTitle className="text-sm font-medium">Auto-replies Sent</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">23</div>
-                  <p className="text-xs text-gray-600">This week</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Recent Activity</CardTitle>
-                <CardDescription>Latest Gmail integration actions</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {[
-                    { action: 'Email sent', details: 'Marketing campaign to lead@prospect.com', time: '2 minutes ago', type: 'send' },
-                    { action: 'Auto-reply triggered', details: 'Support inquiry from customer@example.com', time: '8 minutes ago', type: 'auto' },
-                    { action: 'Label applied', details: 'Priority label added to 3 emails', time: '15 minutes ago', type: 'organize' },
-                    { action: 'Email processed', details: 'Invoice processed and forwarded to accounting', time: '1 hour ago', type: 'process' }
-                  ].map((activity, index) => (
-                    <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                      <div className={`w-2 h-2 rounded-full ${
-                        activity.type === 'send' ? 'bg-blue-500' :
-                        activity.type === 'auto' ? 'bg-green-500' :
-                        activity.type === 'organize' ? 'bg-purple-500' :
-                        'bg-orange-500'
-                      }`}></div>
-                      <div className="flex-1">
-                        <p className="font-medium text-sm">{activity.action}</p>
-                        <p className="text-xs text-gray-600">{activity.details}</p>
-                      </div>
-                      <span className="text-xs text-gray-500">{activity.time}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        )}
       </div>
 
       {/* Footer Actions */}
