@@ -133,16 +133,53 @@ export function WorkspaceSettings() {
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label>Workspace Avatar</Label>
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-blue-500 rounded-lg flex items-center justify-center text-white font-semibold text-xl">
-                    M
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <Label>Icon (1:1)</Label>
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center text-muted-foreground border border-dashed">
+                      <Upload className="w-6 h-6" />
+                    </div>
+                    <Button variant="outline" size="sm" className="bg-[#008062] text-white hover:bg-[#00d2a0]">
+                      <Upload className="w-4 h-4 mr-2" />
+                      Upload Icon
+                    </Button>
                   </div>
-                  <Button variant="outline" size="sm">
-                    <Upload className="w-4 h-4 mr-2" />
-                    Upload Image
-                  </Button>
+                  <p className="text-sm text-muted-foreground">
+                    Square format (1:1) • Recommended: 256x256px
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Logo (2:1)</Label>
+                  <div className="flex items-center gap-4">
+                    <div className="w-32 h-16 bg-muted rounded-lg flex items-center justify-center text-muted-foreground border border-dashed">
+                      <Upload className="w-6 h-6" />
+                    </div>
+                    <Button variant="outline" size="sm" className="bg-[#008062] text-white hover:bg-[#00d2a0]">
+                      <Upload className="w-4 h-4 mr-2" />
+                      Upload Logo
+                    </Button>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Wide format (2:1) • Recommended: 512x256px
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <Label>Banner (16:9)</Label>
+                  <div className="flex items-center gap-4">
+                    <div className="w-48 h-[108px] bg-muted rounded-lg flex items-center justify-center text-muted-foreground border border-dashed">
+                      <Upload className="w-6 h-6" />
+                    </div>
+                    <Button variant="outline" size="sm" className="bg-[#008062] text-white hover:bg-[#00d2a0]">
+                      <Upload className="w-4 h-4 mr-2" />
+                      Upload Banner
+                    </Button>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    Widescreen format (16:9) • Recommended: 1920x1080px
+                  </p>
                 </div>
               </div>
             </CardContent>
