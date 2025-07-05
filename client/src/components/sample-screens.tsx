@@ -31,6 +31,140 @@ import { ToolConfigureScreen } from "./tool-configure-screen";
 
 type WorkspaceSection = 'subscriptions' | 'conversations' | 'analytics' | 'users';
 
+// Declare BrowseIntegrationsScreen before it's used
+function BrowseIntegrationsScreen({ onBack }: { onBack: () => void }) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const integrationsByCategory = {
+    "Popular Integrations": [
+      { name: 'Slack', description: 'Team communication and collaboration', price: 'Free', users: '10M+', category: 'communication' },
+      { name: 'Google Workspace', description: 'Email, docs, and productivity suite', price: 'Free', users: '3B+', category: 'productivity' },
+      { name: 'Microsoft 365', description: 'Office apps and cloud services', price: 'Paid', users: '1.3B+', category: 'productivity' },
+      { name: 'Zoom', description: 'Video conferencing and meetings', price: 'Freemium', users: '300M+', category: 'communication' },
+      { name: 'Trello', description: 'Project management and collaboration', price: 'Freemium', users: '50M+', category: 'productivity' },
+      { name: 'Asana', description: 'Work management and team coordination', price: 'Freemium', users: '100M+', category: 'productivity' },
+    ],
+    "Recently Added": [
+      { name: 'Linear', description: 'Issue tracking and project planning', price: 'Paid', new: true, category: 'productivity' },
+      { name: 'Figma', description: 'Design collaboration and prototyping', price: 'Freemium', new: true, category: 'productivity' },
+      { name: 'Loom', description: 'Video messaging and screen recording', price: 'Freemium', new: true, category: 'communication' },
+      { name: 'Notion', description: 'All-in-one workspace for notes and collaboration', price: 'Freemium', new: true, category: 'productivity' },
+      { name: 'Discord', description: 'Voice, video and text communication', price: 'Free', new: true, category: 'communication' },
+    ],
+    "Analytics & Data": [
+      { name: 'Google Analytics', description: 'Web analytics and reporting', price: 'Free', category: 'analytics' },
+      { name: 'Mixpanel', description: 'Product analytics and user tracking', price: 'Freemium', category: 'analytics' },
+      { name: 'Amplitude', description: 'Digital optimization platform', price: 'Freemium', category: 'analytics' },
+      { name: 'Tableau', description: 'Data visualization and business intelligence', price: 'Paid', category: 'analytics' },
+    ],
+    "Marketing & Sales": [
+      { name: 'HubSpot', description: 'CRM and marketing automation', price: 'Freemium', category: 'marketing' },
+      { name: 'Mailchimp', description: 'Email marketing and automation', price: 'Freemium', category: 'marketing' },
+      { name: 'Salesforce', description: 'Customer relationship management', price: 'Paid', category: 'marketing' },
+      { name: 'Intercom', description: 'Customer messaging and support', price: 'Paid', category: 'marketing' },
+    ]
+  };
+
+  const filteredIntegrations = Object.entries(integrationsByCategory).reduce((acc, [categoryName, integrations]) => {
+    const filtered = integrations.filter(integration => {
+      const matchesSearch = integration.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           integration.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = selectedCategory === 'all' || integration.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+    
+    if (filtered.length > 0) {
+      acc[categoryName] = filtered;
+    }
+    return acc;
+  }, {} as Record<string, any[]>);
+
+  return (
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Button variant="outline" onClick={onBack} className="gap-2">
+            <ArrowLeft className="h-4 w-4" />
+            Back to Tools
+          </Button>
+          <div>
+            <h1 className="text-2xl font-semibold text-foreground">Browse Integrations</h1>
+            <p className="text-sm text-muted-foreground">Explore available integrations and tools from our marketplace</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Search and Filter */}
+      <div className="flex gap-4">
+        <div className="flex-1">
+          <Input 
+            placeholder="Search integrations..." 
+            className="w-full"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+          <SelectTrigger className="w-48">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Categories</SelectItem>
+            <SelectItem value="communication">Communication</SelectItem>
+            <SelectItem value="productivity">Productivity</SelectItem>
+            <SelectItem value="analytics">Analytics</SelectItem>
+            <SelectItem value="marketing">Marketing</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      {/* Integrations by Category */}
+      <div className="space-y-8">
+        {Object.entries(filteredIntegrations).map(([categoryName, integrations]) => (
+          <div key={categoryName}>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold">{categoryName}</h2>
+              <Badge variant="secondary">{integrations.length} integrations</Badge>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {integrations.map((integration) => (
+                <Card key={integration.name} className="p-4 hover:shadow-md transition-shadow">
+                  <div className="flex justify-between items-start mb-3">
+                    <h4 className="font-medium">{integration.name}</h4>
+                    <div className="flex gap-2">
+                      {integration.new && <Badge className="text-xs bg-green-100 text-green-700">New</Badge>}
+                      <Badge variant="secondary" className="text-xs">{integration.price}</Badge>
+                    </div>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-3">{integration.description}</p>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs text-gray-500">{integration.users || 'New'}</span>
+                    <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+                      Connect
+                    </Button>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {Object.keys(filteredIntegrations).length === 0 && (
+        <div className="text-center py-12 text-muted-foreground">
+          <div className="w-12 h-12 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
+            <Search className="w-6 h-6 text-gray-400" />
+          </div>
+          <p className="text-lg font-medium mb-2">No integrations found</p>
+          <p className="text-sm">Try adjusting your search terms or category filter.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 interface SampleScreenProps {
   section: NavigationSection | WorkspaceSection;
   configureAgent?: {id: string, name: string} | null;
@@ -148,6 +282,10 @@ export function SampleScreen({
           return <ToolConfigureScreen tool={toolToConfig} onBack={handleBackToTools} />;
         }
 
+        if (showBrowseIntegrations) {
+          return <BrowseIntegrationsScreen onBack={() => setShowBrowseIntegrations(false)} />;
+        }
+
         switch (section) {
           case 'agents':
             return <AgentsScreen onAgentConfigure={handleAgentConfigure} />;
@@ -244,99 +382,7 @@ export function SampleScreen({
         </DialogContent>
       </Dialog>
 
-      {/* Browse Integrations Modal */}
-      {console.log('Rendering Browse Integrations Modal, open:', showBrowseIntegrations)}
-      <Dialog open={showBrowseIntegrations} onOpenChange={setShowBrowseIntegrations}>
-        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle>Browse Integrations</DialogTitle>
-            <DialogDescription>
-              Explore available integrations and tools from our marketplace
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-6">
-            <div className="flex gap-4">
-              <div className="flex-1">
-                <Input placeholder="Search integrations..." className="w-full" />
-              </div>
-              <Select defaultValue="all">
-                <SelectTrigger className="w-48">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
-                  <SelectItem value="communication">Communication</SelectItem>
-                  <SelectItem value="productivity">Productivity</SelectItem>
-                  <SelectItem value="analytics">Analytics</SelectItem>
-                  <SelectItem value="marketing">Marketing</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div className="space-y-8">
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Popular Integrations</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { name: 'Slack', description: 'Team communication and collaboration', price: 'Free', users: '10M+' },
-                    { name: 'Google Workspace', description: 'Email, docs, and productivity suite', price: 'Free', users: '3B+' },
-                    { name: 'Microsoft 365', description: 'Office apps and cloud services', price: 'Paid', users: '1.3B+' },
-                    { name: 'Zoom', description: 'Video conferencing and meetings', price: 'Freemium', users: '300M+' },
-                    { name: 'Trello', description: 'Project management and collaboration', price: 'Freemium', users: '50M+' },
-                    { name: 'Asana', description: 'Work management and team coordination', price: 'Freemium', users: '100M+' },
-                  ].map((integration) => (
-                    <Card key={integration.name} className="p-4">
-                      <div className="flex justify-between items-start mb-3">
-                        <h4 className="font-medium">{integration.name}</h4>
-                        <Badge variant="secondary" className="text-xs">{integration.price}</Badge>
-                      </div>
-                      <p className="text-sm text-gray-600 mb-3">{integration.description}</p>
-                      <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-500">{integration.users} users</span>
-                        <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
-                          Connect
-                        </Button>
-                      </div>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-              
-              <div>
-                <h3 className="text-lg font-semibold mb-4">Recently Added</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {[
-                    { name: 'Linear', description: 'Issue tracking and project planning', price: 'Paid', new: true },
-                    { name: 'Figma', description: 'Design collaboration and prototyping', price: 'Freemium', new: true },
-                    { name: 'Loom', description: 'Video messaging and screen recording', price: 'Freemium', new: true },
-                  ].map((integration) => (
-                    <Card key={integration.name} className="p-4">
-                      <div className="flex justify-between items-start mb-3">
-                        <h4 className="font-medium">{integration.name}</h4>
-                        <div className="flex gap-2">
-                          {integration.new && <Badge className="text-xs bg-green-100 text-green-700">New</Badge>}
-                          <Badge variant="secondary" className="text-xs">{integration.price}</Badge>
-                        </div>
-                      </div>
-                      <p className="text-sm text-gray-600 mb-3">{integration.description}</p>
-                      <Button size="sm" className="w-full bg-[#008062] hover:bg-[#00d2a0] text-white">
-                        Connect
-                      </Button>
-                    </Card>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex justify-end">
-              <Button variant="outline" onClick={() => setShowBrowseIntegrations(false)}>
-                Close
-              </Button>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+
     </>
   );
 }
