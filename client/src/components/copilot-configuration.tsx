@@ -783,19 +783,33 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                   <div
                     contentEditable
                     className="p-4 min-h-[450px] outline-none focus:ring-0"
-                    style={{ lineHeight: '1.6' }}
+                    style={{ 
+                      lineHeight: '1.6',
+                      direction: 'ltr',
+                      textAlign: 'left'
+                    }}
                     suppressContentEditableWarning={true}
+                    dangerouslySetInnerHTML={{ 
+                      __html: mdContent.replace(/\n/g, '<br>') || 'Start writing your content here...'
+                    }}
                     onInput={(e) => {
                       const target = e.target as HTMLDivElement;
-                      setMdContent(target.innerText || target.textContent || '');
+                      const content = target.innerHTML
+                        .replace(/<br\s*\/?>/gi, '\n')
+                        .replace(/<div><br><\/div>/gi, '\n')
+                        .replace(/<div>/gi, '\n')
+                        .replace(/<\/div>/gi, '')
+                        .replace(/<[^>]*>/gi, '')
+                        .trim();
+                      setMdContent(content);
                     }}
-                    onBlur={(e) => {
-                      const target = e.target as HTMLDivElement;
-                      setMdContent(target.innerText || target.textContent || '');
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault();
+                        document.execCommand('insertHTML', false, '<br><br>');
+                      }
                     }}
-                  >
-                    {mdContent || 'Start writing your content here...'}
-                  </div>
+                  />
                 </div>
               </div>
             )}
