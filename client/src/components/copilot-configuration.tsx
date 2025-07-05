@@ -629,7 +629,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 {/* Copilot Configuration */}
                 <div>
                   <div className="mb-6">
-                    <h2 className="text-lg font-semibold text-foreground">Copilot Configuration</h2>
+                    <h2 className="font-semibold text-foreground text-[24px]">Copilot Configuration</h2>
                     <p className="text-sm text-muted-foreground">Manage basic copilot settings and behavior</p>
                   </div>
                   <div className="space-y-6">
