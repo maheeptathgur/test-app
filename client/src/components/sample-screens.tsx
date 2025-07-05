@@ -50,11 +50,7 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="sm" onClick={onBack}>
-          <ArrowLeft className="w-4 h-4 mr-2" />
-          Back to Integrations
-        </Button>
+      <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded flex items-center justify-center">
             <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
@@ -66,6 +62,10 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
             <p className="text-gray-600">Manage your Gmail integration settings and automation</p>
           </div>
         </div>
+        <Button variant="outline" onClick={onBack} className="gap-2">
+          <X className="h-4 w-4" />
+          Close
+        </Button>
       </div>
 
       {/* Tabs */}
@@ -688,6 +688,7 @@ interface SampleScreenProps {
   configureWorkflow?: {id: string, name: string} | null;
   onClearConfigureWorkflow?: () => void;
   onBrowseIntegrationsChange?: (isActive: boolean) => void;
+  onGmailConfigChange?: (isActive: boolean) => void;
 }
 
 export function SampleScreen({ 
@@ -699,7 +700,8 @@ export function SampleScreen({
   onClearConfigureTool,
   configureWorkflow: externalConfigureWorkflow,
   onClearConfigureWorkflow,
-  onBrowseIntegrationsChange
+  onBrowseIntegrationsChange,
+  onGmailConfigChange
 }: SampleScreenProps) {
   const [localConfigureAgent, setLocalConfigureAgent] = useState<any>(null);
   const [editWorkflow, setEditWorkflow] = useState<string | undefined>(undefined);
@@ -732,6 +734,11 @@ export function SampleScreen({
   useEffect(() => {
     onBrowseIntegrationsChange?.(showBrowseIntegrations);
   }, [showBrowseIntegrations, onBrowseIntegrationsChange]);
+
+  // Notify dashboard when Gmail config state changes
+  useEffect(() => {
+    onGmailConfigChange?.(showGmailConfig);
+  }, [showGmailConfig, onGmailConfigChange]);
 
   useEffect(() => {
     if (onClearConfigureTool) {
