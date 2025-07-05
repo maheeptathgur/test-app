@@ -1361,29 +1361,28 @@ function MyComponent() {
               <Card className="w-full">
                 <CardContent className="p-6 space-y-6">
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div>
-                      <h2 className="font-semibold text-foreground text-[24px]">Knowledge Base</h2>
-                      <p className="text-sm text-muted-foreground">Manage Competitor Researcher's knowledge sources and documentation</p>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" size="sm" onClick={handleAddDocument}>
-                        <Plus className="w-4 h-4 mr-1" />
-                        Add Document
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={handleAddUrl}>
-                        <Link className="w-4 h-4 mr-1" />
-                        Add URL
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={handleCreateMd}>
-                        <FileText className="w-4 h-4 mr-1" />
-                        Create MD
-                      </Button>
-                      <Button variant="outline" size="sm" onClick={() => setSuggestDocsOpen(true)}>
-                        <Bot className="w-4 h-4 mr-1" />
-                        AI Suggestions
-                      </Button>
-                    </div>
+                  <div className="mb-6">
+                    <h2 className="font-semibold text-foreground text-[24px]">Knowledge Base</h2>
+                    <p className="text-sm text-muted-foreground">Manage Competitor Researcher's knowledge sources and documentation</p>
+                  </div>
+                  
+                  <div className="flex gap-2 mb-6">
+                    <Button variant="outline" size="sm" onClick={handleAddDocument}>
+                      <Plus className="w-4 h-4 mr-1" />
+                      Add Document
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={handleAddUrl}>
+                      <Link className="w-4 h-4 mr-1" />
+                      Add URL
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={handleCreateMd}>
+                      <FileText className="w-4 h-4 mr-1" />
+                      Create MD
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={() => setSuggestDocsOpen(true)}>
+                      <Bot className="w-4 h-4 mr-1" />
+                      AI Suggestions
+                    </Button>
                   </div>
                   
                   {/* Search and Filter Controls */}
