@@ -694,7 +694,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
             {mdEditorTab === 'rtf' && (
               <div className="w-full p-6">
-                <div className="border rounded-lg min-h-[500px] bg-white focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-0 focus-within:border-primary transition-all">
+                <div className="border rounded-lg min-h-[500px] bg-white focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:border-primary transition-all">
                   {/* RTF Toolbar */}
                   <div className="border-b p-3 bg-muted/30 flex items-center gap-2 flex-wrap rounded-t-lg">
                     <div className="flex items-center gap-1">
