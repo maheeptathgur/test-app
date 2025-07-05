@@ -575,8 +575,8 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       {/* Header */}
       <div className="flex items-center justify-between p-6 bg-muted/50">
         <div className="flex items-center gap-3">
-          <div className={`w-10 h-10 ${copilotData.avatarColor} rounded-lg flex items-center justify-center text-sm font-semibold`}>
-            {copilotData.avatar}
+          <div className={`w-10 h-10 ${copilotData.avatarColor} rounded-full flex items-center justify-center`}>
+            <Image className="w-5 h-5 text-white" />
           </div>
           <div>
             <h1 className="font-semibold text-foreground text-[24px]">Configure {copilotData.name}</h1>
