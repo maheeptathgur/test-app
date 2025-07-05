@@ -87,8 +87,16 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                     <Input value="March 15, 2024" disabled />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Last Sync</label>
-                    <Input value="2 minutes ago" disabled />
+                    <label className="text-sm font-medium">Authentication Level</label>
+                    <Select defaultValue="user">
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="admin">Admin</SelectItem>
+                        <SelectItem value="user">User</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Sync Frequency</label>
