@@ -93,7 +93,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
       </div>
 
       {/* Tab Content */}
-      <div className="grid grid-cols-1 gap-6 pb-24">
+      <div className="grid grid-cols-1 gap-6">
         <div>
           {activeTab === "general" && (
             <Card>
@@ -457,17 +457,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
         </div>
       </div>
 
-      {/* Save Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
-        <div className="flex justify-end gap-3">
-          <Button variant="outline" onClick={onBack}>
-            Cancel
-          </Button>
-          <Button className="bg-[#008062] hover:bg-[#006b54]">
-            Save Changes
-          </Button>
-        </div>
-      </div>
+
     </div>
   );
 }
