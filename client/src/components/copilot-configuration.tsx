@@ -1017,8 +1017,9 @@ function MyComponent() {
             )}
 
             {activeTab === "components" && (
-            <div className="p-0 m-0">
-              <div className="max-w-4xl mx-auto p-6 space-y-6">
+            <div className="p-6">
+              <Card className="w-full">
+                <CardContent className="p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-lg font-semibold text-foreground">Components</h2>
@@ -1344,13 +1345,15 @@ function MyComponent() {
                     </div>
                   )}
                 </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
             )}
 
             {activeTab === "knowledge" && (
-            <div className="p-0 m-0">
-              <div className="max-w-4xl mx-auto p-6 space-y-6">
+            <div className="p-6">
+              <Card className="w-full">
+                <CardContent className="p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-lg font-semibold text-foreground">Knowledge Base</h2>
@@ -1613,13 +1616,15 @@ function MyComponent() {
 
                   </div>
                 </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
             )}
 
             {activeTab === "user-docs" && !previewDocument && (
-            <div className="p-0 m-0">
-              <div className="max-w-4xl mx-auto p-6 space-y-6">
+            <div className="p-6">
+              <Card className="w-full">
+                <CardContent className="p-6 space-y-6">
                 <div>
                   <h2 className="text-lg font-semibold text-foreground mb-4">User Documents</h2>
                   
@@ -1794,7 +1799,8 @@ function MyComponent() {
                     </div>
                   </div>
                 </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
             )}
 
@@ -2025,8 +2031,9 @@ function MyComponent() {
             )}
 
             {activeTab === "profile" && (
-            <div className="p-0 m-0">
-              <div className="max-w-4xl mx-auto p-6 space-y-6">
+            <div className="p-6">
+              <Card className="w-full">
+                <CardContent className="p-6 space-y-6">
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div>
@@ -2168,7 +2175,8 @@ function MyComponent() {
                     </div>
                   </div>
                 </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
             )}
       </div>
