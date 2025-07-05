@@ -1340,7 +1340,7 @@ function MyComponent() {
                         
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
-                            <span className="text-sm font-medium">Admin Documents in sources</span>
+                            <span className="text-sm font-medium">Show Sources</span>
                             <button className="w-4 h-4 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
                               ?
                             </button>
