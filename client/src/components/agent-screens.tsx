@@ -93,7 +93,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
       </div>
 
       {/* Tab Content */}
-      <div className="grid grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 gap-6 pb-24">
         <div>
           {activeTab === "general" && (
             <Card>
