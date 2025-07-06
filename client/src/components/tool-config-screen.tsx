@@ -69,86 +69,78 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           </Button>
         </div>
         
-        {/* Configuration Sections */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Configuration - Full width */}
-          <div className="lg:col-span-3 space-y-6">
-            {/* Connection Settings */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Connection Status</CardTitle>
-                <CardDescription>Your {toolName} account connection and authentication details</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <div>
-                      <p className="font-medium">Connected to {toolName}</p>
-                      <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
-                    </div>
-                  </div>
-                  <Button variant="outline" size="sm">
-                    Reconnect
-                  </Button>
+        {/* Connection Settings */}
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>Connection Status</CardTitle>
+            <CardDescription>Your {toolName} account connection and authentication details</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div>
+                  <p className="font-medium">Connected to {toolName}</p>
+                  <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Account Email</label>
-                    <Input value="mandeep@knolli.ai" disabled />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Authentication Level</label>
-                    <Select defaultValue="user" onValueChange={() => setHasChanges(true)}>
-                      <SelectTrigger>
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="admin">Admin</SelectItem>
-                        <SelectItem value="user">User</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+              <Button variant="outline" size="sm">
+                Reconnect
+              </Button>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Account Email</label>
+                <Input value="mandeep@knolli.ai" disabled />
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Authentication Level</label>
+                <Select defaultValue="user" onValueChange={() => setHasChanges(true)}>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="admin">Admin</SelectItem>
+                    <SelectItem value="user">User</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-            {/* Permissions & Scopes */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Permissions & Scopes</CardTitle>
-                <CardDescription>Control what actions this integration can perform</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between p-3 border rounded-lg">
-                  <div>
-                    <p className="font-medium">Read Data</p>
-                    <p className="text-sm text-gray-600">Access and read data from {toolName}</p>
-                  </div>
-                  <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
-                </div>
-                <div className="flex items-center justify-between p-3 border rounded-lg">
-                  <div>
-                    <p className="font-medium">Write Data</p>
-                    <p className="text-sm text-gray-600">Create and modify data in {toolName}</p>
-                  </div>
-                  <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
-                </div>
-                <div className="flex items-center justify-between p-3 border rounded-lg">
-                  <div>
-                    <p className="font-medium">Delete Data</p>
-                    <p className="text-sm text-gray-600">Remove data from {toolName}</p>
-                  </div>
-                  <Switch defaultChecked={false} onCheckedChange={() => setHasChanges(true)} />
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          
-        </div>
+        {/* Permissions & Scopes */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Permissions & Scopes</CardTitle>
+            <CardDescription>Control what actions this integration can perform</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <div>
+                <p className="font-medium">Read Data</p>
+                <p className="text-sm text-gray-600">Access and read data from {toolName}</p>
+              </div>
+              <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
+            </div>
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <div>
+                <p className="font-medium">Write Data</p>
+                <p className="text-sm text-gray-600">Create and modify data in {toolName}</p>
+              </div>
+              <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
+            </div>
+            <div className="flex items-center justify-between p-3 border rounded-lg">
+              <div>
+                <p className="font-medium">Delete Data</p>
+                <p className="text-sm text-gray-600">Remove data from {toolName}</p>
+              </div>
+              <Switch defaultChecked={false} onCheckedChange={() => setHasChanges(true)} />
+            </div>
+          </CardContent>
+        </Card>
       </div>
       {/* Sticky Footer */}
       <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
