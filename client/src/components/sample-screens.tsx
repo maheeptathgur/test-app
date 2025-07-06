@@ -699,10 +699,18 @@ export function SampleScreen({
         }
 
         if (showConnectTool) {
-          return <ToolConfigScreen toolName={showConnectTool} onBack={() => {
-            setShowConnectTool(null);
-            onToolConfigChange?.(false);
-          }} />;
+          return <ToolConfigScreen 
+            toolName={showConnectTool} 
+            onBack={() => {
+              setShowConnectTool(null);
+              onToolConfigChange?.(false);
+            }}
+            onBackToBrowseIntegrations={() => {
+              setShowConnectTool(null);
+              setShowBrowseIntegrations(true);
+              onToolConfigChange?.(false);
+            }}
+          />;
         }
 
         switch (section) {
