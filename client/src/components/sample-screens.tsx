@@ -968,6 +968,16 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
 
   return (
     <div className="space-y-6">
+      {/* Title */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-foreground">Agents</h1>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+            {filteredAndSortedAgents.length} Agents
+          </Badge>
+        </div>
+      </div>
+      
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
@@ -1689,7 +1699,15 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
 
   return (
     <div className="space-y-6">
-      
+      {/* Title */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-foreground">Workflows</h1>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+            {totalWorkflows} Workflows
+          </Badge>
+        </div>
+      </div>
 
       {/* Action Bar */}
       <div className="flex justify-between items-center">
@@ -1895,6 +1913,16 @@ function KnowledgeBaseScreen() {
 
   return (
     <div className="space-y-6">
+      {/* Title */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-foreground">Knowledge Base</h1>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+            Documents
+          </Badge>
+        </div>
+      </div>
+      
       <div className="flex items-center justify-end">
         <div className="flex gap-2">
           <Button variant="outline" size="sm">
@@ -2291,6 +2319,13 @@ function KnowledgeBaseScreen() {
 function SubscriptionsScreen() {
   return (
     <div className="space-y-6">
+      {/* Title */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-foreground">Subscriptions</h1>
+        </div>
+      </div>
+      
       <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <CreditCard className="w-4 h-4 mr-2" />
@@ -2376,6 +2411,16 @@ function ConversationsScreen() {
 
   return (
     <div className="space-y-6">
+      {/* Title */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-foreground">Conversations</h1>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+            {conversations.length} Active
+          </Badge>
+        </div>
+      </div>
+      
       <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <MessageSquare className="w-4 h-4 mr-2" />
@@ -2472,6 +2517,13 @@ function ConversationsScreen() {
 function AnalyticsScreen() {
   return (
     <div className="space-y-6">
+      {/* Title */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-foreground">Analytics</h1>
+        </div>
+      </div>
+      
       <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <BarChart3 className="w-4 h-4 mr-2" />
@@ -2603,6 +2655,16 @@ function UsersScreen() {
 
   return (
     <div className="space-y-6">
+      {/* Title */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-foreground">Users</h1>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+            {users.length} Users
+          </Badge>
+        </div>
+      </div>
+      
       <div className="flex items-center justify-end">
         <Button className="bg-brand-primary hover:bg-brand-primary/90">
           <Users className="w-4 h-4 mr-2" />
