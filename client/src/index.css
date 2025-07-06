@@ -275,4 +275,10 @@
   .border.rounded-lg table tbody tr:last-child td:last-child {
     border-bottom-right-radius: 0.5rem;
   }
+
+  /* Custom class for Browse Integrations template - reduced horizontal padding */
+  .browse-integrations-template {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
 }
