@@ -276,5 +276,20 @@
     border-bottom-right-radius: 0.5rem;
   }
 
+  /* Browse Integrations specific padding - adds top padding only for this screen */
+  .browse-integrations-container {
+    padding-top: 2rem; /* pt-8 equivalent */
+  }
+
+  /* Custom wiggle animation for error state toggles */
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+  }
+
+  .wiggle {
+    animation: wiggle 0.3s ease-in-out;
+  }
 
 }
