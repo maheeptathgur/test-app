@@ -289,4 +289,8 @@
     animation: wiggle 0.3s ease-in-out;
   }
 
+  .tool-config-container {
+    padding: 0 !important;
+  }
+
 }
