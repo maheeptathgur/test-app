@@ -1512,7 +1512,7 @@ function ToolsScreen({
                         <p className="text-sm text-gray-600 mt-1">{tool.description}</p>
                         <div className="space-y-3 mt-3">
                           {/* Toggle Switch - moved above */}
-                          <div className="flex items-center justify-end">
+                          <div className="flex items-center justify-start">
                             <div className="flex items-center gap-2">
                               <button
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
