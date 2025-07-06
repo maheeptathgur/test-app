@@ -589,7 +589,7 @@ export default function Dashboard() {
   // State for tracking which specific agent/tool/workflow to configure
   const [configureAgent, setConfigureAgent] = useState<{id: string, name: string} | null>(null);
   const [configureTool, setConfigureTool] = useState<{id: string, name: string} | null>(null);
-  const [toolConfigActive, setToolConfigActive] = useState<string | null>(null);
+  const [toolConfigActive, setToolConfigActive] = useState<boolean>(false);
   const [configureWorkflow, setConfigureWorkflow] = useState<{id: string, name: string} | null>(null);
   const [testAgent, setTestAgent] = useState<{id: string, name: string} | null>(null);
   
@@ -678,14 +678,14 @@ export default function Dashboard() {
       setConfigureWorkflow(null);
     }
     if (toolConfigActive) {
-      setToolConfigActive(null);
+      setToolConfigActive(false);
     }
     showNotification(`Switched to ${section.charAt(0).toUpperCase() + section.slice(1)}`);
   };
 
   // Handler for tool configurations (from both Browse Integrations and Tools screens)
   const handleToolConfig = (toolName: string) => {
-    setToolConfigActive(toolName);
+    // Tool config is now handled by SampleScreen component through onToolConfigChange callback
     setBrowseIntegrationsActive(false);
     setGmailConfigActive(false);
   };
@@ -1115,6 +1115,7 @@ export default function Dashboard() {
             onClearConfigureTool={() => setConfigureTool(null)}
             onBrowseIntegrationsChange={setBrowseIntegrationsActive}
             onGmailConfigChange={setGmailConfigActive}
+            onToolConfigChange={setToolConfigActive}
             onToolConfig={handleToolConfig}
           />,
         };
@@ -1909,15 +1910,6 @@ export default function Dashboard() {
             onToggleAttachment={setShowAttachmentSidebar}
             selectedFiles={selectedFiles}
           />
-        ) : /* Tool Configuration Interface */
-        toolConfigActive ? (
-          <div className="h-full">
-            {toolConfigActive === 'Gmail' ? (
-              <GmailConfigScreen onBack={() => setToolConfigActive(null)} />
-            ) : (
-              <ToolConfigScreen toolName={toolConfigActive} onBack={() => setToolConfigActive(null)} />
-            )}
-          </div>
         ) : /* Configuration Interface */
         configuringCopilot ? (
           <CopilotConfiguration
@@ -1934,10 +1926,15 @@ export default function Dashboard() {
         ) : /* Regular Dashboard Content */
         (
           <div className="h-full overflow-y-auto">
-            {/* Content Body */}
-            <div className="px-8 pt-8 pb-24">
+            {/* Content Body - Conditional padding for tool config screens */}
+            <div className={
+              // No padding for tool configuration screens since they handle their own padding
+              (configureTool || toolConfigActive) 
+                ? "" 
+                : "px-8 pt-8 pb-24"
+            }>
               {/* Title Section for specific pages */}
-              {(activeSection === 'copilots' || activeSection === 'workspace-settings') && (
+              {(activeSection === 'copilots' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && (
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>

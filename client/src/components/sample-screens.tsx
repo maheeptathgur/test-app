@@ -556,6 +556,7 @@ interface SampleScreenProps {
   onClearConfigureWorkflow?: () => void;
   onBrowseIntegrationsChange?: (isActive: boolean) => void;
   onGmailConfigChange?: (isActive: boolean) => void;
+  onToolConfigChange?: (isActive: boolean) => void;
   onToolConfig?: (toolName: string) => void;
 }
 
@@ -570,6 +571,7 @@ export function SampleScreen({
   onClearConfigureWorkflow,
   onBrowseIntegrationsChange,
   onGmailConfigChange,
+  onToolConfigChange,
   onToolConfig
 }: SampleScreenProps) {
   const [localConfigureAgent, setLocalConfigureAgent] = useState<any>(null);
@@ -647,11 +649,13 @@ export function SampleScreen({
 
   const handleToolConfigure = (tool: any) => {
     setLocalConfigureTool(tool);
+    onToolConfigChange?.(true);
   };
 
   const handleBackToTools = () => {
     setLocalConfigureTool(null);
     onClearConfigureTool?.();
+    onToolConfigChange?.(false);
   };
 
   // Show Configure screen if an agent is being configured
@@ -692,6 +696,7 @@ export function SampleScreen({
             onConnectTool={(toolName) => {
               setShowBrowseIntegrations(false);
               setShowConnectTool(toolName);
+              onToolConfigChange?.(true);
             }}
           />;
         }
@@ -701,7 +706,10 @@ export function SampleScreen({
         }
 
         if (showConnectTool) {
-          return <ToolConfigScreen toolName={showConnectTool} onBack={() => setShowConnectTool(null)} />;
+          return <ToolConfigScreen toolName={showConnectTool} onBack={() => {
+            setShowConnectTool(null);
+            onToolConfigChange?.(false);
+          }} />;
         }
 
         switch (section) {
