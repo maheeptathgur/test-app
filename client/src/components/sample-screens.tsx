@@ -1460,47 +1460,56 @@ function ToolsScreen({
                       <div className="flex-1">
                         <h4 className="font-medium">{tool.name}</h4>
                         <p className="text-sm text-gray-600 mt-1">{tool.description}</p>
-                        {tool.status === 'Connected' ? (
-                          <div className="flex items-center gap-3 mt-3">
-                            <Button 
-                              size="sm" 
-                              variant="outline" 
-                              className="text-gray-600 hover:text-white"
-                              onClick={() => onToolConfig?.(tool.name)}
+                        <div className="flex items-center justify-between mt-3">
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            className="text-gray-600 hover:text-white"
+                            onClick={() => onToolConfig?.(tool.name)}
+                          >
+                            Configure
+                          </Button>
+                          
+                          {/* Toggle Switch */}
+                          <div className="flex items-center gap-2">
+                            <button
+                              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
+                                tool.status === 'Connected' 
+                                  ? 'bg-green-500' 
+                                  : tool.status === 'Connected But Errored'
+                                    ? 'bg-red-500'
+                                    : 'bg-gray-300'
+                              }`}
+                              role="switch"
+                              aria-checked={tool.status === 'Connected'}
+                              onClick={() => console.log('Toggle clicked for:', tool.name)}
                             >
-                              Configure
-                            </Button>
-                            <div className="flex items-center gap-2 text-green-600">
-                              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                              <span className="text-sm font-medium">Connected</span>
-                            </div>
+                              <span 
+                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                  tool.status === 'Connected' 
+                                    ? 'translate-x-6' 
+                                    : tool.status === 'Connected But Errored'
+                                      ? 'translate-x-1'
+                                      : 'translate-x-1'
+                                }`}
+                              />
+                            </button>
+                            <span className={`text-xs font-medium ${
+                              tool.status === 'Connected' 
+                                ? 'text-green-600' 
+                                : tool.status === 'Connected But Errored'
+                                  ? 'text-red-600'
+                                  : 'text-gray-500'
+                            }`}>
+                              {tool.status === 'Connected' 
+                                ? 'On' 
+                                : tool.status === 'Connected But Errored'
+                                  ? 'Error'
+                                  : 'Off'
+                              }
+                            </span>
                           </div>
-                        ) : tool.status === 'Connected But Errored' ? (
-                          <div className="flex items-center gap-3 mt-3">
-                            <Button 
-                              size="sm" 
-                              variant="outline" 
-                              className="text-gray-600 hover:text-white"
-                              onClick={() => onToolConfig?.(tool.name)}
-                            >
-                              Configure
-                            </Button>
-                            <div className="flex items-center gap-2 text-orange-600">
-                              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                              <span className="text-sm font-medium">Connected But Errored</span>
-                            </div>
-                          </div>
-                        ) : tool.status === 'Turned Off' ? (
-                          <div className="flex items-center gap-3 mt-3">
-                            <Button size="sm" variant="outline" className="text-gray-600 hover:text-white">
-                              Turn On
-                            </Button>
-                            <div className="flex items-center gap-2 text-gray-600">
-                              <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                              <span className="text-sm font-medium">Turned Off</span>
-                            </div>
-                          </div>
-                        ) : null}
+                        </div>
                       </div>
                     </div>
                   </Card>

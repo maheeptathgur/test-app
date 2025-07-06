@@ -243,6 +243,7 @@ Changelog:
 - July 6, 2025. Fixed syntax error in tool-config-screen.tsx that was preventing app startup - corrected JSX structure issues
 - July 6, 2025. Added connection status indicator to tool configuration screen - displays green/red status badge with connection details similar to Gmail config screen, shows "Connected to [Tool]" with reconnect button when active
 - July 6, 2025. Updated tool status system to three states: "Connected" (green indicator), "Connected But Errored" (orange indicator), and "Turned Off" (gray indicator) - removed "Disconnected" status as Connect button only appears in browse integrations for new tools
+- July 6, 2025. Redesigned tools interface with Configure button and toggle switch layout - all tools show Configure button on left, toggle switch on right with states: On (green, right position), Off (gray, left position), Error (red, left position) with corresponding status labels
 ```
 
 ## User Preferences
