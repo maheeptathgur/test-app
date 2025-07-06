@@ -49,7 +49,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
 
   return (
     <>
-      <div className="h-full overflow-y-auto px-8">
+      <div className="h-full overflow-y-auto px-8 pt-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
@@ -448,7 +448,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
   }, {} as Record<string, any[]>);
 
   return (
-    <div className="h-full overflow-y-auto space-y-6 px-8">
+    <div className="h-full overflow-y-auto space-y-6 px-8 pt-8">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
