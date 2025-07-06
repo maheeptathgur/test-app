@@ -259,6 +259,7 @@ Changelog:
 - July 6, 2025. Simplified dashboard layout by removing top bar section - eliminated the conditional top bar that contained titles, badges, and action buttons for a cleaner content-focused interface
 - July 6, 2025. Restored top padding to dashboard content - added pt-8 to content body to maintain proper spacing from top edge after removing top bar section
 - July 6, 2025. Restored title section to Tools screen - added back title heading and dynamic badge that was accidentally removed when simplifying dashboard layout
+- July 6, 2025. Fixed double padding issue in Browse Integrations screen - removed custom CSS class and container styling to use consistent dashboard padding inheritance
 ```
 
 ## User Preferences

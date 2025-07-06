@@ -276,10 +276,7 @@
     border-bottom-right-radius: 0.5rem;
   }
 
-  /* Browse Integrations specific padding - adds top padding only for this screen */
-  .browse-integrations-container {
-    padding-top: 2rem; /* pt-8 equivalent */
-  }
+
 
   /* Custom wiggle animation for error state toggles */
   @keyframes wiggle {
