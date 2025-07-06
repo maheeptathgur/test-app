@@ -1222,8 +1222,8 @@ function ToolsScreen({
       provider: "Airtable",
       type: "API Integration",
       category: "Data & Analytics",
-      status: "Disconnected",
-      usedBy: [],
+      status: "Connected But Errored",
+      usedBy: ["Marketing Copilot"],
       lastUsed: "2 days ago",
       totalCalls: 156,
       authType: "API Key",
@@ -1278,8 +1278,8 @@ function ToolsScreen({
       provider: "Notion",
       type: "API Integration",
       category: "Productivity",
-      status: "Disconnected",
-      usedBy: [],
+      status: "Connected But Errored",
+      usedBy: ["Content Manager"],
       lastUsed: "45 min ago",
       totalCalls: 678,
       authType: "OAuth 2.0",
@@ -1475,27 +1475,32 @@ function ToolsScreen({
                               <span className="text-sm font-medium">Connected</span>
                             </div>
                           </div>
-                        ) : tool.status === 'Disconnected' ? (
+                        ) : tool.status === 'Connected But Errored' ? (
                           <div className="flex items-center gap-3 mt-3">
-                            <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
-                              Connect
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="text-gray-600 hover:text-white"
+                              onClick={() => onToolConfig?.(tool.name)}
+                            >
+                              Configure
                             </Button>
-                            <div className="flex items-center gap-2 text-gray-600">
-                              <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
-                              <span className="text-sm font-medium">Not Connected</span>
+                            <div className="flex items-center gap-2 text-orange-600">
+                              <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                              <span className="text-sm font-medium">Connected But Errored</span>
                             </div>
                           </div>
-                        ) : (
+                        ) : tool.status === 'Turned Off' ? (
                           <div className="flex items-center gap-3 mt-3">
                             <Button size="sm" variant="outline" className="text-gray-600 hover:text-white">
                               Turn On
                             </Button>
-                            <div className="flex items-center gap-2 text-red-600">
-                              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                            <div className="flex items-center gap-2 text-gray-600">
+                              <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                               <span className="text-sm font-medium">Turned Off</span>
                             </div>
                           </div>
-                        )}
+                        ) : null}
                       </div>
                     </div>
                   </Card>
