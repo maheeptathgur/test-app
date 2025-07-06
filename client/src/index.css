@@ -283,4 +283,12 @@
     padding-left: 2rem !important;
     padding-right: 2rem !important;
   }
+
+  /* Custom class for Gmail Configuration screen - match Tools screen padding */
+  .gmail-config-template {
+    margin-left: -2rem !important;
+    margin-right: -2rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
 }
