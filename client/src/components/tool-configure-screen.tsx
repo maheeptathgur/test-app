@@ -1,19 +1,20 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Check, X, Download, Wrench, Shield, Play, BarChart3, Loader2, MessageSquare, BarChart2, Database, Bot, Image, HardDrive, FileText, Mail, Globe } from "lucide-react";
-import { CardDescription } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { X, MessageSquare, BarChart2, Database, Bot, Image, HardDrive, FileText, Mail, Globe } from "lucide-react";
 
-// Tool Configuration Screen Component
 export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () => void }) {
-  const [isEnabled, setIsEnabled] = useState(tool?.status === 'Connected');
-  const [testResult, setTestResult] = useState<'idle' | 'running' | 'success' | 'error'>('idle');
   const [hasChanges, setHasChanges] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleSave = () => {
+    setShowSuccess(true);
+    setHasChanges(false);
+    setTimeout(() => setShowSuccess(false), 3000);
+  };
 
   const getToolIcon = (toolName: string) => {
     switch (toolName) {
@@ -41,21 +42,6 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
       default:
         return <Globe className="w-8 h-8 text-gray-600" />;
     }
-  };
-
-  const handleSave = () => {
-    setShowSuccess(true);
-    setHasChanges(false);
-    setTimeout(() => setShowSuccess(false), 3000);
-  };
-  
-  const handleTestConnection = () => {
-    setTestResult('running');
-    // Simulate API test
-    setTimeout(() => {
-      setTestResult('success');
-      setTimeout(() => setTestResult('idle'), 3000);
-    }, 2000);
   };
 
   if (!tool) {
@@ -94,96 +80,40 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
             <Card>
               <CardHeader>
                 <CardTitle>Connection Status</CardTitle>
-                <CardDescription>Your {tool.name} connection and authentication details</CardDescription>
+                <CardDescription>Your {tool.name} account connection and authentication details</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className={`flex items-center justify-between p-4 rounded-lg ${
-                  tool.status === 'Connected' ? 'bg-green-50' : 
-                  tool.status === 'Connected But Errored' ? 'bg-red-50' : 'bg-gray-50'
-                }`}>
+                <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
                   <div className="flex items-center gap-3">
-                    <div className={`w-3 h-3 rounded-full ${
-                      tool.status === 'Connected' ? 'bg-green-500' : 
-                      tool.status === 'Connected But Errored' ? 'bg-red-500' : 'bg-gray-400'
-                    }`}></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     <div>
-                      <p className="font-medium">
-                        {tool.status === 'Connected' ? `Connected to ${tool.name}` : 
-                         tool.status === 'Connected But Errored' ? `Connection Error - ${tool.name}` :
-                         `Set up ${tool.name} connection`}
-                      </p>
-                      <p className="text-sm text-gray-600">
-                        {tool.status === 'Connected' ? 'Integration is active and working' : 
-                         tool.status === 'Connected But Errored' ? 'Authentication failed or API key expired' :
-                         'Configure your credentials to connect this tool'}
-                      </p>
+                      <p className="font-medium">Connected to {tool.name}</p>
+                      <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
                     </div>
                   </div>
                   <Button variant="outline" size="sm">
-                    {tool.status === 'Connected' ? 'Reconnect' : 
-                     tool.status === 'Connected But Errored' ? 'Reconfigure' : 'Connect'}
+                    Reconnect
                   </Button>
                 </div>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">Authentication Type</label>
-                    <Select defaultValue={tool.authType?.toLowerCase().replace(' ', '_') || 'api_key'} onValueChange={() => setHasChanges(true)}>
+                    <label className="text-sm font-medium">Account Email</label>
+                    <Input value="mandeep@knolli.ai" disabled />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Authentication Level</label>
+                    <Select defaultValue="user" onValueChange={() => setHasChanges(true)}>
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="api_key">API Key</SelectItem>
-                        <SelectItem value="oauth_2.0">OAuth 2.0</SelectItem>
-                        <SelectItem value="bot_token">Bot Token</SelectItem>
-                        <SelectItem value="service_account">Service Account</SelectItem>
+                        <SelectItem value="admin">Admin</SelectItem>
+                        <SelectItem value="user">User</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
-                  
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Base URL</label>
-                    <Input 
-                      defaultValue={tool.name === 'Gmail' ? 'https://gmail.googleapis.com' : 
-                                   tool.name === 'Slack' ? 'https://slack.com/api' :
-                                   tool.name === 'OpenAI API' ? 'https://api.openai.com' :
-                                   'https://api.example.com'}
-                      onChange={() => setHasChanges(true)}
-                    />
-                  </div>
-                  
-                  {tool.authType === 'API Key' && (
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium">API Key</label>
-                      <Input type="password" placeholder="Enter API key..." onChange={() => setHasChanges(true)} />
-                    </div>
-                  )}
-                </div>
-                
-                <div className="flex gap-3">
-                  <Button 
-                    onClick={handleTestConnection} 
-                    className="bg-[#008062] hover:bg-[#00d2a0] text-white"
-                    disabled={testResult === 'running'}
-                  >
-                    {testResult === 'running' ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Testing...
-                      </>
-                    ) : (
-                      <>
-                        <Play className="w-4 h-4 mr-2" />
-                        Test Connection
-                      </>
-                    )}
-                  </Button>
-                  {testResult === 'success' && (
-                    <Badge variant="outline" className="text-green-600">
-                      <Check className="w-3 h-3 mr-1" />
-                      Connection successful
-                    </Badge>
-                  )}
                 </div>
               </CardContent>
             </Card>
