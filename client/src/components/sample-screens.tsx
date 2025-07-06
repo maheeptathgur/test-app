@@ -1510,11 +1510,58 @@ function ToolsScreen({
                       <div className="flex-1">
                         <h4 className="font-medium">{tool.name}</h4>
                         <p className="text-sm text-gray-600 mt-1">{tool.description}</p>
-                        <div className="flex items-center gap-3 mt-3">
+                        <div className="space-y-3 mt-3">
+                          {/* Toggle Switch - moved above */}
+                          <div className="flex items-center justify-between">
+                            <span className="text-sm font-medium text-gray-700">Status</span>
+                            <div className="flex items-center gap-2">
+                              <button
+                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
+                                  (toolStatuses[tool.id] || tool.status) === 'Connected' 
+                                    ? 'bg-[#008062]' 
+                                    : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                      ? 'bg-red-500'
+                                      : 'bg-gray-300'
+                                } ${wiggleStates[tool.id] ? 'animate-pulse' : ''}`}
+                                style={{
+                                  animation: wiggleStates[tool.id] ? 'wiggle 0.5s ease-in-out' : undefined
+                                }}
+                                role="switch"
+                                aria-checked={(toolStatuses[tool.id] || tool.status) === 'Connected'}
+                                onClick={() => toggleToolStatus(tool.id)}
+                              >
+                                <span 
+                                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                    (toolStatuses[tool.id] || tool.status) === 'Connected' 
+                                      ? 'translate-x-6' 
+                                      : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                        ? 'translate-x-1'
+                                        : 'translate-x-1'
+                                  }`}
+                                />
+                              </button>
+                              <span className={`text-xs font-medium ${
+                                (toolStatuses[tool.id] || tool.status) === 'Connected' 
+                                  ? 'text-[#008062]' 
+                                  : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                    ? 'text-red-600'
+                                    : 'text-gray-500'
+                              }`}>
+                                {(toolStatuses[tool.id] || tool.status) === 'Connected' 
+                                  ? 'On' 
+                                  : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                    ? 'Error'
+                                    : 'Off'
+                                }
+                              </span>
+                            </div>
+                          </div>
+                          
+                          {/* Configure Button - moved below */}
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className={`${
+                            className={`w-full ${
                               (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                 ? 'border-red-500 text-red-600 hover:!bg-red-500 hover:!text-white hover:!border-red-500'
                                 : 'text-gray-600 hover:!bg-[#00d1a0] hover:!text-white'
@@ -1523,49 +1570,6 @@ function ToolsScreen({
                           >
                             {(toolStatuses[tool.id] || tool.status) === 'Connected But Errored' ? 'Reconfigure' : 'Configure'}
                           </Button>
-                          
-                          {/* Toggle Switch */}
-                          <div className="flex items-center gap-2">
-                            <button
-                              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
-                                (toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                  ? 'bg-green-500' 
-                                  : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                    ? 'bg-red-500'
-                                    : 'bg-gray-300'
-                              } ${wiggleStates[tool.id] ? 'animate-pulse' : ''}`}
-                              style={{
-                                animation: wiggleStates[tool.id] ? 'wiggle 0.5s ease-in-out' : undefined
-                              }}
-                              role="switch"
-                              aria-checked={(toolStatuses[tool.id] || tool.status) === 'Connected'}
-                              onClick={() => toggleToolStatus(tool.id)}
-                            >
-                              <span 
-                                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                                  (toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                    ? 'translate-x-6' 
-                                    : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                      ? 'translate-x-1'
-                                      : 'translate-x-1'
-                                }`}
-                              />
-                            </button>
-                            <span className={`text-xs font-medium ${
-                              (toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                ? 'text-green-600' 
-                                : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                  ? 'text-red-600'
-                                  : 'text-gray-500'
-                            }`}>
-                              {(toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                ? 'On' 
-                                : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                  ? 'Error'
-                                  : 'Off'
-                              }
-                            </span>
-                          </div>
                         </div>
                       </div>
                     </div>
