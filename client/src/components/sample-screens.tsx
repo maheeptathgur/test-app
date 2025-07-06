@@ -28,6 +28,7 @@ import { PricingScreen } from "./pricing-screen";
 import { AgentConfigureScreen, AgentTestScreen } from "./agent-screens";
 import { WorkflowEditor } from "./workflow-editor";
 import { ToolConfigureScreen } from "./tool-configure-screen";
+import { ToolConfigScreen } from "./tool-config-screen";
 
 type WorkspaceSection = 'subscriptions' | 'conversations' | 'analytics' | 'users';
 
@@ -181,7 +182,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
   );
 }
 
-function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig }: { onBack: () => void; onGmailConfig: () => void; onToolConfig?: (toolName: string) => void }) {
+function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConnectTool }: { onBack: () => void; onGmailConfig: () => void; onToolConfig?: (toolName: string) => void; onConnectTool?: (toolName: string) => void }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('name');
@@ -542,7 +543,11 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig }: { onB
                           </div>
                         </div>
                       ) : (
-                        <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white mt-3">
+                        <Button 
+                          size="sm" 
+                          className="bg-[#008062] hover:bg-[#00d2a0] text-white mt-3"
+                          onClick={() => onConnectTool?.(integration.name)}
+                        >
                           Connect
                         </Button>
                       )}
@@ -601,6 +606,7 @@ export function SampleScreen({
   const [showBrowseIntegrations, setShowBrowseIntegrations] = useState(false);
   const [showAddWorkspace, setShowAddWorkspace] = useState(false);
   const [showGmailConfig, setShowGmailConfig] = useState(false);
+  const [showConnectTool, setShowConnectTool] = useState<string | null>(null);
 
   // Clear local state when section changes or when external clear functions are triggered
   useEffect(() => {
@@ -612,6 +618,7 @@ export function SampleScreen({
     setShowBrowseIntegrations(false);
     setShowAddWorkspace(false);
     setShowGmailConfig(false);
+    setShowConnectTool(null);
   }, [section]);
 
   // Clear local state when external clear functions are called
@@ -709,11 +716,19 @@ export function SampleScreen({
               setShowGmailConfig(true);
             }}
             onToolConfig={onToolConfig}
+            onConnectTool={(toolName) => {
+              setShowBrowseIntegrations(false);
+              setShowConnectTool(toolName);
+            }}
           />;
         }
 
         if (showGmailConfig) {
           return <GmailConfigScreen onBack={() => setShowGmailConfig(false)} />;
+        }
+
+        if (showConnectTool) {
+          return <ToolConfigScreen toolName={showConnectTool} onBack={() => setShowConnectTool(null)} />;
         }
 
         switch (section) {
