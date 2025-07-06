@@ -1498,7 +1498,11 @@ function ToolsScreen({
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input h-9 rounded-md px-3 text-gray-600 hover:bg-gray-600 hover:text-white bg-[E0FFF8]"
+                            className={`${
+                              (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                ? 'border-red-500 text-red-600 hover:!bg-red-500 hover:!text-white hover:!border-red-500'
+                                : 'text-gray-600 hover:!bg-[#00d1a0] hover:!text-white'
+                            }`}
                             onClick={() => onToolConfig?.(tool.name)}
                           >
                             {(toolStatuses[tool.id] || tool.status) === 'Connected But Errored' ? 'Reconfigure' : 'Configure'}
