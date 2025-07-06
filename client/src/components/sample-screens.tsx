@@ -448,7 +448,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
   }, {} as Record<string, any[]>);
 
   return (
-    <div className="h-full overflow-y-auto space-y-6">
+    <div className="h-full overflow-y-auto px-8 pt-8 pb-24 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
