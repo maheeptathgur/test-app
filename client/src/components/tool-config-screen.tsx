@@ -215,50 +215,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
               </CardContent>
             </Card>
 
-            {/* Testing */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Play className="w-5 h-5" />
-                  Test Connection
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <p className="text-sm text-muted-foreground">
-                    Test your {toolName} connection to ensure everything is working correctly.
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <Button 
-                      onClick={handleTestConnection}
-                      disabled={testResult === 'running'}
-                      className="bg-[#008062] hover:bg-[#00d2a0] text-white"
-                    >
-                      {testResult === 'running' ? (
-                        <>
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Testing...
-                        </>
-                      ) : (
-                        'Test Connection'
-                      )}
-                    </Button>
-                    {testResult === 'success' && (
-                      <div className="flex items-center gap-2 text-green-600">
-                        <Check className="w-4 h-4" />
-                        <span className="text-sm font-medium">Connection successful</span>
-                      </div>
-                    )}
-                    {testResult === 'error' && (
-                      <div className="flex items-center gap-2 text-red-600">
-                        <X className="w-4 h-4" />
-                        <span className="text-sm font-medium">Connection failed</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            
           </div>
         </div>
       </div>
