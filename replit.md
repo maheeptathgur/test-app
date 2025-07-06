@@ -240,6 +240,8 @@ Changelog:
 - July 5, 2025. Fixed content visibility by adding bottom padding to workspace settings container - ensured all content remains accessible above the sticky footer with proper spacing to prevent overlap
 - July 5, 2025. Made save bar conditional in workspace settings - sticky footer only appears for General and Security tabs that require saving, hidden for data display tabs (Subscriptions, Conversations, Analytics, Users) with dynamic padding adjustment for cleaner interface
 - July 5, 2025. Moved Subscriptions back to main sidebar navigation - removed from workspace settings tabs and added as independent menu item with CreditCard icon in main navigation between Knowledge Base and Settings sections
+- July 6, 2025. Fixed syntax error in tool-config-screen.tsx that was preventing app startup - corrected JSX structure issues
+- July 6, 2025. Added connection status indicator to tool configuration screen - displays green/red status badge with connection details similar to Gmail config screen, shows "Connected to [Tool]" with reconnect button when active
 ```
 
 ## User Preferences

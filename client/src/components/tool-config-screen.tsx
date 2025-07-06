@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowLeft, Check, X, Download, Wrench, Shield, Play, BarChart3, Loader2, Globe, Key } from "lucide-react";
+import { CardDescription } from "@/components/ui/card";
 
 interface ToolConfigScreenProps {
   toolName: string;
@@ -17,6 +18,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isEnabled, setIsEnabled] = useState(true);
   const [testResult, setTestResult] = useState<'idle' | 'running' | 'success' | 'error'>('idle');
+  const [isConnected, setIsConnected] = useState(true); // Simulate connection status
 
   const handleSave = () => {
     setShowSuccess(true);
@@ -157,8 +159,27 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
                   <Wrench className="w-5 h-5" />
                   Connection Settings
                 </CardTitle>
+                <CardDescription>Configure your {toolName} connection and authentication details</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
+                {/* Connection Status */}
+                <div className={`flex items-center justify-between p-4 rounded-lg ${isConnected ? 'bg-green-50' : 'bg-red-50'}`}>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                    <div>
+                      <p className="font-medium">
+                        {isConnected ? `Connected to ${toolName}` : `Not connected to ${toolName}`}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {isConnected ? 'Integration is active and working' : 'Please configure your credentials'}
+                      </p>
+                    </div>
+                  </div>
+                  <Button variant="outline" size="sm">
+                    {isConnected ? 'Reconnect' : 'Connect'}
+                  </Button>
+                </div>
+                
                 <div className="space-y-4">
                   {config.fields.map((field) => (
                     <div key={field.name} className="space-y-2">
