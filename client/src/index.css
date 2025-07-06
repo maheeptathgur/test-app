@@ -278,6 +278,8 @@
 
   /* Custom class for Browse Integrations template - reduced horizontal padding */
   .browse-integrations-template {
+    margin-left: -2rem !important;
+    margin-right: -2rem !important;
     padding-left: 1rem !important;
     padding-right: 1rem !important;
   }
