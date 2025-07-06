@@ -43,9 +43,9 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           authType: 'Bot Token',
           endpoints: ['Send Message', 'Create Channel', 'Upload File'],
           fields: [
-            { name: 'bot_token', label: 'Bot Token', type: 'password', required: true },
-            { name: 'workspace_url', label: 'Workspace URL', type: 'text', required: true },
-            { name: 'default_channel', label: 'Default Channel', type: 'text', required: false }
+            { name: 'bot_token', label: 'Bot Token', type: 'password', required: true, value: 'xoxb-1234567890123-1234567890123-abcdefghijklmnopqrstuvwx' },
+            { name: 'workspace_url', label: 'Workspace URL', type: 'text', required: true, value: 'knolli-workspace.slack.com' },
+            { name: 'default_channel', label: 'Default Channel', type: 'text', required: false, value: '#general' }
           ]
         };
       case 'Google Analytics':
@@ -55,9 +55,9 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           authType: 'OAuth 2.0',
           endpoints: ['Get Reports', 'Real-time Data', 'Goal Tracking'],
           fields: [
-            { name: 'property_id', label: 'Property ID', type: 'text', required: true },
-            { name: 'measurement_id', label: 'Measurement ID', type: 'text', required: true },
-            { name: 'view_id', label: 'View ID', type: 'text', required: false }
+            { name: 'property_id', label: 'Property ID', type: 'text', required: true, value: '123456789' },
+            { name: 'measurement_id', label: 'Measurement ID', type: 'text', required: true, value: 'G-ABCDEFGHIJ' },
+            { name: 'view_id', label: 'View ID', type: 'text', required: false, value: '987654321' }
           ]
         };
       case 'Airtable':
@@ -67,9 +67,9 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           authType: 'API Key',
           endpoints: ['List Records', 'Create Record', 'Update Record', 'Delete Record'],
           fields: [
-            { name: 'api_key', label: 'API Key', type: 'password', required: true },
-            { name: 'base_id', label: 'Base ID', type: 'text', required: true },
-            { name: 'table_name', label: 'Table Name', type: 'text', required: true }
+            { name: 'api_key', label: 'API Key', type: 'password', required: true, value: 'patABCDEFGHIJKLMNOPQRSTUVWXYZ.1234567890abcdefghijklmnopqr' },
+            { name: 'base_id', label: 'Base ID', type: 'text', required: true, value: 'appABCDEFGHIJKLMN' },
+            { name: 'table_name', label: 'Table Name', type: 'text', required: true, value: 'Customer Database' }
           ]
         };
       case 'OpenAI':
@@ -79,9 +79,9 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           authType: 'API Key',
           endpoints: ['Chat Completions', 'Text Generation', 'Embeddings'],
           fields: [
-            { name: 'api_key', label: 'API Key', type: 'password', required: true },
-            { name: 'organization', label: 'Organization ID', type: 'text', required: false },
-            { name: 'model', label: 'Default Model', type: 'select', required: true, options: ['gpt-4', 'gpt-3.5-turbo', 'text-davinci-003'] }
+            { name: 'api_key', label: 'API Key', type: 'password', required: true, value: 'sk-proj-abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJ' },
+            { name: 'organization', label: 'Organization ID', type: 'text', required: false, value: 'org-ABCDEFGHIJKLMNOPQRSTUVWX' },
+            { name: 'model', label: 'Default Model', type: 'select', required: true, options: ['gpt-4', 'gpt-3.5-turbo', 'text-davinci-003'], value: 'gpt-4' }
           ]
         };
       case 'Unsplash':
@@ -91,8 +91,8 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           authType: 'Access Key',
           endpoints: ['Search Photos', 'Get Photo', 'Download Photo'],
           fields: [
-            { name: 'access_key', label: 'Access Key', type: 'password', required: true },
-            { name: 'secret_key', label: 'Secret Key', type: 'password', required: false }
+            { name: 'access_key', label: 'Access Key', type: 'password', required: true, value: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefg' },
+            { name: 'secret_key', label: 'Secret Key', type: 'password', required: false, value: 'hijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMN' }
           ]
         };
       case 'Google Drive':
@@ -102,9 +102,9 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           authType: 'OAuth 2.0',
           endpoints: ['List Files', 'Upload File', 'Download File', 'Share File'],
           fields: [
-            { name: 'client_id', label: 'Client ID', type: 'text', required: true },
-            { name: 'client_secret', label: 'Client Secret', type: 'password', required: true },
-            { name: 'folder_id', label: 'Default Folder ID', type: 'text', required: false }
+            { name: 'client_id', label: 'Client ID', type: 'text', required: true, value: '123456789012-abcdefghijklmnopqrstuvwxyz123456.apps.googleusercontent.com' },
+            { name: 'client_secret', label: 'Client Secret', type: 'password', required: true, value: 'GOCSPX-ABCDEFGHIJKLMNOPQRSTUVWXYZ123456' },
+            { name: 'folder_id', label: 'Default Folder ID', type: 'text', required: false, value: '1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms' }
           ]
         };
       case 'Notion':
@@ -114,8 +114,8 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           authType: 'Internal Integration',
           endpoints: ['Query Database', 'Create Page', 'Update Page'],
           fields: [
-            { name: 'integration_token', label: 'Integration Token', type: 'password', required: true },
-            { name: 'database_id', label: 'Database ID', type: 'text', required: false }
+            { name: 'integration_token', label: 'Integration Token', type: 'password', required: true, value: 'secret_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqr' },
+            { name: 'database_id', label: 'Database ID', type: 'text', required: false, value: 'e83ac532-b029-486c-8c24-50b9abcdefgh' }
           ]
         };
       default:
@@ -125,7 +125,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           authType: 'API Key',
           endpoints: ['API Endpoint'],
           fields: [
-            { name: 'api_key', label: 'API Key', type: 'password', required: true }
+            { name: 'api_key', label: 'API Key', type: 'password', required: true, value: 'sk-1234567890abcdefghijklmnopqrstuvwxyz' }
           ]
         };
     }
@@ -188,12 +188,12 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
                         {field.required && <span className="text-red-500">*</span>}
                       </label>
                       {field.type === 'select' ? (
-                        <Select>
+                        <Select defaultValue={(field as any).value}>
                           <SelectTrigger>
                             <SelectValue placeholder={`Select ${field.label}`} />
                           </SelectTrigger>
                           <SelectContent>
-                            {field.options?.map((option) => (
+                            {(field as any).options?.map((option: string) => (
                               <SelectItem key={option} value={option}>
                                 {option}
                               </SelectItem>
@@ -204,6 +204,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
                         <Input
                           type={field.type}
                           placeholder={`Enter ${field.label.toLowerCase()}`}
+                          defaultValue={(field as any).value || ''}
                           onChange={() => setHasChanges(true)}
                         />
                       )}
