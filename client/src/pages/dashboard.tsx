@@ -1687,20 +1687,18 @@ export default function Dashboard() {
                   variant="ghost" 
                   className="w-full p-3 h-auto bg-[#008062] hover:bg-[#00d2a0] text-white justify-start"
                 >
-                  <div className="flex items-center gap-3 w-full">
-                    <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
-                      <img 
-                        src={headshotImage} 
-                        alt="Mandeep Taunk"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0 text-left">
-                      <div className="text-sm font-medium text-white truncate">Mandeep Taunk</div>
-                      <div className="text-xs text-white/80 truncate">mandeep@knolli.ai</div>
-                    </div>
-                    <ChevronDown className="w-4 h-4 text-white/80" />
+                  <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
+                    <img 
+                      src={headshotImage} 
+                      alt="Mandeep Taunk"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
+                  <div className="flex-1 min-w-0 text-left">
+                    <div className="text-sm font-medium text-white truncate">Mandeep Taunk</div>
+                    <div className="text-xs text-white/80 truncate">mandeep@knolli.ai</div>
+                  </div>
+                  <ChevronDown className="w-4 h-4 text-white/80" />
                 </Button>
               )}
             </DropdownMenuTrigger>
