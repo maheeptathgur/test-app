@@ -1347,6 +1347,16 @@ function ToolsScreen({
 
   return (
     <div className="space-y-6">
+      {/* Title */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <h1 className="text-2xl font-bold text-foreground">Tools</h1>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+            {filteredTools.length} Tools
+          </Badge>
+        </div>
+      </div>
+      
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
