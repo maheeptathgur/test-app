@@ -48,32 +48,24 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
 
   return (
     <>
-      <div className="h-full p-8 overflow-y-auto pt-[0px] pb-[0px] pl-[0px] pr-[0px]">
+      <div className="h-full p-8 overflow-y-auto pb-24">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm" onClick={onBack}>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Tools
-            </Button>
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded flex items-center justify-center">
-                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-                  <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
-                </svg>
-              </div>
-              <div>
-                <h1 className="text-2xl font-semibold text-foreground">Gmail Configuration</h1>
-                <p className="text-sm text-muted-foreground">Manage your Gmail integration settings and automation</p>
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded flex items-center justify-center">
+              <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
+              </svg>
+            </div>
+            <div>
+              <h1 className="text-2xl font-semibold text-foreground">Gmail Configuration</h1>
+              <p className="text-sm text-muted-foreground">Manage your Gmail integration settings and automation</p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Badge variant="secondary" className="gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              Connected
-            </Badge>
-          </div>
+          <Button variant="outline" onClick={onBack} className="gap-2">
+            <X className="h-4 w-4" />
+            Close
+          </Button>
         </div>
         
         {/* Configuration Sections */}

@@ -136,22 +136,14 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
       <div className="h-full p-8 overflow-y-auto pb-24">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm" onClick={onBack}>
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Tools
-            </Button>
-            <div>
-              <h1 className="text-2xl font-semibold text-foreground">{config.title}</h1>
-              <p className="text-sm text-muted-foreground">{config.description}</p>
-            </div>
+          <div>
+            <h1 className="text-2xl font-semibold text-foreground">{config.title}</h1>
+            <p className="text-sm text-muted-foreground">{config.description}</p>
           </div>
-          <div className="flex items-center gap-3">
-            <Badge variant="secondary" className="gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              Connected
-            </Badge>
-          </div>
+          <Button variant="outline" onClick={onBack} className="gap-2">
+            <X className="h-4 w-4" />
+            Close
+          </Button>
         </div>
 
         {/* Configuration Sections */}
