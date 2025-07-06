@@ -1351,8 +1351,6 @@ function ToolsScreen({
 
   return (
     <div className="space-y-6">
-      
-
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
@@ -1399,7 +1397,6 @@ function ToolsScreen({
           </Button>
         </div>
       </div>
-
       {/* Tools Grid */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-lg font-semibold">
@@ -1407,7 +1404,6 @@ function ToolsScreen({
         </h2>
         <Badge variant="secondary">{filteredTools.length} integrations</Badge>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredTools.map((tool) => {
                 // Define real platform logos matching Browse Integrations style
@@ -1502,11 +1498,7 @@ function ToolsScreen({
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className={`${
-                              (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                ? 'border-red-500 text-red-600 hover:!bg-red-500 hover:!text-white hover:!border-red-500'
-                                : 'text-gray-600 hover:bg-gray-600 hover:text-white'
-                            }`}
+                            className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input h-9 rounded-md px-3 text-gray-600 hover:bg-gray-600 hover:text-white bg-[E0FFF8]"
                             onClick={() => onToolConfig?.(tool.name)}
                           >
                             {(toolStatuses[tool.id] || tool.status) === 'Connected But Errored' ? 'Reconfigure' : 'Configure'}
