@@ -48,103 +48,165 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
 
   return (
     <>
-      <div className="space-y-6 pb-20">
+      <div className="h-full p-8 overflow-y-auto pb-24">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded flex items-center justify-center">
-              <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-                <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
-              </svg>
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold">Gmail Configuration</h1>
-              <p className="text-gray-600">Manage your Gmail integration settings and automation</p>
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-4">
+            <Button variant="outline" size="sm" onClick={onBack}>
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to Tools
+            </Button>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded flex items-center justify-center">
+                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                  <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
+                </svg>
+              </div>
+              <div>
+                <h1 className="text-2xl font-semibold text-foreground">Gmail Configuration</h1>
+                <p className="text-sm text-muted-foreground">Manage your Gmail integration settings and automation</p>
+              </div>
             </div>
           </div>
-          <Button variant="outline" onClick={onBack} className="gap-2">
-            <X className="h-4 w-4" />
-            Close
-          </Button>
+          <div className="flex items-center gap-3">
+            <Badge variant="secondary" className="gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              Connected
+            </Badge>
+          </div>
         </div>
         
-        {/* Connection Settings */}
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Connection Status</CardTitle>
-              <CardDescription>Your Gmail account connection and authentication details</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <div>
-                    <p className="font-medium">Connected to Gmail</p>
-                    <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
+        {/* Configuration Sections */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Configuration - 2/3 width */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Connection Settings */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Connection Status</CardTitle>
+                <CardDescription>Your Gmail account connection and authentication details</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <div>
+                      <p className="font-medium">Connected to Gmail</p>
+                      <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
+                    </div>
                   </div>
-                </div>
-                <Button variant="outline" size="sm">
-                  Reconnect
-                </Button>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Account Email</label>
-                  <Input value="mandeep@knolli.ai" disabled />
+                  <Button variant="outline" size="sm">
+                    Reconnect
+                  </Button>
                 </div>
                 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Authentication Level</label>
-                  <Select defaultValue="user" onValueChange={() => setHasChanges(true)}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="admin">Admin</SelectItem>
-                      <SelectItem value="user">User</SelectItem>
-                    </SelectContent>
-                  </Select>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Account Email</label>
+                    <Input value="mandeep@knolli.ai" disabled />
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Authentication Level</label>
+                    <Select defaultValue="user" onValueChange={() => setHasChanges(true)}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="admin">Admin</SelectItem>
+                        <SelectItem value="user">User</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Permissions & Scopes</CardTitle>
-              <CardDescription>Control what actions this integration can perform</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between p-3 border rounded-lg">
-                <div>
-                  <p className="font-medium">Draft Gmail</p>
-                  <p className="text-sm text-gray-600">Create and save email drafts</p>
+            {/* Permissions & Scopes */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Permissions & Scopes</CardTitle>
+                <CardDescription>Control what actions this integration can perform</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Draft Gmail</p>
+                    <p className="text-sm text-gray-600">Create and save email drafts</p>
+                  </div>
+                  <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
                 </div>
-                <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
-              </div>
-              <div className="flex items-center justify-between p-3 border rounded-lg">
-                <div>
-                  <p className="font-medium">Send Email</p>
-                  <p className="text-sm text-gray-600">Send emails on your behalf</p>
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Send Email</p>
+                    <p className="text-sm text-gray-600">Send emails on your behalf</p>
+                  </div>
+                  <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
                 </div>
-                <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
-              </div>
-              <div className="flex items-center justify-between p-3 border rounded-lg">
-                <div>
-                  <p className="font-medium">Lookup Contacts</p>
-                  <p className="text-sm text-gray-600">Access and search your contact list</p>
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Lookup Contacts</p>
+                    <p className="text-sm text-gray-600">Access and search your contact list</p>
+                  </div>
+                  <Switch defaultChecked={false} onCheckedChange={() => setHasChanges(true)} />
                 </div>
-                <Switch defaultChecked={false} onCheckedChange={() => setHasChanges(true)} />
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Sidebar - 1/3 width */}
+          <div className="space-y-6">
+            {/* Integration Status */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Integration Status</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">Status</span>
+                  <Badge className="bg-green-100 text-green-800">Connected</Badge>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">Authentication</span>
+                  <span className="text-sm text-muted-foreground">OAuth 2.0</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">Last Sync</span>
+                  <span className="text-sm text-muted-foreground">2 min ago</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm">API Calls Today</span>
+                  <span className="text-sm text-muted-foreground">1,234</span>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Quick Actions */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">Quick Actions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Button variant="outline" size="sm" className="w-full justify-start">
+                  <Globe className="w-4 h-4 mr-2" />
+                  View Documentation
+                </Button>
+                <Button variant="outline" size="sm" className="w-full justify-start">
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Regenerate Token
+                </Button>
+                <Button variant="outline" size="sm" className="w-full justify-start">
+                  <BarChart3 className="w-4 h-4 mr-2" />
+                  View Usage Stats
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
       
       {/* Sticky Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
         <div className="flex justify-between items-center">
           {/* Success Message */}
           <div className="flex-1">
@@ -162,7 +224,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
               Cancel
             </Button>
             <Button 
-              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+              className="bg-[#008062] hover:bg-[#00d2a0] text-white border-0"
               disabled={!hasChanges}
               onClick={handleSave}
             >
