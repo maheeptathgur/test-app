@@ -918,6 +918,20 @@ export default function Dashboard() {
       };
     }
 
+    // If configuring a tool, show tool configuration interface
+    if (configureTool) {
+      return {
+        title: `Configure ${configureTool.name}`,
+        subtitle: 'Manage integration settings and automation',
+        content: (
+          <ToolConfigScreen
+            toolName={configureTool.name}
+            onBack={() => setConfigureTool(null)}
+          />
+        ),
+      };
+    }
+
     switch (activeSection) {
       case 'copilots':
         return {
