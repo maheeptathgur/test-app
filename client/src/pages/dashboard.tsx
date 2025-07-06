@@ -20,7 +20,8 @@ import { CreateCopilotModal } from "@/components/create-copilot-modal";
 import { CopilotCreationWizard } from "@/components/copilot-creation-wizard";
 import { EditCopilotModal } from "@/components/edit-copilot-modal";
 import { CopilotConfiguration } from "@/components/copilot-configuration";
-import { SampleScreen } from "@/components/sample-screens";
+import { SampleScreen, GmailConfigScreen } from "@/components/sample-screens";
+import { ToolConfigScreen } from "@/components/tool-config-screen";
 import { PricingScreen } from "@/components/pricing-screen";
 import { WorkspaceSettings } from "@/components/workspace-settings";
 import { UserView } from "@/components/user-view";
@@ -588,6 +589,7 @@ export default function Dashboard() {
   // State for tracking which specific agent/tool/workflow to configure
   const [configureAgent, setConfigureAgent] = useState<{id: string, name: string} | null>(null);
   const [configureTool, setConfigureTool] = useState<{id: string, name: string} | null>(null);
+  const [toolConfigActive, setToolConfigActive] = useState<string | null>(null);
   const [configureWorkflow, setConfigureWorkflow] = useState<{id: string, name: string} | null>(null);
   const [testAgent, setTestAgent] = useState<{id: string, name: string} | null>(null);
   
@@ -675,7 +677,17 @@ export default function Dashboard() {
     if (configureWorkflow) {
       setConfigureWorkflow(null);
     }
+    if (toolConfigActive) {
+      setToolConfigActive(null);
+    }
     showNotification(`Switched to ${section.charAt(0).toUpperCase() + section.slice(1)}`);
+  };
+
+  // Handler for tool configurations (from both Browse Integrations and Tools screens)
+  const handleToolConfig = (toolName: string) => {
+    setToolConfigActive(toolName);
+    setBrowseIntegrationsActive(false);
+    setGmailConfigActive(false);
   };
 
   const handleStartChat = (copilot: CopilotData) => {
@@ -1103,6 +1115,7 @@ export default function Dashboard() {
             onClearConfigureTool={() => setConfigureTool(null)}
             onBrowseIntegrationsChange={setBrowseIntegrationsActive}
             onGmailConfigChange={setGmailConfigActive}
+            onToolConfig={handleToolConfig}
           />,
         };
       case 'workflows':
@@ -1898,6 +1911,15 @@ export default function Dashboard() {
             onToggleAttachment={setShowAttachmentSidebar}
             selectedFiles={selectedFiles}
           />
+        ) : /* Tool Configuration Interface */
+        toolConfigActive ? (
+          <div className="h-full">
+            {toolConfigActive === 'Gmail' ? (
+              <GmailConfigScreen onBack={() => setToolConfigActive(null)} />
+            ) : (
+              <ToolConfigScreen toolName={toolConfigActive} onBack={() => setToolConfigActive(null)} />
+            )}
+          </div>
         ) : /* Configuration Interface */
         configuringCopilot ? (
           <CopilotConfiguration
@@ -1914,9 +1936,9 @@ export default function Dashboard() {
         ) : /* Regular Dashboard Content */
         (
           <div className="h-full p-8 overflow-y-auto">
-            {/* Top Bar - Hidden when in user-view, settings modes, configuration screens, browse integrations, or Gmail config */}
+            {/* Top Bar - Hidden when in user-view, settings modes, configuration screens, browse integrations, or tool config */}
             {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-              !configureAgent && !configureTool && !configureWorkflow && !testAgent && !browseIntegrationsActive && !gmailConfigActive && (
+              !configureAgent && !configureTool && !configureWorkflow && !testAgent && !browseIntegrationsActive && !gmailConfigActive && !toolConfigActive && (
               <div className="mb-8">
                   <div>
                     <div className="flex items-center gap-3">

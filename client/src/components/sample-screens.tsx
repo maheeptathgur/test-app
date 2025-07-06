@@ -31,7 +31,7 @@ import { ToolConfigureScreen } from "./tool-configure-screen";
 
 type WorkspaceSection = 'subscriptions' | 'conversations' | 'analytics' | 'users';
 
-function GmailConfigScreen({ onBack }: { onBack: () => void }) {
+export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
   const [hasChanges, setHasChanges] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -175,7 +175,7 @@ function GmailConfigScreen({ onBack }: { onBack: () => void }) {
   );
 }
 
-function BrowseIntegrationsScreen({ onBack, onGmailConfig }: { onBack: () => void; onGmailConfig: () => void }) {
+function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig }: { onBack: () => void; onGmailConfig: () => void; onToolConfig?: (toolName: string) => void }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [sortBy, setSortBy] = useState('name');
@@ -514,6 +514,9 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig }: { onBack: () => voi
                               if (integration.name === 'Gmail') {
                                 console.log('Calling onGmailConfig');
                                 onGmailConfig();
+                              } else {
+                                console.log('Calling onToolConfig for:', integration.name);
+                                onToolConfig?.(integration.name);
                               }
                             }}
                           >
@@ -561,6 +564,7 @@ interface SampleScreenProps {
   onClearConfigureWorkflow?: () => void;
   onBrowseIntegrationsChange?: (isActive: boolean) => void;
   onGmailConfigChange?: (isActive: boolean) => void;
+  onToolConfig?: (toolName: string) => void;
 }
 
 export function SampleScreen({ 
@@ -573,7 +577,8 @@ export function SampleScreen({
   configureWorkflow: externalConfigureWorkflow,
   onClearConfigureWorkflow,
   onBrowseIntegrationsChange,
-  onGmailConfigChange
+  onGmailConfigChange,
+  onToolConfig
 }: SampleScreenProps) {
   const [localConfigureAgent, setLocalConfigureAgent] = useState<any>(null);
   const [editWorkflow, setEditWorkflow] = useState<string | undefined>(undefined);
@@ -683,10 +688,14 @@ export function SampleScreen({
         }
 
         if (showBrowseIntegrations) {
-          return <BrowseIntegrationsScreen onBack={() => setShowBrowseIntegrations(false)} onGmailConfig={() => {
-            setShowBrowseIntegrations(false);
-            setShowGmailConfig(true);
-          }} />;
+          return <BrowseIntegrationsScreen 
+            onBack={() => setShowBrowseIntegrations(false)} 
+            onGmailConfig={() => {
+              setShowBrowseIntegrations(false);
+              setShowGmailConfig(true);
+            }}
+            onToolConfig={onToolConfig}
+          />;
         }
 
         if (showGmailConfig) {
@@ -709,6 +718,7 @@ export function SampleScreen({
                 setShowBrowseIntegrations(true);
                 console.log('showBrowseIntegrations state:', true);
               }}
+              onToolConfig={onToolConfig}
             />;
           case 'workflows':
             return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
@@ -1146,11 +1156,13 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
 function ToolsScreen({ 
   onToolConfigure, 
   onConnectNewTool, 
-  onBrowseIntegrations 
+  onBrowseIntegrations,
+  onToolConfig
 }: { 
   onToolConfigure?: (tool: any) => void;
   onConnectNewTool?: () => void;
   onBrowseIntegrations?: () => void;
+  onToolConfig?: (toolName: string) => void;
 } = {}) {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   
@@ -1448,7 +1460,7 @@ function ToolsScreen({
                               size="sm" 
                               variant="outline" 
                               className="text-gray-600 hover:text-white"
-                              onClick={() => onToolConfigure?.(tool)}
+                              onClick={() => onToolConfig?.(tool.name)}
                             >
                               Configure
                             </Button>
