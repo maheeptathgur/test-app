@@ -289,4 +289,9 @@
     animation: wiggle 0.3s ease-in-out;
   }
 
+  /* Custom padding for Browse Integrations screen only */
+  .browse-integrations-padding {
+    padding: 1rem 2rem 1.5rem 2rem; /* Reduced from px-8 pt-8 pb-24 */
+  }
+
 }
