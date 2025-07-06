@@ -48,7 +48,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
 
   return (
     <>
-      <div className="h-full p-8 overflow-y-auto pb-24">
+      <div className="h-full p-8 overflow-y-auto pt-[0px] pb-[0px] pl-[0px] pr-[0px]">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-4">
@@ -204,7 +204,6 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
           </div>
         </div>
       </div>
-      
       {/* Sticky Footer */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
         <div className="flex justify-between items-center">
