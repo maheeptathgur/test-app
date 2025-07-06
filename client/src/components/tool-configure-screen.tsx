@@ -187,7 +187,40 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
                 </div>
               </CardContent>
             </Card>
+
+            {/* Permissions & Scopes */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Permissions & Scopes</CardTitle>
+                <CardDescription>Control what actions this integration can perform</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Read Data</p>
+                    <p className="text-sm text-gray-600">Access and read data from {tool.name}</p>
+                  </div>
+                  <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
+                </div>
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Write Data</p>
+                    <p className="text-sm text-gray-600">Create and modify data in {tool.name}</p>
+                  </div>
+                  <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
+                </div>
+                <div className="flex items-center justify-between p-3 border rounded-lg">
+                  <div>
+                    <p className="font-medium">Delete Data</p>
+                    <p className="text-sm text-gray-600">Remove data from {tool.name}</p>
+                  </div>
+                  <Switch defaultChecked={false} onCheckedChange={() => setHasChanges(true)} />
+                </div>
+              </CardContent>
+            </Card>
           </div>
+
+          
         </div>
       </div>
       {/* Sticky Footer */}
@@ -209,7 +242,7 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
               Cancel
             </Button>
             <Button 
-              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+              className="bg-[#008062] hover:bg-[#00d2a0] text-white border-0"
               disabled={!hasChanges}
               onClick={handleSave}
             >
