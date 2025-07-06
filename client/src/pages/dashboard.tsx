@@ -1935,7 +1935,7 @@ export default function Dashboard() {
         (
           <div className="h-full overflow-y-auto">
             {/* Content Body */}
-            <div className="px-8 pb-24">
+            <div className="px-8 pt-8 pb-24">
               {sectionContent.content}
             </div>
           </div>
