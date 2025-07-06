@@ -197,7 +197,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
         </div>
       </div>
       {/* Sticky Footer */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
+      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
         <div className="flex justify-between items-center">
           {/* Success Message */}
           <div className="flex-1">
