@@ -267,6 +267,7 @@ Changelog:
 - July 6, 2025. Added custom CSS class "tool-config-container" with zero padding for tool configuration screen - prevents affecting other pages while allowing specific styling control for tool configuration interface
 - July 6, 2025. Updated all tool configuration screens to use consistent Gmail template structure - standardized header layout with icons, proper padding (px-8 pt-8 pb-24), Connection Status cards, grid-based form layouts, Permissions & Scopes sections with bordered permission items, and sticky footer with Save/Cancel buttons for unified user experience across tool-config-screen.tsx and tool-configure-screen.tsx - both screens now match Gmail configuration template exactly
 - July 6, 2025. Fixed tool configuration navigation issues - removed nested div containers causing padding conflicts, implemented conditional dashboard padding that removes padding when tool config screens are active, added callback system to detect tool configuration state, and corrected Configure button functionality to properly call onToolConfigure prop - tool configuration screens now display with proper Gmail template structure and correct spacing without double padding or layout conflicts
+- July 6, 2025. Eliminated intermediary ToolConfigureScreen from Configure button flow - Configure button now directly opens ToolConfigScreen (Gmail template) instead of going through intermediate page, streamlining user experience by removing unnecessary navigation step
 ```
 
 ## User Preferences
