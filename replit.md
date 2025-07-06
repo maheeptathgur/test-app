@@ -251,6 +251,7 @@ Changelog:
 - July 6, 2025. Added Connect button functionality in Browse Integrations screen - clicking Connect on non-connected tools now opens ToolConfigScreen for setup, added disconnected status with yellow indicators and "Connect" buttons for new tool connections
 - July 6, 2025. Simplified connected tools display in Browse Integrations - replaced Configure button and toggle switch with "Already installed" message and green checkmark for cleaner interface showing connection status
 - July 6, 2025. Fixed padding issue in tool configuration screen - removed conflicting padding overrides to restore proper 8px padding throughout the interface
+- July 6, 2025. Standardized padding consistency across dashboard and configuration screens - moved padding from outer container to content sections to match configuration screen layout patterns
 ```
 
 ## User Preferences
