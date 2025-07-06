@@ -1232,8 +1232,8 @@ function ToolsScreen({
       provider: "Unsplash",
       type: "API Integration",
       category: "Content & Media",
-      status: "Connected",
-      usedBy: ["Content Manager"],
+      status: "Turned Off",
+      usedBy: [],
       lastUsed: "1 hour ago",
       totalCalls: 234,
       authType: "API Key",
@@ -1260,8 +1260,8 @@ function ToolsScreen({
       provider: "Notion",
       type: "API Integration",
       category: "Productivity",
-      status: "Connected",
-      usedBy: ["Content Manager"],
+      status: "Disconnected",
+      usedBy: [],
       lastUsed: "45 min ago",
       totalCalls: 678,
       authType: "OAuth 2.0",
@@ -1352,96 +1352,134 @@ function ToolsScreen({
         <Badge variant="secondary">{filteredTools.length} integrations</Badge>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredTools.map((tool) => {
-                // Define real platform logos for each tool
+                // Define real platform logos matching Browse Integrations style
                 const getToolLogo = (toolName: string) => {
                   switch (toolName.toLowerCase()) {
                     case 'gmail':
-                      return <SiGmail className="w-8 h-8 text-red-500" />;
+                      return (
+                        <div className="w-8 h-8 rounded flex items-center justify-center">
+                          <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
+                          </svg>
+                        </div>
+                      );
                     case 'slack':
-                      return <SiSlack className="w-8 h-8 text-purple-500" />;
+                      return (
+                        <div className="w-8 h-8 rounded flex items-center justify-center">
+                          <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                            <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
+                            <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
+                            <path d="M18.956 8.834a2.528 2.528 0 0 1 2.521-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.523 2.521h-2.521V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/>
+                            <path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.521A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.523v-2.521h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/>
+                          </svg>
+                        </div>
+                      );
                     case 'google analytics':
-                      return <SiGoogleanalytics className="w-8 h-8 text-orange-500" />;
+                      return (
+                        <div className="w-8 h-8 rounded flex items-center justify-center">
+                          <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                            <path d="M12.5 6.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" fill="#F9AB00"/>
+                            <path d="M7 15c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" fill="#E37400"/>
+                            <path d="M17 20c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" fill="#4285F4"/>
+                          </svg>
+                        </div>
+                      );
                     case 'airtable':
-                      return <SiAirtable className="w-8 h-8 text-yellow-600" />;
+                      return (
+                        <div className="w-8 h-8 rounded flex items-center justify-center bg-yellow-500">
+                          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="white">
+                            <path d="M3 3h18v18H3V3zm2 2v14h14V5H5zm2 2h10v2H7V7zm0 4h6v2H7v-2zm0 4h8v2H7v-2z"/>
+                          </svg>
+                        </div>
+                      );
                     case 'openai api':
-                      return <SiOpenai className="w-8 h-8 text-green-600" />;
+                      return (
+                        <div className="w-8 h-8 rounded flex items-center justify-center bg-green-600">
+                          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                          </svg>
+                        </div>
+                      );
                     case 'unsplash':
-                      return <SiUnsplash className="w-8 h-8 text-black" />;
+                      return (
+                        <div className="w-8 h-8 rounded flex items-center justify-center bg-black">
+                          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="white">
+                            <path d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2 7.5 4.019 7.5 6.5zM20 13.5H4V20h16v-6.5z"/>
+                          </svg>
+                        </div>
+                      );
                     case 'google drive':
-                      return <SiGoogledrive className="w-8 h-8 text-blue-500" />;
+                      return (
+                        <div className="w-8 h-8 rounded flex items-center justify-center">
+                          <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                            <path d="M6.5 16L12 6l5.5 10H6.5z" fill="#FBBC04"/>
+                            <path d="M2 16l3.5-6h9L18 16H2z" fill="#EA4335"/>
+                            <path d="M8.5 10L12 16h10l-3.5-6H8.5z" fill="#34A853"/>
+                          </svg>
+                        </div>
+                      );
                     case 'notion':
-                      return <SiNotion className="w-8 h-8 text-black" />;
+                      return (
+                        <div className="w-8 h-8 rounded flex items-center justify-center">
+                          <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                            <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466l1.823 1.447zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.28c.093.466 0 .933-.466.98l-.747.14v10.264c-.66.373-1.26.373-1.68.047l-3.993-6.173V18.7c0 0 .373.213 0 .42l-4.366.233c-.093-.187 0-.653.327-.746l.934-.28V9.854L7.822 9.76c-.094-.467.14-1.12.793-1.167l4.646-.326 4.553 6.98V8.92c0-.046-.327-.233.047-.374l.747-.187zm-11.423.374l4.179.04-4.179 2.24v-2.28z" fill="black"/>
+                          </svg>
+                        </div>
+                      );
                     case 'n8n':
                       return <img src={n8nLogo} alt="n8n" className="w-8 h-8" />;
                     default:
-                      return <Globe className="w-8 h-8 text-gray-500" />;
+                      return <div className="w-8 h-8 bg-gray-500 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
                   }
                 };
 
                 return (
-                  <Card key={tool.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
-                    <CardHeader className="pb-4">
-                      <div className="flex items-start gap-3">
-                        {getToolLogo(tool.name)}
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{tool.name}</h3>
-                          <p className="text-sm text-gray-500 mb-2">by {tool.provider}</p>
-                          <Badge variant={tool.status === 'Connected' ? 'default' : 'secondary'} className="text-xs">
-                            {tool.status}
-                          </Badge>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pt-0 flex-1 flex flex-col">
-                      <p className="text-sm text-gray-600 mb-4 flex-grow">{tool.description}</p>
-                      
-                      <div className="space-y-4 mt-auto">
-                        <div>
-                          <p className="text-sm font-medium text-gray-700 mb-2">Used by Copilots</p>
-                          <div className="flex flex-wrap gap-1">
-                            {tool.usedBy.length > 0 ? tool.usedBy.slice(0, 2).map((copilot, idx) => (
-                              <Badge key={idx} variant="outline" className="text-xs">
-                                {copilot}
-                              </Badge>
-                            )) : (
-                              <span className="text-sm text-gray-400">Not in use</span>
-                            )}
-                            {tool.usedBy.length > 2 && (
-                              <Badge variant="outline" className="text-xs">
-                                +{tool.usedBy.length - 2}
-                              </Badge>
-                            )}
+                  <Card key={tool.id} className="p-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-start gap-3 mb-3">
+                      {getToolLogo(tool.name)}
+                      <div className="flex-1">
+                        <h4 className="font-medium">{tool.name}</h4>
+                        <p className="text-sm text-gray-600 mt-1">{tool.description}</p>
+                        {tool.status === 'Connected' ? (
+                          <div className="flex items-center gap-3 mt-3">
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="text-gray-600 hover:text-gray-800"
+                              onClick={() => onToolConfigure?.(tool)}
+                            >
+                              Configure
+                            </Button>
+                            <div className="flex items-center gap-2 text-green-600">
+                              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                              <span className="text-sm font-medium">Connected</span>
+                            </div>
                           </div>
-                        </div>
-                        
-                        <div className="grid grid-cols-2 gap-4 text-sm">
-                          <div>
-                            <p className="font-medium text-gray-700">{tool.totalCalls.toLocaleString()}</p>
-                            <p className="text-xs text-gray-500">API calls</p>
-                          </div>
-                          <div>
-                            <p className="font-medium text-gray-700">{tool.authType}</p>
-                            <p className="text-xs text-gray-500">Authentication</p>
-                          </div>
-                        </div>
-                        
-                        <div className="text-sm text-gray-500 border-t pt-3">
-                          Last used: {tool.lastUsed}
-                        </div>
-                        
-                        <div className="pt-2">
-                          {tool.status === 'Connected' ? (
-                            <Button variant="outline" size="sm" className="w-full" onClick={() => onToolConfigure?.(tool)}>Configure</Button>
-                          ) : (
-                            <Button size="sm" className="w-full bg-[#008062] hover:bg-[#00d2a0] text-white">
+                        ) : tool.status === 'Disconnected' ? (
+                          <div className="flex items-center gap-3 mt-3">
+                            <Button size="sm" className="bg-[#008062] hover:bg-[#00d2a0] text-white">
                               Connect
                             </Button>
-                          )}
-                        </div>
+                            <div className="flex items-center gap-2 text-gray-600">
+                              <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                              <span className="text-sm font-medium">Not Connected</span>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-3 mt-3">
+                            <Button size="sm" variant="outline" className="text-gray-600 hover:text-gray-800">
+                              Turn On
+                            </Button>
+                            <div className="flex items-center gap-2 text-red-600">
+                              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                              <span className="text-sm font-medium">Turned Off</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    </CardContent>
+                    </div>
                   </Card>
                 );
               })}
