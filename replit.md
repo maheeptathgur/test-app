@@ -246,6 +246,7 @@ Changelog:
 - July 6, 2025. Redesigned tools interface with Configure button and toggle switch layout - all tools show Configure button on left, toggle switch on right with states: On (green, right position), Off (gray, left position), Error (red, left position) with corresponding status labels
 - July 6, 2025. Implemented functional toggle switches with proper state management - toggles now work to switch between Connected/Turned Off states, error states remain unchanged until Configure is used, added TypeScript support for dynamic tool status updates
 - July 6, 2025. Enhanced error state interaction - added wiggle animation when clicking error state toggles to indicate they can't be turned on/off, changed Configure button to "Reconfigure" with red border outline for error states, created CSS keyframe animation for visual feedback, fixed hover colors to use red instead of green for error state buttons
+- July 6, 2025. Replicated Configure button + toggle switch layout from Tools screen to Browse Integrations screen - connected integrations now show Configure button with #00d1a0 hover and toggle switch in "On" position, while non-connected integrations keep the Connect button
 ```
 
 ## User Preferences

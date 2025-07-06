@@ -514,7 +514,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig }: { onB
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="text-gray-600 hover:text-gray-800"
+                            className="text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
                             onClick={() => {
                               console.log('Configure clicked for:', integration.name);
                               if (integration.name === 'Gmail') {
@@ -528,9 +528,17 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig }: { onB
                           >
                             Configure
                           </Button>
-                          <div className="flex items-center gap-2 text-green-600">
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <span className="text-sm font-medium">Connected</span>
+                          
+                          {/* Toggle Switch */}
+                          <div className="flex items-center gap-2">
+                            <button
+                              className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer bg-green-500"
+                              role="switch"
+                              aria-checked={true}
+                            >
+                              <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6" />
+                            </button>
+                            <span className="text-xs font-medium text-green-600">On</span>
                           </div>
                         </div>
                       ) : (
