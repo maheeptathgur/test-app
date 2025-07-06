@@ -9,9 +9,10 @@ import { X, MessageSquare, BarChart2, Database, Bot, Image, HardDrive, FileText,
 interface ToolConfigScreenProps {
   toolName: string;
   onBack: () => void;
+  onBackToBrowseIntegrations?: () => void;
 }
 
-export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
+export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations }: ToolConfigScreenProps) {
   const [hasChanges, setHasChanges] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -23,6 +24,15 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
     setShowSuccess(true);
     setHasChanges(false);
     setTimeout(() => setShowSuccess(false), 3000);
+  };
+
+  const handleBack = () => {
+    // For unconnected tools, go back to Browse Integrations if available
+    if (!isConnected && onBackToBrowseIntegrations) {
+      onBackToBrowseIntegrations();
+    } else {
+      onBack();
+    }
   };
 
   const getToolIcon = (toolName: string) => {
@@ -67,7 +77,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
               <p className="text-sm text-muted-foreground">Manage your {toolName} integration settings and automation</p>
             </div>
           </div>
-          <Button variant="outline" onClick={onBack} className="gap-2">
+          <Button variant="outline" onClick={handleBack} className="gap-2">
             <X className="h-4 w-4" />
             Close
           </Button>
@@ -196,7 +206,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           
           {/* Buttons */}
           <div className="flex gap-3">
-            <Button variant="outline" onClick={onBack}>
+            <Button variant="outline" onClick={handleBack}>
               Cancel
             </Button>
             <Button 
