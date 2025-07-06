@@ -648,10 +648,8 @@ export function SampleScreen({
   };
 
   const handleToolConfigure = (tool: any) => {
-    console.log('handleToolConfigure called with tool:', tool);
-    setLocalConfigureTool(tool);
+    setShowConnectTool(tool.name);
     onToolConfigChange?.(true);
-    console.log('localConfigureTool set to:', tool);
   };
 
   const handleBackToTools = () => {
@@ -668,21 +666,12 @@ export function SampleScreen({
   return (
     <>
       {(() => {
-        // Determine which agent/tool/workflow to configure (external from copilot config or local from screen)
+        // Determine which agent/workflow to configure (external from copilot config or local from screen)
         const agentToConfig = externalConfigureAgent || localConfigureAgent;
-        const toolToConfig = externalConfigureTool || localConfigureTool;
         const workflowToConfig = externalConfigureWorkflow || (editWorkflow ? { id: editWorkflow, name: editWorkflow } : null);
-
-        console.log('Render check - toolToConfig:', toolToConfig);
-        console.log('Render check - localConfigureTool:', localConfigureTool);
 
         if (agentToConfig) {
           return <AgentConfigureScreen agent={agentToConfig} onBack={handleBackToAgents} />;
-        }
-
-        if (toolToConfig) {
-          console.log('Rendering ToolConfigureScreen with tool:', toolToConfig);
-          return <ToolConfigureScreen tool={toolToConfig} onBack={handleBackToTools} />;
         }
 
         if (workflowToConfig) {
