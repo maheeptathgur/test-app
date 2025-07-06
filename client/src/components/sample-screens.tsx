@@ -511,36 +511,9 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
                       <h4 className="font-medium">{integration.name}</h4>
                       <p className="text-sm text-gray-600 mt-1">{integration.description}</p>
                       {integration.connected ? (
-                        <div className="flex items-center gap-3 mt-3">
-                          <Button 
-                            size="sm" 
-                            variant="outline" 
-                            className="text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
-                            onClick={() => {
-                              console.log('Configure clicked for:', integration.name);
-                              if (integration.name === 'Gmail') {
-                                console.log('Calling onGmailConfig');
-                                onGmailConfig();
-                              } else {
-                                console.log('Calling onToolConfig for:', integration.name);
-                                onToolConfig?.(integration.name);
-                              }
-                            }}
-                          >
-                            Configure
-                          </Button>
-                          
-                          {/* Toggle Switch */}
-                          <div className="flex items-center gap-2">
-                            <button
-                              className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer bg-green-500"
-                              role="switch"
-                              aria-checked={true}
-                            >
-                              <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6" />
-                            </button>
-                            <span className="text-xs font-medium text-green-600">On</span>
-                          </div>
+                        <div className="flex items-center gap-2 mt-3">
+                          <Check className="w-4 h-4 text-green-600" />
+                          <span className="text-sm font-medium text-green-600">Already installed</span>
                         </div>
                       ) : (
                         <Button 
