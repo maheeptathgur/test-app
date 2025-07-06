@@ -276,11 +276,11 @@
     border-bottom-right-radius: 0.5rem;
   }
 
-  /* Custom class for Browse Integrations template - reduced horizontal padding */
+  /* Custom class for Browse Integrations template - match Tools screen padding */
   .browse-integrations-template {
     margin-left: -2rem !important;
     margin-right: -2rem !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
   }
 }
