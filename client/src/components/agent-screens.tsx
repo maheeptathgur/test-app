@@ -213,132 +213,216 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   {/* Available Tools Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                     {/* Gmail Tool */}
-                    <div className="p-4 border rounded-lg bg-white flex flex-col h-full">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
+                    <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                      <CardContent className="p-4 flex flex-col h-full">
+                        <div className="flex items-center gap-3 mb-3">
                           <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center">
-                            <SiGmail className="w-5 h-5 text-red-600" />
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.909 1.528-1.146C21.69 2.28 24 3.434 24 5.457z" fill="#DD4B39"/>
+                            </svg>
                           </div>
-                          <div className="min-w-0">
-                            <h3 className="font-medium text-gray-900 truncate">Gmail</h3>
-                            <p className="text-sm text-[#4E5964]">Email Management</p>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-base font-medium text-gray-900 truncate">Gmail</h3>
+                            <p className="text-sm text-gray-600">Email management platform</p>
+                          </div>
+                          <Checkbox defaultChecked />
+                        </div>
+                        
+                        <div className="flex-1 space-y-2 text-sm text-gray-600 mb-4">
+                          <div className="flex justify-between">
+                            <span>Status:</span>
+                            <span className="font-medium text-green-600">Connected</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Auth:</span>
+                            <span className="font-medium">OAuth 2.0</span>
                           </div>
                         </div>
-                        <Checkbox defaultChecked />
-                      </div>
-                      <div className="flex-1 space-y-2 text-sm text-[#4E5964]">
-                        <div className="flex justify-between">
-                          <span>Status:</span>
-                          <span className="font-medium text-green-600">Connected</span>
+
+                        <div className="mt-auto space-y-3">
+                          {/* Toggle Switch */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-11 h-6 bg-[#008062] rounded-full relative transition-colors">
+                                <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
+                              </div>
+                              <span className="ml-2 text-sm font-medium text-gray-900">Active</span>
+                            </div>
+                          </div>
+                          
+                          {/* Configure Button */}
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
+                            onClick={() => {
+                              console.log('Tool configure event:', { id: 'gmail', name: 'Gmail' });
+                              // onToolConfigure?.({ id: 'gmail', name: 'Gmail' });
+                            }}
+                          >
+                            Configure
+                          </Button>
                         </div>
-                        <div className="flex justify-between">
-                          <span>Auth:</span>
-                          <span className="font-medium">OAuth 2.0</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-1 mt-3">
-                        <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
-                          <Trash2 className="w-3 h-3" />
-                        </Button>
-                      </div>
-                    </div>
+                      </CardContent>
+                    </Card>
 
                     {/* Slack Tool */}
-                    <div className="p-4 border rounded-lg bg-white flex flex-col h-full">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
+                    <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                      <CardContent className="p-4 flex flex-col h-full">
+                        <div className="flex items-center gap-3 mb-3">
                           <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <SiSlack className="w-5 h-5 text-purple-600" />
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zm10.122 2.521a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zm-1.268 0a2.528 2.528 0 0 1-2.521 2.521 2.527 2.527 0 0 1-2.521-2.521V2.522A2.527 2.527 0 0 1 15.167 0a2.528 2.528 0 0 1 2.521 2.522v6.312zm-2.521 10.122a2.528 2.528 0 0 1 2.521 2.522A2.528 2.528 0 0 1 15.167 24a2.527 2.527 0 0 1-2.521-2.522v-2.522h2.521zm0-1.268a2.527 2.527 0 0 1-2.521-2.521 2.527 2.527 0 0 1 2.521-2.521h6.312A2.528 2.528 0 0 1 24 15.167a2.528 2.528 0 0 1-2.522 2.521h-6.312z" fill="#E01E5A"/>
+                            </svg>
                           </div>
-                          <div className="min-w-0">
-                            <h3 className="font-medium text-gray-900 truncate">Slack</h3>
-                            <p className="text-sm text-[#4E5964]">Team Communication</p>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-base font-medium text-gray-900 truncate">Slack</h3>
+                            <p className="text-sm text-gray-600">Team communication and collaboration</p>
+                          </div>
+                          <Checkbox defaultChecked />
+                        </div>
+                        
+                        <div className="flex-1 space-y-2 text-sm text-gray-600 mb-4">
+                          <div className="flex justify-between">
+                            <span>Status:</span>
+                            <span className="font-medium text-green-600">Connected</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Auth:</span>
+                            <span className="font-medium">Bot Token</span>
                           </div>
                         </div>
-                        <Checkbox defaultChecked />
-                      </div>
-                      <div className="flex-1 space-y-2 text-sm text-[#4E5964]">
-                        <div className="flex justify-between">
-                          <span>Status:</span>
-                          <span className="font-medium text-green-600">Connected</span>
+
+                        <div className="mt-auto space-y-3">
+                          {/* Toggle Switch */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-11 h-6 bg-[#008062] rounded-full relative transition-colors">
+                                <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
+                              </div>
+                              <span className="ml-2 text-sm font-medium text-gray-900">Active</span>
+                            </div>
+                          </div>
+                          
+                          {/* Configure Button */}
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
+                            onClick={() => {
+                              console.log('Tool configure event:', { id: 'slack', name: 'Slack' });
+                              // onToolConfigure?.({ id: 'slack', name: 'Slack' });
+                            }}
+                          >
+                            Configure
+                          </Button>
                         </div>
-                        <div className="flex justify-between">
-                          <span>Auth:</span>
-                          <span className="font-medium">Bot Token</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-1 mt-3">
-                        <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
-                          <Trash2 className="w-3 h-3" />
-                        </Button>
-                      </div>
-                    </div>
+                      </CardContent>
+                    </Card>
 
                     {/* Google Analytics Tool */}
-                    <div className="p-4 border rounded-lg bg-white flex flex-col h-full">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
+                    <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                      <CardContent className="p-4 flex flex-col h-full">
+                        <div className="flex items-center gap-3 mb-3">
                           <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
                             <BarChart className="w-5 h-5 text-orange-600" />
                           </div>
-                          <div className="min-w-0">
-                            <h3 className="font-medium text-gray-900 truncate">Google Analytics</h3>
-                            <p className="text-sm text-[#4E5964]">Data Analytics</p>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-base font-medium text-gray-900 truncate">Google Analytics</h3>
+                            <p className="text-sm text-gray-600">Web analytics and insights platform</p>
+                          </div>
+                          <Checkbox />
+                        </div>
+                        
+                        <div className="flex-1 space-y-2 text-sm text-gray-600 mb-4">
+                          <div className="flex justify-between">
+                            <span>Status:</span>
+                            <span className="font-medium text-yellow-600">Not Connected</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Auth:</span>
+                            <span className="font-medium">Service Account</span>
                           </div>
                         </div>
-                        <Checkbox />
-                      </div>
-                      <div className="flex-1 space-y-2 text-sm text-[#4E5964]">
-                        <div className="flex justify-between">
-                          <span>Status:</span>
-                          <span className="font-medium text-yellow-600">Not Connected</span>
+
+                        <div className="mt-auto space-y-3">
+                          {/* Toggle Switch */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-11 h-6 bg-gray-300 rounded-full relative transition-colors">
+                                <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-transform"></div>
+                              </div>
+                              <span className="ml-2 text-sm font-medium text-gray-900">Inactive</span>
+                            </div>
+                          </div>
+                          
+                          {/* Configure Button */}
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
+                            onClick={() => {
+                              console.log('Tool configure event:', { id: 'google-analytics', name: 'Google Analytics' });
+                              // onToolConfigure?.({ id: 'google-analytics', name: 'Google Analytics' });
+                            }}
+                          >
+                            Configure
+                          </Button>
                         </div>
-                        <div className="flex justify-between">
-                          <span>Auth:</span>
-                          <span className="font-medium">Service Account</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-1 mt-3">
-                        <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
-                          <Trash2 className="w-3 h-3" />
-                        </Button>
-                      </div>
-                    </div>
+                      </CardContent>
+                    </Card>
 
                     {/* OpenAI Tool */}
-                    <div className="p-4 border rounded-lg bg-white flex flex-col h-full">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
+                    <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                      <CardContent className="p-4 flex flex-col h-full">
+                        <div className="flex items-center gap-3 mb-3">
                           <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
                             <Bot className="w-5 h-5 text-green-600" />
                           </div>
-                          <div className="min-w-0">
-                            <h3 className="font-medium text-gray-900 truncate">OpenAI</h3>
-                            <p className="text-sm text-[#4E5964]">AI Processing</p>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-base font-medium text-gray-900 truncate">OpenAI</h3>
+                            <p className="text-sm text-gray-600">AI language model and processing</p>
+                          </div>
+                          <Checkbox defaultChecked />
+                        </div>
+                        
+                        <div className="flex-1 space-y-2 text-sm text-gray-600 mb-4">
+                          <div className="flex justify-between">
+                            <span>Status:</span>
+                            <span className="font-medium text-green-600">Connected</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Auth:</span>
+                            <span className="font-medium">API Key</span>
                           </div>
                         </div>
-                        <Checkbox defaultChecked />
-                      </div>
-                      <div className="flex-1 space-y-2 text-sm text-[#4E5964]">
-                        <div className="flex justify-between">
-                          <span>Status:</span>
-                          <span className="font-medium text-green-600">Connected</span>
+
+                        <div className="mt-auto space-y-3">
+                          {/* Toggle Switch */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center">
+                              <div className="w-11 h-6 bg-[#008062] rounded-full relative transition-colors">
+                                <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
+                              </div>
+                              <span className="ml-2 text-sm font-medium text-gray-900">Active</span>
+                            </div>
+                          </div>
+                          
+                          {/* Configure Button */}
+                          <Button 
+                            size="sm" 
+                            variant="outline" 
+                            className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
+                            onClick={() => {
+                              console.log('Tool configure event:', { id: 'openai', name: 'OpenAI' });
+                              // onToolConfigure?.({ id: 'openai', name: 'OpenAI' });
+                            }}
+                          >
+                            Configure
+                          </Button>
                         </div>
-                        <div className="flex justify-between">
-                          <span>Auth:</span>
-                          <span className="font-medium">API Key</span>
-                        </div>
-                      </div>
-                      <div className="flex gap-1 mt-3">
-                        <Button variant="outline" size="sm" className="flex-1 text-xs">Configure</Button>
-                        <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
-                          <Trash2 className="w-3 h-3" />
-                        </Button>
-                      </div>
-                    </div>
+                      </CardContent>
+                    </Card>
                   </div>
 
                   {/* Add New Tool Button */}
