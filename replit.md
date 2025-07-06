@@ -252,6 +252,7 @@ Changelog:
 - July 6, 2025. Simplified connected tools display in Browse Integrations - replaced Configure button and toggle switch with "Already installed" message and green checkmark for cleaner interface showing connection status
 - July 6, 2025. Fixed padding issue in tool configuration screen - removed conflicting padding overrides to restore proper 8px padding throughout the interface
 - July 6, 2025. Standardized padding consistency across dashboard and configuration screens - moved padding from outer container to content sections to match configuration screen layout patterns
+- July 6, 2025. Normalized padding across all tool-related screens - Browse Integrations, Tool Configuration, and Connected Tools now all use consistent 8px padding with h-full overflow-y-auto layout for unified user experience
 ```
 
 ## User Preferences
