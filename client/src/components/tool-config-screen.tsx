@@ -148,8 +148,8 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
 
         {/* Configuration Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Configuration - 2/3 width */}
-          <div className="lg:col-span-2 space-y-6">
+          {/* Main Configuration - Full width */}
+          <div className="lg:col-span-3 space-y-6"></div>
             {/* Connection Settings */}
             <Card>
               <CardHeader>
@@ -257,55 +257,6 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
                     )}
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Sidebar - 1/3 width */}
-          <div className="space-y-6">
-            {/* Integration Status */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Integration Status</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Status</span>
-                  <Badge className="bg-green-100 text-green-800">Connected</Badge>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Authentication</span>
-                  <span className="text-sm text-muted-foreground">{config.authType}</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">Last Sync</span>
-                  <span className="text-sm text-muted-foreground">2 min ago</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">API Calls Today</span>
-                  <span className="text-sm text-muted-foreground">1,234</span>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Quick Actions</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Button variant="outline" size="sm" className="w-full justify-start">
-                  <Globe className="w-4 h-4 mr-2" />
-                  View Documentation
-                </Button>
-                <Button variant="outline" size="sm" className="w-full justify-start">
-                  <Key className="w-4 h-4 mr-2" />
-                  Regenerate API Key
-                </Button>
-                <Button variant="outline" size="sm" className="w-full justify-start">
-                  <BarChart3 className="w-4 h-4 mr-2" />
-                  View Usage Stats
-                </Button>
               </CardContent>
             </Card>
           </div>
