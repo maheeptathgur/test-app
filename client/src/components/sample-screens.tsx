@@ -1183,6 +1183,8 @@ function ToolsScreen({
     8: "Connected But Errored"
   });
 
+  const [wiggleStates, setWiggleStates] = useState<Record<number, boolean>>({});
+
   const toggleToolStatus = (toolId: number) => {
     setToolStatuses(prev => {
       const currentStatus = prev[toolId];
@@ -1192,8 +1194,14 @@ function ToolsScreen({
         newStatus = 'Turned Off';
       } else if (currentStatus === 'Turned Off') {
         newStatus = 'Connected';
+      } else if (currentStatus === 'Connected But Errored') {
+        // Trigger wiggle animation for error state
+        setWiggleStates(wigglePrev => ({ ...wigglePrev, [toolId]: true }));
+        setTimeout(() => {
+          setWiggleStates(wigglePrev => ({ ...wigglePrev, [toolId]: false }));
+        }, 500);
+        return prev; // Don't change status for error state
       }
-      // Error state doesn't change on toggle
       
       return {
         ...prev,
@@ -1494,10 +1502,14 @@ function ToolsScreen({
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="text-gray-600 hover:text-white"
+                            className={`${
+                              (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                ? 'border-red-500 text-red-600 hover:bg-red-500 hover:text-white'
+                                : 'text-gray-600 hover:text-white'
+                            }`}
                             onClick={() => onToolConfig?.(tool.name)}
                           >
-                            Configure
+                            {(toolStatuses[tool.id] || tool.status) === 'Connected But Errored' ? 'Reconfigure' : 'Configure'}
                           </Button>
                           
                           {/* Toggle Switch */}
@@ -1509,7 +1521,10 @@ function ToolsScreen({
                                   : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                     ? 'bg-red-500'
                                     : 'bg-gray-300'
-                              }`}
+                              } ${wiggleStates[tool.id] ? 'animate-pulse' : ''}`}
+                              style={{
+                                animation: wiggleStates[tool.id] ? 'wiggle 0.5s ease-in-out' : undefined
+                              }}
                               role="switch"
                               aria-checked={(toolStatuses[tool.id] || tool.status) === 'Connected'}
                               onClick={() => toggleToolStatus(tool.id)}
