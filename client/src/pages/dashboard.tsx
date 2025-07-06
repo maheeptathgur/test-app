@@ -1981,7 +1981,6 @@ export default function Dashboard() {
           </div>
         )}
         </div>
-        </div>
       {/* Edit Modal */}
       <EditCopilotModal
         isOpen={!!editingCopilot}
@@ -1996,6 +1995,7 @@ export default function Dashboard() {
         onClose={handleCancelDelete}
         onConfirm={handleConfirmDelete}
       />
+        </div>
       </div>
     </TooltipProvider>
   );
