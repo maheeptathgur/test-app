@@ -150,7 +150,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
 
   return (
     <>
-      <div className="h-full p-8 overflow-y-auto">
+      <div className="h-full p-8 pb-24 overflow-y-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
