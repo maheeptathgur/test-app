@@ -150,7 +150,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
 
   return (
     <>
-      <div className="h-full p-8 overflow-y-auto pb-24">
+      <div className="h-full p-8 overflow-y-auto pl-[0px] pr-[0px] pt-[0px] pb-[0px]">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -275,7 +275,6 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           </div>
         </div>
       </div>
-
       {/* Sticky Footer */}
       <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
         <div className="flex justify-between items-center">
