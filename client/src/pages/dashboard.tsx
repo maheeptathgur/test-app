@@ -1936,6 +1936,19 @@ export default function Dashboard() {
           <div className="h-full overflow-y-auto">
             {/* Content Body */}
             <div className="px-8 pt-8 pb-24">
+              {/* Title Section for specific pages */}
+              {(activeSection === 'copilots' || activeSection === 'workspace-settings') && (
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-3">
+                    <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
+                    {activeSection === 'copilots' && (
+                      <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+                        {copilots.length} Total
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              )}
               {sectionContent.content}
             </div>
           </div>
