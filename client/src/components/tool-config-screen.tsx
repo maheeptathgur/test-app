@@ -18,7 +18,19 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
   const [showSuccess, setShowSuccess] = useState(false);
   const [isEnabled, setIsEnabled] = useState(true);
   const [testResult, setTestResult] = useState<'idle' | 'running' | 'success' | 'error'>('idle');
-  const [isConnected, setIsConnected] = useState(true); // Simulate connection status
+  // Set connection status based on tool name
+  const getConnectionStatus = (toolName: string) => {
+    if (toolName === 'Airtable' || toolName === 'Notion') {
+      return 'error';
+    } else if (toolName === 'Unsplash') {
+      return 'off';
+    } else {
+      return 'connected';
+    }
+  };
+  
+  const connectionStatus = getConnectionStatus(toolName);
+  const [isConnected, setIsConnected] = useState(connectionStatus === 'connected');
 
   const handleSave = () => {
     setShowSuccess(true);
@@ -163,20 +175,33 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Connection Status */}
-                <div className={`flex items-center justify-between p-4 rounded-lg ${isConnected ? 'bg-green-50' : 'bg-red-50'}`}>
+                <div className={`flex items-center justify-between p-4 rounded-lg ${
+                  connectionStatus === 'connected' ? 'bg-green-50' : 
+                  connectionStatus === 'error' ? 'bg-red-50' : 'bg-gray-50'
+                }`}>
                   <div className="flex items-center gap-3">
-                    <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+                    <div className={`w-3 h-3 rounded-full ${
+                      connectionStatus === 'connected' ? 'bg-green-500' : 
+                      connectionStatus === 'error' ? 'bg-red-500' : 'bg-gray-400'
+                    }`}></div>
                     <div>
                       <p className="font-medium">
-                        {isConnected ? `Connected to ${toolName}` : `Not connected to ${toolName}`}
+                        {connectionStatus === 'connected' ? `Connected to ${toolName}` : 
+                         connectionStatus === 'error' ? `Connection Error - ${toolName}` :
+                         `${toolName} is turned off`}
                       </p>
                       <p className="text-sm text-gray-600">
-                        {isConnected ? 'Integration is active and working' : 'Please configure your credentials'}
+                        {connectionStatus === 'connected' ? 'Integration is active and working' : 
+                         connectionStatus === 'error' ? 'Authentication failed or API key expired' :
+                         'Tool is disabled and not available for use'}
                       </p>
                     </div>
                   </div>
-                  <Button variant="outline" size="sm">
-                    {isConnected ? 'Reconnect' : 'Connect'}
+                  <Button variant="outline" size="sm" className={
+                    connectionStatus === 'error' ? 'border-red-500 text-red-600 hover:bg-red-500 hover:text-white' : ''
+                  }>
+                    {connectionStatus === 'connected' ? 'Reconnect' : 
+                     connectionStatus === 'error' ? 'Reconfigure' : 'Enable'}
                   </Button>
                 </div>
                 
