@@ -15,6 +15,10 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
   const [hasChanges, setHasChanges] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // Define which tools are actually connected
+  const connectedTools = ['Gmail', 'Slack', 'Google Workspace', 'Zoom', 'Figma', 'Notion', 'Google Analytics', 'HubSpot'];
+  const isConnected = connectedTools.includes(toolName);
+
   const handleSave = () => {
     setShowSuccess(true);
     setHasChanges(false);
@@ -76,30 +80,53 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
             <CardDescription>Your {toolName} account connection and authentication details</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
-              <div className="flex items-center gap-3">
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                <div>
-                  <p className="font-medium">Connected to {toolName}</p>
-                  <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
+            {isConnected ? (
+              <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                  <div>
+                    <p className="font-medium">Connected to {toolName}</p>
+                    <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
+                  </div>
                 </div>
+                <Button variant="outline" size="sm">
+                  Reconnect
+                </Button>
               </div>
-              <Button variant="outline" size="sm">
-                Reconnect
-              </Button>
-            </div>
+            ) : (
+              <div className="flex items-center justify-between p-4 bg-orange-50 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                  <div>
+                    <p className="font-medium">Not Connected</p>
+                    <p className="text-sm text-gray-600">Click Connect to authenticate your {toolName} account</p>
+                  </div>
+                </div>
+                <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white" size="sm">
+                  Connect
+                </Button>
+              </div>
+            )}
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-sm font-medium">Account Email</label>
-                <Input value="mandeep@knolli.ai" disabled />
+                <Input 
+                  value={isConnected ? "mandeep@knolli.ai" : ""} 
+                  placeholder={isConnected ? "" : "Connect to see account details"}
+                  disabled 
+                />
               </div>
               
               <div className="space-y-2">
                 <label className="text-sm font-medium">Authentication Level</label>
-                <Select defaultValue="user" onValueChange={() => setHasChanges(true)}>
+                <Select 
+                  defaultValue={isConnected ? "user" : ""} 
+                  onValueChange={() => setHasChanges(true)}
+                  disabled={!isConnected}
+                >
                   <SelectTrigger>
-                    <SelectValue />
+                    <SelectValue placeholder={isConnected ? "User" : "Connect first"} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="admin">Admin</SelectItem>
@@ -118,26 +145,38 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
             <CardDescription>Control what actions this integration can perform</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex items-center justify-between p-3 border rounded-lg">
+            <div className={`flex items-center justify-between p-3 border rounded-lg ${!isConnected ? 'opacity-50' : ''}`}>
               <div>
                 <p className="font-medium">Read Data</p>
                 <p className="text-sm text-gray-600">Access and read data from {toolName}</p>
               </div>
-              <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
+              <Switch 
+                defaultChecked={isConnected} 
+                disabled={!isConnected}
+                onCheckedChange={() => setHasChanges(true)} 
+              />
             </div>
-            <div className="flex items-center justify-between p-3 border rounded-lg">
+            <div className={`flex items-center justify-between p-3 border rounded-lg ${!isConnected ? 'opacity-50' : ''}`}>
               <div>
                 <p className="font-medium">Write Data</p>
                 <p className="text-sm text-gray-600">Create and modify data in {toolName}</p>
               </div>
-              <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
+              <Switch 
+                defaultChecked={isConnected} 
+                disabled={!isConnected}
+                onCheckedChange={() => setHasChanges(true)} 
+              />
             </div>
-            <div className="flex items-center justify-between p-3 border rounded-lg">
+            <div className={`flex items-center justify-between p-3 border rounded-lg ${!isConnected ? 'opacity-50' : ''}`}>
               <div>
                 <p className="font-medium">Delete Data</p>
                 <p className="text-sm text-gray-600">Remove data from {toolName}</p>
               </div>
-              <Switch defaultChecked={false} onCheckedChange={() => setHasChanges(true)} />
+              <Switch 
+                defaultChecked={false} 
+                disabled={!isConnected}
+                onCheckedChange={() => setHasChanges(true)} 
+              />
             </div>
           </CardContent>
         </Card>
