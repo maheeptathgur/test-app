@@ -448,7 +448,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
   }, {} as Record<string, any[]>);
 
   return (
-    <div className="h-full overflow-y-auto px-8 pt-8 pb-24 space-y-6">
+    <div className="h-full overflow-y-auto space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -582,7 +582,6 @@ export function SampleScreen({
   const [showAddWorkspace, setShowAddWorkspace] = useState(false);
   const [showGmailConfig, setShowGmailConfig] = useState(false);
   const [showConnectTool, setShowConnectTool] = useState<string | null>(null);
-  const [cameFromBrowseIntegrations, setCameFromBrowseIntegrations] = useState(false);
 
   // Clear local state when section changes or when external clear functions are triggered
   useEffect(() => {
@@ -595,7 +594,6 @@ export function SampleScreen({
     setShowAddWorkspace(false);
     setShowGmailConfig(false);
     setShowConnectTool(null);
-    setCameFromBrowseIntegrations(false);
   }, [section]);
 
   // Clear local state when external clear functions are called
@@ -691,7 +689,6 @@ export function SampleScreen({
             onConnectTool={(toolName) => {
               setShowBrowseIntegrations(false);
               setShowConnectTool(toolName);
-              setCameFromBrowseIntegrations(true);
               onToolConfigChange?.(true);
             }}
           />;
@@ -704,12 +701,7 @@ export function SampleScreen({
         if (showConnectTool) {
           return <ToolConfigScreen toolName={showConnectTool} onBack={() => {
             setShowConnectTool(null);
-            if (cameFromBrowseIntegrations) {
-              setCameFromBrowseIntegrations(false);
-              setShowBrowseIntegrations(true);
-            } else {
-              onToolConfigChange?.(false);
-            }
+            onToolConfigChange?.(false);
           }} />;
         }
 
