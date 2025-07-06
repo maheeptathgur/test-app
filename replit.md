@@ -263,7 +263,7 @@ Changelog:
 - July 6, 2025. Restored title sections to all navigation screens - added back title headings with dynamic badges to Agents, Workflows, Knowledge Base, Subscriptions, Conversations, Analytics, and Users screens that were accidentally removed when simplifying dashboard layout
 - July 6, 2025. Added title bars to copilots and settings screens - implemented conditional title display for main dashboard sections showing "Copilots" with total count badge and "Settings" title for consistent interface hierarchy
 - July 6, 2025. Reorganized tool card layout - moved toggle switch above configure button with "Status" label, used brand green color (#008062) for active state, made configure button full width, and improved visual hierarchy with proper spacing
-- July 6, 2025. Refined toggle switch design - removed "Status" label for cleaner layout, changed text from "On/Off" to "Active/Inactive" for better clarity, and right-aligned toggle controls for consistent positioning
+- July 6, 2025. Refined toggle switch design - removed "Status" label for cleaner layout, changed text from "On/Off" to "Active/Inactive" for better clarity, and left-aligned toggle controls for improved visual flow
 ```
 
 ## User Preferences
