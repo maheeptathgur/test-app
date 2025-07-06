@@ -1512,8 +1512,7 @@ function ToolsScreen({
                         <p className="text-sm text-gray-600 mt-1">{tool.description}</p>
                         <div className="space-y-3 mt-3">
                           {/* Toggle Switch - moved above */}
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium text-gray-700">Status</span>
+                          <div className="flex items-center justify-end">
                             <div className="flex items-center gap-2">
                               <button
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
@@ -1548,10 +1547,10 @@ function ToolsScreen({
                                     : 'text-gray-500'
                               }`}>
                                 {(toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                  ? 'On' 
+                                  ? 'Active' 
                                   : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                     ? 'Error'
-                                    : 'Off'
+                                    : 'Inactive'
                                 }
                               </span>
                             </div>
