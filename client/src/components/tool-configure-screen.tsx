@@ -5,12 +5,49 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Check, X, Download, Wrench, Shield, Play, BarChart3, Loader2 } from "lucide-react";
+import { ArrowLeft, Check, X, Download, Wrench, Shield, Play, BarChart3, Loader2, MessageSquare, BarChart2, Database, Bot, Image, HardDrive, FileText, Mail, Globe } from "lucide-react";
+import { CardDescription } from "@/components/ui/card";
 
 // Tool Configuration Screen Component
 export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () => void }) {
   const [isEnabled, setIsEnabled] = useState(tool?.status === 'Connected');
   const [testResult, setTestResult] = useState<'idle' | 'running' | 'success' | 'error'>('idle');
+  const [hasChanges, setHasChanges] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const getToolIcon = (toolName: string) => {
+    switch (toolName) {
+      case 'Gmail':
+        return (
+          <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
+          </svg>
+        );
+      case 'Slack':
+        return <MessageSquare className="w-8 h-8 text-purple-600" />;
+      case 'Google Analytics':
+        return <BarChart2 className="w-8 h-8 text-orange-600" />;
+      case 'Airtable':
+        return <Database className="w-8 h-8 text-yellow-600" />;
+      case 'OpenAI':
+      case 'OpenAI API':
+        return <Bot className="w-8 h-8 text-green-600" />;
+      case 'Unsplash':
+        return <Image className="w-8 h-8 text-pink-600" />;
+      case 'Google Drive':
+        return <HardDrive className="w-8 h-8 text-blue-600" />;
+      case 'Notion':
+        return <FileText className="w-8 h-8 text-gray-700" />;
+      default:
+        return <Globe className="w-8 h-8 text-gray-600" />;
+    }
+  };
+
+  const handleSave = () => {
+    setShowSuccess(true);
+    setHasChanges(false);
+    setTimeout(() => setShowSuccess(false), 3000);
+  };
   
   const handleTestConnection = () => {
     setTestResult('running');
@@ -30,100 +67,157 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
   }
 
   return (
-    <div className="h-full p-8 overflow-y-auto">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" onClick={onBack} className="gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Tools
-          </Button>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">{tool.name}</h1>
-            <p className="text-sm text-gray-600">{tool.description}</p>
+    <>
+      <div className="h-full overflow-y-auto px-8 pt-8 pb-24">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded flex items-center justify-center">
+              {getToolIcon(tool.name)}
+            </div>
+            <div>
+              <h1 className="text-2xl font-semibold text-foreground">{tool.name} Configuration</h1>
+              <p className="text-sm text-muted-foreground">Manage your {tool.name} integration settings and automation</p>
+            </div>
           </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <Badge variant={isEnabled ? "default" : "secondary"} className="gap-1">
-            {isEnabled ? <Check className="w-3 h-3" /> : <X className="w-3 h-3" />}
-            {isEnabled ? 'Connected' : 'Disconnected'}
-          </Badge>
-          <Button className="gap-2 bg-[#008062] hover:bg-[#00d2a0] text-white">
-            <Download className="w-4 h-4" />
-            Save Changes
+          <Button variant="outline" onClick={onBack} className="gap-2">
+            <X className="h-4 w-4" />
+            Close
           </Button>
+        </div>
+        
+        {/* Configuration Sections */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Main Configuration - Full width */}
+          <div className="lg:col-span-3 space-y-6">
+            {/* Connection Settings */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Connection Status</CardTitle>
+                <CardDescription>Your {tool.name} connection and authentication details</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className={`flex items-center justify-between p-4 rounded-lg ${
+                  tool.status === 'Connected' ? 'bg-green-50' : 
+                  tool.status === 'Connected But Errored' ? 'bg-red-50' : 'bg-gray-50'
+                }`}>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-3 h-3 rounded-full ${
+                      tool.status === 'Connected' ? 'bg-green-500' : 
+                      tool.status === 'Connected But Errored' ? 'bg-red-500' : 'bg-gray-400'
+                    }`}></div>
+                    <div>
+                      <p className="font-medium">
+                        {tool.status === 'Connected' ? `Connected to ${tool.name}` : 
+                         tool.status === 'Connected But Errored' ? `Connection Error - ${tool.name}` :
+                         `Set up ${tool.name} connection`}
+                      </p>
+                      <p className="text-sm text-gray-600">
+                        {tool.status === 'Connected' ? 'Integration is active and working' : 
+                         tool.status === 'Connected But Errored' ? 'Authentication failed or API key expired' :
+                         'Configure your credentials to connect this tool'}
+                      </p>
+                    </div>
+                  </div>
+                  <Button variant="outline" size="sm">
+                    {tool.status === 'Connected' ? 'Reconnect' : 
+                     tool.status === 'Connected But Errored' ? 'Reconfigure' : 'Connect'}
+                  </Button>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Authentication Type</label>
+                    <Select defaultValue={tool.authType?.toLowerCase().replace(' ', '_') || 'api_key'} onValueChange={() => setHasChanges(true)}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="api_key">API Key</SelectItem>
+                        <SelectItem value="oauth_2.0">OAuth 2.0</SelectItem>
+                        <SelectItem value="bot_token">Bot Token</SelectItem>
+                        <SelectItem value="service_account">Service Account</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium">Base URL</label>
+                    <Input 
+                      defaultValue={tool.name === 'Gmail' ? 'https://gmail.googleapis.com' : 
+                                   tool.name === 'Slack' ? 'https://slack.com/api' :
+                                   tool.name === 'OpenAI API' ? 'https://api.openai.com' :
+                                   'https://api.example.com'}
+                      onChange={() => setHasChanges(true)}
+                    />
+                  </div>
+                  
+                  {tool.authType === 'API Key' && (
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium">API Key</label>
+                      <Input type="password" placeholder="Enter API key..." onChange={() => setHasChanges(true)} />
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex gap-3">
+                  <Button 
+                    onClick={handleTestConnection} 
+                    className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+                    disabled={testResult === 'running'}
+                  >
+                    {testResult === 'running' ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Testing...
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-4 h-4 mr-2" />
+                        Test Connection
+                      </>
+                    )}
+                  </Button>
+                  {testResult === 'success' && (
+                    <Badge variant="outline" className="text-green-600">
+                      <Check className="w-3 h-3 mr-1" />
+                      Connection successful
+                    </Badge>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
-
-      {/* Configuration Sections */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Wrench className="w-5 h-5" />
-            Connection Settings
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div>
-            <label className="text-sm font-medium">Authentication Type</label>
-            <Select defaultValue={tool.authType?.toLowerCase().replace(' ', '_') || 'api_key'}>
-              <SelectTrigger className="mt-1">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="api_key">API Key</SelectItem>
-                <SelectItem value="oauth_2.0">OAuth 2.0</SelectItem>
-                <SelectItem value="bot_token">Bot Token</SelectItem>
-                <SelectItem value="service_account">Service Account</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-          
-          {tool.authType === 'API Key' && (
-            <div>
-              <label className="text-sm font-medium">API Key</label>
-              <Input type="password" placeholder="Enter API key..." className="mt-1" />
-            </div>
-          )}
-          
-          <div>
-            <label className="text-sm font-medium">Base URL</label>
-            <Input 
-              defaultValue={tool.name === 'Gmail' ? 'https://gmail.googleapis.com' : 
-                           tool.name === 'Slack' ? 'https://slack.com/api' :
-                           tool.name === 'OpenAI API' ? 'https://api.openai.com' :
-                           'https://api.example.com'}
-              className="mt-1"
-            />
-          </div>
-          
-          <div className="flex gap-3 mt-6">
-            <Button 
-              onClick={handleTestConnection} 
-              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
-              disabled={testResult === 'running'}
-            >
-              {testResult === 'running' ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Testing...
-                </>
-              ) : (
-                <>
-                  <Play className="w-4 h-4 mr-2" />
-                  Test Connection
-                </>
-              )}
-            </Button>
-            {testResult === 'success' && (
-              <Badge variant="outline" className="text-green-600">
-                <Check className="w-3 h-3 mr-1" />
-                Connection successful
-              </Badge>
+      {/* Sticky Footer */}
+      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
+        <div className="flex justify-between items-center">
+          {/* Success Message */}
+          <div className="flex-1">
+            {showSuccess && (
+              <div className="flex items-center gap-2 text-green-600">
+                <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                <span className="text-sm font-medium">Changes saved successfully</span>
+              </div>
             )}
           </div>
-        </CardContent>
-      </Card>
-    </div>
+          
+          {/* Buttons */}
+          <div className="flex gap-3">
+            <Button variant="outline" onClick={onBack}>
+              Cancel
+            </Button>
+            <Button 
+              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+              disabled={!hasChanges}
+              onClick={handleSave}
+            >
+              Save Changes
+            </Button>
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

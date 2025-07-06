@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Check, X, Download, Wrench, Shield, Play, BarChart3, Loader2, Globe, Key } from "lucide-react";
+import { ArrowLeft, Check, X, Download, Wrench, Shield, Play, BarChart3, Loader2, Globe, Key, MessageSquare, BarChart2, Database, Bot, Image, HardDrive, FileText, Mail } from "lucide-react";
 import { CardDescription } from "@/components/ui/card";
 
 interface ToolConfigScreenProps {
@@ -51,12 +51,29 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
 
   const getToolConfig = (toolName: string) => {
     switch (toolName) {
+      case 'Gmail':
+        return {
+          title: 'Gmail Integration',
+          description: 'Manage your Gmail integration settings and automation',
+          authType: 'OAuth 2.0',
+          endpoints: ['Send Email', 'Read Email', 'Search Email'],
+          icon: (
+            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
+            </svg>
+          ),
+          fields: [
+            { name: 'account_email', label: 'Account Email', type: 'text', required: true, value: 'mandeep@knolli.ai' },
+            { name: 'auth_level', label: 'Authentication Level', type: 'select', required: true, options: ['Admin', 'User'], value: 'User' }
+          ]
+        };
       case 'Slack':
         return {
           title: 'Slack Integration',
           description: 'Configure Slack workspace connection and message automation',
           authType: 'Bot Token',
           endpoints: ['Send Message', 'Create Channel', 'Upload File'],
+          icon: <MessageSquare className="w-8 h-8 text-purple-600" />,
           fields: [
             { name: 'bot_token', label: 'Bot Token', type: 'password', required: true, value: 'xoxb-1234567890123-1234567890123-abcdefghijklmnopqrstuvwx' },
             { name: 'workspace_url', label: 'Workspace URL', type: 'text', required: true, value: 'knolli-workspace.slack.com' },
@@ -69,6 +86,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           description: 'Connect to Google Analytics for website traffic and performance data',
           authType: 'OAuth 2.0',
           endpoints: ['Get Reports', 'Real-time Data', 'Goal Tracking'],
+          icon: <BarChart2 className="w-8 h-8 text-orange-600" />,
           fields: [
             { name: 'property_id', label: 'Property ID', type: 'text', required: true, value: '123456789' },
             { name: 'measurement_id', label: 'Measurement ID', type: 'text', required: true, value: 'G-ABCDEFGHIJ' },
@@ -81,6 +99,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           description: 'Connect to Airtable for database operations and record management',
           authType: 'API Key',
           endpoints: ['List Records', 'Create Record', 'Update Record', 'Delete Record'],
+          icon: <Database className="w-8 h-8 text-yellow-600" />,
           fields: [
             { name: 'api_key', label: 'API Key', type: 'password', required: true, value: 'patABCDEFGHIJKLMNOPQRSTUVWXYZ.1234567890abcdefghijklmnopqr' },
             { name: 'base_id', label: 'Base ID', type: 'text', required: true, value: 'appABCDEFGHIJKLMN' },
@@ -93,6 +112,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           description: 'Configure OpenAI API for AI text generation and completions',
           authType: 'API Key',
           endpoints: ['Chat Completions', 'Text Generation', 'Embeddings'],
+          icon: <Bot className="w-8 h-8 text-green-600" />,
           fields: [
             { name: 'api_key', label: 'API Key', type: 'password', required: true, value: 'sk-proj-abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJ' },
             { name: 'organization', label: 'Organization ID', type: 'text', required: false, value: 'org-ABCDEFGHIJKLMNOPQRSTUVWX' },
@@ -105,6 +125,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           description: 'Access high-quality stock photos from Unsplash',
           authType: 'Access Key',
           endpoints: ['Search Photos', 'Get Photo', 'Download Photo'],
+          icon: <Image className="w-8 h-8 text-pink-600" />,
           fields: [
             { name: 'access_key', label: 'Access Key', type: 'password', required: true, value: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefg' },
             { name: 'secret_key', label: 'Secret Key', type: 'password', required: false, value: 'hijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMN' }
@@ -116,6 +137,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           description: 'Connect to Google Drive for file storage and management',
           authType: 'OAuth 2.0',
           endpoints: ['List Files', 'Upload File', 'Download File', 'Share File'],
+          icon: <HardDrive className="w-8 h-8 text-blue-600" />,
           fields: [
             { name: 'client_id', label: 'Client ID', type: 'text', required: true, value: '123456789012-abcdefghijklmnopqrstuvwxyz123456.apps.googleusercontent.com' },
             { name: 'client_secret', label: 'Client Secret', type: 'password', required: true, value: 'GOCSPX-ABCDEFGHIJKLMNOPQRSTUVWXYZ123456' },
@@ -128,6 +150,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           description: 'Connect to Notion for page and database management',
           authType: 'Internal Integration',
           endpoints: ['Query Database', 'Create Page', 'Update Page'],
+          icon: <FileText className="w-8 h-8 text-gray-700" />,
           fields: [
             { name: 'integration_token', label: 'Integration Token', type: 'password', required: true, value: 'secret_ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqr' },
             { name: 'database_id', label: 'Database ID', type: 'text', required: false, value: 'e83ac532-b029-486c-8c24-50b9abcdefgh' }
@@ -139,6 +162,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
           description: `Configure ${toolName} integration settings`,
           authType: 'API Key',
           endpoints: ['API Endpoint'],
+          icon: <Globe className="w-8 h-8 text-gray-600" />,
           fields: [
             { name: 'api_key', label: 'API Key', type: 'password', required: true, value: 'sk-1234567890abcdefghijklmnopqrstuvwxyz' }
           ]
@@ -150,12 +174,17 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
 
   return (
     <>
-      <div className="h-full tool-config-container pb-24 overflow-y-auto">
+      <div className="h-full overflow-y-auto px-8 pt-8 pb-24">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-2xl font-semibold text-foreground">{config.title}</h1>
-            <p className="text-sm text-muted-foreground">{config.description}</p>
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded flex items-center justify-center">
+              {config.icon}
+            </div>
+            <div>
+              <h1 className="text-2xl font-semibold text-foreground">{config.title}</h1>
+              <p className="text-sm text-muted-foreground">{config.description}</p>
+            </div>
           </div>
           <Button variant="outline" onClick={onBack} className="gap-2">
             <X className="h-4 w-4" />
@@ -170,11 +199,8 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
             {/* Connection Settings */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Wrench className="w-5 h-5" />
-                  Connection Settings
-                </CardTitle>
-                <CardDescription>Configure your {toolName} connection and authentication details</CardDescription>
+                <CardTitle>Connection Status</CardTitle>
+                <CardDescription>Your {toolName} connection and authentication details</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 {/* Connection Status */}
@@ -214,7 +240,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
                   </Button>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {config.fields.map((field) => (
                     <div key={field.name} className="space-y-2">
                       <label className="text-sm font-medium flex items-center gap-2">
@@ -222,7 +248,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
                         {field.required && <span className="text-red-500">*</span>}
                       </label>
                       {field.type === 'select' ? (
-                        <Select defaultValue={(field as any).value}>
+                        <Select defaultValue={(field as any).value} onValueChange={() => setHasChanges(true)}>
                           <SelectTrigger>
                             <SelectValue placeholder={`Select ${field.label}`} />
                           </SelectTrigger>
@@ -239,6 +265,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
                           type={field.type}
                           placeholder={`Enter ${field.label.toLowerCase()}`}
                           defaultValue={(field as any).value || ''}
+                          disabled={field.name === 'account_email'}
                           onChange={() => setHasChanges(true)}
                         />
                       )}
@@ -276,7 +303,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
         </div>
       </div>
       {/* Sticky Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
+      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
         <div className="flex justify-between items-center">
           {/* Success Message */}
           <div className="flex-1">

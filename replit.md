@@ -265,6 +265,7 @@ Changelog:
 - July 6, 2025. Reorganized tool card layout - moved toggle switch above configure button with "Status" label, used brand green color (#008062) for active state, made configure button full width, and improved visual hierarchy with proper spacing
 - July 6, 2025. Refined toggle switch design - removed "Status" label for cleaner layout, changed text from "On/Off" to "Active/Inactive" for better clarity, and left-aligned toggle controls for improved visual flow
 - July 6, 2025. Added custom CSS class "tool-config-container" with zero padding for tool configuration screen - prevents affecting other pages while allowing specific styling control for tool configuration interface
+- July 6, 2025. Updated all tool configuration screens to use consistent Gmail template structure - standardized header layout with icons, proper padding (px-8 pt-8 pb-24), Connection Status cards, grid-based form layouts, and sticky footer with Save/Cancel buttons for unified user experience across tool-config-screen.tsx and tool-configure-screen.tsx
 ```
 
 ## User Preferences
