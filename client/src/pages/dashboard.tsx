@@ -1949,7 +1949,6 @@ export default function Dashboard() {
                         </Badge>
                       )}
                     </div>
-                    <p className="text-muted-foreground mt-1">{sectionContent.subtitle}</p>
                   </div>
                 {activeSection === 'copilots' && (
                   <div className="flex gap-3 mt-4">
