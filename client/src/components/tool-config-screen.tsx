@@ -24,8 +24,11 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
       return 'error';
     } else if (toolName === 'Unsplash') {
       return 'off';
-    } else {
+    } else if (['Gmail', 'Slack', 'Google Analytics', 'OpenAI', 'Google Drive'].includes(toolName)) {
       return 'connected';
+    } else {
+      // New tools being connected for the first time
+      return 'disconnected';
     }
   };
   
@@ -177,31 +180,37 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
                 {/* Connection Status */}
                 <div className={`flex items-center justify-between p-4 rounded-lg ${
                   connectionStatus === 'connected' ? 'bg-green-50' : 
-                  connectionStatus === 'error' ? 'bg-red-50' : 'bg-gray-50'
+                  connectionStatus === 'error' ? 'bg-red-50' : 
+                  connectionStatus === 'disconnected' ? 'bg-yellow-50' : 'bg-gray-50'
                 }`}>
                   <div className="flex items-center gap-3">
                     <div className={`w-3 h-3 rounded-full ${
                       connectionStatus === 'connected' ? 'bg-green-500' : 
-                      connectionStatus === 'error' ? 'bg-red-500' : 'bg-gray-400'
+                      connectionStatus === 'error' ? 'bg-red-500' : 
+                      connectionStatus === 'disconnected' ? 'bg-yellow-500' : 'bg-gray-400'
                     }`}></div>
                     <div>
                       <p className="font-medium">
                         {connectionStatus === 'connected' ? `Connected to ${toolName}` : 
                          connectionStatus === 'error' ? `Connection Error - ${toolName}` :
+                         connectionStatus === 'disconnected' ? `Set up ${toolName} connection` :
                          `${toolName} is turned off`}
                       </p>
                       <p className="text-sm text-gray-600">
                         {connectionStatus === 'connected' ? 'Integration is active and working' : 
                          connectionStatus === 'error' ? 'Authentication failed or API key expired' :
+                         connectionStatus === 'disconnected' ? 'Configure your credentials to connect this tool' :
                          'Tool is disabled and not available for use'}
                       </p>
                     </div>
                   </div>
                   <Button variant="outline" size="sm" className={
-                    connectionStatus === 'error' ? 'border-red-500 text-red-600 hover:bg-red-500 hover:text-white' : ''
+                    connectionStatus === 'error' ? 'border-red-500 text-red-600 hover:bg-red-500 hover:text-white' : 
+                    connectionStatus === 'disconnected' ? 'border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white' : ''
                   }>
                     {connectionStatus === 'connected' ? 'Reconnect' : 
-                     connectionStatus === 'error' ? 'Reconfigure' : 'Enable'}
+                     connectionStatus === 'error' ? 'Reconfigure' : 
+                     connectionStatus === 'disconnected' ? 'Connect' : 'Enable'}
                   </Button>
                 </div>
                 

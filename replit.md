@@ -248,6 +248,7 @@ Changelog:
 - July 6, 2025. Enhanced error state interaction - added wiggle animation when clicking error state toggles to indicate they can't be turned on/off, changed Configure button to "Reconfigure" with red border outline for error states, created CSS keyframe animation for visual feedback, fixed hover colors to use red instead of green for error state buttons
 - July 6, 2025. Replicated Configure button + toggle switch layout from Tools screen to Browse Integrations screen - connected integrations now show Configure button with #00d1a0 hover and toggle switch in "On" position, while non-connected integrations keep the Connect button
 - July 6, 2025. Updated tool configuration screens to show correct status states - Airtable and Notion display error status with red indicators and "Reconfigure" buttons, Unsplash shows as turned off with gray indicators and "Enable" button, other tools show connected status
+- July 6, 2025. Added Connect button functionality in Browse Integrations screen - clicking Connect on non-connected tools now opens ToolConfigScreen for setup, added disconnected status with yellow indicators and "Connect" buttons for new tool connections
 ```
 
 ## User Preferences
