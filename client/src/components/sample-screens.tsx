@@ -1172,6 +1172,36 @@ function ToolsScreen({
 } = {}) {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   
+  const [toolStatuses, setToolStatuses] = useState<Record<number, string>>({
+    1: "Connected",
+    2: "Connected", 
+    3: "Connected",
+    4: "Connected But Errored",
+    5: "Connected",
+    6: "Turned Off",
+    7: "Connected",
+    8: "Connected But Errored"
+  });
+
+  const toggleToolStatus = (toolId: number) => {
+    setToolStatuses(prev => {
+      const currentStatus = prev[toolId];
+      let newStatus = currentStatus;
+      
+      if (currentStatus === 'Connected') {
+        newStatus = 'Turned Off';
+      } else if (currentStatus === 'Turned Off') {
+        newStatus = 'Connected';
+      }
+      // Error state doesn't change on toggle
+      
+      return {
+        ...prev,
+        [toolId]: newStatus
+      };
+    });
+  };
+  
   const allTools = [
     {
       id: 1,
@@ -1460,7 +1490,7 @@ function ToolsScreen({
                       <div className="flex-1">
                         <h4 className="font-medium">{tool.name}</h4>
                         <p className="text-sm text-gray-600 mt-1">{tool.description}</p>
-                        <div className="flex items-center justify-between mt-3">
+                        <div className="flex items-center gap-3 mt-3">
                           <Button 
                             size="sm" 
                             variant="outline" 
@@ -1474,36 +1504,36 @@ function ToolsScreen({
                           <div className="flex items-center gap-2">
                             <button
                               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
-                                tool.status === 'Connected' 
+                                (toolStatuses[tool.id] || tool.status) === 'Connected' 
                                   ? 'bg-green-500' 
-                                  : tool.status === 'Connected But Errored'
+                                  : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                     ? 'bg-red-500'
                                     : 'bg-gray-300'
                               }`}
                               role="switch"
-                              aria-checked={tool.status === 'Connected'}
-                              onClick={() => console.log('Toggle clicked for:', tool.name)}
+                              aria-checked={(toolStatuses[tool.id] || tool.status) === 'Connected'}
+                              onClick={() => toggleToolStatus(tool.id)}
                             >
                               <span 
                                 className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                                  tool.status === 'Connected' 
+                                  (toolStatuses[tool.id] || tool.status) === 'Connected' 
                                     ? 'translate-x-6' 
-                                    : tool.status === 'Connected But Errored'
+                                    : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                       ? 'translate-x-1'
                                       : 'translate-x-1'
                                 }`}
                               />
                             </button>
                             <span className={`text-xs font-medium ${
-                              tool.status === 'Connected' 
+                              (toolStatuses[tool.id] || tool.status) === 'Connected' 
                                 ? 'text-green-600' 
-                                : tool.status === 'Connected But Errored'
+                                : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                   ? 'text-red-600'
                                   : 'text-gray-500'
                             }`}>
-                              {tool.status === 'Connected' 
+                              {(toolStatuses[tool.id] || tool.status) === 'Connected' 
                                 ? 'On' 
-                                : tool.status === 'Connected But Errored'
+                                : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                   ? 'Error'
                                   : 'Off'
                               }
