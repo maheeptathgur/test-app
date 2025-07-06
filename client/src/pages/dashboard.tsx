@@ -1972,7 +1972,7 @@ export default function Dashboard() {
             )}
 
             {/* Content Body */}
-            <div className="px-8 pb-8">
+            <div className="px-8 pb-24">
               {sectionContent.content}
             </div>
           </div>
