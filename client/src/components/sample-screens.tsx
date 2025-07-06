@@ -1447,7 +1447,7 @@ function ToolsScreen({
                             <Button 
                               size="sm" 
                               variant="outline" 
-                              className="text-gray-600 hover:text-gray-800"
+                              className="text-gray-600 hover:text-white"
                               onClick={() => onToolConfigure?.(tool)}
                             >
                               Configure
@@ -1469,7 +1469,7 @@ function ToolsScreen({
                           </div>
                         ) : (
                           <div className="flex items-center gap-3 mt-3">
-                            <Button size="sm" variant="outline" className="text-gray-600 hover:text-gray-800">
+                            <Button size="sm" variant="outline" className="text-gray-600 hover:text-white">
                               Turn On
                             </Button>
                             <div className="flex items-center gap-2 text-red-600">
