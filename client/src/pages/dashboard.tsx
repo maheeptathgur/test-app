@@ -1933,11 +1933,11 @@ export default function Dashboard() {
           />
         ) : /* Regular Dashboard Content */
         (
-          <div className="h-full p-8 overflow-y-auto">
+          <div className="h-full overflow-y-auto">
             {/* Top Bar - Hidden when in user-view, settings modes, configuration screens, browse integrations, or tool config */}
             {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
               !configureAgent && !configureTool && !configureWorkflow && !testAgent && !browseIntegrationsActive && !gmailConfigActive && !toolConfigActive && (
-              <div className="mb-8">
+              <div className="mb-8 px-8 pt-8">
                   <div>
                     <div className="flex items-center gap-3">
                       <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
@@ -1972,7 +1972,7 @@ export default function Dashboard() {
             )}
 
             {/* Content Body */}
-            <div>
+            <div className="px-8 pb-8">
               {sectionContent.content}
             </div>
           </div>
