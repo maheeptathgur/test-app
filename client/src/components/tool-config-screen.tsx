@@ -275,26 +275,22 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
               </CardContent>
             </Card>
 
-            {/* Permissions */}
+            {/* Permissions & Scopes */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Shield className="w-5 h-5" />
-                  Permissions & Scope
-                </CardTitle>
+                <CardTitle>Permissions & Scopes</CardTitle>
+                <CardDescription>Control what actions this integration can perform</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  {config.endpoints.map((endpoint) => (
-                    <div key={endpoint} className="flex items-center justify-between">
-                      <div>
-                        <span className="font-medium">{endpoint}</span>
-                        <p className="text-sm text-muted-foreground">Allow access to {endpoint.toLowerCase()}</p>
-                      </div>
-                      <Switch defaultChecked />
+                {config.endpoints.map((endpoint) => (
+                  <div key={endpoint} className="flex items-center justify-between p-3 border rounded-lg">
+                    <div>
+                      <p className="font-medium">{endpoint}</p>
+                      <p className="text-sm text-gray-600">Allow access to {endpoint.toLowerCase()}</p>
                     </div>
-                  ))}
-                </div>
+                    <Switch defaultChecked onCheckedChange={() => setHasChanges(true)} />
+                  </div>
+                ))}
               </CardContent>
             </Card>
 
