@@ -253,7 +253,7 @@ Changelog:
 - July 6, 2025. Fixed padding issue in tool configuration screen - removed conflicting padding overrides to restore proper 8px padding throughout the interface
 - July 6, 2025. Standardized padding consistency across dashboard and configuration screens - moved padding from outer container to content sections to match configuration screen layout patterns
 - July 6, 2025. Normalized padding across all tool-related screens - Browse Integrations, Tool Configuration, and Connected Tools now all use consistent 8px padding with h-full overflow-y-auto layout for unified user experience
-- July 6, 2025. Fixed padding inconsistency across tool screens - added px-8 pt-8 padding to Gmail Configuration screen only (since it replaces entire content area), while Browse Integrations inherits dashboard padding naturally, ensuring identical spacing across all tool-related screens
+- July 6, 2025. Fixed padding inconsistency across tool screens - added px-8 pt-8 padding to Gmail Configuration screen (replaces entire content area) and created custom CSS class .browse-integrations-container with top padding only for Browse Integrations screen, ensuring proper spacing without affecting other pages
 ```
 
 ## User Preferences
