@@ -691,7 +691,7 @@ export function SampleScreen({
             onToolConfig={onToolConfig}
             onConnectTool={(toolName) => {
               setShowBrowseIntegrations(false);
-              setShowConnectTool(toolName);
+              onToolConfig?.(toolName);
             }}
           />;
         }
