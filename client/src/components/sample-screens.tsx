@@ -1504,7 +1504,7 @@ function ToolsScreen({
                             variant="outline" 
                             className={`${
                               (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                ? 'border-red-500 text-red-600 hover:bg-red-500 hover:text-white hover:border-red-500'
+                                ? 'border-red-500 text-red-600 hover:!bg-red-500 hover:!text-white hover:!border-red-500'
                                 : 'text-gray-600 hover:bg-gray-600 hover:text-white'
                             }`}
                             onClick={() => onToolConfig?.(tool.name)}
