@@ -264,7 +264,6 @@ Changelog:
 - July 6, 2025. Added title bars to copilots and settings screens - implemented conditional title display for main dashboard sections showing "Copilots" with total count badge and "Settings" title for consistent interface hierarchy
 - July 6, 2025. Reorganized tool card layout - moved toggle switch above configure button with "Status" label, used brand green color (#008062) for active state, made configure button full width, and improved visual hierarchy with proper spacing
 - July 6, 2025. Refined toggle switch design - removed "Status" label for cleaner layout, changed text from "On/Off" to "Active/Inactive" for better clarity, and left-aligned toggle controls for improved visual flow
-- July 6, 2025. Fixed Browse Integrations screen padding using targeted custom CSS - added `.browse-integrations-padding` class with reduced padding (1rem 2rem 1.5rem 2rem) to prevent affecting other dashboard pages while creating more compact spacing for the integrations browser
 ```
 
 ## User Preferences
