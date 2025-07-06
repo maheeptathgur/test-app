@@ -149,7 +149,7 @@ export function ToolConfigScreen({ toolName, onBack }: ToolConfigScreenProps) {
         {/* Configuration Sections */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Main Configuration - Full width */}
-          <div className="lg:col-span-3 space-y-6"></div>
+          <div className="lg:col-span-3 space-y-6">
             {/* Connection Settings */}
             <Card>
               <CardHeader>
