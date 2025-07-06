@@ -1573,7 +1573,7 @@ function ToolsScreen({
                                 ? 'border-red-500 text-red-600 hover:!bg-red-500 hover:!text-white hover:!border-red-500'
                                 : 'text-gray-600 hover:!bg-[#00d1a0] hover:!text-white'
                             }`}
-                            onClick={() => onToolConfig?.(tool.name)}
+                            onClick={() => handleToolConfigure(tool)}
                           >
                             {(toolStatuses[tool.id] || tool.status) === 'Connected But Errored' ? 'Reconfigure' : 'Configure'}
                           </Button>
