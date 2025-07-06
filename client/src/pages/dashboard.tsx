@@ -1995,8 +1995,8 @@ export default function Dashboard() {
         onClose={handleCancelDelete}
         onConfirm={handleConfirmDelete}
       />
-        </div>
       </div>
+    </TooltipProvider>
     </TooltipProvider>
   );
 }
