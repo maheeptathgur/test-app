@@ -648,8 +648,10 @@ export function SampleScreen({
   };
 
   const handleToolConfigure = (tool: any) => {
+    console.log('handleToolConfigure called with tool:', tool);
     setLocalConfigureTool(tool);
     onToolConfigChange?.(true);
+    console.log('localConfigureTool set to:', tool);
   };
 
   const handleBackToTools = () => {
@@ -671,18 +673,20 @@ export function SampleScreen({
         const toolToConfig = externalConfigureTool || localConfigureTool;
         const workflowToConfig = externalConfigureWorkflow || (editWorkflow ? { id: editWorkflow, name: editWorkflow } : null);
 
+        console.log('Render check - toolToConfig:', toolToConfig);
+        console.log('Render check - localConfigureTool:', localConfigureTool);
+
         if (agentToConfig) {
           return <AgentConfigureScreen agent={agentToConfig} onBack={handleBackToAgents} />;
         }
 
-
+        if (toolToConfig) {
+          console.log('Rendering ToolConfigureScreen with tool:', toolToConfig);
+          return <ToolConfigureScreen tool={toolToConfig} onBack={handleBackToTools} />;
+        }
 
         if (workflowToConfig) {
           return <WorkflowEditor workflowId={workflowToConfig.id} onBack={handleBackToWorkflows} />;
-        }
-
-        if (toolToConfig) {
-          return <ToolConfigureScreen tool={toolToConfig} onBack={handleBackToTools} />;
         }
 
         if (showBrowseIntegrations) {
