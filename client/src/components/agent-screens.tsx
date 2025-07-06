@@ -77,8 +77,9 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
             { id: "knowledge", label: "Knowledge Base" },
             { id: "test", label: "Test" }
           ].map((tab) => (
-            <button
+            <Button
               key={tab.id}
+              variant="ghost"
               onClick={() => setActiveTab(tab.id)}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === tab.id
@@ -87,7 +88,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
               }`}
             >
               {tab.label}
-            </button>
+            </Button>
           ))}
         </nav>
       </div>
