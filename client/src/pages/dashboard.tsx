@@ -1972,7 +1972,7 @@ export default function Dashboard() {
             )}
 
             {/* Content Body */}
-            <div className={browseIntegrationsActive ? "pb-24" : "px-8 pb-24"}>
+            <div className="px-8 pb-24">
               {sectionContent.content}
             </div>
           </div>
