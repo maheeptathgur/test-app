@@ -1934,43 +1934,6 @@ export default function Dashboard() {
         ) : /* Regular Dashboard Content */
         (
           <div className="h-full overflow-y-auto">
-            {/* Top Bar - Hidden when in user-view, settings modes, configuration screens, browse integrations, or tool config */}
-            {activeSection !== 'user-view' && activeSection !== 'profile-settings' && activeSection !== 'account-settings' && 
-              !configureAgent && !configureTool && !configureWorkflow && !testAgent && !browseIntegrationsActive && !gmailConfigActive && !toolConfigActive && (
-              <div className="mb-8 px-8 pt-8">
-                  <div>
-                    <div className="flex items-center gap-3">
-                      <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
-                      {activeSection === 'copilots' && (
-                        <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
-                          {copilots.length} Copilots
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-                {activeSection === 'copilots' && (
-                  <div className="flex gap-3 mt-4">
-                    <Button 
-                      onClick={() => setShowCreationWizard(true)}
-                      className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                    >
-                      <Plus className="w-4 h-4 mr-2" />
-                      New Copilot
-                    </Button>
-                    <Button 
-                      variant="outline"
-                      onClick={() => {
-                        // Navigate to marketplace - placeholder for now
-                        console.log('Navigate to marketplace');
-                      }}
-                    >
-                      Go to Marketplace
-                    </Button>
-                  </div>
-                )}
-              </div>
-            )}
-
             {/* Content Body */}
             <div className="px-8 pb-24">
               {sectionContent.content}
