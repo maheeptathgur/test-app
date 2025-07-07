@@ -46,6 +46,8 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
 
   // Helper functions for step editing
   const startEditingStep = (stepId: string, step: any) => {
+    // Auto-expand the step when entering edit mode
+    setExpandedStep(stepId);
     setEditingSteps(prev => ({ ...prev, [stepId]: true }));
     setStepValues(prev => ({ 
       ...prev, 
@@ -55,8 +57,6 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         config: JSON.stringify(step.config, null, 2)
       }
     }));
-    // Auto-expand the step when entering edit mode
-    setExpandedStep(stepId);
   };
 
   const saveStepEdit = (stepId: string) => {
@@ -85,7 +85,22 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
 
   const deleteStep = (stepId: string) => {
     console.log('Deleting step:', stepId);
-    // In a real implementation, this would update the workflow data
+    setWorkflowSteps(prev => prev.filter(step => step.id !== stepId));
+    // Close the step if it was expanded
+    if (expandedStep === stepId) {
+      setExpandedStep(null);
+    }
+    // Clear editing state for this step
+    setEditingSteps(prev => {
+      const newState = { ...prev };
+      delete newState[stepId];
+      return newState;
+    });
+    setStepValues(prev => {
+      const newState = { ...prev };
+      delete newState[stepId];
+      return newState;
+    });
   };
 
   const duplicateStep = (stepId: string) => {
@@ -99,7 +114,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
   };
 
   // Sample workflow data
-  const workflowData = {
+  const initialWorkflowData = {
     id: workflowId,
     name: workflowName,
     description: workflowDescription,
@@ -225,6 +240,48 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
     ]
   };
 
+  // State for managing workflow steps
+  const [workflowSteps, setWorkflowSteps] = useState(initialWorkflowData.steps);
+  const workflowData = { ...initialWorkflowData, steps: workflowSteps };
+
+  // Function to add a new step
+  const addNewStep = () => {
+    const newStepId = `step${workflowSteps.length}`;
+    const newStep = {
+      id: newStepId,
+      name: 'New Step',
+      type: 'agent',
+      description: 'Configure this step',
+      status: 'pending',
+      executionTime: '0s',
+      config: {
+        agentId: 'content-creator',
+        instructions: 'Enter instructions for this step'
+      },
+      input: {
+        type: 'object',
+        schema: {},
+        source: workflowSteps.length > 1 ? workflowSteps[workflowSteps.length - 1].id : 'trigger'
+      },
+      output: {
+        type: 'object',
+        schema: {}
+      }
+    };
+    
+    setWorkflowSteps([...workflowSteps, newStep]);
+    setExpandedStep(newStepId);
+    setEditingSteps(prev => ({ ...prev, [newStepId]: true }));
+    setStepValues(prev => ({ 
+      ...prev, 
+      [newStepId]: {
+        name: newStep.name,
+        description: newStep.description,
+        config: JSON.stringify(newStep.config, null, 2)
+      }
+    }));
+  };
+
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'success':
@@ -300,7 +357,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                 <h2 className="text-lg font-semibold text-gray-900">Workflow Steps</h2>
                 <p className="text-sm text-gray-600">Configure the sequence of actions in your workflow</p>
               </div>
-              <Button variant="outline" className="gap-2">
+              <Button variant="outline" className="gap-2" onClick={addNewStep}>
                 <Plus className="w-4 h-4" />
                 Add Step
               </Button>
