@@ -12,7 +12,7 @@ import newCopilotImage from "@assets/image_1751664430496.png";
 import workspaceImage from "@assets/image_1751923707146.png";
 import newCampaignManagerImage from "@assets/image_1751925400273.png";
 import customerSupportImage from "@assets/image_1751925913677.png";
-import socialAnalystImage from "@assets/image_1751926534727.png";
+import socialAnalystImage from "@assets/image_1751926960404.png";
 import resumeAssistantImage from "@assets/image_1751926805510.png";
 
 // Helper functions for image tiles
