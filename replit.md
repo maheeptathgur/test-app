@@ -291,7 +291,7 @@ Changelog:
 - July 7, 2025. Fixed workflows page to match exact agents and tools card format - added collapsible "Used by" section with chevron toggle functionality, tooltips for copilot descriptions, simplified layout structure removing unnecessary metrics sections, and maintaining only essential collapsible section plus Configure button for perfect consistency across all three component management screens
 - July 7, 2025. Replaced workflow action buttons with tabbed interface featuring "Knolli Workflows", "n8n Workflows", and disabled "Make.com" tabs - restructured workflow data to support the new tabbed organization system with separate arrays for Knolli and n8n workflows, dynamic action buttons based on active tab, and proper state management for tab switching
 - July 7, 2025. Added informative tooltip to disabled Make.com tab - implemented tooltip with mint green styling that instructs users to "Connect Make.com as a tool first to use workflows" providing clear guidance on how to enable the disabled functionality
-- July 7, 2025. Simplified workflow editor header by removing action elements - deleted Badge (Enabled/Disabled status), Test Run button, and Save Changes button, replaced with single right-aligned Close button for cleaner interface and streamlined user experience
+- July 7, 2025. Simplified workflow editor header by removing action elements - deleted Badge (Enabled/Disabled status), Test Run button, and Save Changes button, replaced with single right-aligned Close button with outline styling for cleaner interface and streamlined user experience
 ```
 
 ## User Preferences
