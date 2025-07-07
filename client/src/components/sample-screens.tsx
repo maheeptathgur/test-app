@@ -1682,6 +1682,7 @@ function ToolsScreen({
 function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: string) => void } = {}) {
   const [collapsedUsage, setCollapsedUsage] = useState<Set<number>>(new Set([1, 2, 3, 4, 5, 6]));
   const [activeTab, setActiveTab] = useState("knolli");
+  const [workflowStatuses, setWorkflowStatuses] = useState<Record<number, string>>({});
 
   const toggleUsageCollapsed = (workflowId: number) => {
     setCollapsedUsage(prev => {
@@ -1695,6 +1696,24 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
     });
   };
 
+  const handleWorkflowToggle = (workflowId: number, currentStatus: string) => {
+    if (currentStatus === 'Error') {
+      // Add wiggle animation for error state
+      const element = document.querySelector(`[data-workflow-id="${workflowId}"] .workflow-toggle`);
+      if (element) {
+        element.classList.add('wiggle-animation');
+        setTimeout(() => element.classList.remove('wiggle-animation'), 500);
+      }
+      return;
+    }
+    
+    const newStatus = currentStatus === 'Active' ? 'Inactive' : 'Active';
+    setWorkflowStatuses(prev => ({
+      ...prev,
+      [workflowId]: newStatus
+    }));
+  };
+
   const knolliWorkflows = [
     {
       id: 4,
@@ -1705,7 +1724,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
       steps: ["Extract Content", "Keyword Analysis", "SEO Score", "Generate Suggestions", "Apply Optimizations"],
       tools: ["OpenAI API", "SEMrush API"],
       agents: ["SEO Writer", "SEO Optimizer", "Content Reviewer"],
-      status: "Active",
+      status: "Error",
       executions: 234,
       successRate: 91,
       lastRun: "8 min ago",
@@ -1739,7 +1758,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
       steps: ["Analyze Conversation", "Extract Key Info", "Check Existing Docs", "Generate Updates", "Review & Publish"],
       tools: ["Notion", "OpenAI API"],
       agents: ["FAQ Generator", "Content Reviewer"],
-      status: "Draft",
+      status: "Inactive",
       executions: 0,
       successRate: 0,
       lastRun: "Never",
@@ -1776,7 +1795,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
       steps: ["Analyze Ticket", "Determine Priority", "Assign Specialist", "Notify Team", "Update Customer"],
       tools: ["Zendesk", "Slack", "Gmail"],
       agents: ["Ticket Classifier", "Priority Scorer"],
-      status: "Paused",
+      status: "Inactive",
       executions: 567,
       successRate: 87,
       lastRun: "3 hours ago",
@@ -1900,16 +1919,39 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {getCurrentWorkflows().map((workflow) => (
-              <Card key={workflow.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
+              <Card key={workflow.id} className="hover:shadow-md transition-shadow h-full flex flex-col" data-workflow-id={workflow.id}>
                 <CardHeader className="pb-4">
                   <div className="flex items-start gap-3">
                     <GitBranch className="w-8 h-8 text-purple-600" />
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{workflow.name}</h3>
-                      <div className="flex items-center gap-2 mb-2">
-                        <Badge variant={workflow.status === 'Active' ? 'default' : workflow.status === 'Paused' ? 'secondary' : 'outline'} className="text-xs">
-                          {workflow.status}
-                        </Badge>
+                      <div className="flex items-center justify-between mb-1">
+                        <h3 className="font-semibold text-gray-900 text-base truncate">{workflow.name}</h3>
+                        <div className="flex items-center gap-2 ml-2">
+                          <span className="text-xs text-gray-600">
+                            {(workflowStatuses[workflow.id] || workflow.status) === 'Active' ? 'Active' : 
+                             (workflowStatuses[workflow.id] || workflow.status) === 'Error' ? 'Error' : 'Inactive'}
+                          </span>
+                          <button
+                            onClick={() => handleWorkflowToggle(workflow.id, workflowStatuses[workflow.id] || workflow.status)}
+                            className={`workflow-toggle relative inline-flex items-center rounded-full w-11 h-6 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#008062] ${
+                              (workflowStatuses[workflow.id] || workflow.status) === 'Active'
+                                ? 'bg-[#008062]'
+                                : (workflowStatuses[workflow.id] || workflow.status) === 'Error'
+                                ? 'bg-red-500'
+                                : 'bg-gray-300'
+                            }`}
+                          >
+                            <span
+                              className={`inline-block w-4 h-4 rounded-full bg-white transition-transform ${
+                                (workflowStatuses[workflow.id] || workflow.status) === 'Active'
+                                  ? 'translate-x-6'
+                                  : 'translate-x-1'
+                              }`}
+                            />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
                         <span className="text-xs text-gray-600">Source: {workflow.source}</span>
                       </div>
                     </div>
