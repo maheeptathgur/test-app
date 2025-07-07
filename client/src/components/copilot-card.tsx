@@ -9,29 +9,12 @@ import { CopilotData } from "@/lib/types";
 import campaignManagerImage from "@assets/campaignmanager_1751580871679.png";
 import contentAssistantImage from "@assets/contentassistant_1751581306148.png";
 import newCopilotImage from "@assets/image_1751664430496.png";
+import workspaceImage from "@assets/image_1751923707146.png";
 
 // Helper functions for image tiles
 const getImageUrl = (type: string, name?: string): string => {
-  // Special cases for specific copilots
-  if (name === 'Campaign Manager') {
-    return campaignManagerImage;
-  }
-  if (name === 'Content Assistant') {
-    return newCopilotImage;
-  }
-  
-  switch (type.toLowerCase()) {
-    case 'general':
-      return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
-    case 'content':
-      return 'https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=400&h=200&fit=crop&auto=format';
-    case 'analyst':
-      return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop&auto=format';
-    case 'support':
-      return 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&auto=format';
-    default:
-      return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
-  }
+  // Use the new workspace image for all copilots
+  return workspaceImage;
 };
 
 const getTypeIcon = (type: string) => {
