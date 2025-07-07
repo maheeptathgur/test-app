@@ -1722,9 +1722,8 @@ export default function Dashboard() {
         
         {/* Main Application Container */}
         <div className="flex flex-1 min-h-0 bg-background">
-        {/* Sidebar - Hidden on all-workspaces */}
-        {activeSection !== 'all-workspaces' && (
-          <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
+        {/* Sidebar */}
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
         {/* Logo and Toggle */}
         <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'}`}>
           <div className={`flex items-center ${sidebarCollapsed ? 'flex-col gap-3' : 'justify-between'} mb-4`}>
@@ -1959,6 +1958,9 @@ export default function Dashboard() {
                 </div>
               )}
             </div>)
+          ) : activeSection === 'all-workspaces' ? (
+            // All Workspaces: No navigation menu items
+            <div></div>
           ) : (
             // Regular Admin Navigation Menu
             (<ul className="space-y-2">
@@ -2094,7 +2096,6 @@ export default function Dashboard() {
           </DropdownMenu>
         </div>
       </div>
-        )}
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
         <div className="w-64 border-r border-sidebar-border flex flex-col h-full" style={{ backgroundColor: '#f3f4f7' }}>
