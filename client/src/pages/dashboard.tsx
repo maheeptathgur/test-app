@@ -1952,13 +1952,13 @@ export default function Dashboard() {
           <div className="h-full overflow-y-auto">
             {/* Content Body - Conditional padding for tool config screens */}
             <div className={
-              // No padding for tool configuration screens since they handle their own padding
-              (configureTool || toolConfigActive) 
+              // No padding for configuration screens since they handle their own padding
+              (configureTool || toolConfigActive || configureWorkflow) 
                 ? "" 
                 : "px-8 pt-8 pb-24"
             }>
               {/* Title Section for specific pages */}
-              {(activeSection === 'copilots' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && (
+              {(activeSection === 'copilots' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
