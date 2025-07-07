@@ -14,6 +14,7 @@ import newCampaignManagerImage from "@assets/image_1751925400273.png";
 import customerSupportImage from "@assets/image_1751925913677.png";
 import socialAnalystImage from "@assets/image_1751926960404.png";
 import resumeAssistantImage from "@assets/image_1751926805510.png";
+import contentAssistantNewImage from "@assets/image_1751927977089.png";
 
 // Helper functions for image tiles
 const getImageUrl = (type: string, name?: string): string => {
@@ -29,6 +30,9 @@ const getImageUrl = (type: string, name?: string): string => {
   }
   if (name === 'Resume Assistant') {
     return resumeAssistantImage;
+  }
+  if (name === 'Content Assistant') {
+    return contentAssistantNewImage;
   }
   // Use the new workspace image for all other copilots
   return workspaceImage;
