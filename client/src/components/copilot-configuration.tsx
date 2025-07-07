@@ -1599,11 +1599,20 @@ function MyComponent() {
                   <div className="space-y-4 mb-8">
                     <h3 className="text-md font-medium text-gray-900">Agents</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col relative">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0 z-10"
+                          title="Remove from copilot"
+                          onClick={() => handleDeleteComponent('content-creator', 'Content Creator', 'agent')}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                         <CardHeader className="pb-4">
                           <div className="flex items-start gap-3">
                             <PenTool className="w-8 h-8 text-purple-600" />
-                            <div className="flex-1 min-w-0">
+                            <div className="flex-1 min-w-0 pr-8">
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Content Creator</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
@@ -1643,11 +1652,20 @@ function MyComponent() {
                         </CardContent>
                       </Card>
 
-                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col relative">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0 z-10"
+                          title="Remove from copilot"
+                          onClick={() => handleDeleteComponent('data-analyst', 'Data Analyst', 'agent')}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                         <CardHeader className="pb-4">
                           <div className="flex items-start gap-3">
                             <BarChart className="w-8 h-8 text-blue-600" />
-                            <div className="flex-1 min-w-0">
+                            <div className="flex-1 min-w-0 pr-8">
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Data Analyst</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
@@ -1804,11 +1822,20 @@ function MyComponent() {
                   <div className="space-y-4">
                     <h3 className="text-md font-medium text-gray-900">Workflows</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col relative">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0 z-10"
+                          title="Remove from copilot"
+                          onClick={() => handleDeleteComponent('content-pipeline', 'Content Pipeline', 'workflow')}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                         <CardHeader className="pb-4">
                           <div className="flex items-start gap-3">
                             <Zap className="w-8 h-8 text-amber-600" />
-                            <div className="flex-1 min-w-0">
+                            <div className="flex-1 min-w-0 pr-8">
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Content Pipeline</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
@@ -1845,11 +1872,20 @@ function MyComponent() {
                         </CardContent>
                       </Card>
 
-                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col relative">
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0 z-10"
+                          title="Remove from copilot"
+                          onClick={() => handleDeleteComponent('data-processing', 'Data Processing', 'workflow')}
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
                         <CardHeader className="pb-4">
                           <div className="flex items-start gap-3">
                             <GitBranch className="w-8 h-8 text-green-600" />
-                            <div className="flex-1 min-w-0">
+                            <div className="flex-1 min-w-0 pr-8">
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Data Processing</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
