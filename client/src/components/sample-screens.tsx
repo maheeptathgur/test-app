@@ -1122,15 +1122,17 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                                   {visibleItems.map((item, idx) => (
                                     <Tooltip key={`${item.type}-${idx}`} delayDuration={0}>
                                       <TooltipTrigger asChild>
-                                        <Badge 
-                                          className={`text-xs cursor-help ${
-                                            item.type === 'copilot' 
-                                              ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                                              : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
-                                          }`}
-                                        >
-                                          {item.name}
-                                        </Badge>
+                                        <div className="inline-block cursor-help">
+                                          <Badge 
+                                            className={`text-xs ${
+                                              item.type === 'copilot' 
+                                                ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                                                : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                                            }`}
+                                          >
+                                            {item.name}
+                                          </Badge>
+                                        </div>
                                       </TooltipTrigger>
                                       <TooltipContent side="top" className="bg-white text-gray-900 border border-gray-200 shadow-lg max-w-xs z-50">
                                         <p className="text-sm">
