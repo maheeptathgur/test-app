@@ -157,7 +157,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
   return (
     <div className="workflow-editor h-full flex flex-col" style={{ backgroundColor: '#f2f2f2' }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-8 pt-8 pb-6 bg-[#ffffff00]">
+      <div className="workflow-header flex items-center justify-between px-8 pt-8 pb-6 bg-[#ffffff00]">
         <div className="flex items-center gap-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{workflowName}</h1>
@@ -170,7 +170,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         </Button>
       </div>
       {/* Tab Navigation */}
-      <div className="flex border-b px-8 bg-[#ffffff00]">
+      <div className="workflow-tab-nav flex border-b px-8 bg-[#ffffff00]">
         {tabs.map((tab) => (
           <button
             key={tab.id}

@@ -44,7 +44,15 @@
   }
 }
 
-/* Custom padding for workflow editor inner divs only */
+/* Custom padding for workflow editor only */
+.workflow-editor .workflow-header {
+  padding: 0 !important; /* Remove all padding from header */
+}
+
+.workflow-editor .workflow-tab-nav {
+  padding: 0 !important; /* Remove all padding from tab navigation */
+}
+
 .workflow-editor .workflow-tab-content {
   padding-left: 1rem !important; /* px-4 instead of px-8 */
   padding-right: 1rem !important; /* px-4 instead of px-8 */
