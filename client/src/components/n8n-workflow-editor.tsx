@@ -126,7 +126,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
   return (
     <div className="n8n-workflow-editor h-full flex flex-col" style={{ backgroundColor: '#f2f2f2' }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-8 pt-8 pb-6">
+      <div className="n8n-header flex items-center justify-between px-8 pt-8 pb-6">
         <div className="flex items-center gap-4">
           <div>
             <div className="flex items-center gap-2">
