@@ -272,6 +272,8 @@ Changelog:
 - July 6, 2025. Updated tool cards in copilot configuration Components tab to match main Tools page design - standardized card layout using Card component with proper hover effects, added exact Gmail and Slack SVG logos, implemented toggle switches above Configure buttons, applied consistent typography and spacing, and unified visual appearance across all tool interfaces
 - July 6, 2025. Fixed tool configuration navigation from copilot configuration Components tab - added configureTool handling to getSectionContent function in dashboard.tsx so Configure buttons now properly navigate to ToolConfigScreen with correct Gmail template structure and proper margins/padding
 - July 6, 2025. Updated agent configuration tool cards to match universal design pattern - applied consistent Card component layout with toggle switches above Configure buttons, exact Gmail/Slack SVG logos, unified typography and spacing, and proper hover effects to complete visual consistency across all tool interfaces (main Tools page, copilot Components tab, and agent configuration screens)
+- July 7, 2025. Added hover tooltips with question mark icons to agent badges - implemented TooltipProvider wrapper, HelpCircle icons with informative tooltips explaining that green badges represent copilots and yellow badges represent workflows that use each agent, providing enhanced user experience and consistency with other configuration screens
+- July 7, 2025. Changed collapsible section header from "Usage Statistics" to "Used by" in agent cards for clearer labeling and better user understanding
 ```
 
 ## User Preferences
