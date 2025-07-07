@@ -614,6 +614,25 @@ export default function Dashboard() {
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
+  
+  // Branding colors state for current session
+  const [brandingColors, setBrandingColors] = useState({
+    primary: "#008062",
+    contentBg: "#ffffff", 
+    sidebarBg: "#e6eeef",
+    accent: "#00d2a0",
+    border: "#e5e7eb"
+  });
+
+  // Apply branding colors as CSS custom properties
+  useEffect(() => {
+    const root = document.documentElement;
+    root.style.setProperty('--brand-primary', brandingColors.primary);
+    root.style.setProperty('--brand-content-bg', brandingColors.contentBg);
+    root.style.setProperty('--brand-sidebar-bg', brandingColors.sidebarBg);
+    root.style.setProperty('--brand-accent', brandingColors.accent);
+    root.style.setProperty('--brand-border', brandingColors.border);
+  }, [brandingColors]);
 
   // Handle navigation events from copilot configuration
   useEffect(() => {
@@ -1451,7 +1470,10 @@ export default function Dashboard() {
         return {
           title: 'Settings',
           subtitle: 'Configure your workspace preferences and integrations',
-          content: <WorkspaceSettings />,
+          content: <WorkspaceSettings 
+            brandingColors={brandingColors} 
+            onBrandingColorsChange={setBrandingColors} 
+          />,
         };
       case 'user-view':
         return {
@@ -1739,7 +1761,10 @@ export default function Dashboard() {
         {/* Main Application Container */}
         <div className="flex flex-1 min-h-0 bg-background">
         {/* Sidebar */}
-        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
+        <div 
+          className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col transition-all duration-300`}
+          style={{ backgroundColor: 'var(--brand-sidebar-bg)' }}
+        >
         {/* Logo and Toggle */}
         <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'}`}>
           <div className={`flex items-center ${sidebarCollapsed ? 'flex-col gap-3' : 'justify-between'} mb-4`}>
@@ -2037,7 +2062,16 @@ export default function Dashboard() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               {sidebarCollapsed ? (
-                <div className="w-8 h-8 rounded-full overflow-hidden mx-auto border-2 border-[#008062] cursor-pointer hover:border-[#00d2a0] transition-colors" title="John Doe">
+                <div 
+                  className="w-8 h-8 rounded-full overflow-hidden mx-auto border-2 cursor-pointer transition-colors" 
+                  style={{ 
+                    borderColor: 'var(--brand-primary)',
+                    '--hover-border-color': 'var(--brand-accent)'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--brand-accent)'}
+                  onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--brand-primary)'}
+                  title="John Doe"
+                >
                   <img 
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&auto=format&face=center" 
                     alt="John Doe"
@@ -2047,7 +2081,13 @@ export default function Dashboard() {
               ) : (
                 <Button 
                   variant="ghost" 
-                  className="w-full p-3 h-auto bg-[#008062] hover:bg-[#00d2a0] text-white justify-start"
+                  className="w-full p-3 h-auto text-white justify-start"
+                  style={{ 
+                    backgroundColor: 'var(--brand-primary)',
+                    '--hover-bg-color': 'var(--brand-accent)'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--brand-accent)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--brand-primary)'}
                 >
                   <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                     <img 
@@ -2246,7 +2286,10 @@ export default function Dashboard() {
         </div>
       )}
       {/* Main Content */}
-      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: '#f2f2f2' }}>
+      <div 
+        className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} 
+        style={{ backgroundColor: 'var(--brand-content-bg)' }}
+      >
         {/* Form Interface for form-type copilots */}
         {chatCopilot && chatCopilot.type === 'form' ? (
           <div className="h-full flex">
