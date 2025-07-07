@@ -1843,12 +1843,23 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
           >
             n8n Workflows
           </button>
-          <button
-            disabled
-            className="whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm border-transparent text-gray-300 cursor-not-allowed"
-          >
-            Make.com
-          </button>
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger asChild>
+              <div className="inline-block">
+                <button
+                  disabled
+                  className="whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm border-transparent text-gray-300 cursor-not-allowed"
+                >
+                  Make.com
+                </button>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="top" className="bg-[#E0FFF8] text-gray-900 border border-gray-200 shadow-lg z-50">
+              <p className="text-sm">
+                Connect Make.com as a tool first to use workflows
+              </p>
+            </TooltipContent>
+          </Tooltip>
         </nav>
       </div>
 
