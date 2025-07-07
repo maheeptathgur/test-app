@@ -1719,113 +1719,109 @@ function MyComponent() {
                   <div className="space-y-4 mb-8">
                     <h3 className="text-md font-medium text-gray-900">Tools</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                      <Card className="p-4 hover:shadow-md transition-shadow relative">
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col relative">
                         <Button 
                           variant="ghost" 
                           size="sm" 
-                          className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0"
+                          className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0 z-10"
                           title="Remove from copilot"
                           onClick={() => handleDeleteComponent('gmail', 'Gmail', 'tool')}
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
-                        <div className="flex items-start gap-3 mb-3">
-                          <div className="w-8 h-8 rounded flex items-center justify-center">
-                            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-                              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
-                            </svg>
-                          </div>
-                          <div className="flex-1 pr-8">
-                            <h4 className="font-medium">Gmail</h4>
-                            <p className="text-sm text-gray-600 mt-1">Send emails, read messages, organize inbox, and manage labels</p>
-                            <div className="space-y-3 mt-3">
-                              {/* Toggle Switch */}
-                              <div className="flex items-center justify-start">
-                                <div className="flex items-center gap-2">
-                                  <button
-                                    className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer bg-[#008062]"
-                                    role="switch"
-                                    aria-checked={true}
-                                  >
-                                    <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6" />
-                                  </button>
-                                  <span className="text-xs font-medium text-[#008062]">Active</span>
-                                </div>
+                        <CardHeader className="pb-4">
+                          <div className="flex items-start gap-3">
+                            <div className="w-8 h-8 rounded flex items-center justify-center">
+                              <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                                <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.887.703-1.603 1.582-1.636L12 10.545l10.418-6.724A1.636 1.636 0 0 1 24 5.457z" fill="#EA4335"/>
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0 pr-8">
+                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Gmail</h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <button
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                >
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
+                                </button>
+                                <span className="text-xs text-gray-600">Active</span>
                               </div>
-                              
-                              {/* Configure Button */}
-                              <Button 
-                                size="sm" 
-                                variant="outline" 
-                                className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
-                                onClick={() => handleToolConfigure({ 
-                                  id: 'gmail', 
-                                  name: 'Gmail', 
-                                  description: 'Email management and communication',
-                                  status: 'Connected'
-                                })}
-                              >
-                                Configure
-                              </Button>
                             </div>
                           </div>
-                        </div>
+                        </CardHeader>
+                        <CardContent className="pt-0 flex-1 flex flex-col">
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Send emails, read messages, organize inbox, and manage labels</p>
+                          
+                          <div className="pt-2 mt-auto">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="w-full"
+                              onClick={() => handleToolConfigure({ 
+                                id: 'gmail', 
+                                name: 'Gmail', 
+                                description: 'Email management and communication',
+                                status: 'Connected'
+                              })}
+                            >
+                              Configure
+                            </Button>
+                          </div>
+                        </CardContent>
                       </Card>
 
-                      <Card className="p-4 hover:shadow-md transition-shadow relative">
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col relative">
                         <Button 
                           variant="ghost" 
                           size="sm" 
-                          className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0"
+                          className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0 z-10"
                           title="Remove from copilot"
                           onClick={() => handleDeleteComponent('slack', 'Slack', 'tool')}
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
-                        <div className="flex items-start gap-3 mb-3">
-                          <div className="w-8 h-8 rounded flex items-center justify-center">
-                            <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
-                              <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
-                              <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
-                              <path d="M18.956 8.834a2.528 2.528 0 0 1 2.521-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.523 2.521h-2.521V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/>
-                              <path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.521A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.523v-2.521h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/>
-                            </svg>
-                          </div>
-                          <div className="flex-1 pr-8">
-                            <h4 className="font-medium">Slack</h4>
-                            <p className="text-sm text-gray-600 mt-1">Send messages, create channels, and manage team notifications</p>
-                            <div className="space-y-3 mt-3">
-                              {/* Toggle Switch */}
-                              <div className="flex items-center justify-start">
-                                <div className="flex items-center gap-2">
-                                  <button
-                                    className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer bg-[#008062]"
-                                    role="switch"
-                                    aria-checked={true}
-                                  >
-                                    <span className="inline-block h-4 w-4 transform rounded-full bg-white transition-transform translate-x-6" />
-                                  </button>
-                                  <span className="text-xs font-medium text-[#008062]">Active</span>
-                                </div>
+                        <CardHeader className="pb-4">
+                          <div className="flex items-start gap-3">
+                            <div className="w-8 h-8 rounded flex items-center justify-center">
+                              <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
+                                <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z" fill="#E01E5A"/>
+                                <path d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z" fill="#36C5F0"/>
+                                <path d="M18.956 8.834a2.528 2.528 0 0 1 2.521-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.523 2.521h-2.521V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z" fill="#2EB67D"/>
+                                <path d="M15.165 18.956a2.528 2.528 0 0 1 2.523 2.521A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.523v-2.521h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#ECB22E"/>
+                              </svg>
+                            </div>
+                            <div className="flex-1 min-w-0 pr-8">
+                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Slack</h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <button
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                >
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
+                                </button>
+                                <span className="text-xs text-gray-600">Active</span>
                               </div>
-                              
-                              {/* Configure Button */}
-                              <Button 
-                                size="sm" 
-                                variant="outline" 
-                                className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
-                                onClick={() => handleToolConfigure({ 
-                                  id: 'slack', 
-                                  name: 'Slack', 
-                                  description: 'Team communication and collaboration',
-                                  status: 'Connected'
-                                })}
-                              >
-                                Configure
-                              </Button>
                             </div>
                           </div>
-                        </div>
+                        </CardHeader>
+                        <CardContent className="pt-0 flex-1 flex flex-col">
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Send messages, create channels, and manage team notifications</p>
+                          
+                          <div className="pt-2 mt-auto">
+                            <Button 
+                              variant="outline" 
+                              size="sm" 
+                              className="w-full"
+                              onClick={() => handleToolConfigure({ 
+                                id: 'slack', 
+                                name: 'Slack', 
+                                description: 'Team communication and collaboration',
+                                status: 'Connected'
+                              })}
+                            >
+                              Configure
+                            </Button>
+                          </div>
+                        </CardContent>
                       </Card>
                     </div>
                   </div>
