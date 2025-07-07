@@ -1959,7 +1959,7 @@ export default function Dashboard() {
             }>
               {/* Title Section for specific pages */}
               {(activeSection === 'copilots' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && !configureAgent && !testAgent && (
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
                     {activeSection === 'copilots' && (
