@@ -42,6 +42,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
   const [expandedStep, setExpandedStep] = useState<string | null>('step1');
   const [editingSteps, setEditingSteps] = useState<Record<string, any>>({});
   const [stepValues, setStepValues] = useState<Record<string, any>>({});
+  const [selectedTriggerType, setSelectedTriggerType] = useState<string>('On Message');
 
   // Helper functions for step editing
   const startEditingStep = (stepId: string, step: any) => {
@@ -422,7 +423,10 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                             <>
                               <div>
                                 <Label className="text-xs font-medium text-gray-700">Trigger Type</Label>
-                                <Select defaultValue={step.config.triggerType}>
+                                <Select 
+                                  defaultValue={step.config.triggerType}
+                                  onValueChange={setSelectedTriggerType}
+                                >
                                   <SelectTrigger className="mt-1">
                                     <SelectValue />
                                   </SelectTrigger>
@@ -435,31 +439,205 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                   </SelectContent>
                                 </Select>
                               </div>
-                              <div>
-                                <Label className="text-xs font-medium text-gray-700">Trigger Conditions</Label>
-                                <Input 
-                                  defaultValue={step.config.triggerConditions}
-                                  className="mt-1"
-                                  placeholder="e.g. &quot;If message contains 'pricing'&quot; or &quot;If user role = sales&quot;"
-                                />
-                                <p className="text-xs text-gray-500 mt-1">Define conditions for when this workflow should trigger</p>
-                              </div>
-                              <div>
-                                <Label className="text-xs font-medium text-gray-700">Run Frequency</Label>
-                                <Select defaultValue={step.config.runFrequency}>
-                                  <SelectTrigger className="mt-1">
-                                    <SelectValue />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    <SelectItem value="Immediate">Immediate</SelectItem>
-                                    <SelectItem value="Every 15 min">Every 15 min</SelectItem>
-                                    <SelectItem value="Hourly">Hourly</SelectItem>
-                                    <SelectItem value="Daily">Daily</SelectItem>
-                                    <SelectItem value="Weekly">Weekly</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                                <p className="text-xs text-gray-500 mt-1">For scheduled workflows (e.g. every 15 min, daily)</p>
-                              </div>
+
+                              {/* Manual Trigger - No additional config */}
+                              {selectedTriggerType === 'Manual' && (
+                                <div className="p-3 bg-blue-50 rounded-md">
+                                  <p className="text-xs text-blue-700">Manual triggers are initiated by users through chat or UI buttons. No additional configuration needed.</p>
+                                </div>
+                              )}
+
+                              {/* On Message Trigger */}
+                              {selectedTriggerType === 'On Message' && (
+                                <>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Message Condition</Label>
+                                    <Select defaultValue="text_contains">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="text_contains">Text contains/matches</SelectItem>
+                                        <SelectItem value="regex_match">Regex match (advanced)</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Search Text/Pattern</Label>
+                                    <Input 
+                                      defaultValue="pricing"
+                                      className="mt-1"
+                                      placeholder="e.g. pricing, schedule demo, help"
+                                    />
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Message Sender</Label>
+                                    <Select defaultValue="user">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="user">User</SelectItem>
+                                        <SelectItem value="admin">Admin</SelectItem>
+                                        <SelectItem value="system">System</SelectItem>
+                                        <SelectItem value="any">Any</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Specific Copilot (Optional)</Label>
+                                    <Select defaultValue="any">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="any">Any Copilot</SelectItem>
+                                        <SelectItem value="campaign-manager">Campaign Manager</SelectItem>
+                                        <SelectItem value="content-assistant">Content Assistant</SelectItem>
+                                        <SelectItem value="social-analyst">Social Analyst</SelectItem>
+                                        <SelectItem value="customer-support">Customer Support</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                </>
+                              )}
+
+                              {/* On Event Trigger */}
+                              {selectedTriggerType === 'On Event' && (
+                                <>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Event Source</Label>
+                                    <Select defaultValue="tool_event">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="tool_event">Tool Event</SelectItem>
+                                        <SelectItem value="user_action">User Action</SelectItem>
+                                        <SelectItem value="system_event">System Event</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Event Type</Label>
+                                    <Select defaultValue="new_row_airtable">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="new_row_airtable">New row in Airtable</SelectItem>
+                                        <SelectItem value="new_ticket_intercom">New ticket in Intercom</SelectItem>
+                                        <SelectItem value="new_comment_notion">New comment in Notion</SelectItem>
+                                        <SelectItem value="user_uploads_resume">User uploads resume</SelectItem>
+                                        <SelectItem value="user_completes_form">User completes form step</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Filter Conditions (Optional)</Label>
+                                    <Input 
+                                      className="mt-1"
+                                      placeholder="e.g. field contains X, status = active"
+                                    />
+                                  </div>
+                                </>
+                              )}
+
+                              {/* On Schedule Trigger */}
+                              {selectedTriggerType === 'On Schedule' && (
+                                <>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Frequency</Label>
+                                    <Select defaultValue="daily">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="every_x_minutes">Every X minutes</SelectItem>
+                                        <SelectItem value="every_x_hours">Every X hours</SelectItem>
+                                        <SelectItem value="daily">Daily at specific time</SelectItem>
+                                        <SelectItem value="weekly">Weekly (choose day + time)</SelectItem>
+                                        <SelectItem value="monthly">Monthly (Nth day)</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Schedule Details</Label>
+                                    <Input 
+                                      defaultValue="09:00"
+                                      className="mt-1"
+                                      placeholder="e.g. 09:00, Monday 14:30, 1st day"
+                                    />
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Timezone</Label>
+                                    <Select defaultValue="local">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="local">Local timezone</SelectItem>
+                                        <SelectItem value="utc">UTC</SelectItem>
+                                        <SelectItem value="est">EST</SelectItem>
+                                        <SelectItem value="pst">PST</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                </>
+                              )}
+
+                              {/* On External Call Trigger */}
+                              {selectedTriggerType === 'On External Call' && (
+                                <>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Webhook Endpoint</Label>
+                                    <div className="mt-1 p-2 bg-gray-50 rounded border text-xs font-mono">
+                                      https://knolli.app/webhook/wf-email-campaign-abc123
+                                    </div>
+                                    <p className="text-xs text-gray-500 mt-1">Auto-generated unique URL for this workflow</p>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Expected Payload Format</Label>
+                                    <Select defaultValue="json">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="json">JSON schema</SelectItem>
+                                        <SelectItem value="raw_text">Raw text</SelectItem>
+                                        <SelectItem value="form_data">Form data</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Authorization</Label>
+                                    <Select defaultValue="api_key">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="none">None</SelectItem>
+                                        <SelectItem value="api_key">API Key</SelectItem>
+                                        <SelectItem value="header">Custom Header</SelectItem>
+                                        <SelectItem value="jwt">JWT Token</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Response Behavior</Label>
+                                    <Select defaultValue="return_json">
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="return_json">Return JSON success</SelectItem>
+                                        <SelectItem value="return_with_delay">Return with delay (async)</SelectItem>
+                                        <SelectItem value="no_response">No response</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+                                </>
+                              )}
                             </>
                           ) : (
                             <div>
