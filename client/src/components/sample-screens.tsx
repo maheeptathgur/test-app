@@ -1144,10 +1144,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                         </div>
                       </div>
 
-                      <div className="text-sm text-gray-600 space-y-1">
-                        <p>Last changed: {agent.lastChanged}</p>
-                        <p>Used {agent.usageCount90Days} times in the last 90 days</p>
-                      </div>
+                      
                     </>
                   )}
                 </div>
