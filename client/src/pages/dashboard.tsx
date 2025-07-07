@@ -1047,8 +1047,19 @@ export default function Dashboard() {
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${copilot.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}`} />
-                              <span className="capitalize">{copilot.status}</span>
+                              <button
+                                onClick={() => handleArchiveCopilot(copilot)}
+                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                                  copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
+                                }`}
+                              >
+                                <span
+                                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                    copilot.status === 'active' ? 'translate-x-6' : 'translate-x-1'
+                                  }`}
+                                />
+                              </button>
+                              <span className="text-xs text-gray-600">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
                             </div>
                           </TableCell>
                           <TableCell className="max-w-xs truncate">
@@ -1299,8 +1310,19 @@ export default function Dashboard() {
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
-                              <div className={`w-2 h-2 rounded-full ${copilot.status === 'active' ? 'bg-green-500' : 'bg-gray-400'}`} />
-                              <span className="capitalize">{copilot.status}</span>
+                              <button
+                                onClick={() => handleArchiveCopilot(copilot)}
+                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                                  copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
+                                }`}
+                              >
+                                <span
+                                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                    copilot.status === 'active' ? 'translate-x-6' : 'translate-x-1'
+                                  }`}
+                                />
+                              </button>
+                              <span className="text-xs text-gray-600">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
                             </div>
                           </TableCell>
                           <TableCell className="max-w-xs truncate">
