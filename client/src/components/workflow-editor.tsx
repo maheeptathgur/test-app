@@ -873,13 +873,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
               ))}
             </div>
 
-            {/* Add connection arrows between steps */}
-            <div className="flex justify-center">
-              <Button variant="outline" className="gap-2 bg-gray-50">
-                <ArrowRight className="w-4 h-4" />
-                Add Conditional Branch
-              </Button>
-            </div>
+            
           </div>
         )}
 
