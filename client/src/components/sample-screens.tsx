@@ -1681,6 +1681,7 @@ function ToolsScreen({
 
 function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: string) => void } = {}) {
   const [collapsedUsage, setCollapsedUsage] = useState<Set<number>>(new Set([1, 2, 3, 4, 5, 6]));
+  const [activeTab, setActiveTab] = useState("knolli");
 
   const toggleUsageCollapsed = (workflowId: number) => {
     setCollapsedUsage(prev => {
@@ -1694,123 +1695,117 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
     });
   };
 
-  const workflowsByType = {
-    "Imported Workflows": [
-      {
-        id: 1,
-        name: "Lead Qualification Pipeline",
-        description: "Automatically qualifies and routes incoming leads through multiple channels",
-        source: "n8n",
-        trigger: "New form submission",
-        steps: ["Validate Data", "Score Lead", "Enrich Contact", "Route to Sales", "Send Welcome Email"],
-        tools: ["HubSpot", "Clearbit", "Gmail"],
-        agents: ["Lead Scorer"],
-        status: "Active",
-        executions: 1456,
-        successRate: 94,
-        lastRun: "2 min ago",
-        avgDuration: "45s",
-        usedBy: ["Marketing Copilot"],
-        schedule: "Real-time trigger"
-      },
-      {
-        id: 2,
-        name: "Content Publishing Automation",
-        description: "Schedules and publishes content across multiple social media platforms",
-        source: "Make.com",
-        trigger: "Content approval",
-        steps: ["Format Content", "Schedule Posts", "Cross-post", "Track Engagement", "Generate Report"],
-        tools: ["Buffer", "Twitter API", "LinkedIn API", "Google Analytics"],
-        agents: ["Content Formatter", "Engagement Tracker"],
-        status: "Active",
-        executions: 892,
-        successRate: 98,
-        lastRun: "15 min ago",
-        avgDuration: "2m 30s",
-        usedBy: ["Content Manager"],
-        schedule: "Daily at 9 AM"
-      },
-      {
-        id: 3,
-        name: "Customer Support Escalation",
-        description: "Automatically escalates high-priority tickets to appropriate team members",
-        source: "n8n",
-        trigger: "Ticket priority change",
-        steps: ["Analyze Ticket", "Determine Priority", "Assign Specialist", "Notify Team", "Update Customer"],
-        tools: ["Zendesk", "Slack", "Gmail"],
-        agents: ["Ticket Classifier", "Priority Scorer"],
-        status: "Paused",
-        executions: 567,
-        successRate: 87,
-        lastRun: "3 hours ago",
-        avgDuration: "1m 15s",
-        usedBy: ["Customer Support"],
-        schedule: "Real-time trigger"
-      }
-    ],
-    "Custom Workflows": [
-      {
-        id: 4,
-        name: "SEO Content Optimization",
-        description: "Automated SEO analysis and optimization of blog posts",
-        source: "Custom Chain",
-        trigger: "New draft published",
-        steps: ["Extract Content", "Keyword Analysis", "SEO Score", "Generate Suggestions", "Apply Optimizations"],
-        tools: ["OpenAI API", "SEMrush API"],
-        agents: ["SEO Writer", "SEO Optimizer", "Content Reviewer"],
-        status: "Active",
-        executions: 234,
-        successRate: 91,
-        lastRun: "8 min ago",
-        avgDuration: "3m 45s",
-        usedBy: ["Content Manager"],
-        schedule: "On-demand"
-      },
-      {
-        id: 5,
-        name: "Performance Data Collection",
-        description: "Gathers and consolidates performance metrics from multiple sources",
-        source: "Custom Chain",
-        trigger: "Daily schedule",
-        steps: ["Collect Analytics", "Process Data", "Generate Insights", "Create Dashboard", "Send Report"],
-        tools: ["Google Analytics", "Google Search Console", "Airtable"],
-        agents: ["Performance Analyst", "Report Generator"],
-        status: "Active",
-        executions: 67,
-        successRate: 96,
-        lastRun: "1 hour ago",
-        avgDuration: "5m 20s",
-        usedBy: ["Business Intelligence"],
-        schedule: "Daily at 6 AM"
-      },
-      {
-        id: 6,
-        name: "Knowledge Base Auto-Update",
-        description: "Automatically updates FAQ and knowledge base from support conversations",
-        source: "Custom Chain",
-        trigger: "Support conversation end",
-        steps: ["Analyze Conversation", "Extract Key Info", "Check Existing Docs", "Generate Updates", "Review & Publish"],
-        tools: ["Notion", "OpenAI API"],
-        agents: ["FAQ Generator", "Content Reviewer"],
-        status: "Draft",
-        executions: 0,
-        successRate: 0,
-        lastRun: "Never",
-        avgDuration: "N/A",
-        usedBy: [],
-        schedule: "Real-time trigger"
-      }
-    ]
+  const knolliWorkflows = [
+    {
+      id: 4,
+      name: "SEO Content Optimization",
+      description: "Automated SEO analysis and optimization of blog posts",
+      source: "Knolli",
+      trigger: "New draft published",
+      steps: ["Extract Content", "Keyword Analysis", "SEO Score", "Generate Suggestions", "Apply Optimizations"],
+      tools: ["OpenAI API", "SEMrush API"],
+      agents: ["SEO Writer", "SEO Optimizer", "Content Reviewer"],
+      status: "Active",
+      executions: 234,
+      successRate: 91,
+      lastRun: "8 min ago",
+      avgDuration: "3m 45s",
+      usedBy: ["Content Manager"],
+      schedule: "On-demand"
+    },
+    {
+      id: 5,
+      name: "Performance Data Collection",
+      description: "Gathers and consolidates performance metrics from multiple sources",
+      source: "Knolli",
+      trigger: "Daily schedule",
+      steps: ["Collect Analytics", "Process Data", "Generate Insights", "Create Dashboard", "Send Report"],
+      tools: ["Google Analytics", "Google Search Console", "Airtable"],
+      agents: ["Performance Analyst", "Report Generator"],
+      status: "Active",
+      executions: 67,
+      successRate: 96,
+      lastRun: "1 hour ago",
+      avgDuration: "5m 20s",
+      usedBy: ["Business Intelligence"],
+      schedule: "Daily at 6 AM"
+    },
+    {
+      id: 6,
+      name: "Knowledge Base Auto-Update",
+      description: "Automatically updates FAQ and knowledge base from support conversations",
+      source: "Knolli",
+      trigger: "Support conversation end",
+      steps: ["Analyze Conversation", "Extract Key Info", "Check Existing Docs", "Generate Updates", "Review & Publish"],
+      tools: ["Notion", "OpenAI API"],
+      agents: ["FAQ Generator", "Content Reviewer"],
+      status: "Draft",
+      executions: 0,
+      successRate: 0,
+      lastRun: "Never",
+      avgDuration: "N/A",
+      usedBy: [],
+      schedule: "Real-time trigger"
+    }
+  ];
+
+  const n8nWorkflows = [
+    {
+      id: 1,
+      name: "Lead Qualification Pipeline",
+      description: "Automatically qualifies and routes incoming leads through multiple channels",
+      source: "n8n",
+      trigger: "New form submission",
+      steps: ["Validate Data", "Score Lead", "Enrich Contact", "Route to Sales", "Send Welcome Email"],
+      tools: ["HubSpot", "Clearbit", "Gmail"],
+      agents: ["Lead Scorer"],
+      status: "Active",
+      executions: 1456,
+      successRate: 94,
+      lastRun: "2 min ago",
+      avgDuration: "45s",
+      usedBy: ["Marketing Copilot"],
+      schedule: "Real-time trigger"
+    },
+    {
+      id: 3,
+      name: "Customer Support Escalation",
+      description: "Automatically escalates high-priority tickets to appropriate team members",
+      source: "n8n",
+      trigger: "Ticket priority change",
+      steps: ["Analyze Ticket", "Determine Priority", "Assign Specialist", "Notify Team", "Update Customer"],
+      tools: ["Zendesk", "Slack", "Gmail"],
+      agents: ["Ticket Classifier", "Priority Scorer"],
+      status: "Paused",
+      executions: 567,
+      successRate: 87,
+      lastRun: "3 hours ago",
+      avgDuration: "1m 15s",
+      usedBy: ["Customer Support"],
+      schedule: "Real-time trigger"
+    }
+  ];
+
+  const getCurrentWorkflows = () => {
+    switch (activeTab) {
+      case "knolli":
+        return knolliWorkflows;
+      case "n8n":
+        return n8nWorkflows;
+      default:
+        return [];
+    }
   };
 
-  const totalWorkflows = Object.values(workflowsByType).flat().length;
-  const activeWorkflows = Object.values(workflowsByType).flat().filter(wf => wf.status === 'Active').length;
-  const totalExecutions = Object.values(workflowsByType).flat().reduce((sum, wf) => sum + wf.executions, 0);
+  const allWorkflows = [...knolliWorkflows, ...n8nWorkflows];
+  const totalWorkflows = allWorkflows.length;
+  const activeWorkflows = allWorkflows.filter(wf => wf.status === 'Active').length;
+  const totalExecutions = allWorkflows.reduce((sum, wf) => sum + wf.executions, 0);
   const avgSuccessRate = Math.round(
-    Object.values(workflowsByType).flat()
+    allWorkflows
       .filter(wf => wf.executions > 0)
       .reduce((sum, wf) => sum + wf.successRate, 0) / 
-    Object.values(workflowsByType).flat().filter(wf => wf.executions > 0).length
+    allWorkflows.filter(wf => wf.executions > 0).length
   );
 
   return (
@@ -1825,18 +1820,51 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
         </div>
       </div>
 
+      {/* Workflow Tabs */}
+      <div className="border-b border-gray-200">
+        <nav className="-mb-px flex space-x-8">
+          <button
+            onClick={() => setActiveTab("knolli")}
+            className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "knolli"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            }`}
+          >
+            Knolli Workflows
+          </button>
+          <button
+            onClick={() => setActiveTab("n8n")}
+            className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "n8n"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+            }`}
+          >
+            n8n Workflows
+          </button>
+          <button
+            disabled
+            className="whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm border-transparent text-gray-300 cursor-not-allowed"
+          >
+            Make.com
+          </button>
+        </nav>
+      </div>
+
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
-            Create Custom Workflow
-          </Button>
-          <Button variant="outline">
-            Import from n8n
-          </Button>
-          <Button variant="outline">
-            Import from Make.com
-          </Button>
+          {activeTab === "knolli" && (
+            <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+              Create Custom Workflow
+            </Button>
+          )}
+          {activeTab === "n8n" && (
+            <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+              Import from n8n
+            </Button>
+          )}
         </div>
         <div className="flex gap-2">
           <Button variant="outline" size="sm">
@@ -1850,16 +1878,17 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
         </div>
       </div>
 
-      {/* Workflows by Type */}
-      {Object.entries(workflowsByType).map(([type, workflows]) => (
-        <div key={type} className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-semibold">{type}</h2>
-            <Badge variant="secondary">{workflows.length} workflows</Badge>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {workflows.map((workflow) => (
+      {/* Current Tab Workflows */}
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold">
+            {activeTab === "knolli" ? "Knolli Workflows" : activeTab === "n8n" ? "n8n Workflows" : ""}
+          </h2>
+          <Badge variant="secondary">{getCurrentWorkflows().length} workflows</Badge>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {getCurrentWorkflows().map((workflow) => (
               <Card key={workflow.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
                 <CardHeader className="pb-4">
                   <div className="flex items-start gap-3">
@@ -1951,7 +1980,6 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
             ))}
           </div>
         </div>
-      ))}
     </div>
   );
 }
