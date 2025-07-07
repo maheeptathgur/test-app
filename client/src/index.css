@@ -303,7 +303,7 @@
     75% { transform: rotate(3deg); }
   }
 
-  .wiggle {
+  .wiggle-animation {
     animation: wiggle 0.3s ease-in-out;
   }
 
