@@ -1134,7 +1134,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                                           </Badge>
                                         </div>
                                       </TooltipTrigger>
-                                      <TooltipContent side="top" className="bg-white text-gray-900 border border-gray-200 shadow-lg max-w-xs z-50">
+                                      <TooltipContent side="top" className="bg-[#E0FFF8] text-gray-900 border border-gray-200 shadow-lg max-w-64 z-50">
                                         <p className="text-sm">
                                           <span className="font-medium">{item.name}</span>
                                           <br />

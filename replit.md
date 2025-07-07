@@ -276,6 +276,7 @@ Changelog:
 - July 7, 2025. Changed collapsible section header from "Usage Statistics" to "Used by" in agent cards for clearer labeling and better user understanding
 - July 7, 2025. Fixed tooltip display issues by removing duplicate TooltipProvider (avoiding conflicts with global provider in App.tsx), enhanced tooltip implementation with instant appearance (delayDuration={0}), proper button wrapper for better hover detection, and improved styling with white background and shadow
 - July 7, 2025. Implemented individual badge tooltips in agent cards - each copilot and workflow badge now shows detailed description when hovered (Campaign Manager: marketing campaigns, Content Assistant: written content, etc.), removed general help icon in favor of direct badge interaction, added cursor-help styling for better UX
+- July 7, 2025. Enhanced badge tooltips with proper styling - fixed React forwardRef warning by wrapping badges in div containers, added mint green background (#E0FFF8), set width limit (max-w-64) for consistent tooltip sizing and improved readability
 ```
 
 ## User Preferences
