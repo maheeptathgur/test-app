@@ -559,6 +559,7 @@ interface SampleScreenProps {
   onGmailConfigChange?: (isActive: boolean) => void;
   onToolConfigChange?: (isActive: boolean) => void;
   onToolConfig?: (toolName: string) => void;
+  onWorkflowEdit?: (workflowId: string) => void;
 }
 
 export function SampleScreen({ 
@@ -573,7 +574,8 @@ export function SampleScreen({
   onBrowseIntegrationsChange,
   onGmailConfigChange,
   onToolConfigChange,
-  onToolConfig
+  onToolConfig,
+  onWorkflowEdit
 }: SampleScreenProps) {
   const [localConfigureAgent, setLocalConfigureAgent] = useState<any>(null);
   const [editWorkflow, setEditWorkflow] = useState<string | undefined>(undefined);
@@ -733,7 +735,7 @@ export function SampleScreen({
               onToolConfig={onToolConfig}
             />;
           case 'workflows':
-            return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
+            return <WorkflowsScreen onWorkflowEdit={onWorkflowEdit || handleWorkflowEdit} />;
           case 'knowledge-base':
             return <KnowledgeBaseScreen />;
           case 'subscriptions' as any:
