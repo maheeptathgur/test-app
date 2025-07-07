@@ -1969,17 +1969,28 @@ export default function Dashboard() {
                     )}
                   </div>
                   {activeSection === 'copilots' && (
-                    <Button 
-                      variant="outline" 
-                      className="gap-2"
-                      onClick={() => {
-                        // TODO: Navigate to marketplace
-                        console.log('Navigate to marketplace');
-                      }}
-                    >
-                      <Grid className="w-4 h-4" />
-                      Marketplace
-                    </Button>
+                    <div className="flex gap-3">
+                      <Button 
+                        variant="default"
+                        className="gap-2"
+                        style={{ backgroundColor: '#008062' }}
+                        onClick={() => setShowCreationWizard(true)}
+                      >
+                        <Plus className="w-4 h-4" />
+                        Create Copilot
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        className="gap-2"
+                        onClick={() => {
+                          // TODO: Navigate to marketplace
+                          console.log('Navigate to marketplace');
+                        }}
+                      >
+                        <Grid className="w-4 h-4" />
+                        Marketplace
+                      </Button>
+                    </div>
                   )}
                 </div>
               )}
