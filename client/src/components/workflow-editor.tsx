@@ -25,7 +25,8 @@ import {
   ChevronUp,
   Copy,
   Eye,
-  AlertTriangle
+  AlertTriangle,
+  X
 } from 'lucide-react';
 
 interface WorkflowEditorProps {
@@ -163,20 +164,10 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
             <p className="text-sm text-gray-600">{workflowDescription}</p>
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <Badge variant={isEnabled ? "default" : "secondary"} className="gap-1">
-            {isEnabled ? <CheckCircle className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
-            {isEnabled ? 'Enabled' : 'Disabled'}
-          </Badge>
-          <Button variant="outline" className="gap-2">
-            <Eye className="w-4 h-4" />
-            Test Run
-          </Button>
-          <Button className="gap-2 bg-[#008062] hover:bg-[#00d2a0] text-white">
-            <Save className="w-4 h-4" />
-            Save Changes
-          </Button>
-        </div>
+        <Button variant="ghost" onClick={onBack} className="gap-2">
+          <X className="w-4 h-4" />
+          Close
+        </Button>
       </div>
       {/* Tab Navigation */}
       <div className="flex border-b px-6 bg-[#ffffff00]">
