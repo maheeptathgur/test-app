@@ -1332,11 +1332,11 @@ export default function Dashboard() {
                     <span>12 members</span>
                     <span>Created Dec 15</span>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="space-y-3">
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="flex-1"
+                      className="w-full"
                       onClick={() => {
                         handleSectionChange('workspace-settings');
                       }}
@@ -1347,7 +1347,7 @@ export default function Dashboard() {
                     <Button 
                       variant="outline" 
                       size="sm" 
-                      className="flex-1"
+                      className="w-full"
                       onClick={() => {
                         handleSectionChange('copilots');
                       }}
