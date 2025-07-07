@@ -13,20 +13,30 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { SampleScreen } from "@/components/sample-screens";
 
-export function WorkspaceSettings() {
+interface WorkspaceSettingsProps {
+  brandingColors: {
+    primary: string;
+    contentBg: string;
+    sidebarBg: string;
+    accent: string;
+    border: string;
+  };
+  onBrandingColorsChange: (colors: {
+    primary: string;
+    contentBg: string;
+    sidebarBg: string;
+    accent: string;
+    border: string;
+  }) => void;
+}
+
+export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: WorkspaceSettingsProps) {
   const [activeTab, setActiveTab] = useState("general");
-  const [workspaceName, setWorkspaceName] = useState("GTM Team");
+  const [workspaceName, setWorkspaceName] = useState("Marketing");
   const [workspaceDescription, setWorkspaceDescription] = useState("A comprehensive workspace for managing AI copilots and workflows");
   const [allowPublicAccess, setAllowPublicAccess] = useState(false);
   const [enableNotifications, setEnableNotifications] = useState(true);
   const [dataRetention, setDataRetention] = useState("90");
-  
-  // Branding colors - defaults to current brand colors
-  const [primaryColor, setPrimaryColor] = useState("#008062");
-  const [contentBgColor, setContentBgColor] = useState("#ffffff");
-  const [sidebarBgColor, setSidebarBgColor] = useState("#e6eeef");
-  const [accentColor, setAccentColor] = useState("#00d2a0");
-  const [borderColor, setBorderColor] = useState("#e5e7eb");
 
   // Helper function to determine if text should be light or dark based on background
   const getTextColor = (bgColor: string) => {
@@ -54,11 +64,21 @@ export function WorkspaceSettings() {
 
   // Reset to default brand colors
   const resetToDefaults = () => {
-    setPrimaryColor("#008062");
-    setContentBgColor("#ffffff");
-    setSidebarBgColor("#e6eeef");
-    setAccentColor("#00d2a0");
-    setBorderColor("#e5e7eb");
+    onBrandingColorsChange({
+      primary: "#008062",
+      contentBg: "#ffffff", 
+      sidebarBg: "#e6eeef",
+      accent: "#00d2a0",
+      border: "#e5e7eb"
+    });
+  };
+
+  // Handle individual color changes
+  const handleColorChange = (colorKey: string, value: string) => {
+    onBrandingColorsChange({
+      ...brandingColors,
+      [colorKey]: value
+    });
   };
 
   return (
@@ -405,14 +425,14 @@ export function WorkspaceSettings() {
                     <Input
                       id="primary-color"
                       type="color"
-                      value={primaryColor}
-                      onChange={(e) => setPrimaryColor(e.target.value)}
+                      value={brandingColors.primary}
+                      onChange={(e) => handleColorChange('primary', e.target.value)}
                       className="w-full h-12 rounded-md border cursor-pointer"
                     />
                     <Input
                       type="text"
-                      value={primaryColor}
-                      onChange={(e) => setPrimaryColor(e.target.value)}
+                      value={brandingColors.primary}
+                      onChange={(e) => handleColorChange('primary', e.target.value)}
                       className="text-sm"
                       placeholder="#008062"
                     />
@@ -428,14 +448,14 @@ export function WorkspaceSettings() {
                     <Input
                       id="content-bg-color"
                       type="color"
-                      value={contentBgColor}
-                      onChange={(e) => setContentBgColor(e.target.value)}
+                      value={brandingColors.contentBg}
+                      onChange={(e) => handleColorChange('contentBg', e.target.value)}
                       className="w-full h-12 rounded-md border cursor-pointer"
                     />
                     <Input
                       type="text"
-                      value={contentBgColor}
-                      onChange={(e) => setContentBgColor(e.target.value)}
+                      value={brandingColors.contentBg}
+                      onChange={(e) => handleColorChange('contentBg', e.target.value)}
                       className="text-sm"
                       placeholder="#ffffff"
                     />
@@ -451,14 +471,14 @@ export function WorkspaceSettings() {
                     <Input
                       id="sidebar-bg-color"
                       type="color"
-                      value={sidebarBgColor}
-                      onChange={(e) => setSidebarBgColor(e.target.value)}
+                      value={brandingColors.sidebarBg}
+                      onChange={(e) => handleColorChange('sidebarBg', e.target.value)}
                       className="w-full h-12 rounded-md border cursor-pointer"
                     />
                     <Input
                       type="text"
-                      value={sidebarBgColor}
-                      onChange={(e) => setSidebarBgColor(e.target.value)}
+                      value={brandingColors.sidebarBg}
+                      onChange={(e) => handleColorChange('sidebarBg', e.target.value)}
                       className="text-sm"
                       placeholder="#e6eeef"
                     />
@@ -474,14 +494,14 @@ export function WorkspaceSettings() {
                     <Input
                       id="accent-color"
                       type="color"
-                      value={accentColor}
-                      onChange={(e) => setAccentColor(e.target.value)}
+                      value={brandingColors.accent}
+                      onChange={(e) => handleColorChange('accent', e.target.value)}
                       className="w-full h-12 rounded-md border cursor-pointer"
                     />
                     <Input
                       type="text"
-                      value={accentColor}
-                      onChange={(e) => setAccentColor(e.target.value)}
+                      value={brandingColors.accent}
+                      onChange={(e) => handleColorChange('accent', e.target.value)}
                       className="text-sm"
                       placeholder="#00d2a0"
                     />
@@ -497,14 +517,14 @@ export function WorkspaceSettings() {
                     <Input
                       id="border-color"
                       type="color"
-                      value={borderColor}
-                      onChange={(e) => setBorderColor(e.target.value)}
+                      value={brandingColors.border}
+                      onChange={(e) => handleColorChange('border', e.target.value)}
                       className="w-full h-12 rounded-md border cursor-pointer"
                     />
                     <Input
                       type="text"
-                      value={borderColor}
-                      onChange={(e) => setBorderColor(e.target.value)}
+                      value={brandingColors.border}
+                      onChange={(e) => handleColorChange('border', e.target.value)}
                       className="text-sm"
                       placeholder="#e5e7eb"
                     />
@@ -521,22 +541,22 @@ export function WorkspaceSettings() {
                     <div 
                       className="w-1/4 flex flex-col p-4 space-y-2"
                       style={{ 
-                        backgroundColor: sidebarBgColor,
-                        color: getTextColor(sidebarBgColor)
+                        backgroundColor: brandingColors.sidebarBg,
+                        color: getTextColor(brandingColors.sidebarBg)
                       }}
                     >
                       <div className="text-sm font-medium">Navigation</div>
                       <div className="space-y-1">
                         <div 
                           className="px-2 py-1 rounded text-xs flex items-center justify-between"
-                          style={{ backgroundColor: generateShade(sidebarBgColor, 15) }}
+                          style={{ backgroundColor: generateShade(brandingColors.sidebarBg, 15) }}
                         >
                           <span>Copilots</span>
                           <div 
                             className="w-4 h-3 rounded-full text-xs flex items-center justify-center"
                             style={{ 
-                              backgroundColor: accentColor,
-                              color: getTextColor(accentColor)
+                              backgroundColor: brandingColors.accent,
+                              color: getTextColor(brandingColors.accent)
                             }}
                           >
                             3
@@ -545,15 +565,15 @@ export function WorkspaceSettings() {
                         <div 
                           className="px-2 py-1 rounded text-xs"
                           style={{ 
-                            backgroundColor: primaryColor,
-                            color: getTextColor(primaryColor)
+                            backgroundColor: brandingColors.primary,
+                            color: getTextColor(brandingColors.primary)
                           }}
                         >
                           Active Item
                         </div>
                         <div 
                           className="px-2 py-1 rounded text-xs"
-                          style={{ backgroundColor: generateShade(sidebarBgColor, 15) }}
+                          style={{ backgroundColor: generateShade(brandingColors.sidebarBg, 15) }}
                         >
                           Settings
                         </div>
@@ -564,8 +584,8 @@ export function WorkspaceSettings() {
                     <div 
                       className="flex-1 p-4 space-y-3"
                       style={{ 
-                        backgroundColor: contentBgColor,
-                        color: getTextColor(contentBgColor)
+                        backgroundColor: brandingColors.contentBg,
+                        color: getTextColor(brandingColors.contentBg)
                       }}
                     >
                       <div className="flex items-center justify-between">
@@ -573,8 +593,8 @@ export function WorkspaceSettings() {
                         <button 
                           className="px-3 py-1 rounded text-sm font-medium"
                           style={{ 
-                            backgroundColor: primaryColor,
-                            color: getTextColor(primaryColor)
+                            backgroundColor: brandingColors.primary,
+                            color: getTextColor(brandingColors.primary)
                           }}
                         >
                           Primary Button
@@ -583,8 +603,8 @@ export function WorkspaceSettings() {
                       <div 
                         className="p-3 rounded border"
                         style={{ 
-                          backgroundColor: generateShade(contentBgColor, 5),
-                          borderColor: borderColor
+                          backgroundColor: generateShade(brandingColors.contentBg, 5),
+                          borderColor: brandingColors.border
                         }}
                       >
                         <div className="flex items-center justify-between mb-2">
@@ -592,8 +612,8 @@ export function WorkspaceSettings() {
                           <div 
                             className="px-2 py-1 rounded text-xs font-medium"
                             style={{ 
-                              backgroundColor: accentColor,
-                              color: getTextColor(accentColor)
+                              backgroundColor: brandingColors.accent,
+                              color: getTextColor(brandingColors.accent)
                             }}
                           >
                             Badge
@@ -602,18 +622,18 @@ export function WorkspaceSettings() {
                         <div className="text-xs opacity-75 mb-2">Content with custom border color</div>
                         <div 
                           className="h-px mb-2"
-                          style={{ backgroundColor: borderColor }}
+                          style={{ backgroundColor: brandingColors.border }}
                         ></div>
                         <div className="flex gap-2">
                           <div 
                             className="px-2 py-1 rounded text-xs"
-                            style={{ backgroundColor: generateShade(accentColor, 85) }}
+                            style={{ backgroundColor: generateShade(brandingColors.accent, 85) }}
                           >
                             Accent 85%
                           </div>
                           <div 
                             className="px-2 py-1 rounded text-xs"
-                            style={{ backgroundColor: generateShade(primaryColor, 80) }}
+                            style={{ backgroundColor: generateShade(brandingColors.primary, 80) }}
                           >
                             Primary 80%
                           </div>

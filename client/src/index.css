@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Brand color CSS custom properties */
+:root {
+  --brand-primary: #008062;
+  --brand-content-bg: #ffffff;
+  --brand-sidebar-bg: #e6eeef;
+  --brand-accent: #00d2a0;
+  --brand-border: #e5e7eb;
+}
+
+/* Brand-aware component styles */
+.brand-primary-btn {
+  background-color: var(--brand-primary) !important;
+  color: white !important;
+}
+
+.brand-primary-btn:hover {
+  background-color: var(--brand-accent) !important;
+}
+
+.brand-border {
+  border-color: var(--brand-border) !important;
+}
+
+.brand-accent-bg {
+  background-color: var(--brand-accent) !important;
+}
+
+.brand-content-bg {
+  background-color: var(--brand-content-bg) !important;
+}
+
 /* ContentEditable placeholder styling */
 [data-placeholder]:empty:before {
   content: attr(data-placeholder);
