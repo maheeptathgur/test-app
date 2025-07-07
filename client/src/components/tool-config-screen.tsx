@@ -65,7 +65,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
 
   return (
     <>
-      <div className="h-full overflow-y-auto px-6 pt-4 pb-4">
+      <div className="h-full overflow-y-auto px-3 pt-2 pb-2">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">

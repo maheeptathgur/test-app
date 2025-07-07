@@ -44,9 +44,9 @@
   }
 }
 
-/* Custom dashboard content padding */
+/* Custom dashboard content padding - minimal spacing */
 .dashboard-content {
-  padding: 1rem 1.5rem 1rem 1.5rem; /* Consistent with site: 16px top/bottom, 24px horizontal */
+  padding: 0.5rem 0.75rem 0.5rem 0.75rem; /* Ultra minimal: 8px top/bottom, 12px horizontal */
 }
 
 :root {
