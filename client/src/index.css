@@ -44,7 +44,11 @@
   }
 }
 
-
+/* Custom padding for workflow editor inner divs only */
+.workflow-editor .workflow-tab-content {
+  padding-left: 1rem !important; /* px-4 instead of px-8 */
+  padding-right: 1rem !important; /* px-4 instead of px-8 */
+}
 
 :root {
   /* Brand Color Palette */
