@@ -278,6 +278,7 @@ Changelog:
 - July 7, 2025. Implemented individual badge tooltips in agent cards - each copilot and workflow badge now shows detailed description when hovered (Campaign Manager: marketing campaigns, Content Assistant: written content, etc.), removed general help icon in favor of direct badge interaction, added cursor-help styling for better UX
 - July 7, 2025. Enhanced badge tooltips with proper styling - fixed React forwardRef warning by wrapping badges in div containers, added mint green background (#E0FFF8), set width limit (max-w-64) for consistent tooltip sizing and improved readability
 - July 7, 2025. Updated copilot configuration agent and workflow cards to match agents screen format - replaced simple div cards with Card/CardHeader/CardContent structure, added proper icon sizing (w-8 h-8), included toggle switches, "Used by" badge sections, full-width Configure buttons, and consistent typography/spacing for unified design across all card interfaces
+- July 7, 2025. Added delete functionality to tool cards in copilot configuration Components tab - implemented small red delete buttons positioned in top-right corner of each tool card with "Remove from copilot" tooltip, added proper spacing (pr-8) to content area to prevent overlap with delete button
 ```
 
 ## User Preferences
