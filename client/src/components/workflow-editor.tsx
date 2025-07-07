@@ -40,6 +40,60 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
   const [workflowDescription, setWorkflowDescription] = useState('Automated email campaign workflow with personalization and analytics tracking');
   const [isEnabled, setIsEnabled] = useState(true);
   const [expandedStep, setExpandedStep] = useState<string | null>('step1');
+  const [editingSteps, setEditingSteps] = useState<Record<string, any>>({});
+  const [stepValues, setStepValues] = useState<Record<string, any>>({});
+
+  // Helper functions for step editing
+  const startEditingStep = (stepId: string, step: any) => {
+    setEditingSteps(prev => ({ ...prev, [stepId]: true }));
+    setStepValues(prev => ({ 
+      ...prev, 
+      [stepId]: {
+        name: step.name,
+        description: step.description,
+        config: JSON.stringify(step.config, null, 2)
+      }
+    }));
+  };
+
+  const saveStepEdit = (stepId: string) => {
+    console.log('Saving step:', stepId, stepValues[stepId]);
+    setEditingSteps(prev => ({ ...prev, [stepId]: false }));
+  };
+
+  const cancelStepEdit = (stepId: string) => {
+    setEditingSteps(prev => ({ ...prev, [stepId]: false }));
+    setStepValues(prev => {
+      const newValues = { ...prev };
+      delete newValues[stepId];
+      return newValues;
+    });
+  };
+
+  const updateStepValue = (stepId: string, field: string, value: string) => {
+    setStepValues(prev => ({
+      ...prev,
+      [stepId]: {
+        ...prev[stepId],
+        [field]: value
+      }
+    }));
+  };
+
+  const deleteStep = (stepId: string) => {
+    console.log('Deleting step:', stepId);
+    // In a real implementation, this would update the workflow data
+  };
+
+  const duplicateStep = (stepId: string) => {
+    console.log('Duplicating step:', stepId);
+    // In a real implementation, this would create a copy of the step
+  };
+
+  const testStep = (stepId: string) => {
+    console.log('Testing step:', stepId);
+    // In a real implementation, this would run a test for the specific step
+  };
 
   // Sample workflow data
   const workflowData = {
@@ -225,15 +279,22 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                         <Badge variant="outline" className="text-xs">
                           {step.executionTime}
                         </Badge>
+                        {!editingSteps[step.id] && (
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => startEditingStep(step.id, step)}
+                            title="Edit Step"
+                          >
+                            <Settings className="w-4 h-4" />
+                          </Button>
+                        )}
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => setExpandedStep(expandedStep === step.id ? null : step.id)}
                         >
                           {expandedStep === step.id ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                        </Button>
-                        <Button variant="ghost" size="sm">
-                          <MoreVertical className="w-4 h-4" />
                         </Button>
                       </div>
                     </div>
@@ -242,42 +303,111 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                   {expandedStep === step.id && (
                     <CardContent className="pt-0">
                       <Separator className="mb-4" />
+                      
+                      {editingSteps[step.id] && (
+                        <div className="flex items-center justify-between mb-4 p-3 bg-blue-50 rounded-lg">
+                          <div className="flex items-center gap-2">
+                            <Settings className="w-4 h-4 text-blue-600" />
+                            <span className="text-sm font-medium text-blue-900">Editing Step</span>
+                          </div>
+                          <div className="flex gap-2">
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => saveStepEdit(step.id)}
+                              className="bg-green-50 text-green-700 border-green-200 hover:bg-green-100"
+                            >
+                              <CheckCircle className="w-3 h-3 mr-1" />
+                              Save
+                            </Button>
+                            <Button 
+                              variant="outline" 
+                              size="sm"
+                              onClick={() => cancelStepEdit(step.id)}
+                              className="bg-red-50 text-red-700 border-red-200 hover:bg-red-100"
+                            >
+                              <X className="w-3 h-3 mr-1" />
+                              Cancel
+                            </Button>
+                          </div>
+                        </div>
+                      )}
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-3">
                           <div>
                             <Label className="text-xs font-medium text-gray-700">Step Name</Label>
-                            <Input defaultValue={step.name} className="mt-1" />
+                            <Input 
+                              value={editingSteps[step.id] ? (stepValues[step.id]?.name || step.name) : step.name}
+                              onChange={(e) => updateStepValue(step.id, 'name', e.target.value)}
+                              className="mt-1" 
+                              disabled={!editingSteps[step.id]}
+                            />
                           </div>
                           <div>
                             <Label className="text-xs font-medium text-gray-700">Description</Label>
-                            <Textarea defaultValue={step.description} className="mt-1" rows={2} />
+                            <Textarea 
+                              value={editingSteps[step.id] ? (stepValues[step.id]?.description || step.description) : step.description}
+                              onChange={(e) => updateStepValue(step.id, 'description', e.target.value)}
+                              className="mt-1" 
+                              rows={2}
+                              disabled={!editingSteps[step.id]}
+                            />
                           </div>
                         </div>
                         <div className="space-y-3">
                           <div>
                             <Label className="text-xs font-medium text-gray-700">Configuration</Label>
-                            <div className="mt-1 p-3 bg-gray-50 rounded-md">
-                              <code className="text-xs text-gray-700">
-                                {JSON.stringify(step.config, null, 2)}
-                              </code>
-                            </div>
+                            {editingSteps[step.id] ? (
+                              <Textarea 
+                                value={stepValues[step.id]?.config || JSON.stringify(step.config, null, 2)}
+                                onChange={(e) => updateStepValue(step.id, 'config', e.target.value)}
+                                className="mt-1 font-mono text-xs" 
+                                rows={8}
+                                placeholder="Enter JSON configuration..."
+                              />
+                            ) : (
+                              <div className="mt-1 p-3 bg-gray-50 rounded-md">
+                                <code className="text-xs text-gray-700">
+                                  {JSON.stringify(step.config, null, 2)}
+                                </code>
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2 mt-4 pt-4 border-t">
-                        <Button variant="outline" size="sm" className="gap-1">
-                          <Copy className="w-3 h-3" />
-                          Duplicate
-                        </Button>
-                        <Button variant="outline" size="sm" className="gap-1">
-                          <Play className="w-3 h-3" />
-                          Test Step
-                        </Button>
-                        <Button variant="outline" size="sm" className="gap-1 text-red-600 hover:text-red-700">
-                          <Trash2 className="w-3 h-3" />
-                          Delete
-                        </Button>
-                      </div>
+                      
+                      {!editingSteps[step.id] && (
+                        <div className="flex items-center gap-2 mt-4 pt-4 border-t">
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="gap-1"
+                            onClick={() => duplicateStep(step.id)}
+                          >
+                            <Copy className="w-3 h-3" />
+                            Duplicate
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="gap-1"
+                            onClick={() => testStep(step.id)}
+                          >
+                            <Play className="w-3 h-3" />
+                            Test Step
+                          </Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="gap-1 text-red-600 hover:text-red-700"
+                            onClick={() => deleteStep(step.id)}
+                          >
+                            <Trash2 className="w-3 h-3" />
+                            Delete
+                          </Button>
+                        </div>
+                      )}
                     </CardContent>
                   )}
                 </Card>
