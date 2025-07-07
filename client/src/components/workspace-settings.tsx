@@ -25,6 +25,8 @@ export function WorkspaceSettings() {
   const [primaryColor, setPrimaryColor] = useState("#008062");
   const [contentBgColor, setContentBgColor] = useState("#ffffff");
   const [sidebarBgColor, setSidebarBgColor] = useState("#e6eeef");
+  const [accentColor, setAccentColor] = useState("#00d2a0");
+  const [borderColor, setBorderColor] = useState("#e5e7eb");
 
   // Helper function to determine if text should be light or dark based on background
   const getTextColor = (bgColor: string) => {
@@ -55,6 +57,8 @@ export function WorkspaceSettings() {
     setPrimaryColor("#008062");
     setContentBgColor("#ffffff");
     setSidebarBgColor("#e6eeef");
+    setAccentColor("#00d2a0");
+    setBorderColor("#e5e7eb");
   };
 
   return (
@@ -391,7 +395,7 @@ export function WorkspaceSettings() {
             </CardHeader>
             <CardContent className="space-y-6">
               {/* Color Picker Section */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                 <div className="space-y-3">
                   <Label htmlFor="primary-color">Primary Color</Label>
                   <p className="text-sm text-muted-foreground mb-2">
@@ -460,6 +464,52 @@ export function WorkspaceSettings() {
                     />
                   </div>
                 </div>
+
+                <div className="space-y-3">
+                  <Label htmlFor="accent-color">Accent Color</Label>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Used for highlights, badges, and notifications
+                  </p>
+                  <div className="space-y-2">
+                    <Input
+                      id="accent-color"
+                      type="color"
+                      value={accentColor}
+                      onChange={(e) => setAccentColor(e.target.value)}
+                      className="w-full h-12 rounded-md border cursor-pointer"
+                    />
+                    <Input
+                      type="text"
+                      value={accentColor}
+                      onChange={(e) => setAccentColor(e.target.value)}
+                      className="text-sm"
+                      placeholder="#00d2a0"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <Label htmlFor="border-color">Border Color</Label>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Used for card borders and dividers
+                  </p>
+                  <div className="space-y-2">
+                    <Input
+                      id="border-color"
+                      type="color"
+                      value={borderColor}
+                      onChange={(e) => setBorderColor(e.target.value)}
+                      className="w-full h-12 rounded-md border cursor-pointer"
+                    />
+                    <Input
+                      type="text"
+                      value={borderColor}
+                      onChange={(e) => setBorderColor(e.target.value)}
+                      className="text-sm"
+                      placeholder="#e5e7eb"
+                    />
+                  </div>
+                </div>
               </div>
 
               {/* Color Preview Section */}
@@ -478,10 +528,19 @@ export function WorkspaceSettings() {
                       <div className="text-sm font-medium">Navigation</div>
                       <div className="space-y-1">
                         <div 
-                          className="px-2 py-1 rounded text-xs"
+                          className="px-2 py-1 rounded text-xs flex items-center justify-between"
                           style={{ backgroundColor: generateShade(sidebarBgColor, 15) }}
                         >
-                          Copilots
+                          <span>Copilots</span>
+                          <div 
+                            className="w-4 h-3 rounded-full text-xs flex items-center justify-center"
+                            style={{ 
+                              backgroundColor: accentColor,
+                              color: getTextColor(accentColor)
+                            }}
+                          >
+                            3
+                          </div>
                         </div>
                         <div 
                           className="px-2 py-1 rounded text-xs"
@@ -525,17 +584,40 @@ export function WorkspaceSettings() {
                         className="p-3 rounded border"
                         style={{ 
                           backgroundColor: generateShade(contentBgColor, 5),
-                          borderColor: generateShade(contentBgColor, 20)
+                          borderColor: borderColor
                         }}
                       >
-                        <div className="text-sm font-medium mb-1">Sample Card</div>
-                        <div className="text-xs opacity-75">Content with background shading</div>
-                      </div>
-                      <div 
-                        className="p-2 rounded text-xs"
-                        style={{ backgroundColor: generateShade(primaryColor, 80) }}
-                      >
-                        Primary color with 80% shading
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="text-sm font-medium">Sample Card</div>
+                          <div 
+                            className="px-2 py-1 rounded text-xs font-medium"
+                            style={{ 
+                              backgroundColor: accentColor,
+                              color: getTextColor(accentColor)
+                            }}
+                          >
+                            Badge
+                          </div>
+                        </div>
+                        <div className="text-xs opacity-75 mb-2">Content with custom border color</div>
+                        <div 
+                          className="h-px mb-2"
+                          style={{ backgroundColor: borderColor }}
+                        ></div>
+                        <div className="flex gap-2">
+                          <div 
+                            className="px-2 py-1 rounded text-xs"
+                            style={{ backgroundColor: generateShade(accentColor, 85) }}
+                          >
+                            Accent 85%
+                          </div>
+                          <div 
+                            className="px-2 py-1 rounded text-xs"
+                            style={{ backgroundColor: generateShade(primaryColor, 80) }}
+                          >
+                            Primary 80%
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
