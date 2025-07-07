@@ -1953,12 +1953,12 @@ export default function Dashboard() {
             {/* Content Body - Conditional padding for tool config screens */}
             <div className={
               // No padding for configuration screens since they handle their own padding
-              (configureTool || toolConfigActive || configureWorkflow) 
+              (configureTool || toolConfigActive || configureWorkflow || configureAgent || testAgent) 
                 ? "" 
                 : "px-8 pt-8 pb-24"
             }>
               {/* Title Section for specific pages */}
-              {(activeSection === 'copilots' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
+              {(activeSection === 'copilots' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && !configureAgent && !testAgent && (
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
