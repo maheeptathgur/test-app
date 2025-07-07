@@ -1680,6 +1680,20 @@ function ToolsScreen({
 }
 
 function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: string) => void } = {}) {
+  const [collapsedUsage, setCollapsedUsage] = useState<Set<number>>(new Set([1, 2, 3, 4, 5, 6]));
+
+  const toggleUsageCollapsed = (workflowId: number) => {
+    setCollapsedUsage(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(workflowId)) {
+        newSet.delete(workflowId);
+      } else {
+        newSet.add(workflowId);
+      }
+      return newSet;
+    });
+  };
+
   const workflowsByType = {
     "Imported Workflows": [
       {
@@ -1868,44 +1882,65 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                     {/* Used by Section */}
                     <div className="space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-gray-700">Used by</span>
+                        <button
+                          onClick={() => toggleUsageCollapsed(workflow.id)}
+                          className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                        >
+                          <span>Used by</span>
+                          <ChevronDown 
+                            className={`w-4 h-4 transition-transform ${
+                              collapsedUsage.has(workflow.id) ? '-rotate-90' : ''
+                            }`} 
+                          />
+                        </button>
                       </div>
-                      <div>
-                        <div className="flex flex-wrap gap-1">
-                          {workflow.usedBy?.map((copilotName: string, idx: number) => (
-                            <Badge key={idx} className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">
-                              {copilotName}
-                            </Badge>
-                          )) || (
-                            <span className="text-xs text-gray-500">No copilots using this workflow</span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div>
-                        <p className="font-medium text-gray-700">{workflow.executions.toLocaleString()}</p>
-                        <p className="text-xs text-gray-500">Executions</p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-gray-700">{workflow.successRate}%</p>
-                        <p className="text-xs text-gray-500">Success rate</p>
-                      </div>
-                    </div>
-                    
-                    <div className="text-sm">
-                      <p className="font-medium text-gray-700">{workflow.steps.length} steps</p>
-                      <p className="text-xs text-gray-500">{workflow.trigger}</p>
-                    </div>
-                    
-                    <div className="text-sm text-gray-500 border-t pt-3">
-                      Last run: {workflow.lastRun} • Avg: {workflow.avgDuration}
+
+                      {!collapsedUsage.has(workflow.id) && (
+                        <>
+                          <div>
+                            <div className="flex flex-wrap gap-1">
+                              {workflow.usedBy?.map((copilotName: string, idx: number) => (
+                                <Tooltip key={idx} delayDuration={0}>
+                                  <TooltipTrigger asChild>
+                                    <div className="inline-block cursor-help">
+                                      <Badge className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">
+                                        {copilotName}
+                                      </Badge>
+                                    </div>
+                                  </TooltipTrigger>
+                                  <TooltipContent side="top" className="bg-[#E0FFF8] text-gray-900 border border-gray-200 shadow-lg max-w-64 z-50">
+                                    <p className="text-sm">
+                                      <span className="font-medium">{copilotName}</span>
+                                      <br />
+                                      <span className="text-gray-600">
+                                        {copilotName === 'Campaign Manager' ? 'Manages email and social media marketing campaigns' :
+                                         copilotName === 'Content Manager' ? 'Helps create and optimize written content' :
+                                         copilotName === 'Customer Support' ? 'Handles customer inquiries and support tickets' :
+                                         copilotName === 'Business Intelligence' ? 'Analyzes business data and performance metrics' :
+                                         copilotName === 'Marketing Copilot' ? 'Manages marketing campaigns and lead generation' :
+                                         'AI assistant copilot'
+                                        }
+                                      </span>
+                                    </p>
+                                  </TooltipContent>
+                                </Tooltip>
+                              )) || (
+                                <span className="text-xs text-gray-500">No copilots using this workflow</span>
+                              )}
+                            </div>
+                          </div>
+                        </>
+                      )}
                     </div>
                     
                     <div className="pt-2">
                       <div className="flex gap-2">
-                        <Button variant="outline" size="sm" className="w-full" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          className="w-full"
+                          onClick={() => onWorkflowEdit?.(workflow.id.toString())}
+                        >
                           Configure
                         </Button>
                       </div>
