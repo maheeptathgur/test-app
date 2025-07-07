@@ -1620,20 +1620,7 @@ function MyComponent() {
                           <p className="text-sm text-gray-600 mb-4 flex-grow">Creates and manages content across platforms with AI-powered writing tools</p>
                           
                           <div className="space-y-4 mt-auto">
-                            <div className="space-y-3">
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-gray-700">Used by</span>
-                              </div>
-                              <div>
-                                <div className="flex items-center gap-2">
-                                  <div className="flex flex-wrap gap-1">
-                                    <Badge className="text-xs bg-green-100 text-green-700 hover:bg-green-200">Campaign Manager</Badge>
-                                    <Badge className="text-xs bg-green-100 text-green-700 hover:bg-green-200">Content Assistant</Badge>
-                                    <Badge className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">Content Generation</Badge>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            
                             
                             <div className="pt-2">
                               <div className="flex gap-2">
@@ -1677,20 +1664,7 @@ function MyComponent() {
                           <p className="text-sm text-gray-600 mb-4 flex-grow">Analyzes data and generates insights for performance optimization</p>
                           
                           <div className="space-y-4 mt-auto">
-                            <div className="space-y-3">
-                              <div className="flex items-center justify-between">
-                                <span className="text-sm font-medium text-gray-700">Used by</span>
-                              </div>
-                              <div>
-                                <div className="flex items-center gap-2">
-                                  <div className="flex flex-wrap gap-1">
-                                    <Badge className="text-xs bg-green-100 text-green-700 hover:bg-green-200">Social Analyst</Badge>
-                                    <Badge className="text-xs bg-green-100 text-green-700 hover:bg-green-200">Campaign Manager</Badge>
-                                    <Badge className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">Performance Tracking</Badge>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            
                             
                             <div className="pt-2">
                               <div className="flex gap-2">
