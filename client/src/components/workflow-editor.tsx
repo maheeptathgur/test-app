@@ -327,9 +327,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                         <Badge variant="secondary" className={`text-xs ${getStepTypeColor(step.type)}`}>
                           {step.type}
                         </Badge>
-                        <Badge variant="outline" className="text-xs">
-                          {step.executionTime}
-                        </Badge>
+                        
                         {!editingSteps[step.id] && (
                           <Button
                             variant="ghost"
