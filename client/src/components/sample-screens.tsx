@@ -1095,7 +1095,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                       onClick={() => toggleStatsCollapsed(agent.id)}
                       className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
                     >
-                      <span>Usage Statistics</span>
+                      <span>Used by</span>
                       <ChevronDown 
                         className={`w-4 h-4 transition-transform ${
                           collapsedStats.has(agent.id) ? '-rotate-90' : ''
