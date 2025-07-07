@@ -11,12 +11,16 @@ import contentAssistantImage from "@assets/contentassistant_1751581306148.png";
 import newCopilotImage from "@assets/image_1751664430496.png";
 import workspaceImage from "@assets/image_1751923707146.png";
 import newCampaignManagerImage from "@assets/image_1751925400273.png";
+import customerSupportImage from "@assets/image_1751925504575.png";
 
 // Helper functions for image tiles
 const getImageUrl = (type: string, name?: string): string => {
-  // Use specific image for Campaign Manager
+  // Use specific images for certain copilots
   if (name === 'Campaign Manager') {
     return newCampaignManagerImage;
+  }
+  if (name === 'Customer Support') {
+    return customerSupportImage;
   }
   // Use the new workspace image for all other copilots
   return workspaceImage;
