@@ -54,8 +54,7 @@
 }
 
 .workflow-editor .workflow-tab-content {
-  padding-left: 1rem !important; /* px-4 instead of px-8 */
-  padding-right: 1rem !important; /* px-4 instead of px-8 */
+  padding: 0 !important; /* Remove all padding from tab content */
 }
 
 :root {
