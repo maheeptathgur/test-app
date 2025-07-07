@@ -158,10 +158,6 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
       {/* Header */}
       <div className="flex items-center justify-between p-6 bg-[#ffffff00]">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" onClick={onBack} className="gap-2">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Workflows
-          </Button>
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{workflowName}</h1>
             <p className="text-sm text-gray-600">{workflowDescription}</p>
