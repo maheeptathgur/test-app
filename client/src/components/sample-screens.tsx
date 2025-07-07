@@ -1551,126 +1551,147 @@ function ToolsScreen({
                 };
 
                 return (
-                  <Card key={tool.id} className="p-4 hover:shadow-md transition-shadow">
-                    <div className="flex items-start gap-3 mb-3">
-                      {getToolLogo(tool.name)}
-                      <div className="flex-1">
-                        <h4 className="font-medium">{tool.name}</h4>
-                        <p className="text-sm text-gray-600 mt-1">{tool.description}</p>
-                        <div className="space-y-3 mt-3">
-                          {/* Toggle Switch - moved above */}
-                          <div className="flex items-center justify-start">
-                            <div className="flex items-center gap-2">
-                              <button
-                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors cursor-pointer ${
-                                  (toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                    ? 'bg-[#008062]' 
-                                    : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                      ? 'bg-red-500'
-                                      : 'bg-gray-300'
-                                } ${wiggleStates[tool.id] ? 'animate-pulse' : ''}`}
-                                style={{
-                                  animation: wiggleStates[tool.id] ? 'wiggle 0.5s ease-in-out' : undefined
-                                }}
-                                role="switch"
-                                aria-checked={(toolStatuses[tool.id] || tool.status) === 'Connected'}
-                                onClick={() => toggleToolStatus(tool.id)}
-                              >
-                                <span 
-                                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                                    (toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                      ? 'translate-x-6' 
-                                      : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                        ? 'translate-x-1'
-                                        : 'translate-x-1'
-                                  }`}
-                                />
-                              </button>
-                              <span className={`text-xs font-medium ${
-                                (toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                  ? 'text-[#008062]' 
-                                  : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                    ? 'text-red-600'
-                                    : 'text-gray-500'
-                              }`}>
-                                {(toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                  ? 'Active' 
-                                  : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                    ? 'Error'
-                                    : 'Inactive'
-                                }
-                              </span>
-                            </div>
-                          </div>
-                          
-                          {/* Used by Section */}
-                          <div className="border-t border-gray-100 pt-3">
-                            <div className="flex items-center justify-between">
-                              <h4 className="text-sm font-medium text-gray-700">Used by</h4>
-                              <button 
-                                onClick={() => toggleUsageCollapsed(tool.id)}
-                                className="p-1 rounded hover:bg-gray-100 transition-colors"
-                              >
-                                <ChevronDown 
-                                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
-                                    collapsedUsage.has(tool.id) ? '-rotate-90' : ''
-                                  }`} 
-                                />
-                              </button>
-                            </div>
-
-                            {!collapsedUsage.has(tool.id) && (
-                              <div className="mt-2">
-                                <div className="flex flex-wrap gap-1">
-                                  {tool.usedBy?.map((copilotName: string, idx: number) => (
-                                    <Tooltip key={idx} delayDuration={0}>
-                                      <TooltipTrigger asChild>
-                                        <div className="inline-block cursor-help">
-                                          <Badge className="text-xs bg-blue-100 text-blue-700 hover:bg-blue-200">
-                                            {copilotName}
-                                          </Badge>
-                                        </div>
-                                      </TooltipTrigger>
-                                      <TooltipContent side="top" className="bg-[#E0FFF8] text-gray-900 border border-gray-200 shadow-lg max-w-64 z-50">
-                                        <p className="text-sm">
-                                          <span className="font-medium">{copilotName}</span>
-                                          <br />
-                                          <span className="text-gray-600">
-                                            {copilotName === 'Campaign Manager' ? 'Manages email and social media marketing campaigns' :
-                                             copilotName === 'Content Manager' ? 'Helps create and optimize written content' :
-                                             copilotName === 'Customer Support' ? 'Handles customer inquiries and support tickets' :
-                                             copilotName === 'Business Intelligence' ? 'Analyzes business data and performance metrics' :
-                                             copilotName === 'Social Analyst' ? 'Analyzes social media performance and trends' :
-                                             'AI assistant copilot'
-                                            }
-                                          </span>
-                                        </p>
-                                      </TooltipContent>
-                                    </Tooltip>
-                                  )) || (
-                                    <span className="text-xs text-gray-500">No copilots using this tool</span>
-                                  )}
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                          
-                          {/* Configure Button - moved below */}
-                          <Button 
-                            size="sm" 
-                            variant="outline" 
-                            className={`w-full ${
-                              (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                ? 'border-red-500 text-red-600 hover:!bg-red-500 hover:!text-white hover:!border-red-500'
-                                : 'text-gray-600 hover:!bg-[#00d1a0] hover:!text-white'
-                            }`}
-                            onClick={() => onToolConfigure?.(tool)}
-                          >
-                            {(toolStatuses[tool.id] || tool.status) === 'Connected But Errored' ? 'Reconfigure' : 'Configure'}
-                          </Button>
+                  <Card key={tool.id} className="hover:shadow-md transition-shadow h-full flex flex-col">
+                    <CardContent className="p-4 flex flex-col h-full">
+                      <div className="flex items-center gap-3 mb-3">
+                        {getToolLogo(tool.name)}
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-base font-medium text-gray-900 truncate">{tool.name}</h3>
+                          <p className="text-sm text-gray-600">{tool.description}</p>
                         </div>
                       </div>
-                    </div>
+                      
+                      <div className="flex-1 space-y-2 text-sm text-gray-600 mb-4">
+                        <div className="flex justify-between">
+                          <span>Status:</span>
+                          <span className={`font-medium ${
+                            (toolStatuses[tool.id] || tool.status) === 'Connected' 
+                              ? 'text-green-600' 
+                              : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                ? 'text-red-600'
+                                : 'text-gray-500'
+                          }`}>
+                            {(toolStatuses[tool.id] || tool.status) === 'Connected' 
+                              ? 'Connected' 
+                              : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                ? 'Errored'
+                                : 'Turned Off'
+                            }
+                          </span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Auth:</span>
+                          <span className="font-medium">{tool.authType}</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-auto space-y-3">
+                        {/* Toggle Switch */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <button
+                              className={`w-11 h-6 rounded-full relative transition-colors ${
+                                (toolStatuses[tool.id] || tool.status) === 'Connected' 
+                                  ? 'bg-[#008062]' 
+                                  : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                    ? 'bg-red-500'
+                                    : 'bg-gray-300'
+                              } ${wiggleStates[tool.id] ? 'animate-pulse' : ''}`}
+                              style={{
+                                animation: wiggleStates[tool.id] ? 'wiggle 0.5s ease-in-out' : undefined
+                              }}
+                              onClick={() => toggleToolStatus(tool.id)}
+                            >
+                              <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${
+                                (toolStatuses[tool.id] || tool.status) === 'Connected' 
+                                  ? 'right-0.5' 
+                                  : 'left-0.5'
+                              }`}></div>
+                            </button>
+                            <span className={`ml-2 text-sm font-medium ${
+                              (toolStatuses[tool.id] || tool.status) === 'Connected' 
+                                ? 'text-gray-900' 
+                                : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                  ? 'text-red-600'
+                                  : 'text-gray-500'
+                            }`}>
+                              {(toolStatuses[tool.id] || tool.status) === 'Connected' 
+                                ? 'Active' 
+                                : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                                  ? 'Error'
+                                  : 'Inactive'
+                              }
+                            </span>
+                          </div>
+                        </div>
+                        
+                        {/* Used by Section */}
+                        <div className="border-t border-gray-100 pt-3">
+                          <div className="flex items-center justify-between">
+                            <h4 className="text-sm font-medium text-gray-700">Used by</h4>
+                            <button 
+                              onClick={() => toggleUsageCollapsed(tool.id)}
+                              className="p-1 rounded hover:bg-gray-100 transition-colors"
+                            >
+                              <ChevronDown 
+                                className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                                  collapsedUsage.has(tool.id) ? '-rotate-90' : ''
+                                }`} 
+                              />
+                            </button>
+                          </div>
+
+                          {!collapsedUsage.has(tool.id) && (
+                            <div className="mt-2">
+                              <div className="flex flex-wrap gap-1">
+                                {tool.usedBy?.map((copilotName: string, idx: number) => (
+                                  <Tooltip key={idx} delayDuration={0}>
+                                    <TooltipTrigger asChild>
+                                      <div className="inline-block cursor-help">
+                                        <Badge className="text-xs bg-blue-100 text-blue-700 hover:bg-blue-200">
+                                          {copilotName}
+                                        </Badge>
+                                      </div>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="top" className="bg-[#E0FFF8] text-gray-900 border border-gray-200 shadow-lg max-w-64 z-50">
+                                      <p className="text-sm">
+                                        <span className="font-medium">{copilotName}</span>
+                                        <br />
+                                        <span className="text-gray-600">
+                                          {copilotName === 'Campaign Manager' ? 'Manages email and social media marketing campaigns' :
+                                           copilotName === 'Content Manager' ? 'Helps create and optimize written content' :
+                                           copilotName === 'Customer Support' ? 'Handles customer inquiries and support tickets' :
+                                           copilotName === 'Business Intelligence' ? 'Analyzes business data and performance metrics' :
+                                           copilotName === 'Social Analyst' ? 'Analyzes social media performance and trends' :
+                                           'AI assistant copilot'
+                                          }
+                                        </span>
+                                      </p>
+                                    </TooltipContent>
+                                  </Tooltip>
+                                )) || (
+                                  <span className="text-xs text-gray-500">No copilots using this tool</span>
+                                )}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Configure Button */}
+                        <Button 
+                          size="sm" 
+                          variant="outline" 
+                          className={`w-full ${
+                            (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
+                              ? 'border-red-500 text-red-600 hover:!bg-red-500 hover:!text-white hover:!border-red-500'
+                              : 'text-gray-600 hover:!bg-[#00d1a0] hover:!text-white'
+                          }`}
+                          onClick={() => onToolConfigure?.(tool)}
+                        >
+                          {(toolStatuses[tool.id] || tool.status) === 'Connected But Errored' ? 'Reconfigure' : 'Configure'}
+                        </Button>
+                      </div>
+                    </CardContent>
                   </Card>
                 );
               })}

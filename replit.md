@@ -285,6 +285,7 @@ Changelog:
 - July 7, 2025. Removed Type column from copilots table view - eliminated redundant Type column and corresponding data cells from both table header and table body rows to create cleaner, more focused table layout
 - July 7, 2025. Updated table status indicator to interactive toggle switch - replaced simple status dot with same toggle switch design used in card layout, includes clickable functionality to archive/activate copilots, brand green styling (#008062), smooth transitions, and consistent Active/Inactive labeling matching the card design
 - July 7, 2025. Added collapsible "Used by" section to tool cards - implemented expandable section showing which copilots use each tool with color-coded badges (blue for copilots), tooltips with copilot descriptions, chevron toggle functionality, border separation, and consistent styling matching the agents screen pattern for unified user experience across component management interfaces
+- July 7, 2025. Updated tool cards to match agent screen layout structure - converted to Card/CardContent format with proper header section (icon, title, description), status information display (Connected/Errored/Turned Off with auth type), toggle switch positioning matching agent cards, equal height cards with flex layout, and consistent typography and spacing for unified visual appearance across all component management interfaces
 ```
 
 ## User Preferences
