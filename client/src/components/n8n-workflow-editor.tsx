@@ -507,7 +507,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
       </div>
 
       {/* Save Bar */}
-      <div className="sticky bottom-0 border-t bg-white px-8 py-4 flex items-center justify-end gap-3" style={{ marginLeft: '0px' }}>
+      <div className="n8n-save-bar fixed bottom-0 right-0 border-t bg-white px-8 py-4 flex items-center justify-end gap-3 z-50">
         <Button variant="outline" onClick={onBack}>
           Cancel
         </Button>
