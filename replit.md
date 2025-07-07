@@ -283,6 +283,7 @@ Changelog:
 - July 7, 2025. Updated Gmail and Slack tool cards in Components tab to match universal card format - converted to Card/CardHeader/CardContent structure with proper flex layouts, aligned with agent and workflow card designs, moved toggle switches to header area, positioned delete buttons with z-10 layering, and created consistent visual hierarchy across all component types
 - July 7, 2025. Added delete functionality to all component cards - implemented delete buttons for agents (Content Creator, Data Analyst) and workflows (Content Pipeline, Data Processing) with consistent positioning, styling, and onClick handlers that call handleDeleteComponent with appropriate IDs, names, and component types for unified deletion experience across all component types
 - July 7, 2025. Removed Type column from copilots table view - eliminated redundant Type column and corresponding data cells from both table header and table body rows to create cleaner, more focused table layout
+- July 7, 2025. Updated table status indicator to interactive toggle switch - replaced simple status dot with same toggle switch design used in card layout, includes clickable functionality to archive/activate copilots, brand green styling (#008062), smooth transitions, and consistent Active/Inactive labeling matching the card design
 ```
 
 ## User Preferences
