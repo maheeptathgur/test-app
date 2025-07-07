@@ -1955,7 +1955,7 @@ export default function Dashboard() {
               // No padding for configuration screens since they handle their own padding
               (configureTool || toolConfigActive || configureWorkflow || configureAgent || testAgent) 
                 ? "" 
-                : "px-8 pt-8 pb-24"
+                : "dashboard-content"
             }>
               {/* Title Section for specific pages */}
               {(activeSection === 'copilots' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && !configureAgent && !testAgent && (

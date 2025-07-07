@@ -44,6 +44,11 @@
   }
 }
 
+/* Custom dashboard content padding */
+.dashboard-content {
+  padding: 1rem 2rem 1.5rem 2rem; /* Smaller padding: 16px horizontal, 16px top, 24px bottom */
+}
+
 :root {
   /* Brand Color Palette */
   --brand-primary: hsl(166, 100%, 25%); /* #008062 - Primary teal */
