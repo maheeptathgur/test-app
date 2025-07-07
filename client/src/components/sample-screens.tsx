@@ -1211,6 +1211,7 @@ function ToolsScreen({
   onToolConfig?: (toolName: string) => void;
 } = {}) {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [collapsedUsage, setCollapsedUsage] = useState<Set<number>>(new Set([1, 2, 3, 4, 5, 6, 7, 8]));
   
   const [toolStatuses, setToolStatuses] = useState<Record<number, string>>({
     1: "Connected",
@@ -1247,6 +1248,18 @@ function ToolsScreen({
         ...prev,
         [toolId]: newStatus
       };
+    });
+  };
+
+  const toggleUsageCollapsed = (toolId: number) => {
+    setCollapsedUsage(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(toolId)) {
+        newSet.delete(toolId);
+      } else {
+        newSet.add(toolId);
+      }
+      return newSet;
     });
   };
   
@@ -1588,6 +1601,58 @@ function ToolsScreen({
                                 }
                               </span>
                             </div>
+                          </div>
+                          
+                          {/* Used by Section */}
+                          <div className="border-t border-gray-100 pt-3">
+                            <div className="flex items-center justify-between">
+                              <h4 className="text-sm font-medium text-gray-700">Used by</h4>
+                              <button 
+                                onClick={() => toggleUsageCollapsed(tool.id)}
+                                className="p-1 rounded hover:bg-gray-100 transition-colors"
+                              >
+                                <ChevronDown 
+                                  className={`w-4 h-4 text-gray-500 transition-transform duration-200 ${
+                                    collapsedUsage.has(tool.id) ? '-rotate-90' : ''
+                                  }`} 
+                                />
+                              </button>
+                            </div>
+
+                            {!collapsedUsage.has(tool.id) && (
+                              <div className="mt-2">
+                                <div className="flex flex-wrap gap-1">
+                                  {tool.usedBy?.map((copilotName: string, idx: number) => (
+                                    <Tooltip key={idx} delayDuration={0}>
+                                      <TooltipTrigger asChild>
+                                        <div className="inline-block cursor-help">
+                                          <Badge className="text-xs bg-blue-100 text-blue-700 hover:bg-blue-200">
+                                            {copilotName}
+                                          </Badge>
+                                        </div>
+                                      </TooltipTrigger>
+                                      <TooltipContent side="top" className="bg-[#E0FFF8] text-gray-900 border border-gray-200 shadow-lg max-w-64 z-50">
+                                        <p className="text-sm">
+                                          <span className="font-medium">{copilotName}</span>
+                                          <br />
+                                          <span className="text-gray-600">
+                                            {copilotName === 'Campaign Manager' ? 'Manages email and social media marketing campaigns' :
+                                             copilotName === 'Content Manager' ? 'Helps create and optimize written content' :
+                                             copilotName === 'Customer Support' ? 'Handles customer inquiries and support tickets' :
+                                             copilotName === 'Business Intelligence' ? 'Analyzes business data and performance metrics' :
+                                             copilotName === 'Social Analyst' ? 'Analyzes social media performance and trends' :
+                                             'AI assistant copilot'
+                                            }
+                                          </span>
+                                        </p>
+                                      </TooltipContent>
+                                    </Tooltip>
+                                  )) || (
+                                    <span className="text-xs text-gray-500">No copilots using this tool</span>
+                                  )}
+                                </div>
+                              </div>
+                            )}
                           </div>
                           
                           {/* Configure Button - moved below */}
