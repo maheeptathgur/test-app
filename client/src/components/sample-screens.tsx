@@ -2064,28 +2064,6 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                   >
                     Status
                   </button>
-                  <button
-                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
-                      sortBy === "executions" ? "bg-gray-100 font-medium" : ""
-                    }`}
-                    onClick={() => {
-                      setSortBy("executions");
-                      setSortOpen(false);
-                    }}
-                  >
-                    Most Executions
-                  </button>
-                  <button
-                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
-                      sortBy === "successRate" ? "bg-gray-100 font-medium" : ""
-                    }`}
-                    onClick={() => {
-                      setSortBy("successRate");
-                      setSortOpen(false);
-                    }}
-                  >
-                    Success Rate
-                  </button>
                 </div>
               </div>
             )}
