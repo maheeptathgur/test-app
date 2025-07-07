@@ -1932,11 +1932,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0 flex-1 flex flex-col">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs text-gray-600">
-                      {(workflowStatuses[workflow.id] || workflow.status) === 'Active' ? 'Active' : 
-                       (workflowStatuses[workflow.id] || workflow.status) === 'Error' ? 'Error' : 'Inactive'}
-                    </span>
+                  <div className="flex items-center gap-3 mb-4">
                     <button
                       onClick={() => handleWorkflowToggle(workflow.id, workflowStatuses[workflow.id] || workflow.status)}
                       className={`workflow-toggle relative inline-flex items-center rounded-full w-11 h-6 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#008062] ${
@@ -1955,6 +1951,10 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                         }`}
                       />
                     </button>
+                    <span className="text-xs text-gray-600">
+                      {(workflowStatuses[workflow.id] || workflow.status) === 'Active' ? 'Active' : 
+                       (workflowStatuses[workflow.id] || workflow.status) === 'Error' ? 'Error' : 'Inactive'}
+                    </span>
                   </div>
                   <p className="text-sm text-gray-600 mb-4 flex-grow">{workflow.description}</p>
                   
