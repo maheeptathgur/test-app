@@ -20,6 +20,7 @@ import {
 } from 'react-icons/si';
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -976,11 +977,12 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
   };
 
   return (
-    <div className="space-y-6">
-      {/* Title */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-foreground">Agents</h1>
+    <TooltipProvider>
+      <div className="space-y-6">
+        {/* Title */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-bold text-foreground">Agents</h1>
           <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
             {filteredAndSortedAgents.length} Agents
           </Badge>
@@ -1106,41 +1108,53 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                     <>
                       <div>
                         <p className="text-sm font-medium text-gray-700 mb-2">Used by:</p>
-                        <div className="flex flex-wrap gap-1">
-                          {(() => {
-                            const allItems = [
-                              ...(agent.usedByCopilots?.map(name => ({ name, type: 'copilot' })) || []),
-                              ...(agent.usedByWorkflows?.map(name => ({ name, type: 'workflow' })) || [])
-                            ];
-                            const isExpanded = expandedAgents.has(agent.id);
-                            const visibleItems = isExpanded ? allItems : allItems.slice(0, 3);
-                            const remainingCount = allItems.length - 3;
+                        <div className="flex items-center gap-2">
+                          <div className="flex flex-wrap gap-1">
+                            {(() => {
+                              const allItems = [
+                                ...(agent.usedByCopilots?.map(name => ({ name, type: 'copilot' })) || []),
+                                ...(agent.usedByWorkflows?.map(name => ({ name, type: 'workflow' })) || [])
+                              ];
+                              const isExpanded = expandedAgents.has(agent.id);
+                              const visibleItems = isExpanded ? allItems : allItems.slice(0, 3);
+                              const remainingCount = allItems.length - 3;
 
-                            return (
-                              <>
-                                {visibleItems.map((item, idx) => (
-                                  <Badge 
-                                    key={`${item.type}-${idx}`} 
-                                    className={`text-xs ${
-                                      item.type === 'copilot' 
-                                        ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                                        : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
-                                    }`}
-                                  >
-                                    {item.name}
-                                  </Badge>
-                                ))}
-                                {!isExpanded && remainingCount > 0 && (
-                                  <button
-                                    onClick={() => toggleExpanded(agent.id)}
-                                    className="text-xs px-2 py-1 rounded-md bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
-                                  >
-                                    +{remainingCount}
-                                  </button>
-                                )}
-                              </>
-                            );
-                          })()}
+                              return (
+                                <>
+                                  {visibleItems.map((item, idx) => (
+                                    <Badge 
+                                      key={`${item.type}-${idx}`} 
+                                      className={`text-xs ${
+                                        item.type === 'copilot' 
+                                          ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                                          : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                                      }`}
+                                    >
+                                      {item.name}
+                                    </Badge>
+                                  ))}
+                                  {!isExpanded && remainingCount > 0 && (
+                                    <button
+                                      onClick={() => toggleExpanded(agent.id)}
+                                      className="text-xs px-2 py-1 rounded-md bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+                                    >
+                                      +{remainingCount}
+                                    </button>
+                                  )}
+                                </>
+                              );
+                            })()}
+                          </div>
+                          
+                          {/* Tooltip for badge explanation */}
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
+                            </TooltipTrigger>
+                            <TooltipContent className="bg-[#e0fff8] text-gray-900 border-gray-200 max-w-xs">
+                              <p>Shows which copilots and workflows use this agent. Green badges are copilots, yellow badges are workflows.</p>
+                            </TooltipContent>
+                          </Tooltip>
                         </div>
                       </div>
 
@@ -1167,7 +1181,8 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
         );
         })}
       </div>
-    </div>
+      </div>
+    </TooltipProvider>
   );
 }
 
