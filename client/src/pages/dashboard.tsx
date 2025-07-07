@@ -504,7 +504,6 @@ const navigationItems = [
   { id: 'tools', label: 'Tools', icon: Settings },
   { id: 'workflows', label: 'Workflows', icon: BarChart3 },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
-  { id: 'workspaces', label: 'Workspaces', icon: LayoutDashboard },
   { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
   { id: 'workspace-settings', label: 'Settings', icon: Settings },
   { id: 'user-view', label: 'User View', icon: User },
@@ -1230,9 +1229,16 @@ export default function Dashboard() {
           subtitle: 'Manage knowledge articles and documentation for your copilots',
           content: <SampleScreen section="knowledge-base" />,
         };
-      case 'workspaces':
+
+      case 'subscriptions':
         return {
-          title: 'Workspaces',
+          title: 'Subscriptions',
+          subtitle: 'Manage your billing, plans, and subscription settings',
+          content: <SampleScreen section="subscriptions" />,
+        };
+      case 'all-workspaces':
+        return {
+          title: 'All Workspaces',
           subtitle: 'Manage all your workspaces and team environments',
           content: (
             <div className="space-y-6">
@@ -1418,13 +1424,6 @@ export default function Dashboard() {
             </div>
           ),
         };
-      case 'subscriptions':
-        return {
-          title: 'Subscriptions',
-          subtitle: 'Manage your billing, plans, and subscription settings',
-          content: <SampleScreen section="subscriptions" />,
-        };
-
 
       case 'pricing':
         return {
@@ -1751,6 +1750,7 @@ export default function Dashboard() {
               copilots={copilots}
               isInChatMode={!!chatCopilot}
               onCopilotSelect={handleStartChat}
+              onViewAllWorkspaces={() => handleSectionChange('all-workspaces')}
             />
           )}
 
@@ -2276,7 +2276,7 @@ export default function Dashboard() {
                 : "px-8 pt-8 pb-24"
             }>
               {/* Title Section for specific pages */}
-              {(activeSection === 'copilots' || activeSection === 'workspaces' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
+              {(activeSection === 'copilots' || activeSection === 'all-workspaces' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
@@ -2285,11 +2285,12 @@ export default function Dashboard() {
                         {copilots.length} Total
                       </Badge>
                     )}
-                    {activeSection === 'workspaces' && (
+                    {activeSection === 'all-workspaces' && (
                       <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
                         {workspacesState.length} Total
                       </Badge>
                     )}
+
                   </div>
 
                 </div>

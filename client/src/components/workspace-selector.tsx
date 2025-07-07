@@ -16,9 +16,10 @@ interface WorkspaceSelectorProps {
   copilots?: CopilotData[];
   isInChatMode?: boolean;
   onCopilotSelect?: (copilot: CopilotData) => void;
+  onViewAllWorkspaces?: () => void;
 }
 
-export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceChange, onWorkspaceCreate, copilots, isInChatMode, onCopilotSelect }: WorkspaceSelectorProps) {
+export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceChange, onWorkspaceCreate, copilots, isInChatMode, onCopilotSelect, onViewAllWorkspaces }: WorkspaceSelectorProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newWorkspaceName, setNewWorkspaceName] = useState('');
@@ -172,6 +173,20 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
             ))}
             
             <DropdownMenuSeparator className="my-2" />
+            
+            {onViewAllWorkspaces && (
+              <DropdownMenuItem
+                onClick={onViewAllWorkspaces}
+                className="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-accent hover:text-accent-foreground"
+              >
+                <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
+                  <ChevronDown className="w-4 h-4 text-gray-600" />
+                </div>
+                <div>
+                  <div className="text-sm font-medium" style={{ color: '#008062' }}>View All Workspaces</div>
+                </div>
+              </DropdownMenuItem>
+            )}
             
             <DropdownMenuItem
               onClick={() => setShowCreateModal(true)}
