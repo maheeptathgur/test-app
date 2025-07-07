@@ -70,15 +70,12 @@
 /* Custom styling for n8n workflow editor save bar positioning */
 .n8n-workflow-editor .n8n-save-bar {
   left: 16rem !important; /* Position after expanded sidebar */
-  width: calc(100vw - 16rem) !important; /* Full width minus sidebar */
-  margin-left: 0 !important;
 }
 
 /* Adjust save bar position when sidebar is collapsed */
 .group[data-state="collapsed"] ~ * .n8n-workflow-editor .n8n-save-bar,
 .sidebar-collapsed .n8n-workflow-editor .n8n-save-bar {
   left: 3rem !important; /* Position after collapsed sidebar */
-  width: calc(100vw - 3rem) !important; /* Full width minus collapsed sidebar */
 }
 
 .workflow-editor .workflow-tab-nav {
