@@ -3,19 +3,39 @@ import { ChevronDown, Plus, Play, Search, Heart, Zap } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { Workspace, CopilotData } from "@/lib/types";
 
 interface WorkspaceSelectorProps {
   currentWorkspace: Workspace;
   workspaces: Workspace[];
   onWorkspaceChange: (workspace: Workspace) => void;
+  onWorkspaceCreate?: (workspace: { name: string; description: string }) => void;
   copilots?: CopilotData[];
   isInChatMode?: boolean;
   onCopilotSelect?: (copilot: CopilotData) => void;
 }
 
-export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceChange, copilots, isInChatMode, onCopilotSelect }: WorkspaceSelectorProps) {
+export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceChange, onWorkspaceCreate, copilots, isInChatMode, onCopilotSelect }: WorkspaceSelectorProps) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [newWorkspaceName, setNewWorkspaceName] = useState('');
+  const [newWorkspaceDescription, setNewWorkspaceDescription] = useState('');
+
+  // Handle workspace creation
+  const handleCreateWorkspace = () => {
+    if (newWorkspaceName.trim() && onWorkspaceCreate) {
+      onWorkspaceCreate({
+        name: newWorkspaceName.trim(),
+        description: newWorkspaceDescription.trim()
+      });
+      setNewWorkspaceName('');
+      setNewWorkspaceDescription('');
+      setShowCreateModal(false);
+    }
+  };
 
   // Filter and sort copilots: favorites first, then others
   const getFilteredCopilots = () => {
@@ -37,8 +57,9 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
     return [...favorites, ...nonFavorites];
   };
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3 bg-sidebar-accent hover:bg-card">
           <div className={`w-8 h-8 ${currentWorkspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
             {currentWorkspace.id === '1' ? (
@@ -153,10 +174,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
             <DropdownMenuSeparator className="my-2" />
             
             <DropdownMenuItem
-              onClick={() => {
-                // Placeholder action for adding workspace
-                console.log('Add workspace clicked');
-              }}
+              onClick={() => setShowCreateModal(true)}
               className="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-accent hover:text-accent-foreground"
             >
               <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
@@ -169,6 +187,60 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
           </>
         )}
       </DropdownMenuContent>
-    </DropdownMenu>
+      </DropdownMenu>
+
+      {/* Create Workspace Modal */}
+      <Dialog open={showCreateModal} onOpenChange={setShowCreateModal}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Create New Workspace</DialogTitle>
+          <DialogDescription>
+            Create a new workspace to organize your copilots and team collaboration.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="workspace-name">Workspace Name</Label>
+            <Input
+              id="workspace-name"
+              placeholder="Enter workspace name"
+              value={newWorkspaceName}
+              onChange={(e) => setNewWorkspaceName(e.target.value)}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="workspace-description">Description (Optional)</Label>
+            <Textarea
+              id="workspace-description"
+              placeholder="Describe the purpose of this workspace"
+              value={newWorkspaceDescription}
+              onChange={(e) => setNewWorkspaceDescription(e.target.value)}
+              rows={3}
+            />
+          </div>
+          <div className="flex justify-end gap-3">
+            <Button
+              variant="outline"
+              onClick={() => {
+                setShowCreateModal(false);
+                setNewWorkspaceName('');
+                setNewWorkspaceDescription('');
+              }}
+            >
+              Cancel
+            </Button>
+            <Button
+              onClick={handleCreateWorkspace}
+              disabled={!newWorkspaceName.trim()}
+              style={{ backgroundColor: '#008062' }}
+              className="text-white hover:opacity-90"
+            >
+              Create Workspace
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+      </Dialog>
+    </>
   );
 }

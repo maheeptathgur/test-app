@@ -568,6 +568,7 @@ const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
 };
 
 export default function Dashboard() {
+  const [workspacesState, setWorkspacesState] = useState<Workspace[]>(workspaces);
   const [currentWorkspace, setCurrentWorkspace] = useState<Workspace>(workspaces[0]);
   const [activeSection, setActiveSection] = useState<NavigationSection>('copilots');
   const [copilots, setCopilots] = useState<CopilotData[]>(mockCopilots);
@@ -717,6 +718,20 @@ export default function Dashboard() {
     ));
     const newStatus = copilot.status === 'active' ? 'archived' : 'active';
     showNotification(`${newStatus === 'archived' ? 'Archived' : 'Restored'} copilot: ${copilot.name}`);
+  };
+
+  const handleCreateWorkspace = (workspaceData: { name: string; description: string }) => {
+    const newWorkspace: Workspace = {
+      id: Date.now().toString(),
+      name: workspaceData.name,
+      type: 'Personal',
+      avatar: workspaceData.name[0].toUpperCase(),
+      color: 'bg-blue-500'
+    };
+    
+    setWorkspacesState(prev => [...prev, newWorkspace]);
+    setCurrentWorkspace(newWorkspace);
+    showNotification(`Created workspace: ${workspaceData.name}`);
   };
 
   const handleDeleteCopilot = (copilot: CopilotData) => {
@@ -1535,8 +1550,9 @@ export default function Dashboard() {
           {!sidebarCollapsed && (activeSection !== 'user-view' || (activeSection === 'user-view' && chatCopilot)) && (
             <WorkspaceSelector
               currentWorkspace={currentWorkspace}
-              workspaces={workspaces}
+              workspaces={workspacesState}
               onWorkspaceChange={handleWorkspaceChange}
+              onWorkspaceCreate={handleCreateWorkspace}
               copilots={copilots}
               isInChatMode={!!chatCopilot}
               onCopilotSelect={handleStartChat}
