@@ -28,6 +28,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { PricingScreen } from "./pricing-screen";
 import { AgentConfigureScreen, AgentTestScreen } from "./agent-screens";
 import { WorkflowEditor } from "./workflow-editor";
+import { N8nWorkflowEditor } from "./n8n-workflow-editor";
 import { ToolConfigureScreen } from "./tool-configure-screen";
 import { ToolConfigScreen } from "./tool-config-screen";
 
@@ -662,6 +663,115 @@ export function SampleScreen({
   // Show Configure screen if an agent is being configured
   // All conditional rendering moved to the JSX return to ensure modals are always included
   
+  // Helper function to determine workflow type from ID
+  const getWorkflowType = (workflowId: string | number) => {
+    // Look in both Knolli and n8n workflow arrays to find the workflow
+    const knolliWorkflows = [
+      {
+        id: 4,
+        name: "SEO Content Optimization",
+        description: "Automated SEO analysis and optimization of blog posts",
+        source: "Knolli",
+        trigger: "New draft published",
+        steps: ["Extract Content", "Keyword Analysis", "SEO Score", "Generate Suggestions", "Apply Optimizations"],
+        tools: ["OpenAI API", "SEMrush API"],
+        agents: ["SEO Writer", "SEO Optimizer", "Content Reviewer"],
+        status: "Error",
+        executions: 234,
+        successRate: 91,
+        lastRun: "8 min ago",
+        avgDuration: "3m 45s",
+        usedBy: ["Content Manager"],
+        schedule: "On-demand"
+      },
+      {
+        id: 5,
+        name: "Performance Data Collection",
+        description: "Gathers and consolidates performance metrics from multiple sources",
+        source: "Knolli",
+        trigger: "Daily schedule",
+        steps: ["Collect Analytics", "Process Data", "Generate Insights", "Create Dashboard", "Send Report"],
+        tools: ["Google Analytics", "Google Search Console", "Airtable"],
+        agents: ["Performance Analyst", "Report Generator"],
+        status: "Active",
+        executions: 67,
+        successRate: 96,
+        lastRun: "1 hour ago",
+        avgDuration: "5m 20s",
+        usedBy: ["Business Intelligence"],
+        schedule: "Daily at 6 AM"
+      },
+      {
+        id: 6,
+        name: "Knowledge Base Auto-Update",
+        description: "Automatically updates FAQ and knowledge base from support conversations",
+        source: "Knolli",
+        trigger: "Support conversation end",
+        steps: ["Analyze Conversation", "Extract Key Info", "Check Existing Docs", "Generate Updates", "Review & Publish"],
+        tools: ["Notion", "OpenAI API"],
+        agents: ["FAQ Generator", "Content Reviewer"],
+        status: "Inactive",
+        executions: 0,
+        successRate: 0,
+        lastRun: "Never",
+        avgDuration: "N/A",
+        usedBy: [],
+        schedule: "Real-time trigger"
+      }
+    ];
+
+    const n8nWorkflows = [
+      {
+        id: 1,
+        name: "Lead Qualification Pipeline",
+        description: "Automatically qualifies and routes incoming leads through multiple channels",
+        source: "n8n",
+        trigger: "New form submission",
+        steps: ["Validate Data", "Score Lead", "Enrich Contact", "Route to Sales", "Send Welcome Email"],
+        tools: ["HubSpot", "Clearbit", "Gmail"],
+        agents: ["Lead Scorer"],
+        status: "Active",
+        executions: 1456,
+        successRate: 94,
+        lastRun: "2 min ago",
+        avgDuration: "45s",
+        usedBy: ["Marketing Copilot"],
+        schedule: "Real-time trigger"
+      },
+      {
+        id: 3,
+        name: "Customer Support Escalation",
+        description: "Automatically escalates high-priority tickets to appropriate team members",
+        source: "n8n",
+        trigger: "Ticket priority change",
+        steps: ["Analyze Ticket", "Determine Priority", "Assign Specialist", "Notify Team", "Update Customer"],
+        tools: ["Zendesk", "Slack", "Gmail"],
+        agents: ["Ticket Classifier", "Priority Scorer"],
+        status: "Inactive",
+        executions: 567,
+        successRate: 87,
+        lastRun: "3 hours ago",
+        avgDuration: "1m 15s",
+        usedBy: ["Customer Support"],
+        schedule: "Real-time trigger"
+      }
+    ];
+
+    // Convert to number for comparison
+    const numericId = typeof workflowId === 'string' ? parseInt(workflowId) : workflowId;
+    
+    // Check n8n workflows first
+    const n8nWorkflow = n8nWorkflows.find(w => w.id === numericId);
+    if (n8nWorkflow) return 'n8n';
+    
+    // Check knolli workflows
+    const knolliWorkflow = knolliWorkflows.find(w => w.id === numericId);
+    if (knolliWorkflow) return 'knolli';
+    
+    // Default to knolli for unknown workflows
+    return 'knolli';
+  };
+
   // Add modals after the main render but before the function ends
   // This is a wrapper div to contain the modals alongside the main content
   return (
@@ -676,7 +786,14 @@ export function SampleScreen({
         }
 
         if (workflowToConfig) {
-          return <WorkflowEditor workflowId={workflowToConfig.id} onBack={handleBackToWorkflows} />;
+          // Determine which workflow editor to use based on workflow type
+          const workflowType = getWorkflowType(workflowToConfig.id);
+          
+          if (workflowType === 'n8n') {
+            return <N8nWorkflowEditor workflowId={workflowToConfig.id} onBack={handleBackToWorkflows} />;
+          } else {
+            return <WorkflowEditor workflowId={workflowToConfig.id} onBack={handleBackToWorkflows} />;
+          }
         }
 
         if (showBrowseIntegrations) {
