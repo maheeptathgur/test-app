@@ -936,124 +936,291 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
 
         {activeTab === 'settings' && (
           <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
-            <div>
-              <h2 className="text-lg font-semibold text-gray-900">Workflow Settings</h2>
-              <p className="text-sm text-gray-600">Configure general workflow properties and behavior</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Basic Information</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
+            {/* General Settings */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">General Settings</CardTitle>
+                <p className="text-sm text-gray-600">Basic workflow configuration</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label>Workflow Name</Label>
+                    <Label className="text-sm font-medium">Workflow Name</Label>
                     <Input 
                       value={workflowName} 
                       onChange={(e) => setWorkflowName(e.target.value)}
                       className="mt-1"
+                      placeholder="Enter workflow name"
                     />
                   </div>
                   <div>
-                    <Label>Description</Label>
-                    <Textarea 
-                      value={workflowDescription} 
-                      onChange={(e) => setWorkflowDescription(e.target.value)}
-                      className="mt-1"
-                      rows={3}
-                    />
+                    <Label className="text-sm font-medium">Workflow Type</Label>
+                    <div className="mt-1 p-2 bg-gray-100 rounded border text-sm text-gray-700">
+                      {workflowData.source === 'n8n' ? 'n8n Workflow' : 'Knolli Workflow'}
+                    </div>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <Label>Enable Workflow</Label>
-                    <Switch checked={isEnabled} onCheckedChange={setIsEnabled} />
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">Description</Label>
+                  <Textarea 
+                    value={workflowDescription} 
+                    onChange={(e) => setWorkflowDescription(e.target.value)}
+                    className="mt-1"
+                    rows={3}
+                    placeholder="Describe what this workflow does"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label className="text-sm font-medium">Status</Label>
+                    <p className="text-xs text-gray-500">Enable or disable this workflow</p>
                   </div>
-                </CardContent>
-              </Card>
+                  <Switch
+                    checked={isEnabled}
+                    onCheckedChange={setIsEnabled}
+                  />
+                </div>
+              </CardContent>
+            </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Trigger Settings</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
+            {/* Trigger Settings */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Trigger Settings</CardTitle>
+                <p className="text-sm text-gray-600">Configure when this workflow should run</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label className="text-sm font-medium">Trigger Type</Label>
+                  <Select defaultValue="On Message">
+                    <SelectTrigger className="mt-1">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Manual">Manual</SelectItem>
+                      <SelectItem value="On Message">On Message</SelectItem>
+                      <SelectItem value="On Event">On Event</SelectItem>
+                      <SelectItem value="On Schedule">On Schedule</SelectItem>
+                      <SelectItem value="On Form Submit">On Form Submit</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label>Trigger Type</Label>
-                    <Select defaultValue="form_submission">
+                    <Label className="text-sm font-medium">Condition Type</Label>
+                    <Select defaultValue="text_match">
                       <SelectTrigger className="mt-1">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="form_submission">Form Submission</SelectItem>
-                        <SelectItem value="webhook">Webhook</SelectItem>
-                        <SelectItem value="schedule">Schedule</SelectItem>
-                        <SelectItem value="manual">Manual</SelectItem>
+                        <SelectItem value="text_match">Text Match</SelectItem>
+                        <SelectItem value="role_match">Role Match</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div>
-                    <Label>Trigger Conditions</Label>
-                    <Textarea 
-                      placeholder="Define when this workflow should trigger..."
-                      className="mt-1"
-                      rows={3}
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Error Handling</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <Label>On Error</Label>
-                    <Select defaultValue="stop">
-                      <SelectTrigger className="mt-1">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="stop">Stop Workflow</SelectItem>
-                        <SelectItem value="continue">Continue to Next Step</SelectItem>
-                        <SelectItem value="retry">Retry Step</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label>Max Retries</Label>
-                    <Input type="number" defaultValue="3" className="mt-1" />
-                  </div>
-                  <div>
-                    <Label>Timeout (seconds)</Label>
-                    <Input type="number" defaultValue="300" className="mt-1" />
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Notifications</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <Label>Email on Success</Label>
-                    <Switch />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <Label>Email on Failure</Label>
-                    <Switch defaultChecked />
-                  </div>
-                  <div>
-                    <Label>Notification Email</Label>
+                    <Label className="text-sm font-medium">Condition Value</Label>
                     <Input 
-                      type="email" 
-                      placeholder="admin@company.com" 
                       className="mt-1"
+                      placeholder="e.g. pricing, demo, help"
+                      defaultValue="pricing"
                     />
                   </div>
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Connected Tools & Agents */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Connected Tools & Agents</CardTitle>
+                <p className="text-sm text-gray-600">Components used in this workflow</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Connected Tools</Label>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                      📧 Gmail
+                    </Badge>
+                    <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                      📊 Airtable
+                    </Badge>
+                    <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                      💬 Slack
+                    </Badge>
+                  </div>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Connected Agents</Label>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
+                      🤖 Data Analyst
+                    </Badge>
+                    <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200">
+                      ✍️ Content Creator
+                    </Badge>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Input Mapping */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Input Mapping</CardTitle>
+                <p className="text-sm text-gray-600">Map external data to workflow variables</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-3">
+                  <div className="grid grid-cols-5 gap-2 items-center">
+                    <Label className="text-xs font-medium text-gray-600">Source Field</Label>
+                    <div></div>
+                    <Label className="text-xs font-medium text-gray-600">Workflow Variable</Label>
+                    <div></div>
+                    <div></div>
+                  </div>
+                  <div className="grid grid-cols-5 gap-2 items-center">
+                    <Input placeholder="user.email" defaultValue="user.email" className="text-sm" />
+                    <div className="flex justify-center">
+                      <ArrowRight className="w-4 h-4 text-gray-400" />
+                    </div>
+                    <Input placeholder="email" defaultValue="email" className="text-sm" />
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                      <Trash2 className="w-3 h-3" />
+                    </Button>
+                    <div></div>
+                  </div>
+                  <div className="grid grid-cols-5 gap-2 items-center">
+                    <Input placeholder="user.name" defaultValue="user.name" className="text-sm" />
+                    <div className="flex justify-center">
+                      <ArrowRight className="w-4 h-4 text-gray-400" />
+                    </div>
+                    <Input placeholder="full_name" defaultValue="full_name" className="text-sm" />
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                      <Trash2 className="w-3 h-3" />
+                    </Button>
+                    <div></div>
+                  </div>
+                  <div className="grid grid-cols-5 gap-2 items-center">
+                    <Input placeholder="user.company" defaultValue="user.company" className="text-sm" />
+                    <div className="flex justify-center">
+                      <ArrowRight className="w-4 h-4 text-gray-400" />
+                    </div>
+                    <Input placeholder="company_name" defaultValue="company_name" className="text-sm" />
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                      <Trash2 className="w-3 h-3" />
+                    </Button>
+                    <div></div>
+                  </div>
+                </div>
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Plus className="w-4 h-4" />
+                  Add Mapping
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Output Handling */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Output Handling</CardTitle>
+                <p className="text-sm text-gray-600">Configure what happens with workflow results</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label className="text-sm font-medium">Output Behavior</Label>
+                  <Select defaultValue="show_to_user">
+                    <SelectTrigger className="mt-1">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="show_to_user">Show to user</SelectItem>
+                      <SelectItem value="store_as_variable">Store as variable</SelectItem>
+                      <SelectItem value="log_only">Log only</SelectItem>
+                      <SelectItem value="trigger_another_workflow">Trigger another workflow</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">Output Variable Name</Label>
+                  <Input 
+                    className="mt-1"
+                    placeholder="e.g. email_result, analysis_output"
+                    defaultValue="workflow_result"
+                  />
+                </div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label className="text-sm font-medium">Retry on Failure</Label>
+                    <p className="text-xs text-gray-500">Automatically retry if workflow fails</p>
+                  </div>
+                  <Switch defaultChecked={true} />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Usage Reference */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Usage Reference</CardTitle>
+                <p className="text-sm text-gray-600">Where this workflow is being used</p>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Used by</Label>
+                  <Select defaultValue="campaign-manager">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="campaign-manager">Campaign Manager Copilot</SelectItem>
+                      <SelectItem value="content-assistant">Content Assistant Copilot</SelectItem>
+                      <SelectItem value="social-analyst">Social Analyst Copilot</SelectItem>
+                      <SelectItem value="customer-support">Customer Support Copilot</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Test Runner */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Test Runner</CardTitle>
+                <p className="text-sm text-gray-600">Test your workflow with sample data</p>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <Button className="gap-2" onClick={() => console.log('Running workflow test...')}>
+                  <Play className="w-4 h-4" />
+                  Run Test
+                </Button>
+                <div>
+                  <Label className="text-sm font-medium mb-2 block">Test Output</Label>
+                  <div className="p-4 bg-gray-50 rounded-lg border">
+                    <pre className="text-xs text-gray-700 whitespace-pre-wrap">
+{`{
+  "status": "success",
+  "execution_time": "2.4s",
+  "result": {
+    "email_sent": true,
+    "recipient": "test@example.com",
+    "message_id": "msg_abc123",
+    "data_processed": {
+      "lead_score": 85,
+      "industry": "Technology",
+      "company_size": "50-100 employees"
+    }
+  },
+  "steps_completed": 3,
+  "errors": []
+}`}
+                    </pre>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         )}
 
