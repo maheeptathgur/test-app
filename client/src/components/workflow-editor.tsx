@@ -640,24 +640,186 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                               )}
                             </>
                           ) : (
-                            <div>
-                              <Label className="text-xs font-medium text-gray-700">Configuration</Label>
+                            <>
+                              {/* Regular step configuration form */}
                               {editingSteps[step.id] ? (
-                                <Textarea 
-                                  value={stepValues[step.id]?.config || JSON.stringify(step.config, null, 2)}
-                                  onChange={(e) => updateStepValue(step.id, 'config', e.target.value)}
-                                  className="mt-1 font-mono text-xs" 
-                                  rows={step.input || step.output ? 6 : 8}
-                                  placeholder="Enter JSON configuration..."
-                                />
+                                <>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Step Type</Label>
+                                    <Select defaultValue={step.type}>
+                                      <SelectTrigger className="mt-1">
+                                        <SelectValue />
+                                      </SelectTrigger>
+                                      <SelectContent>
+                                        <SelectItem value="agent">Agent</SelectItem>
+                                        <SelectItem value="tool">Tool</SelectItem>
+                                      </SelectContent>
+                                    </Select>
+                                  </div>
+
+                                  {/* Agent Selection */}
+                                  {step.type === 'agent' && (
+                                    <div>
+                                      <Label className="text-xs font-medium text-gray-700">Select Agent</Label>
+                                      <Select defaultValue={step.config.agentId || 'content-creator'}>
+                                        <SelectTrigger className="mt-1">
+                                          <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                          <SelectItem value="content-creator">Content Creator</SelectItem>
+                                          <SelectItem value="data-analyst">Data Analyst</SelectItem>
+                                          <SelectItem value="research-assistant">Research Assistant</SelectItem>
+                                          <SelectItem value="social-media-manager">Social Media Manager</SelectItem>
+                                          <SelectItem value="email-specialist">Email Specialist</SelectItem>
+                                          <SelectItem value="seo-optimizer">SEO Optimizer</SelectItem>
+                                        </SelectContent>
+                                      </Select>
+                                    </div>
+                                  )}
+
+                                  {/* Tool Selection */}
+                                  {step.type === 'tool' && (
+                                    <div>
+                                      <Label className="text-xs font-medium text-gray-700">Select Tool</Label>
+                                      <Select defaultValue={step.config.toolId || 'gmail'}>
+                                        <SelectTrigger className="mt-1">
+                                          <SelectValue />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                          <SelectItem value="gmail">Gmail</SelectItem>
+                                          <SelectItem value="slack">Slack</SelectItem>
+                                          <SelectItem value="airtable">Airtable</SelectItem>
+                                          <SelectItem value="notion">Notion</SelectItem>
+                                          <SelectItem value="google-drive">Google Drive</SelectItem>
+                                          <SelectItem value="hubspot">HubSpot</SelectItem>
+                                          <SelectItem value="mailchimp">Mailchimp</SelectItem>
+                                          <SelectItem value="calendly">Calendly</SelectItem>
+                                          <SelectItem value="openai">OpenAI</SelectItem>
+                                          <SelectItem value="unsplash">Unsplash</SelectItem>
+                                        </SelectContent>
+                                      </Select>
+                                    </div>
+                                  )}
+
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Name</Label>
+                                    <Input 
+                                      value={stepValues[step.id]?.name || step.name}
+                                      onChange={(e) => updateStepValue(step.id, 'name', e.target.value)}
+                                      className="mt-1"
+                                    />
+                                  </div>
+                                  <div>
+                                    <Label className="text-xs font-medium text-gray-700">Description</Label>
+                                    <Textarea 
+                                      value={stepValues[step.id]?.description || step.description}
+                                      onChange={(e) => updateStepValue(step.id, 'description', e.target.value)}
+                                      className="mt-1"
+                                      rows={2}
+                                    />
+                                  </div>
+
+                                  {/* Agent-specific configuration */}
+                                  {step.type === 'agent' && (
+                                    <>
+                                      <div>
+                                        <Label className="text-xs font-medium text-gray-700">Agent Instructions</Label>
+                                        <Textarea 
+                                          defaultValue={step.config.instructions || "Process the input data and generate appropriate content"}
+                                          className="mt-1"
+                                          rows={3}
+                                          placeholder="Specific instructions for this agent..."
+                                        />
+                                      </div>
+                                      <div>
+                                        <Label className="text-xs font-medium text-gray-700">Output Format</Label>
+                                        <Select defaultValue={step.config.outputFormat || 'text'}>
+                                          <SelectTrigger className="mt-1">
+                                            <SelectValue />
+                                          </SelectTrigger>
+                                          <SelectContent>
+                                            <SelectItem value="text">Plain Text</SelectItem>
+                                            <SelectItem value="markdown">Markdown</SelectItem>
+                                            <SelectItem value="html">HTML</SelectItem>
+                                            <SelectItem value="json">JSON</SelectItem>
+                                            <SelectItem value="csv">CSV</SelectItem>
+                                          </SelectContent>
+                                        </Select>
+                                      </div>
+                                    </>
+                                  )}
+
+                                  {/* Tool-specific configuration */}
+                                  {step.type === 'tool' && (
+                                    <>
+                                      <div>
+                                        <Label className="text-xs font-medium text-gray-700">Action</Label>
+                                        <Select defaultValue={step.config.action || 'send_email'}>
+                                          <SelectTrigger className="mt-1">
+                                            <SelectValue />
+                                          </SelectTrigger>
+                                          <SelectContent>
+                                            {step.config.toolId === 'gmail' && (
+                                              <>
+                                                <SelectItem value="send_email">Send Email</SelectItem>
+                                                <SelectItem value="read_emails">Read Emails</SelectItem>
+                                                <SelectItem value="create_draft">Create Draft</SelectItem>
+                                              </>
+                                            )}
+                                            {step.config.toolId === 'slack' && (
+                                              <>
+                                                <SelectItem value="send_message">Send Message</SelectItem>
+                                                <SelectItem value="create_channel">Create Channel</SelectItem>
+                                                <SelectItem value="invite_user">Invite User</SelectItem>
+                                              </>
+                                            )}
+                                            {step.config.toolId === 'airtable' && (
+                                              <>
+                                                <SelectItem value="create_record">Create Record</SelectItem>
+                                                <SelectItem value="update_record">Update Record</SelectItem>
+                                                <SelectItem value="read_records">Read Records</SelectItem>
+                                              </>
+                                            )}
+                                            {step.config.toolId === 'notion' && (
+                                              <>
+                                                <SelectItem value="create_page">Create Page</SelectItem>
+                                                <SelectItem value="update_page">Update Page</SelectItem>
+                                                <SelectItem value="read_database">Read Database</SelectItem>
+                                              </>
+                                            )}
+                                            {!['gmail', 'slack', 'airtable', 'notion'].includes(step.config.toolId) && (
+                                              <>
+                                                <SelectItem value="execute">Execute</SelectItem>
+                                                <SelectItem value="process">Process</SelectItem>
+                                                <SelectItem value="analyze">Analyze</SelectItem>
+                                              </>
+                                            )}
+                                          </SelectContent>
+                                        </Select>
+                                      </div>
+                                      <div>
+                                        <Label className="text-xs font-medium text-gray-700">Parameters</Label>
+                                        <Textarea 
+                                          defaultValue={JSON.stringify(step.config.parameters || {}, null, 2)}
+                                          className="mt-1 font-mono text-xs"
+                                          rows={3}
+                                          placeholder="Tool-specific parameters in JSON format..."
+                                        />
+                                      </div>
+                                    </>
+                                  )}
+                                </>
                               ) : (
-                                <div className="mt-1 p-3 bg-gray-50 rounded-md">
-                                  <code className="text-xs text-gray-700">
-                                    {JSON.stringify(step.config, null, 2)}
-                                  </code>
+                                <div>
+                                  <Label className="text-xs font-medium text-gray-700">Configuration</Label>
+                                  <div className="mt-1 p-3 bg-gray-50 rounded-md">
+                                    <code className="text-xs text-gray-700">
+                                      {JSON.stringify(step.config, null, 2)}
+                                    </code>
+                                  </div>
                                 </div>
                               )}
-                            </div>
+                            </>
                           )}
                           
                           {/* Output Parameters (for agents and tools) */}
