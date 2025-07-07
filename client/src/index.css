@@ -67,6 +67,17 @@
   padding-right: 0 !important; /* Remove right padding from tab content */
 }
 
+/* Custom styling for n8n workflow editor save bar positioning */
+.n8n-workflow-editor .n8n-save-bar {
+  left: 16rem !important; /* Position after expanded sidebar */
+}
+
+/* Adjust save bar position when sidebar is collapsed */
+.group[data-state="collapsed"] ~ * .n8n-workflow-editor .n8n-save-bar,
+.sidebar-collapsed .n8n-workflow-editor .n8n-save-bar {
+  left: 3rem !important; /* Position after collapsed sidebar */
+}
+
 .workflow-editor .workflow-tab-nav {
   padding: 0 !important; /* Remove all padding from tab navigation */
   margin-top: 2rem !important; /* Add top margin to tab navigation */
