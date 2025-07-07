@@ -1825,21 +1825,6 @@ function MyComponent() {
                           <p className="text-sm text-gray-600 mb-4 flex-grow">Automated content creation and publishing workflow with 5 steps</p>
                           
                           <div className="space-y-4 mt-auto">
-                            <div className="space-y-2 text-xs text-gray-600">
-                              <div className="flex justify-between">
-                                <span>Source:</span>
-                                <span className="font-medium">n8n</span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span>Success Rate:</span>
-                                <span className="font-medium text-green-600">98.2%</span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span>Executions:</span>
-                                <span className="font-medium">245 today</span>
-                              </div>
-                            </div>
-                            
                             <div className="pt-2">
                               <div className="flex gap-2">
                                 <Button 
@@ -1881,21 +1866,6 @@ function MyComponent() {
                           <p className="text-sm text-gray-600 mb-4 flex-grow">Automated data analysis and reporting workflow with 8 steps</p>
                           
                           <div className="space-y-4 mt-auto">
-                            <div className="space-y-2 text-xs text-gray-600">
-                              <div className="flex justify-between">
-                                <span>Source:</span>
-                                <span className="font-medium">Make.com</span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span>Success Rate:</span>
-                                <span className="font-medium text-green-600">94.7%</span>
-                              </div>
-                              <div className="flex justify-between">
-                                <span>Executions:</span>
-                                <span className="font-medium">67 today</span>
-                              </div>
-                            </div>
-                            
                             <div className="pt-2">
                               <div className="flex gap-2">
                                 <Button 
