@@ -32,8 +32,11 @@ import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
   { id: '1', name: 'GTM Team', type: 'Personal', avatar: '⚡', color: 'bg-[#008062]' },
-  { id: '2', name: 'Team Alpha', type: 'Shared', avatar: 'T', color: 'bg-green-500' },
-  { id: '3', name: 'Enterprise', type: 'Organization', avatar: 'E', color: 'bg-purple-500' },
+  { id: '2', name: 'Product Development', type: 'Team', avatar: 'P', color: 'bg-blue-500' },
+  { id: '3', name: 'Marketing Hub', type: 'Team', avatar: 'M', color: 'bg-orange-500' },
+  { id: '4', name: 'Customer Success', type: 'Team', avatar: 'C', color: 'bg-green-500' },
+  { id: '5', name: 'Data Analytics', type: 'Team', avatar: 'D', color: 'bg-purple-500' },
+  { id: '6', name: 'Design Studio', type: 'Team', avatar: 'DS', color: 'bg-pink-500' },
 ];
 
 const recentConversations = [
@@ -501,6 +504,7 @@ const navigationItems = [
   { id: 'tools', label: 'Tools', icon: Settings },
   { id: 'workflows', label: 'Workflows', icon: BarChart3 },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
+  { id: 'workspaces', label: 'Workspaces', icon: LayoutDashboard },
   { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
   { id: 'workspace-settings', label: 'Settings', icon: Settings },
   { id: 'user-view', label: 'User View', icon: User },
@@ -571,6 +575,9 @@ export default function Dashboard() {
   const [workspacesState, setWorkspacesState] = useState<Workspace[]>(workspaces);
   const [currentWorkspace, setCurrentWorkspace] = useState<Workspace>(workspaces[0]);
   const [activeSection, setActiveSection] = useState<NavigationSection>('copilots');
+  
+  // Other workspaces for the workspaces screen
+  const otherWorkspaces = workspacesState.filter(w => w.id !== currentWorkspace.id);
   const [copilots, setCopilots] = useState<CopilotData[]>(mockCopilots);
   const [chatCopilot, setChatCopilot] = useState<CopilotData | null>(null);
   const [editingCopilot, setEditingCopilot] = useState<CopilotData | null>(null);
@@ -1222,6 +1229,194 @@ export default function Dashboard() {
           title: 'Knowledge Base',
           subtitle: 'Manage knowledge articles and documentation for your copilots',
           content: <SampleScreen section="knowledge-base" />,
+        };
+      case 'workspaces':
+        return {
+          title: 'Workspaces',
+          subtitle: 'Manage all your workspaces and team environments',
+          content: (
+            <div className="space-y-6">
+              {/* Controls Bar */}
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                {/* Action Buttons - Left Side */}
+                <div className="flex gap-3">
+                  <Button 
+                    variant="default"
+                    className="gap-2 h-10"
+                    style={{ backgroundColor: '#008062' }}
+                    onClick={() => setShowWorkspaceCreationModal(true)}
+                  >
+                    <Plus className="w-4 h-4" />
+                    Create Workspace
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="h-10"
+                    onClick={() => {
+                      console.log('Import workspace');
+                    }}
+                  >
+                    Import Workspace
+                  </Button>
+                </div>
+
+                {/* Search and Filter Controls - Right Side */}
+                <div className="flex items-center gap-3">
+                  {/* Search */}
+                  <div className="relative w-64">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                    <Input
+                      placeholder="Search workspaces..."
+                      className="pl-10 h-10"
+                    />
+                  </div>
+                  
+                  {/* Filter */}
+                  <Select defaultValue="all">
+                    <SelectTrigger className="w-32 h-10">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Types</SelectItem>
+                      <SelectItem value="personal">Personal</SelectItem>
+                      <SelectItem value="team">Team</SelectItem>
+                      <SelectItem value="enterprise">Enterprise</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  
+                  {/* Sort */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" className="h-10">
+                        <ArrowUpDown className="w-4 h-4 mr-2" />
+                        Sort
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem>Name A-Z</DropdownMenuItem>
+                      <DropdownMenuItem>Date Created</DropdownMenuItem>
+                      <DropdownMenuItem>Members Count</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+
+              {/* Workspaces Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Current Workspace */}
+                <div className="border-2 border-[#008062] rounded-lg p-6 bg-green-50">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-[#008062] rounded-lg flex items-center justify-center">
+                        <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center">
+                          <LayoutDashboard className="w-5 h-5 text-[#008062]" />
+                        </div>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-lg">{currentWorkspace.name}</h3>
+                        <p className="text-sm text-muted-foreground">{currentWorkspace.type}</p>
+                      </div>
+                    </div>
+                    <Badge variant="secondary" className="bg-[#008062] text-white">Current</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">Your main workspace for AI copilot development and management.</p>
+                  <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+                    <span>4 copilots</span>
+                    <span>12 members</span>
+                    <span>Created Dec 15</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm" className="flex-1">
+                      <Settings className="w-4 h-4 mr-2" />
+                      Settings
+                    </Button>
+                    <Button variant="outline" size="sm" className="flex-1">
+                      <Users className="w-4 h-4 mr-2" />
+                      Members
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Other Workspaces */}
+                {otherWorkspaces.map((workspace) => (
+                  <div key={workspace.id} className="border rounded-lg p-6 bg-white hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className={`w-12 h-12 ${workspace.color} rounded-lg flex items-center justify-center`}>
+                          <div className="text-white font-semibold text-lg">{workspace.avatar}</div>
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-lg">{workspace.name}</h3>
+                          <p className="text-sm text-muted-foreground">{workspace.type}</p>
+                        </div>
+                      </div>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                            <Settings className="w-4 h-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem onClick={() => handleWorkspaceChange(workspace)}>
+                            Switch to Workspace
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Settings className="w-4 h-4 mr-2" />
+                            Settings
+                          </DropdownMenuItem>
+                          <DropdownMenuItem>
+                            <Users className="w-4 h-4 mr-2" />
+                            Manage Members
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem className="text-red-600">
+                            <Trash2 className="w-4 h-4 mr-2" />
+                            Delete Workspace
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      {workspace.name === 'Product Development' ? 'Workspace for product team collaboration and development copilots.' :
+                       workspace.name === 'Marketing Hub' ? 'Marketing team workspace with campaign and content copilots.' :
+                       workspace.name === 'Customer Success' ? 'Customer support and success team workspace.' :
+                       workspace.name === 'Data Analytics' ? 'Analytics and reporting workspace for data-driven insights.' :
+                       workspace.name === 'Design Studio' ? 'Creative workspace for design and brand teams.' :
+                       'Workspace for team collaboration and AI copilot management.'}
+                    </p>
+                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+                      <span>{workspace.name === 'Product Development' ? '8 copilots' :
+                             workspace.name === 'Marketing Hub' ? '6 copilots' :
+                             workspace.name === 'Customer Success' ? '3 copilots' :
+                             workspace.name === 'Data Analytics' ? '5 copilots' :
+                             workspace.name === 'Design Studio' ? '4 copilots' :
+                             '2 copilots'}</span>
+                      <span>{workspace.name === 'Product Development' ? '24 members' :
+                             workspace.name === 'Marketing Hub' ? '8 members' :
+                             workspace.name === 'Customer Success' ? '6 members' :
+                             workspace.name === 'Data Analytics' ? '5 members' :
+                             workspace.name === 'Design Studio' ? '7 members' :
+                             '3 members'}</span>
+                      <span>{workspace.name === 'Product Development' ? 'Created Nov 20' :
+                             workspace.name === 'Marketing Hub' ? 'Created Dec 1' :
+                             workspace.name === 'Customer Success' ? 'Created Dec 8' :
+                             workspace.name === 'Data Analytics' ? 'Created Dec 10' :
+                             workspace.name === 'Design Studio' ? 'Created Dec 12' :
+                             'Created Jan 5'}</span>
+                    </div>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full"
+                      onClick={() => handleWorkspaceChange(workspace)}
+                    >
+                      Switch to Workspace
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ),
         };
       case 'subscriptions':
         return {
@@ -2081,13 +2276,18 @@ export default function Dashboard() {
                 : "px-8 pt-8 pb-24"
             }>
               {/* Title Section for specific pages */}
-              {(activeSection === 'copilots' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
+              {(activeSection === 'copilots' || activeSection === 'workspaces' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
                     {activeSection === 'copilots' && (
                       <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
                         {copilots.length} Total
+                      </Badge>
+                    )}
+                    {activeSection === 'workspaces' && (
+                      <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+                        {workspacesState.length} Total
                       </Badge>
                     )}
                   </div>
