@@ -28,6 +28,7 @@ import { UserView } from "@/components/user-view";
 import { DeleteConfirmationModal } from "@/components/delete-confirmation-modal";
 import { ProfileSettings } from "@/components/profile-settings";
 import { AccountSettings } from "@/components/account-settings";
+import { WorkflowEditor } from "@/components/workflow-editor";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
@@ -1146,6 +1147,7 @@ export default function Dashboard() {
             section="workflows" 
             configureWorkflow={configureWorkflow}
             onClearConfigureWorkflow={() => setConfigureWorkflow(null)}
+            onWorkflowEdit={(workflowId: string) => setConfigureWorkflow({id: workflowId, name: `Workflow ${workflowId}`})}
           />,
         };
       case 'knowledge-base':
@@ -1940,6 +1942,12 @@ export default function Dashboard() {
             copilot={configuringCopilot}
             onClose={() => setConfiguringCopilot(null)}
             onSave={handleSaveCopilotConfiguration}
+          />
+        ) : /* Workflow Editor */
+        configureWorkflow ? (
+          <WorkflowEditor
+            workflowId={configureWorkflow.id}
+            onBack={() => setConfigureWorkflow(null)}
           />
         ) : /* Creation Wizard */
         showCreationWizard ? (
