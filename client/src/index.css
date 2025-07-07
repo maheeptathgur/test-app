@@ -44,6 +44,14 @@
   }
 }
 
+/* Custom padding for workflow configuration only */
+.workflow-config-container {
+  padding-left: 1rem; /* px-4 instead of px-8 */
+  padding-right: 1rem; /* px-4 instead of px-8 */
+  padding-top: 1rem; /* pt-4 instead of pt-8 */
+  padding-bottom: 6rem; /* pb-24 unchanged */
+}
+
 :root {
   /* Brand Color Palette */
   --brand-primary: hsl(166, 100%, 25%); /* #008062 - Primary teal */

@@ -1952,10 +1952,12 @@ export default function Dashboard() {
           <div className="h-full overflow-y-auto">
             {/* Content Body - Conditional padding for tool config screens */}
             <div className={
-              // No padding for configuration screens since they handle their own padding
-              (configureTool || toolConfigActive || configureWorkflow) 
-                ? "" 
-                : "px-8 pt-8 pb-24"
+              // Custom padding for workflow config, no padding for tool config, normal padding for others
+              configureWorkflow 
+                ? "workflow-config-container" 
+                : (configureTool || toolConfigActive) 
+                  ? "" 
+                  : "px-8 pt-8 pb-24"
             }>
               {/* Title Section for specific pages */}
               {(activeSection === 'copilots' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (

@@ -157,7 +157,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
   return (
     <div className="h-full flex flex-col" style={{ backgroundColor: '#f2f2f2' }}>
       {/* Header */}
-      <div className="flex items-center justify-between px-8 pt-8 pb-6 bg-[#ffffff00]">
+      <div className="flex items-center justify-between px-4 pt-4 pb-6 bg-[#ffffff00]">
         <div className="flex items-center gap-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{workflowName}</h1>
@@ -170,7 +170,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         </Button>
       </div>
       {/* Tab Navigation */}
-      <div className="flex border-b px-8 bg-[#ffffff00]">
+      <div className="flex border-b px-4 bg-[#ffffff00]">
         {tabs.map((tab) => (
           <button
             key={tab.id}
@@ -189,7 +189,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
       {/* Tab Content */}
       <div className="flex-1 overflow-auto">
         {activeTab === 'steps' && (
-          <div className="px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
+          <div className="px-4 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Workflow Steps</h2>
@@ -295,7 +295,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         )}
 
         {activeTab === 'settings' && (
-          <div className="px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
+          <div className="px-4 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
             <div>
               <h2 className="text-lg font-semibold text-gray-900">Workflow Settings</h2>
               <p className="text-sm text-gray-600">Configure general workflow properties and behavior</p>
@@ -418,7 +418,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         )}
 
         {activeTab === 'variables' && (
-          <div className="px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
+          <div className="px-4 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Workflow Variables</h2>
@@ -474,7 +474,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         )}
 
         {activeTab === 'testing' && (
-          <div className="px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
+          <div className="px-4 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f2f2f2' }}>
             <div>
               <h2 className="text-lg font-semibold text-gray-900">Workflow Testing</h2>
               <p className="text-sm text-gray-600">Test your workflow with sample data</p>
