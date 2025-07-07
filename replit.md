@@ -293,6 +293,7 @@ Changelog:
 - July 7, 2025. Added informative tooltip to disabled Make.com tab - implemented tooltip with mint green styling that instructs users to "Connect Make.com as a tool first to use workflows" providing clear guidance on how to enable the disabled functionality
 - July 7, 2025. Simplified workflow editor header by removing action elements - deleted Badge (Enabled/Disabled status), Test Run button, and Save Changes button, replaced with single right-aligned Close button with outline styling for cleaner interface and streamlined user experience
 - July 7, 2025. Fixed workflow editor padding consistency - updated dashboard to exclude workflow configuration from auto-padding (like tool config screens), standardized workflow editor padding to match dashboard template (px-8 pt-8 pb-24 pattern), and ensured consistent spacing across all workflow editor tabs for unified user experience matching other dashboard pages like workflows home screen
+- July 7, 2025. Implemented targeted CSS solution for workflow editor inner div padding - added workflow-editor class to main container and workflow-tab-content class to all tab content divs, created custom CSS rule that reduces only inner div padding from px-8 to px-4 using !important override, ensuring workflow editor matches workflows home screen spacing while maintaining outer container consistency and not affecting other dashboard pages
 ```
 
 ## User Preferences
