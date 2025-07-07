@@ -1683,6 +1683,26 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
   const [collapsedUsage, setCollapsedUsage] = useState<Set<number>>(new Set([1, 2, 3, 4, 5, 6]));
   const [activeTab, setActiveTab] = useState("knolli");
   const [workflowStatuses, setWorkflowStatuses] = useState<Record<number, string>>({});
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [sortOpen, setSortOpen] = useState(false);
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [sortBy, setSortBy] = useState("name");
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (filterOpen && !target.closest('.filter-dropdown')) {
+        setFilterOpen(false);
+      }
+      if (sortOpen && !target.closest('.sort-dropdown')) {
+        setSortOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [filterOpen, sortOpen]);
 
   const toggleUsageCollapsed = (workflowId: number) => {
     setCollapsedUsage(prev => {
@@ -1712,6 +1732,43 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
       ...prev,
       [workflowId]: newStatus
     }));
+  };
+
+  const handleCreateWorkflow = () => {
+    console.log('Creating new custom workflow...');
+    // This would open a workflow creation wizard
+  };
+
+  const handleImportN8n = () => {
+    console.log('Opening n8n import dialog...');
+    // This would open an import dialog
+  };
+
+  const filterWorkflows = (workflows: any[]) => {
+    if (activeFilter === "all") return workflows;
+    return workflows.filter(workflow => {
+      const status = workflowStatuses[workflow.id] || workflow.status;
+      return status.toLowerCase() === activeFilter.toLowerCase();
+    });
+  };
+
+  const sortWorkflows = (workflows: any[]) => {
+    return [...workflows].sort((a, b) => {
+      switch (sortBy) {
+        case "name":
+          return a.name.localeCompare(b.name);
+        case "status":
+          const statusA = workflowStatuses[a.id] || a.status;
+          const statusB = workflowStatuses[b.id] || b.status;
+          return statusA.localeCompare(statusB);
+        case "executions":
+          return b.executions - a.executions;
+        case "successRate":
+          return b.successRate - a.successRate;
+        default:
+          return 0;
+      }
+    });
   };
 
   const knolliWorkflows = [
@@ -1806,14 +1863,21 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
   ];
 
   const getCurrentWorkflows = () => {
+    let workflows = [];
     switch (activeTab) {
       case "knolli":
-        return knolliWorkflows;
+        workflows = knolliWorkflows;
+        break;
       case "n8n":
-        return n8nWorkflows;
+        workflows = n8nWorkflows;
+        break;
       default:
-        return [];
+        workflows = [];
     }
+    
+    // Apply filtering and sorting
+    const filtered = filterWorkflows(workflows);
+    return sortWorkflows(filtered);
   };
 
   const allWorkflows = [...knolliWorkflows, ...n8nWorkflows];
@@ -1886,25 +1950,146 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
           {activeTab === "knolli" && (
-            <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+            <Button 
+              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+              onClick={handleCreateWorkflow}
+            >
               Create Custom Workflow
             </Button>
           )}
           {activeTab === "n8n" && (
-            <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+            <Button 
+              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+              onClick={handleImportN8n}
+            >
               Import from n8n
             </Button>
           )}
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" size="sm">
-            <Filter className="w-4 h-4 mr-2" />
-            Filter
-          </Button>
-          <Button variant="outline" size="sm">
-            <ArrowUpDown className="w-4 h-4 mr-2" />
-            Sort
-          </Button>
+        <div className="flex gap-2 relative">
+          <div className="relative filter-dropdown">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setFilterOpen(!filterOpen)}
+            >
+              <Filter className="w-4 h-4 mr-2" />
+              Filter
+              {activeFilter !== "all" && (
+                <span className="ml-1 text-xs bg-[#008062] text-white rounded-full px-1">1</span>
+              )}
+            </Button>
+            {filterOpen && (
+              <div className="absolute right-0 top-full mt-1 w-40 bg-white border rounded-lg shadow-lg z-10">
+                <div className="p-2 space-y-1">
+                  <button
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
+                      activeFilter === "all" ? "bg-gray-100 font-medium" : ""
+                    }`}
+                    onClick={() => {
+                      setActiveFilter("all");
+                      setFilterOpen(false);
+                    }}
+                  >
+                    All Workflows
+                  </button>
+                  <button
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
+                      activeFilter === "active" ? "bg-gray-100 font-medium" : ""
+                    }`}
+                    onClick={() => {
+                      setActiveFilter("active");
+                      setFilterOpen(false);
+                    }}
+                  >
+                    Active
+                  </button>
+                  <button
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
+                      activeFilter === "inactive" ? "bg-gray-100 font-medium" : ""
+                    }`}
+                    onClick={() => {
+                      setActiveFilter("inactive");
+                      setFilterOpen(false);
+                    }}
+                  >
+                    Inactive
+                  </button>
+                  <button
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
+                      activeFilter === "error" ? "bg-gray-100 font-medium" : ""
+                    }`}
+                    onClick={() => {
+                      setActiveFilter("error");
+                      setFilterOpen(false);
+                    }}
+                  >
+                    Error
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+          <div className="relative sort-dropdown">
+            <Button 
+              variant="outline" 
+              size="sm"
+              onClick={() => setSortOpen(!sortOpen)}
+            >
+              <ArrowUpDown className="w-4 h-4 mr-2" />
+              Sort
+            </Button>
+            {sortOpen && (
+              <div className="absolute right-0 top-full mt-1 w-40 bg-white border rounded-lg shadow-lg z-10">
+                <div className="p-2 space-y-1">
+                  <button
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
+                      sortBy === "name" ? "bg-gray-100 font-medium" : ""
+                    }`}
+                    onClick={() => {
+                      setSortBy("name");
+                      setSortOpen(false);
+                    }}
+                  >
+                    Name A-Z
+                  </button>
+                  <button
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
+                      sortBy === "status" ? "bg-gray-100 font-medium" : ""
+                    }`}
+                    onClick={() => {
+                      setSortBy("status");
+                      setSortOpen(false);
+                    }}
+                  >
+                    Status
+                  </button>
+                  <button
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
+                      sortBy === "executions" ? "bg-gray-100 font-medium" : ""
+                    }`}
+                    onClick={() => {
+                      setSortBy("executions");
+                      setSortOpen(false);
+                    }}
+                  >
+                    Most Executions
+                  </button>
+                  <button
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
+                      sortBy === "successRate" ? "bg-gray-100 font-medium" : ""
+                    }`}
+                    onClick={() => {
+                      setSortBy("successRate");
+                      setSortOpen(false);
+                    }}
+                  >
+                    Success Rate
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
