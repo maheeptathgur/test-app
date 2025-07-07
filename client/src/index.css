@@ -49,6 +49,11 @@
   padding: 0 !important; /* Remove all padding from header */
 }
 
+/* Custom styling for n8n workflow editor header */
+.n8n-workflow-editor .n8n-header {
+  padding: 0 !important; /* Remove all padding from n8n header */
+}
+
 .workflow-editor .workflow-tab-nav {
   padding: 0 !important; /* Remove all padding from tab navigation */
   margin-top: 2rem !important; /* Add top margin to tab navigation */
