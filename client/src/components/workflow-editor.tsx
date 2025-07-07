@@ -112,8 +112,9 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         status: 'success',
         executionTime: '0.1s',
         config: {
-          triggerType: 'form_submission',
-          formId: 'lead_capture_form',
+          triggerType: 'On Message',
+          triggerConditions: 'If message contains "pricing" or "demo"',
+          runFrequency: 'Immediate',
           webhook: 'https://knolli.app/webhook/form-submit'
         },
         isTrigger: true
@@ -416,24 +417,70 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                           )}
                         </div>
                         <div className="space-y-3">
-                          <div>
-                            <Label className="text-xs font-medium text-gray-700">Configuration</Label>
-                            {editingSteps[step.id] ? (
-                              <Textarea 
-                                value={stepValues[step.id]?.config || JSON.stringify(step.config, null, 2)}
-                                onChange={(e) => updateStepValue(step.id, 'config', e.target.value)}
-                                className="mt-1 font-mono text-xs" 
-                                rows={step.input || step.output ? 6 : 8}
-                                placeholder="Enter JSON configuration..."
-                              />
-                            ) : (
-                              <div className="mt-1 p-3 bg-gray-50 rounded-md">
-                                <code className="text-xs text-gray-700">
-                                  {JSON.stringify(step.config, null, 2)}
-                                </code>
+                          {/* Special trigger settings form */}
+                          {step.isTrigger && editingSteps[step.id] ? (
+                            <>
+                              <div>
+                                <Label className="text-xs font-medium text-gray-700">Trigger Type</Label>
+                                <Select defaultValue={step.config.triggerType}>
+                                  <SelectTrigger className="mt-1">
+                                    <SelectValue />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="Manual">Manual</SelectItem>
+                                    <SelectItem value="On Message">On Message</SelectItem>
+                                    <SelectItem value="On Event">On Event</SelectItem>
+                                    <SelectItem value="On Schedule">On Schedule</SelectItem>
+                                    <SelectItem value="On External Call">On External Call</SelectItem>
+                                  </SelectContent>
+                                </Select>
                               </div>
-                            )}
-                          </div>
+                              <div>
+                                <Label className="text-xs font-medium text-gray-700">Trigger Conditions</Label>
+                                <Input 
+                                  defaultValue={step.config.triggerConditions}
+                                  className="mt-1"
+                                  placeholder="e.g. &quot;If message contains 'pricing'&quot; or &quot;If user role = sales&quot;"
+                                />
+                                <p className="text-xs text-gray-500 mt-1">Define conditions for when this workflow should trigger</p>
+                              </div>
+                              <div>
+                                <Label className="text-xs font-medium text-gray-700">Run Frequency</Label>
+                                <Select defaultValue={step.config.runFrequency}>
+                                  <SelectTrigger className="mt-1">
+                                    <SelectValue />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="Immediate">Immediate</SelectItem>
+                                    <SelectItem value="Every 15 min">Every 15 min</SelectItem>
+                                    <SelectItem value="Hourly">Hourly</SelectItem>
+                                    <SelectItem value="Daily">Daily</SelectItem>
+                                    <SelectItem value="Weekly">Weekly</SelectItem>
+                                  </SelectContent>
+                                </Select>
+                                <p className="text-xs text-gray-500 mt-1">For scheduled workflows (e.g. every 15 min, daily)</p>
+                              </div>
+                            </>
+                          ) : (
+                            <div>
+                              <Label className="text-xs font-medium text-gray-700">Configuration</Label>
+                              {editingSteps[step.id] ? (
+                                <Textarea 
+                                  value={stepValues[step.id]?.config || JSON.stringify(step.config, null, 2)}
+                                  onChange={(e) => updateStepValue(step.id, 'config', e.target.value)}
+                                  className="mt-1 font-mono text-xs" 
+                                  rows={step.input || step.output ? 6 : 8}
+                                  placeholder="Enter JSON configuration..."
+                                />
+                              ) : (
+                                <div className="mt-1 p-3 bg-gray-50 rounded-md">
+                                  <code className="text-xs text-gray-700">
+                                    {JSON.stringify(step.config, null, 2)}
+                                  </code>
+                                </div>
+                              )}
+                            </div>
+                          )}
                           
                           {/* Output Parameters (for agents and tools) */}
                           {step.output && (
