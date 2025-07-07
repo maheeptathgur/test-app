@@ -144,6 +144,10 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
             <ExternalLink className="w-4 h-4" />
             Open in n8n
           </Button>
+          <Button variant="outline" size="sm" className="gap-2">
+            <ExternalLink className="w-4 h-4" />
+            Go to Marketplace
+          </Button>
           <Button variant="outline" onClick={onBack} className="gap-2">
             <X className="w-4 h-4" />
             Close
