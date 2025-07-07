@@ -170,7 +170,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
       </div>
 
       {/* Tab Content */}
-      <div className="flex-1 overflow-auto px-8 pb-24 pt-6">
+      <div className="n8n-tab-content flex-1 overflow-auto px-8 pb-24 pt-6">
         {activeTab === 'overview' && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
