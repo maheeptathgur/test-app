@@ -105,64 +105,108 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
     trigger: 'Form Submission',
     steps: [
       {
-        id: 'step1',
-        name: 'Validate Form Data',
-        type: 'validation',
-        description: 'Validate email format and required fields',
+        id: 'trigger',
+        name: 'Form Submission Trigger',
+        type: 'trigger',
+        description: 'Triggers when a new lead form is submitted',
         status: 'success',
-        executionTime: '0.2s',
+        executionTime: '0.1s',
         config: {
-          rules: ['email_format', 'required_fields'],
-          errorHandling: 'stop_workflow'
+          triggerType: 'form_submission',
+          formId: 'lead_capture_form',
+          webhook: 'https://knolli.app/webhook/form-submit'
+        },
+        isTrigger: true
+      },
+      {
+        id: 'step1',
+        name: 'Data Analyst Agent',
+        type: 'agent',
+        description: 'Analyzes form data and enriches lead information',
+        status: 'success',
+        executionTime: '1.2s',
+        config: {
+          agentId: 'data-analyst',
+          prompt: 'Analyze the submitted form data and enrich with additional lead scoring information'
+        },
+        input: {
+          type: 'object',
+          schema: {
+            email: 'string',
+            first_name: 'string',
+            last_name: 'string',
+            company: 'string',
+            industry: 'string'
+          },
+          source: 'trigger'
+        },
+        output: {
+          type: 'object',
+          schema: {
+            lead_score: 'number',
+            industry_category: 'string',
+            company_size: 'string',
+            enriched_data: 'object'
+          }
         }
       },
       {
         id: 'step2',
-        name: 'Check Email Preferences',
-        type: 'database',
-        description: 'Query user preferences from database',
+        name: 'Gmail Tool',
+        type: 'tool',
+        description: 'Sends personalized email using Gmail integration',
         status: 'success',
-        executionTime: '0.5s',
+        executionTime: '0.8s',
         config: {
-          query: 'SELECT * FROM user_preferences WHERE email = ?',
-          timeout: 30
+          toolId: 'gmail',
+          action: 'send_email',
+          template: 'lead_welcome_email'
+        },
+        input: {
+          type: 'object',
+          schema: {
+            recipient_email: 'string',
+            personalization_data: 'object',
+            lead_score: 'number'
+          },
+          source: 'step1'
+        },
+        output: {
+          type: 'object',
+          schema: {
+            message_id: 'string',
+            sent_timestamp: 'string',
+            delivery_status: 'string'
+          }
         }
       },
       {
         id: 'step3',
-        name: 'Personalize Content',
-        type: 'transformation',
-        description: 'Customize email content based on user data',
-        status: 'success',
-        executionTime: '1.2s',
-        config: {
-          template: 'email_template_v2',
-          variables: ['first_name', 'company', 'industry']
-        }
-      },
-      {
-        id: 'step4',
-        name: 'Send Email',
-        type: 'email',
-        description: 'Send personalized email via Gmail API',
+        name: 'Content Creator Agent',
+        type: 'agent',
+        description: 'Creates follow-up content based on lead interaction',
         status: 'pending',
         executionTime: '2.1s',
         config: {
-          provider: 'gmail',
-          from: 'noreply@company.com',
-          replyTo: 'support@company.com'
-        }
-      },
-      {
-        id: 'step5',
-        name: 'Track Analytics',
-        type: 'analytics',
-        description: 'Log email sent event to analytics platform',
-        status: 'pending',
-        executionTime: '0.8s',
-        config: {
-          events: ['email_sent', 'campaign_interaction'],
-          platform: 'google_analytics'
+          agentId: 'content-creator',
+          prompt: 'Generate personalized follow-up content sequence based on lead profile and email engagement'
+        },
+        input: {
+          type: 'object',
+          schema: {
+            lead_data: 'object',
+            email_engagement: 'object',
+            industry_category: 'string'
+          },
+          source: 'step2'
+        },
+        output: {
+          type: 'object',
+          schema: {
+            follow_up_sequence: 'array',
+            content_recommendations: 'array',
+            next_touchpoint: 'string'
+          }
         }
       }
     ],
@@ -192,6 +236,9 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
 
   const getStepTypeColor = (type: string) => {
     const colors = {
+      trigger: 'bg-yellow-100 text-yellow-700',
+      agent: 'bg-purple-100 text-purple-700',
+      tool: 'bg-blue-100 text-blue-700',
       validation: 'bg-blue-100 text-blue-700',
       database: 'bg-green-100 text-green-700',
       transformation: 'bg-purple-100 text-purple-700',
@@ -257,7 +304,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
 
             <div className="space-y-4">
               {workflowData.steps.map((step, index) => (
-                <Card key={step.id} className="border-l-4 border-l-[#008062]">
+                <Card key={step.id} className={`border-l-4 ${step.isTrigger ? 'border-l-yellow-500 bg-yellow-50/50' : 'border-l-[#008062]'}`}>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -354,6 +401,19 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                               disabled={!editingSteps[step.id]}
                             />
                           </div>
+                          
+                          {/* Input Parameters (for agents and tools) */}
+                          {step.input && (
+                            <div>
+                              <Label className="text-xs font-medium text-gray-700">Input Parameters</Label>
+                              <div className="mt-1 p-3 bg-blue-50 rounded-md">
+                                <div className="text-xs text-blue-600 font-medium mb-2">Source: {step.input.source}</div>
+                                <code className="text-xs text-blue-700">
+                                  {JSON.stringify(step.input.schema, null, 2)}
+                                </code>
+                              </div>
+                            </div>
+                          )}
                         </div>
                         <div className="space-y-3">
                           <div>
@@ -363,7 +423,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                 value={stepValues[step.id]?.config || JSON.stringify(step.config, null, 2)}
                                 onChange={(e) => updateStepValue(step.id, 'config', e.target.value)}
                                 className="mt-1 font-mono text-xs" 
-                                rows={8}
+                                rows={step.input || step.output ? 6 : 8}
                                 placeholder="Enter JSON configuration..."
                               />
                             ) : (
@@ -374,6 +434,18 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                               </div>
                             )}
                           </div>
+                          
+                          {/* Output Parameters (for agents and tools) */}
+                          {step.output && (
+                            <div>
+                              <Label className="text-xs font-medium text-gray-700">Output Parameters</Label>
+                              <div className="mt-1 p-3 bg-green-50 rounded-md">
+                                <code className="text-xs text-green-700">
+                                  {JSON.stringify(step.output.schema, null, 2)}
+                                </code>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                       
