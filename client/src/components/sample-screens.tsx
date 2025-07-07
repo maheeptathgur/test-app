@@ -1107,7 +1107,6 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                   {!collapsedStats.has(agent.id) && (
                     <>
                       <div>
-                        <p className="text-sm font-medium text-gray-700 mb-2">Used by:</p>
                         <div className="flex items-center gap-2">
                           <div className="flex flex-wrap gap-1">
                             {(() => {
