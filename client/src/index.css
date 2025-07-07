@@ -57,6 +57,10 @@
   padding: 0 !important; /* Remove all padding from tab content */
 }
 
+.workflow-editor .workflow-tab-content > div:first-child {
+  margin-top: 2rem !important; /* Add top margin to first content div */
+}
+
 :root {
   /* Brand Color Palette */
   --brand-primary: hsl(166, 100%, 25%); /* #008062 - Primary teal */
