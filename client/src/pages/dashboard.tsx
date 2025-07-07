@@ -31,10 +31,10 @@ import { AccountSettings } from "@/components/account-settings";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
-  { id: '1', name: 'Marketing', type: 'Personal', avatar: '⚡', color: 'bg-[#008062]' },
-  { id: '2', name: 'Product Development', type: 'Team', avatar: 'P', color: 'bg-blue-500' },
-  { id: '4', name: 'Customer Success', type: 'Team', avatar: 'C', color: 'bg-green-500' },
-  { id: '7', name: 'Career Coach', type: 'Team', avatar: 'CC', color: 'bg-indigo-500' },
+  { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'bg-[#008062]' },
+  { id: '2', name: 'Product Development', type: '', avatar: 'P', color: 'bg-blue-500' },
+  { id: '4', name: 'Customer Success', type: '', avatar: 'C', color: 'bg-green-500' },
+  { id: '7', name: 'Career Coach', type: '', avatar: 'CC', color: 'bg-indigo-500' },
 ];
 
 const recentConversations = [
@@ -734,7 +734,7 @@ export default function Dashboard() {
     const newWorkspace: Workspace = {
       id: Date.now().toString(),
       name: workspaceData.name,
-      type: 'Personal',
+      type: '',
       avatar: workspaceData.name[0].toUpperCase(),
       color: 'bg-blue-500'
     };
