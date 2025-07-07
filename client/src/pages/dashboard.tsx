@@ -955,14 +955,13 @@ export default function Dashboard() {
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="gap-2 h-10"
+                    className="h-10"
                     onClick={() => {
                       // TODO: Navigate to marketplace
                       console.log('Navigate to marketplace');
                     }}
                   >
-                    <Grid className="w-4 h-4" />
-                    Marketplace
+                    Go to Marketplace
                   </Button>
                 </div>
 
@@ -1272,14 +1271,13 @@ export default function Dashboard() {
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="gap-2 h-10"
+                    className="h-10"
                     onClick={() => {
                       // TODO: Navigate to marketplace
                       console.log('Navigate to marketplace');
                     }}
                   >
-                    <Grid className="w-4 h-4" />
-                    Marketplace
+                    Go to Marketplace
                   </Button>
                 </div>
 
