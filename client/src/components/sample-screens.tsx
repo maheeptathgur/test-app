@@ -1151,7 +1151,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help hover:text-gray-600 transition-colors" />
                               </button>
                             </TooltipTrigger>
-                            <TooltipContent side="top" className="bg-red-500 text-white border border-gray-200 shadow-lg max-w-xs z-[9999]">
+                            <TooltipContent side="top" className="bg-white text-gray-900 border border-gray-200 shadow-lg max-w-xs z-50">
                               <p className="text-sm">Shows which copilots and workflows use this agent. Green badges are copilots, yellow badges are workflows.</p>
                             </TooltipContent>
                           </Tooltip>
