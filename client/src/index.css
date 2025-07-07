@@ -60,6 +60,12 @@
   padding-right: 0 !important; /* Remove right padding from tab navigation */
 }
 
+/* Custom styling for n8n workflow editor tab content */
+.n8n-workflow-editor .n8n-tab-content {
+  padding-left: 0 !important; /* Remove left padding from tab content */
+  padding-right: 0 !important; /* Remove right padding from tab content */
+}
+
 .workflow-editor .workflow-tab-nav {
   padding: 0 !important; /* Remove all padding from tab navigation */
   margin-top: 2rem !important; /* Add top margin to tab navigation */
