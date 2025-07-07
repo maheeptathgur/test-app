@@ -37,6 +37,7 @@ const workspaces: Workspace[] = [
   { id: '4', name: 'Customer Success', type: 'Team', avatar: 'C', color: 'bg-green-500' },
   { id: '5', name: 'Data Analytics', type: 'Team', avatar: 'D', color: 'bg-purple-500' },
   { id: '6', name: 'Design Studio', type: 'Team', avatar: 'DS', color: 'bg-pink-500' },
+  { id: '7', name: 'Career Coach', type: 'Team', avatar: 'CC', color: 'bg-indigo-500' },
 ];
 
 const recentConversations = [
@@ -352,6 +353,7 @@ const mockCopilots: CopilotData[] = [
     avatarColor: 'bg-blue-100 text-blue-600',
     type: 'content',
     favorite: true,
+    workspaceId: '1',
     components: [
       { name: 'Content Writer', type: 'agent', description: 'AI assistant that creates engaging articles, blogs, and marketing copy' },
       { name: 'SEO Optimizer', type: 'agent', description: 'Specialist in keyword research and content optimization for search engines' },
@@ -375,6 +377,7 @@ const mockCopilots: CopilotData[] = [
     avatarColor: 'bg-green-100 text-green-600',
     type: 'general',
     favorite: true,
+    workspaceId: '1',
     components: [
       { name: 'Campaign Planning', type: 'workflow', description: 'Automated workflow for campaign strategy, timeline, and budget planning' },
       { name: 'Media Planner', type: 'agent', description: 'Strategic assistant for media buying, channel selection, and budget allocation' },
@@ -443,6 +446,7 @@ const mockCopilots: CopilotData[] = [
     avatarColor: 'bg-orange-100 text-orange-600',
     type: 'analyst',
     favorite: true,
+    workspaceId: '1',
     components: [
       { name: 'Data Analyst', type: 'agent', description: 'Advanced analytics specialist for social media performance and ROI tracking' },
       { name: 'Trend Spotter', type: 'agent', description: 'AI assistant that identifies emerging social trends and viral content patterns' },
@@ -465,6 +469,7 @@ const mockCopilots: CopilotData[] = [
     avatarColor: 'bg-purple-100 text-purple-600',
     type: 'support',
     favorite: false,
+    workspaceId: '4',
     components: [
       { name: 'Support Agent', type: 'agent', description: 'AI customer service representative that handles common inquiries and issues' },
       { name: 'Ticket Router', type: 'agent', description: 'Smart routing system that assigns tickets to the right team based on complexity' },
@@ -485,6 +490,7 @@ const mockCopilots: CopilotData[] = [
     name: 'Resume Assistant',
     description: 'AI-powered resume optimization tool that personalizes your resume based on job descriptions and career goals.',
     status: 'active',
+    workspaceId: '7',
     avatar: 'RA',
     avatarColor: 'bg-indigo-100 text-indigo-600',
     type: 'form',
@@ -887,7 +893,8 @@ export default function Dashboard() {
       const matchesSearch = copilot.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                            copilot.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesStatus = statusFilter === 'all' || copilot.status === statusFilter;
-      return matchesSearch && matchesStatus;
+      const matchesWorkspace = copilot.workspaceId === currentWorkspace.id;
+      return matchesSearch && matchesStatus && matchesWorkspace;
     });
 
     filtered.sort((a, b) => {
@@ -1328,7 +1335,7 @@ export default function Dashboard() {
                   </div>
                   <p className="text-sm text-muted-foreground mb-4">Your main workspace for AI copilot development and management.</p>
                   <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-                    <span>4 copilots</span>
+                    <span>3 copilots</span>
                     <span>12 members</span>
                     <span>Created Dec 15</span>
                   </div>
@@ -1408,26 +1415,30 @@ export default function Dashboard() {
                        workspace.name === 'Customer Success' ? 'Customer support and success team workspace.' :
                        workspace.name === 'Data Analytics' ? 'Analytics and reporting workspace for data-driven insights.' :
                        workspace.name === 'Design Studio' ? 'Creative workspace for design and brand teams.' :
+                       workspace.name === 'Career Coach' ? 'Professional development workspace for career coaching and resume optimization.' :
                        'Workspace for team collaboration and AI copilot management.'}
                     </p>
                     <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                       <span>{workspace.name === 'Product Development' ? '8 copilots' :
                              workspace.name === 'Marketing Hub' ? '6 copilots' :
-                             workspace.name === 'Customer Success' ? '3 copilots' :
+                             workspace.name === 'Customer Success' ? '1 copilot' :
                              workspace.name === 'Data Analytics' ? '5 copilots' :
                              workspace.name === 'Design Studio' ? '4 copilots' :
+                             workspace.name === 'Career Coach' ? '1 copilot' :
                              '2 copilots'}</span>
                       <span>{workspace.name === 'Product Development' ? '24 members' :
                              workspace.name === 'Marketing Hub' ? '8 members' :
                              workspace.name === 'Customer Success' ? '6 members' :
                              workspace.name === 'Data Analytics' ? '5 members' :
                              workspace.name === 'Design Studio' ? '7 members' :
+                             workspace.name === 'Career Coach' ? '4 members' :
                              '3 members'}</span>
                       <span>{workspace.name === 'Product Development' ? 'Created Nov 20' :
                              workspace.name === 'Marketing Hub' ? 'Created Dec 1' :
                              workspace.name === 'Customer Success' ? 'Created Dec 8' :
                              workspace.name === 'Data Analytics' ? 'Created Dec 10' :
                              workspace.name === 'Design Studio' ? 'Created Dec 12' :
+                             workspace.name === 'Career Coach' ? 'Created Dec 18' :
                              'Created Jan 5'}</span>
                     </div>
                     <Button 
