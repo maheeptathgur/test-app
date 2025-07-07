@@ -941,52 +941,52 @@ export default function Dashboard() {
           content: (
             <div className="space-y-6">
               {/* Controls Bar */}
-              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-                <div className="flex flex-col sm:flex-row gap-4 flex-1">
-                  {/* Action Buttons */}
-                  <div className="flex gap-3">
-                    <Button 
-                      variant="default"
-                      className="gap-2"
-                      style={{ backgroundColor: '#008062' }}
-                      onClick={() => setShowCreationWizard(true)}
-                    >
-                      <Plus className="w-4 h-4" />
-                      Create Copilot
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="gap-2"
-                      onClick={() => {
-                        // TODO: Navigate to marketplace
-                        console.log('Navigate to marketplace');
-                      }}
-                    >
-                      <Grid className="w-4 h-4" />
-                      Marketplace
-                    </Button>
-                  </div>
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                {/* Action Buttons - Left Side */}
+                <div className="flex gap-3">
+                  <Button 
+                    variant="default"
+                    className="gap-2 h-10"
+                    style={{ backgroundColor: '#008062' }}
+                    onClick={() => setShowCreationWizard(true)}
+                  >
+                    <Plus className="w-4 h-4" />
+                    Create Copilot
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="gap-2 h-10"
+                    onClick={() => {
+                      // TODO: Navigate to marketplace
+                      console.log('Navigate to marketplace');
+                    }}
+                  >
+                    <Grid className="w-4 h-4" />
+                    Marketplace
+                  </Button>
+                </div>
 
+                {/* Search, Filters, and View Toggle - Right Side */}
+                <div className="flex items-center gap-3">
                   {/* Search - Collapsible */}
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center">
                     {!searchExpanded ? (
                       <Button 
                         variant="outline" 
-                        size="sm"
+                        className="gap-2 h-10"
                         onClick={() => setSearchExpanded(true)}
-                        className="gap-2"
                       >
                         <Search className="w-4 h-4" />
                         Search
                       </Button>
                     ) : (
-                      <div className="relative flex-1 max-w-md">
+                      <div className="relative w-64">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
                         <Input
                           placeholder="Search copilots..."
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
-                          className="pl-10 pr-10"
+                          className="pl-10 pr-10 h-10"
                           autoFocus
                           onBlur={() => {
                             if (!searchTerm) {
@@ -1009,59 +1009,58 @@ export default function Dashboard() {
                     )}
                   </div>
                   
-                  {/* Filters */}
-                  <div className="flex gap-2">
-                    <Select value={statusFilter} onValueChange={(value: 'all' | 'active' | 'archived') => setStatusFilter(value)}>
-                      <SelectTrigger className="w-32">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Status</SelectItem>
-                        <SelectItem value="active">Active</SelectItem>
-                        <SelectItem value="archived">Archived</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="sm">
-                          <ArrowUpDown className="w-4 h-4 mr-2" />
-                          Sort
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuItem onClick={() => setSortBy('name')}>
-                          Sort by Name
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setSortBy('type')}>
-                          Sort by Type
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setSortBy('status')}>
-                          Sort by Status
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                  {/* Status Filter */}
+                  <Select value={statusFilter} onValueChange={(value: 'all' | 'active' | 'archived') => setStatusFilter(value)}>
+                    <SelectTrigger className="w-32 h-10">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Status</SelectItem>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="archived">Archived</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  
+                  {/* Sort Dropdown */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" className="h-10">
+                        <ArrowUpDown className="w-4 h-4 mr-2" />
+                        Sort
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => setSortBy('name')}>
+                        Sort by Name
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setSortBy('type')}>
+                        Sort by Type
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setSortBy('status')}>
+                        Sort by Status
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+
+                  {/* View Toggle */}
+                  <div className="flex gap-1 border rounded-lg p-1">
+                    <Button
+                      variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                      size="sm"
+                      onClick={() => setViewMode('grid')}
+                      className="px-3 h-8"
+                    >
+                      <Grid className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant={viewMode === 'table' ? 'default' : 'ghost'}
+                      size="sm"
+                      onClick={() => setViewMode('table')}
+                      className="px-3 h-8"
+                    >
+                      <List className="w-4 h-4" />
+                    </Button>
                   </div>
-                </div>
-                
-                {/* View Toggle */}
-                <div className="flex gap-1 border rounded-lg p-1">
-                  <Button
-                    variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                    size="sm"
-                    onClick={() => setViewMode('grid')}
-                    className="px-3"
-                  >
-                    <Grid className="w-4 h-4" />
-                  </Button>
-                  <Button
-                    variant={viewMode === 'table' ? 'default' : 'ghost'}
-                    size="sm"
-                    onClick={() => setViewMode('table')}
-                    className="px-3"
-                  >
-                    <List className="w-4 h-4" />
-                  </Button>
                 </div>
               </div>
 
@@ -1259,72 +1258,126 @@ export default function Dashboard() {
           content: (
             <div className="space-y-6">
               {/* Controls Bar */}
-              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-                <div className="flex flex-col sm:flex-row gap-4 flex-1">
-                  {/* Search */}
-                  <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input
-                      placeholder="Search copilots..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
-                  </div>
-                  
-                  {/* Filters */}
-                  <div className="flex gap-2">
-                    <Select value={statusFilter} onValueChange={(value: 'all' | 'active' | 'archived') => setStatusFilter(value)}>
-                      <SelectTrigger className="w-32">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="all">All Status</SelectItem>
-                        <SelectItem value="active">Active</SelectItem>
-                        <SelectItem value="archived">Archived</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline" size="sm">
-                          <ArrowUpDown className="w-4 h-4 mr-2" />
-                          Sort
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuItem onClick={() => setSortBy('name')}>
-                          Sort by Name
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setSortBy('type')}>
-                          Sort by Type
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setSortBy('status')}>
-                          Sort by Status
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </div>
-                
-                {/* View Toggle */}
-                <div className="flex gap-1 border rounded-lg p-1">
-                  <Button
-                    variant={viewMode === 'grid' ? 'default' : 'ghost'}
-                    size="sm"
-                    onClick={() => setViewMode('grid')}
-                    className="px-3"
+              <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
+                {/* Action Buttons - Left Side */}
+                <div className="flex gap-3">
+                  <Button 
+                    variant="default"
+                    className="gap-2 h-10"
+                    style={{ backgroundColor: '#008062' }}
+                    onClick={() => setShowCreationWizard(true)}
+                  >
+                    <Plus className="w-4 h-4" />
+                    Create Copilot
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="gap-2 h-10"
+                    onClick={() => {
+                      // TODO: Navigate to marketplace
+                      console.log('Navigate to marketplace');
+                    }}
                   >
                     <Grid className="w-4 h-4" />
+                    Marketplace
                   </Button>
-                  <Button
-                    variant={viewMode === 'table' ? 'default' : 'ghost'}
-                    size="sm"
-                    onClick={() => setViewMode('table')}
-                    className="px-3"
-                  >
-                    <List className="w-4 h-4" />
-                  </Button>
+                </div>
+
+                {/* Search, Filters, and View Toggle - Right Side */}
+                <div className="flex items-center gap-3">
+                  {/* Search - Collapsible */}
+                  <div className="flex items-center">
+                    {!searchExpanded ? (
+                      <Button 
+                        variant="outline" 
+                        className="gap-2 h-10"
+                        onClick={() => setSearchExpanded(true)}
+                      >
+                        <Search className="w-4 h-4" />
+                        Search
+                      </Button>
+                    ) : (
+                      <div className="relative w-64">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                        <Input
+                          placeholder="Search copilots..."
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          className="pl-10 pr-10 h-10"
+                          autoFocus
+                          onBlur={() => {
+                            if (!searchTerm) {
+                              setSearchExpanded(false);
+                            }
+                          }}
+                        />
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setSearchTerm('');
+                            setSearchExpanded(false);
+                          }}
+                          className="absolute right-1 top-1/2 transform -translate-y-1/2 h-6 w-6 p-0"
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Status Filter */}
+                  <Select value={statusFilter} onValueChange={(value: 'all' | 'active' | 'archived') => setStatusFilter(value)}>
+                    <SelectTrigger className="w-32 h-10">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All Status</SelectItem>
+                      <SelectItem value="active">Active</SelectItem>
+                      <SelectItem value="archived">Archived</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  
+                  {/* Sort Dropdown */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" className="h-10">
+                        <ArrowUpDown className="w-4 h-4 mr-2" />
+                        Sort
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuItem onClick={() => setSortBy('name')}>
+                        Sort by Name
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setSortBy('type')}>
+                        Sort by Type
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => setSortBy('status')}>
+                        Sort by Status
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+
+                  {/* View Toggle */}
+                  <div className="flex gap-1 border rounded-lg p-1">
+                    <Button
+                      variant={viewMode === 'grid' ? 'default' : 'ghost'}
+                      size="sm"
+                      onClick={() => setViewMode('grid')}
+                      className="px-3 h-8"
+                    >
+                      <Grid className="w-4 h-4" />
+                    </Button>
+                    <Button
+                      variant={viewMode === 'table' ? 'default' : 'ghost'}
+                      size="sm"
+                      onClick={() => setViewMode('table')}
+                      className="px-3 h-8"
+                    >
+                      <List className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
 
