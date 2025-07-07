@@ -1031,7 +1031,6 @@ export default function Dashboard() {
                     <TableHeader>
                       <TableRow>
                         <TableHead>Name</TableHead>
-                        <TableHead>Type</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead>Description</TableHead>
                         <TableHead className="text-right">Actions</TableHead>
@@ -1045,11 +1044,6 @@ export default function Dashboard() {
                               <TableAvatar copilot={copilot} />
                               {copilot.name}
                             </div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge variant="secondary" className="capitalize">
-                              {copilot.type}
-                            </Badge>
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
@@ -1289,7 +1283,6 @@ export default function Dashboard() {
                     <TableHeader>
                       <TableRow>
                         <TableHead>Name</TableHead>
-                        <TableHead>Type</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead>Description</TableHead>
                         <TableHead className="text-right">Actions</TableHead>
@@ -1303,11 +1296,6 @@ export default function Dashboard() {
                               <TableAvatar copilot={copilot} />
                               {copilot.name}
                             </div>
-                          </TableCell>
-                          <TableCell>
-                            <Badge variant="secondary" className="capitalize">
-                              {copilot.type}
-                            </Badge>
                           </TableCell>
                           <TableCell>
                             <div className="flex items-center gap-2">
