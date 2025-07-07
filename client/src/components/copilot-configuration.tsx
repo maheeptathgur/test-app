@@ -1574,101 +1574,119 @@ function MyComponent() {
                   <div className="space-y-4 mb-8">
                     <h3 className="text-md font-medium text-gray-900">Agents</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
-                            <PenTool className="w-5 h-5 text-white" />
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                        <CardHeader className="pb-4">
+                          <div className="flex items-start gap-3">
+                            <PenTool className="w-8 h-8 text-purple-600" />
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Content Creator</h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <button
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                >
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
+                                </button>
+                                <span className="text-xs text-gray-600">Active</span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm">Content Creator</div>
-                            <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700 mt-1">Agent</Badge>
+                        </CardHeader>
+                        <CardContent className="pt-0 flex-1 flex flex-col">
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Creates and manages content across platforms with AI-powered writing tools</p>
+                          
+                          <div className="space-y-4 mt-auto">
+                            <div className="space-y-3">
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-medium text-gray-700">Used by</span>
+                              </div>
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <div className="flex flex-wrap gap-1">
+                                    <Badge className="text-xs bg-green-100 text-green-700 hover:bg-green-200">Campaign Manager</Badge>
+                                    <Badge className="text-xs bg-green-100 text-green-700 hover:bg-green-200">Content Assistant</Badge>
+                                    <Badge className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">Content Generation</Badge>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="pt-2">
+                              <div className="flex gap-2">
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="w-full"
+                                  onClick={() => handleAgentConfigure({ 
+                                    id: 'content-creator', 
+                                    name: 'Content Creator', 
+                                    description: 'Creates and manages content across platforms',
+                                    specialization: 'Content Creation'
+                                  })}
+                                >
+                                  Configure
+                                </Button>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="space-y-2 text-xs text-gray-600">
-                          <div className="flex justify-between">
-                            <span>Specialization:</span>
-                            <span className="font-medium">Content Creation</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Tools:</span>
-                            <span className="font-medium">3 connected</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Workflows:</span>
-                            <span className="font-medium">2 active</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Tasks:</span>
-                            <span className="font-medium">156 completed</span>
-                          </div>
-                        </div>
-                        <div className="flex gap-1 mt-3">
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="flex-1 text-xs"
-                            onClick={() => handleAgentConfigure({ 
-                              id: 'content-creator', 
-                              name: 'Content Creator', 
-                              description: 'Creates and manages content across platforms',
-                              specialization: 'Content Creation'
-                            })}
-                          >
-                            Configure
-                          </Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
-                            <Trash2 className="w-3 h-3" />
-                          </Button>
-                        </div>
-                      </div>
+                        </CardContent>
+                      </Card>
 
-                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
-                            <BarChart className="w-5 h-5 text-white" />
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                        <CardHeader className="pb-4">
+                          <div className="flex items-start gap-3">
+                            <BarChart className="w-8 h-8 text-blue-600" />
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Data Analyst</h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <button
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                >
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
+                                </button>
+                                <span className="text-xs text-gray-600">Active</span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm">Data Analyst</div>
-                            <Badge variant="secondary" className="text-xs bg-purple-100 text-purple-700 mt-1">Agent</Badge>
+                        </CardHeader>
+                        <CardContent className="pt-0 flex-1 flex flex-col">
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Analyzes data and generates insights for performance optimization</p>
+                          
+                          <div className="space-y-4 mt-auto">
+                            <div className="space-y-3">
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-medium text-gray-700">Used by</span>
+                              </div>
+                              <div>
+                                <div className="flex items-center gap-2">
+                                  <div className="flex flex-wrap gap-1">
+                                    <Badge className="text-xs bg-green-100 text-green-700 hover:bg-green-200">Social Analyst</Badge>
+                                    <Badge className="text-xs bg-green-100 text-green-700 hover:bg-green-200">Campaign Manager</Badge>
+                                    <Badge className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">Performance Tracking</Badge>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <div className="pt-2">
+                              <div className="flex gap-2">
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="w-full"
+                                  onClick={() => handleAgentConfigure({ 
+                                    id: 'data-analyst', 
+                                    name: 'Data Analyst', 
+                                    description: 'Analyzes data and generates insights',
+                                    specialization: 'Data Analysis'
+                                  })}
+                                >
+                                  Configure
+                                </Button>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="space-y-2 text-xs text-gray-600">
-                          <div className="flex justify-between">
-                            <span>Specialization:</span>
-                            <span className="font-medium">Data Analysis</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Tools:</span>
-                            <span className="font-medium">4 connected</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Workflows:</span>
-                            <span className="font-medium">3 active</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Tasks:</span>
-                            <span className="font-medium">89 completed</span>
-                          </div>
-                        </div>
-                        <div className="flex gap-1 mt-3">
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="flex-1 text-xs"
-                            onClick={() => handleAgentConfigure({ 
-                              id: 'data-analyst', 
-                              name: 'Data Analyst', 
-                              description: 'Analyzes data and generates insights',
-                              specialization: 'Data Analysis'
-                            })}
-                          >
-                            Configure
-                          </Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
-                            <Trash2 className="w-3 h-3" />
-                          </Button>
-                        </div>
-                      </div>
+                        </CardContent>
+                      </Card>
                     </div>
                   </div>
 
@@ -1773,99 +1791,117 @@ function MyComponent() {
                   <div className="space-y-4">
                     <h3 className="text-md font-medium text-gray-900">Workflows</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
-                            <Zap className="w-5 h-5 text-white" />
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                        <CardHeader className="pb-4">
+                          <div className="flex items-start gap-3">
+                            <Zap className="w-8 h-8 text-amber-600" />
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Content Pipeline</h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <button
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                >
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
+                                </button>
+                                <span className="text-xs text-gray-600">Active</span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm">Content Pipeline</div>
-                            <Badge variant="secondary" className="text-xs bg-amber-100 text-amber-700 mt-1">Workflow</Badge>
+                        </CardHeader>
+                        <CardContent className="pt-0 flex-1 flex flex-col">
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Automated content creation and publishing workflow with 5 steps</p>
+                          
+                          <div className="space-y-4 mt-auto">
+                            <div className="space-y-2 text-xs text-gray-600">
+                              <div className="flex justify-between">
+                                <span>Source:</span>
+                                <span className="font-medium">n8n</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span>Success Rate:</span>
+                                <span className="font-medium text-green-600">98.2%</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span>Executions:</span>
+                                <span className="font-medium">245 today</span>
+                              </div>
+                            </div>
+                            
+                            <div className="pt-2">
+                              <div className="flex gap-2">
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="w-full"
+                                  onClick={() => handleWorkflowConfigure({ 
+                                    id: 'content-pipeline', 
+                                    name: 'Content Pipeline', 
+                                    description: 'Automated content creation and publishing workflow'
+                                  })}
+                                >
+                                  Configure
+                                </Button>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="space-y-2 text-xs text-gray-600">
-                          <div className="flex justify-between">
-                            <span>Source:</span>
-                            <span className="font-medium">n8n</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Steps:</span>
-                            <span className="font-medium">5</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Success Rate:</span>
-                            <span className="font-medium text-green-600">98.2%</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Executions:</span>
-                            <span className="font-medium">245 today</span>
-                          </div>
-                        </div>
-                        <div className="flex gap-1 mt-3">
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="flex-1 text-xs"
-                            onClick={() => handleWorkflowConfigure({ 
-                              id: 'content-pipeline', 
-                              name: 'Content Pipeline', 
-                              description: 'Automated content creation and publishing workflow'
-                            })}
-                          >
-                            Configure
-                          </Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
-                            <Trash2 className="w-3 h-3" />
-                          </Button>
-                        </div>
-                      </div>
+                        </CardContent>
+                      </Card>
 
-                      <div className="p-4 border rounded-lg bg-white hover:shadow-sm transition-shadow">
-                        <div className="flex items-center gap-3 mb-3">
-                          <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
-                            <GitBranch className="w-5 h-5 text-white" />
+                      <Card className="hover:shadow-md transition-shadow h-full flex flex-col">
+                        <CardHeader className="pb-4">
+                          <div className="flex items-start gap-3">
+                            <GitBranch className="w-8 h-8 text-green-600" />
+                            <div className="flex-1 min-w-0">
+                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Data Processing</h3>
+                              <div className="flex items-center gap-2 mb-2">
+                                <button
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                >
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
+                                </button>
+                                <span className="text-xs text-gray-600">Active</span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm">Data Processing</div>
-                            <Badge variant="secondary" className="text-xs bg-amber-100 text-amber-700 mt-1">Workflow</Badge>
+                        </CardHeader>
+                        <CardContent className="pt-0 flex-1 flex flex-col">
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Automated data analysis and reporting workflow with 8 steps</p>
+                          
+                          <div className="space-y-4 mt-auto">
+                            <div className="space-y-2 text-xs text-gray-600">
+                              <div className="flex justify-between">
+                                <span>Source:</span>
+                                <span className="font-medium">Make.com</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span>Success Rate:</span>
+                                <span className="font-medium text-green-600">94.7%</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span>Executions:</span>
+                                <span className="font-medium">67 today</span>
+                              </div>
+                            </div>
+                            
+                            <div className="pt-2">
+                              <div className="flex gap-2">
+                                <Button 
+                                  variant="outline" 
+                                  size="sm" 
+                                  className="w-full"
+                                  onClick={() => handleWorkflowConfigure({ 
+                                    id: 'data-processing', 
+                                    name: 'Data Processing', 
+                                    description: 'Automated data analysis and reporting workflow'
+                                  })}
+                                >
+                                  Configure
+                                </Button>
+                              </div>
+                            </div>
                           </div>
-                        </div>
-                        <div className="space-y-2 text-xs text-gray-600">
-                          <div className="flex justify-between">
-                            <span>Source:</span>
-                            <span className="font-medium">Make.com</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Steps:</span>
-                            <span className="font-medium">8</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Success Rate:</span>
-                            <span className="font-medium text-green-600">94.7%</span>
-                          </div>
-                          <div className="flex justify-between">
-                            <span>Executions:</span>
-                            <span className="font-medium">67 today</span>
-                          </div>
-                        </div>
-                        <div className="flex gap-1 mt-3">
-                          <Button 
-                            variant="outline" 
-                            size="sm" 
-                            className="flex-1 text-xs"
-                            onClick={() => handleWorkflowConfigure({ 
-                              id: 'data-processing', 
-                              name: 'Data Processing', 
-                              description: 'Automated data analysis and reporting workflow'
-                            })}
-                          >
-                            Configure
-                          </Button>
-                          <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50">
-                            <Trash2 className="w-3 h-3" />
-                          </Button>
-                        </div>
-                      </div>
+                        </CardContent>
+                      </Card>
                     </div>
                   </div>
 
