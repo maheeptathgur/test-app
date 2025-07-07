@@ -58,6 +58,7 @@
 .n8n-workflow-editor .n8n-tab-nav {
   padding-left: 0 !important; /* Remove left padding from tab navigation */
   padding-right: 0 !important; /* Remove right padding from tab navigation */
+  padding-top: 1rem !important; /* Add some top padding for spacing */
 }
 
 /* Custom styling for n8n workflow editor tab content */
