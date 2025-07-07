@@ -1852,10 +1852,12 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                     <GitBranch className="w-8 h-8 text-purple-600" />
                     <div className="flex-1 min-w-0">
                       <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{workflow.name}</h3>
-                      <p className="text-sm text-gray-500 mb-2">Source: <span className="font-medium">{workflow.source}</span></p>
-                      <Badge variant={workflow.status === 'Active' ? 'default' : workflow.status === 'Paused' ? 'secondary' : 'outline'} className="text-xs">
-                        {workflow.status}
-                      </Badge>
+                      <div className="flex items-center gap-2 mb-2">
+                        <Badge variant={workflow.status === 'Active' ? 'default' : workflow.status === 'Paused' ? 'secondary' : 'outline'} className="text-xs">
+                          {workflow.status}
+                        </Badge>
+                        <span className="text-xs text-gray-600">Source: {workflow.source}</span>
+                      </div>
                     </div>
                   </div>
                 </CardHeader>
@@ -1863,31 +1865,21 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                   <p className="text-sm text-gray-600 mb-4 flex-grow">{workflow.description}</p>
                   
                   <div className="space-y-4 mt-auto">
-                    <div>
-                      <p className="text-sm font-medium text-gray-700 mb-2">Tools & Agents</p>
-                      <div className="flex flex-wrap gap-1 mb-2">
-                        {workflow.tools.slice(0, 2).map((tool, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {tool}
-                          </Badge>
-                        ))}
-                        {workflow.tools.length > 2 && (
-                          <Badge variant="outline" className="text-xs">
-                            +{workflow.tools.length - 2} tools
-                          </Badge>
-                        )}
+                    {/* Used by Section */}
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium text-gray-700">Used by</span>
                       </div>
-                      <div className="flex flex-wrap gap-1">
-                        {workflow.agents.slice(0, 1).map((agent, idx) => (
-                          <Badge key={idx} variant="outline" className="text-xs">
-                            {agent}
-                          </Badge>
-                        ))}
-                        {workflow.agents.length > 1 && (
-                          <Badge variant="outline" className="text-xs">
-                            +{workflow.agents.length - 1} agents
-                          </Badge>
-                        )}
+                      <div>
+                        <div className="flex flex-wrap gap-1">
+                          {workflow.usedBy?.map((copilotName: string, idx: number) => (
+                            <Badge key={idx} className="text-xs bg-amber-100 text-amber-700 hover:bg-amber-200">
+                              {copilotName}
+                            </Badge>
+                          )) || (
+                            <span className="text-xs text-gray-500">No copilots using this workflow</span>
+                          )}
+                        </div>
                       </div>
                     </div>
                     
@@ -1912,22 +1904,11 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                     </div>
                     
                     <div className="pt-2">
-                      {workflow.status === 'Active' ? (
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="flex-1" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>Edit</Button>
-                          <Button variant="outline" size="sm" className="flex-1" onClick={() => console.log('Pausing workflow:', workflow.name)}>Pause</Button>
-                        </div>
-                      ) : workflow.status === 'Paused' ? (
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="flex-1" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>Edit</Button>
-                          <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white" onClick={() => console.log('Resuming workflow:', workflow.name)}>Resume</Button>
-                        </div>
-                      ) : (
-                        <div className="flex gap-2">
-                          <Button variant="outline" size="sm" className="flex-1" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>Edit</Button>
-                          <Button size="sm" className="flex-1 bg-[#008062] hover:bg-[#00d2a0] text-white" onClick={() => console.log('Deploying workflow:', workflow.name)}>Deploy</Button>
-                        </div>
-                      )}
+                      <div className="flex gap-2">
+                        <Button variant="outline" size="sm" className="w-full" onClick={() => onWorkflowEdit?.(workflow.id.toString())}>
+                          Configure
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
