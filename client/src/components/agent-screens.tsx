@@ -55,7 +55,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
     setQuickInputs(quickInputs.filter((_, i) => i !== index));
   };
   return (
-    <div className="px-8 pt-4 pb-6 space-y-6">
+    <div className="px-6 pt-4 pb-4 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -593,7 +593,7 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
   };
 
   return (
-    <div className="px-8 pt-4 pb-6 space-y-6">
+    <div className="px-6 pt-4 pb-4 space-y-6">
       {/* Header */}
       <div className="flex items-center gap-4">
         <Button variant="outline" size="sm" onClick={onBack}>

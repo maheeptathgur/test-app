@@ -46,7 +46,7 @@
 
 /* Custom dashboard content padding */
 .dashboard-content {
-  padding: 1rem 2rem 1.5rem 2rem; /* Smaller padding: 16px horizontal, 16px top, 24px bottom */
+  padding: 1rem 1.5rem 1rem 1.5rem; /* Consistent with site: 16px top/bottom, 24px horizontal */
 }
 
 :root {
