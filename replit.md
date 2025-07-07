@@ -284,6 +284,7 @@ Changelog:
 - July 7, 2025. Added delete functionality to all component cards - implemented delete buttons for agents (Content Creator, Data Analyst) and workflows (Content Pipeline, Data Processing) with consistent positioning, styling, and onClick handlers that call handleDeleteComponent with appropriate IDs, names, and component types for unified deletion experience across all component types
 - July 7, 2025. Removed Type column from copilots table view - eliminated redundant Type column and corresponding data cells from both table header and table body rows to create cleaner, more focused table layout
 - July 7, 2025. Updated table status indicator to interactive toggle switch - replaced simple status dot with same toggle switch design used in card layout, includes clickable functionality to archive/activate copilots, brand green styling (#008062), smooth transitions, and consistent Active/Inactive labeling matching the card design
+- July 7, 2025. Added collapsible "Used by" section to tool cards - implemented expandable section showing which copilots use each tool with color-coded badges (blue for copilots), tooltips with copilot descriptions, chevron toggle functionality, border separation, and consistent styling matching the agents screen pattern for unified user experience across component management interfaces
 ```
 
 ## User Preferences
