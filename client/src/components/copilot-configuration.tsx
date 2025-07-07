@@ -118,6 +118,10 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   
   // Component selection modal state
   const [componentModalOpen, setComponentModalOpen] = useState(false);
+  
+  // Component deletion state
+  const [deleteComponentModalOpen, setDeleteComponentModalOpen] = useState(false);
+  const [componentToDelete, setComponentToDelete] = useState<{id: string, name: string, type: string} | null>(null);
   const [componentModalType, setComponentModalType] = useState<'agent' | 'tool' | 'workflow'>('agent');
   const [selectedComponents, setSelectedComponents] = useState<string[]>([]);
 
@@ -418,6 +422,27 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     setEditingDocument(null);
     setTempTitle("");
     setTempDescription("");
+  };
+
+  // Component deletion handlers
+  const handleDeleteComponent = (id: string, name: string, type: string) => {
+    setComponentToDelete({ id, name, type });
+    setDeleteComponentModalOpen(true);
+  };
+
+  const handleConfirmDeleteComponent = () => {
+    if (componentToDelete) {
+      console.log(`Removing ${componentToDelete.type} "${componentToDelete.name}" from copilot`);
+      // In a real implementation, this would update the copilot's components
+      // For now, we'll just close the modal
+      setDeleteComponentModalOpen(false);
+      setComponentToDelete(null);
+    }
+  };
+
+  const handleCancelDeleteComponent = () => {
+    setDeleteComponentModalOpen(false);
+    setComponentToDelete(null);
   };
 
   // Navigation handlers dispatch custom events
@@ -1700,6 +1725,7 @@ function MyComponent() {
                           size="sm" 
                           className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0"
                           title="Remove from copilot"
+                          onClick={() => handleDeleteComponent('gmail', 'Gmail', 'tool')}
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -1752,6 +1778,7 @@ function MyComponent() {
                           size="sm" 
                           className="absolute top-2 right-2 text-red-500 hover:text-red-600 hover:bg-red-50 w-8 h-8 p-0"
                           title="Remove from copilot"
+                          onClick={() => handleDeleteComponent('slack', 'Slack', 'tool')}
                         >
                           <Trash2 className="w-4 h-4" />
                         </Button>
@@ -3474,6 +3501,35 @@ Add sections, lists, and more..."
             }}>
               <FileText className="w-4 h-4 mr-2" />
               Create Document
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Component Confirmation Modal */}
+      <Dialog open={deleteComponentModalOpen} onOpenChange={setDeleteComponentModalOpen}>
+        <DialogContent className="max-w-sm">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Trash2 className="w-5 h-5 text-red-500" />
+              Remove Component
+            </DialogTitle>
+            <DialogDescription>
+              Are you sure you want to remove "{componentToDelete?.name}" from this copilot? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="flex justify-end gap-2 pt-4">
+            <Button variant="outline" onClick={handleCancelDeleteComponent}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive"
+              onClick={handleConfirmDeleteComponent}
+              className="gap-2"
+            >
+              <Trash2 className="w-4 h-4" />
+              Remove Component
             </Button>
           </div>
         </DialogContent>
