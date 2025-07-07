@@ -1120,16 +1120,40 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                               return (
                                 <>
                                   {visibleItems.map((item, idx) => (
-                                    <Badge 
-                                      key={`${item.type}-${idx}`} 
-                                      className={`text-xs ${
-                                        item.type === 'copilot' 
-                                          ? 'bg-green-100 text-green-700 hover:bg-green-200'
-                                          : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
-                                      }`}
-                                    >
-                                      {item.name}
-                                    </Badge>
+                                    <Tooltip key={`${item.type}-${idx}`} delayDuration={0}>
+                                      <TooltipTrigger asChild>
+                                        <Badge 
+                                          className={`text-xs cursor-help ${
+                                            item.type === 'copilot' 
+                                              ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                                              : 'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                                          }`}
+                                        >
+                                          {item.name}
+                                        </Badge>
+                                      </TooltipTrigger>
+                                      <TooltipContent side="top" className="bg-white text-gray-900 border border-gray-200 shadow-lg max-w-xs z-50">
+                                        <p className="text-sm">
+                                          <span className="font-medium">{item.name}</span>
+                                          <br />
+                                          <span className="text-gray-600">
+                                            {item.type === 'copilot' ? (
+                                              item.name === 'Campaign Manager' ? 'Manages email and social media marketing campaigns' :
+                                              item.name === 'Content Assistant' ? 'Helps create and optimize written content' :
+                                              item.name === 'Social Analyst' ? 'Analyzes social media performance and trends' :
+                                              item.name === 'Customer Support' ? 'Handles customer inquiries and support tickets' :
+                                              'AI assistant copilot'
+                                            ) : (
+                                              item.name === 'Email Campaign Setup' ? 'Automates email campaign creation and scheduling' :
+                                              item.name === 'Social Media Posting' ? 'Schedules and publishes social media content' :
+                                              item.name === 'Content Generation' ? 'Generates various types of marketing content' :
+                                              item.name === 'Performance Tracking' ? 'Tracks and analyzes campaign performance metrics' :
+                                              'Automated workflow process'
+                                            )}
+                                          </span>
+                                        </p>
+                                      </TooltipContent>
+                                    </Tooltip>
                                   ))}
                                   {!isExpanded && remainingCount > 0 && (
                                     <button
@@ -1143,18 +1167,6 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                               );
                             })()}
                           </div>
-                          
-                          {/* Tooltip for badge explanation */}
-                          <Tooltip delayDuration={0}>
-                            <TooltipTrigger asChild>
-                              <button className="flex items-center justify-center">
-                                <HelpCircle className="w-4 h-4 text-gray-400 cursor-help hover:text-gray-600 transition-colors" />
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent side="top" className="bg-white text-gray-900 border border-gray-200 shadow-lg max-w-xs z-50">
-                              <p className="text-sm">Shows which copilots and workflows use this agent. Green badges are copilots, yellow badges are workflows.</p>
-                            </TooltipContent>
-                          </Tooltip>
                         </div>
                       </div>
 
