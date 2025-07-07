@@ -165,9 +165,6 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 </div>
                 <div>
                   <div className="text-sm font-medium">{workspace.name}</div>
-                  <div className={`text-xs group-hover:text-white ${
-                    workspace.id === currentWorkspace.id ? 'text-white' : 'text-muted-foreground'
-                  }`}>{workspace.type}</div>
                 </div>
               </DropdownMenuItem>
             ))}
