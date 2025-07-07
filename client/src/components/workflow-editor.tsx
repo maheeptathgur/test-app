@@ -164,7 +164,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
             <p className="text-sm text-gray-600">{workflowDescription}</p>
           </div>
         </div>
-        <Button variant="ghost" onClick={onBack} className="gap-2">
+        <Button variant="outline" onClick={onBack} className="gap-2">
           <X className="w-4 h-4" />
           Close
         </Button>
