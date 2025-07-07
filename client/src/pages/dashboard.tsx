@@ -31,12 +31,9 @@ import { AccountSettings } from "@/components/account-settings";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
-  { id: '1', name: 'GTM Team', type: 'Personal', avatar: '⚡', color: 'bg-[#008062]' },
+  { id: '1', name: 'Marketing', type: 'Personal', avatar: '⚡', color: 'bg-[#008062]' },
   { id: '2', name: 'Product Development', type: 'Team', avatar: 'P', color: 'bg-blue-500' },
-  { id: '3', name: 'Marketing Hub', type: 'Team', avatar: 'M', color: 'bg-orange-500' },
   { id: '4', name: 'Customer Success', type: 'Team', avatar: 'C', color: 'bg-green-500' },
-  { id: '5', name: 'Data Analytics', type: 'Team', avatar: 'D', color: 'bg-purple-500' },
-  { id: '6', name: 'Design Studio', type: 'Team', avatar: 'DS', color: 'bg-pink-500' },
   { id: '7', name: 'Career Coach', type: 'Team', avatar: 'CC', color: 'bg-indigo-500' },
 ];
 
@@ -1333,7 +1330,7 @@ export default function Dashboard() {
                     </div>
                     <Badge variant="secondary" className="bg-[#008062] text-white">Current</Badge>
                   </div>
-                  <p className="text-sm text-muted-foreground mb-4">Your main workspace for AI copilot development and management.</p>
+                  <p className="text-sm text-muted-foreground mb-4">Marketing team workspace with campaign and content copilots.</p>
                   <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                     <span>3 copilots</span>
                     <span>12 members</span>
@@ -1411,33 +1408,21 @@ export default function Dashboard() {
                     </div>
                     <p className="text-sm text-muted-foreground mb-4">
                       {workspace.name === 'Product Development' ? 'Workspace for product team collaboration and development copilots.' :
-                       workspace.name === 'Marketing Hub' ? 'Marketing team workspace with campaign and content copilots.' :
                        workspace.name === 'Customer Success' ? 'Customer support and success team workspace.' :
-                       workspace.name === 'Data Analytics' ? 'Analytics and reporting workspace for data-driven insights.' :
-                       workspace.name === 'Design Studio' ? 'Creative workspace for design and brand teams.' :
                        workspace.name === 'Career Coach' ? 'Professional development workspace for career coaching and resume optimization.' :
                        'Workspace for team collaboration and AI copilot management.'}
                     </p>
                     <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                       <span>{workspace.name === 'Product Development' ? '8 copilots' :
-                             workspace.name === 'Marketing Hub' ? '6 copilots' :
                              workspace.name === 'Customer Success' ? '1 copilot' :
-                             workspace.name === 'Data Analytics' ? '5 copilots' :
-                             workspace.name === 'Design Studio' ? '4 copilots' :
                              workspace.name === 'Career Coach' ? '1 copilot' :
                              '2 copilots'}</span>
                       <span>{workspace.name === 'Product Development' ? '24 members' :
-                             workspace.name === 'Marketing Hub' ? '8 members' :
                              workspace.name === 'Customer Success' ? '6 members' :
-                             workspace.name === 'Data Analytics' ? '5 members' :
-                             workspace.name === 'Design Studio' ? '7 members' :
                              workspace.name === 'Career Coach' ? '4 members' :
                              '3 members'}</span>
                       <span>{workspace.name === 'Product Development' ? 'Created Nov 20' :
-                             workspace.name === 'Marketing Hub' ? 'Created Dec 1' :
                              workspace.name === 'Customer Success' ? 'Created Dec 8' :
-                             workspace.name === 'Data Analytics' ? 'Created Dec 10' :
-                             workspace.name === 'Design Studio' ? 'Created Dec 12' :
                              workspace.name === 'Career Coach' ? 'Created Dec 18' :
                              'Created Jan 5'}</span>
                     </div>
