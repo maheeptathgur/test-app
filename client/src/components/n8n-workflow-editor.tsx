@@ -152,7 +152,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex border-b px-8">
+      <div className="n8n-tab-nav flex border-b px-8">
         {tabs.map((tab) => (
           <button
             key={tab.id}
