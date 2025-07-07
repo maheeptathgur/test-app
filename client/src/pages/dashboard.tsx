@@ -578,6 +578,7 @@ export default function Dashboard() {
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'archived'>('all');
   const [sortBy, setSortBy] = useState<'name' | 'type' | 'status'>('name');
+  const [searchExpanded, setSearchExpanded] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [browseIntegrationsActive, setBrowseIntegrationsActive] = useState(false);
   const [gmailConfigActive, setGmailConfigActive] = useState(false);
@@ -942,15 +943,70 @@ export default function Dashboard() {
               {/* Controls Bar */}
               <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
                 <div className="flex flex-col sm:flex-row gap-4 flex-1">
-                  {/* Search */}
-                  <div className="relative flex-1 max-w-md">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-                    <Input
-                      placeholder="Search copilots..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
+                  {/* Action Buttons */}
+                  <div className="flex gap-3">
+                    <Button 
+                      variant="default"
+                      className="gap-2"
+                      style={{ backgroundColor: '#008062' }}
+                      onClick={() => setShowCreationWizard(true)}
+                    >
+                      <Plus className="w-4 h-4" />
+                      Create Copilot
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="gap-2"
+                      onClick={() => {
+                        // TODO: Navigate to marketplace
+                        console.log('Navigate to marketplace');
+                      }}
+                    >
+                      <Grid className="w-4 h-4" />
+                      Marketplace
+                    </Button>
+                  </div>
+
+                  {/* Search - Collapsible */}
+                  <div className="flex items-center gap-2">
+                    {!searchExpanded ? (
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => setSearchExpanded(true)}
+                        className="gap-2"
+                      >
+                        <Search className="w-4 h-4" />
+                        Search
+                      </Button>
+                    ) : (
+                      <div className="relative flex-1 max-w-md">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                        <Input
+                          placeholder="Search copilots..."
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          className="pl-10 pr-10"
+                          autoFocus
+                          onBlur={() => {
+                            if (!searchTerm) {
+                              setSearchExpanded(false);
+                            }
+                          }}
+                        />
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setSearchTerm('');
+                            setSearchExpanded(false);
+                          }}
+                          className="absolute right-1 top-1/2 transform -translate-y-1/2 h-6 w-6 p-0"
+                        >
+                          <X className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    )}
                   </div>
                   
                   {/* Filters */}
@@ -1968,30 +2024,7 @@ export default function Dashboard() {
                       </Badge>
                     )}
                   </div>
-                  {activeSection === 'copilots' && (
-                    <div className="flex gap-3">
-                      <Button 
-                        variant="default"
-                        className="gap-2"
-                        style={{ backgroundColor: '#008062' }}
-                        onClick={() => setShowCreationWizard(true)}
-                      >
-                        <Plus className="w-4 h-4" />
-                        Create Copilot
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        className="gap-2"
-                        onClick={() => {
-                          // TODO: Navigate to marketplace
-                          console.log('Navigate to marketplace');
-                        }}
-                      >
-                        <Grid className="w-4 h-4" />
-                        Marketplace
-                      </Button>
-                    </div>
-                  )}
+
                 </div>
               )}
               {sectionContent.content}
