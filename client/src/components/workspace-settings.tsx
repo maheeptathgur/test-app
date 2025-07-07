@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon } from "lucide-react";
+import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon, Palette, RotateCcw } from "lucide-react";
 import avatarImagePath from "@assets/image_1751745994194.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,9 +20,45 @@ export function WorkspaceSettings() {
   const [allowPublicAccess, setAllowPublicAccess] = useState(false);
   const [enableNotifications, setEnableNotifications] = useState(true);
   const [dataRetention, setDataRetention] = useState("90");
+  
+  // Branding colors - defaults to current brand colors
+  const [primaryColor, setPrimaryColor] = useState("#008062");
+  const [contentBgColor, setContentBgColor] = useState("#ffffff");
+  const [sidebarBgColor, setSidebarBgColor] = useState("#e6eeef");
+
+  // Helper function to determine if text should be light or dark based on background
+  const getTextColor = (bgColor: string) => {
+    const hex = bgColor.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    return brightness > 155 ? '#000000' : '#ffffff';
+  };
+
+  // Helper function to generate percentage shading of colors
+  const generateShade = (color: string, percentage: number) => {
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    const adjustedR = Math.round(r + (255 - r) * (percentage / 100));
+    const adjustedG = Math.round(g + (255 - g) * (percentage / 100));
+    const adjustedB = Math.round(b + (255 - b) * (percentage / 100));
+    
+    return `#${adjustedR.toString(16).padStart(2, '0')}${adjustedG.toString(16).padStart(2, '0')}${adjustedB.toString(16).padStart(2, '0')}`;
+  };
+
+  // Reset to default brand colors
+  const resetToDefaults = () => {
+    setPrimaryColor("#008062");
+    setContentBgColor("#ffffff");
+    setSidebarBgColor("#e6eeef");
+  };
 
   return (
-    <div className={`space-y-6 ${(activeTab === "general" || activeTab === "security") ? "pb-24" : ""}`}>
+    <div className={`space-y-6 ${(activeTab === "general" || activeTab === "security" || activeTab === "branding") ? "pb-24" : ""}`}>
       <div className="w-full">
         <nav className="flex space-x-8 border-b border-border">
           <button
@@ -44,6 +80,16 @@ export function WorkspaceSettings() {
             }`}
           >
             Security
+          </button>
+          <button
+            onClick={() => setActiveTab("branding")}
+            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "branding"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+            }`}
+          >
+            Branding
           </button>
 
           <button
@@ -331,7 +377,192 @@ export function WorkspaceSettings() {
         </div>
         )}
 
+        {activeTab === "branding" && (
+        <div className="space-y-6 mt-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Palette className="w-5 h-5" />
+                Workspace Theme Colors
+              </CardTitle>
+              <CardDescription>
+                Customize your workspace colors to match your brand identity
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Color Picker Section */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-3">
+                  <Label htmlFor="primary-color">Primary Color</Label>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Used for buttons, links, and accent elements
+                  </p>
+                  <div className="space-y-2">
+                    <Input
+                      id="primary-color"
+                      type="color"
+                      value={primaryColor}
+                      onChange={(e) => setPrimaryColor(e.target.value)}
+                      className="w-full h-12 rounded-md border cursor-pointer"
+                    />
+                    <Input
+                      type="text"
+                      value={primaryColor}
+                      onChange={(e) => setPrimaryColor(e.target.value)}
+                      className="text-sm"
+                      placeholder="#008062"
+                    />
+                  </div>
+                </div>
 
+                <div className="space-y-3">
+                  <Label htmlFor="content-bg-color">Content Background</Label>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Main content area background color
+                  </p>
+                  <div className="space-y-2">
+                    <Input
+                      id="content-bg-color"
+                      type="color"
+                      value={contentBgColor}
+                      onChange={(e) => setContentBgColor(e.target.value)}
+                      className="w-full h-12 rounded-md border cursor-pointer"
+                    />
+                    <Input
+                      type="text"
+                      value={contentBgColor}
+                      onChange={(e) => setContentBgColor(e.target.value)}
+                      className="text-sm"
+                      placeholder="#ffffff"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <Label htmlFor="sidebar-bg-color">Sidebar Background</Label>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Navigation sidebar background color
+                  </p>
+                  <div className="space-y-2">
+                    <Input
+                      id="sidebar-bg-color"
+                      type="color"
+                      value={sidebarBgColor}
+                      onChange={(e) => setSidebarBgColor(e.target.value)}
+                      className="w-full h-12 rounded-md border cursor-pointer"
+                    />
+                    <Input
+                      type="text"
+                      value={sidebarBgColor}
+                      onChange={(e) => setSidebarBgColor(e.target.value)}
+                      className="text-sm"
+                      placeholder="#e6eeef"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Color Preview Section */}
+              <div className="space-y-3">
+                <Label>Color Preview</Label>
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="flex h-48">
+                    {/* Sidebar Preview */}
+                    <div 
+                      className="w-1/4 flex flex-col p-4 space-y-2"
+                      style={{ 
+                        backgroundColor: sidebarBgColor,
+                        color: getTextColor(sidebarBgColor)
+                      }}
+                    >
+                      <div className="text-sm font-medium">Navigation</div>
+                      <div className="space-y-1">
+                        <div 
+                          className="px-2 py-1 rounded text-xs"
+                          style={{ backgroundColor: generateShade(sidebarBgColor, 15) }}
+                        >
+                          Copilots
+                        </div>
+                        <div 
+                          className="px-2 py-1 rounded text-xs"
+                          style={{ 
+                            backgroundColor: primaryColor,
+                            color: getTextColor(primaryColor)
+                          }}
+                        >
+                          Active Item
+                        </div>
+                        <div 
+                          className="px-2 py-1 rounded text-xs"
+                          style={{ backgroundColor: generateShade(sidebarBgColor, 15) }}
+                        >
+                          Settings
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Content Preview */}
+                    <div 
+                      className="flex-1 p-4 space-y-3"
+                      style={{ 
+                        backgroundColor: contentBgColor,
+                        color: getTextColor(contentBgColor)
+                      }}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div className="text-lg font-semibold">Dashboard</div>
+                        <button 
+                          className="px-3 py-1 rounded text-sm font-medium"
+                          style={{ 
+                            backgroundColor: primaryColor,
+                            color: getTextColor(primaryColor)
+                          }}
+                        >
+                          Primary Button
+                        </button>
+                      </div>
+                      <div 
+                        className="p-3 rounded border"
+                        style={{ 
+                          backgroundColor: generateShade(contentBgColor, 5),
+                          borderColor: generateShade(contentBgColor, 20)
+                        }}
+                      >
+                        <div className="text-sm font-medium mb-1">Sample Card</div>
+                        <div className="text-xs opacity-75">Content with background shading</div>
+                      </div>
+                      <div 
+                        className="p-2 rounded text-xs"
+                        style={{ backgroundColor: generateShade(primaryColor, 80) }}
+                      >
+                        Primary color with 80% shading
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Reset to Defaults */}
+              <div className="flex justify-between items-center pt-4 border-t">
+                <div>
+                  <div className="text-sm font-medium">Reset to Brand Defaults</div>
+                  <div className="text-sm text-muted-foreground">
+                    Restore the original Knolli brand color theme
+                  </div>
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={resetToDefaults}
+                  className="gap-2"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  Reset Colors
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+        )}
 
         {activeTab === "conversations" && (
           <div className="mt-6">
@@ -352,8 +583,8 @@ export function WorkspaceSettings() {
         )}
       </div>
       
-      {/* Save Footer - Only show for General and Security tabs */}
-      {(activeTab === "general" || activeTab === "security") && (
+      {/* Save Footer - Only show for General, Security, and Branding tabs */}
+      {(activeTab === "general" || activeTab === "security" || activeTab === "branding") && (
         <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
           <div className="flex justify-end gap-3">
             <Button variant="outline">
