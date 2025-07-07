@@ -1924,40 +1924,38 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                   <div className="flex items-start gap-3">
                     <GitBranch className="w-8 h-8 text-purple-600" />
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between mb-1">
-                        <h3 className="font-semibold text-gray-900 text-base truncate">{workflow.name}</h3>
-                        <div className="flex items-center gap-2 ml-2">
-                          <span className="text-xs text-gray-600">
-                            {(workflowStatuses[workflow.id] || workflow.status) === 'Active' ? 'Active' : 
-                             (workflowStatuses[workflow.id] || workflow.status) === 'Error' ? 'Error' : 'Inactive'}
-                          </span>
-                          <button
-                            onClick={() => handleWorkflowToggle(workflow.id, workflowStatuses[workflow.id] || workflow.status)}
-                            className={`workflow-toggle relative inline-flex items-center rounded-full w-11 h-6 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#008062] ${
-                              (workflowStatuses[workflow.id] || workflow.status) === 'Active'
-                                ? 'bg-[#008062]'
-                                : (workflowStatuses[workflow.id] || workflow.status) === 'Error'
-                                ? 'bg-red-500'
-                                : 'bg-gray-300'
-                            }`}
-                          >
-                            <span
-                              className={`inline-block w-4 h-4 rounded-full bg-white transition-transform ${
-                                (workflowStatuses[workflow.id] || workflow.status) === 'Active'
-                                  ? 'translate-x-6'
-                                  : 'translate-x-1'
-                              }`}
-                            />
-                          </button>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
+                      <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{workflow.name}</h3>
+                      <div className="flex items-center gap-2 mb-2">
                         <span className="text-xs text-gray-600">Source: {workflow.source}</span>
                       </div>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0 flex-1 flex flex-col">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-xs text-gray-600">
+                      {(workflowStatuses[workflow.id] || workflow.status) === 'Active' ? 'Active' : 
+                       (workflowStatuses[workflow.id] || workflow.status) === 'Error' ? 'Error' : 'Inactive'}
+                    </span>
+                    <button
+                      onClick={() => handleWorkflowToggle(workflow.id, workflowStatuses[workflow.id] || workflow.status)}
+                      className={`workflow-toggle relative inline-flex items-center rounded-full w-11 h-6 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#008062] ${
+                        (workflowStatuses[workflow.id] || workflow.status) === 'Active'
+                          ? 'bg-[#008062]'
+                          : (workflowStatuses[workflow.id] || workflow.status) === 'Error'
+                          ? 'bg-red-500'
+                          : 'bg-gray-300'
+                      }`}
+                    >
+                      <span
+                        className={`inline-block w-4 h-4 rounded-full bg-white transition-transform ${
+                          (workflowStatuses[workflow.id] || workflow.status) === 'Active'
+                            ? 'translate-x-6'
+                            : 'translate-x-1'
+                        }`}
+                      />
+                    </button>
+                  </div>
                   <p className="text-sm text-gray-600 mb-4 flex-grow">{workflow.description}</p>
                   
                   <div className="space-y-4 mt-auto">
