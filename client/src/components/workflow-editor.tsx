@@ -55,6 +55,8 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         config: JSON.stringify(step.config, null, 2)
       }
     }));
+    // Auto-expand the step when entering edit mode
+    setExpandedStep(stepId);
   };
 
   const saveStepEdit = (stepId: string) => {
