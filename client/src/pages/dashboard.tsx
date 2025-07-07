@@ -607,6 +607,7 @@ export default function Dashboard() {
   
   // State for creation wizard
   const [showCreationWizard, setShowCreationWizard] = useState(false);
+  const [showWorkspaceCreationModal, setShowWorkspaceCreationModal] = useState(false);
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
@@ -1332,13 +1333,27 @@ export default function Dashboard() {
                     <span>Created Dec 15</span>
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => {
+                        handleSectionChange('workspace-settings');
+                      }}
+                    >
                       <Settings className="w-4 h-4 mr-2" />
                       Settings
                     </Button>
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <Users className="w-4 h-4 mr-2" />
-                      Members
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => {
+                        handleSectionChange('copilots');
+                      }}
+                    >
+                      <LayoutDashboard className="w-4 h-4 mr-2" />
+                      Go to Workspace
                     </Button>
                   </div>
                 </div>
@@ -1366,7 +1381,12 @@ export default function Dashboard() {
                           <DropdownMenuItem onClick={() => handleWorkspaceChange(workspace)}>
                             Switch to Workspace
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
+                          <DropdownMenuItem 
+                            onClick={() => {
+                              handleWorkspaceChange(workspace);
+                              handleSectionChange('workspace-settings');
+                            }}
+                          >
                             <Settings className="w-4 h-4 mr-2" />
                             Settings
                           </DropdownMenuItem>
