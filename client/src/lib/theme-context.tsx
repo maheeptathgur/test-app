@@ -12,6 +12,8 @@ interface ThemeContextType {
   updateColors: (newColors: Partial<ThemeColors>) => void;
   resetToDefault: () => void;
   isCustomized: boolean;
+  setWorkspace: (workspaceId: string) => void;
+  currentWorkspaceId: string | null;
 }
 
 const defaultColors: ThemeColors = {
@@ -26,21 +28,38 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [colors, setColors] = useState<ThemeColors>(defaultColors);
   const [isCustomized, setIsCustomized] = useState(false);
+  const [currentWorkspaceId, setCurrentWorkspaceId] = useState<string | null>(null);
 
-  // Load saved theme from localStorage on mount
+  // Load workspace-specific theme when workspace changes
   useEffect(() => {
-    const savedTheme = localStorage.getItem('knolli-theme');
-    if (savedTheme) {
-      try {
-        const parsedTheme = JSON.parse(savedTheme);
-        setColors(parsedTheme);
-        setIsCustomized(true);
-        applyThemeToDOM(parsedTheme);
-      } catch (error) {
-        console.error('Failed to parse saved theme:', error);
+    if (currentWorkspaceId) {
+      const savedTheme = localStorage.getItem(`knolli-theme-${currentWorkspaceId}`);
+      if (savedTheme) {
+        try {
+          const parsedTheme = JSON.parse(savedTheme);
+          setColors(parsedTheme);
+          setIsCustomized(true);
+          applyThemeToDOM(parsedTheme);
+        } catch (error) {
+          console.error('Failed to parse saved theme:', error);
+          // Reset to default if parsing fails
+          setColors(defaultColors);
+          setIsCustomized(false);
+          applyThemeToDOM(defaultColors);
+        }
+      } else {
+        // No custom theme for this workspace, use default
+        setColors(defaultColors);
+        setIsCustomized(false);
+        applyThemeToDOM(defaultColors);
       }
+    } else {
+      // No workspace selected, use default theme
+      setColors(defaultColors);
+      setIsCustomized(false);
+      applyThemeToDOM(defaultColors);
     }
-  }, []);
+  }, [currentWorkspaceId]);
 
   const applyThemeToDOM = (themeColors: ThemeColors) => {
     const root = document.documentElement;
@@ -70,8 +89,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setColors(updatedColors);
     setIsCustomized(true);
     
-    // Save to localStorage
-    localStorage.setItem('knolli-theme', JSON.stringify(updatedColors));
+    // Save to workspace-specific localStorage
+    if (currentWorkspaceId) {
+      localStorage.setItem(`knolli-theme-${currentWorkspaceId}`, JSON.stringify(updatedColors));
+    }
     
     // Apply to DOM
     applyThemeToDOM(updatedColors);
@@ -80,7 +101,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const resetToDefault = () => {
     setColors(defaultColors);
     setIsCustomized(false);
-    localStorage.removeItem('knolli-theme');
+    // Remove workspace-specific theme from localStorage
+    if (currentWorkspaceId) {
+      localStorage.removeItem(`knolli-theme-${currentWorkspaceId}`);
+    }
     
     // Reset DOM to defaults
     const root = document.documentElement;
@@ -97,8 +121,19 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.removeProperty('--theme-accent-dark');
   };
 
+  const setWorkspace = (workspaceId: string) => {
+    setCurrentWorkspaceId(workspaceId);
+  };
+
   return (
-    <ThemeContext.Provider value={{ colors, updateColors, resetToDefault, isCustomized }}>
+    <ThemeContext.Provider value={{ 
+      colors, 
+      updateColors, 
+      resetToDefault, 
+      isCustomized, 
+      setWorkspace, 
+      currentWorkspaceId 
+    }}>
       {children}
     </ThemeContext.Provider>
   );
