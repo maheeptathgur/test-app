@@ -376,7 +376,7 @@ export function WorkspaceSettings() {
             <Button variant="outline">
               Cancel
             </Button>
-            <Button className="theme-primary hover:bg-[#006b54]">
+            <Button className="theme-primary hover:bg-[var(--theme-primary-hover)]">
               Save Changes
             </Button>
           </div>

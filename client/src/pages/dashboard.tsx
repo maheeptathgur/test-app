@@ -1725,7 +1725,7 @@ export default function Dashboard() {
       <div className="flex flex-col h-screen bg-background">
         {/* User View Preview Toolbar */}
         {activeSection === 'user-view' && (
-          <div className="theme-primary/80 text-white px-4 py-2 flex items-center justify-between border-b border-[#006b52]/50 flex-shrink-0">
+          <div className="theme-primary/80 text-white px-4 py-2 flex items-center justify-between border-b border-[var(--theme-primary)]/50 flex-shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium">User View Preview</span>
@@ -2253,7 +2253,7 @@ export default function Dashboard() {
         </div>
       )}
       {/* Main Content */}
-      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: '#f6f6f6' }}>
+      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: 'var(--theme-background-light)' }}>
         {/* Form Interface for form-type copilots */}
         {chatCopilot && chatCopilot.type === 'form' ? (
           <div className="h-full flex">

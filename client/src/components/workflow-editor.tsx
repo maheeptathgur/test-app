@@ -317,7 +317,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
   ];
 
   return (
-    <div className="workflow-editor h-full flex flex-col" style={{ backgroundColor: '#f6f6f6' }}>
+    <div className="workflow-editor h-full flex flex-col" style={{ backgroundColor: 'var(--theme-background-light)' }}>
       {/* Header */}
       <div className="workflow-header flex items-center justify-between px-8 pt-8 pb-6 bg-[#ffffff00]">
         <div className="flex items-center gap-4">
@@ -351,7 +351,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
       {/* Tab Content */}
       <div className="flex-1 overflow-auto">
         {activeTab === 'steps' && (
-          <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f6f6f6' }}>
+          <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: 'var(--theme-background-light)' }}>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Workflow Steps</h2>
@@ -935,7 +935,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         )}
 
         {activeTab === 'settings' && (
-          <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f6f6f6' }}>
+          <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: 'var(--theme-background-light)' }}>
             <div>
               <h2 className="text-lg font-semibold text-gray-900">Workflow Settings</h2>
               <p className="text-sm text-gray-600">Configure general workflow properties and behavior</p>
@@ -1058,7 +1058,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         )}
 
         {activeTab === 'variables' && (
-          <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f6f6f6' }}>
+          <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: 'var(--theme-background-light)' }}>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-gray-900">Workflow Variables</h2>
@@ -1114,7 +1114,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         )}
 
         {activeTab === 'testing' && (
-          <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f6f6f6' }}>
+          <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: 'var(--theme-background-light)' }}>
             <div>
               <h2 className="text-lg font-semibold text-gray-900">Workflow Testing</h2>
               <p className="text-sm text-gray-600">Test your workflow with sample data</p>
