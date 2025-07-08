@@ -16,6 +16,85 @@ import { SampleScreen } from "@/components/sample-screens";
 
 export function WorkspaceSettings() {
   const [activeTab, setActiveTab] = useState("general");
+  
+  // Theme colors state
+  const [themeColors, setThemeColors] = useState({
+    primary: "#008062",
+    primaryHover: "#00D2A0", 
+    workspaceBg: "#E6EEEF",
+    cardBg: "#FFFFFF",
+    primaryText: "#191C20",
+    secondaryText: "#4E5964",
+    borders: "#DADEE2",
+    accent: "#E0FFF8"
+  });
+
+  // Preset themes
+  const presetThemes = {
+    default: {
+      primary: "#008062",
+      primaryHover: "#00D2A0",
+      workspaceBg: "#E6EEEF", 
+      cardBg: "#FFFFFF",
+      primaryText: "#191C20",
+      secondaryText: "#4E5964",
+      borders: "#DADEE2",
+      accent: "#E0FFF8"
+    },
+    ocean: {
+      primary: "#0066CC",
+      primaryHover: "#0080FF",
+      workspaceBg: "#E6F3FF",
+      cardBg: "#FFFFFF", 
+      primaryText: "#1A1A1A",
+      secondaryText: "#4A5568",
+      borders: "#BEE3F8",
+      accent: "#E0F0FF"
+    },
+    forest: {
+      primary: "#2D5016",
+      primaryHover: "#38A169",
+      workspaceBg: "#F0F7E6",
+      cardBg: "#FFFFFF",
+      primaryText: "#1A1A1A", 
+      secondaryText: "#4A5568",
+      borders: "#C6F6D5",
+      accent: "#E8F5D8"
+    },
+    purple: {
+      primary: "#7C3AED",
+      primaryHover: "#8B5CF6",
+      workspaceBg: "#F3F1FF",
+      cardBg: "#FFFFFF",
+      primaryText: "#1A1A1A",
+      secondaryText: "#4A5568", 
+      borders: "#E9D8FD",
+      accent: "#EDE9FE"
+    },
+    sunset: {
+      primary: "#EA580C", 
+      primaryHover: "#FB923C",
+      workspaceBg: "#FFF7ED",
+      cardBg: "#FFFFFF",
+      primaryText: "#1A1A1A",
+      secondaryText: "#4A5568",
+      borders: "#FDBA74",
+      accent: "#FED7AA"
+    }
+  };
+
+  const handlePresetChange = (preset: string) => {
+    if (presetThemes[preset as keyof typeof presetThemes]) {
+      setThemeColors(presetThemes[preset as keyof typeof presetThemes]);
+    }
+  };
+
+  const handleColorChange = (colorKey: keyof typeof themeColors, value: string) => {
+    setThemeColors(prev => ({
+      ...prev,
+      [colorKey]: value
+    }));
+  };
   const [workspaceName, setWorkspaceName] = useState("GTM Team");
   const [workspaceDescription, setWorkspaceDescription] = useState("A comprehensive workspace for managing AI copilots and workflows");
   const [allowPublicAccess, setAllowPublicAccess] = useState(false);
@@ -390,7 +469,7 @@ export function WorkspaceSettings() {
                     <Label className="text-sm font-medium">Theme Preset</Label>
                     <p className="text-xs text-gray-500 mt-1">Apply a pre-designed color scheme</p>
                   </div>
-                  <Select defaultValue="default">
+                  <Select defaultValue="default" onValueChange={handlePresetChange}>
                     <SelectTrigger className="w-48">
                       <SelectValue />
                     </SelectTrigger>
@@ -407,51 +486,91 @@ export function WorkspaceSettings() {
                 {/* Color Customization Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div className="text-center">
-                    <input type="color" defaultValue="#008062" className="circular-color-picker mx-auto block mb-2" />
+                    <input 
+                      type="color" 
+                      value={themeColors.primary} 
+                      onChange={(e) => handleColorChange('primary', e.target.value)}
+                      className="circular-color-picker mx-auto block mb-2" 
+                    />
                     <Label className="text-xs font-medium block mb-1">Primary</Label>
-                    <span className="text-xs text-gray-500">#008062</span>
+                    <span className="text-xs text-gray-500">{themeColors.primary}</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#00D2A0" className="circular-color-picker mx-auto block mb-2" />
+                    <input 
+                      type="color" 
+                      value={themeColors.primaryHover} 
+                      onChange={(e) => handleColorChange('primaryHover', e.target.value)}
+                      className="circular-color-picker mx-auto block mb-2" 
+                    />
                     <Label className="text-xs font-medium block mb-1">Primary Hover</Label>
-                    <span className="text-xs text-gray-500">#00D2A0</span>
+                    <span className="text-xs text-gray-500">{themeColors.primaryHover}</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#E6EEEF" className="circular-color-picker mx-auto block mb-2" />
+                    <input 
+                      type="color" 
+                      value={themeColors.workspaceBg} 
+                      onChange={(e) => handleColorChange('workspaceBg', e.target.value)}
+                      className="circular-color-picker mx-auto block mb-2" 
+                    />
                     <Label className="text-xs font-medium block mb-1">Workspace BG</Label>
-                    <span className="text-xs text-gray-500">#E6EEEF</span>
+                    <span className="text-xs text-gray-500">{themeColors.workspaceBg}</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#FFFFFF" className="circular-color-picker mx-auto block mb-2" />
+                    <input 
+                      type="color" 
+                      value={themeColors.cardBg} 
+                      onChange={(e) => handleColorChange('cardBg', e.target.value)}
+                      className="circular-color-picker mx-auto block mb-2" 
+                    />
                     <Label className="text-xs font-medium block mb-1">Card BG</Label>
-                    <span className="text-xs text-gray-500">#FFFFFF</span>
+                    <span className="text-xs text-gray-500">{themeColors.cardBg}</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#191C20" className="circular-color-picker mx-auto block mb-2" />
+                    <input 
+                      type="color" 
+                      value={themeColors.primaryText} 
+                      onChange={(e) => handleColorChange('primaryText', e.target.value)}
+                      className="circular-color-picker mx-auto block mb-2" 
+                    />
                     <Label className="text-xs font-medium block mb-1">Primary Text</Label>
-                    <span className="text-xs text-gray-500">#191C20</span>
+                    <span className="text-xs text-gray-500">{themeColors.primaryText}</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#4E5964" className="circular-color-picker mx-auto block mb-2" />
+                    <input 
+                      type="color" 
+                      value={themeColors.secondaryText} 
+                      onChange={(e) => handleColorChange('secondaryText', e.target.value)}
+                      className="circular-color-picker mx-auto block mb-2" 
+                    />
                     <Label className="text-xs font-medium block mb-1">Secondary Text</Label>
-                    <span className="text-xs text-gray-500">#4E5964</span>
+                    <span className="text-xs text-gray-500">{themeColors.secondaryText}</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#DADEE2" className="circular-color-picker mx-auto block mb-2" />
+                    <input 
+                      type="color" 
+                      value={themeColors.borders} 
+                      onChange={(e) => handleColorChange('borders', e.target.value)}
+                      className="circular-color-picker mx-auto block mb-2" 
+                    />
                     <Label className="text-xs font-medium block mb-1">Borders</Label>
-                    <span className="text-xs text-gray-500">#DADEE2</span>
+                    <span className="text-xs text-gray-500">{themeColors.borders}</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#E0FFF8" className="circular-color-picker mx-auto block mb-2" />
+                    <input 
+                      type="color" 
+                      value={themeColors.accent} 
+                      onChange={(e) => handleColorChange('accent', e.target.value)}
+                      className="circular-color-picker mx-auto block mb-2" 
+                    />
                     <Label className="text-xs font-medium block mb-1">Accent</Label>
-                    <span className="text-xs text-gray-500">#E0FFF8</span>
+                    <span className="text-xs text-gray-500">{themeColors.accent}</span>
                   </div>
                 </div>
 
@@ -467,26 +586,26 @@ export function WorkspaceSettings() {
                     <div className="border rounded-lg overflow-hidden" style={{ backgroundColor: '#F8F6F6' }}>
                       <div className="flex">
                         {/* Simulated Sidebar */}
-                        <div className="w-64 h-80 p-4 space-y-3" style={{ backgroundColor: '#E6EEEF' }}>
+                        <div className="w-64 h-80 p-4 space-y-3" style={{ backgroundColor: themeColors.workspaceBg }}>
                           {/* Logo area */}
                           <div className="flex items-center gap-2 mb-4">
-                            <div className="w-8 h-8 rounded-lg" style={{ backgroundColor: '#008062' }}></div>
-                            <div className="w-16 h-3 rounded" style={{ backgroundColor: '#191C20' }}></div>
+                            <div className="w-8 h-8 rounded-lg" style={{ backgroundColor: themeColors.primary }}></div>
+                            <div className="w-16 h-3 rounded" style={{ backgroundColor: themeColors.primaryText }}></div>
                           </div>
                           
                           {/* Navigation items */}
                           <div className="space-y-2">
-                            <div className="flex items-center gap-2 p-2 rounded-md" style={{ backgroundColor: '#008062' }}>
-                              <div className="w-4 h-4 rounded" style={{ backgroundColor: '#FFFFFF' }}></div>
-                              <div className="w-16 h-2 rounded" style={{ backgroundColor: '#FFFFFF' }}></div>
+                            <div className="flex items-center gap-2 p-2 rounded-md" style={{ backgroundColor: themeColors.primary }}>
+                              <div className="w-4 h-4 rounded" style={{ backgroundColor: themeColors.cardBg }}></div>
+                              <div className="w-16 h-2 rounded" style={{ backgroundColor: themeColors.cardBg }}></div>
                             </div>
                             <div className="flex items-center gap-2 p-2">
-                              <div className="w-4 h-4 rounded" style={{ backgroundColor: '#4E5964' }}></div>
-                              <div className="w-14 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                              <div className="w-4 h-4 rounded" style={{ backgroundColor: themeColors.secondaryText }}></div>
+                              <div className="w-14 h-2 rounded" style={{ backgroundColor: themeColors.secondaryText }}></div>
                             </div>
                             <div className="flex items-center gap-2 p-2">
-                              <div className="w-4 h-4 rounded" style={{ backgroundColor: '#4E5964' }}></div>
-                              <div className="w-12 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                              <div className="w-4 h-4 rounded" style={{ backgroundColor: themeColors.secondaryText }}></div>
+                              <div className="w-12 h-2 rounded" style={{ backgroundColor: themeColors.secondaryText }}></div>
                             </div>
                           </div>
                         </div>
@@ -494,25 +613,25 @@ export function WorkspaceSettings() {
                         {/* Simulated Main Content */}
                         <div className="flex-1 p-4 space-y-4" style={{ backgroundColor: '#F8F6F6' }}>
                           {/* Header */}
-                          <div className="flex items-center justify-between pb-3" style={{ borderBottom: '1px solid #DADEE2' }}>
-                            <div className="w-24 h-4 rounded" style={{ backgroundColor: '#191C20' }}></div>
-                            <div className="w-8 h-8 rounded-full" style={{ backgroundColor: '#008062' }}></div>
+                          <div className="flex items-center justify-between pb-3" style={{ borderBottom: `1px solid ${themeColors.borders}` }}>
+                            <div className="w-24 h-4 rounded" style={{ backgroundColor: themeColors.primaryText }}></div>
+                            <div className="w-8 h-8 rounded-full" style={{ backgroundColor: themeColors.primary }}></div>
                           </div>
                           
                           {/* Content Cards */}
                           <div className="grid grid-cols-2 gap-3">
-                            <div className="bg-white rounded-lg p-3 border" style={{ borderColor: '#DADEE2' }}>
-                              <div className="w-20 h-3 rounded mb-2" style={{ backgroundColor: '#191C20' }}></div>
-                              <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: '#4E5964' }}></div>
-                              <div className="w-3/4 h-2 rounded mb-2" style={{ backgroundColor: '#4E5964' }}></div>
-                              <div className="w-16 h-6 rounded" style={{ backgroundColor: '#008062' }}></div>
+                            <div className="rounded-lg p-3 border" style={{ backgroundColor: themeColors.cardBg, borderColor: themeColors.borders }}>
+                              <div className="w-20 h-3 rounded mb-2" style={{ backgroundColor: themeColors.primaryText }}></div>
+                              <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: themeColors.secondaryText }}></div>
+                              <div className="w-3/4 h-2 rounded mb-2" style={{ backgroundColor: themeColors.secondaryText }}></div>
+                              <div className="w-16 h-6 rounded" style={{ backgroundColor: themeColors.primary }}></div>
                             </div>
                             
-                            <div className="bg-white rounded-lg p-3 border" style={{ borderColor: '#DADEE2' }}>
-                              <div className="w-16 h-3 rounded mb-2" style={{ backgroundColor: '#191C20' }}></div>
-                              <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: '#4E5964' }}></div>
-                              <div className="w-2/3 h-2 rounded mb-2" style={{ backgroundColor: '#4E5964' }}></div>
-                              <div className="w-12 h-6 rounded" style={{ backgroundColor: '#E0FFF8' }}></div>
+                            <div className="rounded-lg p-3 border" style={{ backgroundColor: themeColors.cardBg, borderColor: themeColors.borders }}>
+                              <div className="w-16 h-3 rounded mb-2" style={{ backgroundColor: themeColors.primaryText }}></div>
+                              <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: themeColors.secondaryText }}></div>
+                              <div className="w-2/3 h-2 rounded mb-2" style={{ backgroundColor: themeColors.secondaryText }}></div>
+                              <div className="w-12 h-6 rounded" style={{ backgroundColor: themeColors.accent }}></div>
                             </div>
                           </div>
                         </div>
@@ -527,7 +646,7 @@ export function WorkspaceSettings() {
                     <RotateCcw className="w-4 h-4" />
                     Reset to Default
                   </Button>
-                  <Button className="gap-2" style={{ backgroundColor: '#008062' }}>
+                  <Button className="gap-2" style={{ backgroundColor: themeColors.primary }}>
                     Apply Theme Changes
                   </Button>
                 </div>
