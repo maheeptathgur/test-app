@@ -1549,9 +1549,7 @@ function ToolsScreen({
               console.log('Button clicked - Connect New Tool', onConnectNewTool);
               onConnectNewTool?.();
             }}
-          >
-            Connect New Tool
-          </Button>
+          >Connect New Integration</Button>
           <Button 
             variant="outline"
             onClick={(e) => {
