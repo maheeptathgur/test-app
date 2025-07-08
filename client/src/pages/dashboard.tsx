@@ -2427,12 +2427,15 @@ export default function Dashboard() {
         (
           <div className="h-full overflow-y-auto main-content" style={{ backgroundColor: 'var(--theme-content-bg)' }}>
             {/* Content Body - Conditional padding for tool config screens */}
-            <div className={
-              // No padding for configuration screens since they handle their own padding
-              (configureTool || toolConfigActive || configureWorkflow) 
-                ? "" 
-                : "px-8 pt-8 pb-24"
-            }>
+            <div 
+              className={
+                // No padding for configuration screens since they handle their own padding
+                (configureTool || toolConfigActive || configureWorkflow) 
+                  ? "" 
+                  : "px-8 pt-8 pb-24"
+              }
+              style={{ backgroundColor: 'var(--theme-content-bg)' }}
+            >
               {/* Title Section for specific pages */}
               {(activeSection === 'copilots' || activeSection === 'all-workspaces' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
                 <div className="flex items-center justify-between mb-6">
