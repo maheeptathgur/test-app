@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon, Palette } from "lucide-react";
+import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon, Palette, RotateCcw } from "lucide-react";
 import { ThemeCustomizer } from "@/components/theme-customizer";
 import avatarImagePath from "@assets/image_1751745994194.png";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,7 @@ export function WorkspaceSettings() {
   const [dataRetention, setDataRetention] = useState("90");
 
   return (
-    <div className={`space-y-6 ${(activeTab === "general" || activeTab === "security" || activeTab === "theme") ? "pb-24" : ""}`}>
+    <div className={`space-y-6 ${(activeTab === "general" || activeTab === "brand" || activeTab === "security" || activeTab === "theme") ? "pb-24" : ""}`}>
       <div className="w-full">
         <nav className="flex space-x-8 border-b border-border">
           <button
@@ -35,6 +35,16 @@ export function WorkspaceSettings() {
             }`}
           >
             General
+          </button>
+          <button
+            onClick={() => setActiveTab("brand")}
+            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "brand"
+                ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+            }`}
+          >
+            Brand
           </button>
           <button
             onClick={() => setActiveTab("security")}
@@ -138,87 +148,7 @@ export function WorkspaceSettings() {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label>Icon Image (1:1 ratio)</Label>
-                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                      <div className="text-sm text-muted-foreground mb-2">
-                        Upload icon image
-                      </div>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                      >
-                        <Upload className="h-3 w-3" />
-                        Choose File
-                      </Button>
-                    </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label>Logo Image (2:1 ratio)</Label>
-                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                      <div className="text-sm text-muted-foreground mb-2">
-                        Upload logo image
-                      </div>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                      >
-                        <Upload className="h-3 w-3" />
-                        Choose File
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>Avatar Image (1:1 ratio)</Label>
-                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                      <img 
-                        src={avatarImagePath} 
-                        alt="Avatar" 
-                        className="h-8 w-8 mx-auto mb-2"
-                      />
-                      <div className="text-sm text-muted-foreground mb-2">
-                        Avatar uploaded
-                      </div>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                      >
-                        <Upload className="h-3 w-3" />
-                        Change File
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>Banner Image (16:9 ratio)</Label>
-                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                      <div className="text-sm text-muted-foreground mb-2">
-                        Upload banner image
-                      </div>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                      >
-                        <Upload className="h-3 w-3" />
-                        Choose File
-                      </Button>
-                    </div>
-                  </div>
-                </div>
 
 
               </CardContent>
@@ -350,6 +280,210 @@ export function WorkspaceSettings() {
           </div>
         )}
 
+        {activeTab === "brand" && (
+          <div className="grid grid-cols-3 gap-6 mt-6">
+            {/* Brand Assets - 2/3 column */}
+            <div className="col-span-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Brand Assets</CardTitle>
+                  <CardDescription>
+                    Upload your workspace logos and visual identity
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label>Icon Image (1:1 ratio)</Label>
+                      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                        <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                        <div className="text-sm text-muted-foreground mb-2">
+                          Upload icon image
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="gap-2"
+                        >
+                          <Upload className="h-3 w-3" />
+                          Choose File
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Logo Image (2:1 ratio)</Label>
+                      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                        <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                        <div className="text-sm text-muted-foreground mb-2">
+                          Upload logo image
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="gap-2"
+                        >
+                          <Upload className="h-3 w-3" />
+                          Choose File
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Avatar Image (1:1 ratio)</Label>
+                      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                        <img 
+                          src={avatarImagePath} 
+                          alt="Avatar" 
+                          className="h-8 w-8 mx-auto mb-2"
+                        />
+                        <div className="text-sm text-muted-foreground mb-2">
+                          Avatar uploaded
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="gap-2"
+                        >
+                          <Upload className="h-3 w-3" />
+                          Change File
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label>Banner Image (16:9 ratio)</Label>
+                      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                        <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                        <div className="text-sm text-muted-foreground mb-2">
+                          Upload banner image
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="gap-2"
+                        >
+                          <Upload className="h-3 w-3" />
+                          Choose File
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Theme Colors - 1/3 column */}
+            <div className="col-span-1">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Theme Colors</CardTitle>
+                  <CardDescription>
+                    Customize your workspace colors
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {/* Brand Colors */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700">Brand Colors</h4>
+                    <div className="space-y-3">
+                      <div className="space-y-1">
+                        <Label className="text-xs">Primary Color</Label>
+                        <div className="flex items-center gap-2">
+                          <input type="color" value="#008062" className="w-8 h-8 rounded border cursor-pointer" />
+                          <span className="text-xs text-gray-500">#008062</span>
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-xs">Primary Hover</Label>
+                        <div className="flex items-center gap-2">
+                          <input type="color" value="#00D2A0" className="w-8 h-8 rounded border cursor-pointer" />
+                          <span className="text-xs text-gray-500">#00D2A0</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Background Colors */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700">Backgrounds</h4>
+                    <div className="space-y-3">
+                      <div className="space-y-1">
+                        <Label className="text-xs">Workspace Background</Label>
+                        <div className="flex items-center gap-2">
+                          <input type="color" value="#E6EEEF" className="w-8 h-8 rounded border cursor-pointer" />
+                          <span className="text-xs text-gray-500">#E6EEEF</span>
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-xs">Card Background</Label>
+                        <div className="flex items-center gap-2">
+                          <input type="color" value="#FFFFFF" className="w-8 h-8 rounded border cursor-pointer" />
+                          <span className="text-xs text-gray-500">#FFFFFF</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content Colors */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700">Content</h4>
+                    <div className="space-y-3">
+                      <div className="space-y-1">
+                        <Label className="text-xs">Primary Text</Label>
+                        <div className="flex items-center gap-2">
+                          <input type="color" value="#191C20" className="w-8 h-8 rounded border cursor-pointer" />
+                          <span className="text-xs text-gray-500">#191C20</span>
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-xs">Secondary Text</Label>
+                        <div className="flex items-center gap-2">
+                          <input type="color" value="#4E5964" className="w-8 h-8 rounded border cursor-pointer" />
+                          <span className="text-xs text-gray-500">#4E5964</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Structure Colors */}
+                  <div className="space-y-3">
+                    <h4 className="text-sm font-medium text-gray-700">Structure</h4>
+                    <div className="space-y-3">
+                      <div className="space-y-1">
+                        <Label className="text-xs">Border Color</Label>
+                        <div className="flex items-center gap-2">
+                          <input type="color" value="#DADEE2" className="w-8 h-8 rounded border cursor-pointer" />
+                          <span className="text-xs text-gray-500">#DADEE2</span>
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <Label className="text-xs">Accent Color</Label>
+                        <div className="flex items-center gap-2">
+                          <input type="color" value="#E0FFF8" className="w-8 h-8 rounded border cursor-pointer" />
+                          <span className="text-xs text-gray-500">#E0FFF8</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Reset Button */}
+                  <div className="pt-2 border-t">
+                    <Button variant="outline" size="sm" className="w-full">
+                      <RotateCcw className="w-3 h-3 mr-2" />
+                      Reset to Brand Default
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
+
         {activeTab === "analytics" && (
           <div className="mt-6">
             <SampleScreen section={"analytics" as any} />
@@ -369,8 +503,8 @@ export function WorkspaceSettings() {
         )}
       </div>
       
-      {/* Save Footer - Only show for General, Security, and Theme tabs */}
-      {(activeTab === "general" || activeTab === "security" || activeTab === "theme") && (
+      {/* Save Footer - Only show for General, Brand, and Security tabs */}
+      {(activeTab === "general" || activeTab === "brand" || activeTab === "security") && (
         <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
           <div className="flex justify-end gap-3">
             <Button variant="outline">
