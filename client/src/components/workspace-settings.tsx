@@ -17,6 +17,7 @@ interface WorkspaceSettingsProps {
   brandingColors: {
     primary: string;
     contentBg: string;
+    cardBg: string;
     sidebarBg: string;
     accent: string;
     border: string;
@@ -24,6 +25,7 @@ interface WorkspaceSettingsProps {
   onBrandingColorsChange: (colors: {
     primary: string;
     contentBg: string;
+    cardBg: string;
     sidebarBg: string;
     accent: string;
     border: string;
@@ -68,7 +70,8 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
       name: "Knolli Default",
       colors: {
         primary: "#008062",
-        contentBg: "#ffffff", 
+        contentBg: "#ffffff",
+        cardBg: "#f9fafb",
         sidebarBg: "#e6eeef",
         accent: "#00d2a0",
         border: "#e5e7eb"
@@ -79,6 +82,7 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
       colors: {
         primary: "#4a154b",
         contentBg: "#ffffff",
+        cardBg: "#f8f9fa",
         sidebarBg: "#350d36",
         accent: "#1264a3",
         border: "#e1e5e9"
@@ -89,6 +93,7 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
       colors: {
         primary: "#6366f1",
         contentBg: "#fafbff",
+        cardBg: "#ffffff",
         sidebarBg: "#f1f5f9",
         accent: "#8b5cf6",
         border: "#e2e8f0"
@@ -99,9 +104,10 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
       colors: {
         primary: "#60a5fa",
         contentBg: "#111827",
-        sidebarBg: "#1f2937",
+        cardBg: "#1f2937",
+        sidebarBg: "#374151",
         accent: "#34d399",
-        border: "#374151"
+        border: "#4b5563"
       }
     },
     {
@@ -109,7 +115,8 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
       colors: {
         primary: "#2563eb",
         contentBg: "#ffffff",
-        sidebarBg: "#f8fafc",
+        cardBg: "#f8fafc",
+        sidebarBg: "#f1f5f9",
         accent: "#0ea5e9",
         border: "#e2e8f0"
       }
@@ -118,10 +125,11 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
       name: "Vibrant Pop",
       colors: {
         primary: "#ec4899",
-        contentBg: "#fefce8",
+        contentBg: "#fefcfe",
+        cardBg: "#ffffff",
         sidebarBg: "#fdf2f8",
         accent: "#f59e0b",
-        border: "#fbbf24"
+        border: "#fce7f3"
       }
     }
   ];
@@ -529,7 +537,7 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
               </div>
 
               {/* Color Picker Section */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
                 <div className="space-y-3">
                   <Label htmlFor="primary-color">Primary Color</Label>
                   <p className="text-sm text-muted-foreground mb-2">
@@ -572,6 +580,29 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
                       onChange={(e) => handleColorChange('contentBg', e.target.value)}
                       className="text-sm"
                       placeholder="#ffffff"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <Label htmlFor="card-bg-color">Card Background</Label>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Individual card and component background
+                  </p>
+                  <div className="space-y-2">
+                    <Input
+                      id="card-bg-color"
+                      type="color"
+                      value={brandingColors.cardBg || brandingColors.contentBg}
+                      onChange={(e) => handleColorChange('cardBg', e.target.value)}
+                      className="w-full h-12 rounded-md border cursor-pointer"
+                    />
+                    <Input
+                      type="text"
+                      value={brandingColors.cardBg || brandingColors.contentBg}
+                      onChange={(e) => handleColorChange('cardBg', e.target.value)}
+                      className="text-sm"
+                      placeholder="#f9fafb"
                     />
                   </div>
                 </div>
