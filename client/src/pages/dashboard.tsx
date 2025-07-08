@@ -254,7 +254,7 @@ const recentConversations = [
     ]
   },
   {
-    id: '7',
+    id: '7b',
     title: 'Social Media Campaign Strategy',
     copilot: 'Campaign Manager',
     lastMessage: 'For maximum reach, I recommend a multi-platform approach...',
@@ -815,8 +815,10 @@ export default function Dashboard() {
   };
 
   const handleEditConversationTitle = (conversationId: string, currentTitle: string) => {
+    console.log('Edit button clicked for conversation:', conversationId, 'with title:', currentTitle);
     setEditingConversationId(conversationId);
     setEditingConversationTitle(currentTitle);
+    console.log('State set - editingConversationId:', conversationId, 'editingConversationTitle:', currentTitle);
   };
 
   const handleSaveConversationTitle = (conversationId: string) => {
