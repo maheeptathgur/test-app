@@ -1532,13 +1532,12 @@ function ToolsScreen({
       {/* Title */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-foreground">Tools</h1>
+          <h1 className="text-2xl font-bold text-foreground">Integrations</h1>
           <Badge variant="secondary" className="text-sm" style={{ color: 'var(--theme-primary)' }}>
             {filteredTools.length} Tools
           </Badge>
         </div>
       </div>
-      
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
@@ -2451,7 +2450,6 @@ function KnowledgeBaseScreen({ mdEditorOpen = false, onMdEditorOpenChange }: Kno
             </Button>
           </div>
         </div>
-
         {/* Markdown Editor Content */}
         <div className="flex flex-col h-[calc(100vh-120px)]">
           {/* Document Info */}
