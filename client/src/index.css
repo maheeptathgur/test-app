@@ -385,10 +385,17 @@
     color: var(--brand-content-text) !important;
   }
 
-  /* Global card styling */
-  [data-radix-collection-item], .card, [class*="Card"] {
+  /* Global card styling - shadcn/ui Card components */
+  [data-radix-collection-item], .card, [class*="Card"], [class*="card"], div[class*="rounded-lg border"], div[class*="rounded-md border"] {
     background-color: var(--brand-card-bg) !important;
     color: var(--brand-content-text) !important;
+  }
+
+  /* Specifically target shadcn Card components */
+  .card, .Card, [data-testid="card"], div[class*="bg-card"] {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+    border-color: var(--brand-border) !important;
   }
 
   /* Global text adaptations */
@@ -424,6 +431,79 @@
 
   /* Form inputs and components */
   input, textarea, select {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Additional Card targeting for workspace settings and configuration screens */
+  .space-y-6 > div[class*="rounded"], .space-y-6 div[class*="border"], .mt-6 div[class*="rounded"] {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Workspace settings specific card styling */
+  .space-y-6 .mt-6 > div {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+  }
+
+  /* Most comprehensive Card targeting - covers all possible Card implementations */
+  div[class*="rounded-lg"]:not([class*="rounded-lg border-dashed"]),
+  div[class*="rounded-md"]:not([class*="rounded-md border-dashed"]),
+  div[class*="bg-card"],
+  div[class*="border shadow"],
+  div[class*="bg-white border"],
+  div[class*="bg-background border"] {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Override any inline styles on cards */
+  div[style*="background-color: white"],
+  div[style*="background-color: #fff"],
+  div[style*="background-color: #ffffff"] {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+  }
+
+  /* Universal Card targeting - this will catch everything */
+  div[class*="rounded"][class*="border"]:not([class*="border-dashed"]),
+  div[class*="shadow"]:not([class*="shadow-none"]),
+  div[class*="bg-"]:not([class*="bg-transparent"]):not([class*="bg-gray-100"]):not([class*="bg-blue-100"]):not([class*="bg-green-100"]):not([class*="bg-orange-100"]):not([class*="bg-purple-100"]):not([class*="bg-red-100"]):not([class*="bg-yellow-100"]),
+  .card-container,
+  .card-wrapper,
+  .settings-card {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Final catch-all for any missed card elements */
+  div[data-card="true"],
+  div[role="group"],
+  div[class*="space-y-6"] > div[class*="rounded"],
+  div[class*="mt-6"] > div[class*="rounded"] {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Direct targeting for workspace settings */
+  div[class*="space-y-6"] div[class*="rounded-lg"],
+  div[class*="mt-6"] div[class*="rounded-lg"] {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Specific override for workspace settings cards */
+  .space-y-6 > div,
+  .mt-6 > div,
+  div[class*="CardContent"],
+  div[class*="CardHeader"] {
     background-color: var(--brand-card-bg) !important;
     color: var(--brand-content-text) !important;
     border-color: var(--brand-border) !important;
