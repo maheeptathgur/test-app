@@ -1137,16 +1137,16 @@ export default function Dashboard() {
                               <button
                                 onClick={() => handleArchiveCopilot(copilot)}
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                                  copilot.status === 'active' ? 'theme-primary' : 'bg-muted'
+                                  copilot.status === 'active' ? 'theme-primary' : 'bg-gray-200'
                                 }`}
                               >
                                 <span
-                                  className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${
+                                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                                     copilot.status === 'active' ? 'translate-x-6' : 'translate-x-1'
                                   }`}
                                 />
                               </button>
-                              <span className="text-xs text-muted-foreground">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
+                              <span className="text-xs text-gray-600">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
                             </div>
                           </TableCell>
                           <TableCell className="max-w-xs truncate">
@@ -1335,7 +1335,7 @@ export default function Dashboard() {
                         <p className="text-sm text-muted-foreground">{currentWorkspace.type}</p>
                       </div>
                     </div>
-                    <Badge variant="secondary" className="theme-primary text-card-foreground">Current</Badge>
+                    <Badge variant="secondary" className="theme-primary text-white">Current</Badge>
                   </div>
                   <p className="text-sm text-muted-foreground mb-4">Marketing team workspace with campaign and content copilots.</p>
                   <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
@@ -1652,16 +1652,16 @@ export default function Dashboard() {
                               <button
                                 onClick={() => handleArchiveCopilot(copilot)}
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                                  copilot.status === 'active' ? 'theme-primary' : 'bg-muted'
+                                  copilot.status === 'active' ? 'theme-primary' : 'bg-gray-200'
                                 }`}
                               >
                                 <span
-                                  className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${
+                                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                                     copilot.status === 'active' ? 'translate-x-6' : 'translate-x-1'
                                   }`}
                                 />
                               </button>
-                              <span className="text-xs text-muted-foreground">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
+                              <span className="text-xs text-gray-600">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
                             </div>
                           </TableCell>
                           <TableCell className="max-w-xs truncate">
@@ -1725,17 +1725,17 @@ export default function Dashboard() {
       <div className="flex flex-col h-screen bg-background">
         {/* User View Preview Toolbar */}
         {activeSection === 'user-view' && (
-          <div className="text-card-foreground px-4 py-2 flex items-center justify-between border-b flex-shrink-0" style={{ backgroundColor: 'var(--theme-primary)', borderBottomColor: 'var(--theme-primary)' }}>
+          <div className="text-white px-4 py-2 flex items-center justify-between border-b flex-shrink-0" style={{ backgroundColor: 'var(--theme-primary)', borderBottomColor: 'var(--theme-primary)' }}>
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium">User View Preview</span>
-              <span className="text-xs text-card-foreground/80">This is how your workspace appears to end users</span>
+              <span className="text-xs text-white/80">This is how your workspace appears to end users</span>
             </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => handleSectionChange('copilots')}
-              className="text-card-foreground hover:bg-[var(--theme-primary-hover)]/10 hover:text-card-foreground gap-2"
+              className="text-white hover:bg-[var(--theme-primary-hover)]/10 hover:text-white gap-2"
             >
               <X className="w-4 h-4" />
               Exit Preview
@@ -1746,7 +1746,7 @@ export default function Dashboard() {
         {/* Main Application Container */}
         <div className="flex flex-1 min-h-0 bg-background">
         {/* Sidebar */}
-        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-border flex flex-col sidebar transition-all duration-300`}>
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r flex flex-col theme-background transition-all duration-300`} style={{ borderRightColor: 'hsl(187, 18%, 80%)' }}>
         {/* Logo and Toggle */}
         <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'}`}>
           <div className={`flex items-center ${sidebarCollapsed ? 'flex-col gap-3' : 'justify-between'} mb-4`}>
@@ -1949,7 +1949,7 @@ export default function Dashboard() {
                       className={`p-2 rounded-lg transition-all group cursor-pointer ${
                         conversation.isActive 
                           ? 'text-sidebar-primary' 
-                          : 'bg-card/50 hover:text-sidebar-primary'
+                          : 'bg-white/50 hover:text-sidebar-primary'
                       }`}
                       style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
@@ -2145,7 +2145,7 @@ export default function Dashboard() {
               {!sidebarCollapsed && (
                 <Button 
                   variant="outline"
-                  className="w-full bg-card border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-card-foreground transition-colors"
+                  className="w-full bg-white border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-white transition-colors"
                   onClick={() => handleSectionChange('pricing')}
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
                   onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
@@ -2157,7 +2157,7 @@ export default function Dashboard() {
                 <Button 
                   variant="outline"
                   size="sm"
-                  className="w-full bg-card border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-card-foreground transition-colors"
+                  className="w-full bg-white border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-white transition-colors"
                   title="Pricing Plans"
                   onClick={() => handleSectionChange('pricing')}
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
@@ -2183,7 +2183,7 @@ export default function Dashboard() {
               ) : (
                 <Button 
                   variant="ghost" 
-                  className="w-full p-3 h-auto text-card-foreground justify-start"
+                  className="w-full p-3 h-auto text-white justify-start"
                   style={{ backgroundColor: 'var(--theme-primary)' }}
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary-hover)'}
                   onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
@@ -2196,10 +2196,10 @@ export default function Dashboard() {
                     />
                   </div>
                   <div className="flex-1 min-w-0 text-left">
-                    <div className="text-sm font-medium text-card-foreground truncate">Mandeep Taunk</div>
-                    <div className="text-xs text-card-foreground/80 truncate">mandeep@knolli.ai</div>
+                    <div className="text-sm font-medium text-white truncate">Mandeep Taunk</div>
+                    <div className="text-xs text-white/80 truncate">mandeep@knolli.ai</div>
                   </div>
-                  <ChevronDown className="w-4 h-4 text-card-foreground/80" />
+                  <ChevronDown className="w-4 h-4 text-white/80" />
                 </Button>
               )}
             </DropdownMenuTrigger>
@@ -2425,7 +2425,7 @@ export default function Dashboard() {
           />
         ) : /* Regular Dashboard Content */
         (
-          <div className="h-full overflow-y-auto main-content bg-background">
+          <div className="h-full overflow-y-auto" style={{ backgroundColor: '#f6f6f6' }}>
             {/* Content Body - Conditional padding for tool config screens */}
             <div className={
               // No padding for configuration screens since they handle their own padding

@@ -112,7 +112,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
       case 'Paused':
         return <Clock className="w-4 h-4 text-yellow-500" />;
       default:
-        return <Clock className="w-4 h-4 text-muted-foreground" />;
+        return <Clock className="w-4 h-4 text-gray-400" />;
     }
   };
 
@@ -136,7 +136,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
               </Badge>
               {getStatusIcon(n8nWorkflowData.status)}
             </div>
-            <p className="text-sm text-muted-foreground">{workflowDescription}</p>
+            <p className="text-sm text-gray-600">{workflowDescription}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -184,15 +184,15 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
                 <CardContent>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Total</span>
+                      <span className="text-sm text-gray-600">Total</span>
                       <span className="font-medium">{n8nWorkflowData.executions.total}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Success Rate</span>
+                      <span className="text-sm text-gray-600">Success Rate</span>
                       <span className="font-medium text-green-600">{n8nWorkflowData.executions.successRate}%</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Failed</span>
+                      <span className="text-sm text-gray-600">Failed</span>
                       <span className="font-medium text-red-600">{n8nWorkflowData.executions.failed}</span>
                     </div>
                   </div>
@@ -209,15 +209,15 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
                 <CardContent>
                   <div className="space-y-2">
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Version</span>
+                      <span className="text-sm text-gray-600">Version</span>
                       <span className="font-medium">{n8nWorkflowData.version}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Nodes</span>
+                      <span className="text-sm text-gray-600">Nodes</span>
                       <span className="font-medium">{n8nWorkflowData.nodes.length}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-sm text-muted-foreground">Last Sync</span>
+                      <span className="text-sm text-gray-600">Last Sync</span>
                       <span className="font-medium text-xs">Just now</span>
                     </div>
                   </div>
@@ -282,7 +282,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
                 <div className="flex items-center justify-between">
                   <div>
                     <Label>Enable Workflow</Label>
-                    <p className="text-xs text-muted-foreground">Allow this workflow to run automatically</p>
+                    <p className="text-xs text-gray-600">Allow this workflow to run automatically</p>
                   </div>
                   <Switch checked={isEnabled} onCheckedChange={setIsEnabled} />
                 </div>
@@ -299,7 +299,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
                     <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
                       <div>
                         <div className="font-medium">{cred.name}</div>
-                        <div className="text-xs text-muted-foreground">{cred.type}</div>
+                        <div className="text-xs text-gray-600">{cred.type}</div>
                       </div>
                       <Badge variant={cred.status === 'connected' ? 'default' : 'secondary'} className="bg-green-100 text-green-700">
                         {cred.status}
@@ -317,7 +317,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Nodes</h2>
-                <p className="text-sm text-muted-foreground">These nodes are imported from your n8n workflow</p>
+                <p className="text-sm text-gray-600">These nodes are imported from your n8n workflow</p>
               </div>
               <Button variant="outline" className="gap-2">
                 <Download className="w-4 h-4" />
@@ -331,12 +331,12 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <span className="w-6 h-6 bg-blue-500 text-card-foreground rounded-full flex items-center justify-center text-xs font-medium">
+                        <span className="w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs font-medium">
                           {index + 1}
                         </span>
                         <div>
                           <h3 className="font-medium text-[hsl(var(--foreground))]">{node.name}</h3>
-                          <p className="text-sm text-muted-foreground">{node.type}</p>
+                          <p className="text-sm text-gray-600">{node.type}</p>
                         </div>
                       </div>
                       <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
@@ -366,32 +366,32 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
           <div className="space-y-6">
             <div>
               <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Execution History</h2>
-              <p className="text-sm text-muted-foreground">Recent workflow executions from n8n</p>
+              <p className="text-sm text-gray-600">Recent workflow executions from n8n</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold">{n8nWorkflowData.executions.total}</div>
-                  <p className="text-xs text-muted-foreground">Total Executions</p>
+                  <p className="text-xs text-gray-600">Total Executions</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold text-green-600">{n8nWorkflowData.executions.successful}</div>
-                  <p className="text-xs text-muted-foreground">Successful</p>
+                  <p className="text-xs text-gray-600">Successful</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold text-red-600">{n8nWorkflowData.executions.failed}</div>
-                  <p className="text-xs text-muted-foreground">Failed</p>
+                  <p className="text-xs text-gray-600">Failed</p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="pt-6">
                   <div className="text-2xl font-bold text-blue-600">{n8nWorkflowData.executions.successRate}%</div>
-                  <p className="text-xs text-muted-foreground">Success Rate</p>
+                  <p className="text-xs text-gray-600">Success Rate</p>
                 </CardContent>
               </Card>
             </div>
@@ -408,12 +408,12 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
                         <CheckCircle className="w-4 h-4 text-green-500" />
                         <div>
                           <div className="font-medium">Execution #{1248 - i}</div>
-                          <div className="text-xs text-muted-foreground">{i} minutes ago</div>
+                          <div className="text-xs text-gray-600">{i} minutes ago</div>
                         </div>
                       </div>
                       <div className="text-right">
                         <div className="text-sm font-medium">Success</div>
-                        <div className="text-xs text-muted-foreground">1.2s</div>
+                        <div className="text-xs text-gray-600">1.2s</div>
                       </div>
                     </div>
                   ))}
@@ -427,7 +427,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
           <div className="space-y-6">
             <div>
               <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Settings</h2>
-              <p className="text-sm text-muted-foreground">Configure how this n8n workflow integrates with Knolli</p>
+              <p className="text-sm text-gray-600">Configure how this n8n workflow integrates with Knolli</p>
             </div>
 
             <Card>
@@ -454,14 +454,14 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
                 <div className="flex items-center justify-between">
                   <div>
                     <Label>Auto-sync from n8n</Label>
-                    <p className="text-xs text-muted-foreground">Automatically pull updates from n8n</p>
+                    <p className="text-xs text-gray-600">Automatically pull updates from n8n</p>
                   </div>
                   <Switch defaultChecked />
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
                     <Label>Enable webhook triggers</Label>
-                    <p className="text-xs text-muted-foreground">Allow Knolli to trigger this workflow</p>
+                    <p className="text-xs text-gray-600">Allow Knolli to trigger this workflow</p>
                   </div>
                   <Switch defaultChecked />
                 </div>
@@ -507,7 +507,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
       </div>
 
       {/* Save Bar */}
-      <div className="n8n-save-bar fixed bottom-0 right-0 border-t bg-card px-8 py-4 flex items-center justify-end gap-3 z-50">
+      <div className="n8n-save-bar fixed bottom-0 right-0 border-t bg-white px-8 py-4 flex items-center justify-end gap-3 z-50">
         <Button variant="outline" onClick={onBack}>
           Cancel
         </Button>
