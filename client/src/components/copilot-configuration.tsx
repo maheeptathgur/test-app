@@ -3046,7 +3046,7 @@ function MyComponent() {
             </div>
           </div>
           
-          <div className="flex justify-end gap-2 pt-4 border-t border-[hsl(var(--border))]">
+          <div className="flex justify-end gap-2 pt-4 border-t" style={{ borderTopColor: 'hsl(187, 18%, 80%)' }}>
             <Button variant="outline" onClick={handleCancelAddField}>
               Cancel
             </Button>
@@ -3125,7 +3125,7 @@ function MyComponent() {
             </div>
           </div>
           
-          <div className="flex justify-end gap-2 pt-4 border-t border-[hsl(var(--border))]">
+          <div className="flex justify-end gap-2 pt-4 border-t" style={{ borderTopColor: 'hsl(187, 18%, 80%)' }}>
             <Button variant="outline" onClick={handleCancelEditField}>
               Cancel
             </Button>
