@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon, Palette, RotateCcw, ChevronDown } from "lucide-react";
 import { useTheme } from "@/lib/theme-context";
 import { ThemeCustomizer } from "@/components/theme-customizer";
@@ -49,7 +49,7 @@ export function WorkspaceSettings() {
     primaryHover: "#00D2A0", 
     workspaceBg: "#E6EEEF",
     contentBg: "#F8F6F6",
-    cardBg: "#FFFFFF",
+    cardBg: "#E6EEEF",
     primaryText: "#191C20",
     secondaryText: "#4E5964",
     borders: "#DADEE2",
@@ -63,7 +63,7 @@ export function WorkspaceSettings() {
       primaryHover: "#00D2A0",
       workspaceBg: "#E6EEEF", 
       contentBg: "#F8F6F6",
-      cardBg: "#FFFFFF",
+      cardBg: "#E6EEEF",
       primaryText: "#191C20",
       secondaryText: "#4E5964",
       borders: "#DADEE2",
@@ -268,6 +268,11 @@ export function WorkspaceSettings() {
   const [allowPublicAccess, setAllowPublicAccess] = useState(false);
   const [enableNotifications, setEnableNotifications] = useState(true);
   const [dataRetention, setDataRetention] = useState("90");
+
+  // Apply default theme on component mount to ensure cards show correct colors
+  useEffect(() => {
+    applyThemeChanges();
+  }, []);
 
   return (
     <div className={`space-y-6 ${(activeTab === "general" || activeTab === "brand" || activeTab === "security" || activeTab === "theme") ? "pb-24" : ""}`}>
