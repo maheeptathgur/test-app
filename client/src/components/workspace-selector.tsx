@@ -138,6 +138,14 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 }
               }}
               className="flex items-center gap-3 p-3 rounded-lg cursor-pointer"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                e.currentTarget.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '';
+                e.currentTarget.style.color = '';
+              }}
             >
               <div className="w-8 h-8 bg-[hsl(var(--muted))] rounded-lg flex items-center justify-center">
                 <ChevronDown className="w-4 h-4 rotate-180" />
@@ -155,6 +163,14 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 className={`flex items-center gap-3 p-3 mb-1 rounded-lg cursor-pointer group ${
                   workspace.id === currentWorkspace.id ? 'bg-accent text-accent-foreground' : ''
                 }`}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = workspace.id === currentWorkspace.id ? 'var(--theme-accent)' : '';
+                  e.currentTarget.style.color = '';
+                }}
               >
                 <div className={`w-8 h-8 ${workspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
                   {workspace.id === '1' ? (
@@ -174,7 +190,15 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
             {onViewAllWorkspaces && (
               <DropdownMenuItem
                 onClick={onViewAllWorkspaces}
-                className="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-accent hover:text-accent-foreground"
+                className="flex items-center gap-3 p-3 rounded-lg cursor-pointer"
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                  e.currentTarget.style.color = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '';
+                  e.currentTarget.style.color = '';
+                }}
               >
                 <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
                   <ChevronDown className="w-4 h-4 text-gray-600" />
@@ -187,7 +211,15 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
             
             <DropdownMenuItem
               onClick={() => setShowCreateModal(true)}
-              className="flex items-center gap-3 p-3 rounded-lg cursor-pointer hover:bg-accent hover:text-accent-foreground"
+              className="flex items-center gap-3 p-3 rounded-lg cursor-pointer"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                e.currentTarget.style.color = 'white';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = '';
+                e.currentTarget.style.color = '';
+              }}
             >
               <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
                 <Plus className="w-4 h-4 text-gray-600" />
