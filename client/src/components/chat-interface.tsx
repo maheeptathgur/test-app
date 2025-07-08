@@ -987,7 +987,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             </Button>
           </div>
           <div className="flex-1 overflow-y-auto px-2 sm:px-4">
-            <div className="max-w-4xl mx-auto h-full flex flex-col p-2 sm:p-4 lg:p-6">
+            <div className={`mx-auto h-full flex flex-col p-2 sm:p-4 lg:p-6 ${
+              selectedFiles.length > 0 && showDocumentPreview 
+                ? 'max-w-none w-full' 
+                : 'max-w-4xl'
+            }`}>
 
               {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
                 <div className="mb-4 sm:mb-6 mt-6 sm:mt-8 p-3 sm:p-4 mx-3 sm:mx-0 rounded-lg" style={{ backgroundColor: 'white', border: '1px solid hsl(218, 18%, 80%)' }}>
@@ -1424,7 +1428,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           
           {/* Prompt Bar - moved inside chat area */}
           <div className="bg-white relative px-2 sm:px-4">
-            <div className="max-w-4xl mx-auto p-2 sm:p-3 lg:p-4 relative">
+            <div className={`mx-auto p-2 sm:p-3 lg:p-4 relative ${
+              selectedFiles.length > 0 && showDocumentPreview 
+                ? 'max-w-none w-full' 
+                : 'max-w-4xl'
+            }`}>
               <div className="flex gap-1 sm:gap-2 lg:gap-3 relative items-end">
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
