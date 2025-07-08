@@ -1849,9 +1849,10 @@ export default function Dashboard() {
                         onClick={() => handleStartChat(copilot)}
                         className={`w-full p-2 ${
                           chatCopilot?.id === copilot.id 
-                            ? 'text-sidebar-primary bg-sidebar-accent' 
+                            ? 'text-sidebar-primary' 
                             : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
                         }`}
+                        style={chatCopilot?.id === copilot.id ? { backgroundColor: 'var(--theme-accent)' } : {}}
                         title={copilot.name}
                       >
                         <div className={`w-6 h-6 ${copilot.avatarColor} rounded-full text-xs font-semibold flex items-center justify-center`}>
@@ -2002,9 +2003,10 @@ export default function Dashboard() {
                       onClick={() => handleSectionChange(item.id as NavigationSection)}
                       className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
                         isActive 
-                          ? 'text-sidebar-primary bg-sidebar-accent' 
+                          ? 'text-sidebar-primary' 
                           : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
                       }`}
+                      style={isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
                       <Icon className="w-5 h-5" />
