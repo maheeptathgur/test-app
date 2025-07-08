@@ -22,6 +22,7 @@ export function WorkspaceSettings() {
     primary: "#008062",
     primaryHover: "#00D2A0", 
     workspaceBg: "#E6EEEF",
+    contentBg: "#F8F6F6",
     cardBg: "#FFFFFF",
     primaryText: "#191C20",
     secondaryText: "#4E5964",
@@ -35,6 +36,7 @@ export function WorkspaceSettings() {
       primary: "#008062",
       primaryHover: "#00D2A0",
       workspaceBg: "#E6EEEF", 
+      contentBg: "#F8F6F6",
       cardBg: "#FFFFFF",
       primaryText: "#191C20",
       secondaryText: "#4E5964",
@@ -45,6 +47,7 @@ export function WorkspaceSettings() {
       primary: "#0066CC",
       primaryHover: "#0080FF",
       workspaceBg: "#E6F3FF",
+      contentBg: "#F0F8FF",
       cardBg: "#FFFFFF", 
       primaryText: "#1A1A1A",
       secondaryText: "#4A5568",
@@ -55,6 +58,7 @@ export function WorkspaceSettings() {
       primary: "#2D5016",
       primaryHover: "#38A169",
       workspaceBg: "#F0F7E6",
+      contentBg: "#F8FBF4",
       cardBg: "#FFFFFF",
       primaryText: "#1A1A1A", 
       secondaryText: "#4A5568",
@@ -65,6 +69,7 @@ export function WorkspaceSettings() {
       primary: "#7C3AED",
       primaryHover: "#8B5CF6",
       workspaceBg: "#F3F1FF",
+      contentBg: "#F9F7FF",
       cardBg: "#FFFFFF",
       primaryText: "#1A1A1A",
       secondaryText: "#4A5568", 
@@ -75,6 +80,7 @@ export function WorkspaceSettings() {
       primary: "#EA580C", 
       primaryHover: "#FB923C",
       workspaceBg: "#FFF7ED",
+      contentBg: "#FFFAF7",
       cardBg: "#FFFFFF",
       primaryText: "#1A1A1A",
       secondaryText: "#4A5568",
@@ -484,7 +490,7 @@ export function WorkspaceSettings() {
                 </div>
 
                 {/* Color Customization Grid */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
                   <div className="text-center">
                     <input 
                       type="color" 
@@ -516,6 +522,17 @@ export function WorkspaceSettings() {
                     />
                     <Label className="text-xs font-medium block mb-1">Workspace BG</Label>
                     <span className="text-xs text-gray-500">{themeColors.workspaceBg}</span>
+                  </div>
+                  
+                  <div className="text-center">
+                    <input 
+                      type="color" 
+                      value={themeColors.contentBg} 
+                      onChange={(e) => handleColorChange('contentBg', e.target.value)}
+                      className="circular-color-picker mx-auto block mb-2" 
+                    />
+                    <Label className="text-xs font-medium block mb-1">Content BG</Label>
+                    <span className="text-xs text-gray-500">{themeColors.contentBg}</span>
                   </div>
                   
                   <div className="text-center">
@@ -583,7 +600,7 @@ export function WorkspaceSettings() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="border rounded-lg overflow-hidden" style={{ backgroundColor: '#F8F6F6' }}>
+                    <div className="border rounded-lg overflow-hidden" style={{ backgroundColor: themeColors.contentBg }}>
                       <div className="flex">
                         {/* Simulated Sidebar */}
                         <div className="w-64 h-80 p-4 space-y-3" style={{ backgroundColor: themeColors.workspaceBg }}>
@@ -611,7 +628,7 @@ export function WorkspaceSettings() {
                         </div>
                         
                         {/* Simulated Main Content */}
-                        <div className="flex-1 p-4 space-y-4" style={{ backgroundColor: '#F8F6F6' }}>
+                        <div className="flex-1 p-4 space-y-4" style={{ backgroundColor: themeColors.contentBg }}>
                           {/* Header */}
                           <div className="flex items-center justify-between pb-3" style={{ borderBottom: `1px solid ${themeColors.borders}` }}>
                             <div className="w-24 h-4 rounded" style={{ backgroundColor: themeColors.primaryText }}></div>
