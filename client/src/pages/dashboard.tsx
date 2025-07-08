@@ -2096,6 +2096,11 @@ export default function Dashboard() {
                         e.currentTarget.style.setProperty('color', 'var(--theme-primary)', 'important');
                         e.currentTarget.style.removeProperty('--sidebar-foreground');
                         e.currentTarget.style.removeProperty('--sidebar-primary');
+                        // Force all nested elements (including icons) to use the primary color
+                        const allElements = e.currentTarget.querySelectorAll('*');
+                        allElements.forEach((el: any) => {
+                          el.style.setProperty('color', 'var(--theme-primary)', 'important');
+                        });
                       }}
                       className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
                         isActive 
@@ -2124,6 +2129,13 @@ export default function Dashboard() {
                         allTextElements.forEach((el: any) => {
                           el.style.removeProperty('color');
                         });
+                        // If this is the active item, set the icon color back to primary
+                        if (isActive) {
+                          const iconElement = e.currentTarget.querySelector('.lucide');
+                          if (iconElement) {
+                            (iconElement as HTMLElement).style.setProperty('color', 'var(--theme-primary)', 'important');
+                          }
+                        }
                       }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
