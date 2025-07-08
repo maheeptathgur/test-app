@@ -80,8 +80,22 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           <div className="absolute top-3 right-3">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-[#008062]/80 hover:bg-[#008062]">
-                  <MoreVertical className="h-4 w-4 text-white" />
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="h-8 w-8 p-0 text-white"
+                  style={{
+                    backgroundColor: 'var(--brand-primary)',
+                    opacity: 0.8
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = '1';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = '0.8';
+                  }}
+                >
+                  <MoreVertical className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -98,9 +112,13 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           <div className="flex items-center gap-2">
             <button
               onClick={() => onToggleStatus(copilot)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+                copilot.status === 'active' ? 'bg-gray-200' : 'bg-gray-200'
               }`}
+              style={copilot.status === 'active' ? {
+                backgroundColor: 'var(--brand-primary)',
+                boxShadow: `0 0 0 2px var(--brand-primary)`
+              } : {}}
             >
               <span
                 className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${

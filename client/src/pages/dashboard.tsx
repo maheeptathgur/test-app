@@ -1013,7 +1013,7 @@ export default function Dashboard() {
                   <Button 
                     variant="default"
                     className="gap-2 h-10"
-                    style={{ backgroundColor: '#008062' }}
+                    style={{ backgroundColor: 'var(--brand-primary)', borderColor: 'var(--brand-primary)' }}
                     onClick={() => setShowCreationWizard(true)}
                   >
                     <Plus className="w-4 h-4" />
@@ -1294,7 +1294,7 @@ export default function Dashboard() {
                   <Button 
                     variant="default"
                     className="gap-2 h-10"
-                    style={{ backgroundColor: '#008062' }}
+                    style={{ backgroundColor: 'var(--brand-primary)', borderColor: 'var(--brand-primary)' }}
                     onClick={() => setShowWorkspaceCreationModal(true)}
                   >
                     <Plus className="w-4 h-4" />
@@ -1531,7 +1531,7 @@ export default function Dashboard() {
                   <Button 
                     variant="default"
                     className="gap-2 h-10"
-                    style={{ backgroundColor: '#008062' }}
+                    style={{ backgroundColor: 'var(--brand-primary)', borderColor: 'var(--brand-primary)' }}
                     onClick={() => setShowCreationWizard(true)}
                   >
                     <Plus className="w-4 h-4" />
