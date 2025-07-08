@@ -628,7 +628,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     return (
       <div className="min-h-full bg-background">
         {/* Markdown Editor Header */}
-        <div className="flex items-center justify-between p-6 bg-muted/50 border-b border-[hsl(var(--border))]">
+        <div className="flex items-center justify-between p-6 bg-muted/50 border-b" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
           <div className="flex items-center gap-3">
             <FileText className="w-6 h-6 text-[var(--theme-primary)]" />
             <div>
@@ -664,7 +664,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         {/* Markdown Editor Content */}
         <div className="flex flex-col h-[calc(100vh-120px)]">
           {/* Document Info */}
-          <div className="p-6 bg-white border-b border-[hsl(var(--border))]">
+          <div className="p-6 bg-white border-b" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div className="space-y-2">
                 <Label htmlFor="md-title">Document Title</Label>
