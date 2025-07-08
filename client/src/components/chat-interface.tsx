@@ -1101,7 +1101,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                           <div className="font-medium text-[hsl(var(--foreground))] truncate text-[14px]">{agent.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className={`text-gray-600 text-[14px] ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
+                                        <div className={`text-[14px] text-gray-600 leading-tight ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
                                           {agent.description || 'Specialized assistant'}
                                         </div>
                                         {isExpanded && (
