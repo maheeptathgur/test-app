@@ -1496,6 +1496,8 @@ function MyComponent() {
                         )}
                       </div>
                       
+                      <div className="border-t my-6" style={{ borderTopColor: 'hsl(187, 18%, 80%)' }}></div>
+                      
                       <div className="space-y-4">
                         <div className="space-y-2">
                           <Label htmlFor="aiProvider">AI Provider</Label>
