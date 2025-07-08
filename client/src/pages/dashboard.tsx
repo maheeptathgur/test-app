@@ -2394,10 +2394,10 @@ export default function Dashboard() {
                       e.stopPropagation();
                       setDeletingFileName('Project_Brief.pdf');
                     }}
-                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-50 group"
                     title="Delete file"
                   >
-                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                    <Trash2 className="w-3 h-3 text-gray-500 group-hover:text-red-600 transition-colors" />
                   </Button>
                 </div>
                 <div 
@@ -2419,10 +2419,10 @@ export default function Dashboard() {
                       e.stopPropagation();
                       setDeletingFileName('logo_design.png');
                     }}
-                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-50 group"
                     title="Delete file"
                   >
-                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                    <Trash2 className="w-3 h-3 text-gray-500 group-hover:text-red-600 transition-colors" />
                   </Button>
                 </div>
                 <div 
@@ -2444,10 +2444,10 @@ export default function Dashboard() {
                       e.stopPropagation();
                       setDeletingFileName('background_music.mp3');
                     }}
-                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-50 group"
                     title="Delete file"
                   >
-                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                    <Trash2 className="w-3 h-3 text-gray-500 group-hover:text-red-600 transition-colors" />
                   </Button>
                 </div>
                 <div 
@@ -2469,10 +2469,10 @@ export default function Dashboard() {
                       e.stopPropagation();
                       setDeletingFileName('demo_video.mp4');
                     }}
-                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-50 group"
                     title="Delete file"
                   >
-                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                    <Trash2 className="w-3 h-3 text-gray-500 group-hover:text-red-600 transition-colors" />
                   </Button>
                 </div>
                 <div 
@@ -2494,10 +2494,10 @@ export default function Dashboard() {
                       e.stopPropagation();
                       setDeletingFileName('presentation.pptx');
                     }}
-                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-50 group"
                     title="Delete file"
                   >
-                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                    <Trash2 className="w-3 h-3 text-gray-500 group-hover:text-red-600 transition-colors" />
                   </Button>
                 </div>
                 <div 
@@ -2519,10 +2519,10 @@ export default function Dashboard() {
                       e.stopPropagation();
                       setDeletingFileName('data_export.csv');
                     }}
-                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-50 group"
                     title="Delete file"
                   >
-                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                    <Trash2 className="w-3 h-3 text-gray-500 group-hover:text-red-600 transition-colors" />
                   </Button>
                 </div>
                 <div 
@@ -2544,10 +2544,10 @@ export default function Dashboard() {
                       e.stopPropagation();
                       setDeletingFileName('screenshot_2024.jpg');
                     }}
-                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-all hover:bg-red-50 group"
                     title="Delete file"
                   >
-                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                    <Trash2 className="w-3 h-3 text-gray-500 group-hover:text-red-600 transition-colors" />
                   </Button>
                 </div>
               </div>
