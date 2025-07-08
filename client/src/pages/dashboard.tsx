@@ -2339,7 +2339,7 @@ export default function Dashboard() {
       </div>
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
-        <div className="w-64 border-r flex flex-col h-full" style={{ backgroundColor: 'var(--theme-background)', borderRightColor: 'hsl(187, 18%, 80%)' }}>
+        <div className="w-64 border-r flex flex-col h-full" style={{ backgroundColor: '#f6f6f6', borderRightColor: 'hsl(187, 18%, 80%)' }}>
           <div className="p-4 flex items-center justify-between">
             <h3 className="font-semibold text-foreground">Files</h3>
             <Button
