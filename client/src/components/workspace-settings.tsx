@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon, Palette, RotateCcw, ChevronDown } from "lucide-react";
+import { useTheme } from "@/lib/theme-context";
 import { ThemeCustomizer } from "@/components/theme-customizer";
 import avatarImagePath from "@assets/image_1751745994194.png";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ import { SampleScreen } from "@/components/sample-screens";
 
 export function WorkspaceSettings() {
   const [activeTab, setActiveTab] = useState("general");
+  const { updateColors, resetToDefault: resetThemeToDefault } = useTheme();
   
   // Theme colors state
   const [themeColors, setThemeColors] = useState({
@@ -122,6 +124,32 @@ export function WorkspaceSettings() {
       ...prev,
       [colorKey]: value
     }));
+  };
+
+  const applyThemeChanges = () => {
+    // Map our detailed theme colors to the theme context format
+    const themeUpdate = {
+      primary: themeColors.primary,
+      background: themeColors.workspaceBg,
+      text: themeColors.primaryText,
+      accent: themeColors.accent
+    };
+
+    // Apply theme using the theme context
+    updateColors(themeUpdate);
+    
+    // Also manually set the additional CSS custom properties that aren't in the theme context
+    const root = document.documentElement;
+    root.style.setProperty('--theme-primary-hover', themeColors.primaryHover);
+    root.style.setProperty('--theme-background-light', themeColors.contentBg);
+    root.style.setProperty('--theme-background-dark', themeColors.borders);
+    root.style.setProperty('--theme-text-muted', themeColors.secondaryText);
+  };
+
+  const resetToDefault = () => {
+    setThemeColors(presetThemes.default);
+    // Reset using theme context
+    resetThemeToDefault();
   };
   const [workspaceName, setWorkspaceName] = useState("GTM Team");
   const [workspaceDescription, setWorkspaceDescription] = useState("A comprehensive workspace for managing AI copilots and workflows");
@@ -682,11 +710,11 @@ export function WorkspaceSettings() {
 
                 {/* Actions */}
                 <div className="flex justify-between items-center pt-4 border-t">
-                  <Button variant="outline" className="gap-2">
+                  <Button variant="outline" className="gap-2" onClick={resetToDefault}>
                     <RotateCcw className="w-4 h-4" />
                     Reset to Default
                   </Button>
-                  <Button className="gap-2" style={{ backgroundColor: themeColors.primary }}>
+                  <Button className="gap-2" style={{ backgroundColor: themeColors.primary }} onClick={applyThemeChanges}>
                     Apply Theme Changes
                   </Button>
                 </div>
