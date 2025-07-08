@@ -1760,6 +1760,26 @@ export default function Dashboard() {
               size="sm"
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
               className="text-sidebar-foreground hover:text-sidebar-primary"
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
+                // Force all nested elements (including icons) to white
+                const allElements = e.currentTarget.querySelectorAll('*');
+                allElements.forEach((el: any) => {
+                  el.style.setProperty('color', 'white', 'important');
+                });
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+                e.currentTarget.style.removeProperty('color');
+                e.currentTarget.style.removeProperty('--sidebar-foreground');
+                e.currentTarget.style.removeProperty('--sidebar-primary');
+                // Reset all nested elements
+                const allElements = e.currentTarget.querySelectorAll('*');
+                allElements.forEach((el: any) => {
+                  el.style.removeProperty('color');
+                });
+              }}
             >
               {sidebarCollapsed ? <PanelLeftOpen className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
             </Button>
