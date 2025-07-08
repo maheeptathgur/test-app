@@ -31,7 +31,7 @@ import { AccountSettings } from "@/components/account-settings";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
-  { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'bg-brand-primary' },
+  { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'bg-[#008062]' },
   { id: '2', name: 'Product Development', type: '', avatar: 'P', color: 'bg-blue-500' },
   { id: '4', name: 'Customer Success', type: '', avatar: 'C', color: 'bg-green-500' },
   { id: '7', name: 'Career Coach', type: '', avatar: 'CC', color: 'bg-indigo-500' },
@@ -614,77 +614,6 @@ export default function Dashboard() {
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
-  
-  // Branding colors state for current session
-  const [brandingColors, setBrandingColors] = useState({
-    primary: "#008062",
-    contentBg: "#ffffff",
-    cardBg: "#f9fafb",
-    sidebarBg: "#e6eeef",
-    accent: "#00d2a0",
-    border: "#e5e7eb"
-  });
-
-  // Function to calculate luminance and determine text color
-  const getTextColorForBackground = (hexColor: string): string => {
-    // Remove # if present
-    const hex = hexColor.replace('#', '');
-    
-    // Convert to RGB
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
-    
-    // Calculate luminance
-    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-    
-    // Return light or dark text based on luminance
-    return luminance > 0.5 ? '#000000' : '#ffffff';
-  };
-
-  // Get dynamic text color based on sidebar background
-  const sidebarTextColor = getTextColorForBackground(brandingColors.sidebarBg);
-
-  // Apply branding colors as CSS custom properties
-  useEffect(() => {
-    const root = document.documentElement;
-    
-    // Helper function to generate color shades
-    const generateShades = (color: string) => {
-      const hex = color.replace('#', '');
-      const r = parseInt(hex.substr(0, 2), 16);
-      const g = parseInt(hex.substr(2, 2), 16);
-      const b = parseInt(hex.substr(4, 2), 16);
-      
-      return {
-        dark: `rgb(${Math.max(0, r - 30)}, ${Math.max(0, g - 30)}, ${Math.max(0, b - 30)})`,
-        50: `rgb(${Math.min(255, r + 40)}, ${Math.min(255, g + 40)}, ${Math.min(255, b + 40)})`
-      };
-    };
-
-    // Calculate adaptive text and background colors
-    const contentTextColor = getTextColorForBackground(brandingColors.contentBg);
-    const contentTextMuted = brandingColors.contentBg === '#111827' || brandingColors.contentBg === '#1f2937' 
-      ? '#d1d5db' : '#6b7280'; // Light gray for dark themes, medium gray for light themes
-    
-    // Use configured card background or fallback to content background
-    const cardBg = brandingColors.cardBg || brandingColors.contentBg;
-    
-    const primaryShades = generateShades(brandingColors.primary);
-    
-    // Set all CSS custom properties
-    root.style.setProperty('--brand-primary', brandingColors.primary);
-    root.style.setProperty('--brand-primary-dark', primaryShades.dark);
-    root.style.setProperty('--brand-primary-50', primaryShades[50]);
-    root.style.setProperty('--brand-content-bg', brandingColors.contentBg);
-    root.style.setProperty('--brand-sidebar-bg', brandingColors.sidebarBg);
-    root.style.setProperty('--brand-accent', brandingColors.accent);
-    root.style.setProperty('--brand-border', brandingColors.border);
-    root.style.setProperty('--brand-sidebar-text', sidebarTextColor);
-    root.style.setProperty('--brand-content-text', contentTextColor);
-    root.style.setProperty('--brand-content-text-muted', contentTextMuted);
-    root.style.setProperty('--brand-card-bg', cardBg);
-  }, [brandingColors, sidebarTextColor]);
 
   // Handle navigation events from copilot configuration
   useEffect(() => {
@@ -1044,7 +973,7 @@ export default function Dashboard() {
                   <Button 
                     variant="default"
                     className="gap-2 h-10"
-                    style={{ backgroundColor: 'var(--brand-primary)', borderColor: 'var(--brand-primary)' }}
+                    style={{ backgroundColor: '#008062' }}
                     onClick={() => setShowCreationWizard(true)}
                   >
                     <Plus className="w-4 h-4" />
@@ -1201,7 +1130,7 @@ export default function Dashboard() {
                               <button
                                 onClick={() => handleArchiveCopilot(copilot)}
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                                  copilot.status === 'active' ? 'bg-brand-primary' : 'bg-gray-200'
+                                  copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
                                 }`}
                               >
                                 <span
@@ -1325,7 +1254,7 @@ export default function Dashboard() {
                   <Button 
                     variant="default"
                     className="gap-2 h-10"
-                    style={{ backgroundColor: 'var(--brand-primary)', borderColor: 'var(--brand-primary)' }}
+                    style={{ backgroundColor: '#008062' }}
                     onClick={() => setShowWorkspaceCreationModal(true)}
                   >
                     <Plus className="w-4 h-4" />
@@ -1386,12 +1315,12 @@ export default function Dashboard() {
               {/* Workspaces Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Current Workspace */}
-                <div className="border-2 border-brand-primary rounded-lg p-6 bg-green-50">
+                <div className="border-2 border-[#008062] rounded-lg p-6 bg-green-50">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-brand-primary rounded-lg flex items-center justify-center">
+                      <div className="w-12 h-12 bg-[#008062] rounded-lg flex items-center justify-center">
                         <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center">
-                          <LayoutDashboard className="w-5 h-5 text-brand-primary" />
+                          <LayoutDashboard className="w-5 h-5 text-[#008062]" />
                         </div>
                       </div>
                       <div>
@@ -1399,7 +1328,7 @@ export default function Dashboard() {
                         <p className="text-sm text-muted-foreground">{currentWorkspace.type}</p>
                       </div>
                     </div>
-                    <Badge variant="secondary" className="bg-brand-primary text-white">Current</Badge>
+                    <Badge variant="secondary" className="bg-[#008062] text-white">Current</Badge>
                   </div>
                   <p className="text-sm text-muted-foreground mb-4">Marketing team workspace with campaign and content copilots.</p>
                   <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
@@ -1522,10 +1451,7 @@ export default function Dashboard() {
         return {
           title: 'Settings',
           subtitle: 'Configure your workspace preferences and integrations',
-          content: <WorkspaceSettings 
-            brandingColors={brandingColors} 
-            onBrandingColorsChange={setBrandingColors} 
-          />,
+          content: <WorkspaceSettings />,
         };
       case 'user-view':
         return {
@@ -1562,7 +1488,7 @@ export default function Dashboard() {
                   <Button 
                     variant="default"
                     className="gap-2 h-10"
-                    style={{ backgroundColor: 'var(--brand-primary)', borderColor: 'var(--brand-primary)' }}
+                    style={{ backgroundColor: '#008062' }}
                     onClick={() => setShowCreationWizard(true)}
                   >
                     <Plus className="w-4 h-4" />
@@ -1719,7 +1645,7 @@ export default function Dashboard() {
                               <button
                                 onClick={() => handleArchiveCopilot(copilot)}
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                                  copilot.status === 'active' ? 'bg-brand-primary' : 'bg-gray-200'
+                                  copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
                                 }`}
                               >
                                 <span
@@ -1792,7 +1718,7 @@ export default function Dashboard() {
       <div className="flex flex-col h-screen bg-background">
         {/* User View Preview Toolbar */}
         {activeSection === 'user-view' && (
-          <div className="bg-brand-primary/80 text-white px-4 py-2 flex items-center justify-between border-b border-[#006b52]/50 flex-shrink-0">
+          <div className="bg-[#008062]/80 text-white px-4 py-2 flex items-center justify-between border-b border-[#006b52]/50 flex-shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium">User View Preview</span>
@@ -1813,10 +1739,7 @@ export default function Dashboard() {
         {/* Main Application Container */}
         <div className="flex flex-1 min-h-0 bg-background">
         {/* Sidebar */}
-        <div 
-          className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col transition-all duration-300`}
-          style={{ backgroundColor: 'var(--brand-sidebar-bg)' }}
-        >
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col bg-[#e6eeef] transition-all duration-300`}>
         {/* Logo and Toggle */}
         <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'}`}>
           <div className={`flex items-center ${sidebarCollapsed ? 'flex-col gap-3' : 'justify-between'} mb-4`}>
@@ -1829,14 +1752,7 @@ export default function Dashboard() {
               variant="ghost"
               size="sm"
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className=""
-              style={{ 
-                color: 'var(--brand-sidebar-text)',
-                '--hover-text-color': 'var(--brand-primary)'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-primary)'}
-              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--brand-sidebar-text)'}
-            
+              className="text-sidebar-foreground hover:text-sidebar-primary"
             >
               {sidebarCollapsed ? <PanelLeftOpen className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
             </Button>
@@ -1865,21 +1781,14 @@ export default function Dashboard() {
                 <>
                   {/* Quick Access Assistants */}
                   <div className="space-y-3">
-                    <h3 className="text-sm font-medium" style={{ color: 'var(--brand-sidebar-text)' }}>Your Assistants</h3>
+                    <h3 className="text-sm font-medium text-sidebar-foreground">Your Assistants</h3>
                     <div className="space-y-2">
                       {copilots.filter(c => c.status === 'active' && c.favorite).slice(0, 4).map((copilot) => (
                         <Button
                           key={copilot.id}
                           variant="ghost"
                           onClick={() => handleStartChat(copilot)}
-                          className="w-full justify-start gap-3 hover:bg-sidebar-accent p-3"
-                          style={{ 
-                            color: 'var(--brand-sidebar-text)',
-                            '--hover-text-color': 'var(--brand-primary)'
-                          }}
-                          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-primary)'}
-                          onMouseLeave={(e) => e.currentTarget.style.color = 'var(--brand-sidebar-text)'}
-                        
+                          className="w-full justify-start gap-3 text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent p-3"
                         >
                           <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
                             {copilot.avatar}
@@ -1905,14 +1814,7 @@ export default function Dashboard() {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleStartChat(copilot)}
-                      className="w-full p-2 hover:bg-sidebar-accent"
-                      style={{ 
-                        color: 'var(--brand-sidebar-text)',
-                        '--hover-text-color': 'var(--brand-primary)'
-                      }}
-                      onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-primary)'}
-                      onMouseLeave={(e) => e.currentTarget.style.color = 'var(--brand-sidebar-text)'}
-                    
+                      className="w-full p-2 text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent"
                       title={copilot.name}
                     >
                       <div className={`w-6 h-6 ${copilot.avatarColor} rounded text-xs font-semibold flex items-center justify-center`}>
@@ -1940,19 +1842,9 @@ export default function Dashboard() {
                         onClick={() => handleStartChat(copilot)}
                         className={`w-full p-2 ${
                           chatCopilot?.id === copilot.id 
-                            ? 'bg-sidebar-accent' 
-                            : 'hover:bg-sidebar-accent'
+                            ? 'text-sidebar-primary bg-sidebar-accent' 
+                            : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
                         }`}
-                        style={{ 
-                          color: chatCopilot?.id === copilot.id ? 'var(--brand-primary)' : 'var(--brand-sidebar-text)',
-                          '--hover-text-color': 'var(--brand-primary)'
-                        }}
-                        onMouseEnter={(e) => {
-                          if (chatCopilot?.id !== copilot.id) e.currentTarget.style.color = 'var(--brand-primary)';
-                        }}
-                        onMouseLeave={(e) => {
-                          if (chatCopilot?.id !== copilot.id) e.currentTarget.style.color = 'var(--brand-sidebar-text)';
-                        }}
                         title={copilot.name}
                       >
                         <div className={`w-6 h-6 ${copilot.avatarColor} rounded-full text-xs font-semibold flex items-center justify-center`}>
@@ -1971,14 +1863,7 @@ export default function Dashboard() {
                         setChatCopilot(null);
                         setShowAttachmentSidebar(false);
                       }}
-                      className=""
-                      style={{ 
-                        color: 'var(--brand-sidebar-text)',
-                        '--hover-text-color': 'var(--brand-primary)'
-                      }}
-                      onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-primary)'}
-                      onMouseLeave={(e) => e.currentTarget.style.color = 'var(--brand-sidebar-text)'}
-                    
+                      className="text-sidebar-foreground hover:text-sidebar-primary"
                       title="Close chat"
                     >
                       <X className="w-4 h-4" />
@@ -2105,19 +1990,9 @@ export default function Dashboard() {
                       onClick={() => handleSectionChange(item.id as NavigationSection)}
                       className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
                         isActive 
-                          ? 'bg-sidebar-accent' 
-                          : 'hover:bg-sidebar-accent'
+                          ? 'text-sidebar-primary bg-sidebar-accent' 
+                          : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
                       }`}
-                      style={{ 
-                        color: isActive ? 'var(--brand-primary)' : 'var(--brand-sidebar-text)',
-                        '--hover-text-color': 'var(--brand-primary)'
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!isActive) e.currentTarget.style.color = 'var(--brand-primary)';
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!isActive) e.currentTarget.style.color = 'var(--brand-sidebar-text)';
-                      }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
                       <Icon className="w-5 h-5" />
@@ -2138,7 +2013,7 @@ export default function Dashboard() {
               {!sidebarCollapsed && (
                 <Button 
                   variant="outline"
-                  className="w-full bg-white border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors"
+                  className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
                   onClick={() => handleSectionChange('pricing')}
                 >
                   Pricing Plans
@@ -2148,7 +2023,7 @@ export default function Dashboard() {
                 <Button 
                   variant="outline"
                   size="sm"
-                  className="w-full bg-white border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors"
+                  className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
                   title="Pricing Plans"
                   onClick={() => handleSectionChange('pricing')}
                 >
@@ -2162,16 +2037,7 @@ export default function Dashboard() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               {sidebarCollapsed ? (
-                <div 
-                  className="w-8 h-8 rounded-full overflow-hidden mx-auto border-2 cursor-pointer transition-colors" 
-                  style={{ 
-                    borderColor: 'var(--brand-primary)',
-                    '--hover-border-color': 'var(--brand-accent)'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--brand-accent)'}
-                  onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--brand-primary)'}
-                  title="John Doe"
-                >
+                <div className="w-8 h-8 rounded-full overflow-hidden mx-auto border-2 border-[#008062] cursor-pointer hover:border-[#00d2a0] transition-colors" title="John Doe">
                   <img 
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&auto=format&face=center" 
                     alt="John Doe"
@@ -2181,13 +2047,7 @@ export default function Dashboard() {
               ) : (
                 <Button 
                   variant="ghost" 
-                  className="w-full p-3 h-auto text-white justify-start"
-                  style={{ 
-                    backgroundColor: 'var(--brand-primary)',
-                    '--hover-bg-color': 'var(--brand-accent)'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--brand-accent)'}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--brand-primary)'}
+                  className="w-full p-3 h-auto bg-[#008062] hover:bg-[#00d2a0] text-white justify-start"
                 >
                   <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                     <img 
@@ -2219,7 +2079,7 @@ export default function Dashboard() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem 
                     onClick={() => handleSectionChange('copilots')}
-                    className="text-brand-primary hover:text-[#00d2a0]"
+                    className="text-[#008062] hover:text-[#00d2a0]"
                   >
                     <LayoutDashboard className="w-4 h-4 mr-2" />
                     Back to Admin Dashboard
@@ -2386,10 +2246,7 @@ export default function Dashboard() {
         </div>
       )}
       {/* Main Content */}
-      <div 
-        className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} 
-        style={{ backgroundColor: 'var(--brand-content-bg)' }}
-      >
+      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: '#f2f2f2' }}>
         {/* Form Interface for form-type copilots */}
         {chatCopilot && chatCopilot.type === 'form' ? (
           <div className="h-full flex">
@@ -2441,14 +2298,14 @@ export default function Dashboard() {
               {(activeSection === 'copilots' || activeSection === 'all-workspaces' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
-                    <h1 className="text-2xl font-bold text-adaptive">{sectionContent.title}</h1>
+                    <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
                     {activeSection === 'copilots' && (
-                      <Badge variant="secondary" className="text-sm text-brand-primary">
+                      <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
                         {copilots.length} Total
                       </Badge>
                     )}
                     {activeSection === 'all-workspaces' && (
-                      <Badge variant="secondary" className="text-sm text-brand-primary">
+                      <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
                         {workspacesState.length} Total
                       </Badge>
                     )}
