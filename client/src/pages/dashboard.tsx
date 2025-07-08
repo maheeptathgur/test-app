@@ -1878,12 +1878,22 @@ export default function Dashboard() {
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
                           e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
+                          // Force all nested text elements to white
+                          const allTextElements = e.currentTarget.querySelectorAll('*');
+                          allTextElements.forEach((el: any) => {
+                            el.style.setProperty('color', 'white', 'important');
+                          });
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = chatCopilot?.id === copilot.id ? 'var(--theme-accent)' : 'transparent';
                           e.currentTarget.style.removeProperty('color');
                           e.currentTarget.style.removeProperty('--sidebar-foreground');
                           e.currentTarget.style.removeProperty('--sidebar-primary');
+                          // Reset all nested text elements
+                          const allTextElements = e.currentTarget.querySelectorAll('*');
+                          allTextElements.forEach((el: any) => {
+                            el.style.removeProperty('color');
+                          });
                         }}
                         title={copilot.name}
                       >
@@ -1925,12 +1935,22 @@ export default function Dashboard() {
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
                         e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
+                        // Force all nested text elements to white
+                        const allTextElements = e.currentTarget.querySelectorAll('*');
+                        allTextElements.forEach((el: any) => {
+                          el.style.setProperty('color', 'white', 'important');
+                        });
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = conversation.isActive ? 'var(--theme-accent)' : 'rgba(255, 255, 255, 0.5)';
                         e.currentTarget.style.removeProperty('color');
                         e.currentTarget.style.removeProperty('--sidebar-foreground');
                         e.currentTarget.style.removeProperty('--sidebar-primary');
+                        // Reset all nested text elements
+                        const allTextElements = e.currentTarget.querySelectorAll('*');
+                        allTextElements.forEach((el: any) => {
+                          el.style.removeProperty('color');
+                        });
                       }}
                       onClick={(e) => {
                         if (!editingConversationId) {
@@ -2067,6 +2087,11 @@ export default function Dashboard() {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
                         // Override all text colors forcefully
                         e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
+                        // Force all nested text elements to white
+                        const allTextElements = e.currentTarget.querySelectorAll('*');
+                        allTextElements.forEach((el: any) => {
+                          el.style.setProperty('color', 'white', 'important');
+                        });
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = isActive ? 'var(--theme-accent)' : 'transparent';
@@ -2074,6 +2099,11 @@ export default function Dashboard() {
                         e.currentTarget.style.removeProperty('color');
                         e.currentTarget.style.removeProperty('--sidebar-foreground');
                         e.currentTarget.style.removeProperty('--sidebar-primary');
+                        // Reset all nested text elements
+                        const allTextElements = e.currentTarget.querySelectorAll('*');
+                        allTextElements.forEach((el: any) => {
+                          el.style.removeProperty('color');
+                        });
                       }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
