@@ -1871,17 +1871,13 @@ export default function Dashboard() {
                         style={chatCopilot?.id === copilot.id ? { backgroundColor: 'var(--theme-accent)' } : {}}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                          e.currentTarget.style.setProperty('color', 'white', 'important');
-                          e.currentTarget.dataset.originalClassName = e.currentTarget.className;
-                          e.currentTarget.className = e.currentTarget.className.replace(/text-sidebar-\w+/g, '');
+                          e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = chatCopilot?.id === copilot.id ? 'var(--theme-accent)' : 'transparent';
                           e.currentTarget.style.removeProperty('color');
-                          if (e.currentTarget.dataset.originalClassName) {
-                            e.currentTarget.className = e.currentTarget.dataset.originalClassName;
-                            delete e.currentTarget.dataset.originalClassName;
-                          }
+                          e.currentTarget.style.removeProperty('--sidebar-foreground');
+                          e.currentTarget.style.removeProperty('--sidebar-primary');
                         }}
                         title={copilot.name}
                       >
@@ -1922,17 +1918,13 @@ export default function Dashboard() {
                       style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        e.currentTarget.style.setProperty('color', 'white', 'important');
-                        e.currentTarget.dataset.originalClassName = e.currentTarget.className;
-                        e.currentTarget.className = e.currentTarget.className.replace(/text-sidebar-\w+/g, '');
+                        e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = conversation.isActive ? 'var(--theme-accent)' : 'rgba(255, 255, 255, 0.5)';
                         e.currentTarget.style.removeProperty('color');
-                        if (e.currentTarget.dataset.originalClassName) {
-                          e.currentTarget.className = e.currentTarget.dataset.originalClassName;
-                          delete e.currentTarget.dataset.originalClassName;
-                        }
+                        e.currentTarget.style.removeProperty('--sidebar-foreground');
+                        e.currentTarget.style.removeProperty('--sidebar-primary');
                       }}
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
@@ -2053,17 +2045,15 @@ export default function Dashboard() {
                       style={isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        e.currentTarget.style.setProperty('color', 'white', 'important');
-                        e.currentTarget.dataset.originalClassName = e.currentTarget.className;
-                        e.currentTarget.className = e.currentTarget.className.replace(/text-sidebar-\w+/g, '');
+                        // Override all text colors forcefully
+                        e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = isActive ? 'var(--theme-accent)' : 'transparent';
+                        // Reset colors
                         e.currentTarget.style.removeProperty('color');
-                        if (e.currentTarget.dataset.originalClassName) {
-                          e.currentTarget.className = e.currentTarget.dataset.originalClassName;
-                          delete e.currentTarget.dataset.originalClassName;
-                        }
+                        e.currentTarget.style.removeProperty('--sidebar-foreground');
+                        e.currentTarget.style.removeProperty('--sidebar-primary');
                       }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
