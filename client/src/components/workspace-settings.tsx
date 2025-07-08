@@ -30,7 +30,7 @@ export function WorkspaceSettings() {
             onClick={() => setActiveTab("general")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "general"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
           >
@@ -40,7 +40,7 @@ export function WorkspaceSettings() {
             onClick={() => setActiveTab("security")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "security"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
           >
@@ -50,7 +50,7 @@ export function WorkspaceSettings() {
             onClick={() => setActiveTab("theme")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "theme"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
           >
@@ -61,7 +61,7 @@ export function WorkspaceSettings() {
             onClick={() => setActiveTab("conversations")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "conversations"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
           >
@@ -71,7 +71,7 @@ export function WorkspaceSettings() {
             onClick={() => setActiveTab("analytics")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "analytics"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
           >
@@ -81,7 +81,7 @@ export function WorkspaceSettings() {
             onClick={() => setActiveTab("users")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "users"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
           >
@@ -376,7 +376,7 @@ export function WorkspaceSettings() {
             <Button variant="outline">
               Cancel
             </Button>
-            <Button className="bg-[#008062] hover:bg-[#006b54]">
+            <Button className="theme-primary hover:bg-[#006b54]">
               Save Changes
             </Button>
           </div>

@@ -80,7 +80,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           <div className="absolute top-3 right-3">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-[#008062]/80 hover:bg-[#008062]">
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 theme-primary/80 hover:theme-primary">
                   <MoreVertical className="h-4 w-4 text-white" />
                 </Button>
               </DropdownMenuTrigger>
@@ -98,8 +98,8 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           <div className="flex items-center gap-2">
             <button
               onClick={() => onToggleStatus(copilot)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                copilot.status === 'active' ? 'theme-primary' : 'bg-gray-200'
               }`}
             >
               <span
@@ -142,7 +142,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
                         </Badge>
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent className="max-w-xs" style={{ backgroundColor: '#E0FFF8' }}>
+                    <TooltipContent className="max-w-xs" style={{ backgroundColor: 'var(--theme-accent)' }}>
                       <p className="text-sm">{component.description || `${component.type} component`}</p>
                     </TooltipContent>
                   </Tooltip>

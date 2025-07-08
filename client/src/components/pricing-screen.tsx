@@ -66,10 +66,10 @@ export function PricingScreen() {
       {/* Pricing Cards */}
       <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         {plans.map((plan, index) => (
-          <Card key={index} className={`relative ${plan.recommended ? 'border-[#008062] border-2' : ''}`}>
+          <Card key={index} className={`relative ${plan.recommended ? 'border-[var(--theme-primary)] border-2' : ''}`}>
             {plan.recommended && (
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <Badge className="bg-[#008062] text-white px-3 py-1">Recommended</Badge>
+                <Badge className="theme-primary text-white px-3 py-1">Recommended</Badge>
               </div>
             )}
             <CardHeader className="text-center pb-4">
@@ -84,13 +84,13 @@ export function PricingScreen() {
               <ul className="space-y-3 mb-6">
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-[#008062] rounded-full"></div>
+                    <div className="w-2 h-2 theme-primary rounded-full"></div>
                     <span className="text-sm text-gray-700">{feature}</span>
                   </li>
                 ))}
               </ul>
               <Button 
-                className={`w-full ${plan.recommended ? 'bg-[#008062] hover:bg-[#00d2a0]' : 'bg-gray-900 hover:bg-gray-800'}`}
+                className={`w-full ${plan.recommended ? 'theme-primary theme-primary-hover:hover' : 'bg-gray-900 hover:bg-gray-800'}`}
               >
                 {plan.name === "Enterprise" ? "Contact Sales" : "Get Started"}
               </Button>

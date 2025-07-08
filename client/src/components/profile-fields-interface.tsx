@@ -108,7 +108,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 onClick={() => setActiveTab("general")}
                 className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${
                   activeTab === "general"
-                    ? "border-[#008062] text-[#008062]"
+                    ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                     : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
                 }`}
               >
@@ -119,7 +119,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 onClick={() => setActiveTab("components")}
                 className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${
                   activeTab === "components"
-                    ? "border-[#008062] text-[#008062]"
+                    ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                     : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
                 }`}
               >
@@ -130,7 +130,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 onClick={() => setActiveTab("profile")}
                 className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors flex items-center gap-2 ${
                   activeTab === "profile"
-                    ? "border-[#008062] text-[#008062]"
+                    ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                     : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
                 }`}
               >

@@ -148,7 +148,7 @@ export function UserView({ copilots, onToggleFavorite, onStartChat }: UserViewPr
                     </div>
                     
                     <Button 
-                      className="w-full bg-[#008062] hover:bg-[#00d2a0]"
+                      className="w-full theme-primary theme-primary-hover:hover"
                       onClick={() => onStartChat(copilot)}
                     >
                       <Play className="w-4 h-4 mr-2" />
@@ -184,13 +184,13 @@ export function UserView({ copilots, onToggleFavorite, onStartChat }: UserViewPr
             <CardContent className="space-y-3">
               {recentChats.map((chat) => (
                 <div key={chat.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                  <div className="w-8 h-8 bg-[#008062] rounded-full flex items-center justify-center text-white text-xs font-medium">
+                  <div className="w-8 h-8 theme-primary rounded-full flex items-center justify-center text-white text-xs font-medium">
                     {chat.copilotName.split(' ').map(word => word[0]).join('')}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
                       <div className="font-medium text-sm truncate">{chat.copilotName}</div>
-                      {chat.unread && <div className="w-2 h-2 bg-[#008062] rounded-full"></div>}
+                      {chat.unread && <div className="w-2 h-2 theme-primary rounded-full"></div>}
                     </div>
                     <p className="text-xs text-muted-foreground truncate">{chat.lastMessage}</p>
                     <p className="text-xs text-muted-foreground mt-1">{chat.timestamp}</p>

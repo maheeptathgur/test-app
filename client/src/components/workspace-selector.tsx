@@ -90,7 +90,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                   placeholder="Search assistants..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 border-border focus:border-[#008062] h-8 text-sm"
+                  className="pl-10 border-border focus:border-[var(--theme-primary)] h-8 text-sm"
                 />
               </div>
             </div>
@@ -180,7 +180,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                   <ChevronDown className="w-4 h-4 text-gray-600" />
                 </div>
                 <div>
-                  <div className="text-sm font-medium" style={{ color: '#008062' }}>View All Workspaces</div>
+                  <div className="text-sm font-medium" style={{ color: 'var(--theme-primary)' }}>View All Workspaces</div>
                 </div>
               </DropdownMenuItem>
             )}
@@ -193,7 +193,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 <Plus className="w-4 h-4 text-gray-600" />
               </div>
               <div>
-                <div className="text-sm font-medium" style={{ color: '#008062' }}>Add Workspace</div>
+                <div className="text-sm font-medium" style={{ color: 'var(--theme-primary)' }}>Add Workspace</div>
               </div>
             </DropdownMenuItem>
           </>
@@ -244,7 +244,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
             <Button
               onClick={handleCreateWorkspace}
               disabled={!newWorkspaceName.trim()}
-              style={{ backgroundColor: '#008062' }}
+              style={{ backgroundColor: 'var(--theme-primary)' }}
               className="text-white hover:opacity-90"
             >
               Create Workspace

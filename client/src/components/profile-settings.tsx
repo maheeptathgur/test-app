@@ -59,7 +59,7 @@ export function ProfileSettings() {
           <p className="text-gray-600">Manage your personal information and preferences</p>
         </div>
         {!isEditing ? (
-          <Button onClick={() => setIsEditing(true)} className="bg-[#008062] hover:bg-[#00d2a0]">
+          <Button onClick={() => setIsEditing(true)} className="theme-primary theme-primary-hover:hover">
             Edit Profile
           </Button>
         ) : (
@@ -70,7 +70,7 @@ export function ProfileSettings() {
             <Button 
               onClick={handleSave}
               disabled={!hasChanges}
-              className="bg-[#008062] hover:bg-[#00d2a0]"
+              className="theme-primary theme-primary-hover:hover"
             >
               <Save className="w-4 h-4 mr-2" />
               Save Changes
@@ -91,7 +91,7 @@ export function ProfileSettings() {
               {/* Profile Picture */}
               <div className="flex flex-col items-center space-y-4">
                 <div className="relative">
-                  <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[#008062]">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[var(--theme-primary)]">
                     <img 
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&auto=format&face=center" 
                       alt="John Doe"
@@ -101,7 +101,7 @@ export function ProfileSettings() {
                   {isEditing && (
                     <Button
                       size="sm"
-                      className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full p-0 bg-[#008062] hover:bg-[#00d2a0]"
+                      className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full p-0 theme-primary theme-primary-hover:hover"
                     >
                       <Camera className="w-4 h-4" />
                     </Button>

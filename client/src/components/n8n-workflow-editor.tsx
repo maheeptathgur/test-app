@@ -159,7 +159,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.id
-                ? 'border-[#008062] text-[#008062]'
+                ? 'border-[var(--theme-primary)] text-[var(--theme-primary)]'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -511,7 +511,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
         <Button variant="outline" onClick={onBack}>
           Cancel
         </Button>
-        <Button className="bg-[#008062] hover:bg-[#006B54]">
+        <Button className="theme-primary hover:bg-[#006B54]">
           Save Changes
         </Button>
       </div>

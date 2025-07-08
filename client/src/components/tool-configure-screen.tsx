@@ -164,7 +164,7 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
               Cancel
             </Button>
             <Button 
-              className="bg-[#008062] hover:bg-[#00d2a0] text-white border-0"
+              className="theme-primary theme-primary-hover:hover text-white border-0"
               disabled={!hasChanges}
               onClick={handleSave}
             >

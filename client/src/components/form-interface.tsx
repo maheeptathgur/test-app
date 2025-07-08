@@ -475,7 +475,7 @@ Stanford University | 2015
               variant="outline" 
               size="sm"
               onClick={onClose} 
-              className="h-7 w-7 p-0 hover:bg-[#00d2a0] hover:text-white"
+              className="h-7 w-7 p-0 theme-primary-hover:hover hover:text-white"
             >
               <X className="h-3 w-3" />
             </Button>

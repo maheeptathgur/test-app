@@ -339,7 +339,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.id
-                ? 'border-[#008062] text-[#008062]'
+                ? 'border-[var(--theme-primary)] text-[var(--theme-primary)]'
                 : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -365,12 +365,12 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
 
             <div className="space-y-4">
               {workflowData.steps.map((step, index) => (
-                <Card key={step.id} className={`border-l-4 ${step.isTrigger ? 'border-l-yellow-500 bg-yellow-50/50' : 'border-l-[#008062]'}`}>
+                <Card key={step.id} className={`border-l-4 ${step.isTrigger ? 'border-l-yellow-500 bg-yellow-50/50' : 'border-l-[var(--theme-primary)]'}`}>
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
-                          <span className="w-6 h-6 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs font-medium">
+                          <span className="w-6 h-6 theme-primary text-white rounded-full flex items-center justify-center text-xs font-medium">
                             {index + 1}
                           </span>
                           {getStatusIcon(step.status)}
@@ -1140,7 +1140,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                       }, null, 2)}
                     />
                   </div>
-                  <Button className="w-full gap-2 bg-[#008062] hover:bg-[#00d2a0] text-white">
+                  <Button className="w-full gap-2 theme-primary theme-primary-hover:hover text-white">
                     <Play className="w-4 h-4" />
                     Run Test
                   </Button>
@@ -1165,7 +1165,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                       <div className="text-sm font-medium">Step Results:</div>
                       {workflowData.steps.map((step, index) => (
                         <div key={step.id} className="flex items-center gap-2 p-2 bg-gray-50 rounded">
-                          <span className="w-5 h-5 bg-[#008062] text-white rounded-full flex items-center justify-center text-xs">
+                          <span className="w-5 h-5 theme-primary text-white rounded-full flex items-center justify-center text-xs">
                             {index + 1}
                           </span>
                           <span className="text-sm">{step.name}</span>
