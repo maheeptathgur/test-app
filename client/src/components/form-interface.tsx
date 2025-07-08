@@ -263,7 +263,7 @@ Stanford University | 2015
       // Convert *italic* to <em>
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       // Convert `code` to <code>
-      .replace(/`(.*?)`/g, '<code style="background-color: #f3f4f6; padding: 2px 4px; border-radius: 3px; font-family: monospace;">$1</code>')
+      .replace(/`(.*?)`/g, '<code style="background-color: var(--theme-accent); padding: 2px 4px; border-radius: 3px; font-family: monospace;">$1</code>')
       // Convert bullet points
       .replace(/^- (.*$)/gim, '• $1')
       // Convert numbered lists
