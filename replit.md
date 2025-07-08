@@ -341,6 +341,7 @@ Changelog:
 - July 8, 2025. Converted modal dialogs to inline displays in copilot configuration - replaced profile field modal dialogs with inline editing forms including: dashed border form for adding new fields, brand green highlighted form for editing existing fields, red confirmation display for field deletion, and updated state management to use inline editing states (isAddingField, editingFieldId) for better user experience and improved visual hierarchy
 - July 8, 2025. Applied brand colors to inline editing forms - changed all blue highlighting to use brand accent color (var(--theme-accent)) for backgrounds and brand primary color (var(--theme-primary)) for borders and badges, ensuring consistent brand color usage throughout profile field editing interface
 - July 8, 2025. Fixed tooltip border colors in copilot configuration - updated all TooltipContent components to use #85FFE2 (light green) for borders instead of default border color, ensuring consistent brand styling across all tooltip elements in the advanced settings section
+- July 8, 2025. Renamed Components tab to Tools in copilot configuration interface for better user clarity and simplified navigation
 ```
 
 ## User Preferences

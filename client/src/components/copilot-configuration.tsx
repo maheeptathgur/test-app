@@ -983,7 +983,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
             <nav className="-mb-px flex space-x-8">
               {[
                 { id: "general", label: "General", icon: Settings },
-                { id: "components", label: "Components", icon: Bot },
+                { id: "components", label: "Tools", icon: Bot },
                 { id: "knowledge", label: "Knowledge Base", icon: BookOpen },
                 { id: "user-docs", label: "User Documents", icon: Upload },
                 { id: "profile", label: "Profile Fields", icon: Users }
