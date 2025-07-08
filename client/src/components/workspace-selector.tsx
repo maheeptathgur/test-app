@@ -61,7 +61,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3 bg-sidebar-accent hover:bg-card">
+        <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3 bg-white/50 hover:bg-sidebar-accent">
           <div className={`w-8 h-8 ${currentWorkspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
             {currentWorkspace.id === '1' ? (
               <Zap className="w-4 h-4" />
