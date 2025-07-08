@@ -171,7 +171,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
               Cancel
             </Button>
             <Button 
-              className="bg-brand-primary hover:bg-brand-primary-dark text-white border-0"
+              className="bg-[#008062] hover:bg-[#00d2a0] text-white border-0"
               disabled={!hasChanges}
               onClick={handleSave}
             >
@@ -520,7 +520,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
                       ) : (
                         <Button 
                           size="sm" 
-                          className="bg-brand-primary hover:bg-brand-primary-dark text-white mt-3"
+                          className="bg-[#008062] hover:bg-[#00d2a0] text-white mt-3"
                           onClick={() => onConnectTool?.(integration.name)}
                         >
                           Connect
@@ -920,7 +920,7 @@ export function SampleScreen({
               <Button variant="outline" onClick={() => setShowConnectNewTool(false)}>
                 Cancel
               </Button>
-              <Button className="bg-brand-primary hover:bg-brand-primary-dark text-white">
+              <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
                 Connect Tool
               </Button>
             </div>
@@ -1098,8 +1098,8 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
         {/* Title */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-adaptive">Agents</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
+            <h1 className="text-2xl font-bold text-foreground">Agents</h1>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
             {filteredAndSortedAgents.length} Agents
           </Badge>
         </div>
@@ -1108,7 +1108,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <Button className="bg-brand-primary text-white hover:bg-brand-primary-dark border-brand-primary hover:border-brand-primary-dark">
+          <Button className="bg-[#008062] text-white hover:bg-[#00d1a0] border-[#008062] hover:border-[#00d1a0]">
             <Plus className="w-4 h-4 mr-2" />
             Create New Agent
           </Button>
@@ -1185,7 +1185,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                       onClick={() => toggleAgentStatus(agent.id)}
                       className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
                         agent.status === 'Active' 
-                          ? 'bg-brand-primary' 
+                          ? 'bg-[#008062]' 
                           : 'bg-gray-300'
                       }`}
                     >
@@ -1525,7 +1525,7 @@ function ToolsScreen({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">Tools</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
             {filteredTools.length} Tools
           </Badge>
         </div>
@@ -1535,7 +1535,7 @@ function ToolsScreen({
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
           <Button 
-            className="bg-brand-primary hover:bg-brand-primary-dark text-white"
+            className="bg-[#008062] hover:bg-[#00d2a0] text-white"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -1679,7 +1679,7 @@ function ToolsScreen({
                               onClick={() => toggleToolStatus(tool.id)}
                               className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
                                 (toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                  ? 'bg-brand-primary' 
+                                  ? 'bg-[#008062]' 
                                   : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                     ? 'bg-red-500'
                                     : 'bg-gray-300'
@@ -2014,7 +2014,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">Workflows</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
             {totalWorkflows} Workflows
           </Badge>
         </div>
@@ -2027,7 +2027,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
             onClick={() => setActiveTab("knolli")}
             className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "knolli"
-                ? "border-brand-primary text-brand-primary"
+                ? "border-[#008062] text-[#008062]"
                 : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
             }`}
           >
@@ -2037,7 +2037,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
             onClick={() => setActiveTab("n8n")}
             className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "n8n"
-                ? "border-brand-primary text-brand-primary"
+                ? "border-[#008062] text-[#008062]"
                 : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
             }`}
           >
@@ -2068,7 +2068,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
         <div className="flex gap-4">
           {activeTab === "knolli" && (
             <Button 
-              className="bg-brand-primary hover:bg-brand-primary-dark text-white"
+              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
               onClick={handleCreateWorkflow}
             >
               Create Custom Workflow
@@ -2076,7 +2076,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
           )}
           {activeTab === "n8n" && (
             <Button 
-              className="bg-brand-primary hover:bg-brand-primary-dark text-white"
+              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
               onClick={handleImportN8n}
             >
               Import from n8n
@@ -2093,7 +2093,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
               <Filter className="w-4 h-4 mr-2" />
               Filter
               {activeFilter !== "all" && (
-                <span className="ml-1 text-xs bg-brand-primary text-white rounded-full px-1">1</span>
+                <span className="ml-1 text-xs bg-[#008062] text-white rounded-full px-1">1</span>
               )}
             </Button>
             {filterOpen && (
@@ -2210,7 +2210,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                           onClick={() => handleWorkflowToggle(workflow.id, workflowStatuses[workflow.id] || workflow.status)}
                           className={`workflow-toggle relative inline-flex items-center rounded-full w-11 h-6 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#008062] ${
                             (workflowStatuses[workflow.id] || workflow.status) === 'Active'
-                              ? 'bg-brand-primary'
+                              ? 'bg-[#008062]'
                               : (workflowStatuses[workflow.id] || workflow.status) === 'Error'
                               ? 'bg-red-500'
                               : 'bg-gray-300'
@@ -2391,7 +2391,7 @@ function KnowledgeBaseScreen() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">Knowledge Base</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
             Documents
           </Badge>
         </div>
@@ -2889,7 +2889,7 @@ function ConversationsScreen() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">Conversations</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
             {conversations.length} Active
           </Badge>
         </div>
@@ -2994,7 +2994,7 @@ function AnalyticsScreen() {
       {/* Title */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-adaptive">Analytics</h1>
+          <h1 className="text-2xl font-bold text-foreground">Analytics</h1>
         </div>
       </div>
       
@@ -3006,57 +3006,57 @@ function AnalyticsScreen() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-blue-100 rounded-lg">
                 <MessageSquare className="w-6 h-6 text-blue-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-adaptive-muted">Total Interactions</p>
-                <p className="text-2xl font-bold text-adaptive">12,467</p>
+                <p className="text-sm font-medium text-gray-600">Total Interactions</p>
+                <p className="text-2xl font-bold text-gray-900">12,467</p>
                 <p className="text-xs text-green-600">+12% from last month</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-green-100 rounded-lg">
                 <Users className="w-6 h-6 text-green-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-adaptive-muted">Active Users</p>
-                <p className="text-2xl font-bold text-adaptive">1,234</p>
+                <p className="text-sm font-medium text-gray-600">Active Users</p>
+                <p className="text-2xl font-bold text-gray-900">1,234</p>
                 <p className="text-xs text-green-600">+8% from last month</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-orange-100 rounded-lg">
                 <BarChart3 className="w-6 h-6 text-orange-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-adaptive-muted">Avg Session Time</p>
-                <p className="text-2xl font-bold text-adaptive">8.5m</p>
+                <p className="text-sm font-medium text-gray-600">Avg Session Time</p>
+                <p className="text-2xl font-bold text-gray-900">8.5m</p>
                 <p className="text-xs text-red-600">-2% from last month</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-purple-100 rounded-lg">
                 <Shield className="w-6 h-6 text-purple-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-adaptive-muted">Success Rate</p>
-                <p className="text-2xl font-bold text-adaptive">94.2%</p>
+                <p className="text-sm font-medium text-gray-600">Success Rate</p>
+                <p className="text-2xl font-bold text-gray-900">94.2%</p>
                 <p className="text-xs text-green-600">+1.5% from last month</p>
               </div>
             </div>
@@ -3065,50 +3065,50 @@ function AnalyticsScreen() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-adaptive">Usage Trends</CardTitle>
-            <CardDescription className="text-adaptive-muted">Daily interactions over the past 30 days</CardDescription>
+            <CardTitle>Usage Trends</CardTitle>
+            <CardDescription>Daily interactions over the past 30 days</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center border border-dashed border-adaptive rounded-lg">
-              <p className="text-adaptive-muted">Chart placeholder - Usage trends visualization</p>
+            <div className="h-64 flex items-center justify-center border border-dashed border-gray-200 rounded-lg">
+              <p className="text-gray-500">Chart placeholder - Usage trends visualization</p>
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardHeader>
-            <CardTitle className="text-adaptive">Top Performing Copilots</CardTitle>
-            <CardDescription className="text-adaptive-muted">Ranked by user satisfaction</CardDescription>
+            <CardTitle>Top Performing Copilots</CardTitle>
+            <CardDescription>Ranked by user satisfaction</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="font-medium text-adaptive">Customer Support Bot</span>
+                <span className="font-medium">Customer Support Bot</span>
                 <div className="flex items-center gap-2">
                   <Progress value={95} className="w-16 h-2" />
-                  <span className="text-sm text-adaptive-muted">95%</span>
+                  <span className="text-sm text-gray-600">95%</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-medium text-adaptive">Sales Assistant</span>
+                <span className="font-medium">Sales Assistant</span>
                 <div className="flex items-center gap-2">
                   <Progress value={87} className="w-16 h-2" />
-                  <span className="text-sm text-adaptive-muted">87%</span>
+                  <span className="text-sm text-gray-600">87%</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-medium text-adaptive">Technical Helper</span>
+                <span className="font-medium">Technical Helper</span>
                 <div className="flex items-center gap-2">
                   <Progress value={82} className="w-16 h-2" />
-                  <span className="text-sm text-adaptive-muted">82%</span>
+                  <span className="text-sm text-gray-600">82%</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-medium text-adaptive">Content Reviewer</span>
+                <span className="font-medium">Content Reviewer</span>
                 <div className="flex items-center gap-2">
                   <Progress value={78} className="w-16 h-2" />
-                  <span className="text-sm text-adaptive-muted">78%</span>
+                  <span className="text-sm text-gray-600">78%</span>
                 </div>
               </div>
             </div>
@@ -3132,8 +3132,8 @@ function UsersScreen() {
       {/* Title */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-adaptive">Users</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
+          <h1 className="text-2xl font-bold text-foreground">Users</h1>
+          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
             {users.length} Users
           </Badge>
         </div>
@@ -3147,43 +3147,43 @@ function UsersScreen() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-brand-primary">47</p>
-              <p className="text-sm text-adaptive-muted">Total Users</p>
+              <p className="text-sm text-gray-600">Total Users</p>
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-green-600">42</p>
-              <p className="text-sm text-adaptive-muted">Active</p>
+              <p className="text-sm text-gray-600">Active</p>
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-blue-600">8</p>
-              <p className="text-sm text-adaptive-muted">Admins</p>
+              <p className="text-sm text-gray-600">Admins</p>
             </div>
           </CardContent>
         </Card>
-        <Card className="bg-adaptive-card">
+        <Card>
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-orange-600">5</p>
-              <p className="text-sm text-adaptive-muted">Pending Invites</p>
+              <p className="text-sm text-gray-600">Pending Invites</p>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <Card className="bg-adaptive-card">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-adaptive">User Management</CardTitle>
+          <CardTitle>User Management</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>

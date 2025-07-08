@@ -66,7 +66,7 @@ interface CopilotCardProps {
 export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchive, onDelete, onToggleStatus }: CopilotCardProps) {
   const [isComponentsExpanded, setIsComponentsExpanded] = useState(false);
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-shadow bg-adaptive-card">
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow">
       {/* Card content */}
       <CardContent className="p-6">
         {/* Image tile header */}
@@ -80,22 +80,8 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           <div className="absolute top-3 right-3">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  className="h-8 w-8 p-0 text-white"
-                  style={{
-                    backgroundColor: 'var(--brand-primary)',
-                    opacity: 0.8
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.opacity = '1';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.opacity = '0.8';
-                  }}
-                >
-                  <MoreVertical className="h-4 w-4" />
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0 bg-[#008062]/80 hover:bg-[#008062]">
+                  <MoreVertical className="h-4 w-4 text-white" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -108,17 +94,13 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
           </div>
         </div>
         <div className="mb-4">
-          <h3 className="font-semibold text-adaptive mb-2">{copilot.name}</h3>
+          <h3 className="font-semibold text-card-foreground mb-2">{copilot.name}</h3>
           <div className="flex items-center gap-2">
             <button
               onClick={() => onToggleStatus(copilot)}
-              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 ${
-                copilot.status === 'active' ? 'bg-gray-200' : 'bg-gray-200'
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
+                copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
               }`}
-              style={copilot.status === 'active' ? {
-                backgroundColor: 'var(--brand-primary)',
-                boxShadow: `0 0 0 2px var(--brand-primary)`
-              } : {}}
             >
               <span
                 className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -126,16 +108,16 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
                 }`}
               />
             </button>
-            <span className="text-xs text-adaptive-muted">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
+            <span className="text-xs text-gray-600">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
           </div>
         </div>
         
-        <p className="text-adaptive-muted text-sm mb-4">{copilot.description}</p>
+        <p className="text-muted-foreground text-sm mb-4">{copilot.description}</p>
         
         <div className="mb-4">
           <button
             onClick={() => setIsComponentsExpanded(!isComponentsExpanded)}
-            className="flex items-center gap-2 text-sm font-medium text-adaptive hover:text-gray-900 transition-colors mb-2"
+            className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors mb-2"
           >
             <ChevronDown className={`w-4 h-4 transition-transform ${isComponentsExpanded ? 'rotate-180' : ''}`} />
             Components ({copilot.components.length})

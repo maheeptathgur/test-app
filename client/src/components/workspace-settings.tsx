@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon, Palette, RotateCcw } from "lucide-react";
+import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon } from "lucide-react";
 import avatarImagePath from "@assets/image_1751745994194.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,160 +13,25 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { SampleScreen } from "@/components/sample-screens";
 
-interface WorkspaceSettingsProps {
-  brandingColors: {
-    primary: string;
-    contentBg: string;
-    cardBg: string;
-    sidebarBg: string;
-    accent: string;
-    border: string;
-  };
-  onBrandingColorsChange: (colors: {
-    primary: string;
-    contentBg: string;
-    cardBg: string;
-    sidebarBg: string;
-    accent: string;
-    border: string;
-  }) => void;
-}
-
-export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: WorkspaceSettingsProps) {
+export function WorkspaceSettings() {
   const [activeTab, setActiveTab] = useState("general");
-  const [workspaceName, setWorkspaceName] = useState("Marketing");
+  const [workspaceName, setWorkspaceName] = useState("GTM Team");
   const [workspaceDescription, setWorkspaceDescription] = useState("A comprehensive workspace for managing AI copilots and workflows");
   const [allowPublicAccess, setAllowPublicAccess] = useState(false);
   const [enableNotifications, setEnableNotifications] = useState(true);
   const [dataRetention, setDataRetention] = useState("90");
 
-  // Helper function to determine if text should be light or dark based on background
-  const getTextColor = (bgColor: string) => {
-    const hex = bgColor.replace('#', '');
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
-    const brightness = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-    return brightness > 155 ? '#000000' : '#ffffff';
-  };
-
-  // Helper function to generate percentage shading of colors
-  const generateShade = (color: string, percentage: number) => {
-    const hex = color.replace('#', '');
-    const r = parseInt(hex.substr(0, 2), 16);
-    const g = parseInt(hex.substr(2, 2), 16);
-    const b = parseInt(hex.substr(4, 2), 16);
-    
-    const adjustedR = Math.round(r + (255 - r) * (percentage / 100));
-    const adjustedG = Math.round(g + (255 - g) * (percentage / 100));
-    const adjustedB = Math.round(b + (255 - b) * (percentage / 100));
-    
-    return `#${adjustedR.toString(16).padStart(2, '0')}${adjustedG.toString(16).padStart(2, '0')}${adjustedB.toString(16).padStart(2, '0')}`;
-  };
-
-  // Theme presets
-  const themePresets = [
-    {
-      name: "Knolli Default",
-      colors: {
-        primary: "#008062",
-        contentBg: "#ffffff",
-        cardBg: "#f9fafb",
-        sidebarBg: "#e6eeef",
-        accent: "#00d2a0",
-        border: "#e5e7eb"
-      }
-    },
-    {
-      name: "Slack Inspired",
-      colors: {
-        primary: "#4a154b",
-        contentBg: "#ffffff",
-        cardBg: "#f8f9fa",
-        sidebarBg: "#350d36",
-        accent: "#1264a3",
-        border: "#e1e5e9"
-      }
-    },
-    {
-      name: "AI Modern",
-      colors: {
-        primary: "#6366f1",
-        contentBg: "#fafbff",
-        cardBg: "#ffffff",
-        sidebarBg: "#f1f5f9",
-        accent: "#8b5cf6",
-        border: "#e2e8f0"
-      }
-    },
-    {
-      name: "Dark Theme",
-      colors: {
-        primary: "#60a5fa",
-        contentBg: "#111827",
-        cardBg: "#1f2937",
-        sidebarBg: "#374151",
-        accent: "#34d399",
-        border: "#4b5563"
-      }
-    },
-    {
-      name: "Tech Classic",
-      colors: {
-        primary: "#2563eb",
-        contentBg: "#ffffff",
-        cardBg: "#f8fafc",
-        sidebarBg: "#f1f5f9",
-        accent: "#0ea5e9",
-        border: "#e2e8f0"
-      }
-    },
-    {
-      name: "Vibrant Pop",
-      colors: {
-        primary: "#ec4899",
-        contentBg: "#fefcfe",
-        cardBg: "#ffffff",
-        sidebarBg: "#fdf2f8",
-        accent: "#f59e0b",
-        border: "#fce7f3"
-      }
-    }
-  ];
-
-  // Apply theme preset
-  const applyThemePreset = (theme: typeof themePresets[0]) => {
-    onBrandingColorsChange(theme.colors);
-  };
-
-  // Reset to default brand colors
-  const resetToDefaults = () => {
-    applyThemePreset(themePresets[0]);
-  };
-
-  // Handle individual color changes
-  const handleColorChange = (colorKey: string, value: string) => {
-    onBrandingColorsChange({
-      ...brandingColors,
-      [colorKey]: value
-    });
-  };
-
   return (
-    <div className={`space-y-6 ${(activeTab === "general" || activeTab === "security" || activeTab === "branding") ? "pb-24" : ""}`}>
+    <div className={`space-y-6 ${(activeTab === "general" || activeTab === "security") ? "pb-24" : ""}`}>
       <div className="w-full">
         <nav className="flex space-x-8 border-b border-border">
           <button
             onClick={() => setActiveTab("general")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "general"
-                ? "border-transparent text-foreground"
+                ? "border-[#008062] text-[#008062]"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
-            style={activeTab === "general" ? {
-              borderBottomColor: 'var(--brand-primary)',
-              color: 'var(--brand-primary)'
-            } : {}}
           >
             General
           </button>
@@ -174,29 +39,11 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
             onClick={() => setActiveTab("security")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "security"
-                ? "border-transparent text-foreground"
+                ? "border-[#008062] text-[#008062]"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
-            style={activeTab === "security" ? {
-              borderBottomColor: 'var(--brand-primary)',
-              color: 'var(--brand-primary)'
-            } : {}}
           >
             Security
-          </button>
-          <button
-            onClick={() => setActiveTab("branding")}
-            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
-              activeTab === "branding"
-                ? "border-transparent text-foreground"
-                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
-            }`}
-            style={activeTab === "branding" ? {
-              borderBottomColor: 'var(--brand-primary)',
-              color: 'var(--brand-primary)'
-            } : {}}
-          >
-            Branding
           </button>
 
           <button
@@ -235,10 +82,10 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
         <div className="grid grid-cols-3 gap-6 mt-6">
           {/* Workspace Information - 2/3 column */}
           <div className="col-span-2">
-            <Card className="bg-adaptive-card">
+            <Card>
               <CardHeader>
-                <CardTitle className="text-adaptive">Workspace Information</CardTitle>
-                <CardDescription className="text-adaptive-muted">
+                <CardTitle>Workspace Information</CardTitle>
+                <CardDescription>
                   Basic information about your workspace
                 </CardDescription>
               </CardHeader>
@@ -369,10 +216,10 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
 
           {/* Workspace Preferences - 1/3 column */}
           <div className="col-span-1">
-            <Card className="bg-adaptive-card">
+            <Card>
               <CardHeader>
-                <CardTitle className="font-semibold tracking-tight text-[16px] text-adaptive">Workspace Preferences</CardTitle>
-                <CardDescription className="text-adaptive-muted">
+                <CardTitle className="font-semibold tracking-tight text-[16px]">Workspace Preferences</CardTitle>
+                <CardDescription>
                   Configure how your workspace behaves
                 </CardDescription>
               </CardHeader>
@@ -426,10 +273,10 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
 
         {activeTab === "security" && (
         <div className="space-y-6 mt-6">
-          <Card className="bg-adaptive-card">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-adaptive">Security Settings</CardTitle>
-              <CardDescription className="text-adaptive-muted">
+              <CardTitle>Security Settings</CardTitle>
+              <CardDescription>
                 Configure security and access controls
               </CardDescription>
             </CardHeader>
@@ -484,332 +331,7 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
         </div>
         )}
 
-        {activeTab === "branding" && (
-        <div className="space-y-6 mt-6">
-          <Card className="bg-adaptive-card">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-adaptive">
-                <Palette className="w-5 h-5" />
-                Workspace Theme Colors
-              </CardTitle>
-              <CardDescription className="text-adaptive-muted">
-                Customize your workspace colors to match your brand identity
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Theme Presets Section */}
-              <div className="space-y-3">
-                <Label htmlFor="theme-preset">Theme Presets</Label>
-                <p className="text-sm text-muted-foreground">
-                  Quick apply popular color schemes
-                </p>
-                <Select onValueChange={(value) => {
-                  const selectedTheme = themePresets.find(theme => theme.name === value);
-                  if (selectedTheme) applyThemePreset(selectedTheme);
-                }}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Choose a theme preset" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {themePresets.map((theme) => (
-                      <SelectItem key={theme.name} value={theme.name}>
-                        <div className="flex items-center gap-3">
-                          <div className="flex gap-1">
-                            <div 
-                              className="w-3 h-3 rounded-full border border-gray-300" 
-                              style={{ backgroundColor: theme.colors.primary }}
-                            />
-                            <div 
-                              className="w-3 h-3 rounded-full border border-gray-300" 
-                              style={{ backgroundColor: theme.colors.sidebarBg }}
-                            />
-                            <div 
-                              className="w-3 h-3 rounded-full border border-gray-300" 
-                              style={{ backgroundColor: theme.colors.accent }}
-                            />
-                          </div>
-                          {theme.name}
-                        </div>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
 
-              {/* Color Picker Section */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-6">
-                <div className="space-y-3">
-                  <Label htmlFor="primary-color">Primary Color</Label>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Used for buttons, links, and accent elements
-                  </p>
-                  <div className="space-y-2">
-                    <Input
-                      id="primary-color"
-                      type="color"
-                      value={brandingColors.primary}
-                      onChange={(e) => handleColorChange('primary', e.target.value)}
-                      className="w-full h-12 rounded-md border cursor-pointer"
-                    />
-                    <Input
-                      type="text"
-                      value={brandingColors.primary}
-                      onChange={(e) => handleColorChange('primary', e.target.value)}
-                      className="text-sm"
-                      placeholder="#008062"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <Label htmlFor="content-bg-color">Content Background</Label>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Main content area background color
-                  </p>
-                  <div className="space-y-2">
-                    <Input
-                      id="content-bg-color"
-                      type="color"
-                      value={brandingColors.contentBg}
-                      onChange={(e) => handleColorChange('contentBg', e.target.value)}
-                      className="w-full h-12 rounded-md border cursor-pointer"
-                    />
-                    <Input
-                      type="text"
-                      value={brandingColors.contentBg}
-                      onChange={(e) => handleColorChange('contentBg', e.target.value)}
-                      className="text-sm"
-                      placeholder="#ffffff"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <Label htmlFor="card-bg-color">Card Background</Label>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Individual card and component background
-                  </p>
-                  <div className="space-y-2">
-                    <Input
-                      id="card-bg-color"
-                      type="color"
-                      value={brandingColors.cardBg || brandingColors.contentBg}
-                      onChange={(e) => handleColorChange('cardBg', e.target.value)}
-                      className="w-full h-12 rounded-md border cursor-pointer"
-                    />
-                    <Input
-                      type="text"
-                      value={brandingColors.cardBg || brandingColors.contentBg}
-                      onChange={(e) => handleColorChange('cardBg', e.target.value)}
-                      className="text-sm"
-                      placeholder="#f9fafb"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <Label htmlFor="sidebar-bg-color">Sidebar Background</Label>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Navigation sidebar background color
-                  </p>
-                  <div className="space-y-2">
-                    <Input
-                      id="sidebar-bg-color"
-                      type="color"
-                      value={brandingColors.sidebarBg}
-                      onChange={(e) => handleColorChange('sidebarBg', e.target.value)}
-                      className="w-full h-12 rounded-md border cursor-pointer"
-                    />
-                    <Input
-                      type="text"
-                      value={brandingColors.sidebarBg}
-                      onChange={(e) => handleColorChange('sidebarBg', e.target.value)}
-                      className="text-sm"
-                      placeholder="#e6eeef"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <Label htmlFor="accent-color">Accent Color</Label>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Used for highlights, badges, and notifications
-                  </p>
-                  <div className="space-y-2">
-                    <Input
-                      id="accent-color"
-                      type="color"
-                      value={brandingColors.accent}
-                      onChange={(e) => handleColorChange('accent', e.target.value)}
-                      className="w-full h-12 rounded-md border cursor-pointer"
-                    />
-                    <Input
-                      type="text"
-                      value={brandingColors.accent}
-                      onChange={(e) => handleColorChange('accent', e.target.value)}
-                      className="text-sm"
-                      placeholder="#00d2a0"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <Label htmlFor="border-color">Border Color</Label>
-                  <p className="text-sm text-muted-foreground mb-2">
-                    Used for card borders and dividers
-                  </p>
-                  <div className="space-y-2">
-                    <Input
-                      id="border-color"
-                      type="color"
-                      value={brandingColors.border}
-                      onChange={(e) => handleColorChange('border', e.target.value)}
-                      className="w-full h-12 rounded-md border cursor-pointer"
-                    />
-                    <Input
-                      type="text"
-                      value={brandingColors.border}
-                      onChange={(e) => handleColorChange('border', e.target.value)}
-                      className="text-sm"
-                      placeholder="#e5e7eb"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Color Preview Section */}
-              <div className="space-y-3">
-                <Label>Color Preview</Label>
-                <div className="border rounded-lg overflow-hidden">
-                  <div className="flex h-48">
-                    {/* Sidebar Preview */}
-                    <div 
-                      className="w-1/4 flex flex-col p-4 space-y-2"
-                      style={{ 
-                        backgroundColor: brandingColors.sidebarBg,
-                        color: getTextColor(brandingColors.sidebarBg)
-                      }}
-                    >
-                      <div className="text-sm font-medium">Navigation</div>
-                      <div className="space-y-1">
-                        <div 
-                          className="px-2 py-1 rounded text-xs flex items-center justify-between"
-                          style={{ backgroundColor: generateShade(brandingColors.sidebarBg, 15) }}
-                        >
-                          <span>Copilots</span>
-                          <div 
-                            className="w-4 h-3 rounded-full text-xs flex items-center justify-center"
-                            style={{ 
-                              backgroundColor: brandingColors.accent,
-                              color: getTextColor(brandingColors.accent)
-                            }}
-                          >
-                            3
-                          </div>
-                        </div>
-                        <div 
-                          className="px-2 py-1 rounded text-xs"
-                          style={{ 
-                            backgroundColor: brandingColors.primary,
-                            color: getTextColor(brandingColors.primary)
-                          }}
-                        >
-                          Active Item
-                        </div>
-                        <div 
-                          className="px-2 py-1 rounded text-xs"
-                          style={{ backgroundColor: generateShade(brandingColors.sidebarBg, 15) }}
-                        >
-                          Settings
-                        </div>
-                      </div>
-                    </div>
-                    
-                    {/* Content Preview */}
-                    <div 
-                      className="flex-1 p-4 space-y-3"
-                      style={{ 
-                        backgroundColor: brandingColors.contentBg,
-                        color: getTextColor(brandingColors.contentBg)
-                      }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="text-lg font-semibold">Dashboard</div>
-                        <button 
-                          className="px-3 py-1 rounded text-sm font-medium"
-                          style={{ 
-                            backgroundColor: brandingColors.primary,
-                            color: getTextColor(brandingColors.primary)
-                          }}
-                        >
-                          Primary Button
-                        </button>
-                      </div>
-                      <div 
-                        className="p-3 rounded border"
-                        style={{ 
-                          backgroundColor: generateShade(brandingColors.contentBg, 5),
-                          borderColor: brandingColors.border
-                        }}
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="text-sm font-medium">Sample Card</div>
-                          <div 
-                            className="px-2 py-1 rounded text-xs font-medium"
-                            style={{ 
-                              backgroundColor: brandingColors.accent,
-                              color: getTextColor(brandingColors.accent)
-                            }}
-                          >
-                            Badge
-                          </div>
-                        </div>
-                        <div className="text-xs opacity-75 mb-2">Content with custom border color</div>
-                        <div 
-                          className="h-px mb-2"
-                          style={{ backgroundColor: brandingColors.border }}
-                        ></div>
-                        <div className="flex gap-2">
-                          <div 
-                            className="px-2 py-1 rounded text-xs"
-                            style={{ backgroundColor: generateShade(brandingColors.accent, 85) }}
-                          >
-                            Accent 85%
-                          </div>
-                          <div 
-                            className="px-2 py-1 rounded text-xs"
-                            style={{ backgroundColor: generateShade(brandingColors.primary, 80) }}
-                          >
-                            Primary 80%
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Reset to Defaults */}
-              <div className="flex justify-between items-center pt-4 border-t">
-                <div>
-                  <div className="text-sm font-medium">Reset to Brand Defaults</div>
-                  <div className="text-sm text-muted-foreground">
-                    Restore the original Knolli brand color theme
-                  </div>
-                </div>
-                <Button 
-                  variant="outline" 
-                  onClick={resetToDefaults}
-                  className="gap-2"
-                >
-                  <RotateCcw className="w-4 h-4" />
-                  Reset Colors
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-        )}
 
         {activeTab === "conversations" && (
           <div className="mt-6">
@@ -830,26 +352,14 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
         )}
       </div>
       
-      {/* Save Footer - Only show for General, Security, and Branding tabs */}
-      {(activeTab === "general" || activeTab === "security" || activeTab === "branding") && (
+      {/* Save Footer - Only show for General and Security tabs */}
+      {(activeTab === "general" || activeTab === "security") && (
         <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
           <div className="flex justify-end gap-3">
             <Button variant="outline">
               Cancel
             </Button>
-            <Button 
-              className="text-white"
-              style={{
-                backgroundColor: 'var(--brand-primary)',
-                borderColor: 'var(--brand-primary)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--brand-primary-dark)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'var(--brand-primary)';
-              }}
-            >
+            <Button className="bg-[#008062] hover:bg-[#006b54]">
               Save Changes
             </Button>
           </div>
