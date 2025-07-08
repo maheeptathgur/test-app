@@ -813,7 +813,7 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
                 borderColor: 'var(--brand-primary)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = adjustColorShade(brandingColors.primary, -20);
+                e.currentTarget.style.backgroundColor = 'var(--brand-primary-dark)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--brand-primary)';
