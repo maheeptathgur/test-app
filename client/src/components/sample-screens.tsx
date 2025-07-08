@@ -1098,7 +1098,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
         {/* Title */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-foreground">Agents</h1>
+            <h1 className="text-2xl font-bold text-adaptive">Agents</h1>
           <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
             {filteredAndSortedAgents.length} Agents
           </Badge>
@@ -2994,7 +2994,7 @@ function AnalyticsScreen() {
       {/* Title */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-foreground">Analytics</h1>
+          <h1 className="text-2xl font-bold text-adaptive">Analytics</h1>
         </div>
       </div>
       
@@ -3006,57 +3006,57 @@ function AnalyticsScreen() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-blue-100 rounded-lg">
                 <MessageSquare className="w-6 h-6 text-blue-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Interactions</p>
-                <p className="text-2xl font-bold text-gray-900">12,467</p>
+                <p className="text-sm font-medium text-adaptive-muted">Total Interactions</p>
+                <p className="text-2xl font-bold text-adaptive">12,467</p>
                 <p className="text-xs text-green-600">+12% from last month</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-green-100 rounded-lg">
                 <Users className="w-6 h-6 text-green-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Active Users</p>
-                <p className="text-2xl font-bold text-gray-900">1,234</p>
+                <p className="text-sm font-medium text-adaptive-muted">Active Users</p>
+                <p className="text-2xl font-bold text-adaptive">1,234</p>
                 <p className="text-xs text-green-600">+8% from last month</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-orange-100 rounded-lg">
                 <BarChart3 className="w-6 h-6 text-orange-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Avg Session Time</p>
-                <p className="text-2xl font-bold text-gray-900">8.5m</p>
+                <p className="text-sm font-medium text-adaptive-muted">Avg Session Time</p>
+                <p className="text-2xl font-bold text-adaptive">8.5m</p>
                 <p className="text-xs text-red-600">-2% from last month</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="p-2 bg-purple-100 rounded-lg">
                 <Shield className="w-6 h-6 text-purple-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Success Rate</p>
-                <p className="text-2xl font-bold text-gray-900">94.2%</p>
+                <p className="text-sm font-medium text-adaptive-muted">Success Rate</p>
+                <p className="text-2xl font-bold text-adaptive">94.2%</p>
                 <p className="text-xs text-green-600">+1.5% from last month</p>
               </div>
             </div>
@@ -3065,50 +3065,50 @@ function AnalyticsScreen() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardHeader>
-            <CardTitle>Usage Trends</CardTitle>
-            <CardDescription>Daily interactions over the past 30 days</CardDescription>
+            <CardTitle className="text-adaptive">Usage Trends</CardTitle>
+            <CardDescription className="text-adaptive-muted">Daily interactions over the past 30 days</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center border border-dashed border-gray-200 rounded-lg">
-              <p className="text-gray-500">Chart placeholder - Usage trends visualization</p>
+            <div className="h-64 flex items-center justify-center border border-dashed border-adaptive rounded-lg">
+              <p className="text-adaptive-muted">Chart placeholder - Usage trends visualization</p>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardHeader>
-            <CardTitle>Top Performing Copilots</CardTitle>
-            <CardDescription>Ranked by user satisfaction</CardDescription>
+            <CardTitle className="text-adaptive">Top Performing Copilots</CardTitle>
+            <CardDescription className="text-adaptive-muted">Ranked by user satisfaction</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <span className="font-medium">Customer Support Bot</span>
+                <span className="font-medium text-adaptive">Customer Support Bot</span>
                 <div className="flex items-center gap-2">
                   <Progress value={95} className="w-16 h-2" />
-                  <span className="text-sm text-gray-600">95%</span>
+                  <span className="text-sm text-adaptive-muted">95%</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-medium">Sales Assistant</span>
+                <span className="font-medium text-adaptive">Sales Assistant</span>
                 <div className="flex items-center gap-2">
                   <Progress value={87} className="w-16 h-2" />
-                  <span className="text-sm text-gray-600">87%</span>
+                  <span className="text-sm text-adaptive-muted">87%</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-medium">Technical Helper</span>
+                <span className="font-medium text-adaptive">Technical Helper</span>
                 <div className="flex items-center gap-2">
                   <Progress value={82} className="w-16 h-2" />
-                  <span className="text-sm text-gray-600">82%</span>
+                  <span className="text-sm text-adaptive-muted">82%</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <span className="font-medium">Content Reviewer</span>
+                <span className="font-medium text-adaptive">Content Reviewer</span>
                 <div className="flex items-center gap-2">
                   <Progress value={78} className="w-16 h-2" />
-                  <span className="text-sm text-gray-600">78%</span>
+                  <span className="text-sm text-adaptive-muted">78%</span>
                 </div>
               </div>
             </div>
@@ -3132,7 +3132,7 @@ function UsersScreen() {
       {/* Title */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold text-foreground">Users</h1>
+          <h1 className="text-2xl font-bold text-adaptive">Users</h1>
           <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
             {users.length} Users
           </Badge>
@@ -3147,43 +3147,43 @@ function UsersScreen() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-brand-primary">47</p>
-              <p className="text-sm text-gray-600">Total Users</p>
+              <p className="text-sm text-adaptive-muted">Total Users</p>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-green-600">42</p>
-              <p className="text-sm text-gray-600">Active</p>
+              <p className="text-sm text-adaptive-muted">Active</p>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-blue-600">8</p>
-              <p className="text-sm text-gray-600">Admins</p>
+              <p className="text-sm text-adaptive-muted">Admins</p>
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="bg-adaptive-card">
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-orange-600">5</p>
-              <p className="text-sm text-gray-600">Pending Invites</p>
+              <p className="text-sm text-adaptive-muted">Pending Invites</p>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      <Card>
+      <Card className="bg-adaptive-card">
         <CardHeader>
-          <CardTitle>User Management</CardTitle>
+          <CardTitle className="text-adaptive">User Management</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>

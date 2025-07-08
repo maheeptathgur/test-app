@@ -385,6 +385,60 @@
     color: var(--brand-content-text) !important;
   }
 
+  /* Global card styling */
+  [data-radix-collection-item], .card, [class*="Card"] {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+  }
+
+  /* Global text adaptations */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--brand-content-text) !important;
+  }
+
+  /* Table styling */
+  table {
+    background-color: var(--brand-card-bg) !important;
+  }
+
+  /* Badge and component text */
+  .badge {
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Dialog and modal backgrounds */
+  [data-radix-overlay] {
+    background-color: var(--brand-card-bg) !important;
+  }
+
+  /* Dropdown and select backgrounds */
+  [data-radix-popper-content-wrapper], [data-radix-dropdown-content], [data-radix-select-content] {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+  }
+
+  /* Tab components */
+  [data-radix-tabs-list], [data-radix-tabs-content] {
+    background-color: var(--brand-card-bg) !important;
+  }
+
+  /* Form inputs and components */
+  input, textarea, select {
+    background-color: var(--brand-card-bg) !important;
+    color: var(--brand-content-text) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Button variants that need adaptive styling */
+  .btn-outline {
+    border-color: var(--brand-border) !important;
+    color: var(--brand-content-text) !important;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--brand-accent) !important;
+  }
+
   .google-drive-btn:hover .google-drive-icon {
     color: white !important;
   }
