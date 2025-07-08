@@ -1847,47 +1847,47 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           <table className="w-full text-xs">
                             <thead className="bg-[hsl(var(--muted))] sticky top-0">
                               <tr>
-                                <th className="p-2 text-left border-r">Customer ID</th>
-                                <th className="p-2 text-left border-r">Name</th>
-                                <th className="p-2 text-left border-r">Email</th>
-                                <th className="p-2 text-left border-r">Purchase Date</th>
+                                <th className="p-2 text-left border-r border-[hsl(var(--border))]">Customer ID</th>
+                                <th className="p-2 text-left border-r border-[hsl(var(--border))]">Name</th>
+                                <th className="p-2 text-left border-r border-[hsl(var(--border))]">Email</th>
+                                <th className="p-2 text-left border-r border-[hsl(var(--border))]">Purchase Date</th>
                                 <th className="p-2 text-left">Amount</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r">CUST001</td>
-                                <td className="p-2 border-r">Sarah Johnson</td>
-                                <td className="p-2 border-r">sarah.j@email.com</td>
-                                <td className="p-2 border-r">2024-01-15</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST001</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">Sarah Johnson</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">sarah.j@email.com</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-15</td>
                                 <td className="p-2">$299.99</td>
                               </tr>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r">CUST002</td>
-                                <td className="p-2 border-r">Mike Chen</td>
-                                <td className="p-2 border-r">mike.chen@email.com</td>
-                                <td className="p-2 border-r">2024-01-15</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST002</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">Mike Chen</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">mike.chen@email.com</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-15</td>
                                 <td className="p-2">$149.50</td>
                               </tr>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r">CUST003</td>
-                                <td className="p-2 border-r">Emily Davis</td>
-                                <td className="p-2 border-r">emily.d@email.com</td>
-                                <td className="p-2 border-r">2024-01-14</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST003</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">Emily Davis</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">emily.d@email.com</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-14</td>
                                 <td className="p-2">$89.99</td>
                               </tr>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r">CUST004</td>
-                                <td className="p-2 border-r">James Wilson</td>
-                                <td className="p-2 border-r">j.wilson@email.com</td>
-                                <td className="p-2 border-r">2024-01-14</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST004</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">James Wilson</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">j.wilson@email.com</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-14</td>
                                 <td className="p-2">$399.00</td>
                               </tr>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r">CUST005</td>
-                                <td className="p-2 border-r">Lisa Anderson</td>
-                                <td className="p-2 border-r">lisa.a@email.com</td>
-                                <td className="p-2 border-r">2024-01-13</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST005</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">Lisa Anderson</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">lisa.a@email.com</td>
+                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-13</td>
                                 <td className="p-2">$199.99</td>
                               </tr>
                             </tbody>
