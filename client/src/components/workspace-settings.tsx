@@ -350,10 +350,10 @@ export function WorkspaceSettings() {
         <div className="grid grid-cols-3 gap-6 mt-6">
           {/* Workspace Information - 2/3 column */}
           <div className="col-span-2">
-            <Card>
+            <Card className="bg-[hsl(var(--card))] border-[hsl(var(--border))]">
               <CardHeader>
-                <CardTitle>Workspace Information</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-[hsl(var(--card-foreground))]">Workspace Information</CardTitle>
+                <CardDescription className="text-[hsl(var(--muted-foreground))]">
                   Basic information about your workspace
                 </CardDescription>
               </CardHeader>
@@ -445,10 +445,10 @@ export function WorkspaceSettings() {
 
           {/* Workspace Preferences - 1/3 column */}
           <div className="col-span-1">
-            <Card>
+            <Card className="bg-[hsl(var(--card))] border-[hsl(var(--border))]">
               <CardHeader>
-                <CardTitle className="font-semibold tracking-tight text-[16px]">Workspace Preferences</CardTitle>
-                <CardDescription>
+                <CardTitle className="font-semibold tracking-tight text-[16px] text-[hsl(var(--card-foreground))]">Workspace Preferences</CardTitle>
+                <CardDescription className="text-[hsl(var(--muted-foreground))]">
                   Configure how your workspace behaves
                 </CardDescription>
               </CardHeader>
@@ -502,10 +502,10 @@ export function WorkspaceSettings() {
 
         {activeTab === "security" && (
         <div className="space-y-6 mt-6">
-          <Card>
+          <Card className="bg-[hsl(var(--card))] border-[hsl(var(--border))]">
             <CardHeader>
-              <CardTitle>Security Settings</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-[hsl(var(--card-foreground))]">Security Settings</CardTitle>
+              <CardDescription className="text-[hsl(var(--muted-foreground))]">
                 Configure security and access controls
               </CardDescription>
             </CardHeader>
@@ -571,10 +571,10 @@ export function WorkspaceSettings() {
         {activeTab === "brand" && (
           <div className="space-y-6 mt-6">
             {/* Brand Assets */}
-            <Card>
+            <Card className="bg-[hsl(var(--card))] border-[hsl(var(--border))]">
               <CardHeader>
-                <CardTitle>Brand Assets</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-[hsl(var(--card-foreground))]">Brand Assets</CardTitle>
+                <CardDescription className="text-[hsl(var(--muted-foreground))]">
                   Upload your workspace logos and visual identity
                 </CardDescription>
               </CardHeader>
@@ -622,10 +622,10 @@ export function WorkspaceSettings() {
             </Card>
 
             {/* Theme Colors */}
-            <Card>
+            <Card className="bg-[hsl(var(--card))] border-[hsl(var(--border))]">
               <CardHeader>
-                <CardTitle>Theme Colors</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-[hsl(var(--card-foreground))]">Theme Colors</CardTitle>
+                <CardDescription className="text-[hsl(var(--muted-foreground))]">
                   Customize your workspace colors and visual appearance
                 </CardDescription>
               </CardHeader>
@@ -755,10 +755,10 @@ export function WorkspaceSettings() {
                 </div>
 
                 {/* Realistic Theme Preview */}
-                <Card>
+                <Card className="bg-[hsl(var(--card))] border-[hsl(var(--border))]">
                   <CardHeader>
-                    <CardTitle>Live Preview</CardTitle>
-                    <CardDescription>
+                    <CardTitle className="text-[hsl(var(--card-foreground))]">Live Preview</CardTitle>
+                    <CardDescription className="text-[hsl(var(--muted-foreground))]">
                       See how your theme looks in the actual interface
                     </CardDescription>
                   </CardHeader>

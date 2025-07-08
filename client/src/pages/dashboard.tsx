@@ -1113,7 +1113,7 @@ export default function Dashboard() {
                   ))}
                 </div>
               ) : (
-                <div className="border rounded-lg bg-white">
+                <div className="border rounded-lg bg-[hsl(var(--card))]">
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -1326,7 +1326,7 @@ export default function Dashboard() {
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
                       <div className="w-12 h-12 theme-primary rounded-lg flex items-center justify-center">
-                        <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center">
+                        <div className="w-8 h-8 bg-[hsl(var(--card))] rounded-md flex items-center justify-center">
                           <LayoutDashboard className="w-5 h-5 text-[var(--theme-primary)]" />
                         </div>
                       </div>
@@ -1371,7 +1371,7 @@ export default function Dashboard() {
 
                 {/* Other Workspaces */}
                 {otherWorkspaces.map((workspace) => (
-                  <div key={workspace.id} className="border rounded-lg p-6 bg-white hover:shadow-md transition-shadow">
+                  <div key={workspace.id} className="border rounded-lg p-6 bg-[hsl(var(--card))] hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-3">
                         <div className={`w-12 h-12 ${workspace.color} rounded-lg flex items-center justify-center`}>
@@ -1628,7 +1628,7 @@ export default function Dashboard() {
                   ))}
                 </div>
               ) : (
-                <div className="border rounded-lg bg-white">
+                <div className="border rounded-lg bg-[hsl(var(--card))]">
                   <Table>
                     <TableHeader>
                       <TableRow>
@@ -1735,7 +1735,7 @@ export default function Dashboard() {
               variant="ghost"
               size="sm"
               onClick={() => handleSectionChange('copilots')}
-              className="text-white hover:bg-white/10 hover:text-white gap-2"
+              className="text-white hover:bg-[var(--theme-primary-hover)]/10 hover:text-white gap-2"
             >
               <X className="w-4 h-4" />
               Exit Preview
@@ -1926,7 +1926,7 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleCancelEditConversationTitle();
                                   }}
-                                  className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                                  className="h-5 w-5 p-0 text-muted-foreground hover:text-muted-foreground hover:bg-muted/50"
                                   title="Cancel"
                                 >
                                   <X className="w-3 h-3" />
@@ -1954,7 +1954,7 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleEditConversationTitle(conversation.id, conversation.title);
                                   }}
-                                  className="h-5 w-5 p-0 text-gray-500 hover:text-gray-700 hover:bg-gray-50"
+                                  className="h-5 w-5 p-0 text-muted-foreground hover:text-muted-foreground hover:bg-muted/50"
                                   title="Edit title"
                                 >
                                   <Edit3 className="w-3 h-3" />
@@ -2143,8 +2143,8 @@ export default function Dashboard() {
                 <div 
                   className={`flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all ${
                     selectedFiles.includes('Project_Brief.pdf') 
-                      ? 'bg-white hover:bg-muted/30' 
-                      : 'bg-white hover:bg-muted/30'
+                      ? 'bg-[hsl(var(--card))] hover:bg-muted/30' 
+                      : 'bg-[hsl(var(--card))] hover:bg-muted/30'
                   }`}
                   style={{
                     borderColor: selectedFiles.includes('Project_Brief.pdf') ? 'var(--theme-primary)' : '#dadde2'
@@ -2158,7 +2158,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-[hsl(var(--card))] hover:bg-muted/30"
                   style={{
                     borderColor: selectedFiles.includes('logo_design.png') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2171,7 +2171,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-[hsl(var(--card))] hover:bg-muted/30"
                   style={{
                     borderColor: selectedFiles.includes('background_music.mp3') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2184,7 +2184,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-[hsl(var(--card))] hover:bg-muted/30"
                   style={{
                     borderColor: selectedFiles.includes('demo_video.mp4') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2197,7 +2197,7 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-[hsl(var(--card))] hover:bg-muted/30"
                   style={{
                     borderColor: selectedFiles.includes('presentation.pptx') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2210,20 +2210,20 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-[hsl(var(--card))] hover:bg-muted/30"
                   style={{
                     borderColor: selectedFiles.includes('data_export.csv') ? 'var(--theme-primary)' : '#dadde2'
                   }}
                   onClick={() => handleFileSelect('data_export.csv')}
                 >
-                  <File className="w-4 h-4 text-gray-500" />
+                  <File className="w-4 h-4 text-muted-foreground" />
                   <div className="flex-1 min-w-0">
                     <div className="text-sm font-medium truncate">data_export.csv</div>
                     <div className="text-xs text-muted-foreground">2 weeks ago • 540 KB</div>
                   </div>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border-2 cursor-pointer transition-all bg-[hsl(var(--card))] hover:bg-muted/30"
                   style={{
                     borderColor: selectedFiles.includes('screenshot_2024.jpg') ? 'var(--theme-primary)' : '#dadde2'
                   }}
