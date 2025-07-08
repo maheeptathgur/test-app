@@ -820,14 +820,12 @@ export default function Dashboard() {
   };
 
   const handleSaveConversationTitle = (conversationId: string) => {
-    console.log('Saving conversation title:', conversationId, 'new title:', editingConversationTitle);
     if (editingConversationTitle.trim()) {
       setConversations(prev => prev.map(conv => 
         conv.id === conversationId 
           ? { ...conv, title: editingConversationTitle.trim() }
           : conv
       ));
-      console.log('Title saved successfully');
       showNotification('Conversation title updated');
     }
     setEditingConversationId(null);
@@ -2016,12 +2014,13 @@ export default function Dashboard() {
                                 onChange={(e) => setEditingConversationTitle(e.target.value)}
                                 onKeyDown={(e) => {
                                   if (e.key === 'Enter') {
+                                    e.preventDefault();
                                     handleSaveConversationTitle(conversation.id);
                                   } else if (e.key === 'Escape') {
+                                    e.preventDefault();
                                     handleCancelEditConversationTitle();
                                   }
                                 }}
-                                onBlur={() => handleSaveConversationTitle(conversation.id)}
                                 className="h-6 text-sm px-2 py-0"
                                 style={{ 
                                   color: 'black !important',
