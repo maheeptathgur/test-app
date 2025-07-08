@@ -1858,14 +1858,10 @@ export default function Dashboard() {
                         }`}
                         style={chatCopilot?.id === copilot.id ? { backgroundColor: 'var(--theme-accent)' } : {}}
                         onMouseEnter={(e) => {
-                          if (chatCopilot?.id !== copilot.id) {
-                            e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                          }
+                          e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
                         }}
                         onMouseLeave={(e) => {
-                          if (chatCopilot?.id !== copilot.id) {
-                            e.currentTarget.style.backgroundColor = 'transparent';
-                          }
+                          e.currentTarget.style.backgroundColor = chatCopilot?.id === copilot.id ? 'var(--theme-accent)' : 'transparent';
                         }}
                         title={copilot.name}
                       >
@@ -1905,14 +1901,10 @@ export default function Dashboard() {
                       }`}
                       style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
-                        if (!conversation.isActive) {
-                          e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        }
+                        e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
                       }}
                       onMouseLeave={(e) => {
-                        if (!conversation.isActive) {
-                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-                        }
+                        e.currentTarget.style.backgroundColor = conversation.isActive ? 'var(--theme-accent)' : 'rgba(255, 255, 255, 0.5)';
                       }}
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
@@ -2032,14 +2024,10 @@ export default function Dashboard() {
                       }`}
                       style={isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        }
+                        e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
                       }}
                       onMouseLeave={(e) => {
-                        if (!isActive) {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                        }
+                        e.currentTarget.style.backgroundColor = isActive ? 'var(--theme-accent)' : 'transparent';
                       }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
