@@ -1798,11 +1798,11 @@ export default function Dashboard() {
                           className="w-full justify-start gap-3 text-sidebar-foreground hover:text-sidebar-primary p-3"
                           onMouseEnter={(e) => {
                             e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                            e.currentTarget.style.color = 'white';
+                            e.currentTarget.style.setProperty('color', 'white', 'important');
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.backgroundColor = 'transparent';
-                            e.currentTarget.style.color = '';
+                            e.currentTarget.style.setProperty('color', '', 'important');
                           }}
                         >
                           <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
@@ -1832,11 +1832,11 @@ export default function Dashboard() {
                       className="w-full p-2 text-sidebar-foreground hover:text-sidebar-primary"
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        e.currentTarget.style.color = 'white';
+                        e.currentTarget.style.setProperty('color', 'white', 'important');
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = '';
+                        e.currentTarget.style.setProperty('color', '', 'important');
                       }}
                       title={copilot.name}
                     >
@@ -1871,11 +1871,11 @@ export default function Dashboard() {
                         style={chatCopilot?.id === copilot.id ? { backgroundColor: 'var(--theme-accent)' } : {}}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                          e.currentTarget.style.color = 'white';
+                          e.currentTarget.style.setProperty('color', 'white', 'important');
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = chatCopilot?.id === copilot.id ? 'var(--theme-accent)' : 'transparent';
-                          e.currentTarget.style.color = chatCopilot?.id === copilot.id ? 'var(--theme-primary)' : '';
+                          e.currentTarget.style.setProperty('color', chatCopilot?.id === copilot.id ? 'var(--theme-primary)' : '', 'important');
                         }}
                         title={copilot.name}
                       >
@@ -1916,11 +1916,11 @@ export default function Dashboard() {
                       style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        e.currentTarget.style.color = 'white';
+                        e.currentTarget.style.setProperty('color', 'white', 'important');
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = conversation.isActive ? 'var(--theme-accent)' : 'rgba(255, 255, 255, 0.5)';
-                        e.currentTarget.style.color = conversation.isActive ? 'var(--theme-primary)' : '';
+                        e.currentTarget.style.setProperty('color', conversation.isActive ? 'var(--theme-primary)' : '', 'important');
                       }}
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
@@ -2041,11 +2041,11 @@ export default function Dashboard() {
                       style={isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        e.currentTarget.style.color = 'white';
+                        e.currentTarget.style.setProperty('color', 'white', 'important');
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = isActive ? 'var(--theme-accent)' : 'transparent';
-                        e.currentTarget.style.color = isActive ? 'var(--theme-primary)' : '';
+                        e.currentTarget.style.setProperty('color', isActive ? 'var(--theme-primary)' : '', 'important');
                       }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >

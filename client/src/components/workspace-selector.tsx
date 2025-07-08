@@ -140,11 +140,11 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
               className="flex items-center gap-3 p-3 rounded-lg cursor-pointer"
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                e.currentTarget.style.color = 'white';
+                e.currentTarget.style.setProperty('color', 'white', 'important');
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = '';
-                e.currentTarget.style.color = '';
+                e.currentTarget.style.setProperty('color', '', 'important');
               }}
             >
               <div className="w-8 h-8 bg-[hsl(var(--muted))] rounded-lg flex items-center justify-center">
@@ -165,11 +165,11 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 }`}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                  e.currentTarget.style.color = 'white';
+                  e.currentTarget.style.setProperty('color', 'white', 'important');
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = workspace.id === currentWorkspace.id ? 'var(--theme-accent)' : '';
-                  e.currentTarget.style.color = workspace.id === currentWorkspace.id ? 'var(--theme-primary)' : '';
+                  e.currentTarget.style.setProperty('color', workspace.id === currentWorkspace.id ? 'var(--theme-primary)' : '', 'important');
                 }}
               >
                 <div className={`w-8 h-8 ${workspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
@@ -193,11 +193,11 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 className="flex items-center gap-3 p-3 rounded-lg cursor-pointer"
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                  e.currentTarget.style.color = 'white';
+                  e.currentTarget.style.setProperty('color', 'white', 'important');
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = '';
-                  e.currentTarget.style.color = '';
+                  e.currentTarget.style.setProperty('color', '', 'important');
                 }}
               >
                 <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
@@ -214,11 +214,11 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
               className="flex items-center gap-3 p-3 rounded-lg cursor-pointer"
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                e.currentTarget.style.color = 'white';
+                e.currentTarget.style.setProperty('color', 'white', 'important');
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = '';
-                e.currentTarget.style.color = '';
+                e.currentTarget.style.setProperty('color', '', 'important');
               }}
             >
               <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
