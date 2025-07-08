@@ -318,6 +318,46 @@
     font-size: 0.875rem !important;
   }
 
+  /* Brand-aware background colors */
+  .bg-brand-primary {
+    background-color: var(--brand-primary) !important;
+  }
+
+  .bg-brand-primary-50 {
+    background-color: var(--brand-primary-50) !important;
+  }
+
+  /* Brand-aware border colors */
+  .border-brand-primary {
+    border-color: var(--brand-primary) !important;
+  }
+
+  /* Brand-aware text colors */
+  .text-brand-primary {
+    color: var(--brand-primary) !important;
+  }
+
+  /* Button hover effects */
+  .btn-primary {
+    background-color: var(--brand-primary) !important;
+    border-color: var(--brand-primary) !important;
+    color: white !important;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--brand-primary-dark) !important;
+    border-color: var(--brand-primary-dark) !important;
+  }
+
+  /* Hover effects */
+  .hover\:bg-brand-primary-dark:hover {
+    background-color: var(--brand-primary-dark) !important;
+  }
+
+  .hover\:border-brand-primary-dark:hover {
+    border-color: var(--brand-primary-dark) !important;
+  }
+
   .google-drive-btn:hover .google-drive-icon {
     color: white !important;
   }
