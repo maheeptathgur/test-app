@@ -1863,11 +1863,11 @@ export default function Dashboard() {
                         variant="ghost"
                         size="sm"
                         onClick={(e) => {
-                          // Clear any hover styles that might be persisting
-                          e.currentTarget.style.removeProperty('color');
+                          handleStartChat(copilot);
+                          // Immediately force the active text color on click
+                          e.currentTarget.style.setProperty('color', 'var(--theme-primary)', 'important');
                           e.currentTarget.style.removeProperty('--sidebar-foreground');
                           e.currentTarget.style.removeProperty('--sidebar-primary');
-                          handleStartChat(copilot);
                         }}
                         className={`w-full p-2 ${
                           chatCopilot?.id === copilot.id 
@@ -1934,11 +1934,11 @@ export default function Dashboard() {
                       }}
                       onClick={(e) => {
                         if (!editingConversationId) {
-                          // Clear any hover styles that might be persisting
-                          e.currentTarget.style.removeProperty('color');
+                          handleLoadConversation(conversation);
+                          // Immediately force the active text color on click
+                          e.currentTarget.style.setProperty('color', 'var(--theme-primary)', 'important');
                           e.currentTarget.style.removeProperty('--sidebar-foreground');
                           e.currentTarget.style.removeProperty('--sidebar-primary');
-                          handleLoadConversation(conversation);
                         }
                       }}
                     >
@@ -2051,11 +2051,11 @@ export default function Dashboard() {
                     <Button
                       variant="ghost"
                       onClick={(e) => {
-                        // Clear any hover styles that might be persisting
-                        e.currentTarget.style.removeProperty('color');
+                        handleSectionChange(item.id as NavigationSection);
+                        // Immediately force the active text color on click
+                        e.currentTarget.style.setProperty('color', 'var(--theme-primary)', 'important');
                         e.currentTarget.style.removeProperty('--sidebar-foreground');
                         e.currentTarget.style.removeProperty('--sidebar-primary');
-                        handleSectionChange(item.id as NavigationSection);
                       }}
                       className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
                         isActive 
