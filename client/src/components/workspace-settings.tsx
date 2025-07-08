@@ -159,7 +159,7 @@ export function WorkspaceSettings() {
     root.style.setProperty('--theme-primary-hover', themeColors.primaryHover);
     root.style.setProperty('--theme-primary-light', themeColors.primaryHover);
     
-    // Background properties
+    // Background properties (using exact variable names from index.css)
     root.style.setProperty('--theme-background', themeColors.workspaceBg);
     root.style.setProperty('--theme-background-light', themeColors.contentBg);
     root.style.setProperty('--theme-background-dark', themeColors.borders);
@@ -171,6 +171,7 @@ export function WorkspaceSettings() {
     
     // Accent properties
     root.style.setProperty('--theme-accent', themeColors.accent);
+    root.style.setProperty('--theme-accent-hover', themeColors.primaryHover);
     root.style.setProperty('--theme-accent-dark', themeColors.accent);
 
     // Override all shadcn/ui variables for complete theme coverage (need HSL format)
