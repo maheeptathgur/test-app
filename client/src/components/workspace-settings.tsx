@@ -227,10 +227,10 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
         <div className="grid grid-cols-3 gap-6 mt-6">
           {/* Workspace Information - 2/3 column */}
           <div className="col-span-2">
-            <Card>
+            <Card className="bg-adaptive-card">
               <CardHeader>
-                <CardTitle>Workspace Information</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-adaptive">Workspace Information</CardTitle>
+                <CardDescription className="text-adaptive-muted">
                   Basic information about your workspace
                 </CardDescription>
               </CardHeader>
@@ -361,10 +361,10 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
 
           {/* Workspace Preferences - 1/3 column */}
           <div className="col-span-1">
-            <Card>
+            <Card className="bg-adaptive-card">
               <CardHeader>
-                <CardTitle className="font-semibold tracking-tight text-[16px]">Workspace Preferences</CardTitle>
-                <CardDescription>
+                <CardTitle className="font-semibold tracking-tight text-[16px] text-adaptive">Workspace Preferences</CardTitle>
+                <CardDescription className="text-adaptive-muted">
                   Configure how your workspace behaves
                 </CardDescription>
               </CardHeader>
@@ -418,10 +418,10 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
 
         {activeTab === "security" && (
         <div className="space-y-6 mt-6">
-          <Card>
+          <Card className="bg-adaptive-card">
             <CardHeader>
-              <CardTitle>Security Settings</CardTitle>
-              <CardDescription>
+              <CardTitle className="text-adaptive">Security Settings</CardTitle>
+              <CardDescription className="text-adaptive-muted">
                 Configure security and access controls
               </CardDescription>
             </CardHeader>
@@ -478,13 +478,13 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
 
         {activeTab === "branding" && (
         <div className="space-y-6 mt-6">
-          <Card>
+          <Card className="bg-adaptive-card">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-adaptive">
                 <Palette className="w-5 h-5" />
                 Workspace Theme Colors
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-adaptive-muted">
                 Customize your workspace colors to match your brand identity
               </CardDescription>
             </CardHeader>
