@@ -1875,7 +1875,7 @@ export default function Dashboard() {
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = chatCopilot?.id === copilot.id ? 'var(--theme-accent)' : 'transparent';
-                          e.currentTarget.style.color = '';
+                          e.currentTarget.style.color = chatCopilot?.id === copilot.id ? 'var(--theme-primary)' : '';
                         }}
                         title={copilot.name}
                       >
@@ -1920,7 +1920,7 @@ export default function Dashboard() {
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = conversation.isActive ? 'var(--theme-accent)' : 'rgba(255, 255, 255, 0.5)';
-                        e.currentTarget.style.color = '';
+                        e.currentTarget.style.color = conversation.isActive ? 'var(--theme-primary)' : '';
                       }}
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
@@ -2045,7 +2045,7 @@ export default function Dashboard() {
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = isActive ? 'var(--theme-accent)' : 'transparent';
-                        e.currentTarget.style.color = '';
+                        e.currentTarget.style.color = isActive ? 'var(--theme-primary)' : '';
                       }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
