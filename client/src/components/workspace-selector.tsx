@@ -169,7 +169,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = workspace.id === currentWorkspace.id ? 'var(--theme-accent)' : '';
-                  e.currentTarget.style.color = '';
+                  e.currentTarget.style.color = workspace.id === currentWorkspace.id ? 'var(--theme-primary)' : '';
                 }}
               >
                 <div className={`w-8 h-8 ${workspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
