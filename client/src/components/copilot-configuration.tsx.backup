@@ -742,7 +742,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
             {mdEditorTab === 'rtf' && (
               <div className="w-full p-6">
-                <div className="border rounded-lg min-h-[500px] bg-white focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:border-primary transition-all" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
+                <div className="border " style="border-color: hsl(187, 18%, 80%)" rounded-lg min-h-[500px] bg-white focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:border-primary transition-all" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
                   {/* RTF Toolbar */}
                   <div className="border-b p-3 bg-muted/30 flex items-center gap-2 flex-wrap rounded-t-lg" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
                     <div className="flex items-center gap-1">
@@ -2449,40 +2449,40 @@ function MyComponent() {
                           <h3 className="text-xl font-semibold mb-2">Quarterly Sales Data</h3>
                           <p className="text-muted-foreground">Excel Spreadsheet - 1.2 MB</p>
                         </div>
-                        <div className="border rounded-lg p-4">
+                        <div className="border " style="border-color: hsl(187, 18%, 80%)" rounded-lg p-4">
                           <h4 className="font-medium mb-3">Sheet Preview: Q1 2024 Sales</h4>
                           <div className="overflow-x-auto">
                             <table className="w-full border-collapse border border-[hsl(var(--border))]">
                               <thead>
                                 <tr className="bg-[hsl(var(--muted))]">
-                                  <th className="border border-[hsl(var(--border))] p-2 text-left">Region</th>
-                                  <th className="border border-[hsl(var(--border))] p-2 text-left">Product</th>
-                                  <th className="border border-[hsl(var(--border))] p-2 text-left">Sales Rep</th>
-                                  <th className="border border-[hsl(var(--border))] p-2 text-right">Revenue</th>
-                                  <th className="border border-[hsl(var(--border))] p-2 text-right">Units Sold</th>
+                                  <th className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-left">Region</th>
+                                  <th className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-left">Product</th>
+                                  <th className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-left">Sales Rep</th>
+                                  <th className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-right">Revenue</th>
+                                  <th className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-right">Units Sold</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td className="border border-[hsl(var(--border))] p-2">North America</td>
-                                  <td className="border border-[hsl(var(--border))] p-2">Product A</td>
-                                  <td className="border border-[hsl(var(--border))] p-2">John Smith</td>
-                                  <td className="border border-[hsl(var(--border))] p-2 text-right">$125,000</td>
-                                  <td className="border border-[hsl(var(--border))] p-2 text-right">250</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2">North America</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2">Product A</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2">John Smith</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-right">$125,000</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-right">250</td>
                                 </tr>
                                 <tr>
-                                  <td className="border border-[hsl(var(--border))] p-2">Europe</td>
-                                  <td className="border border-[hsl(var(--border))] p-2">Product B</td>
-                                  <td className="border border-[hsl(var(--border))] p-2">Sarah Wilson</td>
-                                  <td className="border border-[hsl(var(--border))] p-2 text-right">$89,500</td>
-                                  <td className="border border-[hsl(var(--border))] p-2 text-right">179</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2">Europe</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2">Product B</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2">Sarah Wilson</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-right">$89,500</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-right">179</td>
                                 </tr>
                                 <tr>
-                                  <td className="border border-[hsl(var(--border))] p-2">Asia Pacific</td>
-                                  <td className="border border-[hsl(var(--border))] p-2">Product C</td>
-                                  <td className="border border-[hsl(var(--border))] p-2">Mike Chen</td>
-                                  <td className="border border-[hsl(var(--border))] p-2 text-right">$156,200</td>
-                                  <td className="border border-[hsl(var(--border))] p-2 text-right">312</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2">Asia Pacific</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2">Product C</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2">Mike Chen</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-right">$156,200</td>
+                                  <td className="border " style="border-color: hsl(187, 18%, 80%)" border-[hsl(var(--border))] p-2 text-right">312</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -2532,7 +2532,7 @@ function MyComponent() {
                           <h3 className="text-xl font-semibold mb-2">Team Meeting Notes</h3>
                           <p className="text-muted-foreground">PDF Document - 564 KB</p>
                         </div>
-                        <div className="border rounded-lg p-6 bg-[hsl(var(--muted))]">
+                        <div className="border " style="border-color: hsl(187, 18%, 80%)" rounded-lg p-6 bg-[hsl(var(--muted))]">
                           <div className="space-y-4">
                             <div>
                               <h4 className="font-semibold text-lg">Weekly Team Meeting - March 15, 2024</h4>
@@ -2579,7 +2579,7 @@ function MyComponent() {
                           <p className="text-muted-foreground">PowerPoint Presentation - 3.1 MB</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div className="border rounded-lg p-4 bg-white">
+                          <div className="border " style="border-color: hsl(187, 18%, 80%)" rounded-lg p-4 bg-white">
                             <div className="aspect-video bg-blue-50 rounded border-2 border-dashed border-blue-200 flex items-center justify-center mb-3">
                               <div className="text-center">
                                 <h4 className="font-semibold text-blue-700">Slide 1</h4>
@@ -2589,7 +2589,7 @@ function MyComponent() {
                             <p className="text-sm text-muted-foreground">Introduction to user research methodology and objectives</p>
                           </div>
                           
-                          <div className="border rounded-lg p-4 bg-white">
+                          <div className="border " style="border-color: hsl(187, 18%, 80%)" rounded-lg p-4 bg-white">
                             <div className="aspect-video bg-green-50 rounded border-2 border-dashed border-green-200 flex items-center justify-center mb-3">
                               <div className="text-center">
                                 <h4 className="font-semibold text-green-700">Slide 2</h4>
@@ -2599,7 +2599,7 @@ function MyComponent() {
                             <p className="text-sm text-muted-foreground">Primary findings from user interviews and surveys</p>
                           </div>
                           
-                          <div className="border rounded-lg p-4 bg-white">
+                          <div className="border " style="border-color: hsl(187, 18%, 80%)" rounded-lg p-4 bg-white">
                             <div className="aspect-video bg-purple-50 rounded border-2 border-dashed border-purple-200 flex items-center justify-center mb-3">
                               <div className="text-center">
                                 <h4 className="font-semibold text-purple-700">Slide 3</h4>
@@ -2609,7 +2609,7 @@ function MyComponent() {
                             <p className="text-sm text-muted-foreground">Detailed personas based on research data</p>
                           </div>
                           
-                          <div className="border rounded-lg p-4 bg-white">
+                          <div className="border " style="border-color: hsl(187, 18%, 80%)" rounded-lg p-4 bg-white">
                             <div className="aspect-video bg-orange-50 rounded border-2 border-dashed border-orange-200 flex items-center justify-center mb-3">
                               <div className="text-center">
                                 <h4 className="font-semibold text-orange-700">Slide 4</h4>
