@@ -81,6 +81,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     
     // Apply accent color and variants
     root.style.setProperty('--theme-accent', themeColors.accent);
+    root.style.setProperty('--theme-accent-hover', adjustBrightness(themeColors.primary, 20));
     root.style.setProperty('--theme-accent-dark', adjustBrightness(themeColors.accent, -20));
   };
 
@@ -118,6 +119,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     root.style.removeProperty('--theme-text-muted');
     root.style.removeProperty('--theme-text-light');
     root.style.removeProperty('--theme-accent');
+    root.style.removeProperty('--theme-accent-hover');
     root.style.removeProperty('--theme-accent-dark');
   };
 
