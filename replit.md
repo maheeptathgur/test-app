@@ -321,6 +321,7 @@ Changelog:
 - July 8, 2025. Fixed critical visibility issues with carousel navigation buttons and other interactive elements - replaced invalid CSS classes (theme-primary/80, theme-primary, theme-primary-hover:hover) with proper inline styles using CSS custom properties and mouse event handlers, resolved button invisibility issues throughout chat interface including conversation starter carousel arrows, floating attachment indicators, and document preview controls, ensured all interactive elements properly display with brand colors
 - July 8, 2025. Fixed User View Preview toolbar visibility and interactive elements in dashboard - replaced invalid CSS class theme-primary/80 with proper inline styles for toolbar background, fixed pricing plans buttons hover states, corrected user profile button styling, ensured proper brand color application and text legibility throughout dashboard interface elements
 - July 8, 2025. Applied consistent background styling to workspace selector - updated WorkspaceSelector component to use bg-white/50 background matching conversation cards styling for visual consistency throughout sidebar navigation
+- July 8, 2025. Added selected conversation state styling - implemented active conversation highlighting using brand accent color (var(--theme-accent)) background and primary text color, creating clear visual feedback for which conversation is currently loaded in chat interface
 ```
 
 ## User Preferences
