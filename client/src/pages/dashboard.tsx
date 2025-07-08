@@ -820,12 +820,14 @@ export default function Dashboard() {
   };
 
   const handleSaveConversationTitle = (conversationId: string) => {
+    console.log('Saving conversation title:', conversationId, 'new title:', editingConversationTitle);
     if (editingConversationTitle.trim()) {
       setConversations(prev => prev.map(conv => 
         conv.id === conversationId 
           ? { ...conv, title: editingConversationTitle.trim() }
           : conv
       ));
+      console.log('Title saved successfully');
       showNotification('Conversation title updated');
     }
     setEditingConversationId(null);
@@ -2102,7 +2104,7 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleDeleteConversation(conversation.id);
                                   }}
-                                  className="h-6 w-6 p-1 text-red-500 hover:text-red-600 hover:bg-red-50"
+                                  className="h-6 w-6 p-1 text-red-500 hover:text-white hover:bg-red-500"
                                   title="Delete conversation"
                                 >
                                   <Trash2 className="w-3 h-3" />
