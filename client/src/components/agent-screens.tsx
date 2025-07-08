@@ -69,7 +69,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
       </div>
 
       {/* Configuration Tabs */}
-      <div className="border-b border-[hsl(var(--border))]">
+      <div className="border-b" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
         <nav className="-mb-px flex space-x-8">
           {[
             { id: "general", label: "General Settings" },
@@ -83,7 +83,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === tab.id
                   ? 'border-[var(--theme-primary)] text-[var(--theme-primary)]'
-                  : 'border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:border-[hsl(var(--border))]'
+                  : 'border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]'
               }`}
             >
               {tab.label}
@@ -134,7 +134,8 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   <textarea 
                     defaultValue={agent.description}
                     rows={3}
-                    className="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                    style={{ borderColor: 'hsl(187, 18%, 80%)' }}
                   />
                 </div>
                 
@@ -143,7 +144,8 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   <textarea 
                     placeholder="You are a helpful AI assistant specialized in..."
                     rows={6}
-                    className="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                    className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                    style={{ borderColor: 'hsl(187, 18%, 80%)' }}
                   />
                 </div>
 
@@ -457,7 +459,8 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                         onChange={(e) => setTestMessage(e.target.value)}
                         placeholder="Type your test message here..."
                         rows={4}
-                        className="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                        style={{ borderColor: 'hsl(187, 18%, 80%)' }}
                       />
                       <div className="space-y-4">
                         <div className="flex gap-2">
@@ -622,7 +625,8 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
                   onChange={(e) => setTestMessage(e.target.value)}
                   placeholder="Type your test message here..."
                   rows={4}
-                  className="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                  className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                  style={{ borderColor: 'hsl(187, 18%, 80%)' }}
                 />
                 <div className="flex gap-2">
                   <Button 
