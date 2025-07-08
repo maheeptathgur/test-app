@@ -2405,7 +2405,7 @@ function MyComponent() {
             <div className="p-0 m-0">
               <div className="max-w-6xl mx-auto p-6 flex flex-col">
                 {/* Preview Header */}
-                <div className="flex items-center justify-between mb-6 pb-4 border-b border-[hsl(var(--border))]">
+                <div className="flex items-center justify-between mb-6 pb-4 border-b" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
                   <div className="flex items-center gap-3">
                     <Button 
                       variant="outline" 
@@ -2440,7 +2440,7 @@ function MyComponent() {
                 </div>
 
                 {/* Document Content Preview */}
-                <div className="flex-1 bg-white border rounded-lg overflow-hidden">
+                <div className="flex-1 bg-white border rounded-lg overflow-hidden" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
                   <div className="h-full p-8 overflow-y-auto">
                     {previewDocument?.endsWith('.xlsx') && (
                       <div className="space-y-6">
