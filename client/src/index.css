@@ -379,4 +379,66 @@
     padding: 0 !important;
   }
 
+  /* Brand-aware component styling */
+  .btn-primary {
+    background-color: var(--brand-primary) !important;
+    border-color: var(--brand-primary) !important;
+    color: white !important;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--brand-primary-hover) !important;
+    border-color: var(--brand-primary-hover) !important;
+  }
+
+  .badge-primary {
+    background-color: var(--brand-primary) !important;
+    color: white !important;
+  }
+
+  .badge-accent {
+    background-color: var(--brand-accent) !important;
+    color: white !important;
+  }
+
+  .border-brand {
+    border-color: var(--brand-border) !important;
+  }
+
+  .bg-brand-content {
+    background-color: var(--brand-content-bg) !important;
+  }
+
+  .text-brand-primary {
+    color: var(--brand-primary) !important;
+  }
+
+  .text-brand-accent {
+    color: var(--brand-accent) !important;
+  }
+
+  /* Tab navigation brand styling */
+  .nav-tab-active {
+    color: var(--brand-primary) !important;
+    border-bottom-color: var(--brand-primary) !important;
+  }
+
+  /* Card component brand styling */
+  .card-brand-bg {
+    background-color: var(--brand-content-bg) !important;
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Button variants with brand colors */
+  .btn-brand-outline {
+    color: var(--brand-primary) !important;
+    border-color: var(--brand-primary) !important;
+    background-color: transparent !important;
+  }
+
+  .btn-brand-outline:hover {
+    background-color: var(--brand-primary) !important;
+    color: white !important;
+  }
+
 }
