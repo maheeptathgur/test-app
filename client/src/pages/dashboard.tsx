@@ -612,6 +612,7 @@ export default function Dashboard() {
   const [editingConversationId, setEditingConversationId] = useState<string | null>(null);
   const [editingConversationTitle, setEditingConversationTitle] = useState('');
   const [deletingConversationId, setDeletingConversationId] = useState<string | null>(null);
+  const [deletingFileName, setDeletingFileName] = useState<string | null>(null);
   
   // State for creation wizard
   const [showCreationWizard, setShowCreationWizard] = useState(false);
@@ -826,6 +827,19 @@ export default function Dashboard() {
 
   const handleCancelDeleteConversation = () => {
     setDeletingConversationId(null);
+  };
+
+  const handleConfirmDeleteFile = () => {
+    if (deletingFileName) {
+      // Remove the file from selectedFiles if it was selected
+      setSelectedFiles(prev => prev.filter(file => file !== deletingFileName));
+      setDeletingFileName(null);
+      console.log(`Deleted file: ${deletingFileName}`);
+    }
+  };
+  
+  const handleCancelDeleteFile = () => {
+    setDeletingFileName(null);
   };
 
   const handleEditConversationTitle = (conversationId: string, currentTitle: string) => {
@@ -2358,7 +2372,7 @@ export default function Dashboard() {
             <div className="flex-1 p-4 space-y-3 overflow-y-auto min-h-0">
               <div className="space-y-2">
                 <div 
-                  className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all ${
+                  className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all group ${
                     selectedFiles.includes('Project_Brief.pdf') 
                       ? 'bg-white hover:bg-muted/30' 
                       : 'bg-white hover:bg-muted/30'
@@ -2373,9 +2387,21 @@ export default function Dashboard() {
                     <div className="text-sm font-medium truncate">Project_Brief.pdf</div>
                     <div className="text-xs text-muted-foreground">2 hours ago • 1.2 MB</div>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDeletingFileName('Project_Brief.pdf');
+                    }}
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    title="Delete file"
+                  >
+                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                  </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
                   style={{
                     borderColor: selectedFiles.includes('logo_design.png') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2386,9 +2412,21 @@ export default function Dashboard() {
                     <div className="text-sm font-medium truncate">logo_design.png</div>
                     <div className="text-xs text-muted-foreground">Yesterday • 856 KB</div>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDeletingFileName('logo_design.png');
+                    }}
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    title="Delete file"
+                  >
+                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                  </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
                   style={{
                     borderColor: selectedFiles.includes('background_music.mp3') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2399,9 +2437,21 @@ export default function Dashboard() {
                     <div className="text-sm font-medium truncate">background_music.mp3</div>
                     <div className="text-xs text-muted-foreground">3 days ago • 4.8 MB</div>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDeletingFileName('background_music.mp3');
+                    }}
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    title="Delete file"
+                  >
+                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                  </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
                   style={{
                     borderColor: selectedFiles.includes('demo_video.mp4') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2412,9 +2462,21 @@ export default function Dashboard() {
                     <div className="text-sm font-medium truncate">demo_video.mp4</div>
                     <div className="text-xs text-muted-foreground">1 week ago • 24.5 MB</div>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDeletingFileName('demo_video.mp4');
+                    }}
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    title="Delete file"
+                  >
+                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                  </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
                   style={{
                     borderColor: selectedFiles.includes('presentation.pptx') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2425,9 +2487,21 @@ export default function Dashboard() {
                     <div className="text-sm font-medium truncate">presentation.pptx</div>
                     <div className="text-xs text-muted-foreground">1 week ago • 3.2 MB</div>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDeletingFileName('presentation.pptx');
+                    }}
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    title="Delete file"
+                  >
+                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                  </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
                   style={{
                     borderColor: selectedFiles.includes('data_export.csv') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2438,9 +2512,21 @@ export default function Dashboard() {
                     <div className="text-sm font-medium truncate">data_export.csv</div>
                     <div className="text-xs text-muted-foreground">2 weeks ago • 540 KB</div>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDeletingFileName('data_export.csv');
+                    }}
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    title="Delete file"
+                  >
+                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                  </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30"
+                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
                   style={{
                     borderColor: selectedFiles.includes('screenshot_2024.jpg') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2451,6 +2537,18 @@ export default function Dashboard() {
                     <div className="text-sm font-medium truncate">screenshot_2024.jpg</div>
                     <div className="text-xs text-muted-foreground">2 weeks ago • 1.8 MB</div>
                   </div>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDeletingFileName('screenshot_2024.jpg');
+                    }}
+                    className="h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50"
+                    title="Delete file"
+                  >
+                    <Trash2 className="w-3 h-3 text-gray-500 hover:text-red-600 transition-colors" />
+                  </Button>
                 </div>
               </div>
             </div>
@@ -2579,6 +2677,30 @@ export default function Dashboard() {
             <Button 
               variant="destructive" 
               onClick={handleConfirmDeleteConversation}
+              className="bg-red-500 hover:bg-red-600"
+            >
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* File Delete Confirmation Dialog */}
+      <Dialog open={!!deletingFileName} onOpenChange={() => setDeletingFileName(null)}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Delete File</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete "{deletingFileName}"? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={handleCancelDeleteFile}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={handleConfirmDeleteFile}
               className="bg-red-500 hover:bg-red-600"
             >
               Delete
