@@ -171,7 +171,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
               Cancel
             </Button>
             <Button 
-              className="bg-[#008062] hover:bg-[#00d2a0] text-white border-0"
+              className="bg-brand-primary hover:bg-brand-primary-dark text-white border-0"
               disabled={!hasChanges}
               onClick={handleSave}
             >
@@ -520,7 +520,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
                       ) : (
                         <Button 
                           size="sm" 
-                          className="bg-[#008062] hover:bg-[#00d2a0] text-white mt-3"
+                          className="bg-brand-primary hover:bg-brand-primary-dark text-white mt-3"
                           onClick={() => onConnectTool?.(integration.name)}
                         >
                           Connect
@@ -920,7 +920,7 @@ export function SampleScreen({
               <Button variant="outline" onClick={() => setShowConnectNewTool(false)}>
                 Cancel
               </Button>
-              <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white">
+              <Button className="bg-brand-primary hover:bg-brand-primary-dark text-white">
                 Connect Tool
               </Button>
             </div>
@@ -1099,7 +1099,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <h1 className="text-2xl font-bold text-foreground">Agents</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
             {filteredAndSortedAgents.length} Agents
           </Badge>
         </div>
@@ -1108,7 +1108,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <Button className="bg-[#008062] text-white hover:bg-[#00d1a0] border-[#008062] hover:border-[#00d1a0]">
+          <Button className="bg-brand-primary text-white hover:bg-brand-primary-dark border-brand-primary hover:border-brand-primary-dark">
             <Plus className="w-4 h-4 mr-2" />
             Create New Agent
           </Button>
@@ -1185,7 +1185,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                       onClick={() => toggleAgentStatus(agent.id)}
                       className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
                         agent.status === 'Active' 
-                          ? 'bg-[#008062]' 
+                          ? 'bg-brand-primary' 
                           : 'bg-gray-300'
                       }`}
                     >
@@ -1525,7 +1525,7 @@ function ToolsScreen({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">Tools</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
             {filteredTools.length} Tools
           </Badge>
         </div>
@@ -1535,7 +1535,7 @@ function ToolsScreen({
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
           <Button 
-            className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+            className="bg-brand-primary hover:bg-brand-primary-dark text-white"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -1679,7 +1679,7 @@ function ToolsScreen({
                               onClick={() => toggleToolStatus(tool.id)}
                               className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
                                 (toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                  ? 'bg-[#008062]' 
+                                  ? 'bg-brand-primary' 
                                   : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                     ? 'bg-red-500'
                                     : 'bg-gray-300'
@@ -2014,7 +2014,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">Workflows</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
             {totalWorkflows} Workflows
           </Badge>
         </div>
@@ -2027,7 +2027,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
             onClick={() => setActiveTab("knolli")}
             className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "knolli"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-brand-primary text-brand-primary"
                 : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
             }`}
           >
@@ -2037,7 +2037,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
             onClick={() => setActiveTab("n8n")}
             className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "n8n"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-brand-primary text-brand-primary"
                 : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
             }`}
           >
@@ -2068,7 +2068,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
         <div className="flex gap-4">
           {activeTab === "knolli" && (
             <Button 
-              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+              className="bg-brand-primary hover:bg-brand-primary-dark text-white"
               onClick={handleCreateWorkflow}
             >
               Create Custom Workflow
@@ -2076,7 +2076,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
           )}
           {activeTab === "n8n" && (
             <Button 
-              className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+              className="bg-brand-primary hover:bg-brand-primary-dark text-white"
               onClick={handleImportN8n}
             >
               Import from n8n
@@ -2093,7 +2093,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
               <Filter className="w-4 h-4 mr-2" />
               Filter
               {activeFilter !== "all" && (
-                <span className="ml-1 text-xs bg-[#008062] text-white rounded-full px-1">1</span>
+                <span className="ml-1 text-xs bg-brand-primary text-white rounded-full px-1">1</span>
               )}
             </Button>
             {filterOpen && (
@@ -2210,7 +2210,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                           onClick={() => handleWorkflowToggle(workflow.id, workflowStatuses[workflow.id] || workflow.status)}
                           className={`workflow-toggle relative inline-flex items-center rounded-full w-11 h-6 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#008062] ${
                             (workflowStatuses[workflow.id] || workflow.status) === 'Active'
-                              ? 'bg-[#008062]'
+                              ? 'bg-brand-primary'
                               : (workflowStatuses[workflow.id] || workflow.status) === 'Error'
                               ? 'bg-red-500'
                               : 'bg-gray-300'
@@ -2391,7 +2391,7 @@ function KnowledgeBaseScreen() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">Knowledge Base</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
             Documents
           </Badge>
         </div>
@@ -2889,7 +2889,7 @@ function ConversationsScreen() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">Conversations</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
             {conversations.length} Active
           </Badge>
         </div>
@@ -3133,7 +3133,7 @@ function UsersScreen() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h1 className="text-2xl font-bold text-foreground">Users</h1>
-          <Badge variant="secondary" className="text-sm" style={{ color: '#008062' }}>
+          <Badge variant="secondary" className="text-sm" style={{ color: 'var(--brand-primary)' }}>
             {users.length} Users
           </Badge>
         </div>

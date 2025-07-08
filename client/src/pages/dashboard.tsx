@@ -31,7 +31,7 @@ import { AccountSettings } from "@/components/account-settings";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 
 const workspaces: Workspace[] = [
-  { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'bg-[#008062]' },
+  { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'bg-brand-primary' },
   { id: '2', name: 'Product Development', type: '', avatar: 'P', color: 'bg-blue-500' },
   { id: '4', name: 'Customer Success', type: '', avatar: 'C', color: 'bg-green-500' },
   { id: '7', name: 'Career Coach', type: '', avatar: 'CC', color: 'bg-indigo-500' },
@@ -1170,7 +1170,7 @@ export default function Dashboard() {
                               <button
                                 onClick={() => handleArchiveCopilot(copilot)}
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                                  copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
+                                  copilot.status === 'active' ? 'bg-brand-primary' : 'bg-gray-200'
                                 }`}
                               >
                                 <span
@@ -1355,12 +1355,12 @@ export default function Dashboard() {
               {/* Workspaces Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {/* Current Workspace */}
-                <div className="border-2 border-[#008062] rounded-lg p-6 bg-green-50">
+                <div className="border-2 border-brand-primary rounded-lg p-6 bg-green-50">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 bg-[#008062] rounded-lg flex items-center justify-center">
+                      <div className="w-12 h-12 bg-brand-primary rounded-lg flex items-center justify-center">
                         <div className="w-8 h-8 bg-white rounded-md flex items-center justify-center">
-                          <LayoutDashboard className="w-5 h-5 text-[#008062]" />
+                          <LayoutDashboard className="w-5 h-5 text-brand-primary" />
                         </div>
                       </div>
                       <div>
@@ -1368,7 +1368,7 @@ export default function Dashboard() {
                         <p className="text-sm text-muted-foreground">{currentWorkspace.type}</p>
                       </div>
                     </div>
-                    <Badge variant="secondary" className="bg-[#008062] text-white">Current</Badge>
+                    <Badge variant="secondary" className="bg-brand-primary text-white">Current</Badge>
                   </div>
                   <p className="text-sm text-muted-foreground mb-4">Marketing team workspace with campaign and content copilots.</p>
                   <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
@@ -1688,7 +1688,7 @@ export default function Dashboard() {
                               <button
                                 onClick={() => handleArchiveCopilot(copilot)}
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                                  copilot.status === 'active' ? 'bg-[#008062]' : 'bg-gray-200'
+                                  copilot.status === 'active' ? 'bg-brand-primary' : 'bg-gray-200'
                                 }`}
                               >
                                 <span
@@ -1761,7 +1761,7 @@ export default function Dashboard() {
       <div className="flex flex-col h-screen bg-background">
         {/* User View Preview Toolbar */}
         {activeSection === 'user-view' && (
-          <div className="bg-[#008062]/80 text-white px-4 py-2 flex items-center justify-between border-b border-[#006b52]/50 flex-shrink-0">
+          <div className="bg-brand-primary/80 text-white px-4 py-2 flex items-center justify-between border-b border-[#006b52]/50 flex-shrink-0">
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium">User View Preview</span>
@@ -2107,7 +2107,7 @@ export default function Dashboard() {
               {!sidebarCollapsed && (
                 <Button 
                   variant="outline"
-                  className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
+                  className="w-full bg-white border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors"
                   onClick={() => handleSectionChange('pricing')}
                 >
                   Pricing Plans
@@ -2117,7 +2117,7 @@ export default function Dashboard() {
                 <Button 
                   variant="outline"
                   size="sm"
-                  className="w-full bg-white border-2 border-[#008062] text-[#008062] hover:bg-[#008062] hover:text-white transition-colors"
+                  className="w-full bg-white border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white transition-colors"
                   title="Pricing Plans"
                   onClick={() => handleSectionChange('pricing')}
                 >
@@ -2188,7 +2188,7 @@ export default function Dashboard() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem 
                     onClick={() => handleSectionChange('copilots')}
-                    className="text-[#008062] hover:text-[#00d2a0]"
+                    className="text-brand-primary hover:text-[#00d2a0]"
                   >
                     <LayoutDashboard className="w-4 h-4 mr-2" />
                     Back to Admin Dashboard
