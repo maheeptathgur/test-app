@@ -1240,7 +1240,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 onClick={() => handleStarterClick(starter)}
                                 className="flex-shrink-0 rounded-lg p-2 text-left transition-colors group w-80 hover:opacity-90"
                                 style={{ 
-                                  backgroundColor: 'var(--theme-background-light)',
+                                  backgroundColor: '#F6F6F6',
                                   border: '1px solid hsl(218, 18%, 80%)' 
                                 }}
                               >
