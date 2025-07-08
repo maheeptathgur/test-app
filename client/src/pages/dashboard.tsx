@@ -29,6 +29,7 @@ import { DeleteConfirmationModal } from "@/components/delete-confirmation-modal"
 import { ProfileSettings } from "@/components/profile-settings";
 import { AccountSettings } from "@/components/account-settings";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
+import { useTheme } from "@/lib/theme-context";
 
 const workspaces: Workspace[] = [
   { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'theme-primary' },
@@ -577,6 +578,7 @@ export default function Dashboard() {
   const [workspacesState, setWorkspacesState] = useState<Workspace[]>(workspaces);
   const [currentWorkspace, setCurrentWorkspace] = useState<Workspace>(workspaces[0]);
   const [activeSection, setActiveSection] = useState<NavigationSection>('copilots');
+  const { setWorkspace } = useTheme();
   
   // Other workspaces for the workspaces screen
   const otherWorkspaces = workspacesState.filter(w => w.id !== currentWorkspace.id);
@@ -614,6 +616,11 @@ export default function Dashboard() {
 
   const [conversations, setConversations] = useState(recentConversations);
   const { toast } = useToast();
+
+  // Notify theme system when workspace changes
+  useEffect(() => {
+    setWorkspace(currentWorkspace.id);
+  }, [currentWorkspace.id, setWorkspace]);
 
   // Handle navigation events from copilot configuration
   useEffect(() => {
