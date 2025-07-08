@@ -606,6 +606,7 @@ export default function Dashboard() {
   const [toolConfigActive, setToolConfigActive] = useState<boolean>(false);
   const [configureWorkflow, setConfigureWorkflow] = useState<{id: string, name: string} | null>(null);
   const [testAgent, setTestAgent] = useState<{id: string, name: string} | null>(null);
+  const [mdEditorOpen, setMdEditorOpen] = useState<boolean>(false);
   
   // State for editing conversation titles
   const [editingConversationId, setEditingConversationId] = useState<string | null>(null);
@@ -1252,7 +1253,11 @@ export default function Dashboard() {
         return {
           title: 'Knowledge Base',
           subtitle: 'Manage knowledge articles and documentation for your copilots',
-          content: <SampleScreen section="knowledge-base" />,
+          content: <SampleScreen 
+            section="knowledge-base" 
+            mdEditorOpen={mdEditorOpen}
+            onMdEditorOpenChange={setMdEditorOpen}
+          />,
         };
 
       case 'subscriptions':
@@ -2507,7 +2512,7 @@ export default function Dashboard() {
             {/* Content Body - Conditional padding for tool config screens */}
             <div className={
               // No padding for configuration screens since they handle their own padding
-              (configureTool || toolConfigActive || configureWorkflow) 
+              (configureTool || toolConfigActive || configureWorkflow || mdEditorOpen) 
                 ? "" 
                 : "px-8 pt-8 pb-24"
             }>
