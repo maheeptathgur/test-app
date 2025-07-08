@@ -166,7 +166,7 @@
   --sidebar-foreground: var(--brand-neutral-dark);
   --sidebar-primary: var(--brand-primary);
   --sidebar-primary-foreground: hsl(0, 0%, 100%);
-  --sidebar-accent: var(--theme-accent);
+  --sidebar-accent: hsl(0, 0%, 100%);
   --sidebar-accent-foreground: var(--brand-neutral-dark);
   --sidebar-border: var(--brand-secondary-dark);
   --sidebar-ring: var(--brand-primary);
@@ -208,7 +208,7 @@
   --sidebar-foreground: var(--brand-neutral-dark);
   --sidebar-primary: var(--brand-primary);
   --sidebar-primary-foreground: hsl(0, 0%, 100%);
-  --sidebar-accent: var(--theme-accent);
+  --sidebar-accent: var(--brand-neutral);
   --sidebar-accent-foreground: var(--brand-neutral-dark);
   --sidebar-border: var(--brand-secondary-dark);
   --sidebar-ring: var(--brand-primary);
