@@ -2010,9 +2010,22 @@ export default function Dashboard() {
                               }}
                               onBlur={() => handleSaveConversationTitle(conversation.id)}
                               className="h-6 text-sm px-2 py-0 text-foreground bg-background"
-                              style={{ color: 'hsl(var(--foreground)) !important' }}
+                              style={{ 
+                                color: 'hsl(var(--foreground)) !important',
+                                backgroundColor: 'white !important'
+                              }}
+                              onFocus={(e) => {
+                                // Force dark text on focus
+                                e.target.style.setProperty('color', 'hsl(var(--foreground))', 'important');
+                                e.target.style.setProperty('background-color', 'white', 'important');
+                              }}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                // Force dark text on click
+                                e.target.style.setProperty('color', 'hsl(var(--foreground))', 'important');
+                                e.target.style.setProperty('background-color', 'white', 'important');
+                              }}
                               autoFocus
-                              onClick={(e) => e.stopPropagation()}
                             />
                             <div className="flex items-center justify-between">
                               <span className="text-xs text-muted-foreground leading-tight">{conversation.timestamp}</span>
