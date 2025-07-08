@@ -124,7 +124,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
   ];
 
   return (
-    <div className="n8n-workflow-editor h-full flex flex-col" style={{ backgroundColor: '#f6f6f6' }}>
+    <div className="n8n-workflow-editor h-full flex flex-col" style={{ backgroundColor: 'var(--theme-background-light)' }}>
       {/* Header */}
       <div className="n8n-header flex items-center justify-between px-8 pt-8 pb-6">
         <div className="flex items-center gap-4">
@@ -511,7 +511,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
         <Button variant="outline" onClick={onBack}>
           Cancel
         </Button>
-        <Button className="theme-primary hover:bg-[#006B54]">
+        <Button className="theme-primary hover:bg-[var(--theme-primary-hover)]">
           Save Changes
         </Button>
       </div>

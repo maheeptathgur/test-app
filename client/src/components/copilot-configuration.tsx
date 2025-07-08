@@ -648,7 +648,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
             </Button>
             <Button 
               type="button"
-              className="gap-2 theme-primary hover:bg-[#006b54]"
+              className="gap-2 theme-primary hover:bg-[var(--theme-primary-hover)]"
               onClick={() => {
                 // Save markdown document logic here
                 console.log('Saving markdown document:', { title: mdTitle, description: mdDescription, content: mdContent });
@@ -1558,7 +1558,7 @@ function MyComponent() {
                       <Button 
                         onClick={handleSave} 
                         disabled={!hasChanges}
-                        className="theme-primary hover:bg-[#006b54] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                        className="theme-primary hover:bg-[var(--theme-primary-hover)] disabled:bg-[#DADEE2] disabled:text-[#78838D] disabled:cursor-not-allowed"
                       >
                         Save Changes
                       </Button>

@@ -254,7 +254,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
+                            className="w-full text-gray-600 hover:!bg-[var(--theme-primary-hover)] hover:!text-white"
                             onClick={() => {
                               console.log('Tool configure event:', { id: 'gmail', name: 'Gmail' });
                               // onToolConfigure?.({ id: 'gmail', name: 'Gmail' });
@@ -308,7 +308,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
+                            className="w-full text-gray-600 hover:!bg-[var(--theme-primary-hover)] hover:!text-white"
                             onClick={() => {
                               console.log('Tool configure event:', { id: 'slack', name: 'Slack' });
                               // onToolConfigure?.({ id: 'slack', name: 'Slack' });
@@ -360,7 +360,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
+                            className="w-full text-gray-600 hover:!bg-[var(--theme-primary-hover)] hover:!text-white"
                             onClick={() => {
                               console.log('Tool configure event:', { id: 'google-analytics', name: 'Google Analytics' });
                               // onToolConfigure?.({ id: 'google-analytics', name: 'Google Analytics' });
@@ -412,7 +412,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="w-full text-gray-600 hover:!bg-[#00d1a0] hover:!text-white"
+                            className="w-full text-gray-600 hover:!bg-[var(--theme-primary-hover)] hover:!text-white"
                             onClick={() => {
                               console.log('Tool configure event:', { id: 'openai', name: 'OpenAI' });
                               // onToolConfigure?.({ id: 'openai', name: 'OpenAI' });

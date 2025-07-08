@@ -1108,7 +1108,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <Button className="theme-primary text-white hover:bg-[#00d1a0] border-[var(--theme-primary)] hover:border-[#00d1a0]">
+          <Button className="theme-primary text-white hover:bg-[var(--theme-primary-hover)] border-[var(--theme-primary)] hover:border-[var(--theme-primary-hover)]">
             <Plus className="w-4 h-4 mr-2" />
             Create New Agent
           </Button>

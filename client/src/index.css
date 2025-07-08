@@ -4,18 +4,18 @@
 
 /* Theme CSS Custom Properties */
 :root {
-  /* Default theme colors - matches current design */
+  /* Default theme colors - matches brand palette */
   --theme-primary: #008062;
   --theme-primary-hover: #00D2A0;
-  --theme-primary-light: #40bf9f;
+  --theme-primary-light: #00A881;
   --theme-background: #E6EEEF;
-  --theme-background-light: #f0f6f7;
-  --theme-background-dark: #d0dde0;
-  --theme-text: #1a1a1a;
-  --theme-text-muted: rgba(26, 26, 26, 0.7);
-  --theme-text-light: rgba(26, 26, 26, 0.5);
+  --theme-background-light: #F8F6F6;
+  --theme-background-dark: #DADEE2;
+  --theme-text: #191C20;
+  --theme-text-muted: #4E5964;
+  --theme-text-light: #78838D;
   --theme-accent: #E0FFF8;
-  --theme-accent-dark: #b3f5e6;
+  --theme-accent-dark: #C2FFF1;
 }
 
 /* Theme-aware utility classes */
