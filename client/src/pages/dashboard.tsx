@@ -1871,7 +1871,9 @@ export default function Dashboard() {
                         style={chatCopilot?.id === copilot.id ? { backgroundColor: 'var(--theme-accent)' } : {}}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                          e.currentTarget.style.setProperty('color', 'white', 'important');
+                          if (chatCopilot?.id !== copilot.id) {
+                            e.currentTarget.style.setProperty('color', 'white', 'important');
+                          }
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = chatCopilot?.id === copilot.id ? 'var(--theme-accent)' : 'transparent';
@@ -1916,7 +1918,9 @@ export default function Dashboard() {
                       style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        e.currentTarget.style.setProperty('color', 'white', 'important');
+                        if (!conversation.isActive) {
+                          e.currentTarget.style.setProperty('color', 'white', 'important');
+                        }
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = conversation.isActive ? 'var(--theme-accent)' : 'rgba(255, 255, 255, 0.5)';
@@ -2041,7 +2045,9 @@ export default function Dashboard() {
                       style={isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        e.currentTarget.style.setProperty('color', 'white', 'important');
+                        if (!isActive) {
+                          e.currentTarget.style.setProperty('color', 'white', 'important');
+                        }
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = isActive ? 'var(--theme-accent)' : 'transparent';
