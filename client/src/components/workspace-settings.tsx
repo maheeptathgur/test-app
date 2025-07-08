@@ -233,9 +233,50 @@ export function WorkspaceSettings() {
                   />
                 </div>
 
+                {/* Avatar and Banner Images */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label>Avatar Image (1:1 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <img 
+                        src={avatarImagePath} 
+                        alt="Avatar" 
+                        className="h-8 w-8 mx-auto mb-2"
+                      />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Avatar uploaded
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Change File
+                      </Button>
+                    </div>
+                  </div>
 
-
-
+                  <div className="space-y-2">
+                    <Label>Banner Image (16:9 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Upload banner image
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Choose File
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -402,48 +443,6 @@ export function WorkspaceSettings() {
                       <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
                       <div className="text-sm text-muted-foreground mb-2">
                         Upload logo image
-                      </div>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                      >
-                        <Upload className="h-3 w-3" />
-                        Choose File
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>Avatar Image (1:1 ratio)</Label>
-                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                      <img 
-                        src={avatarImagePath} 
-                        alt="Avatar" 
-                        className="h-8 w-8 mx-auto mb-2"
-                      />
-                      <div className="text-sm text-muted-foreground mb-2">
-                        Avatar uploaded
-                      </div>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                      >
-                        <Upload className="h-3 w-3" />
-                        Change File
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label>Banner Image (16:9 ratio)</Label>
-                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                      <div className="text-sm text-muted-foreground mb-2">
-                        Upload banner image
                       </div>
                       <Button
                         type="button"
