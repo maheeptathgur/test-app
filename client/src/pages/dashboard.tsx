@@ -1958,8 +1958,8 @@ export default function Dashboard() {
                         
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
                         e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
-                        // Force all nested text elements to white, but exclude input elements
-                        const allTextElements = e.currentTarget.querySelectorAll('*:not(input)');
+                        // Force all nested text elements to white, but exclude input elements and delete button
+                        const allTextElements = e.currentTarget.querySelectorAll('*:not(input):not([title="Delete conversation"]):not([title="Delete conversation"] *)');
                         allTextElements.forEach((el: any) => {
                           el.style.setProperty('color', 'white', 'important');
                         });
@@ -1972,8 +1972,8 @@ export default function Dashboard() {
                         e.currentTarget.style.removeProperty('color');
                         e.currentTarget.style.removeProperty('--sidebar-foreground');
                         e.currentTarget.style.removeProperty('--sidebar-primary');
-                        // Reset all nested text elements, but exclude input elements
-                        const allTextElements = e.currentTarget.querySelectorAll('*:not(input)');
+                        // Reset all nested text elements, but exclude input elements and delete button
+                        const allTextElements = e.currentTarget.querySelectorAll('*:not(input):not([title="Delete conversation"]):not([title="Delete conversation"] *)');
                         allTextElements.forEach((el: any) => {
                           el.style.removeProperty('color');
                         });
@@ -2170,10 +2170,10 @@ export default function Dashboard() {
                       style={isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                        // Override all text colors forcefully, but exclude input elements
+                        // Override all text colors forcefully, but exclude input elements and delete buttons
                         e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
-                        // Force all nested text elements to white, but exclude inputs
-                        const allTextElements = e.currentTarget.querySelectorAll('*:not(input)');
+                        // Force all nested text elements to white, but exclude inputs and delete button elements
+                        const allTextElements = e.currentTarget.querySelectorAll('*:not(input):not([title="Delete conversation"]):not([title="Delete conversation"] *)');
                         allTextElements.forEach((el: any) => {
                           el.style.setProperty('color', 'white', 'important');
                         });
