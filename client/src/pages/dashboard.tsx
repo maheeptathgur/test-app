@@ -2103,10 +2103,17 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleDeleteConversation(conversation.id);
                                   }}
-                                  className="h-6 w-6 p-1 text-red-500 hover:text-red-600 hover:bg-red-50"
+                                  className="h-6 w-6 p-1 hover:bg-red-50"
+                                  style={{ color: '#ef4444' }}
                                   title="Delete conversation"
+                                  onMouseEnter={(e) => {
+                                    e.currentTarget.style.color = '#dc2626';
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.currentTarget.style.color = '#ef4444';
+                                  }}
                                 >
-                                  <Trash2 className="w-3 h-3" />
+                                  <Trash2 className="w-3 h-3" style={{ color: 'inherit' }} />
                                 </Button>
                               </div>
                             </div>
