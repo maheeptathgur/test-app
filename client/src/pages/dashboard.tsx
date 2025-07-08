@@ -1974,8 +1974,8 @@ export default function Dashboard() {
                         // If this is the active conversation, set the color back to primary
                         if (conversation.isActive) {
                           e.currentTarget.style.setProperty('color', 'var(--theme-primary)', 'important');
-                          const allElements = e.currentTarget.querySelectorAll('*');
-                          allElements.forEach((el: any) => {
+                          const textElements = e.currentTarget.querySelectorAll('h4, span:not(.opacity-0 *)');
+                          textElements.forEach((el: any) => {
                             el.style.setProperty('color', 'var(--theme-primary)', 'important');
                           });
                         }
@@ -1987,9 +1987,9 @@ export default function Dashboard() {
                           e.currentTarget.style.setProperty('color', 'var(--theme-primary)', 'important');
                           e.currentTarget.style.removeProperty('--sidebar-foreground');
                           e.currentTarget.style.removeProperty('--sidebar-primary');
-                          // Force all nested elements (including icons) to use the primary color
-                          const allElements = e.currentTarget.querySelectorAll('*');
-                          allElements.forEach((el: any) => {
+                          // Force text elements to use primary color, but exclude edit interface elements
+                          const textElements = e.currentTarget.querySelectorAll('h4, span:not(.opacity-0 *)');
+                          textElements.forEach((el: any) => {
                             el.style.setProperty('color', 'var(--theme-primary)', 'important');
                           });
                         }
