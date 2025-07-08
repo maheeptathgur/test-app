@@ -281,206 +281,334 @@ export function WorkspaceSettings() {
         )}
 
         {activeTab === "brand" && (
-          <div className="grid grid-cols-3 gap-6 mt-6">
-            {/* Brand Assets - 2/3 column */}
-            <div className="col-span-2">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Brand Assets</CardTitle>
-                  <CardDescription>
-                    Upload your workspace logos and visual identity
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label>Icon Image (1:1 ratio)</Label>
-                      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                        <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                        <div className="text-sm text-muted-foreground mb-2">
-                          Upload icon image
-                        </div>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          className="gap-2"
-                        >
-                          <Upload className="h-3 w-3" />
-                          Choose File
-                        </Button>
+          <div className="space-y-6 mt-6">
+            {/* Brand Assets */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Brand Assets</CardTitle>
+                <CardDescription>
+                  Upload your workspace logos and visual identity
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label>Icon Image (1:1 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Upload icon image
                       </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label>Logo Image (2:1 ratio)</Label>
-                      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                        <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                        <div className="text-sm text-muted-foreground mb-2">
-                          Upload logo image
-                        </div>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          className="gap-2"
-                        >
-                          <Upload className="h-3 w-3" />
-                          Choose File
-                        </Button>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label>Avatar Image (1:1 ratio)</Label>
-                      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                        <img 
-                          src={avatarImagePath} 
-                          alt="Avatar" 
-                          className="h-8 w-8 mx-auto mb-2"
-                        />
-                        <div className="text-sm text-muted-foreground mb-2">
-                          Avatar uploaded
-                        </div>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          className="gap-2"
-                        >
-                          <Upload className="h-3 w-3" />
-                          Change File
-                        </Button>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label>Banner Image (16:9 ratio)</Label>
-                      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                        <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                        <div className="text-sm text-muted-foreground mb-2">
-                          Upload banner image
-                        </div>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          className="gap-2"
-                        >
-                          <Upload className="h-3 w-3" />
-                          Choose File
-                        </Button>
-                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Choose File
+                      </Button>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            </div>
 
-            {/* Theme Colors - 1/3 column */}
-            <div className="col-span-1">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Theme Colors</CardTitle>
-                  <CardDescription>
-                    Customize your workspace colors
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  {/* Brand Colors */}
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-medium text-gray-700">Brand Colors</h4>
-                    <div className="space-y-3">
-                      <div className="space-y-1">
-                        <Label className="text-xs">Primary Color</Label>
-                        <div className="flex items-center gap-2">
-                          <input type="color" value="#008062" className="w-8 h-8 rounded border cursor-pointer" />
+                  <div className="space-y-2">
+                    <Label>Logo Image (2:1 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Upload logo image
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Choose File
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Avatar Image (1:1 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <img 
+                        src={avatarImagePath} 
+                        alt="Avatar" 
+                        className="h-8 w-8 mx-auto mb-2"
+                      />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Avatar uploaded
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Change File
+                      </Button>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label>Banner Image (16:9 ratio)</Label>
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
+                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground mb-2">
+                        Upload banner image
+                      </div>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        className="gap-2"
+                      >
+                        <Upload className="h-3 w-3" />
+                        Choose File
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Theme Colors */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Theme Colors</CardTitle>
+                <CardDescription>
+                  Customize your workspace colors and visual appearance
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                {/* Color Customization Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
+                    <CardContent className="p-4 text-center">
+                      <div className="space-y-2">
+                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#008062' }}></div>
+                        <Label className="text-sm font-medium">Primary Color</Label>
+                        <div className="flex items-center gap-2 justify-center">
+                          <input type="color" defaultValue="#008062" className="w-8 h-8 rounded border cursor-pointer" />
                           <span className="text-xs text-gray-500">#008062</span>
                         </div>
                       </div>
-                      <div className="space-y-1">
-                        <Label className="text-xs">Primary Hover</Label>
-                        <div className="flex items-center gap-2">
-                          <input type="color" value="#00D2A0" className="w-8 h-8 rounded border cursor-pointer" />
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
+                    <CardContent className="p-4 text-center">
+                      <div className="space-y-2">
+                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#00D2A0' }}></div>
+                        <Label className="text-sm font-medium">Primary Hover</Label>
+                        <div className="flex items-center gap-2 justify-center">
+                          <input type="color" defaultValue="#00D2A0" className="w-8 h-8 rounded border cursor-pointer" />
                           <span className="text-xs text-gray-500">#00D2A0</span>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
 
-                  {/* Background Colors */}
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-medium text-gray-700">Backgrounds</h4>
-                    <div className="space-y-3">
-                      <div className="space-y-1">
-                        <Label className="text-xs">Workspace Background</Label>
-                        <div className="flex items-center gap-2">
-                          <input type="color" value="#E6EEEF" className="w-8 h-8 rounded border cursor-pointer" />
+                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
+                    <CardContent className="p-4 text-center">
+                      <div className="space-y-2">
+                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#E6EEEF' }}></div>
+                        <Label className="text-sm font-medium">Workspace Background</Label>
+                        <div className="flex items-center gap-2 justify-center">
+                          <input type="color" defaultValue="#E6EEEF" className="w-8 h-8 rounded border cursor-pointer" />
                           <span className="text-xs text-gray-500">#E6EEEF</span>
                         </div>
                       </div>
-                      <div className="space-y-1">
-                        <Label className="text-xs">Card Background</Label>
-                        <div className="flex items-center gap-2">
-                          <input type="color" value="#FFFFFF" className="w-8 h-8 rounded border cursor-pointer" />
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
+                    <CardContent className="p-4 text-center">
+                      <div className="space-y-2">
+                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#FFFFFF', border: '1px solid #ddd' }}></div>
+                        <Label className="text-sm font-medium">Card Background</Label>
+                        <div className="flex items-center gap-2 justify-center">
+                          <input type="color" defaultValue="#FFFFFF" className="w-8 h-8 rounded border cursor-pointer" />
                           <span className="text-xs text-gray-500">#FFFFFF</span>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
 
-                  {/* Content Colors */}
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-medium text-gray-700">Content</h4>
-                    <div className="space-y-3">
-                      <div className="space-y-1">
-                        <Label className="text-xs">Primary Text</Label>
-                        <div className="flex items-center gap-2">
-                          <input type="color" value="#191C20" className="w-8 h-8 rounded border cursor-pointer" />
+                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
+                    <CardContent className="p-4 text-center">
+                      <div className="space-y-2">
+                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#191C20' }}></div>
+                        <Label className="text-sm font-medium">Primary Text</Label>
+                        <div className="flex items-center gap-2 justify-center">
+                          <input type="color" defaultValue="#191C20" className="w-8 h-8 rounded border cursor-pointer" />
                           <span className="text-xs text-gray-500">#191C20</span>
                         </div>
                       </div>
-                      <div className="space-y-1">
-                        <Label className="text-xs">Secondary Text</Label>
-                        <div className="flex items-center gap-2">
-                          <input type="color" value="#4E5964" className="w-8 h-8 rounded border cursor-pointer" />
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
+                    <CardContent className="p-4 text-center">
+                      <div className="space-y-2">
+                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#4E5964' }}></div>
+                        <Label className="text-sm font-medium">Secondary Text</Label>
+                        <div className="flex items-center gap-2 justify-center">
+                          <input type="color" defaultValue="#4E5964" className="w-8 h-8 rounded border cursor-pointer" />
                           <span className="text-xs text-gray-500">#4E5964</span>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
 
-                  {/* Structure Colors */}
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-medium text-gray-700">Structure</h4>
-                    <div className="space-y-3">
-                      <div className="space-y-1">
-                        <Label className="text-xs">Border Color</Label>
-                        <div className="flex items-center gap-2">
-                          <input type="color" value="#DADEE2" className="w-8 h-8 rounded border cursor-pointer" />
+                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
+                    <CardContent className="p-4 text-center">
+                      <div className="space-y-2">
+                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#DADEE2' }}></div>
+                        <Label className="text-sm font-medium">Border Color</Label>
+                        <div className="flex items-center gap-2 justify-center">
+                          <input type="color" defaultValue="#DADEE2" className="w-8 h-8 rounded border cursor-pointer" />
                           <span className="text-xs text-gray-500">#DADEE2</span>
                         </div>
                       </div>
-                      <div className="space-y-1">
-                        <Label className="text-xs">Accent Color</Label>
-                        <div className="flex items-center gap-2">
-                          <input type="color" value="#E0FFF8" className="w-8 h-8 rounded border cursor-pointer" />
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
+                    <CardContent className="p-4 text-center">
+                      <div className="space-y-2">
+                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#E0FFF8' }}></div>
+                        <Label className="text-sm font-medium">Accent Color</Label>
+                        <div className="flex items-center gap-2 justify-center">
+                          <input type="color" defaultValue="#E0FFF8" className="w-8 h-8 rounded border cursor-pointer" />
                           <span className="text-xs text-gray-500">#E0FFF8</span>
                         </div>
                       </div>
-                    </div>
-                  </div>
+                    </CardContent>
+                  </Card>
+                </div>
 
-                  {/* Reset Button */}
-                  <div className="pt-2 border-t">
-                    <Button variant="outline" size="sm" className="w-full">
-                      <RotateCcw className="w-3 h-3 mr-2" />
-                      Reset to Brand Default
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+                {/* Theme Preview */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Theme Preview</CardTitle>
+                    <CardDescription>
+                      See how your colors will look in the interface
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="border rounded-lg p-4 space-y-4" style={{ backgroundColor: '#F8F6F6' }}>
+                      {/* Simulated sidebar */}
+                      <div className="flex gap-4">
+                        <div className="w-48 h-32 rounded-lg p-3 space-y-2" style={{ backgroundColor: '#E6EEEF' }}>
+                          <div className="w-full h-3 rounded" style={{ backgroundColor: '#008062' }}></div>
+                          <div className="w-3/4 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                          <div className="w-1/2 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                        </div>
+                        
+                        {/* Simulated content */}
+                        <div className="flex-1 space-y-2">
+                          <div className="bg-white rounded-lg p-3 border" style={{ borderColor: '#DADEE2' }}>
+                            <div className="w-1/3 h-3 rounded mb-2" style={{ backgroundColor: '#191C20' }}></div>
+                            <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: '#4E5964' }}></div>
+                            <div className="w-2/3 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                          </div>
+                          <div className="bg-white rounded-lg p-3 border" style={{ borderColor: '#DADEE2' }}>
+                            <div className="w-1/4 h-3 rounded mb-2" style={{ backgroundColor: '#191C20' }}></div>
+                            <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: '#4E5964' }}></div>
+                            <div className="w-1/2 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Preset Themes */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Preset Themes</CardTitle>
+                    <CardDescription>
+                      Choose from professionally designed color schemes
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                      {/* Default Theme */}
+                      <button className="border-2 border-[#008062] rounded-lg p-4 text-center hover:bg-gray-50 transition-colors">
+                        <div className="flex justify-center gap-1 mb-2">
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#008062' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E6EEEF' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#191C20' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E0FFF8' }}></div>
+                        </div>
+                        <p className="text-sm font-medium">Default</p>
+                        <p className="text-xs text-gray-500">Current theme</p>
+                      </button>
+
+                      {/* Ocean Blue */}
+                      <button className="border-2 border-transparent rounded-lg p-4 text-center hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                        <div className="flex justify-center gap-1 mb-2">
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#0066CC' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E6F3FF' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#1A1A1A' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E0F0FF' }}></div>
+                        </div>
+                        <p className="text-sm font-medium">Ocean Blue</p>
+                        <p className="text-xs text-gray-500">Professional blue</p>
+                      </button>
+
+                      {/* Forest Green */}
+                      <button className="border-2 border-transparent rounded-lg p-4 text-center hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                        <div className="flex justify-center gap-1 mb-2">
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#2D5016' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#F0F7E6' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#1A1A1A' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E8F5D8' }}></div>
+                        </div>
+                        <p className="text-sm font-medium">Forest Green</p>
+                        <p className="text-xs text-gray-500">Natural earth</p>
+                      </button>
+
+                      {/* Purple Pro */}
+                      <button className="border-2 border-transparent rounded-lg p-4 text-center hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                        <div className="flex justify-center gap-1 mb-2">
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#7C3AED' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#F3F1FF' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#1A1A1A' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#EDE9FE' }}></div>
+                        </div>
+                        <p className="text-sm font-medium">Purple Pro</p>
+                        <p className="text-xs text-gray-500">Creative purple</p>
+                      </button>
+
+                      {/* Sunset Orange */}
+                      <button className="border-2 border-transparent rounded-lg p-4 text-center hover:bg-gray-50 hover:border-gray-300 transition-colors">
+                        <div className="flex justify-center gap-1 mb-2">
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#EA580C' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#FFF7ED' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#1A1A1A' }}></div>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#FED7AA' }}></div>
+                        </div>
+                        <p className="text-sm font-medium">Sunset Orange</p>
+                        <p className="text-xs text-gray-500">Warm energy</p>
+                      </button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Reset Button */}
+                <div className="flex justify-center pt-4">
+                  <Button variant="outline" className="gap-2">
+                    <RotateCcw className="w-4 h-4" />
+                    Reset to Brand Default
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         )}
 
