@@ -2793,7 +2793,7 @@ function MyComponent() {
           
           <div className="space-y-4 mt-4">
             {suggestedDocs.map((doc) => (
-              <div key={doc.id} className="flex items-start space-x-3 p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+              <div key={doc.id} className="flex items-start space-x-3 p-4 border rounded-lg hover:bg-muted/50 transition-colors" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
                 <Checkbox
                   id={doc.id}
                   checked={selectedSuggestions.includes(doc.id)}
@@ -2817,7 +2817,7 @@ function MyComponent() {
             ))}
           </div>
           
-          <div className="flex justify-between items-center pt-4 border-t border-[hsl(var(--border))]">
+          <div className="flex justify-between items-center pt-4 border-t" style={{ borderTopColor: 'hsl(187, 18%, 80%)' }}>
             <p className="text-sm text-muted-foreground">
               {selectedSuggestions.length} document{selectedSuggestions.length !== 1 ? 's' : ''} selected
             </p>
