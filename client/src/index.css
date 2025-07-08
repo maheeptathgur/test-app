@@ -463,4 +463,21 @@
     color: #ef4444 !important; /* Red icon on hover */
   }
 
+  /* Edit Conversation Button Styling */
+  .edit-conversation-btn {
+    color: white !important; /* White by default */
+  }
+
+  .edit-conversation-btn svg {
+    color: white !important; /* White icon by default */
+  }
+
+  .edit-conversation-btn:hover {
+    color: var(--theme-primary) !important; /* Brand green on hover */
+  }
+
+  .edit-conversation-btn:hover svg {
+    color: var(--theme-primary) !important; /* Brand green icon on hover */
+  }
+
 }

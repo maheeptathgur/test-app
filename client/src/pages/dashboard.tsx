@@ -2091,8 +2091,14 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleEditConversationTitle(conversation.id, conversation.title);
                                   }}
-                                  className="h-6 w-6 p-1 text-muted-foreground hover:text-muted-foreground hover:bg-muted/50"
+                                  className="h-6 w-6 p-1 edit-conversation-btn hover:bg-muted/50"
                                   title="Edit title"
+                                  onMouseEnter={(e) => {
+                                    e.stopPropagation();
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    e.stopPropagation();
+                                  }}
                                 >
                                   <Edit3 className="w-3 h-3" />
                                 </Button>
