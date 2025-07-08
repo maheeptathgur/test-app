@@ -173,12 +173,34 @@ export function WorkspaceSettings() {
     root.style.setProperty('--theme-accent', themeColors.accent);
     root.style.setProperty('--theme-accent-dark', themeColors.accent);
 
-    // Additional variables for shadcn/ui compatibility (need HSL format)
+    // Override all shadcn/ui variables for complete theme coverage (need HSL format)
     root.style.setProperty('--background', hexToHSL(themeColors.contentBg));
-    root.style.setProperty('--card', hexToHSL(themeColors.cardBg));
     root.style.setProperty('--foreground', hexToHSL(themeColors.primaryText));
+    root.style.setProperty('--card', hexToHSL(themeColors.cardBg));
+    root.style.setProperty('--card-foreground', hexToHSL(themeColors.primaryText));
+    root.style.setProperty('--popover', hexToHSL(themeColors.cardBg));
+    root.style.setProperty('--popover-foreground', hexToHSL(themeColors.primaryText));
+    root.style.setProperty('--primary', hexToHSL(themeColors.primary));
+    root.style.setProperty('--primary-foreground', '0 0% 100%'); // Always white
+    root.style.setProperty('--secondary', hexToHSL(themeColors.workspaceBg));
+    root.style.setProperty('--secondary-foreground', hexToHSL(themeColors.primaryText));
+    root.style.setProperty('--muted', hexToHSL(themeColors.workspaceBg));
     root.style.setProperty('--muted-foreground', hexToHSL(themeColors.secondaryText));
+    root.style.setProperty('--accent', hexToHSL(themeColors.accent));
+    root.style.setProperty('--accent-foreground', hexToHSL(themeColors.primaryText));
     root.style.setProperty('--border', hexToHSL(themeColors.borders));
+    root.style.setProperty('--input', hexToHSL(themeColors.borders));
+    root.style.setProperty('--ring', hexToHSL(themeColors.primary));
+    
+    // Override sidebar variables
+    root.style.setProperty('--sidebar-background', themeColors.workspaceBg);
+    root.style.setProperty('--sidebar-foreground', themeColors.primaryText);
+    root.style.setProperty('--sidebar-primary', themeColors.primary);
+    root.style.setProperty('--sidebar-primary-foreground', '#FFFFFF');
+    root.style.setProperty('--sidebar-accent', themeColors.cardBg);
+    root.style.setProperty('--sidebar-accent-foreground', themeColors.primaryText);
+    root.style.setProperty('--sidebar-border', themeColors.borders);
+    root.style.setProperty('--sidebar-ring', themeColors.primary);
 
     // Also update theme context for consistency
     const themeUpdate = {
@@ -209,12 +231,34 @@ export function WorkspaceSettings() {
     root.style.setProperty('--theme-accent', defaultTheme.accent);
     root.style.setProperty('--theme-accent-dark', defaultTheme.accent);
 
-    // Reset shadcn/ui variables (need HSL format)
+    // Reset all shadcn/ui variables (need HSL format)
     root.style.setProperty('--background', hexToHSL(defaultTheme.contentBg));
-    root.style.setProperty('--card', hexToHSL(defaultTheme.cardBg));
     root.style.setProperty('--foreground', hexToHSL(defaultTheme.primaryText));
+    root.style.setProperty('--card', hexToHSL(defaultTheme.cardBg));
+    root.style.setProperty('--card-foreground', hexToHSL(defaultTheme.primaryText));
+    root.style.setProperty('--popover', hexToHSL(defaultTheme.cardBg));
+    root.style.setProperty('--popover-foreground', hexToHSL(defaultTheme.primaryText));
+    root.style.setProperty('--primary', hexToHSL(defaultTheme.primary));
+    root.style.setProperty('--primary-foreground', '0 0% 100%'); // Always white
+    root.style.setProperty('--secondary', hexToHSL(defaultTheme.workspaceBg));
+    root.style.setProperty('--secondary-foreground', hexToHSL(defaultTheme.primaryText));
+    root.style.setProperty('--muted', hexToHSL(defaultTheme.workspaceBg));
     root.style.setProperty('--muted-foreground', hexToHSL(defaultTheme.secondaryText));
+    root.style.setProperty('--accent', hexToHSL(defaultTheme.accent));
+    root.style.setProperty('--accent-foreground', hexToHSL(defaultTheme.primaryText));
     root.style.setProperty('--border', hexToHSL(defaultTheme.borders));
+    root.style.setProperty('--input', hexToHSL(defaultTheme.borders));
+    root.style.setProperty('--ring', hexToHSL(defaultTheme.primary));
+    
+    // Reset sidebar variables
+    root.style.setProperty('--sidebar-background', defaultTheme.workspaceBg);
+    root.style.setProperty('--sidebar-foreground', defaultTheme.primaryText);
+    root.style.setProperty('--sidebar-primary', defaultTheme.primary);
+    root.style.setProperty('--sidebar-primary-foreground', '#FFFFFF');
+    root.style.setProperty('--sidebar-accent', defaultTheme.cardBg);
+    root.style.setProperty('--sidebar-accent-foreground', defaultTheme.primaryText);
+    root.style.setProperty('--sidebar-border', defaultTheme.borders);
+    root.style.setProperty('--sidebar-ring', defaultTheme.primary);
     
     // Also reset theme context
     resetThemeToDefault();
