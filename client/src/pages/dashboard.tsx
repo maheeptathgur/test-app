@@ -2114,7 +2114,7 @@ export default function Dashboard() {
       </div>
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
-        <div className="w-64 border-r border-sidebar-border flex flex-col h-full" style={{ backgroundColor: '#f3f4f7' }}>
+        <div className="w-64 border-r border-sidebar-border flex flex-col h-full" style={{ backgroundColor: 'var(--theme-background)' }}>
           <div className="p-4 flex items-center justify-between">
             <h3 className="font-semibold text-foreground">Files</h3>
             <Button
@@ -2246,7 +2246,7 @@ export default function Dashboard() {
         </div>
       )}
       {/* Main Content */}
-      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: '#f2f2f2' }}>
+      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: 'var(--theme-background)' }}>
         {/* Form Interface for form-type copilots */}
         {chatCopilot && chatCopilot.type === 'form' ? (
           <div className="h-full flex">
