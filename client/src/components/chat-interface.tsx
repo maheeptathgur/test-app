@@ -986,8 +986,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               <X className="h-3 w-3" />
             </Button>
           </div>
-          <div className="flex-1 overflow-y-auto">
-            <div className="max-w-4xl mx-auto h-full flex flex-col p-3 sm:p-6">
+          <div className="flex-1 overflow-y-auto px-2 sm:px-4">
+            <div className="max-w-4xl mx-auto h-full flex flex-col p-2 sm:p-4 lg:p-6">
 
               {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
                 <div className="mb-4 sm:mb-6 mt-6 sm:mt-8 p-3 sm:p-4 mx-3 sm:mx-0 rounded-lg" style={{ backgroundColor: 'white', border: '1px solid hsl(218, 18%, 80%)' }}>
@@ -1423,9 +1423,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           </div>
           
           {/* Prompt Bar - moved inside chat area */}
-          <div className="bg-white relative">
-            <div className="max-w-4xl mx-auto p-3 sm:p-4 relative">
-              <div className="flex gap-2 sm:gap-3 relative items-end">
+          <div className="bg-white relative px-2 sm:px-4">
+            <div className="max-w-4xl mx-auto p-2 sm:p-3 lg:p-4 relative">
+              <div className="flex gap-1 sm:gap-2 lg:gap-3 relative items-end">
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
                   <div className="absolute -top-8 left-0">
@@ -1461,7 +1461,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 )}
                 <Button 
                   variant="outline" 
-                  className="h-12 px-2 sm:px-3 self-end"
+                  className="h-10 sm:h-12 px-1 sm:px-2 lg:px-3 self-end"
                   onClick={() => {
                     setShowAttachmentSidebar(!showAttachmentSidebar);
                     onToggleAttachment?.(!showAttachmentSidebar);
@@ -1473,7 +1473,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   <DropdownMenuTrigger asChild>
                     <Button 
                       variant="outline" 
-                      className="h-12 px-2 sm:px-3 self-end"
+                      className="h-10 sm:h-12 px-1 sm:px-2 lg:px-3 self-end"
                       title="Add Agent, Tool, or Workflow"
                     >
                       <Plus className="h-4 w-4" />
@@ -1584,13 +1584,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     )}
                   </div>
                 </div>
-                <Button onClick={handleSendMessage} className="h-12 w-10 sm:w-12 p-0 self-end" title="Send Message">
+                <Button onClick={handleSendMessage} className="h-10 sm:h-12 w-10 sm:w-12 p-0 self-end" title="Send Message">
                   <Send className="h-4 w-4" />
                 </Button>
                 {recordingSupported && (
                   <Button 
                     variant={isRecording ? "default" : "outline"}
-                    className={`h-12 px-2 sm:px-3 self-end transition-colors ${
+                    className={`h-10 sm:h-12 px-1 sm:px-2 lg:px-3 self-end transition-colors ${
                       isRecording 
                         ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
                         : 'hover:text-white'
