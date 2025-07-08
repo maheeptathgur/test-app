@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon, Palette, RotateCcw } from "lucide-react";
+import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon, Palette, RotateCcw, ChevronDown } from "lucide-react";
 import { ThemeCustomizer } from "@/components/theme-customizer";
 import avatarImagePath from "@assets/image_1751745994194.png";
 import { Button } from "@/components/ui/button";
@@ -384,142 +384,136 @@ export function WorkspaceSettings() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                {/* Color Customization Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
-                    <CardContent className="p-4 text-center">
-                      <div className="space-y-2">
-                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#008062' }}></div>
-                        <Label className="text-sm font-medium">Primary Color</Label>
-                        <div className="flex items-center gap-2 justify-center">
-                          <input type="color" defaultValue="#008062" className="w-8 h-8 rounded border cursor-pointer" />
-                          <span className="text-xs text-gray-500">#008062</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
-                    <CardContent className="p-4 text-center">
-                      <div className="space-y-2">
-                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#00D2A0' }}></div>
-                        <Label className="text-sm font-medium">Primary Hover</Label>
-                        <div className="flex items-center gap-2 justify-center">
-                          <input type="color" defaultValue="#00D2A0" className="w-8 h-8 rounded border cursor-pointer" />
-                          <span className="text-xs text-gray-500">#00D2A0</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
-                    <CardContent className="p-4 text-center">
-                      <div className="space-y-2">
-                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#E6EEEF' }}></div>
-                        <Label className="text-sm font-medium">Workspace Background</Label>
-                        <div className="flex items-center gap-2 justify-center">
-                          <input type="color" defaultValue="#E6EEEF" className="w-8 h-8 rounded border cursor-pointer" />
-                          <span className="text-xs text-gray-500">#E6EEEF</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
-                    <CardContent className="p-4 text-center">
-                      <div className="space-y-2">
-                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#FFFFFF', border: '1px solid #ddd' }}></div>
-                        <Label className="text-sm font-medium">Card Background</Label>
-                        <div className="flex items-center gap-2 justify-center">
-                          <input type="color" defaultValue="#FFFFFF" className="w-8 h-8 rounded border cursor-pointer" />
-                          <span className="text-xs text-gray-500">#FFFFFF</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
-                    <CardContent className="p-4 text-center">
-                      <div className="space-y-2">
-                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#191C20' }}></div>
-                        <Label className="text-sm font-medium">Primary Text</Label>
-                        <div className="flex items-center gap-2 justify-center">
-                          <input type="color" defaultValue="#191C20" className="w-8 h-8 rounded border cursor-pointer" />
-                          <span className="text-xs text-gray-500">#191C20</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
-                    <CardContent className="p-4 text-center">
-                      <div className="space-y-2">
-                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#4E5964' }}></div>
-                        <Label className="text-sm font-medium">Secondary Text</Label>
-                        <div className="flex items-center gap-2 justify-center">
-                          <input type="color" defaultValue="#4E5964" className="w-8 h-8 rounded border cursor-pointer" />
-                          <span className="text-xs text-gray-500">#4E5964</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
-                    <CardContent className="p-4 text-center">
-                      <div className="space-y-2">
-                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#DADEE2' }}></div>
-                        <Label className="text-sm font-medium">Border Color</Label>
-                        <div className="flex items-center gap-2 justify-center">
-                          <input type="color" defaultValue="#DADEE2" className="w-8 h-8 rounded border cursor-pointer" />
-                          <span className="text-xs text-gray-500">#DADEE2</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors">
-                    <CardContent className="p-4 text-center">
-                      <div className="space-y-2">
-                        <div className="w-12 h-12 rounded-full mx-auto" style={{ backgroundColor: '#E0FFF8' }}></div>
-                        <Label className="text-sm font-medium">Accent Color</Label>
-                        <div className="flex items-center gap-2 justify-center">
-                          <input type="color" defaultValue="#E0FFF8" className="w-8 h-8 rounded border cursor-pointer" />
-                          <span className="text-xs text-gray-500">#E0FFF8</span>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                {/* Preset Theme Selector */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <Label className="text-sm font-medium">Theme Preset</Label>
+                    <p className="text-xs text-gray-500 mt-1">Apply a pre-designed color scheme</p>
+                  </div>
+                  <Select defaultValue="default">
+                    <SelectTrigger className="w-48">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="default">Default (Teal Green)</SelectItem>
+                      <SelectItem value="ocean">Ocean Blue</SelectItem>
+                      <SelectItem value="forest">Forest Green</SelectItem>
+                      <SelectItem value="purple">Purple Pro</SelectItem>
+                      <SelectItem value="sunset">Sunset Orange</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
-                {/* Theme Preview */}
+                {/* Color Customization Grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="text-center">
+                    <input type="color" defaultValue="#008062" className="w-12 h-12 rounded-full border cursor-pointer mx-auto block mb-2" />
+                    <Label className="text-xs font-medium block mb-1">Primary</Label>
+                    <span className="text-xs text-gray-500">#008062</span>
+                  </div>
+                  
+                  <div className="text-center">
+                    <input type="color" defaultValue="#00D2A0" className="w-12 h-12 rounded-full border cursor-pointer mx-auto block mb-2" />
+                    <Label className="text-xs font-medium block mb-1">Primary Hover</Label>
+                    <span className="text-xs text-gray-500">#00D2A0</span>
+                  </div>
+                  
+                  <div className="text-center">
+                    <input type="color" defaultValue="#E6EEEF" className="w-12 h-12 rounded-full border cursor-pointer mx-auto block mb-2" />
+                    <Label className="text-xs font-medium block mb-1">Workspace BG</Label>
+                    <span className="text-xs text-gray-500">#E6EEEF</span>
+                  </div>
+                  
+                  <div className="text-center">
+                    <input type="color" defaultValue="#FFFFFF" className="w-12 h-12 rounded-full border cursor-pointer mx-auto block mb-2" style={{ border: '2px solid #ddd' }} />
+                    <Label className="text-xs font-medium block mb-1">Card BG</Label>
+                    <span className="text-xs text-gray-500">#FFFFFF</span>
+                  </div>
+                  
+                  <div className="text-center">
+                    <input type="color" defaultValue="#191C20" className="w-12 h-12 rounded-full border cursor-pointer mx-auto block mb-2" />
+                    <Label className="text-xs font-medium block mb-1">Primary Text</Label>
+                    <span className="text-xs text-gray-500">#191C20</span>
+                  </div>
+                  
+                  <div className="text-center">
+                    <input type="color" defaultValue="#4E5964" className="w-12 h-12 rounded-full border cursor-pointer mx-auto block mb-2" />
+                    <Label className="text-xs font-medium block mb-1">Secondary Text</Label>
+                    <span className="text-xs text-gray-500">#4E5964</span>
+                  </div>
+                  
+                  <div className="text-center">
+                    <input type="color" defaultValue="#DADEE2" className="w-12 h-12 rounded-full border cursor-pointer mx-auto block mb-2" />
+                    <Label className="text-xs font-medium block mb-1">Borders</Label>
+                    <span className="text-xs text-gray-500">#DADEE2</span>
+                  </div>
+                  
+                  <div className="text-center">
+                    <input type="color" defaultValue="#E0FFF8" className="w-12 h-12 rounded-full border cursor-pointer mx-auto block mb-2" />
+                    <Label className="text-xs font-medium block mb-1">Accent</Label>
+                    <span className="text-xs text-gray-500">#E0FFF8</span>
+                  </div>
+                </div>
+
+                {/* Realistic Theme Preview */}
                 <Card>
                   <CardHeader>
-                    <CardTitle>Theme Preview</CardTitle>
+                    <CardTitle>Live Preview</CardTitle>
                     <CardDescription>
-                      See how your colors will look in the interface
+                      See how your theme looks in the actual interface
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="border rounded-lg p-4 space-y-4" style={{ backgroundColor: '#F8F6F6' }}>
-                      {/* Simulated sidebar */}
-                      <div className="flex gap-4">
-                        <div className="w-48 h-32 rounded-lg p-3 space-y-2" style={{ backgroundColor: '#E6EEEF' }}>
-                          <div className="w-full h-3 rounded" style={{ backgroundColor: '#008062' }}></div>
-                          <div className="w-3/4 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
-                          <div className="w-1/2 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                    <div className="border rounded-lg overflow-hidden" style={{ backgroundColor: '#F8F6F6' }}>
+                      <div className="flex">
+                        {/* Simulated Sidebar */}
+                        <div className="w-64 h-80 p-4 space-y-3" style={{ backgroundColor: '#E6EEEF' }}>
+                          {/* Logo area */}
+                          <div className="flex items-center gap-2 mb-4">
+                            <div className="w-8 h-8 rounded-lg" style={{ backgroundColor: '#008062' }}></div>
+                            <div className="w-16 h-3 rounded" style={{ backgroundColor: '#191C20' }}></div>
+                          </div>
+                          
+                          {/* Navigation items */}
+                          <div className="space-y-2">
+                            <div className="flex items-center gap-2 p-2 rounded-md" style={{ backgroundColor: '#008062' }}>
+                              <div className="w-4 h-4 rounded" style={{ backgroundColor: '#FFFFFF' }}></div>
+                              <div className="w-16 h-2 rounded" style={{ backgroundColor: '#FFFFFF' }}></div>
+                            </div>
+                            <div className="flex items-center gap-2 p-2">
+                              <div className="w-4 h-4 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                              <div className="w-14 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                            </div>
+                            <div className="flex items-center gap-2 p-2">
+                              <div className="w-4 h-4 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                              <div className="w-12 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                            </div>
+                          </div>
                         </div>
                         
-                        {/* Simulated content */}
-                        <div className="flex-1 space-y-2">
-                          <div className="bg-white rounded-lg p-3 border" style={{ borderColor: '#DADEE2' }}>
-                            <div className="w-1/3 h-3 rounded mb-2" style={{ backgroundColor: '#191C20' }}></div>
-                            <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: '#4E5964' }}></div>
-                            <div className="w-2/3 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                        {/* Simulated Main Content */}
+                        <div className="flex-1 p-4 space-y-4" style={{ backgroundColor: '#F8F6F6' }}>
+                          {/* Header */}
+                          <div className="flex items-center justify-between pb-3" style={{ borderBottom: '1px solid #DADEE2' }}>
+                            <div className="w-24 h-4 rounded" style={{ backgroundColor: '#191C20' }}></div>
+                            <div className="w-8 h-8 rounded-full" style={{ backgroundColor: '#008062' }}></div>
                           </div>
-                          <div className="bg-white rounded-lg p-3 border" style={{ borderColor: '#DADEE2' }}>
-                            <div className="w-1/4 h-3 rounded mb-2" style={{ backgroundColor: '#191C20' }}></div>
-                            <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: '#4E5964' }}></div>
-                            <div className="w-1/2 h-2 rounded" style={{ backgroundColor: '#4E5964' }}></div>
+                          
+                          {/* Content Cards */}
+                          <div className="grid grid-cols-2 gap-3">
+                            <div className="bg-white rounded-lg p-3 border" style={{ borderColor: '#DADEE2' }}>
+                              <div className="w-20 h-3 rounded mb-2" style={{ backgroundColor: '#191C20' }}></div>
+                              <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: '#4E5964' }}></div>
+                              <div className="w-3/4 h-2 rounded mb-2" style={{ backgroundColor: '#4E5964' }}></div>
+                              <div className="w-16 h-6 rounded" style={{ backgroundColor: '#008062' }}></div>
+                            </div>
+                            
+                            <div className="bg-white rounded-lg p-3 border" style={{ borderColor: '#DADEE2' }}>
+                              <div className="w-16 h-3 rounded mb-2" style={{ backgroundColor: '#191C20' }}></div>
+                              <div className="w-full h-2 rounded mb-1" style={{ backgroundColor: '#4E5964' }}></div>
+                              <div className="w-2/3 h-2 rounded mb-2" style={{ backgroundColor: '#4E5964' }}></div>
+                              <div className="w-12 h-6 rounded" style={{ backgroundColor: '#E0FFF8' }}></div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -527,84 +521,14 @@ export function WorkspaceSettings() {
                   </CardContent>
                 </Card>
 
-                {/* Preset Themes */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Preset Themes</CardTitle>
-                    <CardDescription>
-                      Choose from professionally designed color schemes
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                      {/* Default Theme */}
-                      <button className="border-2 border-[#008062] rounded-lg p-4 text-center hover:bg-gray-50 transition-colors">
-                        <div className="flex justify-center gap-1 mb-2">
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#008062' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E6EEEF' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#191C20' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E0FFF8' }}></div>
-                        </div>
-                        <p className="text-sm font-medium">Default</p>
-                        <p className="text-xs text-gray-500">Current theme</p>
-                      </button>
-
-                      {/* Ocean Blue */}
-                      <button className="border-2 border-transparent rounded-lg p-4 text-center hover:bg-gray-50 hover:border-gray-300 transition-colors">
-                        <div className="flex justify-center gap-1 mb-2">
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#0066CC' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E6F3FF' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#1A1A1A' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E0F0FF' }}></div>
-                        </div>
-                        <p className="text-sm font-medium">Ocean Blue</p>
-                        <p className="text-xs text-gray-500">Professional blue</p>
-                      </button>
-
-                      {/* Forest Green */}
-                      <button className="border-2 border-transparent rounded-lg p-4 text-center hover:bg-gray-50 hover:border-gray-300 transition-colors">
-                        <div className="flex justify-center gap-1 mb-2">
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#2D5016' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#F0F7E6' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#1A1A1A' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#E8F5D8' }}></div>
-                        </div>
-                        <p className="text-sm font-medium">Forest Green</p>
-                        <p className="text-xs text-gray-500">Natural earth</p>
-                      </button>
-
-                      {/* Purple Pro */}
-                      <button className="border-2 border-transparent rounded-lg p-4 text-center hover:bg-gray-50 hover:border-gray-300 transition-colors">
-                        <div className="flex justify-center gap-1 mb-2">
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#7C3AED' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#F3F1FF' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#1A1A1A' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#EDE9FE' }}></div>
-                        </div>
-                        <p className="text-sm font-medium">Purple Pro</p>
-                        <p className="text-xs text-gray-500">Creative purple</p>
-                      </button>
-
-                      {/* Sunset Orange */}
-                      <button className="border-2 border-transparent rounded-lg p-4 text-center hover:bg-gray-50 hover:border-gray-300 transition-colors">
-                        <div className="flex justify-center gap-1 mb-2">
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#EA580C' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#FFF7ED' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#1A1A1A' }}></div>
-                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: '#FED7AA' }}></div>
-                        </div>
-                        <p className="text-sm font-medium">Sunset Orange</p>
-                        <p className="text-xs text-gray-500">Warm energy</p>
-                      </button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Reset Button */}
-                <div className="flex justify-center pt-4">
+                {/* Actions */}
+                <div className="flex justify-between items-center pt-4 border-t">
                   <Button variant="outline" className="gap-2">
                     <RotateCcw className="w-4 h-4" />
-                    Reset to Brand Default
+                    Reset to Default
+                  </Button>
+                  <Button className="gap-2" style={{ backgroundColor: '#008062' }}>
+                    Apply Theme Changes
                   </Button>
                 </div>
               </CardContent>
