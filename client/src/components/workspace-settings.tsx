@@ -304,17 +304,6 @@ export function WorkspaceSettings() {
             Security
           </button>
           <button
-            onClick={() => setActiveTab("theme")}
-            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
-              activeTab === "theme"
-                ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
-                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
-            }`}
-          >
-            Theme
-          </button>
-
-          <button
             onClick={() => setActiveTab("conversations")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "conversations"
@@ -844,12 +833,6 @@ export function WorkspaceSettings() {
         {activeTab === "users" && (
           <div className="mt-6">
             <SampleScreen section={"users" as any} />
-          </div>
-        )}
-
-        {activeTab === "theme" && (
-          <div className="mt-6">
-            <ThemeCustomizer />
           </div>
         )}
       </div>
