@@ -1725,7 +1725,7 @@ export default function Dashboard() {
       <div className="flex flex-col h-screen bg-background">
         {/* User View Preview Toolbar */}
         {activeSection === 'user-view' && (
-          <div className="theme-primary/80 text-white px-4 py-2 flex items-center justify-between border-b border-[var(--theme-primary)]/50 flex-shrink-0">
+          <div className="text-white px-4 py-2 flex items-center justify-between border-b flex-shrink-0" style={{ backgroundColor: 'var(--theme-primary)', borderBottomColor: 'var(--theme-primary)' }}>
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium">User View Preview</span>
@@ -2020,8 +2020,10 @@ export default function Dashboard() {
               {!sidebarCollapsed && (
                 <Button 
                   variant="outline"
-                  className="w-full bg-white border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:theme-primary hover:text-white transition-colors"
+                  className="w-full bg-white border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-white transition-colors"
                   onClick={() => handleSectionChange('pricing')}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                 >
                   Pricing Plans
                 </Button>
@@ -2030,9 +2032,11 @@ export default function Dashboard() {
                 <Button 
                   variant="outline"
                   size="sm"
-                  className="w-full bg-white border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:theme-primary hover:text-white transition-colors"
+                  className="w-full bg-white border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-white transition-colors"
                   title="Pricing Plans"
                   onClick={() => handleSectionChange('pricing')}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
                 >
                   $
                 </Button>
@@ -2054,7 +2058,10 @@ export default function Dashboard() {
               ) : (
                 <Button 
                   variant="ghost" 
-                  className="w-full p-3 h-auto theme-primary theme-primary-hover:hover text-white justify-start"
+                  className="w-full p-3 h-auto text-white justify-start"
+                  style={{ backgroundColor: 'var(--theme-primary)' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary-hover)'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
                 >
                   <div className="w-8 h-8 rounded-full overflow-hidden flex-shrink-0">
                     <img 
