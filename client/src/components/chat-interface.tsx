@@ -169,10 +169,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
             break;
           default:
-            badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border border-[hsl(var(--border))]";
+            badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
         }
       } else {
-        badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border border-[hsl(var(--border))]";
+        badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
       }
       
       return `<span class="${badgeClass}" contenteditable="false">${componentName}</span>`;
@@ -229,7 +229,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               }
             } else {
               // Unknown component - still show as badge but gray
-              badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border border-[hsl(var(--border))]";
+              badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
             }
             
             return (
@@ -336,7 +336,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               break;
           }
         } else {
-          badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border border-[hsl(var(--border))]";
+          badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
         }
         
         return `<span class="${badgeClass}">${componentName}</span>`;
@@ -986,7 +986,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
 
               {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
-                <div className="mb-6 mt-8 p-4 rounded-lg border border-[hsl(var(--border))]" style={{ backgroundColor: 'var(--theme-accent)' }}>
+                <div className="mb-6 mt-8 p-4 rounded-lg" style={{ backgroundColor: 'var(--theme-accent)', border: '1px solid hsl(218, 18%, 80%)' }}>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <h3 className="font-medium text-[hsl(var(--foreground))]">Personalize your experience</h3>
@@ -1228,7 +1228,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <button
                                 key={index}
                                 onClick={() => handleStarterClick(starter)}
-                                className="flex-shrink-0 bg-[hsl(var(--muted))] hover:bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-lg p-2 text-left transition-colors group w-80"
+                                className="flex-shrink-0 bg-[hsl(var(--muted))] hover:bg-[hsl(var(--muted))] rounded-lg p-2 text-left transition-colors group w-80"
+                                style={{ border: '1px solid hsl(218, 18%, 80%)' }}
                               >
                                 <span 
                                   className="text-xs text-[hsl(var(--foreground))] group-hover:text-[hsl(var(--foreground))] block"
@@ -1268,7 +1269,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       
                       {/* Interaction buttons for AI responses */}
                       {message.sender === 'bot' && (
-                        <div className="mt-3 pt-2 border-t border-[hsl(var(--border))]">
+                        <div className="mt-3 pt-2" style={{ borderTop: '1px solid hsl(218, 18%, 80%)' }}>
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <Button
@@ -1395,7 +1396,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 {/* Universal Messaging App */}
                 {showMessagingApp && (
                   <div className="mt-4 mb-4">
-                    <div className="bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-lg overflow-hidden shadow-sm">
+                    <div className="bg-[hsl(var(--muted))] rounded-lg overflow-hidden shadow-sm" style={{ border: '1px solid hsl(218, 18%, 80%)' }}>
                       <div className="h-[700px]">
                         <UniversalMessagingApp onClose={() => setShowMessagingApp(false)} />
                       </div>
@@ -1537,7 +1538,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     {/* Handle Autocomplete Dropdown */}
                     {showHandleDropdown && handleSuggestions.length > 0 && (
                       <div 
-                        className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-[hsl(var(--border))] rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto"
+                        className="absolute bottom-full left-0 right-0 mb-1 bg-white rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto"
+                        style={{ border: '1px solid hsl(218, 18%, 80%)' }}
                         onMouseDown={(e) => {
                           e.preventDefault(); // Prevent textarea blur
                         }}
@@ -1594,8 +1596,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         {/* File Preview Pane */}
         {selectedFiles.length > 0 && showDocumentPreview && (
           <div 
-            className="fixed top-0 right-0 bottom-0 border-l border-border bg-muted/20 flex flex-col z-50"
-            style={{ width: `${documentPaneWidth}px` }}
+            className="fixed top-0 right-0 bottom-0 bg-muted/20 flex flex-col z-50"
+            style={{ 
+              borderLeft: '1px solid hsl(218, 18%, 80%)', 
+              width: `${documentPaneWidth}px` 
+            }}
           >
             {/* Resize Handle */}
             <div
@@ -1847,47 +1852,47 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           <table className="w-full text-xs">
                             <thead className="bg-[hsl(var(--muted))] sticky top-0">
                               <tr>
-                                <th className="p-2 text-left border-r border-[hsl(var(--border))]">Customer ID</th>
-                                <th className="p-2 text-left border-r border-[hsl(var(--border))]">Name</th>
-                                <th className="p-2 text-left border-r border-[hsl(var(--border))]">Email</th>
-                                <th className="p-2 text-left border-r border-[hsl(var(--border))]">Purchase Date</th>
+                                <th className="p-2 text-left border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>Customer ID</th>
+                                <th className="p-2 text-left border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>Name</th>
+                                <th className="p-2 text-left border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>Email</th>
+                                <th className="p-2 text-left border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>Purchase Date</th>
                                 <th className="p-2 text-left">Amount</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST001</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">Sarah Johnson</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">sarah.j@email.com</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-15</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>CUST001</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>Sarah Johnson</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>sarah.j@email.com</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>2024-01-15</td>
                                 <td className="p-2">$299.99</td>
                               </tr>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST002</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">Mike Chen</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">mike.chen@email.com</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-15</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>CUST002</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>Mike Chen</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>mike.chen@email.com</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>2024-01-15</td>
                                 <td className="p-2">$149.50</td>
                               </tr>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST003</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">Emily Davis</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">emily.d@email.com</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-14</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>CUST003</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>Emily Davis</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>emily.d@email.com</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>2024-01-14</td>
                                 <td className="p-2">$89.99</td>
                               </tr>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST004</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">James Wilson</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">j.wilson@email.com</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-14</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>CUST004</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>James Wilson</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>j.wilson@email.com</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>2024-01-14</td>
                                 <td className="p-2">$399.00</td>
                               </tr>
                               <tr className="border-b hover:bg-[hsl(var(--muted))]">
-                                <td className="p-2 border-r border-[hsl(var(--border))]">CUST005</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">Lisa Anderson</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">lisa.a@email.com</td>
-                                <td className="p-2 border-r border-[hsl(var(--border))]">2024-01-13</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>CUST005</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>Lisa Anderson</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>lisa.a@email.com</td>
+                                <td className="p-2 border-r" style={{ borderColor: 'hsl(218, 18%, 80%)' }}>2024-01-13</td>
                                 <td className="p-2">$199.99</td>
                               </tr>
                             </tbody>
