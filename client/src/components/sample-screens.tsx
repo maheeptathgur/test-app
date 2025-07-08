@@ -153,7 +153,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
         </div>
       </div>
       {/* Sticky Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
+      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-[hsl(var(--border))] px-8 py-4 z-10">
         <div className="flex justify-between items-center">
           {/* Success Message */}
           <div className="flex-1">
@@ -384,7 +384,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
             </svg>
           </div>
         );
-      default: return <div className="w-8 h-8 bg-gray-500 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
+      default: return <div className="w-8 h-8 bg-[hsl(var(--muted))]0 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
     }
   };
 
@@ -536,7 +536,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
       </div>
       {Object.keys(filteredIntegrations).length === 0 && (
         <div className="text-center py-12 text-muted-foreground">
-          <div className="w-12 h-12 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
+          <div className="w-12 h-12 mx-auto mb-4 bg-[hsl(var(--muted))] rounded-lg flex items-center justify-center">
             <Search className="w-6 h-6 text-gray-400" />
           </div>
           <p className="text-lg font-medium mb-2">No integrations found</p>
@@ -896,7 +896,7 @@ export function SampleScreen({
                   <div className="text-center">
                     <div className="text-2xl mb-2">{tool.icon}</div>
                     <div className="font-medium text-sm">{tool.name}</div>
-                    <div className="text-xs text-gray-500">{tool.category}</div>
+                    <div className="text-xs text-[hsl(var(--muted-foreground))]">{tool.category}</div>
                   </div>
                 </Card>
               ))}
@@ -1179,7 +1179,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
               <div className="flex items-start gap-3">
                 {getAgentIcon(agent.name)}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{agent.name}</h3>
+                  <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">{agent.name}</h3>
                   <div className="flex items-center gap-2 mb-2">
                     <button
                       onClick={() => toggleAgentStatus(agent.id)}
@@ -1209,7 +1209,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                   <div className="flex items-center justify-between">
                     <button
                       onClick={() => toggleStatsCollapsed(agent.id)}
-                      className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                      className="flex items-center gap-1 text-sm font-medium text-[hsl(var(--foreground))] hover:text-[hsl(var(--foreground))] transition-colors"
                     >
                       <span>Used by</span>
                       <ChevronDown 
@@ -1251,7 +1251,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                                           </Badge>
                                         </div>
                                       </TooltipTrigger>
-                                      <TooltipContent side="top" className="bg-[var(--theme-accent)] text-gray-900 border border-gray-200 shadow-lg max-w-64 z-50">
+                                      <TooltipContent side="top" className="bg-[var(--theme-accent)] text-[hsl(var(--foreground))] border border-[hsl(var(--border))] shadow-lg max-w-64 z-50">
                                         <p className="text-sm">
                                           <span className="font-medium">{item.name}</span>
                                           <br />
@@ -1663,7 +1663,7 @@ function ToolsScreen({
                     case 'n8n':
                       return <img src={n8nLogo} alt="n8n" className="w-8 h-8" />;
                     default:
-                      return <div className="w-8 h-8 bg-gray-500 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
+                      return <div className="w-8 h-8 bg-[hsl(var(--muted))]0 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
                   }
                 };
 
@@ -1673,7 +1673,7 @@ function ToolsScreen({
                       <div className="flex items-start gap-3">
                         {getToolLogo(tool.name)}
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{tool.name}</h3>
+                          <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">{tool.name}</h3>
                           <div className="flex items-center gap-2 mb-2">
                             <button
                               onClick={() => toggleToolStatus(tool.id)}
@@ -1699,7 +1699,7 @@ function ToolsScreen({
                                 ? 'text-gray-600' 
                                 : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                   ? 'text-red-600'
-                                  : 'text-gray-500'
+                                  : 'text-[hsl(var(--muted-foreground))]'
                             }`}>
                               {(toolStatuses[tool.id] || tool.status) === 'Connected' 
                                 ? 'Connected' 
@@ -1721,7 +1721,7 @@ function ToolsScreen({
                           <div className="flex items-center justify-between">
                             <button
                               onClick={() => toggleUsageCollapsed(tool.id)}
-                              className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                              className="flex items-center gap-1 text-sm font-medium text-[hsl(var(--foreground))] hover:text-[hsl(var(--foreground))] transition-colors"
                             >
                               <span>Used by</span>
                               <ChevronDown 
@@ -1745,7 +1745,7 @@ function ToolsScreen({
                                           </Badge>
                                         </div>
                                       </TooltipTrigger>
-                                      <TooltipContent side="top" className="bg-[var(--theme-accent)] text-gray-900 border border-gray-200 shadow-lg max-w-64 z-50">
+                                      <TooltipContent side="top" className="bg-[var(--theme-accent)] text-[hsl(var(--foreground))] border border-[hsl(var(--border))] shadow-lg max-w-64 z-50">
                                         <p className="text-sm">
                                           <span className="font-medium">{copilotName}</span>
                                           <br />
@@ -1762,7 +1762,7 @@ function ToolsScreen({
                                       </TooltipContent>
                                     </Tooltip>
                                   )) || (
-                                    <span className="text-xs text-gray-500">No copilots using this tool</span>
+                                    <span className="text-xs text-[hsl(var(--muted-foreground))]">No copilots using this tool</span>
                                   )}
                                 </div>
                               </div>
@@ -2021,14 +2021,14 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
       </div>
 
       {/* Workflow Tabs */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-[hsl(var(--border))]">
         <nav className="-mb-px flex space-x-8">
           <button
             onClick={() => setActiveTab("knolli")}
             className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "knolli"
                 ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
-                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                : "border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:border-[hsl(var(--border))]"
             }`}
           >
             Knolli Workflows
@@ -2038,7 +2038,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
             className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "n8n"
                 ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
-                : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                : "border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:border-[hsl(var(--border))]"
             }`}
           >
             n8n Workflows
@@ -2054,7 +2054,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                 </button>
               </div>
             </TooltipTrigger>
-            <TooltipContent side="top" className="bg-[var(--theme-accent)] text-gray-900 border border-gray-200 shadow-lg z-50">
+            <TooltipContent side="top" className="bg-[var(--theme-accent)] text-[hsl(var(--foreground))] border border-[hsl(var(--border))] shadow-lg z-50">
               <p className="text-sm">
                 Connect Make.com as a tool first to use workflows
               </p>
@@ -2100,8 +2100,8 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
               <div className="absolute right-0 top-full mt-1 w-40 bg-white border rounded-lg shadow-lg z-10">
                 <div className="p-2 space-y-1">
                   <button
-                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
-                      activeFilter === "all" ? "bg-gray-100 font-medium" : ""
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-[hsl(var(--muted))] ${
+                      activeFilter === "all" ? "bg-[hsl(var(--muted))] font-medium" : ""
                     }`}
                     onClick={() => {
                       setActiveFilter("all");
@@ -2111,8 +2111,8 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                     All Workflows
                   </button>
                   <button
-                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
-                      activeFilter === "active" ? "bg-gray-100 font-medium" : ""
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-[hsl(var(--muted))] ${
+                      activeFilter === "active" ? "bg-[hsl(var(--muted))] font-medium" : ""
                     }`}
                     onClick={() => {
                       setActiveFilter("active");
@@ -2122,8 +2122,8 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                     Active
                   </button>
                   <button
-                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
-                      activeFilter === "inactive" ? "bg-gray-100 font-medium" : ""
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-[hsl(var(--muted))] ${
+                      activeFilter === "inactive" ? "bg-[hsl(var(--muted))] font-medium" : ""
                     }`}
                     onClick={() => {
                       setActiveFilter("inactive");
@@ -2133,8 +2133,8 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                     Inactive
                   </button>
                   <button
-                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
-                      activeFilter === "error" ? "bg-gray-100 font-medium" : ""
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-[hsl(var(--muted))] ${
+                      activeFilter === "error" ? "bg-[hsl(var(--muted))] font-medium" : ""
                     }`}
                     onClick={() => {
                       setActiveFilter("error");
@@ -2160,8 +2160,8 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
               <div className="absolute right-0 top-full mt-1 w-40 bg-white border rounded-lg shadow-lg z-10">
                 <div className="p-2 space-y-1">
                   <button
-                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
-                      sortBy === "name" ? "bg-gray-100 font-medium" : ""
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-[hsl(var(--muted))] ${
+                      sortBy === "name" ? "bg-[hsl(var(--muted))] font-medium" : ""
                     }`}
                     onClick={() => {
                       setSortBy("name");
@@ -2171,8 +2171,8 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                     Name A-Z
                   </button>
                   <button
-                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-gray-100 ${
-                      sortBy === "status" ? "bg-gray-100 font-medium" : ""
+                    className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-[hsl(var(--muted))] ${
+                      sortBy === "status" ? "bg-[hsl(var(--muted))] font-medium" : ""
                     }`}
                     onClick={() => {
                       setSortBy("status");
@@ -2204,7 +2204,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                   <div className="flex items-start gap-3">
                     <GitBranch className="w-8 h-8 text-purple-600" />
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">{workflow.name}</h3>
+                      <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">{workflow.name}</h3>
                       <div className="flex items-center gap-2 mb-2">
                         <button
                           onClick={() => handleWorkflowToggle(workflow.id, workflowStatuses[workflow.id] || workflow.status)}
@@ -2241,7 +2241,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                       <div className="flex items-center justify-between">
                         <button
                           onClick={() => toggleUsageCollapsed(workflow.id)}
-                          className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                          className="flex items-center gap-1 text-sm font-medium text-[hsl(var(--foreground))] hover:text-[hsl(var(--foreground))] transition-colors"
                         >
                           <span>Used by</span>
                           <ChevronDown 
@@ -2265,7 +2265,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                                       </Badge>
                                     </div>
                                   </TooltipTrigger>
-                                  <TooltipContent side="top" className="bg-[var(--theme-accent)] text-gray-900 border border-gray-200 shadow-lg max-w-64 z-50">
+                                  <TooltipContent side="top" className="bg-[var(--theme-accent)] text-[hsl(var(--foreground))] border border-[hsl(var(--border))] shadow-lg max-w-64 z-50">
                                     <p className="text-sm">
                                       <span className="font-medium">{copilotName}</span>
                                       <br />
@@ -2282,7 +2282,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                                   </TooltipContent>
                                 </Tooltip>
                               )) || (
-                                <span className="text-xs text-gray-500">No copilots using this workflow</span>
+                                <span className="text-xs text-[hsl(var(--muted-foreground))]">No copilots using this workflow</span>
                               )}
                             </div>
                           </div>
@@ -3014,7 +3014,7 @@ function AnalyticsScreen() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Interactions</p>
-                <p className="text-2xl font-bold text-gray-900">12,467</p>
+                <p className="text-2xl font-bold text-[hsl(var(--foreground))]">12,467</p>
                 <p className="text-xs text-green-600">+12% from last month</p>
               </div>
             </div>
@@ -3028,7 +3028,7 @@ function AnalyticsScreen() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Active Users</p>
-                <p className="text-2xl font-bold text-gray-900">1,234</p>
+                <p className="text-2xl font-bold text-[hsl(var(--foreground))]">1,234</p>
                 <p className="text-xs text-green-600">+8% from last month</p>
               </div>
             </div>
@@ -3042,7 +3042,7 @@ function AnalyticsScreen() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Avg Session Time</p>
-                <p className="text-2xl font-bold text-gray-900">8.5m</p>
+                <p className="text-2xl font-bold text-[hsl(var(--foreground))]">8.5m</p>
                 <p className="text-xs text-red-600">-2% from last month</p>
               </div>
             </div>
@@ -3056,7 +3056,7 @@ function AnalyticsScreen() {
               </div>
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Success Rate</p>
-                <p className="text-2xl font-bold text-gray-900">94.2%</p>
+                <p className="text-2xl font-bold text-[hsl(var(--foreground))]">94.2%</p>
                 <p className="text-xs text-green-600">+1.5% from last month</p>
               </div>
             </div>
@@ -3071,8 +3071,8 @@ function AnalyticsScreen() {
             <CardDescription>Daily interactions over the past 30 days</CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="h-64 flex items-center justify-center border border-dashed border-gray-200 rounded-lg">
-              <p className="text-gray-500">Chart placeholder - Usage trends visualization</p>
+            <div className="h-64 flex items-center justify-center border border-dashed border-[hsl(var(--border))] rounded-lg">
+              <p className="text-[hsl(var(--muted-foreground))]">Chart placeholder - Usage trends visualization</p>
             </div>
           </CardContent>
         </Card>

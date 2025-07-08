@@ -57,7 +57,7 @@ export function PricingScreen() {
     <div className="space-y-8">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">Choose Your Plan</h1>
+        <h1 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-4">Choose Your Plan</h1>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
           Scale your AI copilot operations with plans designed for teams of all sizes
         </p>
@@ -75,7 +75,7 @@ export function PricingScreen() {
             <CardHeader className="text-center pb-4">
               <CardTitle className="text-xl font-bold">{plan.name}</CardTitle>
               <div className="mt-4">
-                <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
+                <span className="text-4xl font-bold text-[hsl(var(--foreground))]">{plan.price}</span>
                 <span className="text-gray-600 ml-1">/{plan.period}</span>
               </div>
               <CardDescription className="mt-2">{plan.description}</CardDescription>
@@ -85,7 +85,7 @@ export function PricingScreen() {
                 {plan.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center gap-2">
                     <div className="w-2 h-2 theme-primary rounded-full"></div>
-                    <span className="text-sm text-gray-700">{feature}</span>
+                    <span className="text-sm text-[hsl(var(--foreground))]">{feature}</span>
                   </li>
                 ))}
               </ul>

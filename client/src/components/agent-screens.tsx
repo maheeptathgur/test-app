@@ -59,7 +59,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Configure {agent.name}</h1>
+          <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">Configure {agent.name}</h1>
           <p className="text-gray-600">Customize agent behavior, tools, and capabilities</p>
         </div>
         <Button variant="outline" size="sm" onClick={onBack}>
@@ -69,7 +69,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
       </div>
 
       {/* Configuration Tabs */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-[hsl(var(--border))]">
         <nav className="-mb-px flex space-x-8">
           {[
             { id: "general", label: "General Settings" },
@@ -83,7 +83,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === tab.id
                   ? 'border-[var(--theme-primary)] text-[var(--theme-primary)]'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  : 'border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:border-[hsl(var(--border))]'
               }`}
             >
               {tab.label}
@@ -134,7 +134,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   <textarea 
                     defaultValue={agent.description}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                    className="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
                   />
                 </div>
                 
@@ -143,7 +143,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   <textarea 
                     placeholder="You are a helpful AI assistant specialized in..."
                     rows={6}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                    className="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
                   />
                 </div>
 
@@ -151,7 +151,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                 {/* Quick Test Inputs Section */}
                 <div className="space-y-4 pt-6 border-t">
                   <div>
-                    <h3 className="text-lg font-medium text-gray-900">Quick Test Inputs</h3>
+                    <h3 className="text-lg font-medium text-[hsl(var(--foreground))]">Quick Test Inputs</h3>
                     <p className="text-sm text-gray-600">Manage pre-defined test scenarios that appear in the Test tab</p>
                   </div>
                   
@@ -177,8 +177,8 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   {/* List of current quick inputs */}
                   <div className="space-y-2">
                     {quickInputs.map((input, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <span className="text-sm text-gray-700 flex-1">{input}</span>
+                      <div key={index} className="flex items-center justify-between p-3 bg-[hsl(var(--muted))] rounded-lg">
+                        <span className="text-sm text-[hsl(var(--foreground))] flex-1">{input}</span>
                         <Button
                           variant="ghost"
                           size="sm"
@@ -192,7 +192,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   </div>
 
                   {quickInputs.length === 0 && (
-                    <div className="text-center py-8 text-gray-500">
+                    <div className="text-center py-8 text-[hsl(var(--muted-foreground))]">
                       <MessageSquare className="w-8 h-8 mx-auto mb-2 text-gray-300" />
                       <p className="text-sm">No quick test inputs configured</p>
                     </div>
@@ -222,7 +222,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                             </svg>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h3 className="text-base font-medium text-gray-900 truncate">Gmail</h3>
+                            <h3 className="text-base font-medium text-[hsl(var(--foreground))] truncate">Gmail</h3>
                             <p className="text-sm text-gray-600">Email management platform</p>
                           </div>
                           <Checkbox defaultChecked />
@@ -246,7 +246,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                               <div className="w-11 h-6 theme-primary rounded-full relative transition-colors">
                                 <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
                               </div>
-                              <span className="ml-2 text-sm font-medium text-gray-900">Active</span>
+                              <span className="ml-2 text-sm font-medium text-[hsl(var(--foreground))]">Active</span>
                             </div>
                           </div>
                           
@@ -276,7 +276,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                             </svg>
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h3 className="text-base font-medium text-gray-900 truncate">Slack</h3>
+                            <h3 className="text-base font-medium text-[hsl(var(--foreground))] truncate">Slack</h3>
                             <p className="text-sm text-gray-600">Team communication and collaboration</p>
                           </div>
                           <Checkbox defaultChecked />
@@ -300,7 +300,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                               <div className="w-11 h-6 theme-primary rounded-full relative transition-colors">
                                 <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
                               </div>
-                              <span className="ml-2 text-sm font-medium text-gray-900">Active</span>
+                              <span className="ml-2 text-sm font-medium text-[hsl(var(--foreground))]">Active</span>
                             </div>
                           </div>
                           
@@ -328,7 +328,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                             <BarChart className="w-5 h-5 text-orange-600" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h3 className="text-base font-medium text-gray-900 truncate">Google Analytics</h3>
+                            <h3 className="text-base font-medium text-[hsl(var(--foreground))] truncate">Google Analytics</h3>
                             <p className="text-sm text-gray-600">Web analytics and insights platform</p>
                           </div>
                           <Checkbox />
@@ -352,7 +352,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                               <div className="w-11 h-6 bg-gray-300 rounded-full relative transition-colors">
                                 <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-transform"></div>
                               </div>
-                              <span className="ml-2 text-sm font-medium text-gray-900">Inactive</span>
+                              <span className="ml-2 text-sm font-medium text-[hsl(var(--foreground))]">Inactive</span>
                             </div>
                           </div>
                           
@@ -380,7 +380,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                             <Bot className="w-5 h-5 text-green-600" />
                           </div>
                           <div className="flex-1 min-w-0">
-                            <h3 className="text-base font-medium text-gray-900 truncate">OpenAI</h3>
+                            <h3 className="text-base font-medium text-[hsl(var(--foreground))] truncate">OpenAI</h3>
                             <p className="text-sm text-gray-600">AI language model and processing</p>
                           </div>
                           <Checkbox defaultChecked />
@@ -404,7 +404,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                               <div className="w-11 h-6 theme-primary rounded-full relative transition-colors">
                                 <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
                               </div>
-                              <span className="ml-2 text-sm font-medium text-gray-900">Active</span>
+                              <span className="ml-2 text-sm font-medium text-[hsl(var(--foreground))]">Active</span>
                             </div>
                           </div>
                           
@@ -457,7 +457,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                         onChange={(e) => setTestMessage(e.target.value)}
                         placeholder="Type your test message here..."
                         rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                        className="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
                       />
                       <div className="space-y-4">
                         <div className="flex gap-2">
@@ -487,7 +487,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                         {/* Quick Test Scenarios */}
                         {quickInputs.length > 0 && (
                           <div>
-                            <p className="text-sm font-medium text-gray-700 mb-2">Quick Test Scenarios:</p>
+                            <p className="text-sm font-medium text-[hsl(var(--foreground))] mb-2">Quick Test Scenarios:</p>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                               {quickInputs.map((scenario, idx) => (
                                 <Button
@@ -516,7 +516,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   </CardHeader>
                   <CardContent>
                     {testResults.length === 0 ? (
-                      <div className="text-center py-8 text-gray-500">
+                      <div className="text-center py-8 text-[hsl(var(--muted-foreground))]">
                         <MessageSquare className="w-12 h-12 mx-auto mb-4 text-gray-300" />
                         <p>No test results yet. Run a test to see how {agent.name} responds.</p>
                       </div>
@@ -530,19 +530,19 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                                 <Badge variant={result.success ? "default" : "destructive"}>
                                   {result.success ? "Success" : "Failed"}
                                 </Badge>
-                                <span className="text-xs text-gray-500">{result.responseTime}ms</span>
+                                <span className="text-xs text-[hsl(var(--muted-foreground))]">{result.responseTime}ms</span>
                               </div>
                             </div>
                             <div className="space-y-2">
                               <div>
-                                <p className="text-sm font-medium text-gray-700">Input:</p>
-                                <p className="text-sm text-gray-600 bg-gray-50 p-2 rounded">{result.input}</p>
+                                <p className="text-sm font-medium text-[hsl(var(--foreground))]">Input:</p>
+                                <p className="text-sm text-gray-600 bg-[hsl(var(--muted))] p-2 rounded">{result.input}</p>
                               </div>
                               <div>
-                                <p className="text-sm font-medium text-gray-700">Output:</p>
+                                <p className="text-sm font-medium text-[hsl(var(--foreground))]">Output:</p>
                                 <p className="text-sm text-gray-600 bg-blue-50 p-2 rounded">{result.output}</p>
                               </div>
-                              <div className="flex justify-between text-xs text-gray-500">
+                              <div className="flex justify-between text-xs text-[hsl(var(--muted-foreground))]">
                                 <span>Tokens used: {result.tokensUsed}</span>
                                 <span>Response time: {result.responseTime}ms</span>
                               </div>
@@ -601,7 +601,7 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
           Back to Agents
         </Button>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Test {agent.name}</h1>
+          <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">Test {agent.name}</h1>
           <p className="text-gray-600">Run tests to validate agent behavior and responses</p>
         </div>
       </div>
@@ -622,7 +622,7 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
                   onChange={(e) => setTestMessage(e.target.value)}
                   placeholder="Type your test message here..."
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
+                  className="w-full px-3 py-2 border border-[hsl(var(--border))] rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
                 />
                 <div className="flex gap-2">
                   <Button 
@@ -659,7 +659,7 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
             </CardHeader>
             <CardContent>
               {testResults.length === 0 ? (
-                <div className="text-center py-8 text-gray-500">
+                <div className="text-center py-8 text-[hsl(var(--muted-foreground))]">
                   <MessageSquare className="w-12 h-12 mx-auto mb-4 text-gray-300" />
                   <p>No test results yet. Run a test to see how {agent.name} responds.</p>
                 </div>
@@ -673,19 +673,19 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
                           <Badge variant={result.success ? "default" : "destructive"}>
                             {result.success ? "Success" : "Failed"}
                           </Badge>
-                          <span className="text-xs text-gray-500">{result.responseTime}ms</span>
+                          <span className="text-xs text-[hsl(var(--muted-foreground))]">{result.responseTime}ms</span>
                         </div>
                       </div>
                       <div className="space-y-2">
                         <div>
-                          <p className="text-sm font-medium text-gray-700">Input:</p>
-                          <p className="text-sm text-gray-600 bg-gray-50 p-2 rounded">{result.input}</p>
+                          <p className="text-sm font-medium text-[hsl(var(--foreground))]">Input:</p>
+                          <p className="text-sm text-gray-600 bg-[hsl(var(--muted))] p-2 rounded">{result.input}</p>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-gray-700">Output:</p>
+                          <p className="text-sm font-medium text-[hsl(var(--foreground))]">Output:</p>
                           <p className="text-sm text-gray-600 bg-blue-50 p-2 rounded">{result.output}</p>
                         </div>
-                        <div className="flex justify-between text-xs text-gray-500">
+                        <div className="flex justify-between text-xs text-[hsl(var(--muted-foreground))]">
                           <span>Tokens used: {result.tokensUsed}</span>
                           <span>Response time: {result.responseTime}ms</span>
                         </div>
@@ -712,7 +712,7 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
                   </div>
                   <div>
                     <p className="font-medium">{agent.name}</p>
-                    <p className="text-sm text-gray-500">{agent.status}</p>
+                    <p className="text-sm text-[hsl(var(--muted-foreground))]">{agent.status}</p>
                   </div>
                 </div>
                 <div className="space-y-2">

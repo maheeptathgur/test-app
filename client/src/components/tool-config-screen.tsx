@@ -57,7 +57,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
       case 'Google Drive':
         return <HardDrive className="w-8 h-8 text-blue-600" />;
       case 'Notion':
-        return <FileText className="w-8 h-8 text-gray-700" />;
+        return <FileText className="w-8 h-8 text-[hsl(var(--foreground))]" />;
       default:
         return <Globe className="w-8 h-8 text-gray-600" />;
     }
@@ -192,7 +192,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
         </Card>
       </div>
       {/* Sticky Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
+      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-[hsl(var(--border))] px-8 py-4 z-10">
         <div className="flex justify-between items-center">
           {/* Success Message */}
           <div className="flex-1">

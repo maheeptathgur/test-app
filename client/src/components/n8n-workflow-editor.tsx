@@ -130,7 +130,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
         <div className="flex items-center gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-bold text-gray-900">{workflowName}</h1>
+              <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">{workflowName}</h1>
               <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
                 n8n
               </Badge>
@@ -160,7 +160,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
             className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.id
                 ? 'border-[var(--theme-primary)] text-[var(--theme-primary)]'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+                : 'border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]'
             }`}
           >
             <tab.icon className="w-4 h-4" />
@@ -316,7 +316,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
           <div className="space-y-6">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-semibold text-gray-900">Workflow Nodes</h2>
+                <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Nodes</h2>
                 <p className="text-sm text-gray-600">These nodes are imported from your n8n workflow</p>
               </div>
               <Button variant="outline" className="gap-2">
@@ -335,7 +335,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
                           {index + 1}
                         </span>
                         <div>
-                          <h3 className="font-medium text-gray-900">{node.name}</h3>
+                          <h3 className="font-medium text-[hsl(var(--foreground))]">{node.name}</h3>
                           <p className="text-sm text-gray-600">{node.type}</p>
                         </div>
                       </div>
@@ -347,10 +347,10 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
                   <CardContent>
                     <div className="space-y-2">
                       <div className="text-sm">
-                        <span className="font-medium text-gray-700">Parameters:</span>
+                        <span className="font-medium text-[hsl(var(--foreground))]">Parameters:</span>
                       </div>
-                      <div className="p-3 bg-gray-50 rounded-md">
-                        <code className="text-xs text-gray-700">
+                      <div className="p-3 bg-[hsl(var(--muted))] rounded-md">
+                        <code className="text-xs text-[hsl(var(--foreground))]">
                           {JSON.stringify(node.parameters, null, 2)}
                         </code>
                       </div>
@@ -365,7 +365,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
         {activeTab === 'executions' && (
           <div className="space-y-6">
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">Execution History</h2>
+              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Execution History</h2>
               <p className="text-sm text-gray-600">Recent workflow executions from n8n</p>
             </div>
 
@@ -426,7 +426,7 @@ export function N8nWorkflowEditor({ workflowId = 'n8n-lead-enrichment', onBack }
         {activeTab === 'settings' && (
           <div className="space-y-6">
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">Workflow Settings</h2>
+              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Settings</h2>
               <p className="text-sm text-gray-600">Configure how this n8n workflow integrates with Knolli</p>
             </div>
 

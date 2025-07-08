@@ -139,7 +139,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
               }}
               className="flex items-center gap-3 p-3 rounded-lg cursor-pointer"
             >
-              <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-[hsl(var(--muted))] rounded-lg flex items-center justify-center">
                 <ChevronDown className="w-4 h-4 rotate-180" />
               </div>
               <span className="text-sm">Back to Dashboard</span>
