@@ -1372,7 +1372,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] max-w-xs" style={{ borderColor: 'var(--theme-primary)' }}>
+                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] max-w-xs" style={{ borderColor: '#85FFE2' }}>
                                 <p>Show a document preview pane alongside the chat interface</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1399,7 +1399,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] max-w-xs" style={{ borderColor: 'var(--theme-primary)' }}>
+                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] max-w-xs" style={{ borderColor: '#85FFE2' }}>
                                 <p>Display source references and citations in AI responses</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1426,7 +1426,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] max-w-xs" style={{ borderColor: 'var(--theme-primary)' }}>
+                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] max-w-xs" style={{ borderColor: '#85FFE2' }}>
                                 <p>Highlight this copilot in featured listings and recommendations</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1453,7 +1453,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] max-w-xs" style={{ borderColor: 'var(--theme-primary)' }}>
+                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] max-w-xs" style={{ borderColor: '#85FFE2' }}>
                                 <p>Require users to enter a custom prompt before starting conversations</p>
                               </TooltipContent>
                             </Tooltip>
