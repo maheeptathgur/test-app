@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -609,6 +610,7 @@ export default function Dashboard() {
   // State for editing conversation titles
   const [editingConversationId, setEditingConversationId] = useState<string | null>(null);
   const [editingConversationTitle, setEditingConversationTitle] = useState('');
+  const [deletingConversationId, setDeletingConversationId] = useState<string | null>(null);
   
   // State for creation wizard
   const [showCreationWizard, setShowCreationWizard] = useState(false);
@@ -810,8 +812,19 @@ export default function Dashboard() {
   };
 
   const handleDeleteConversation = (conversationId: string) => {
-    setConversations(prev => prev.filter(conv => conv.id !== conversationId));
-    showNotification('Conversation deleted');
+    setDeletingConversationId(conversationId);
+  };
+
+  const handleConfirmDeleteConversation = () => {
+    if (deletingConversationId) {
+      setConversations(prev => prev.filter(conv => conv.id !== deletingConversationId));
+      showNotification('Conversation deleted');
+      setDeletingConversationId(null);
+    }
+  };
+
+  const handleCancelDeleteConversation = () => {
+    setDeletingConversationId(null);
   };
 
   const handleEditConversationTitle = (conversationId: string, currentTitle: string) => {
@@ -2537,6 +2550,30 @@ export default function Dashboard() {
         onClose={handleCancelDelete}
         onConfirm={handleConfirmDelete}
       />
+      
+      {/* Conversation Delete Confirmation Dialog */}
+      <Dialog open={!!deletingConversationId} onOpenChange={() => setDeletingConversationId(null)}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Delete Conversation</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete this conversation? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={handleCancelDeleteConversation}>
+              Cancel
+            </Button>
+            <Button 
+              variant="destructive" 
+              onClick={handleConfirmDeleteConversation}
+              className="bg-red-500 hover:bg-red-600"
+            >
+              Delete
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
         </div>
       </div>
     </TooltipProvider>
