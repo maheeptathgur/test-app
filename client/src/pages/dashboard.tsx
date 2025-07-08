@@ -1796,8 +1796,14 @@ export default function Dashboard() {
                           variant="ghost"
                           onClick={() => handleStartChat(copilot)}
                           className="w-full justify-start gap-3 text-sidebar-foreground hover:text-sidebar-primary p-3"
-                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)'}
-                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                            e.currentTarget.style.color = 'white';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.color = '';
+                          }}
                         >
                           <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
                             {copilot.avatar}
@@ -1824,8 +1830,14 @@ export default function Dashboard() {
                       size="sm"
                       onClick={() => handleStartChat(copilot)}
                       className="w-full p-2 text-sidebar-foreground hover:text-sidebar-primary"
-                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)'}
-                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                        e.currentTarget.style.color = 'white';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = '';
+                      }}
                       title={copilot.name}
                     >
                       <div className={`w-6 h-6 ${copilot.avatarColor} rounded text-xs font-semibold flex items-center justify-center`}>
@@ -1859,9 +1871,11 @@ export default function Dashboard() {
                         style={chatCopilot?.id === copilot.id ? { backgroundColor: 'var(--theme-accent)' } : {}}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                          e.currentTarget.style.color = 'white';
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = chatCopilot?.id === copilot.id ? 'var(--theme-accent)' : 'transparent';
+                          e.currentTarget.style.color = '';
                         }}
                         title={copilot.name}
                       >
@@ -1902,9 +1916,11 @@ export default function Dashboard() {
                       style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                        e.currentTarget.style.color = 'white';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = conversation.isActive ? 'var(--theme-accent)' : 'rgba(255, 255, 255, 0.5)';
+                        e.currentTarget.style.color = '';
                       }}
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
@@ -2025,9 +2041,11 @@ export default function Dashboard() {
                       style={isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                        e.currentTarget.style.color = 'white';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = isActive ? 'var(--theme-accent)' : 'transparent';
+                        e.currentTarget.style.color = '';
                       }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
