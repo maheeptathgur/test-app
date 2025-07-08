@@ -2,6 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme CSS Custom Properties */
+:root {
+  /* Default theme colors - matches current design */
+  --theme-primary: #008062;
+  --theme-primary-hover: #00d2a0;
+  --theme-primary-light: #40bf9f;
+  --theme-background: #e6eeef;
+  --theme-background-light: #f0f6f7;
+  --theme-background-dark: #d0dde0;
+  --theme-text: #1a1a1a;
+  --theme-text-muted: rgba(26, 26, 26, 0.7);
+  --theme-text-light: rgba(26, 26, 26, 0.5);
+  --theme-accent: #E0FFF8;
+  --theme-accent-dark: #b3f5e6;
+}
+
+/* Theme-aware utility classes */
+.theme-primary {
+  background-color: var(--theme-primary) !important;
+}
+
+.theme-primary-hover:hover {
+  background-color: var(--theme-primary-hover) !important;
+}
+
+.theme-background {
+  background-color: var(--theme-background) !important;
+}
+
+.theme-text {
+  color: var(--theme-text) !important;
+}
+
+.theme-accent {
+  background-color: var(--theme-accent) !important;
+}
+
 /* ContentEditable placeholder styling */
 [data-placeholder]:empty:before {
   content: attr(data-placeholder);
