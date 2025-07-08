@@ -340,7 +340,7 @@ export function WorkspaceSettings() {
         <div className="grid grid-cols-3 gap-6 mt-6">
           {/* Workspace Information - 2/3 column */}
           <div className="col-span-2">
-            <Card style={{ backgroundColor: '#ffffff' }}>
+            <Card >
               <CardHeader>
                 <CardTitle className="text-[hsl(var(--card-foreground))]">Workspace Information</CardTitle>
                 <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -435,7 +435,7 @@ export function WorkspaceSettings() {
 
           {/* Workspace Preferences - 1/3 column */}
           <div className="col-span-1">
-            <Card style={{ backgroundColor: '#ffffff' }}>
+            <Card >
               <CardHeader>
                 <CardTitle className="font-semibold tracking-tight text-[16px] text-[hsl(var(--card-foreground))]">Workspace Preferences</CardTitle>
                 <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -492,7 +492,7 @@ export function WorkspaceSettings() {
 
         {activeTab === "security" && (
         <div className="space-y-6 mt-6">
-          <Card style={{ backgroundColor: '#ffffff' }}>
+          <Card >
             <CardHeader>
               <CardTitle className="text-[hsl(var(--card-foreground))]">Security Settings</CardTitle>
               <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -561,7 +561,7 @@ export function WorkspaceSettings() {
         {activeTab === "brand" && (
           <div className="space-y-6 mt-6">
             {/* Brand Assets */}
-            <Card style={{ backgroundColor: '#ffffff' }}>
+            <Card >
               <CardHeader>
                 <CardTitle className="text-[hsl(var(--card-foreground))]">Brand Assets</CardTitle>
                 <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -612,7 +612,7 @@ export function WorkspaceSettings() {
             </Card>
 
             {/* Theme Colors */}
-            <Card style={{ backgroundColor: '#ffffff' }}>
+            <Card >
               <CardHeader>
                 <CardTitle className="text-[hsl(var(--card-foreground))]">Theme Colors</CardTitle>
                 <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -745,7 +745,7 @@ export function WorkspaceSettings() {
                 </div>
 
                 {/* Realistic Theme Preview */}
-                <Card style={{ backgroundColor: '#ffffff' }}>
+                <Card >
                   <CardHeader>
                     <CardTitle className="text-[hsl(var(--card-foreground))]">Live Preview</CardTitle>
                     <CardDescription className="text-[hsl(var(--muted-foreground))]">

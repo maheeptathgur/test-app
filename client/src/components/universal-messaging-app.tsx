@@ -249,7 +249,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
     );
 
     return (
-      <div className="h-full bg-white flex flex-col">
+      <div className="h-full bg-card flex flex-col">
         {/* Conversation Header */}
         <div className="flex items-center justify-between p-4 border-b border-[hsl(var(--border))]">
           <div className="flex items-center gap-3">
@@ -290,7 +290,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
             {channelMessages.map((message) => (
               <div key={message.id} className="flex gap-3">
                 <div 
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium text-white flex-shrink-0"
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium text-card-foreground flex-shrink-0"
                   style={{ backgroundColor: getPlatformColor(message.platform) }}
                 >
                   {message.senderAvatar}
@@ -332,7 +332,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
   }
 
   return (
-    <div className="h-full bg-white flex flex-col">
+    <div className="h-full bg-card flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-[hsl(var(--border))]">
         <div>
@@ -361,7 +361,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
       {/* Search and Filters */}
       <div className="p-4 space-y-3 border-b border-[hsl(var(--border))]">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -430,17 +430,17 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <span className="text-xs text-[hsl(var(--muted-foreground))]">{channel.lastTimestamp}</span>
                       {channel.unreadCount > 0 && (
-                        <Badge variant="default" className="bg-blue-500 text-white text-xs min-w-[20px] h-5 flex items-center justify-center rounded-full">
+                        <Badge variant="default" className="bg-blue-500 text-card-foreground text-xs min-w-[20px] h-5 flex items-center justify-center rounded-full">
                           {channel.unreadCount}
                         </Badge>
                       )}
                     </div>
                   </div>
-                  <p className="text-sm text-gray-600 truncate">{channel.lastMessage}</p>
+                  <p className="text-sm text-muted-foreground truncate">{channel.lastMessage}</p>
                   <div className="flex items-center gap-2 mt-1">
-                    <span className="text-xs text-gray-400 capitalize">{channel.platform}</span>
+                    <span className="text-xs text-muted-foreground capitalize">{channel.platform}</span>
                     <span className="text-xs text-gray-300">•</span>
-                    <span className="text-xs text-gray-400 capitalize">{channel.type}</span>
+                    <span className="text-xs text-muted-foreground capitalize">{channel.type}</span>
                   </div>
                 </div>
               </div>

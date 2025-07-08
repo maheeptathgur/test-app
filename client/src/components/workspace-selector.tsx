@@ -61,7 +61,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3 bg-white/50 hover:bg-sidebar-accent mt-4">
+        <Button variant="ghost" className="w-full justify-start gap-3 h-auto p-3 bg-card/50 hover:bg-sidebar-accent mt-4">
           <div className={`w-8 h-8 ${currentWorkspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
             {currentWorkspace.id === '1' ? (
               <Zap className="w-4 h-4" />
@@ -202,8 +202,8 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                   e.currentTarget.style.removeProperty('color');
                 }}
               >
-                <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
-                  <ChevronDown className="w-4 h-4 text-gray-600" />
+                <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center">
+                  <ChevronDown className="w-4 h-4 text-muted-foreground" />
                 </div>
                 <div>
                   <div className="text-sm font-medium" style={{ color: 'var(--theme-primary)' }}>View All Workspaces</div>
@@ -223,8 +223,8 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 e.currentTarget.style.removeProperty('color');
               }}
             >
-              <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
-                <Plus className="w-4 h-4 text-gray-600" />
+              <div className="w-8 h-8 bg-muted rounded-lg flex items-center justify-center">
+                <Plus className="w-4 h-4 text-muted-foreground" />
               </div>
               <div>
                 <div className="text-sm font-medium" style={{ color: 'var(--theme-primary)' }}>Add Workspace</div>
@@ -279,7 +279,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
               onClick={handleCreateWorkspace}
               disabled={!newWorkspaceName.trim()}
               style={{ backgroundColor: 'var(--theme-primary)' }}
-              className="text-white hover:opacity-90"
+              className="text-card-foreground hover:opacity-90"
             >
               Create Workspace
             </Button>

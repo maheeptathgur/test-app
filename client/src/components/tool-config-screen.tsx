@@ -59,7 +59,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
       case 'Notion':
         return <FileText className="w-8 h-8 text-[hsl(var(--foreground))]" />;
       default:
-        return <Globe className="w-8 h-8 text-gray-600" />;
+        return <Globe className="w-8 h-8 text-muted-foreground" />;
     }
   };
 
@@ -96,7 +96,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                   <div>
                     <p className="font-medium">Connected to {toolName}</p>
-                    <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
+                    <p className="text-sm text-muted-foreground">mandeep@knolli.ai</p>
                   </div>
                 </div>
                 <Button variant="outline" size="sm">
@@ -109,10 +109,10 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
                   <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
                   <div>
                     <p className="font-medium">Not Connected</p>
-                    <p className="text-sm text-gray-600">Click Connect to authenticate your {toolName} account</p>
+                    <p className="text-sm text-muted-foreground">Click Connect to authenticate your {toolName} account</p>
                   </div>
                 </div>
-                <Button className="theme-primary theme-primary-hover:hover text-white" size="sm">
+                <Button className="theme-primary theme-primary-hover:hover text-card-foreground" size="sm">
                   Connect
                 </Button>
               </div>
@@ -158,7 +158,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
             <div className={`flex items-center justify-between p-3 border rounded-lg ${!isConnected ? 'opacity-50' : ''}`}>
               <div>
                 <p className="font-medium">Read Data</p>
-                <p className="text-sm text-gray-600">Access and read data from {toolName}</p>
+                <p className="text-sm text-muted-foreground">Access and read data from {toolName}</p>
               </div>
               <Switch 
                 defaultChecked={isConnected} 
@@ -169,7 +169,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
             <div className={`flex items-center justify-between p-3 border rounded-lg ${!isConnected ? 'opacity-50' : ''}`}>
               <div>
                 <p className="font-medium">Write Data</p>
-                <p className="text-sm text-gray-600">Create and modify data in {toolName}</p>
+                <p className="text-sm text-muted-foreground">Create and modify data in {toolName}</p>
               </div>
               <Switch 
                 defaultChecked={isConnected} 
@@ -180,7 +180,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
             <div className={`flex items-center justify-between p-3 border rounded-lg ${!isConnected ? 'opacity-50' : ''}`}>
               <div>
                 <p className="font-medium">Delete Data</p>
-                <p className="text-sm text-gray-600">Remove data from {toolName}</p>
+                <p className="text-sm text-muted-foreground">Remove data from {toolName}</p>
               </div>
               <Switch 
                 defaultChecked={false} 
@@ -192,7 +192,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
         </Card>
       </div>
       {/* Sticky Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-[hsl(var(--border))] px-8 py-4 z-10">
+      <div className="fixed bottom-0 left-64 right-0 bg-card border-t border-[hsl(var(--border))] px-8 py-4 z-10">
         <div className="flex justify-between items-center">
           {/* Success Message */}
           <div className="flex-1">
@@ -210,7 +210,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
               Cancel
             </Button>
             <Button 
-              className="theme-primary theme-primary-hover:hover text-white border-0"
+              className="theme-primary theme-primary-hover:hover text-card-foreground border-0"
               disabled={!hasChanges}
               onClick={handleSave}
             >

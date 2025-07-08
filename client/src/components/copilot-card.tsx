@@ -81,7 +81,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="h-8 w-8 p-0 theme-primary/80 hover:theme-primary">
-                  <MoreVertical className="h-4 w-4 text-white" />
+                  <MoreVertical className="h-4 w-4 text-card-foreground" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -99,16 +99,16 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
             <button
               onClick={() => onToggleStatus(copilot)}
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                copilot.status === 'active' ? 'theme-primary' : 'bg-gray-200'
+                copilot.status === 'active' ? 'theme-primary' : 'bg-muted'
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4 transform rounded-full bg-background transition-transform ${
                   copilot.status === 'active' ? 'translate-x-6' : 'translate-x-1'
                 }`}
               />
             </button>
-            <span className="text-xs text-gray-600">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
+            <span className="text-xs text-muted-foreground">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
           </div>
         </div>
         

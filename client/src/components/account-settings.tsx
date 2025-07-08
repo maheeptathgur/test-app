@@ -131,7 +131,7 @@ export function AccountSettings() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">Account Settings</h1>
-        <p className="text-gray-600">Manage your account security, privacy, and connected services</p>
+        <p className="text-muted-foreground">Manage your account security, privacy, and connected services</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -296,7 +296,7 @@ export function AccountSettings() {
                       </Badge>
                     </div>
                     <p className="text-sm text-[hsl(var(--muted-foreground))]">{key.description}</p>
-                    <p className="text-xs text-gray-400">Created {key.created} • Last used {key.lastUsed}</p>
+                    <p className="text-xs text-muted-foreground">Created {key.created} • Last used {key.lastUsed}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <Button
@@ -343,7 +343,7 @@ export function AccountSettings() {
                         </Badge>
                       </div>
                       <p className="text-sm text-[hsl(var(--muted-foreground))]">{app.description}</p>
-                      <p className="text-xs text-gray-400">Last used {app.lastUsed}</p>
+                      <p className="text-xs text-muted-foreground">Last used {app.lastUsed}</p>
                     </div>
                   </div>
                   <Button 
@@ -378,7 +378,7 @@ export function AccountSettings() {
                       )}
                     </div>
                     <p className="text-sm text-[hsl(var(--muted-foreground))]">{session.location}</p>
-                    <p className="text-xs text-gray-400">IP: {session.ip} • {session.lastActive}</p>
+                    <p className="text-xs text-muted-foreground">IP: {session.ip} • {session.lastActive}</p>
                   </div>
                   {!session.current && (
                     <Button variant="outline" size="sm" className="text-red-600 hover:text-red-700">

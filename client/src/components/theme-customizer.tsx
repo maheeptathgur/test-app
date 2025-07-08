@@ -55,7 +55,7 @@ export function ThemeCustomizer() {
         </div>
         <div className="flex gap-2">
           {isChanged && (
-            <Button onClick={applyChanges} size="sm" style={{ backgroundColor: 'var(--theme-primary)' }} className="text-white">
+            <Button onClick={applyChanges} size="sm" style={{ backgroundColor: 'var(--theme-primary)' }} className="text-card-foreground">
               <Check className="w-4 h-4 mr-2" />
               Apply Changes
             </Button>
@@ -228,7 +228,7 @@ export function ThemeCustomizer() {
               </h3>
               <div className="flex gap-2">
                 <button
-                  className="px-4 py-2 rounded text-white text-sm"
+                  className="px-4 py-2 rounded text-card-foreground text-sm"
                   style={{ backgroundColor: previewColors.primary }}
                 >
                   Primary Button

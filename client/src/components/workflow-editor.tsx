@@ -291,7 +291,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
       case 'pending':
         return <Clock className="w-4 h-4 text-yellow-500" />;
       default:
-        return <Clock className="w-4 h-4 text-gray-400" />;
+        return <Clock className="w-4 h-4 text-muted-foreground" />;
     }
   };
 
@@ -323,7 +323,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         <div className="flex items-center gap-4">
           <div>
             <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">{workflowName}</h1>
-            <p className="text-sm text-gray-600">{workflowDescription}</p>
+            <p className="text-sm text-muted-foreground">{workflowDescription}</p>
           </div>
         </div>
         <Button variant="outline" onClick={onBack} className="gap-2">
@@ -355,7 +355,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Steps</h2>
-                <p className="text-sm text-gray-600">Configure the sequence of actions in your workflow</p>
+                <p className="text-sm text-muted-foreground">Configure the sequence of actions in your workflow</p>
               </div>
               <Button variant="outline" className="gap-2" onClick={addNewStep}>
                 <Plus className="w-4 h-4" />
@@ -370,14 +370,14 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <div className="flex items-center gap-2">
-                          <span className="w-6 h-6 theme-primary text-white rounded-full flex items-center justify-center text-xs font-medium">
+                          <span className="w-6 h-6 theme-primary text-card-foreground rounded-full flex items-center justify-center text-xs font-medium">
                             {index + 1}
                           </span>
                           {getStatusIcon(step.status)}
                         </div>
                         <div>
                           <h3 className="font-medium text-[hsl(var(--foreground))]">{step.name}</h3>
-                          <p className="text-sm text-gray-600">{step.description}</p>
+                          <p className="text-sm text-muted-foreground">{step.description}</p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
@@ -938,7 +938,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
           <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6">
             <div>
               <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Settings</h2>
-              <p className="text-sm text-gray-600">Configure general workflow properties and behavior</p>
+              <p className="text-sm text-muted-foreground">Configure general workflow properties and behavior</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1062,7 +1062,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Variables</h2>
-                <p className="text-sm text-gray-600">Define reusable variables for your workflow</p>
+                <p className="text-sm text-muted-foreground">Define reusable variables for your workflow</p>
               </div>
               <Button variant="outline" className="gap-2">
                 <Plus className="w-4 h-4" />
@@ -1117,7 +1117,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
           <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6">
             <div>
               <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Testing</h2>
-              <p className="text-sm text-gray-600">Test your workflow with sample data</p>
+              <p className="text-sm text-muted-foreground">Test your workflow with sample data</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1140,7 +1140,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                       }, null, 2)}
                     />
                   </div>
-                  <Button className="w-full gap-2 theme-primary theme-primary-hover:hover text-white">
+                  <Button className="w-full gap-2 theme-primary theme-primary-hover:hover text-card-foreground">
                     <Play className="w-4 h-4" />
                     Run Test
                   </Button>
@@ -1165,7 +1165,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                       <div className="text-sm font-medium">Step Results:</div>
                       {workflowData.steps.map((step, index) => (
                         <div key={step.id} className="flex items-center gap-2 p-2 bg-[hsl(var(--muted))] rounded">
-                          <span className="w-5 h-5 theme-primary text-white rounded-full flex items-center justify-center text-xs">
+                          <span className="w-5 h-5 theme-primary text-card-foreground rounded-full flex items-center justify-center text-xs">
                             {index + 1}
                           </span>
                           <span className="text-sm">{step.name}</span>
@@ -1205,7 +1205,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                       <CheckCircle className="w-5 h-5 text-green-500" />
                       <div>
                         <div className="font-medium">Test run completed</div>
-                        <div className="text-sm text-gray-600">2 minutes ago • 4.8s duration</div>
+                        <div className="text-sm text-muted-foreground">2 minutes ago • 4.8s duration</div>
                       </div>
                     </div>
                     <Button variant="ghost" size="sm">
@@ -1218,7 +1218,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                       <XCircle className="w-5 h-5 text-red-500" />
                       <div>
                         <div className="font-medium">Test run failed</div>
-                        <div className="text-sm text-gray-600">1 hour ago • Failed at step 3</div>
+                        <div className="text-sm text-muted-foreground">1 hour ago • Failed at step 3</div>
                       </div>
                     </div>
                     <Button variant="ghost" size="sm">

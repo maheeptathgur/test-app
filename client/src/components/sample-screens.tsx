@@ -87,7 +87,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                     <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                     <div>
                       <p className="font-medium">Connected to Gmail</p>
-                      <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
+                      <p className="text-sm text-muted-foreground">mandeep@knolli.ai</p>
                     </div>
                   </div>
                   <Button variant="outline" size="sm">
@@ -127,21 +127,21 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
                 <div className="flex items-center justify-between p-3 border rounded-lg">
                   <div>
                     <p className="font-medium">Draft Gmail</p>
-                    <p className="text-sm text-gray-600">Create and save email drafts</p>
+                    <p className="text-sm text-muted-foreground">Create and save email drafts</p>
                   </div>
                   <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
                 </div>
                 <div className="flex items-center justify-between p-3 border rounded-lg">
                   <div>
                     <p className="font-medium">Send Email</p>
-                    <p className="text-sm text-gray-600">Send emails on your behalf</p>
+                    <p className="text-sm text-muted-foreground">Send emails on your behalf</p>
                   </div>
                   <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
                 </div>
                 <div className="flex items-center justify-between p-3 border rounded-lg">
                   <div>
                     <p className="font-medium">Lookup Contacts</p>
-                    <p className="text-sm text-gray-600">Access and search your contact list</p>
+                    <p className="text-sm text-muted-foreground">Access and search your contact list</p>
                   </div>
                   <Switch defaultChecked={false} onCheckedChange={() => setHasChanges(true)} />
                 </div>
@@ -153,7 +153,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
         </div>
       </div>
       {/* Sticky Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-[hsl(var(--border))] px-8 py-4 z-10">
+      <div className="fixed bottom-0 left-64 right-0 bg-card border-t border-[hsl(var(--border))] px-8 py-4 z-10">
         <div className="flex justify-between items-center">
           {/* Success Message */}
           <div className="flex-1">
@@ -171,7 +171,7 @@ export function GmailConfigScreen({ onBack }: { onBack: () => void }) {
               Cancel
             </Button>
             <Button 
-              className="theme-primary theme-primary-hover:hover text-white border-0"
+              className="theme-primary theme-primary-hover:hover text-card-foreground border-0"
               disabled={!hasChanges}
               onClick={handleSave}
             >
@@ -384,7 +384,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
             </svg>
           </div>
         );
-      default: return <div className="w-8 h-8 bg-[hsl(var(--muted))]0 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
+      default: return <div className="w-8 h-8 bg-[hsl(var(--muted))]0 rounded flex items-center justify-center text-card-foreground font-bold">{toolName.charAt(0)}</div>;
     }
   };
 
@@ -511,7 +511,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
                     {getToolLogo(integration.name)}
                     <div className="flex-1">
                       <h4 className="font-medium">{integration.name}</h4>
-                      <p className="text-sm text-gray-600 mt-1">{integration.description}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{integration.description}</p>
                       {integration.connected ? (
                         <div className="flex items-center gap-2 mt-3">
                           <Check className="w-4 h-4 text-green-600" />
@@ -520,7 +520,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
                       ) : (
                         <Button 
                           size="sm" 
-                          className="theme-primary theme-primary-hover:hover text-white mt-3"
+                          className="theme-primary theme-primary-hover:hover text-card-foreground mt-3"
                           onClick={() => onConnectTool?.(integration.name)}
                         >
                           Connect
@@ -537,7 +537,7 @@ function BrowseIntegrationsScreen({ onBack, onGmailConfig, onToolConfig, onConne
       {Object.keys(filteredIntegrations).length === 0 && (
         <div className="text-center py-12 text-muted-foreground">
           <div className="w-12 h-12 mx-auto mb-4 bg-[hsl(var(--muted))] rounded-lg flex items-center justify-center">
-            <Search className="w-6 h-6 text-gray-400" />
+            <Search className="w-6 h-6 text-muted-foreground" />
           </div>
           <p className="text-lg font-medium mb-2">No integrations found</p>
           <p className="text-sm">Try adjusting your search terms or category filter.</p>
@@ -920,7 +920,7 @@ export function SampleScreen({
               <Button variant="outline" onClick={() => setShowConnectNewTool(false)}>
                 Cancel
               </Button>
-              <Button className="theme-primary theme-primary-hover:hover text-white">
+              <Button className="theme-primary theme-primary-hover:hover text-card-foreground">
                 Connect Tool
               </Button>
             </div>
@@ -1108,7 +1108,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
       {/* Action Bar */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
-          <Button className="theme-primary text-white hover:bg-[var(--theme-primary-hover)] border-[var(--theme-primary)] hover:border-[var(--theme-primary-hover)]">
+          <Button className="theme-primary text-card-foreground hover:bg-[var(--theme-primary-hover)] border-[var(--theme-primary)] hover:border-[var(--theme-primary-hover)]">
             <Plus className="w-4 h-4 mr-2" />
             Create New Agent
           </Button>
@@ -1169,7 +1169,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
               case 'FAQ Generator':
                 return <HelpCircle className="w-8 h-8 text-indigo-600" />;
               default:
-                return <Bot className="w-8 h-8 text-gray-600" />;
+                return <Bot className="w-8 h-8 text-muted-foreground" />;
             }
           };
 
@@ -1190,18 +1190,18 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                       }`}
                     >
                       <span
-                        className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                        className={`inline-block h-3 w-3 transform rounded-full bg-card transition-transform ${
                           agent.status === 'Active' ? 'translate-x-5' : 'translate-x-1'
                         }`}
                       />
                     </button>
-                    <span className="text-xs text-gray-600">{agent.status}</span>
+                    <span className="text-xs text-muted-foreground">{agent.status}</span>
                   </div>
                 </div>
               </div>
             </CardHeader>
             <CardContent className="pt-0 flex-1 flex flex-col">
-              <p className="text-sm text-gray-600 mb-4 flex-grow">{agent.description}</p>
+              <p className="text-sm text-muted-foreground mb-4 flex-grow">{agent.description}</p>
               
               <div className="space-y-4 mt-auto">
                 {/* Usage Statistics */}
@@ -1255,7 +1255,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                                         <p className="text-sm">
                                           <span className="font-medium">{item.name}</span>
                                           <br />
-                                          <span className="text-gray-600">
+                                          <span className="text-muted-foreground">
                                             {item.type === 'copilot' ? (
                                               item.name === 'Campaign Manager' ? 'Manages email and social media marketing campaigns' :
                                               item.name === 'Content Assistant' ? 'Helps create and optimize written content' :
@@ -1277,7 +1277,7 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                                   {!isExpanded && remainingCount > 0 && (
                                     <button
                                       onClick={() => toggleExpanded(agent.id)}
-                                      className="text-xs px-2 py-1 rounded-md bg-gray-200 text-gray-600 hover:bg-gray-300 transition-colors"
+                                      className="text-xs px-2 py-1 rounded-md bg-muted text-muted-foreground hover:bg-gray-300 transition-colors"
                                     >
                                       +{remainingCount}
                                     </button>
@@ -1535,7 +1535,7 @@ function ToolsScreen({
       <div className="flex justify-between items-center">
         <div className="flex gap-4">
           <Button 
-            className="theme-primary theme-primary-hover:hover text-white"
+            className="theme-primary theme-primary-hover:hover text-card-foreground"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -1663,7 +1663,7 @@ function ToolsScreen({
                     case 'n8n':
                       return <img src={n8nLogo} alt="n8n" className="w-8 h-8" />;
                     default:
-                      return <div className="w-8 h-8 bg-[hsl(var(--muted))]0 rounded flex items-center justify-center text-white font-bold">{toolName.charAt(0)}</div>;
+                      return <div className="w-8 h-8 bg-[hsl(var(--muted))]0 rounded flex items-center justify-center text-card-foreground font-bold">{toolName.charAt(0)}</div>;
                   }
                 };
 
@@ -1689,14 +1689,14 @@ function ToolsScreen({
                               }}
                             >
                               <span
-                                className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                                className={`inline-block h-3 w-3 transform rounded-full bg-card transition-transform ${
                                   (toolStatuses[tool.id] || tool.status) === 'Connected' ? 'translate-x-5' : 'translate-x-1'
                                 }`}
                               />
                             </button>
                             <span className={`text-xs ${
                               (toolStatuses[tool.id] || tool.status) === 'Connected' 
-                                ? 'text-gray-600' 
+                                ? 'text-muted-foreground' 
                                 : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
                                   ? 'text-red-600'
                                   : 'text-[hsl(var(--muted-foreground))]'
@@ -1713,7 +1713,7 @@ function ToolsScreen({
                       </div>
                     </CardHeader>
                     <CardContent className="pt-0 flex-1 flex flex-col">
-                      <p className="text-sm text-gray-600 mb-4 flex-grow">{tool.description}</p>
+                      <p className="text-sm text-muted-foreground mb-4 flex-grow">{tool.description}</p>
                       
                       <div className="space-y-4 mt-auto">
                         {/* Used by Section */}
@@ -1749,7 +1749,7 @@ function ToolsScreen({
                                         <p className="text-sm">
                                           <span className="font-medium">{copilotName}</span>
                                           <br />
-                                          <span className="text-gray-600">
+                                          <span className="text-muted-foreground">
                                             {copilotName === 'Campaign Manager' ? 'Manages email and social media marketing campaigns' :
                                              copilotName === 'Content Manager' ? 'Helps create and optimize written content' :
                                              copilotName === 'Customer Support' ? 'Handles customer inquiries and support tickets' :
@@ -1777,7 +1777,7 @@ function ToolsScreen({
                               size="sm" 
                               className={`w-full ${
                                 (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
-                                  ? 'border-red-500 text-red-600 hover:!bg-red-500 hover:!text-white hover:!border-red-500'
+                                  ? 'border-red-500 text-red-600 hover:!bg-red-500 hover:!text-card-foreground hover:!border-red-500'
                                   : ''
                               }`}
                               onClick={() => onToolConfigure?.(tool)}
@@ -2068,7 +2068,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
         <div className="flex gap-4">
           {activeTab === "knolli" && (
             <Button 
-              className="theme-primary theme-primary-hover:hover text-white"
+              className="theme-primary theme-primary-hover:hover text-card-foreground"
               onClick={handleCreateWorkflow}
             >
               Create Custom Workflow
@@ -2076,7 +2076,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
           )}
           {activeTab === "n8n" && (
             <Button 
-              className="theme-primary theme-primary-hover:hover text-white"
+              className="theme-primary theme-primary-hover:hover text-card-foreground"
               onClick={handleImportN8n}
             >
               Import from n8n
@@ -2093,11 +2093,11 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
               <Filter className="w-4 h-4 mr-2" />
               Filter
               {activeFilter !== "all" && (
-                <span className="ml-1 text-xs theme-primary text-white rounded-full px-1">1</span>
+                <span className="ml-1 text-xs theme-primary text-card-foreground rounded-full px-1">1</span>
               )}
             </Button>
             {filterOpen && (
-              <div className="absolute right-0 top-full mt-1 w-40 bg-white border rounded-lg shadow-lg z-10">
+              <div className="absolute right-0 top-full mt-1 w-40 bg-card border rounded-lg shadow-lg z-10">
                 <div className="p-2 space-y-1">
                   <button
                     className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-[hsl(var(--muted))] ${
@@ -2157,7 +2157,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
               Sort
             </Button>
             {sortOpen && (
-              <div className="absolute right-0 top-full mt-1 w-40 bg-white border rounded-lg shadow-lg z-10">
+              <div className="absolute right-0 top-full mt-1 w-40 bg-card border rounded-lg shadow-lg z-10">
                 <div className="p-2 space-y-1">
                   <button
                     className={`w-full text-left px-2 py-1 rounded text-sm hover:bg-[hsl(var(--muted))] ${
@@ -2217,14 +2217,14 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                           }`}
                         >
                           <span
-                            className={`inline-block w-4 h-4 rounded-full bg-white transition-transform ${
+                            className={`inline-block w-4 h-4 rounded-full bg-card transition-transform ${
                               (workflowStatuses[workflow.id] || workflow.status) === 'Active'
                                 ? 'translate-x-6'
                                 : 'translate-x-1'
                             }`}
                           />
                         </button>
-                        <span className="text-xs text-gray-600">
+                        <span className="text-xs text-muted-foreground">
                           {(workflowStatuses[workflow.id] || workflow.status) === 'Active' ? 'Active' : 
                            (workflowStatuses[workflow.id] || workflow.status) === 'Error' ? 'Error' : 'Inactive'}
                         </span>
@@ -2233,7 +2233,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                   </div>
                 </CardHeader>
                 <CardContent className="pt-0 flex-1 flex flex-col">
-                  <p className="text-sm text-gray-600 mb-4 flex-grow">{workflow.description}</p>
+                  <p className="text-sm text-muted-foreground mb-4 flex-grow">{workflow.description}</p>
                   
                   <div className="space-y-4 mt-auto">
                     {/* Used by Section */}
@@ -2269,7 +2269,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                                     <p className="text-sm">
                                       <span className="font-medium">{copilotName}</span>
                                       <br />
-                                      <span className="text-gray-600">
+                                      <span className="text-muted-foreground">
                                         {copilotName === 'Campaign Manager' ? 'Manages email and social media marketing campaigns' :
                                          copilotName === 'Content Manager' ? 'Helps create and optimize written content' :
                                          copilotName === 'Customer Support' ? 'Handles customer inquiries and support tickets' :
@@ -2460,7 +2460,7 @@ function KnowledgeBaseScreen() {
 
       <div className="space-y-4">
         {/* Knowledge base documents */}
-        <div className="p-4 border rounded-lg bg-white">
+        <div className="p-4 border rounded-lg bg-card">
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3 flex-1">
               <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
@@ -2501,7 +2501,7 @@ function KnowledgeBaseScreen() {
                     <Check className="w-4 h-4 text-green-600" />
                   </Button>
                   <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                    <X className="w-4 h-4 text-gray-600" />
+                    <X className="w-4 h-4 text-muted-foreground" />
                   </Button>
                 </>
               ) : (
@@ -2526,7 +2526,7 @@ function KnowledgeBaseScreen() {
           </div>
         </div>
 
-        <div className="p-4 border rounded-lg bg-white">
+        <div className="p-4 border rounded-lg bg-card">
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3 flex-1">
               <FileText className="w-5 h-5 text-green-500 mt-0.5" />
@@ -2567,7 +2567,7 @@ function KnowledgeBaseScreen() {
                     <Check className="w-4 h-4 text-green-600" />
                   </Button>
                   <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                    <X className="w-4 h-4 text-gray-600" />
+                    <X className="w-4 h-4 text-muted-foreground" />
                   </Button>
                 </>
               ) : (
@@ -2592,7 +2592,7 @@ function KnowledgeBaseScreen() {
           </div>
         </div>
 
-        <div className="p-4 border rounded-lg bg-white">
+        <div className="p-4 border rounded-lg bg-card">
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3 flex-1">
               <FileText className="w-5 h-5 text-purple-500 mt-0.5" />
@@ -2633,7 +2633,7 @@ function KnowledgeBaseScreen() {
                     <Check className="w-4 h-4 text-green-600" />
                   </Button>
                   <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                    <X className="w-4 h-4 text-gray-600" />
+                    <X className="w-4 h-4 text-muted-foreground" />
                   </Button>
                 </>
               ) : (
@@ -2658,7 +2658,7 @@ function KnowledgeBaseScreen() {
           </div>
         </div>
 
-        <div className="p-4 border rounded-lg bg-white">
+        <div className="p-4 border rounded-lg bg-card">
           <div className="flex items-start justify-between">
             <div className="flex items-start gap-3 flex-1">
               <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
@@ -2699,7 +2699,7 @@ function KnowledgeBaseScreen() {
                     <Check className="w-4 h-4 text-green-600" />
                   </Button>
                   <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                    <X className="w-4 h-4 text-gray-600" />
+                    <X className="w-4 h-4 text-muted-foreground" />
                   </Button>
                 </>
               ) : (
@@ -2860,7 +2860,7 @@ function SubscriptionsScreen() {
             <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-6 bg-blue-600 rounded flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">VISA</span>
+                  <span className="text-card-foreground text-xs font-bold">VISA</span>
                 </div>
                 <span className="text-sm">•••• 4242</span>
               </div>
@@ -2907,7 +2907,7 @@ function ConversationsScreen() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-brand-primary">247</p>
-              <p className="text-sm text-gray-600">Total Conversations</p>
+              <p className="text-sm text-muted-foreground">Total Conversations</p>
             </div>
           </CardContent>
         </Card>
@@ -2915,7 +2915,7 @@ function ConversationsScreen() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-green-600">23</p>
-              <p className="text-sm text-gray-600">Active Now</p>
+              <p className="text-sm text-muted-foreground">Active Now</p>
             </div>
           </CardContent>
         </Card>
@@ -2923,7 +2923,7 @@ function ConversationsScreen() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-blue-600">189</p>
-              <p className="text-sm text-gray-600">Resolved Today</p>
+              <p className="text-sm text-muted-foreground">Resolved Today</p>
             </div>
           </CardContent>
         </Card>
@@ -2931,7 +2931,7 @@ function ConversationsScreen() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-orange-600">4.2</p>
-              <p className="text-sm text-gray-600">Avg Response Time</p>
+              <p className="text-sm text-muted-foreground">Avg Response Time</p>
             </div>
           </CardContent>
         </Card>
@@ -3013,7 +3013,7 @@ function AnalyticsScreen() {
                 <MessageSquare className="w-6 h-6 text-blue-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total Interactions</p>
+                <p className="text-sm font-medium text-muted-foreground">Total Interactions</p>
                 <p className="text-2xl font-bold text-[hsl(var(--foreground))]">12,467</p>
                 <p className="text-xs text-green-600">+12% from last month</p>
               </div>
@@ -3027,7 +3027,7 @@ function AnalyticsScreen() {
                 <Users className="w-6 h-6 text-green-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Active Users</p>
+                <p className="text-sm font-medium text-muted-foreground">Active Users</p>
                 <p className="text-2xl font-bold text-[hsl(var(--foreground))]">1,234</p>
                 <p className="text-xs text-green-600">+8% from last month</p>
               </div>
@@ -3041,7 +3041,7 @@ function AnalyticsScreen() {
                 <BarChart3 className="w-6 h-6 text-orange-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Avg Session Time</p>
+                <p className="text-sm font-medium text-muted-foreground">Avg Session Time</p>
                 <p className="text-2xl font-bold text-[hsl(var(--foreground))]">8.5m</p>
                 <p className="text-xs text-red-600">-2% from last month</p>
               </div>
@@ -3055,7 +3055,7 @@ function AnalyticsScreen() {
                 <Shield className="w-6 h-6 text-purple-600" />
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Success Rate</p>
+                <p className="text-sm font-medium text-muted-foreground">Success Rate</p>
                 <p className="text-2xl font-bold text-[hsl(var(--foreground))]">94.2%</p>
                 <p className="text-xs text-green-600">+1.5% from last month</p>
               </div>
@@ -3087,28 +3087,28 @@ function AnalyticsScreen() {
                 <span className="font-medium">Customer Support Bot</span>
                 <div className="flex items-center gap-2">
                   <Progress value={95} className="w-16 h-2" />
-                  <span className="text-sm text-gray-600">95%</span>
+                  <span className="text-sm text-muted-foreground">95%</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <span className="font-medium">Sales Assistant</span>
                 <div className="flex items-center gap-2">
                   <Progress value={87} className="w-16 h-2" />
-                  <span className="text-sm text-gray-600">87%</span>
+                  <span className="text-sm text-muted-foreground">87%</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <span className="font-medium">Technical Helper</span>
                 <div className="flex items-center gap-2">
                   <Progress value={82} className="w-16 h-2" />
-                  <span className="text-sm text-gray-600">82%</span>
+                  <span className="text-sm text-muted-foreground">82%</span>
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <span className="font-medium">Content Reviewer</span>
                 <div className="flex items-center gap-2">
                   <Progress value={78} className="w-16 h-2" />
-                  <span className="text-sm text-gray-600">78%</span>
+                  <span className="text-sm text-muted-foreground">78%</span>
                 </div>
               </div>
             </div>
@@ -3151,7 +3151,7 @@ function UsersScreen() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-brand-primary">47</p>
-              <p className="text-sm text-gray-600">Total Users</p>
+              <p className="text-sm text-muted-foreground">Total Users</p>
             </div>
           </CardContent>
         </Card>
@@ -3159,7 +3159,7 @@ function UsersScreen() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-green-600">42</p>
-              <p className="text-sm text-gray-600">Active</p>
+              <p className="text-sm text-muted-foreground">Active</p>
             </div>
           </CardContent>
         </Card>
@@ -3167,7 +3167,7 @@ function UsersScreen() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-blue-600">8</p>
-              <p className="text-sm text-gray-600">Admins</p>
+              <p className="text-sm text-muted-foreground">Admins</p>
             </div>
           </CardContent>
         </Card>
@@ -3175,7 +3175,7 @@ function UsersScreen() {
           <CardContent className="p-6">
             <div className="text-center">
               <p className="text-3xl font-bold text-orange-600">5</p>
-              <p className="text-sm text-gray-600">Pending Invites</p>
+              <p className="text-sm text-muted-foreground">Pending Invites</p>
             </div>
           </CardContent>
         </Card>

@@ -331,7 +331,7 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
           <div className="space-y-6">
             <div>
               <h3 className="text-sm font-medium text-[hsl(var(--foreground))] mb-2">Description</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{fallbackDetails.description}</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">{fallbackDetails.description}</p>
             </div>
 
             <Separator />
@@ -342,7 +342,7 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
                 {fallbackDetails.capabilities.map((capability, index) => (
                   <div key={index} className="flex items-center gap-2 text-sm">
                     <div className="w-1.5 h-1.5 bg-brand-primary rounded-full" />
-                    <span className="text-gray-600">{capability}</span>
+                    <span className="text-muted-foreground">{capability}</span>
                   </div>
                 ))}
               </div>
@@ -356,7 +356,7 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
                 {Object.entries(fallbackDetails.configuration).map(([key, value], index) => (
                   <div key={index} className="flex justify-between items-start">
                     <span className="text-sm font-medium text-[hsl(var(--foreground))] flex-shrink-0 w-1/3">{key}:</span>
-                    <span className="text-sm text-gray-600 text-right">{value}</span>
+                    <span className="text-sm text-muted-foreground text-right">{value}</span>
                   </div>
                 ))}
               </div>
@@ -398,7 +398,7 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
         <div className="space-y-6">
           <div>
             <h3 className="text-sm font-medium text-[hsl(var(--foreground))] mb-2">Description</h3>
-            <p className="text-gray-600 text-sm leading-relaxed">{details.description}</p>
+            <p className="text-muted-foreground text-sm leading-relaxed">{details.description}</p>
           </div>
 
           <Separator />
@@ -409,7 +409,7 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
               {details.capabilities.map((capability, index) => (
                 <div key={index} className="flex items-center gap-2 text-sm">
                   <div className="w-1.5 h-1.5 bg-brand-primary rounded-full" />
-                  <span className="text-gray-600">{capability}</span>
+                  <span className="text-muted-foreground">{capability}</span>
                 </div>
               ))}
             </div>
@@ -423,7 +423,7 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
               {Object.entries(details.configuration).map(([key, value], index) => (
                 <div key={index} className="flex justify-between items-start">
                   <span className="text-sm font-medium text-[hsl(var(--foreground))] flex-shrink-0 w-1/3">{key}:</span>
-                  <span className="text-sm text-gray-600 text-right">{value}</span>
+                  <span className="text-sm text-muted-foreground text-right">{value}</span>
                 </div>
               ))}
             </div>
