@@ -2103,25 +2103,24 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleDeleteConversation(conversation.id);
                                   }}
-                                  className="h-6 w-6 p-1 hover:bg-red-50"
-                                  style={{ color: '#ef4444' }}
+                                  className="h-6 w-6 p-1 text-muted-foreground hover:bg-red-50"
                                   title="Delete conversation"
                                   onMouseEnter={(e) => {
                                     e.stopPropagation();
-                                    e.currentTarget.style.setProperty('color', '#dc2626', 'important');
-                                    // Force the icon to stay red too
+                                    e.currentTarget.style.setProperty('color', '#ef4444', 'important');
+                                    // Force the icon to turn red on hover
                                     const icon = e.currentTarget.querySelector('svg');
                                     if (icon) {
-                                      (icon as HTMLElement).style.setProperty('color', '#dc2626', 'important');
+                                      (icon as HTMLElement).style.setProperty('color', '#ef4444', 'important');
                                     }
                                   }}
                                   onMouseLeave={(e) => {
                                     e.stopPropagation();
-                                    e.currentTarget.style.setProperty('color', '#ef4444', 'important');
-                                    // Force the icon to stay red too
+                                    e.currentTarget.style.setProperty('color', '#6b7280', 'important');
+                                    // Force the icon back to gray
                                     const icon = e.currentTarget.querySelector('svg');
                                     if (icon) {
-                                      (icon as HTMLElement).style.setProperty('color', '#ef4444', 'important');
+                                      (icon as HTMLElement).style.setProperty('color', '#6b7280', 'important');
                                     }
                                   }}
                                 >
