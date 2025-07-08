@@ -2711,7 +2711,7 @@ function MyComponent() {
                     
                     {/* Job Title field - Sample profile field */}
                     {editingFieldId === 'job-title' ? (
-                      <div className="p-6 border-2 rounded-lg bg-blue-50 border-blue-200">
+                      <div className="p-6 border-2 rounded-lg" style={{ backgroundColor: 'var(--theme-accent)', borderColor: 'var(--theme-primary)' }}>
                         <div className="space-y-4">
                           <div className="space-y-2">
                             <Label htmlFor="edit-field-name">Field Name</Label>
@@ -2823,7 +2823,7 @@ function MyComponent() {
 
                     {/* Industry field */}
                     {editingFieldId === 'industry' ? (
-                      <div className="p-6 border-2 rounded-lg bg-blue-50 border-blue-200">
+                      <div className="p-6 border-2 rounded-lg" style={{ backgroundColor: 'var(--theme-accent)', borderColor: 'var(--theme-primary)' }}>
                         <div className="space-y-4">
                           <div className="space-y-2">
                             <Label htmlFor="edit-field-name">Field Name</Label>
@@ -2921,7 +2921,7 @@ function MyComponent() {
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
-                            <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
+                            <Badge variant="outline" className="text-xs" style={{ color: 'var(--theme-primary)' }}>Optional</Badge>
                             <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('industry')}>
                               <Edit3 className="w-4 h-4" />
                             </Button>
@@ -2935,7 +2935,7 @@ function MyComponent() {
 
                     {/* Experience Level field */}
                     {editingFieldId === 'experience' ? (
-                      <div className="p-6 border-2 rounded-lg bg-blue-50 border-blue-200">
+                      <div className="p-6 border-2 rounded-lg" style={{ backgroundColor: 'var(--theme-accent)', borderColor: 'var(--theme-primary)' }}>
                         <div className="space-y-4">
                           <div className="space-y-2">
                             <Label htmlFor="edit-field-name">Field Name</Label>
@@ -3055,7 +3055,7 @@ function MyComponent() {
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
+                          <Badge variant="outline" className="text-xs" style={{ color: 'var(--theme-primary)' }}>Optional</Badge>
                           <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('expertise')}>
                             <Edit3 className="w-4 h-4" />
                           </Button>
@@ -3076,7 +3076,7 @@ function MyComponent() {
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
+                          <Badge variant="outline" className="text-xs" style={{ color: 'var(--theme-primary)' }}>Optional</Badge>
                           <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('company-size')}>
                             <Edit3 className="w-4 h-4" />
                           </Button>
@@ -3097,7 +3097,7 @@ function MyComponent() {
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
+                          <Badge variant="outline" className="text-xs" style={{ color: 'var(--theme-primary)' }}>Optional</Badge>
                           <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('goals')}>
                             <Edit3 className="w-4 h-4" />
                           </Button>
