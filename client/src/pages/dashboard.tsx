@@ -2425,7 +2425,7 @@ export default function Dashboard() {
           />
         ) : /* Regular Dashboard Content */
         (
-          <div className="h-full overflow-y-auto main-content bg-muted/50">
+          <div className="h-full overflow-y-auto main-content" style={{ backgroundColor: 'var(--theme-content-bg)' }}>
             {/* Content Body - Conditional padding for tool config screens */}
             <div className={
               // No padding for configuration screens since they handle their own padding
