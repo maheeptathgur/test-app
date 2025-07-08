@@ -358,6 +358,33 @@
     border-color: var(--brand-primary-dark) !important;
   }
 
+  /* Adaptive text colors based on background */
+  .text-adaptive {
+    color: var(--brand-content-text) !important;
+  }
+
+  .text-adaptive-muted {
+    color: var(--brand-content-text-muted) !important;
+  }
+
+  /* Adaptive card backgrounds */
+  .bg-adaptive-card {
+    background-color: var(--brand-card-bg) !important;
+  }
+
+  .border-adaptive {
+    border-color: var(--brand-border) !important;
+  }
+
+  /* Override Tailwind's text colors on dark themes */
+  .text-muted-foreground {
+    color: var(--brand-content-text-muted) !important;
+  }
+
+  .text-foreground {
+    color: var(--brand-content-text) !important;
+  }
+
   .google-drive-btn:hover .google-drive-icon {
     color: white !important;
   }
