@@ -86,6 +86,28 @@ export function WorkspaceSettings() {
       secondaryText: "#4A5568",
       borders: "#FDBA74",
       accent: "#FED7AA"
+    },
+    dark: {
+      primary: "#00D2A0",
+      primaryHover: "#00F5B8",
+      workspaceBg: "#1A1A1A",
+      contentBg: "#0F0F0F",
+      cardBg: "#262626",
+      primaryText: "#FFFFFF",
+      secondaryText: "#A3A3A3",
+      borders: "#404040",
+      accent: "#003D2F"
+    },
+    aiCompany: {
+      primary: "#6366F1",
+      primaryHover: "#8B5CF6",
+      workspaceBg: "#F1F5F9",
+      contentBg: "#F8FAFC",
+      cardBg: "#FFFFFF",
+      primaryText: "#0F172A",
+      secondaryText: "#475569",
+      borders: "#CBD5E1",
+      accent: "#E0E7FF"
     }
   };
 
@@ -484,6 +506,8 @@ export function WorkspaceSettings() {
                       <SelectItem value="forest">Forest Green</SelectItem>
                       <SelectItem value="purple">Purple Pro</SelectItem>
                       <SelectItem value="sunset">Sunset Orange</SelectItem>
+                      <SelectItem value="dark">Dark Mode</SelectItem>
+                      <SelectItem value="aiCompany">AI Company (Purple & Blue)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
