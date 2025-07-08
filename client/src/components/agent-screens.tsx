@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { ArrowLeft, Copy, Download, Loader2, Play, Plus, RotateCcw, Upload, MessageSquare, FileText, Link, Bot, Search, Filter, SortAsc, Eye, Edit3, Check, X, Trash2, BarChart } from "lucide-react";
+import { ArrowLeft, Copy, Download, Loader2, Play, Plus, RotateCcw, Upload, MessageSquare, FileText, Link, Bot, Search, Filter, SortAsc, Eye, Edit3, Check, X, Trash2, BarChart, ShoppingCart } from "lucide-react";
 import { SiGmail, SiSlack } from "react-icons/si";
 
 // Agent Configuration Screen
@@ -825,21 +825,25 @@ function KnowledgeBaseTab({ agentName }: { agentName: string }) {
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Action Buttons */}
-        <div className="flex items-center justify-end">
+        <div className="flex items-center justify-between">
+          <Button variant="outline" size="sm">
+            <ShoppingCart className="w-4 h-4 mr-1" />
+            Go to Marketplace
+          </Button>
           <div className="flex gap-2">
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={() => console.log('Add Document clicked')}>
               <Plus className="w-4 h-4 mr-1" />
               Add Document
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={() => console.log('Add URL clicked')}>
               <Link className="w-4 h-4 mr-1" />
               Add URL
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={() => console.log('Create MD clicked')}>
               <FileText className="w-4 h-4 mr-1" />
               Create MD
             </Button>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={() => console.log('AI Suggestions clicked')}>
               <Bot className="w-4 h-4 mr-1" />
               AI Suggestions
             </Button>
