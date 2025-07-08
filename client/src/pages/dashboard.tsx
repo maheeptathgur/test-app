@@ -510,7 +510,7 @@ const navigationItems = [
     label: 'Tools', 
     icon: Wrench,
     children: [
-      { id: 'agents', label: 'Agents', icon: Users },
+      { id: 'agents', label: 'Agents', icon: Bot },
       { id: 'tools', label: 'Integrations', icon: Settings },
       { id: 'workflows', label: 'Workflows', icon: BarChart3 },
     ]
