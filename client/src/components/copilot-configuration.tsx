@@ -1125,11 +1125,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                               
                               return (
                                 <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
-                                  <div className="aspect-[4/3] bg-muted relative">
+                                  <div className="aspect-[4/3] bg-muted relative p-3">
                                     <img 
                                       src={currentImageUrl} 
                                       alt={`${copilotData.type} copilot tile`}
-                                      className="w-full h-full object-cover"
+                                      className="w-full h-full object-cover rounded"
                                     />
                                   </div>
                                   <div className="p-3 text-center bg-muted/20">
