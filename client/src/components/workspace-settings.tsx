@@ -62,15 +62,78 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
     return `#${adjustedR.toString(16).padStart(2, '0')}${adjustedG.toString(16).padStart(2, '0')}${adjustedB.toString(16).padStart(2, '0')}`;
   };
 
+  // Theme presets
+  const themePresets = [
+    {
+      name: "Knolli Default",
+      colors: {
+        primary: "#008062",
+        contentBg: "#ffffff", 
+        sidebarBg: "#e6eeef",
+        accent: "#00d2a0",
+        border: "#e5e7eb"
+      }
+    },
+    {
+      name: "Slack Inspired",
+      colors: {
+        primary: "#4a154b",
+        contentBg: "#ffffff",
+        sidebarBg: "#350d36",
+        accent: "#1264a3",
+        border: "#e1e5e9"
+      }
+    },
+    {
+      name: "AI Modern",
+      colors: {
+        primary: "#6366f1",
+        contentBg: "#fafbff",
+        sidebarBg: "#f1f5f9",
+        accent: "#8b5cf6",
+        border: "#e2e8f0"
+      }
+    },
+    {
+      name: "Dark Theme",
+      colors: {
+        primary: "#60a5fa",
+        contentBg: "#111827",
+        sidebarBg: "#1f2937",
+        accent: "#34d399",
+        border: "#374151"
+      }
+    },
+    {
+      name: "Tech Classic",
+      colors: {
+        primary: "#2563eb",
+        contentBg: "#ffffff",
+        sidebarBg: "#f8fafc",
+        accent: "#0ea5e9",
+        border: "#e2e8f0"
+      }
+    },
+    {
+      name: "Vibrant Pop",
+      colors: {
+        primary: "#ec4899",
+        contentBg: "#fefce8",
+        sidebarBg: "#fdf2f8",
+        accent: "#f59e0b",
+        border: "#fbbf24"
+      }
+    }
+  ];
+
+  // Apply theme preset
+  const applyThemePreset = (theme: typeof themePresets[0]) => {
+    onBrandingColorsChange(theme.colors);
+  };
+
   // Reset to default brand colors
   const resetToDefaults = () => {
-    onBrandingColorsChange({
-      primary: "#008062",
-      contentBg: "#ffffff", 
-      sidebarBg: "#e6eeef",
-      accent: "#00d2a0",
-      border: "#e5e7eb"
-    });
+    applyThemePreset(themePresets[0]);
   };
 
   // Handle individual color changes
@@ -414,6 +477,45 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
+              {/* Theme Presets Section */}
+              <div className="space-y-3">
+                <Label htmlFor="theme-preset">Theme Presets</Label>
+                <p className="text-sm text-muted-foreground">
+                  Quick apply popular color schemes
+                </p>
+                <Select onValueChange={(value) => {
+                  const selectedTheme = themePresets.find(theme => theme.name === value);
+                  if (selectedTheme) applyThemePreset(selectedTheme);
+                }}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Choose a theme preset" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {themePresets.map((theme) => (
+                      <SelectItem key={theme.name} value={theme.name}>
+                        <div className="flex items-center gap-3">
+                          <div className="flex gap-1">
+                            <div 
+                              className="w-3 h-3 rounded-full border border-gray-300" 
+                              style={{ backgroundColor: theme.colors.primary }}
+                            />
+                            <div 
+                              className="w-3 h-3 rounded-full border border-gray-300" 
+                              style={{ backgroundColor: theme.colors.sidebarBg }}
+                            />
+                            <div 
+                              className="w-3 h-3 rounded-full border border-gray-300" 
+                              style={{ backgroundColor: theme.colors.accent }}
+                            />
+                          </div>
+                          {theme.name}
+                        </div>
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
               {/* Color Picker Section */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                 <div className="space-y-3">
