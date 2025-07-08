@@ -2253,7 +2253,7 @@ export default function Dashboard() {
         </div>
       )}
       {/* Main Content */}
-      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: 'var(--theme-background)' }}>
+      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: 'white' }}>
         {/* Form Interface for form-type copilots */}
         {chatCopilot && chatCopilot.type === 'form' ? (
           <div className="h-full flex">

@@ -986,7 +986,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
 
               {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
-                <div className="mb-6 mt-8 p-4 rounded-lg border border-gray-200" style={{ backgroundColor: 'var(--theme-background)' }}>
+                <div className="mb-6 mt-8 p-4 rounded-lg border border-gray-200" style={{ backgroundColor: 'var(--theme-accent)' }}>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <h3 className="font-medium text-gray-900">Personalize your experience</h3>
@@ -1256,7 +1256,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       className={`p-4 rounded-lg text-foreground pt-[6px] pb-[6px] ${
                         message.sender === 'user' ? 'max-w-[70%]' : 'w-full'
                       }`}
-                      style={message.sender === 'user' ? { backgroundColor: 'var(--theme-background)' } : {}}
+                      style={message.sender === 'user' ? { backgroundColor: '#f8f9fa' } : {}}
                     >
                       <div 
                         className="whitespace-pre-wrap" 
