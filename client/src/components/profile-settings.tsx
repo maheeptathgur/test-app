@@ -56,7 +56,7 @@ export function ProfileSettings() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">Profile Settings</h1>
-          <p className="text-gray-600">Manage your personal information and preferences</p>
+          <p className="text-muted-foreground">Manage your personal information and preferences</p>
         </div>
         {!isEditing ? (
           <Button onClick={() => setIsEditing(true)} className="theme-primary theme-primary-hover:hover">
@@ -137,7 +137,7 @@ export function ProfileSettings() {
               {/* Status Badge */}
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span className="text-sm text-gray-600">Active</span>
+                <span className="text-sm text-muted-foreground">Active</span>
                 <Badge variant="secondary" className="ml-auto">Admin</Badge>
               </div>
             </CardContent>

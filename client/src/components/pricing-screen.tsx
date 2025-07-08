@@ -58,7 +58,7 @@ export function PricingScreen() {
       {/* Header */}
       <div className="text-center">
         <h1 className="text-3xl font-bold text-[hsl(var(--foreground))] mb-4">Choose Your Plan</h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
           Scale your AI copilot operations with plans designed for teams of all sizes
         </p>
       </div>
@@ -69,14 +69,14 @@ export function PricingScreen() {
           <Card key={index} className={`relative ${plan.recommended ? 'border-[var(--theme-primary)] border-2' : ''}`}>
             {plan.recommended && (
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <Badge className="theme-primary text-white px-3 py-1">Recommended</Badge>
+                <Badge className="theme-primary text-card-foreground px-3 py-1">Recommended</Badge>
               </div>
             )}
             <CardHeader className="text-center pb-4">
               <CardTitle className="text-xl font-bold">{plan.name}</CardTitle>
               <div className="mt-4">
                 <span className="text-4xl font-bold text-[hsl(var(--foreground))]">{plan.price}</span>
-                <span className="text-gray-600 ml-1">/{plan.period}</span>
+                <span className="text-muted-foreground ml-1">/{plan.period}</span>
               </div>
               <CardDescription className="mt-2">{plan.description}</CardDescription>
             </CardHeader>
@@ -108,7 +108,7 @@ export function PricingScreen() {
               <CardTitle className="text-lg">Can I change plans anytime?</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.</p>
+              <p className="text-muted-foreground">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.</p>
             </CardContent>
           </Card>
           <Card>
@@ -116,7 +116,7 @@ export function PricingScreen() {
               <CardTitle className="text-lg">What happens if I exceed my limits?</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600">We'll notify you when you're approaching your limits. You can upgrade or purchase additional usage.</p>
+              <p className="text-muted-foreground">We'll notify you when you're approaching your limits. You can upgrade or purchase additional usage.</p>
             </CardContent>
           </Card>
           <Card>
@@ -124,7 +124,7 @@ export function PricingScreen() {
               <CardTitle className="text-lg">Is there a free trial?</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600">Yes, all plans come with a 14-day free trial. No credit card required to start.</p>
+              <p className="text-muted-foreground">Yes, all plans come with a 14-day free trial. No credit card required to start.</p>
             </CardContent>
           </Card>
           <Card>
@@ -132,7 +132,7 @@ export function PricingScreen() {
               <CardTitle className="text-lg">Do you offer discounts for annual billing?</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600">Yes, save 20% when you choose annual billing on any plan.</p>
+              <p className="text-muted-foreground">Yes, save 20% when you choose annual billing on any plan.</p>
             </CardContent>
           </Card>
         </div>

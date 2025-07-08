@@ -169,10 +169,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
             break;
           default:
-            badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
+            badgeClass += " bg-[hsl(var(--muted))] text-muted-foreground border";
         }
       } else {
-        badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
+        badgeClass += " bg-[hsl(var(--muted))] text-muted-foreground border";
       }
       
       return `<span class="${badgeClass}" contenteditable="false">${componentName}</span>`;
@@ -229,7 +229,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               }
             } else {
               // Unknown component - still show as badge but gray
-              badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
+              badgeClass += " bg-[hsl(var(--muted))] text-muted-foreground border";
             }
             
             return (
@@ -336,7 +336,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               break;
           }
         } else {
-          badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
+          badgeClass += " bg-[hsl(var(--muted))] text-muted-foreground border";
         }
         
         return `<span class="${badgeClass}">${componentName}</span>`;
@@ -953,7 +953,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
 
   return (
     <div 
-      className="flex flex-col h-full overflow-hidden bg-white transition-all duration-300"
+      className="flex flex-col h-full overflow-hidden bg-background transition-all duration-300"
       style={{ 
         marginRight: selectedFiles.length > 0 && showDocumentPreview ? `${documentPaneWidth}px` : '0px' 
       }}
@@ -966,7 +966,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <Button 
               variant="outline" 
               size="sm"
-              className="h-7 w-7 p-0 bg-white/90 hover:text-white shadow-sm" 
+              className="h-7 w-7 p-0 bg-card/90 hover:text-card-foreground shadow-sm" 
               onClick={() => setShowProfileFields(!showProfileFields)}
               title="Toggle Profile Fields"
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary-hover)'}
@@ -978,7 +978,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               variant="outline" 
               size="sm"
               onClick={onClose} 
-              className="h-7 w-7 p-0 bg-white/90 hover:text-white shadow-sm"
+              className="h-7 w-7 p-0 bg-card/90 hover:text-card-foreground shadow-sm"
               title="Close Chat"
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary-hover)'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''}
@@ -1062,7 +1062,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     <div className="max-w-2xl text-center space-y-6">
                       <div className="space-y-2">
                         <h2 className="text-2xl font-semibold text-[hsl(var(--foreground))]">Welcome to {copilot.name}</h2>
-                        <p className="text-gray-600">{copilot.description}</p>
+                        <p className="text-muted-foreground">{copilot.description}</p>
                       </div>
                       
                       {/* Available Tools Overview */}
@@ -1099,9 +1099,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                       >
                                         <div className="flex items-center justify-between">
                                           <div className="font-medium text-[hsl(var(--foreground))] truncate text-[14px]">{agent.name}</div>
-                                          <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                                          <ChevronDown className={`w-3 h-3 text-muted-foreground transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className={`text-[14px] text-gray-600 leading-tight mt-0.5 ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
+                                        <div className={`text-[14px] text-muted-foreground leading-tight mt-0.5 ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
                                           {agent.description || 'Specialized assistant'}
                                         </div>
                                         {isExpanded && (
@@ -1136,9 +1136,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                       >
                                         <div className="flex items-center justify-between">
                                           <div className="font-medium text-[hsl(var(--foreground))] text-[14px] truncate">{tool.name}</div>
-                                          <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                                          <ChevronDown className={`w-3 h-3 text-muted-foreground transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className={`text-[14px] text-gray-600 leading-tight mt-0.5 ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
+                                        <div className={`text-[14px] text-muted-foreground leading-tight mt-0.5 ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
                                           {tool.description || 'Integration tool'}
                                         </div>
                                         {isExpanded && (
@@ -1173,9 +1173,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                       >
                                         <div className="flex items-center justify-between">
                                           <div className="font-medium text-[hsl(var(--foreground))] text-[14px] truncate">{workflow.name}</div>
-                                          <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                                          <ChevronDown className={`w-3 h-3 text-muted-foreground transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
-                                        <div className={`text-[14px] text-gray-600 leading-tight mt-0.5 ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
+                                        <div className={`text-[14px] text-muted-foreground leading-tight mt-0.5 ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
                                           {workflow.description || 'Automated workflow'}
                                         </div>
                                         {isExpanded && (
@@ -1212,7 +1212,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary-hover)'}
                               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
                             >
-                              <ChevronLeft className="h-4 w-4 text-white" />
+                              <ChevronLeft className="h-4 w-4 text-card-foreground" />
                             </button>
                           )}
                           
@@ -1225,7 +1225,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary-hover)'}
                               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
                             >
-                              <ChevronRight className="h-4 w-4 text-white" />
+                              <ChevronRight className="h-4 w-4 text-card-foreground" />
                             </button>
                           )}
                           
@@ -1240,7 +1240,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 onClick={() => handleStarterClick(starter)}
                                 className="flex-shrink-0 rounded-lg p-2 text-left transition-colors group w-80 hover:opacity-90"
                                 style={{ 
-                                  backgroundColor: '#F6F6F6',
+                                  backgroundColor: 'var(--theme-content-bg)',
                                   border: '1px solid hsl(218, 18%, 80%)' 
                                 }}
                               >
@@ -1270,7 +1270,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       className={`p-4 rounded-lg text-foreground pt-[6px] pb-[6px] ${
                         message.sender === 'user' ? 'max-w-[70%]' : 'w-full'
                       }`}
-                      style={message.sender === 'user' ? { backgroundColor: '#f8f9fa' } : {}}
+                      style={message.sender === 'user' ? { backgroundColor: 'var(--theme-content-bg)' } : {}}
                     >
                       <div 
                         className="whitespace-pre-wrap" 
@@ -1288,7 +1288,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-[hsl(var(--foreground))] ${
+                                className={`h-8 px-3 text-xs hover:bg-muted hover:text-[hsl(var(--foreground))] ${
                                   copiedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
                                 }`}
                                 onClick={() => handleCopyMessage(message.content, message.id)}
@@ -1308,7 +1308,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-[hsl(var(--foreground))] ${
+                                className={`h-8 px-3 text-xs hover:bg-muted hover:text-[hsl(var(--foreground))] ${
                                   likedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
                                 }`}
                                 onClick={() => handleLikeMessage(message.id)}
@@ -1334,7 +1334,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 <Button
                                   variant="ghost"
                                   size="sm"
-                                  className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-[hsl(var(--foreground))]"
+                                  className="h-8 px-3 text-xs hover:bg-muted hover:text-[hsl(var(--foreground))]"
                                   onClick={() => handleDislikeMessage(message.id)}
                                 >
                                   <ThumbsDown className="w-3 h-3 mr-1" />
@@ -1353,7 +1353,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-[hsl(var(--foreground))]"
+                                className="h-8 px-3 text-xs hover:bg-muted hover:text-[hsl(var(--foreground))]"
                                 onClick={() => handleAskHuman(message.id)}
                               >
                                 <MessageCircle className="w-3 h-3 mr-1" />
@@ -1375,7 +1375,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                   variant="ghost"
                                   size="sm"
                                   onClick={() => handleCloseFeedback(message.id)}
-                                  className="h-6 w-6 p-0 text-gray-400 hover:text-gray-600"
+                                  className="h-6 w-6 p-0 text-muted-foreground hover:text-muted-foreground"
                                   title="Close"
                                 >
                                   <X className="w-3 h-3" />
@@ -1423,25 +1423,25 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           </div>
           
           {/* Prompt Bar - moved inside chat area */}
-          <div className="bg-white relative">
+          <div className="bg-background relative">
             <div className="max-w-4xl mx-auto p-3 relative">
               <div className="flex gap-3 relative items-end">
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
                   <div className="absolute -top-8 left-0">
-                    <div className="flex items-center gap-2 px-3 py-1 backdrop-blur-sm rounded-full text-white text-xs mt-[-6px] mb-[-6px]" style={{ backgroundColor: 'var(--theme-primary)' }}>
+                    <div className="flex items-center gap-2 px-3 py-1 backdrop-blur-sm rounded-full text-card-foreground text-xs mt-[-6px] mb-[-6px]" style={{ backgroundColor: 'var(--theme-primary)' }}>
                       <Paperclip className="w-3 h-3" />
                       <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
                       <div className="flex items-center gap-1 flex-wrap">
                         {(expandedAttachments ? selectedFiles : selectedFiles.slice(0, 2)).map((fileName) => (
-                          <div key={fileName} className="flex items-center gap-1 bg-white/30 px-2 py-0.5 rounded-full">
+                          <div key={fileName} className="flex items-center gap-1 bg-card/30 px-2 py-0.5 rounded-full">
                             {getFileIcon(fileName)}
                             <span className="truncate max-w-[80px]">{fileName.split('.')[0]}</span>
                           </div>
                         ))}
                         {selectedFiles.length > 2 && !expandedAttachments && (
                           <button 
-                            className="bg-white/30 px-2 py-0.5 rounded-full hover:bg-white/40 transition-colors cursor-pointer"
+                            className="bg-card/30 px-2 py-0.5 rounded-full hover:bg-card/40 transition-colors cursor-pointer"
                             onClick={() => setExpandedAttachments(true)}
                           >
                             +{selectedFiles.length - 2}
@@ -1449,7 +1449,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                         )}
                         {expandedAttachments && selectedFiles.length > 2 && (
                           <button 
-                            className="bg-white/30 px-2 py-0.5 rounded-full hover:bg-white/40 transition-colors cursor-pointer"
+                            className="bg-card/30 px-2 py-0.5 rounded-full hover:bg-card/40 transition-colors cursor-pointer"
                             onClick={() => setExpandedAttachments(false)}
                           >
                             −
@@ -1551,7 +1551,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     {/* Handle Autocomplete Dropdown */}
                     {showHandleDropdown && handleSuggestions.length > 0 && (
                       <div 
-                        className="absolute bottom-full left-0 right-0 mb-1 bg-white rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto"
+                        className="absolute bottom-full left-0 right-0 mb-1 bg-card rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto"
                         style={{ border: '1px solid hsl(218, 18%, 80%)' }}
                         onMouseDown={(e) => {
                           e.preventDefault(); // Prevent textarea blur
@@ -1592,8 +1592,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     variant={isRecording ? "default" : "outline"}
                     className={`h-12 px-3 self-end transition-colors ${
                       isRecording 
-                        ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
-                        : 'hover:text-white'
+                        ? 'bg-red-500 hover:bg-red-600 text-card-foreground animate-pulse' 
+                        : 'hover:text-card-foreground'
                     }`}
                     onClick={toggleRecording}
                     title={isRecording ? "Stop recording" : "Start voice input"}
@@ -1629,7 +1629,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <Button
               variant="ghost"
               size="sm"
-              className="absolute top-1 right-1 h-5 w-5 p-0 z-20 bg-white/90 shadow-md rounded-full transition-colors"
+              className="absolute top-1 right-1 h-5 w-5 p-0 z-20 bg-card/90 shadow-md rounded-full transition-colors"
               onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary-hover)'}
               onMouseLeave={(e) => e.currentTarget.style.backgroundColor = ''}
               onClick={() => {
@@ -1638,7 +1638,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               }}
               title="Close Preview"
             >
-              <X className="h-3 w-3 hover:text-white transition-colors" />
+              <X className="h-3 w-3 hover:text-card-foreground transition-colors" />
             </Button>
             {/* Document Content */}
             <div className="flex-1 p-4 overflow-y-auto min-h-0">
@@ -1649,7 +1649,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 switch (extension) {
                   case 'pdf':
                     return (
-                      <div className="h-full bg-white flex flex-col">
+                      <div className="h-full bg-background flex flex-col">
                         <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -1665,7 +1665,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           <div className="space-y-4">
                             <div className="text-center border-b pb-4">
                               <h1 className="text-xl font-bold text-[hsl(var(--foreground))]">Project Brief: Q1 Marketing Campaign</h1>
-                              <p className="text-gray-600 mt-2">Strategic Planning Document</p>
+                              <p className="text-muted-foreground mt-2">Strategic Planning Document</p>
                             </div>
                             
                             <div>
@@ -1704,7 +1704,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'jpeg':
                   case 'png':
                     return (
-                      <div className="h-full bg-white flex flex-col">
+                      <div className="h-full bg-background flex flex-col">
                         <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -1718,7 +1718,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                         </div>
                         <div className="flex-1 flex flex-col p-4">
                           <div className="flex-1 aspect-square bg-gradient-to-br from-blue-100 to-purple-100 rounded flex items-center justify-center mb-4">
-                            <Image className="w-16 h-16 text-gray-400" />
+                            <Image className="w-16 h-16 text-muted-foreground" />
                           </div>
                           <div className="text-xs text-muted-foreground space-y-1">
                             <p><strong>Dimensions:</strong> 1920x1080</p>
@@ -1731,7 +1731,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'mp3':
                   case 'wav':
                     return (
-                      <div className="h-full bg-white flex flex-col">
+                      <div className="h-full bg-background flex flex-col">
                         <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -1766,7 +1766,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'mp4':
                   case 'avi':
                     return (
-                      <div className="h-full bg-white flex flex-col">
+                      <div className="h-full bg-background flex flex-col">
                         <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -1801,7 +1801,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'pptx':
                   case 'ppt':
                     return (
-                      <div className="h-full bg-white flex flex-col">
+                      <div className="h-full bg-background flex flex-col">
                         <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -1818,7 +1818,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             <div className="border rounded-lg p-4 bg-gradient-to-r from-blue-50 to-purple-50">
                               <div className="text-center">
                                 <h1 className="text-lg font-bold text-[hsl(var(--foreground))]">Q1 Marketing Strategy</h1>
-                                <p className="text-gray-600 mt-1">Presentation Deck</p>
+                                <p className="text-muted-foreground mt-1">Presentation Deck</p>
                                 <p className="text-sm text-[hsl(var(--muted-foreground))] mt-2">Slide 1 of 15</p>
                               </div>
                             </div>
@@ -1851,7 +1851,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     );
                   case 'csv':
                     return (
-                      <div className="h-full bg-white flex flex-col">
+                      <div className="h-full bg-background flex flex-col">
                         <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -1917,7 +1917,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     );
                   default:
                     return (
-                      <div className="h-full bg-white flex flex-col">
+                      <div className="h-full bg-background flex flex-col">
                         <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
@@ -1933,7 +1933,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           <div className="space-y-4">
                             <div className="text-center border-b pb-4">
                               <h1 className="text-xl font-bold text-[hsl(var(--foreground))]">Document Content</h1>
-                              <p className="text-gray-600 mt-2">{extension?.toUpperCase()} File Preview</p>
+                              <p className="text-muted-foreground mt-2">{extension?.toUpperCase()} File Preview</p>
                             </div>
                             
                             <div>

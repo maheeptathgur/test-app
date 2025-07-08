@@ -1137,16 +1137,16 @@ export default function Dashboard() {
                               <button
                                 onClick={() => handleArchiveCopilot(copilot)}
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                                  copilot.status === 'active' ? 'theme-primary' : 'bg-gray-200'
+                                  copilot.status === 'active' ? 'theme-primary' : 'bg-muted'
                                 }`}
                               >
                                 <span
-                                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                  className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${
                                     copilot.status === 'active' ? 'translate-x-6' : 'translate-x-1'
                                   }`}
                                 />
                               </button>
-                              <span className="text-xs text-gray-600">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
+                              <span className="text-xs text-muted-foreground">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
                             </div>
                           </TableCell>
                           <TableCell className="max-w-xs truncate">
@@ -1335,7 +1335,7 @@ export default function Dashboard() {
                         <p className="text-sm text-muted-foreground">{currentWorkspace.type}</p>
                       </div>
                     </div>
-                    <Badge variant="secondary" className="theme-primary text-white">Current</Badge>
+                    <Badge variant="secondary" className="theme-primary text-card-foreground">Current</Badge>
                   </div>
                   <p className="text-sm text-muted-foreground mb-4">Marketing team workspace with campaign and content copilots.</p>
                   <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
@@ -1652,16 +1652,16 @@ export default function Dashboard() {
                               <button
                                 onClick={() => handleArchiveCopilot(copilot)}
                                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                                  copilot.status === 'active' ? 'theme-primary' : 'bg-gray-200'
+                                  copilot.status === 'active' ? 'theme-primary' : 'bg-muted'
                                 }`}
                               >
                                 <span
-                                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                                  className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${
                                     copilot.status === 'active' ? 'translate-x-6' : 'translate-x-1'
                                   }`}
                                 />
                               </button>
-                              <span className="text-xs text-gray-600">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
+                              <span className="text-xs text-muted-foreground">{copilot.status === 'active' ? 'Active' : 'Inactive'}</span>
                             </div>
                           </TableCell>
                           <TableCell className="max-w-xs truncate">
@@ -1725,17 +1725,17 @@ export default function Dashboard() {
       <div className="flex flex-col h-screen bg-background">
         {/* User View Preview Toolbar */}
         {activeSection === 'user-view' && (
-          <div className="text-white px-4 py-2 flex items-center justify-between border-b flex-shrink-0" style={{ backgroundColor: 'var(--theme-primary)', borderBottomColor: 'var(--theme-primary)' }}>
+          <div className="text-card-foreground px-4 py-2 flex items-center justify-between border-b flex-shrink-0" style={{ backgroundColor: 'var(--theme-primary)', borderBottomColor: 'var(--theme-primary)' }}>
             <div className="flex items-center gap-3">
               <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
               <span className="text-sm font-medium">User View Preview</span>
-              <span className="text-xs text-white/80">This is how your workspace appears to end users</span>
+              <span className="text-xs text-card-foreground/80">This is how your workspace appears to end users</span>
             </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => handleSectionChange('copilots')}
-              className="text-white hover:bg-[var(--theme-primary-hover)]/10 hover:text-white gap-2"
+              className="text-card-foreground hover:bg-[var(--theme-primary-hover)]/10 hover:text-card-foreground gap-2"
             >
               <X className="w-4 h-4" />
               Exit Preview
@@ -1949,7 +1949,7 @@ export default function Dashboard() {
                       className={`p-2 rounded-lg transition-all group cursor-pointer ${
                         conversation.isActive 
                           ? 'text-sidebar-primary' 
-                          : 'bg-white/50 hover:text-sidebar-primary'
+                          : 'bg-card/50 hover:text-sidebar-primary'
                       }`}
                       style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
@@ -2145,7 +2145,7 @@ export default function Dashboard() {
               {!sidebarCollapsed && (
                 <Button 
                   variant="outline"
-                  className="w-full bg-white border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-white transition-colors"
+                  className="w-full bg-card border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-card-foreground transition-colors"
                   onClick={() => handleSectionChange('pricing')}
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
                   onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'white'}
@@ -2157,7 +2157,7 @@ export default function Dashboard() {
                 <Button 
                   variant="outline"
                   size="sm"
-                  className="w-full bg-white border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-white transition-colors"
+                  className="w-full bg-card border-2 border-[var(--theme-primary)] text-[var(--theme-primary)] hover:text-card-foreground transition-colors"
                   title="Pricing Plans"
                   onClick={() => handleSectionChange('pricing')}
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
@@ -2183,7 +2183,7 @@ export default function Dashboard() {
               ) : (
                 <Button 
                   variant="ghost" 
-                  className="w-full p-3 h-auto text-white justify-start"
+                  className="w-full p-3 h-auto text-card-foreground justify-start"
                   style={{ backgroundColor: 'var(--theme-primary)' }}
                   onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary-hover)'}
                   onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-primary)'}
@@ -2196,10 +2196,10 @@ export default function Dashboard() {
                     />
                   </div>
                   <div className="flex-1 min-w-0 text-left">
-                    <div className="text-sm font-medium text-white truncate">Mandeep Taunk</div>
-                    <div className="text-xs text-white/80 truncate">mandeep@knolli.ai</div>
+                    <div className="text-sm font-medium text-card-foreground truncate">Mandeep Taunk</div>
+                    <div className="text-xs text-card-foreground/80 truncate">mandeep@knolli.ai</div>
                   </div>
-                  <ChevronDown className="w-4 h-4 text-white/80" />
+                  <ChevronDown className="w-4 h-4 text-card-foreground/80" />
                 </Button>
               )}
             </DropdownMenuTrigger>

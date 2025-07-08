@@ -66,7 +66,7 @@ export function UserView({ copilots, onToggleFavorite, onStartChat }: UserViewPr
     <div className="space-y-6">
       {/* Welcome Header */}
       <div 
-        className="relative text-center text-white rounded-lg overflow-hidden"
+        className="relative text-center text-card-foreground rounded-lg overflow-hidden"
         style={{ aspectRatio: '3/1' }}
       >
         {/* Background Image */}
@@ -114,16 +114,16 @@ export function UserView({ copilots, onToggleFavorite, onStartChat }: UserViewPr
                       <Button 
                         variant="ghost" 
                         size="sm" 
-                        className="h-8 w-8 p-0 bg-white/20 hover:bg-white/30"
+                        className="h-8 w-8 p-0 bg-card/20 hover:bg-card/30"
                         onClick={() => onToggleFavorite(copilot.id)}
                       >
                         <Heart 
-                          className={`h-4 w-4 ${copilot.favorite ? 'text-red-500 fill-red-500' : 'text-white'}`} 
+                          className={`h-4 w-4 ${copilot.favorite ? 'text-red-500 fill-red-500' : 'text-card-foreground'}`} 
                         />
                       </Button>
                     </div>
                     <div className="absolute top-2 right-2">
-                      <Badge variant="secondary" className="bg-white/90 text-[hsl(var(--foreground))] capitalize">
+                      <Badge variant="secondary" className="bg-card/90 text-[hsl(var(--foreground))] capitalize">
                         {copilot.type}
                       </Badge>
                     </div>
@@ -184,7 +184,7 @@ export function UserView({ copilots, onToggleFavorite, onStartChat }: UserViewPr
             <CardContent className="space-y-3">
               {recentChats.map((chat) => (
                 <div key={chat.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 cursor-pointer transition-colors">
-                  <div className="w-8 h-8 theme-primary rounded-full flex items-center justify-center text-white text-xs font-medium">
+                  <div className="w-8 h-8 theme-primary rounded-full flex items-center justify-center text-card-foreground text-xs font-medium">
                     {chat.copilotName.split(' ').map(word => word[0]).join('')}
                   </div>
                   <div className="flex-1 min-w-0">

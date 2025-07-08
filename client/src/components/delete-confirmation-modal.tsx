@@ -70,7 +70,7 @@ export function DeleteConfirmationModal({ isOpen, copilotName, onClose, onConfir
             <Button 
               onClick={handleConfirm}
               disabled={isConfirmDisabled}
-              className="bg-red-600 hover:bg-red-700 text-white disabled:bg-red-300"
+              className="bg-red-600 hover:bg-red-700 text-card-foreground disabled:bg-red-300"
             >
               Delete Copilot
             </Button>
