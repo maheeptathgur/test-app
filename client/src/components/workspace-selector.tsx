@@ -144,7 +144,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = '';
-                e.currentTarget.style.setProperty('color', '', 'important');
+                e.currentTarget.style.removeProperty('color');
               }}
             >
               <div className="w-8 h-8 bg-[hsl(var(--muted))] rounded-lg flex items-center justify-center">
@@ -169,7 +169,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = workspace.id === currentWorkspace.id ? 'var(--theme-accent)' : '';
-                  e.currentTarget.style.setProperty('color', workspace.id === currentWorkspace.id ? 'var(--theme-primary)' : '', 'important');
+                  e.currentTarget.style.removeProperty('color');
                 }}
               >
                 <div className={`w-8 h-8 ${workspace.color} rounded-lg flex items-center justify-center text-white font-semibold text-sm`}>
@@ -197,7 +197,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = '';
-                  e.currentTarget.style.setProperty('color', '', 'important');
+                  e.currentTarget.style.removeProperty('color');
                 }}
               >
                 <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
@@ -218,7 +218,7 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = '';
-                e.currentTarget.style.setProperty('color', '', 'important');
+                e.currentTarget.style.removeProperty('color');
               }}
             >
               <div className="w-8 h-8 bg-gray-200 rounded-lg flex items-center justify-center">
