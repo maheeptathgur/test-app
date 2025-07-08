@@ -7,7 +7,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { NavigationSection } from "@/lib/types";
-import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle, ArrowLeft, Copy, Download, Loader2, Play, RotateCcw, Upload, Activity, ChevronDown, Hash, Video, Trello, Calendar, FigmaIcon, MonitorPlay, FileQuestion, Github, Zap, Palette, Tablet, Building2, Send, Settings } from "lucide-react";
+import { Users, Bot, Wrench, GitBranch, BookOpen, UserCog, CreditCard, MessageSquare, BarChart3, Shield, Plus, FileText, Link, Trash2, Eye, Edit3, Check, X, Search, Filter, SortAsc, ArrowUpDown, Mail, MessageCircle, TrendingUp, Database, Camera, Cloud, FileImage, Globe, PenTool, SearchIcon, BarChart, Binoculars, Tags, HelpCircle, ArrowLeft, Copy, Download, Loader2, Play, RotateCcw, Upload, Activity, ChevronDown, Hash, Video, Trello, Calendar, FigmaIcon, MonitorPlay, FileQuestion, Github, Zap, Palette, Tablet, Building2, Send, Settings, Save, Code } from "lucide-react";
 import { 
   SiGmail,
   SiSlack,
@@ -2323,15 +2323,19 @@ function KnowledgeBaseScreen() {
   // New modal states
   const [addDocumentOpen, setAddDocumentOpen] = useState(false);
   const [addUrlOpen, setAddUrlOpen] = useState(false);
-  const [createMdOpen, setCreateMdOpen] = useState(false);
   const [marketplaceOpen, setMarketplaceOpen] = useState(false);
   
   // Form states
   const [documentFile, setDocumentFile] = useState<File | null>(null);
   const [urlInput, setUrlInput] = useState("");
   const [urlDescription, setUrlDescription] = useState("");
-  const [mdTitle, setMdTitle] = useState("");
-  const [mdContent, setMdContent] = useState("");
+  
+  // Markdown editor states
+  const [mdEditorOpen, setMdEditorOpen] = useState(false);
+  const [mdEditorTab, setMdEditorTab] = useState<'markdown' | 'preview' | 'rtf'>('markdown');
+  const [mdContent, setMdContent] = useState('# New Document\n\nStart writing your markdown content here...');
+  const [mdTitle, setMdTitle] = useState('');
+  const [mdDescription, setMdDescription] = useState('');
   
   // Search and filtering state
   const [searchTerm, setSearchTerm] = useState('');
@@ -2399,6 +2403,194 @@ function KnowledgeBaseScreen() {
     setTempDescription("");
   };
 
+  // If markdown editor is open, show it instead of main screen
+  if (mdEditorOpen) {
+    return (
+      <div className="min-h-full bg-background">
+        {/* Markdown Editor Header */}
+        <div className="flex items-center justify-between p-6 bg-muted/50 border-b" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
+          <div className="flex items-center gap-3">
+            <FileText className="w-6 h-6 text-[var(--theme-primary)]" />
+            <div>
+              <h1 className="font-semibold text-foreground text-[24px]">Markdown Editor</h1>
+              <p className="text-muted-foreground text-[16px]">Create and edit markdown documents for Knowledge Base</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button 
+              type="button"
+              variant="outline" 
+              onClick={() => setMdEditorOpen(false)} 
+              className="gap-2"
+            >
+              <X className="h-4 w-4" />
+              Close Editor
+            </Button>
+            <Button 
+              type="button"
+              className="gap-2"
+              style={{ backgroundColor: 'var(--theme-primary)', color: 'white' }}
+              onClick={() => {
+                console.log('Saving markdown document:', { title: mdTitle, description: mdDescription, content: mdContent });
+                setMdEditorOpen(false);
+              }}
+            >
+              <Save className="h-4 w-4" />
+              Save Document
+            </Button>
+          </div>
+        </div>
+
+        {/* Markdown Editor Content */}
+        <div className="flex flex-col h-[calc(100vh-120px)]">
+          {/* Document Info */}
+          <div className="p-6 bg-white border-b" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div className="space-y-2">
+                <Label htmlFor="md-title">Document Title</Label>
+                <Input
+                  id="md-title"
+                  value={mdTitle}
+                  onChange={(e) => setMdTitle(e.target.value)}
+                  placeholder="Enter document title"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="md-description">Description</Label>
+                <Input
+                  id="md-description"
+                  value={mdDescription}
+                  onChange={(e) => setMdDescription(e.target.value)}
+                  placeholder="Brief description of the document"
+                />
+              </div>
+            </div>
+
+            {/* Editor Tabs */}
+            <div className="flex space-x-1 bg-muted p-1 rounded-lg inline-flex">
+              <button
+                type="button"
+                onClick={() => setMdEditorTab('markdown')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  mdEditorTab === 'markdown' 
+                    ? 'bg-white shadow-sm' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                style={mdEditorTab === 'markdown' ? { color: 'var(--theme-primary)' } : {}}
+              >
+                <Code className="w-4 h-4 mr-1 inline" />
+                Markdown
+              </button>
+              <button
+                type="button"
+                onClick={() => setMdEditorTab('rtf')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  mdEditorTab === 'rtf' 
+                    ? 'bg-white shadow-sm' 
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                style={mdEditorTab === 'rtf' ? { color: 'var(--theme-primary)' } : {}}
+              >
+                <PenTool className="w-4 h-4 mr-1 inline" />
+                Rich Text
+              </button>
+              <button
+                type="button"
+                onClick={() => setMdEditorTab('preview')}
+                className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
+                  mdEditorTab === 'preview' 
+                    ? 'bg-white shadow-sm'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+                style={mdEditorTab === 'preview' ? { color: 'var(--theme-primary)' } : {}}
+              >
+                <Eye className="w-4 h-4 mr-1 inline" />
+                Preview
+              </button>
+            </div>
+          </div>
+
+          {/* Editor Area */}
+          <div className="flex-1 flex">
+            {mdEditorTab === 'markdown' && (
+              <div className="w-full p-6">
+                <Textarea
+                  value={mdContent}
+                  onChange={(e) => setMdContent(e.target.value)}
+                  placeholder="Start writing your markdown content here..."
+                  className="w-full h-full min-h-[500px] font-mono text-sm resize-none"
+                />
+              </div>
+            )}
+
+            {mdEditorTab === 'rtf' && (
+              <div className="w-full p-6">
+                <div className="h-full border rounded-lg">
+                  <div className="border-b p-2 bg-muted flex gap-1">
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                      <strong>B</strong>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                      <em>I</em>
+                    </Button>
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                      <u>U</u>
+                    </Button>
+                    <div className="h-6 w-px bg-border mx-1"></div>
+                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs">
+                      H1
+                    </Button>
+                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs">
+                      H2
+                    </Button>
+                    <Button variant="ghost" size="sm" className="h-8 px-2 text-xs">
+                      Link
+                    </Button>
+                  </div>
+                  <div 
+                    contentEditable
+                    className="p-4 focus:outline-none prose prose-sm max-w-none"
+                    style={{ height: 'calc(100% - 50px)' }}
+                    onInput={(e) => {
+                      const content = e.currentTarget.textContent || '';
+                      setMdContent(content);
+                    }}
+                  >
+                    Start writing your content here...
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {mdEditorTab === 'preview' && (
+              <div className="w-full p-6 bg-white">
+                <div className="prose max-w-none">
+                  {mdContent ? (
+                    <div dangerouslySetInnerHTML={{ 
+                      __html: mdContent
+                        .replace(/^# (.+)/gm, '<h1>$1</h1>')
+                        .replace(/^## (.+)/gm, '<h2>$1</h2>')
+                        .replace(/^### (.+)/gm, '<h3>$1</h3>')
+                        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                        .replace(/\*(.+?)\*/g, '<em>$1</em>')
+                        .replace(/`(.+?)`/g, '<code>$1</code>')
+                        .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>')
+                        .replace(/^- (.+)/gm, '<li>$1</li>')
+                        .replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>')
+                        .replace(/\n/g, '<br>')
+                    }} />
+                  ) : (
+                    <p className="text-muted-foreground italic">Start writing in the markdown or rich text tab to see preview here...</p>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       {/* Title */}
@@ -2421,7 +2613,7 @@ function KnowledgeBaseScreen() {
             <Link className="w-4 h-4 mr-1" />
             Add URL
           </Button>
-          <Button variant="outline" size="sm" onClick={() => setCreateMdOpen(true)}>
+          <Button variant="outline" size="sm" onClick={() => setMdEditorOpen(true)}>
             <FileText className="w-4 h-4 mr-1" />
             Create MD
           </Button>
@@ -2914,74 +3106,7 @@ function KnowledgeBaseScreen() {
         </DialogContent>
       </Dialog>
 
-      {/* Create Markdown Modal */}
-      <Dialog open={createMdOpen} onOpenChange={setCreateMdOpen}>
-        <DialogContent className="max-w-4xl max-h-[80vh]">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <FileText className="w-5 h-5" />
-              Create Markdown Document
-            </DialogTitle>
-            <DialogDescription>
-              Create a new markdown document for your knowledge base.
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4 mt-4">
-            <div className="space-y-2">
-              <Label htmlFor="mdTitle">Document Title</Label>
-              <Input
-                id="mdTitle"
-                placeholder="Document title..."
-                value={mdTitle}
-                onChange={(e) => setMdTitle(e.target.value)}
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="mdContent">Content</Label>
-              <Textarea
-                id="mdContent"
-                placeholder="# Your markdown content here...
 
-Use **bold** text, *italic* text, and `code` blocks.
-
-## Lists
-- Item 1
-- Item 2
-
-## Links
-[Link text](https://example.com)"
-                value={mdContent}
-                onChange={(e) => setMdContent(e.target.value)}
-                rows={12}
-                className="font-mono text-sm"
-              />
-            </div>
-          </div>
-          
-          <div className="flex justify-end gap-2 pt-4 border-t">
-            <Button variant="outline" onClick={() => {
-              setCreateMdOpen(false);
-              setMdTitle("");
-              setMdContent("");
-            }}>
-              Cancel
-            </Button>
-            <Button 
-              onClick={() => {
-                console.log('Creating markdown document:', mdTitle, mdContent);
-                setCreateMdOpen(false);
-                setMdTitle("");
-                setMdContent("");
-              }}
-              disabled={!mdTitle.trim() || !mdContent.trim()}
-            >
-              Create Document
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
 
       {/* Marketplace Modal */}
       <Dialog open={marketplaceOpen} onOpenChange={setMarketplaceOpen}>
