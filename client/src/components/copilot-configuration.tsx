@@ -1133,9 +1133,6 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                     />
                                   </div>
                                   <div className="p-3 text-center bg-muted/20">
-                                    <div className="text-sm font-medium text-foreground mb-2">
-                                      Current tile image for {copilotData.name}
-                                    </div>
                                     <input
                                       type="file"
                                       accept="image/*"
