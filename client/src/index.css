@@ -448,11 +448,11 @@
 
   /* Delete Conversation Button Styling */
   .delete-conversation-btn {
-    color: #6b7280 !important; /* Gray by default */
+    color: white !important; /* White by default */
   }
 
   .delete-conversation-btn svg {
-    color: #6b7280 !important; /* Gray icon by default */
+    color: white !important; /* White icon by default */
   }
 
   .delete-conversation-btn:hover {
