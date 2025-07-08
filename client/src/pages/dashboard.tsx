@@ -2107,10 +2107,22 @@ export default function Dashboard() {
                                   style={{ color: '#ef4444' }}
                                   title="Delete conversation"
                                   onMouseEnter={(e) => {
-                                    e.currentTarget.style.color = '#dc2626';
+                                    e.stopPropagation();
+                                    e.currentTarget.style.setProperty('color', '#dc2626', 'important');
+                                    // Force the icon to stay red too
+                                    const icon = e.currentTarget.querySelector('svg');
+                                    if (icon) {
+                                      (icon as HTMLElement).style.setProperty('color', '#dc2626', 'important');
+                                    }
                                   }}
                                   onMouseLeave={(e) => {
-                                    e.currentTarget.style.color = '#ef4444';
+                                    e.stopPropagation();
+                                    e.currentTarget.style.setProperty('color', '#ef4444', 'important');
+                                    // Force the icon to stay red too
+                                    const icon = e.currentTarget.querySelector('svg');
+                                    if (icon) {
+                                      (icon as HTMLElement).style.setProperty('color', '#ef4444', 'important');
+                                    }
                                   }}
                                 >
                                   <Trash2 className="w-3 h-3" style={{ color: 'inherit' }} />
