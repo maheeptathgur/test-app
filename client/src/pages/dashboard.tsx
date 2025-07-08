@@ -1897,7 +1897,6 @@ export default function Dashboard() {
                 <div className="space-y-3">
                   {/* Copilot Icons when collapsed in conversation mode */}
                   <div className="space-y-2">
-                    <div className="text-center text-xs text-muted-foreground mb-2">Assistants</div>
                     {copilots.filter(c => c.status === 'active').slice(0, 6).map((copilot) => (
                       <Button
                         key={copilot.id}
