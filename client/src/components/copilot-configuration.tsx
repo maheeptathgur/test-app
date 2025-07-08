@@ -75,14 +75,12 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [editingDocument, setEditingDocument] = useState<string | null>(null);
   const [tempTitle, setTempTitle] = useState("");
   const [tempDescription, setTempDescription] = useState("");
-  const [addFieldModalOpen, setAddFieldModalOpen] = useState(false);
+  const [isAddingField, setIsAddingField] = useState(false);
   const [newFieldName, setNewFieldName] = useState("");
   const [newFieldDescription, setNewFieldDescription] = useState("");
   const [newFieldType, setNewFieldType] = useState("text");
   const [newFieldRequired, setNewFieldRequired] = useState(false);
-  const [editFieldModalOpen, setEditFieldModalOpen] = useState(false);
   const [editingFieldId, setEditingFieldId] = useState<string | null>(null);
-  const [deleteFieldModalOpen, setDeleteFieldModalOpen] = useState(false);
   const [fieldToDelete, setFieldToDelete] = useState<string | null>(null);
   const [deleteDocumentModalOpen, setDeleteDocumentModalOpen] = useState(false);
   const [documentToDelete, setDocumentToDelete] = useState<string | null>(null);
@@ -468,7 +466,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   };
 
   const handleAddField = () => {
-    setAddFieldModalOpen(true);
+    setIsAddingField(true);
   };
 
   const handleSaveNewField = () => {
@@ -480,12 +478,12 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       required: newFieldRequired
     });
     
-    // Reset form and close modal
+    // Reset form and close inline form
     setNewFieldName("");
     setNewFieldDescription("");
     setNewFieldType("text");
     setNewFieldRequired(false);
-    setAddFieldModalOpen(false);
+    setIsAddingField(false);
   };
 
   const handleCancelAddField = () => {
@@ -493,7 +491,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     setNewFieldDescription("");
     setNewFieldType("text");
     setNewFieldRequired(false);
-    setAddFieldModalOpen(false);
+    setIsAddingField(false);
   };
 
   const handleEditField = (fieldId: string) => {
@@ -514,7 +512,6 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       setNewFieldType(field.type);
       setNewFieldRequired(field.required);
       setEditingFieldId(fieldId);
-      setEditFieldModalOpen(true);
     }
   };
 
@@ -527,13 +524,12 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       required: newFieldRequired
     });
     
-    // Reset form and close modal
+    // Reset form and close inline editing
     setNewFieldName("");
     setNewFieldDescription("");
     setNewFieldType("text");
     setNewFieldRequired(false);
     setEditingFieldId(null);
-    setEditFieldModalOpen(false);
   };
 
   const handleCancelEditField = () => {
@@ -542,25 +538,23 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     setNewFieldType("text");
     setNewFieldRequired(false);
     setEditingFieldId(null);
-    setEditFieldModalOpen(false);
   };
 
   const handleDeleteField = (fieldId: string) => {
+    // In a real implementation, this would delete the field immediately
+    // or show an inline confirmation
+    console.log('Deleting field:', fieldId);
     setFieldToDelete(fieldId);
-    setDeleteFieldModalOpen(true);
   };
 
   const handleConfirmDeleteField = () => {
     // In a real implementation, this would delete the field from the backend
-    console.log('Deleting field:', fieldToDelete);
-    
+    console.log('Confirming delete field:', fieldToDelete);
     setFieldToDelete(null);
-    setDeleteFieldModalOpen(false);
   };
 
   const handleCancelDeleteField = () => {
     setFieldToDelete(null);
-    setDeleteFieldModalOpen(false);
   };
 
   // User Documents handlers
@@ -2645,69 +2639,411 @@ function MyComponent() {
                   </div>
                   
                   <div className="space-y-4">
-                    {/* Sample profile fields */}
-                    <div className="p-4 border rounded-lg bg-white">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Badge variant="secondary" className="text-xs">Text</Badge>
-                          <div>
-                            <div className="font-medium">Job Title</div>
-                            <div className="text-sm text-muted-foreground">User's current job title or role</div>
+                    {/* Add new field form - inline */}
+                    {isAddingField && (
+                      <div className="p-6 border-2 border-dashed border-muted rounded-lg bg-muted/20">
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="field-name">Field Name</Label>
+                            <Input
+                              id="field-name"
+                              value={newFieldName}
+                              onChange={(e) => setNewFieldName(e.target.value)}
+                              placeholder="e.g., Job Title, Company, Department"
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="field-description">Description</Label>
+                            <Textarea
+                              id="field-description"
+                              value={newFieldDescription}
+                              onChange={(e) => setNewFieldDescription(e.target.value)}
+                              placeholder="Describe what information this field collects..."
+                              rows={2}
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="field-type">Field Type</Label>
+                            <Select value={newFieldType} onValueChange={setNewFieldType}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select field type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="text">Text</SelectItem>
+                                <SelectItem value="textarea">Text Area</SelectItem>
+                                <SelectItem value="select">Select</SelectItem>
+                                <SelectItem value="number">Number</SelectItem>
+                                <SelectItem value="email">Email</SelectItem>
+                                <SelectItem value="date">Date</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          
+                          <div className="flex items-center space-x-2">
+                            <Checkbox
+                              id="field-required"
+                              checked={newFieldRequired}
+                              onCheckedChange={(checked) => setNewFieldRequired(checked === true)}
+                            />
+                            <Label htmlFor="field-required" className="text-sm">
+                              This field is required
+                            </Label>
+                          </div>
+                          
+                          <div className="flex justify-end gap-2 pt-2">
+                            <Button variant="outline" onClick={handleCancelAddField}>
+                              Cancel
+                            </Button>
+                            <Button 
+                              onClick={handleSaveNewField}
+                              disabled={!newFieldName.trim() || !newFieldDescription.trim()}
+                              className="gap-2"
+                            >
+                              <Save className="w-4 h-4" />
+                              Add Field
+                            </Button>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
-                          <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('job-title')}>
-                            <Edit3 className="w-4 h-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteField('job-title')}>
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
+                      </div>
+                    )}
+                    
+                    {/* Job Title field - Sample profile field */}
+                    {editingFieldId === 'job-title' ? (
+                      <div className="p-6 border-2 rounded-lg bg-blue-50 border-blue-200">
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-field-name">Field Name</Label>
+                            <Input
+                              id="edit-field-name"
+                              value={newFieldName}
+                              onChange={(e) => setNewFieldName(e.target.value)}
+                              placeholder="e.g., Job Title, Company, Department"
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-field-description">Description</Label>
+                            <Textarea
+                              id="edit-field-description"
+                              value={newFieldDescription}
+                              onChange={(e) => setNewFieldDescription(e.target.value)}
+                              placeholder="Describe what information this field collects..."
+                              rows={2}
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-field-type">Field Type</Label>
+                            <Select value={newFieldType} onValueChange={setNewFieldType}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select field type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="text">Text</SelectItem>
+                                <SelectItem value="textarea">Text Area</SelectItem>
+                                <SelectItem value="select">Select</SelectItem>
+                                <SelectItem value="number">Number</SelectItem>
+                                <SelectItem value="email">Email</SelectItem>
+                                <SelectItem value="date">Date</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          
+                          <div className="flex items-center space-x-2">
+                            <Checkbox
+                              id="edit-field-required"
+                              checked={newFieldRequired}
+                              onCheckedChange={(checked) => setNewFieldRequired(checked === true)}
+                            />
+                            <Label htmlFor="edit-field-required" className="text-sm">
+                              This field is required
+                            </Label>
+                          </div>
+                          
+                          <div className="flex justify-end gap-2 pt-2">
+                            <Button variant="outline" onClick={handleCancelEditField}>
+                              Cancel
+                            </Button>
+                            <Button 
+                              onClick={handleSaveEditField}
+                              disabled={!newFieldName.trim() || !newFieldDescription.trim()}
+                              className="gap-2"
+                            >
+                              <Save className="w-4 h-4" />
+                              Save Changes
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ) : fieldToDelete === 'job-title' ? (
+                      <div className="p-4 border rounded-lg bg-red-50 border-red-200">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Badge variant="secondary" className="text-xs">Text</Badge>
+                            <div>
+                              <div className="font-medium">Job Title</div>
+                              <div className="text-sm text-muted-foreground">User's current job title or role</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm text-red-600 font-medium">Delete this field?</span>
+                            <Button variant="outline" size="sm" onClick={handleCancelDeleteField}>
+                              Cancel
+                            </Button>
+                            <Button variant="destructive" size="sm" onClick={handleConfirmDeleteField}>
+                              Delete
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="p-4 border rounded-lg bg-white">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Badge variant="secondary" className="text-xs">Text</Badge>
+                            <div>
+                              <div className="font-medium">Job Title</div>
+                              <div className="text-sm text-muted-foreground">User's current job title or role</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
+                            <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('job-title')}>
+                              <Edit3 className="w-4 h-4" />
+                            </Button>
+                            <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteField('job-title')}>
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
-                    <div className="p-4 border rounded-lg bg-white">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Badge variant="secondary" className="text-xs">Select</Badge>
-                          <div>
-                            <div className="font-medium">Industry</div>
-                            <div className="text-sm text-muted-foreground">Industry sector the user works in</div>
+                    {/* Industry field */}
+                    {editingFieldId === 'industry' ? (
+                      <div className="p-6 border-2 rounded-lg bg-blue-50 border-blue-200">
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-field-name">Field Name</Label>
+                            <Input
+                              id="edit-field-name"
+                              value={newFieldName}
+                              onChange={(e) => setNewFieldName(e.target.value)}
+                              placeholder="e.g., Job Title, Company, Department"
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-field-description">Description</Label>
+                            <Textarea
+                              id="edit-field-description"
+                              value={newFieldDescription}
+                              onChange={(e) => setNewFieldDescription(e.target.value)}
+                              placeholder="Describe what information this field collects..."
+                              rows={2}
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-field-type">Field Type</Label>
+                            <Select value={newFieldType} onValueChange={setNewFieldType}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select field type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="text">Text</SelectItem>
+                                <SelectItem value="textarea">Text Area</SelectItem>
+                                <SelectItem value="select">Select</SelectItem>
+                                <SelectItem value="number">Number</SelectItem>
+                                <SelectItem value="email">Email</SelectItem>
+                                <SelectItem value="date">Date</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          
+                          <div className="flex items-center space-x-2">
+                            <Checkbox
+                              id="edit-field-required"
+                              checked={newFieldRequired}
+                              onCheckedChange={(checked) => setNewFieldRequired(checked === true)}
+                            />
+                            <Label htmlFor="edit-field-required" className="text-sm">
+                              This field is required
+                            </Label>
+                          </div>
+                          
+                          <div className="flex justify-end gap-2 pt-2">
+                            <Button variant="outline" onClick={handleCancelEditField}>
+                              Cancel
+                            </Button>
+                            <Button 
+                              onClick={handleSaveEditField}
+                              disabled={!newFieldName.trim() || !newFieldDescription.trim()}
+                              className="gap-2"
+                            >
+                              <Save className="w-4 h-4" />
+                              Save Changes
+                            </Button>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
-                          <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('industry')}>
-                            <Edit3 className="w-4 h-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteField('industry')}>
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
+                      </div>
+                    ) : fieldToDelete === 'industry' ? (
+                      <div className="p-4 border rounded-lg bg-red-50 border-red-200">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Badge variant="secondary" className="text-xs">Select</Badge>
+                            <div>
+                              <div className="font-medium">Industry</div>
+                              <div className="text-sm text-muted-foreground">Industry sector the user works in</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm text-red-600 font-medium">Delete this field?</span>
+                            <Button variant="outline" size="sm" onClick={handleCancelDeleteField}>
+                              Cancel
+                            </Button>
+                            <Button variant="destructive" size="sm" onClick={handleConfirmDeleteField}>
+                              Delete
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="p-4 border rounded-lg bg-white">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Badge variant="secondary" className="text-xs">Select</Badge>
+                            <div>
+                              <div className="font-medium">Industry</div>
+                              <div className="text-sm text-muted-foreground">Industry sector the user works in</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Badge variant="outline" className="text-xs text-blue-600">Optional</Badge>
+                            <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('industry')}>
+                              <Edit3 className="w-4 h-4" />
+                            </Button>
+                            <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteField('industry')}>
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
-                    <div className="p-4 border rounded-lg bg-white">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <Badge variant="secondary" className="text-xs">Select</Badge>
-                          <div>
-                            <div className="font-medium">Experience Level</div>
-                            <div className="text-sm text-muted-foreground">Years of professional experience</div>
+                    {/* Experience Level field */}
+                    {editingFieldId === 'experience' ? (
+                      <div className="p-6 border-2 rounded-lg bg-blue-50 border-blue-200">
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-field-name">Field Name</Label>
+                            <Input
+                              id="edit-field-name"
+                              value={newFieldName}
+                              onChange={(e) => setNewFieldName(e.target.value)}
+                              placeholder="e.g., Job Title, Company, Department"
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-field-description">Description</Label>
+                            <Textarea
+                              id="edit-field-description"
+                              value={newFieldDescription}
+                              onChange={(e) => setNewFieldDescription(e.target.value)}
+                              placeholder="Describe what information this field collects..."
+                              rows={2}
+                            />
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label htmlFor="edit-field-type">Field Type</Label>
+                            <Select value={newFieldType} onValueChange={setNewFieldType}>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select field type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="text">Text</SelectItem>
+                                <SelectItem value="textarea">Text Area</SelectItem>
+                                <SelectItem value="select">Select</SelectItem>
+                                <SelectItem value="number">Number</SelectItem>
+                                <SelectItem value="email">Email</SelectItem>
+                                <SelectItem value="date">Date</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          
+                          <div className="flex items-center space-x-2">
+                            <Checkbox
+                              id="edit-field-required"
+                              checked={newFieldRequired}
+                              onCheckedChange={(checked) => setNewFieldRequired(checked === true)}
+                            />
+                            <Label htmlFor="edit-field-required" className="text-sm">
+                              This field is required
+                            </Label>
+                          </div>
+                          
+                          <div className="flex justify-end gap-2 pt-2">
+                            <Button variant="outline" onClick={handleCancelEditField}>
+                              Cancel
+                            </Button>
+                            <Button 
+                              onClick={handleSaveEditField}
+                              disabled={!newFieldName.trim() || !newFieldDescription.trim()}
+                              className="gap-2"
+                            >
+                              <Save className="w-4 h-4" />
+                              Save Changes
+                            </Button>
                           </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
-                          <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('experience')}>
-                            <Edit3 className="w-4 h-4" />
-                          </Button>
-                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteField('experience')}>
-                            <Trash2 className="w-4 h-4" />
-                          </Button>
+                      </div>
+                    ) : fieldToDelete === 'experience' ? (
+                      <div className="p-4 border rounded-lg bg-red-50 border-red-200">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Badge variant="secondary" className="text-xs">Select</Badge>
+                            <div>
+                              <div className="font-medium">Experience Level</div>
+                              <div className="text-sm text-muted-foreground">Years of professional experience</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm text-red-600 font-medium">Delete this field?</span>
+                            <Button variant="outline" size="sm" onClick={handleCancelDeleteField}>
+                              Cancel
+                            </Button>
+                            <Button variant="destructive" size="sm" onClick={handleConfirmDeleteField}>
+                              Delete
+                            </Button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="p-4 border rounded-lg bg-white">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <Badge variant="secondary" className="text-xs">Select</Badge>
+                            <div>
+                              <div className="font-medium">Experience Level</div>
+                              <div className="text-sm text-muted-foreground">Years of professional experience</div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
+                            <Button variant="ghost" size="sm" title="Edit Field" onClick={() => handleEditField('experience')}>
+                              <Edit3 className="w-4 h-4" />
+                            </Button>
+                            <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-600 hover:bg-red-50" title="Delete" onClick={() => handleDeleteField('experience')}>
+                              <Trash2 className="w-4 h-4" />
+                            </Button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-center justify-between">
@@ -3057,113 +3393,6 @@ function MyComponent() {
             >
               <Save className="w-4 h-4" />
               Add Field
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-      {/* Edit Field Modal */}
-      <Dialog open={editFieldModalOpen} onOpenChange={setEditFieldModalOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Edit3 className="w-5 h-5" />
-              Edit Profile Field
-            </DialogTitle>
-            <DialogDescription>
-              Update the profile field configuration.
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4 mt-4">
-            <div className="space-y-2">
-              <Label htmlFor="edit-field-name">Field Name</Label>
-              <Input
-                id="edit-field-name"
-                value={newFieldName}
-                onChange={(e) => setNewFieldName(e.target.value)}
-                placeholder="e.g., Job Title, Company, Department"
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="edit-field-description">Description</Label>
-              <Textarea
-                id="edit-field-description"
-                value={newFieldDescription}
-                onChange={(e) => setNewFieldDescription(e.target.value)}
-                placeholder="Describe what information this field collects..."
-                rows={2}
-              />
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="edit-field-type">Field Type</Label>
-              <Select value={newFieldType} onValueChange={setNewFieldType}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select field type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="text">Text</SelectItem>
-                  <SelectItem value="textarea">Text Area</SelectItem>
-                  <SelectItem value="select">Select</SelectItem>
-                  <SelectItem value="number">Number</SelectItem>
-                  <SelectItem value="email">Email</SelectItem>
-                  <SelectItem value="date">Date</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="edit-field-required"
-                checked={newFieldRequired}
-                onCheckedChange={(checked) => setNewFieldRequired(checked === true)}
-              />
-              <Label htmlFor="edit-field-required" className="text-sm">
-                This field is required
-              </Label>
-            </div>
-          </div>
-          
-          <div className="flex justify-end gap-2 pt-4 border-t" style={{ borderTopColor: 'hsl(187, 18%, 80%)' }}>
-            <Button variant="outline" onClick={handleCancelEditField}>
-              Cancel
-            </Button>
-            <Button 
-              onClick={handleSaveEditField}
-              disabled={!newFieldName.trim() || !newFieldDescription.trim()}
-              className="gap-2"
-            >
-              <Save className="w-4 h-4" />
-              Save Changes
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-      {/* Delete Field Confirmation Modal */}
-      <Dialog open={deleteFieldModalOpen} onOpenChange={setDeleteFieldModalOpen}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <Trash2 className="w-5 h-5 text-red-500" />
-              Delete Profile Field
-            </DialogTitle>
-            <DialogDescription>
-              Are you sure you want to delete this profile field? This action cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="flex justify-end gap-2 pt-4">
-            <Button variant="outline" onClick={handleCancelDeleteField}>
-              Cancel
-            </Button>
-            <Button 
-              variant="destructive"
-              onClick={handleConfirmDeleteField}
-              className="gap-2"
-            >
-              <Trash2 className="w-4 h-4" />
-              Delete Field
             </Button>
           </div>
         </DialogContent>
