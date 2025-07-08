@@ -506,7 +506,7 @@ const mockCopilots: CopilotData[] = [
 const navigationItems = [
   { id: 'copilots', label: 'Copilots', icon: Monitor },
   { id: 'agents', label: 'Agents', icon: Users },
-  { id: 'tools', label: 'Tools', icon: Settings },
+  { id: 'tools', label: 'Integrations', icon: Settings },
   { id: 'workflows', label: 'Workflows', icon: BarChart3 },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
   { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
