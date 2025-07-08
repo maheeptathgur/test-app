@@ -647,12 +647,45 @@ export default function Dashboard() {
   // Apply branding colors as CSS custom properties
   useEffect(() => {
     const root = document.documentElement;
+    
+    // Helper function to generate color shades
+    const generateShades = (color: string) => {
+      const hex = color.replace('#', '');
+      const r = parseInt(hex.substr(0, 2), 16);
+      const g = parseInt(hex.substr(2, 2), 16);
+      const b = parseInt(hex.substr(4, 2), 16);
+      
+      return {
+        dark: `rgb(${Math.max(0, r - 30)}, ${Math.max(0, g - 30)}, ${Math.max(0, b - 30)})`,
+        50: `rgb(${Math.min(255, r + 40)}, ${Math.min(255, g + 40)}, ${Math.min(255, b + 40)})`
+      };
+    };
+
+    // Calculate adaptive text and background colors
+    const contentTextColor = getTextColorForBackground(brandingColors.contentBg);
+    const contentTextMuted = brandingColors.contentBg === '#111827' || brandingColors.contentBg === '#1f2937' 
+      ? '#d1d5db' : '#6b7280'; // Light gray for dark themes, medium gray for light themes
+    
+    // Calculate card background (contrasting with content background)
+    const contentLuminance = (0.299 * parseInt(brandingColors.contentBg.replace('#', '').substr(0, 2), 16) + 
+                             0.587 * parseInt(brandingColors.contentBg.replace('#', '').substr(2, 2), 16) + 
+                             0.114 * parseInt(brandingColors.contentBg.replace('#', '').substr(4, 2), 16)) / 255;
+    const cardBg = contentLuminance > 0.5 ? '#ffffff' : '#374151'; // White for light themes, gray for dark themes
+    
+    const primaryShades = generateShades(brandingColors.primary);
+    
+    // Set all CSS custom properties
     root.style.setProperty('--brand-primary', brandingColors.primary);
+    root.style.setProperty('--brand-primary-dark', primaryShades.dark);
+    root.style.setProperty('--brand-primary-50', primaryShades[50]);
     root.style.setProperty('--brand-content-bg', brandingColors.contentBg);
     root.style.setProperty('--brand-sidebar-bg', brandingColors.sidebarBg);
     root.style.setProperty('--brand-accent', brandingColors.accent);
     root.style.setProperty('--brand-border', brandingColors.border);
     root.style.setProperty('--brand-sidebar-text', sidebarTextColor);
+    root.style.setProperty('--brand-content-text', contentTextColor);
+    root.style.setProperty('--brand-content-text-muted', contentTextMuted);
+    root.style.setProperty('--brand-card-bg', cardBg);
   }, [brandingColors, sidebarTextColor]);
 
   // Handle navigation events from copilot configuration
@@ -2410,7 +2443,7 @@ export default function Dashboard() {
               {(activeSection === 'copilots' || activeSection === 'all-workspaces' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
-                    <h1 className="text-2xl font-bold text-foreground">{sectionContent.title}</h1>
+                    <h1 className="text-2xl font-bold text-adaptive">{sectionContent.title}</h1>
                     {activeSection === 'copilots' && (
                       <Badge variant="secondary" className="text-sm text-brand-primary">
                         {copilots.length} Total
