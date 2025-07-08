@@ -8,15 +8,90 @@
   --theme-primary: #008062;
   --theme-primary-hover: #00D2A0;
   --theme-primary-light: #00A881;
-  --theme-background: #E6EEEF;
-  --theme-background-light: #F8F6F6;
-  --theme-background-dark: #DADEE2;
-  --theme-text: #191C20;
-  --theme-text-muted: #4E5964;
-  --theme-text-light: #78838D;
+  --theme-workspace-bg: #E6EEEF;
+  --theme-content-bg: #F8F6F6;
+  --theme-card-bg: #FFFFFF;
+  --theme-primary-text: #191C20;
+  --theme-secondary-text: #4E5964;
+  --theme-borders: #DADEE2;
   --theme-accent: #E0FFF8;
   --theme-accent-hover: #00D2A0;
+  
+  /* Legacy variables for backwards compatibility */
+  --theme-background: var(--theme-workspace-bg);
+  --theme-background-light: var(--theme-content-bg);
+  --theme-background-dark: var(--theme-borders);
+  --theme-text: var(--theme-primary-text);
+  --theme-text-muted: var(--theme-secondary-text);
+  --theme-text-light: #78838D;
   --theme-accent-dark: #C2FFF1;
+}
+
+/* Global theme-aware styles */
+body {
+  background-color: var(--theme-workspace-bg) !important;
+  color: var(--theme-primary-text) !important;
+}
+
+/* Sidebar theming */
+.sidebar {
+  background-color: var(--theme-workspace-bg) !important;
+}
+
+/* Main content area theming */
+.main-content {
+  background-color: var(--theme-content-bg) !important;
+}
+
+/* Card theming - applies to all card components */
+.card, .bg-white, [data-state="open"], .bg-card {
+  background-color: var(--theme-card-bg) !important;
+  border-color: var(--theme-borders) !important;
+}
+
+/* Modal and dropdown theming */
+.bg-popover, .bg-muted\/50, .bg-background {
+  background-color: var(--theme-card-bg) !important;
+}
+
+/* Input and form theming */
+.bg-input, input[type="text"], input[type="email"], input[type="password"], textarea, select {
+  background-color: var(--theme-card-bg) !important;
+  border-color: var(--theme-borders) !important;
+  color: var(--theme-primary-text) !important;
+}
+
+/* Table theming */
+.table-wrapper, .table-container, table {
+  background-color: var(--theme-card-bg) !important;
+}
+
+/* Text theming */
+.text-gray-900, .text-black {
+  color: var(--theme-primary-text) !important;
+}
+
+.text-gray-600, .text-gray-500, .text-muted-foreground {
+  color: var(--theme-secondary-text) !important;
+}
+
+/* Border theming */
+.border-gray-200, .border-gray-300, .border-muted {
+  border-color: var(--theme-borders) !important;
+}
+
+/* Background theming for various components */
+.bg-gray-50, .bg-gray-100, .bg-muted {
+  background-color: var(--theme-content-bg) !important;
+}
+
+/* Button theming */
+.bg-green-600 {
+  background-color: var(--theme-primary) !important;
+}
+
+.hover\:bg-green-700:hover {
+  background-color: var(--theme-primary-hover) !important;
 }
 
 /* Theme-aware utility classes */
@@ -29,11 +104,27 @@
 }
 
 .theme-background {
-  background-color: var(--theme-background) !important;
+  background-color: var(--theme-workspace-bg) !important;
+}
+
+.theme-content-bg {
+  background-color: var(--theme-content-bg) !important;
+}
+
+.theme-card-bg {
+  background-color: var(--theme-card-bg) !important;
 }
 
 .theme-text {
-  color: var(--theme-text) !important;
+  color: var(--theme-primary-text) !important;
+}
+
+.theme-text-secondary {
+  color: var(--theme-secondary-text) !important;
+}
+
+.theme-borders {
+  border-color: var(--theme-borders) !important;
 }
 
 .theme-accent {
