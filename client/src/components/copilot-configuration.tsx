@@ -628,7 +628,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     return (
       <div className="min-h-full bg-background">
         {/* Markdown Editor Header */}
-        <div className="flex items-center justify-between p-6 bg-muted/50 border-b">
+        <div className="flex items-center justify-between p-6 bg-muted/50 border-b border-[hsl(var(--border))]">
           <div className="flex items-center gap-3">
             <FileText className="w-6 h-6 text-[var(--theme-primary)]" />
             <div>
@@ -664,7 +664,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         {/* Markdown Editor Content */}
         <div className="flex flex-col h-[calc(100vh-120px)]">
           {/* Document Info */}
-          <div className="p-6 bg-white border-b">
+          <div className="p-6 bg-white border-b border-[hsl(var(--border))]">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div className="space-y-2">
                 <Label htmlFor="md-title">Document Title</Label>
@@ -816,7 +816,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         <span className="line-through">S</span>
                       </Button>
                     </div>
-                    <Separator orientation="vertical" className="h-6" />
+                    <Separator orientation="vertical" className="h-6 bg-[hsl(var(--border))]" />
                     <div className="flex items-center gap-1">
                       <Button
                         type="button"
@@ -861,7 +861,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         1. List
                       </Button>
                     </div>
-                    <Separator orientation="vertical" className="h-6" />
+                    <Separator orientation="vertical" className="h-6 bg-[hsl(var(--border))]" />
                     <div className="flex items-center gap-1">
                       <Button
                         type="button"
@@ -1205,7 +1205,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                 <Label className="text-sm font-medium">Integration Code</Label>
                               </div>
                               <div className="w-full">
-                                <nav className="flex space-x-8 border-b border-border">
+                                <nav className="flex space-x-8 border-b border-[hsl(var(--border))]">
                                   <button
                                     onClick={() => setCodeTab("javascript")}
                                     className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
@@ -2405,7 +2405,7 @@ function MyComponent() {
             <div className="p-0 m-0">
               <div className="max-w-6xl mx-auto p-6 flex flex-col">
                 {/* Preview Header */}
-                <div className="flex items-center justify-between mb-6 pb-4 border-b">
+                <div className="flex items-center justify-between mb-6 pb-4 border-b border-[hsl(var(--border))]">
                   <div className="flex items-center gap-3">
                     <Button 
                       variant="outline" 
@@ -2817,7 +2817,7 @@ function MyComponent() {
             ))}
           </div>
           
-          <div className="flex justify-between items-center pt-4 border-t">
+          <div className="flex justify-between items-center pt-4 border-t border-[hsl(var(--border))]">
             <p className="text-sm text-muted-foreground">
               {selectedSuggestions.length} document{selectedSuggestions.length !== 1 ? 's' : ''} selected
             </p>
@@ -2967,7 +2967,7 @@ function MyComponent() {
             ))}
           </div>
           
-          <div className="flex justify-between items-center pt-4 border-t">
+          <div className="flex justify-between items-center pt-4 border-t border-[hsl(var(--border))]">
             <p className="text-sm text-muted-foreground">
               {selectedComponents.length} component{selectedComponents.length !== 1 ? 's' : ''} selected
             </p>
@@ -3046,7 +3046,7 @@ function MyComponent() {
             </div>
           </div>
           
-          <div className="flex justify-end gap-2 pt-4 border-t">
+          <div className="flex justify-end gap-2 pt-4 border-t border-[hsl(var(--border))]">
             <Button variant="outline" onClick={handleCancelAddField}>
               Cancel
             </Button>
@@ -3125,7 +3125,7 @@ function MyComponent() {
             </div>
           </div>
           
-          <div className="flex justify-end gap-2 pt-4 border-t">
+          <div className="flex justify-end gap-2 pt-4 border-t border-[hsl(var(--border))]">
             <Button variant="outline" onClick={handleCancelEditField}>
               Cancel
             </Button>
@@ -3340,7 +3340,7 @@ function MyComponent() {
             </div>
             
             {/* Editor Tabs */}
-            <div className="border-b border-border">
+            <div className="border-b border-[hsl(var(--border))]">
               <div className="flex space-x-1">
                 <button
                   onClick={() => setMdEditorTab('markdown')}
@@ -3467,7 +3467,7 @@ Add sections, lists, and more..."
             </div>
           </div>
           
-          <div className="flex justify-end gap-2 pt-4 border-t flex-shrink-0">
+          <div className="flex justify-end gap-2 pt-4 border-t border-[hsl(var(--border))] flex-shrink-0">
             <Button variant="outline" onClick={() => setCreateMdModalOpen(false)}>
               Cancel
             </Button>
