@@ -335,6 +335,7 @@ Changelog:
 - July 8, 2025. Fixed Knowledge Base button functionality in workspace section - added working click handlers to Add Document, Add URL, Create MD, and Go to Marketplace buttons in main workspace Knowledge Base screen, ensuring all action buttons are now functional and responsive to user interaction
 - July 8, 2025. Implemented comprehensive Knowledge Base modal functionality - created fully functional modals for Add Document (file upload with drag & drop), Add URL (URL input with description), Create MD (markdown editor), and Go to Marketplace (template browser), replacing console logs with real user interfaces and form validation for complete document management workflow
 - July 8, 2025. Fixed responsive layout issues in copilots controls bar - updated layout from sm:flex-row to lg:flex-row breakpoint, added flex-wrap to action buttons, made search and filter controls stack properly on mobile devices, added responsive width constraints (w-full sm:w-auto, max-w-sm) to prevent overflow, and added min-width constraints to maintain button usability on all screen sizes
+- July 8, 2025. Fixed attachment sidebar styling - changed background color to #f6f6f6, made document cards white with 1px borders instead of 2px, and implemented automatic main sidebar collapse when attachment sidebar opens for better space utilization
 ```
 
 ## User Preferences

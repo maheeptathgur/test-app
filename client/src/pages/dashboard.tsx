@@ -2493,7 +2493,12 @@ export default function Dashboard() {
               setChatCopilot(null);
               setShowAttachmentSidebar(false);
             }}
-            onToggleAttachment={setShowAttachmentSidebar}
+            onToggleAttachment={(show: boolean) => {
+              setShowAttachmentSidebar(show);
+              if (show) {
+                setSidebarCollapsed(true);
+              }
+            }}
             selectedFiles={selectedFiles}
           />
         ) : /* Configuration Interface */
