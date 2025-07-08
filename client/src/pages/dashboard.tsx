@@ -1795,7 +1795,9 @@ export default function Dashboard() {
                           key={copilot.id}
                           variant="ghost"
                           onClick={() => handleStartChat(copilot)}
-                          className="w-full justify-start gap-3 text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent p-3"
+                          className="w-full justify-start gap-3 text-sidebar-foreground hover:text-sidebar-primary p-3"
+                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)'}
+                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                         >
                           <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
                             {copilot.avatar}
@@ -1821,7 +1823,9 @@ export default function Dashboard() {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleStartChat(copilot)}
-                      className="w-full p-2 text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent"
+                      className="w-full p-2 text-sidebar-foreground hover:text-sidebar-primary"
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                       title={copilot.name}
                     >
                       <div className={`w-6 h-6 ${copilot.avatarColor} rounded text-xs font-semibold flex items-center justify-center`}>
@@ -1850,9 +1854,19 @@ export default function Dashboard() {
                         className={`w-full p-2 ${
                           chatCopilot?.id === copilot.id 
                             ? 'text-sidebar-primary' 
-                            : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
+                            : 'text-sidebar-foreground hover:text-sidebar-primary'
                         }`}
                         style={chatCopilot?.id === copilot.id ? { backgroundColor: 'var(--theme-accent)' } : {}}
+                        onMouseEnter={(e) => {
+                          if (chatCopilot?.id !== copilot.id) {
+                            e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (chatCopilot?.id !== copilot.id) {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }
+                        }}
                         title={copilot.name}
                       >
                         <div className={`w-6 h-6 ${copilot.avatarColor} rounded-full text-xs font-semibold flex items-center justify-center`}>
@@ -1887,9 +1901,19 @@ export default function Dashboard() {
                       className={`p-2 rounded-lg transition-all group cursor-pointer ${
                         conversation.isActive 
                           ? 'text-sidebar-primary' 
-                          : 'bg-white/50 hover:bg-sidebar-accent hover:text-sidebar-primary'
+                          : 'bg-white/50 hover:text-sidebar-primary'
                       }`}
                       style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
+                      onMouseEnter={(e) => {
+                        if (!conversation.isActive) {
+                          e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!conversation.isActive) {
+                          e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+                        }
+                      }}
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
                       <div className="space-y-0.5">
@@ -2004,9 +2028,19 @@ export default function Dashboard() {
                       className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
                         isActive 
                           ? 'text-sidebar-primary' 
-                          : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
+                          : 'text-sidebar-foreground hover:text-sidebar-primary'
                       }`}
                       style={isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
+                      onMouseEnter={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                        }
+                      }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
                       <Icon className="w-5 h-5" />
