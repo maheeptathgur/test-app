@@ -1063,7 +1063,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 {/* Welcome screen with available tools when no messages */}
                 {messages.length === 0 && copilot && (
                   <div className="flex-1 flex items-center justify-center px-4">
-                    <div className="max-w-2xl w-full text-center space-y-6">
+                    <div className={`w-full text-center space-y-6 ${
+                      selectedFiles.length > 0 && showDocumentPreview 
+                        ? 'max-w-none' 
+                        : 'max-w-2xl'
+                    }`}>
                       <div className="space-y-2">
                         <h2 className="text-xl sm:text-2xl font-semibold text-[hsl(var(--foreground))]">Welcome to {copilot.name}</h2>
                         <p className="text-gray-600">{copilot.description}</p>
