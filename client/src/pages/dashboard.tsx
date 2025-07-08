@@ -1883,7 +1883,12 @@ export default function Dashboard() {
                   {conversations.filter(conversation => conversation.copilot === chatCopilot?.name).map((conversation) => (
                     <div
                       key={conversation.id}
-                      className="p-2 rounded-lg transition-all group cursor-pointer bg-white/50 hover:bg-sidebar-accent hover:text-sidebar-primary"
+                      className={`p-2 rounded-lg transition-all group cursor-pointer ${
+                        conversation.isActive 
+                          ? 'text-sidebar-primary' 
+                          : 'bg-white/50 hover:bg-sidebar-accent hover:text-sidebar-primary'
+                      }`}
+                      style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
                       <div className="space-y-0.5">
