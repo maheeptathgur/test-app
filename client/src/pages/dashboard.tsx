@@ -1862,7 +1862,13 @@ export default function Dashboard() {
                         key={copilot.id}
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleStartChat(copilot)}
+                        onClick={(e) => {
+                          // Clear any hover styles that might be persisting
+                          e.currentTarget.style.removeProperty('color');
+                          e.currentTarget.style.removeProperty('--sidebar-foreground');
+                          e.currentTarget.style.removeProperty('--sidebar-primary');
+                          handleStartChat(copilot);
+                        }}
                         className={`w-full p-2 ${
                           chatCopilot?.id === copilot.id 
                             ? 'text-sidebar-primary' 
@@ -1926,7 +1932,15 @@ export default function Dashboard() {
                         e.currentTarget.style.removeProperty('--sidebar-foreground');
                         e.currentTarget.style.removeProperty('--sidebar-primary');
                       }}
-                      onClick={() => !editingConversationId && handleLoadConversation(conversation)}
+                      onClick={(e) => {
+                        if (!editingConversationId) {
+                          // Clear any hover styles that might be persisting
+                          e.currentTarget.style.removeProperty('color');
+                          e.currentTarget.style.removeProperty('--sidebar-foreground');
+                          e.currentTarget.style.removeProperty('--sidebar-primary');
+                          handleLoadConversation(conversation);
+                        }
+                      }}
                     >
                       <div className="space-y-0.5">
                         {editingConversationId === conversation.id ? (
@@ -2036,7 +2050,13 @@ export default function Dashboard() {
                   <li key={item.id}>
                     <Button
                       variant="ghost"
-                      onClick={() => handleSectionChange(item.id as NavigationSection)}
+                      onClick={(e) => {
+                        // Clear any hover styles that might be persisting
+                        e.currentTarget.style.removeProperty('color');
+                        e.currentTarget.style.removeProperty('--sidebar-foreground');
+                        e.currentTarget.style.removeProperty('--sidebar-primary');
+                        handleSectionChange(item.id as NavigationSection);
+                      }}
                       className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
                         isActive 
                           ? 'text-sidebar-primary' 
