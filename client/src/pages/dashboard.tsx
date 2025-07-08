@@ -2425,7 +2425,7 @@ export default function Dashboard() {
           />
         ) : /* Regular Dashboard Content */
         (
-          <div className="h-full overflow-y-auto main-content" style={{ backgroundColor: 'var(--theme-content-bg)' }}>
+          <div className="h-full overflow-y-auto main-content" style={{ backgroundColor: 'var(--theme-background-light)' }}>
             {/* Content Body - Conditional padding for tool config screens */}
             <div 
               className={
@@ -2434,7 +2434,7 @@ export default function Dashboard() {
                   ? "" 
                   : "px-8 pt-8 pb-24"
               }
-              style={{ backgroundColor: 'var(--theme-content-bg)' }}
+              style={{ backgroundColor: 'var(--theme-background-light)' }}
             >
               {/* Title Section for specific pages */}
               {(activeSection === 'copilots' || activeSection === 'all-workspaces' || activeSection === 'workspace-settings') && !configureTool && !toolConfigActive && !configureWorkflow && (
