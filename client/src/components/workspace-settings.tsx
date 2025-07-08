@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon } from "lucide-react";
+import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Database, MessageSquare, TrendingUp, BarChart3, Filter, Search, Image as ImageIcon, Palette } from "lucide-react";
+import { ThemeCustomizer } from "@/components/theme-customizer";
 import avatarImagePath from "@assets/image_1751745994194.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -22,7 +23,7 @@ export function WorkspaceSettings() {
   const [dataRetention, setDataRetention] = useState("90");
 
   return (
-    <div className={`space-y-6 ${(activeTab === "general" || activeTab === "security") ? "pb-24" : ""}`}>
+    <div className={`space-y-6 ${(activeTab === "general" || activeTab === "security" || activeTab === "theme") ? "pb-24" : ""}`}>
       <div className="w-full">
         <nav className="flex space-x-8 border-b border-border">
           <button
@@ -44,6 +45,16 @@ export function WorkspaceSettings() {
             }`}
           >
             Security
+          </button>
+          <button
+            onClick={() => setActiveTab("theme")}
+            className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+              activeTab === "theme"
+                ? "border-[#008062] text-[#008062]"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
+            }`}
+          >
+            Theme
           </button>
 
           <button
@@ -350,10 +361,16 @@ export function WorkspaceSettings() {
             <SampleScreen section={"users" as any} />
           </div>
         )}
+
+        {activeTab === "theme" && (
+          <div className="mt-6">
+            <ThemeCustomizer />
+          </div>
+        )}
       </div>
       
-      {/* Save Footer - Only show for General and Security tabs */}
-      {(activeTab === "general" || activeTab === "security") && (
+      {/* Save Footer - Only show for General, Security, and Theme tabs */}
+      {(activeTab === "general" || activeTab === "security" || activeTab === "theme") && (
         <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
           <div className="flex justify-end gap-3">
             <Button variant="outline">
