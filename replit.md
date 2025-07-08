@@ -337,6 +337,7 @@ Changelog:
 - July 8, 2025. Fixed responsive layout issues in copilots controls bar - updated layout from sm:flex-row to lg:flex-row breakpoint, added flex-wrap to action buttons, made search and filter controls stack properly on mobile devices, added responsive width constraints (w-full sm:w-auto, max-w-sm) to prevent overflow, and added min-width constraints to maintain button usability on all screen sizes
 - July 8, 2025. Fixed attachment sidebar styling - changed background color to #f6f6f6, made document cards white with 1px borders instead of 2px, and implemented automatic main sidebar collapse when attachment sidebar opens for better space utilization
 - July 8, 2025. Added comprehensive file delete functionality to attachment sidebar - implemented trash can icons that appear on hover with red color transition, added confirmation dialogs for file deletion with proper file name display, and integrated delete handlers to remove files from selected files state when confirmed
+- July 8, 2025. Enhanced file selection visual feedback in attachment sidebar - updated all file cards to display 2px green border when selected (using theme primary color) and 1px gray border when unselected, providing clear visual distinction between selected and unselected files
 ```
 
 ## User Preferences

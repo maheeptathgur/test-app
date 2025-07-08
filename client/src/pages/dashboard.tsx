@@ -2372,10 +2372,10 @@ export default function Dashboard() {
             <div className="flex-1 p-4 space-y-3 overflow-y-auto min-h-0">
               <div className="space-y-2">
                 <div 
-                  className={`flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all group ${
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all group ${
                     selectedFiles.includes('Project_Brief.pdf') 
-                      ? 'bg-white hover:bg-muted/30' 
-                      : 'bg-white hover:bg-muted/30'
+                      ? 'bg-white hover:bg-muted/30 border-2' 
+                      : 'bg-white hover:bg-muted/30 border'
                   }`}
                   style={{
                     borderColor: selectedFiles.includes('Project_Brief.pdf') ? 'var(--theme-primary)' : '#dadde2'
@@ -2401,7 +2401,11 @@ export default function Dashboard() {
                   </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all group ${
+                    selectedFiles.includes('logo_design.png') 
+                      ? 'bg-white hover:bg-muted/30 border-2' 
+                      : 'bg-white hover:bg-muted/30 border'
+                  }`}
                   style={{
                     borderColor: selectedFiles.includes('logo_design.png') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2426,7 +2430,11 @@ export default function Dashboard() {
                   </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all group ${
+                    selectedFiles.includes('background_music.mp3') 
+                      ? 'bg-white hover:bg-muted/30 border-2' 
+                      : 'bg-white hover:bg-muted/30 border'
+                  }`}
                   style={{
                     borderColor: selectedFiles.includes('background_music.mp3') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2451,7 +2459,11 @@ export default function Dashboard() {
                   </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all group ${
+                    selectedFiles.includes('demo_video.mp4') 
+                      ? 'bg-white hover:bg-muted/30 border-2' 
+                      : 'bg-white hover:bg-muted/30 border'
+                  }`}
                   style={{
                     borderColor: selectedFiles.includes('demo_video.mp4') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2476,7 +2488,11 @@ export default function Dashboard() {
                   </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all group ${
+                    selectedFiles.includes('presentation.pptx') 
+                      ? 'bg-white hover:bg-muted/30 border-2' 
+                      : 'bg-white hover:bg-muted/30 border'
+                  }`}
                   style={{
                     borderColor: selectedFiles.includes('presentation.pptx') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2501,7 +2517,11 @@ export default function Dashboard() {
                   </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all group ${
+                    selectedFiles.includes('data_export.csv') 
+                      ? 'bg-white hover:bg-muted/30 border-2' 
+                      : 'bg-white hover:bg-muted/30 border'
+                  }`}
                   style={{
                     borderColor: selectedFiles.includes('data_export.csv') ? 'var(--theme-primary)' : '#dadde2'
                   }}
@@ -2526,7 +2546,11 @@ export default function Dashboard() {
                   </Button>
                 </div>
                 <div 
-                  className="flex items-center gap-3 p-3 rounded-lg border cursor-pointer transition-all bg-white hover:bg-muted/30 group"
+                  className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all group ${
+                    selectedFiles.includes('screenshot_2024.jpg') 
+                      ? 'bg-white hover:bg-muted/30 border-2' 
+                      : 'bg-white hover:bg-muted/30 border'
+                  }`}
                   style={{
                     borderColor: selectedFiles.includes('screenshot_2024.jpg') ? 'var(--theme-primary)' : '#dadde2'
                   }}
