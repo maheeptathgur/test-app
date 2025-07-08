@@ -624,6 +624,26 @@ export default function Dashboard() {
     border: "#e5e7eb"
   });
 
+  // Function to calculate luminance and determine text color
+  const getTextColorForBackground = (hexColor: string): string => {
+    // Remove # if present
+    const hex = hexColor.replace('#', '');
+    
+    // Convert to RGB
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    
+    // Calculate luminance
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    
+    // Return light or dark text based on luminance
+    return luminance > 0.5 ? '#000000' : '#ffffff';
+  };
+
+  // Get dynamic text color based on sidebar background
+  const sidebarTextColor = getTextColorForBackground(brandingColors.sidebarBg);
+
   // Apply branding colors as CSS custom properties
   useEffect(() => {
     const root = document.documentElement;
@@ -632,7 +652,8 @@ export default function Dashboard() {
     root.style.setProperty('--brand-sidebar-bg', brandingColors.sidebarBg);
     root.style.setProperty('--brand-accent', brandingColors.accent);
     root.style.setProperty('--brand-border', brandingColors.border);
-  }, [brandingColors]);
+    root.style.setProperty('--brand-sidebar-text', sidebarTextColor);
+  }, [brandingColors, sidebarTextColor]);
 
   // Handle navigation events from copilot configuration
   useEffect(() => {
@@ -1777,7 +1798,14 @@ export default function Dashboard() {
               variant="ghost"
               size="sm"
               onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-              className="text-sidebar-foreground hover:text-sidebar-primary"
+              className=""
+              style={{ 
+                color: 'var(--brand-sidebar-text)',
+                '--hover-text-color': 'var(--brand-primary)'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-primary)'}
+              onMouseLeave={(e) => e.currentTarget.style.color = 'var(--brand-sidebar-text)'}
+            
             >
               {sidebarCollapsed ? <PanelLeftOpen className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
             </Button>
@@ -1806,14 +1834,21 @@ export default function Dashboard() {
                 <>
                   {/* Quick Access Assistants */}
                   <div className="space-y-3">
-                    <h3 className="text-sm font-medium text-sidebar-foreground">Your Assistants</h3>
+                    <h3 className="text-sm font-medium" style={{ color: 'var(--brand-sidebar-text)' }}>Your Assistants</h3>
                     <div className="space-y-2">
                       {copilots.filter(c => c.status === 'active' && c.favorite).slice(0, 4).map((copilot) => (
                         <Button
                           key={copilot.id}
                           variant="ghost"
                           onClick={() => handleStartChat(copilot)}
-                          className="w-full justify-start gap-3 text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent p-3"
+                          className="w-full justify-start gap-3 hover:bg-sidebar-accent p-3"
+                          style={{ 
+                            color: 'var(--brand-sidebar-text)',
+                            '--hover-text-color': 'var(--brand-primary)'
+                          }}
+                          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-primary)'}
+                          onMouseLeave={(e) => e.currentTarget.style.color = 'var(--brand-sidebar-text)'}
+                        
                         >
                           <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
                             {copilot.avatar}
@@ -1839,7 +1874,14 @@ export default function Dashboard() {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleStartChat(copilot)}
-                      className="w-full p-2 text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent"
+                      className="w-full p-2 hover:bg-sidebar-accent"
+                      style={{ 
+                        color: 'var(--brand-sidebar-text)',
+                        '--hover-text-color': 'var(--brand-primary)'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-primary)'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = 'var(--brand-sidebar-text)'}
+                    
                       title={copilot.name}
                     >
                       <div className={`w-6 h-6 ${copilot.avatarColor} rounded text-xs font-semibold flex items-center justify-center`}>
@@ -1867,9 +1909,19 @@ export default function Dashboard() {
                         onClick={() => handleStartChat(copilot)}
                         className={`w-full p-2 ${
                           chatCopilot?.id === copilot.id 
-                            ? 'text-sidebar-primary bg-sidebar-accent' 
-                            : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
+                            ? 'bg-sidebar-accent' 
+                            : 'hover:bg-sidebar-accent'
                         }`}
+                        style={{ 
+                          color: chatCopilot?.id === copilot.id ? 'var(--brand-primary)' : 'var(--brand-sidebar-text)',
+                          '--hover-text-color': 'var(--brand-primary)'
+                        }}
+                        onMouseEnter={(e) => {
+                          if (chatCopilot?.id !== copilot.id) e.currentTarget.style.color = 'var(--brand-primary)';
+                        }}
+                        onMouseLeave={(e) => {
+                          if (chatCopilot?.id !== copilot.id) e.currentTarget.style.color = 'var(--brand-sidebar-text)';
+                        }}
                         title={copilot.name}
                       >
                         <div className={`w-6 h-6 ${copilot.avatarColor} rounded-full text-xs font-semibold flex items-center justify-center`}>
@@ -1888,7 +1940,14 @@ export default function Dashboard() {
                         setChatCopilot(null);
                         setShowAttachmentSidebar(false);
                       }}
-                      className="text-sidebar-foreground hover:text-sidebar-primary"
+                      className=""
+                      style={{ 
+                        color: 'var(--brand-sidebar-text)',
+                        '--hover-text-color': 'var(--brand-primary)'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = 'var(--brand-primary)'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = 'var(--brand-sidebar-text)'}
+                    
                       title="Close chat"
                     >
                       <X className="w-4 h-4" />
@@ -2015,9 +2074,19 @@ export default function Dashboard() {
                       onClick={() => handleSectionChange(item.id as NavigationSection)}
                       className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
                         isActive 
-                          ? 'text-sidebar-primary bg-sidebar-accent' 
-                          : 'text-sidebar-foreground hover:text-sidebar-primary hover:bg-sidebar-accent'
+                          ? 'bg-sidebar-accent' 
+                          : 'hover:bg-sidebar-accent'
                       }`}
+                      style={{ 
+                        color: isActive ? 'var(--brand-primary)' : 'var(--brand-sidebar-text)',
+                        '--hover-text-color': 'var(--brand-primary)'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isActive) e.currentTarget.style.color = 'var(--brand-primary)';
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) e.currentTarget.style.color = 'var(--brand-sidebar-text)';
+                      }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
                       <Icon className="w-5 h-5" />
