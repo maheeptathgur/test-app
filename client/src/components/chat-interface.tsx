@@ -1076,8 +1076,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               const hasWorkflows = copilot.components.filter(c => c.type === 'workflow').length > 0;
                               const columnCount = [hasAgents, hasTools, hasWorkflows].filter(Boolean).length;
                               
-                              if (columnCount === 3) return 'grid grid-cols-1 md:grid-cols-3 gap-3 items-stretch min-h-[120px]';
-                              if (columnCount === 2) return 'flex flex-col md:flex-row gap-3 justify-center max-w-2xl mx-auto items-stretch min-h-[120px]';
+                              if (columnCount === 3) return 'grid grid-cols-1 md:grid-cols-3 gap-3 auto-rows-fr';
+                              if (columnCount === 2) return 'grid grid-cols-1 md:grid-cols-2 gap-3 justify-center max-w-2xl mx-auto auto-rows-fr';
                               return 'flex justify-center max-w-sm mx-auto';
                             })()
                           }`}>
@@ -1094,7 +1094,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     return (
                                       <div 
                                         key={agent.name} 
-                                        className="p-2 bg-purple-50 rounded text-left border border-purple-100 hover:bg-purple-100 transition-colors cursor-pointer"
+                                        className="p-2 bg-purple-50 rounded text-left border border-purple-100 hover:bg-purple-100 transition-colors cursor-pointer min-h-[60px]"
                                         onClick={() => toggleComponentExpansion(agent.name)}
                                       >
                                         <div className="flex items-center justify-between">
@@ -1131,7 +1131,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     return (
                                       <div 
                                         key={tool.name} 
-                                        className="p-2 bg-blue-50 rounded text-left border border-blue-100 hover:bg-blue-100 transition-colors cursor-pointer"
+                                        className="p-2 bg-blue-50 rounded text-left border border-blue-100 hover:bg-blue-100 transition-colors cursor-pointer min-h-[60px]"
                                         onClick={() => toggleComponentExpansion(tool.name)}
                                       >
                                         <div className="flex items-center justify-between">
@@ -1168,7 +1168,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     return (
                                       <div 
                                         key={workflow.name} 
-                                        className="p-2 bg-amber-50 rounded text-left border border-amber-100 hover:bg-amber-100 transition-colors cursor-pointer"
+                                        className="p-2 bg-amber-50 rounded text-left border border-amber-100 hover:bg-amber-100 transition-colors cursor-pointer min-h-[60px]"
                                         onClick={() => toggleComponentExpansion(workflow.name)}
                                       >
                                         <div className="flex items-center justify-between">
