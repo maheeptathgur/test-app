@@ -2063,7 +2063,7 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleEditConversationTitle(conversation.id, conversation.title);
                                   }}
-                                  className="h-5 w-5 p-0 text-muted-foreground hover:text-muted-foreground hover:bg-muted/50"
+                                  className="h-6 w-6 p-1 text-muted-foreground hover:text-muted-foreground hover:bg-muted/50"
                                   title="Edit title"
                                 >
                                   <Edit3 className="w-3 h-3" />
@@ -2075,7 +2075,7 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleDeleteConversation(conversation.id);
                                   }}
-                                  className="h-5 w-5 p-0 text-red-500 hover:text-red-600 hover:bg-red-50"
+                                  className="h-6 w-6 p-1 text-red-500 hover:text-red-600 hover:bg-red-50"
                                   title="Delete conversation"
                                 >
                                   <Trash2 className="w-3 h-3" />
