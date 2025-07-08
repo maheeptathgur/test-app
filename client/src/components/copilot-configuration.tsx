@@ -22,6 +22,7 @@ import socialAnalystImage from "@assets/image_1751926960404.png";
 import resumeAssistantImage from "@assets/image_1751926805510.png";
 import contentAssistantNewImage from "@assets/image_1751927977089.png";
 import workspaceImage from "@assets/image_1751923707146.png";
+import defaultIconImage from "@assets/image_1752010885962.png";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
@@ -1066,33 +1067,38 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         <div className="grid grid-cols-2 gap-6">
                           <div className="space-y-2">
                             <Label>Icon Image (1:1 ratio)</Label>
-                            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                              <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                              <div className="text-sm text-muted-foreground mb-2">
-                                Upload icon image
+                            <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
+                              <div className="aspect-square relative p-3 bg-[#ffffff]">
+                                <img 
+                                  src={iconImage ? URL.createObjectURL(iconImage) : defaultIconImage} 
+                                  alt="Copilot icon"
+                                  className="w-full h-full object-cover rounded"
+                                />
                               </div>
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => handleImageUpload('icon', e.target.files?.[0] || null)}
-                                className="hidden"
-                                id="icon-upload"
-                              />
-                              <Button
-                                type="button"
-                                variant="outline"
-                                size="sm"
-                                onClick={() => document.getElementById('icon-upload')?.click()}
-                                className="gap-2"
-                              >
-                                <Upload className="h-3 w-3" />
-                                Choose File
-                              </Button>
-                              {iconImage && (
-                                <div className="mt-2 text-xs text-muted-foreground">
-                                  {iconImage.name}
-                                </div>
-                              )}
+                              <div className="p-3 text-center bg-muted/20">
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  onChange={(e) => handleImageUpload('icon', e.target.files?.[0] || null)}
+                                  className="hidden"
+                                  id="icon-upload"
+                                />
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => document.getElementById('icon-upload')?.click()}
+                                  className="gap-2"
+                                >
+                                  <Upload className="h-3 w-3" />
+                                  {iconImage ? 'Change Image' : 'Choose File'}
+                                </Button>
+                                {iconImage && (
+                                  <div className="mt-2 text-xs text-muted-foreground">
+                                    New: {iconImage.name}
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           </div>
                           
