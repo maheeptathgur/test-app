@@ -2021,14 +2021,14 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
       </div>
 
       {/* Workflow Tabs */}
-      <div className="border-b border-[hsl(var(--border))]">
+      <div className="border-b" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
         <nav className="-mb-px flex space-x-8">
           <button
             onClick={() => setActiveTab("knolli")}
             className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "knolli"
                 ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
-                : "border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:border-[hsl(var(--border))]"
+                : "border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]"
             }`}
           >
             Knolli Workflows
@@ -2038,7 +2038,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
             className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "n8n"
                 ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
-                : "border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:border-[hsl(var(--border))]"
+                : "border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]"
             }`}
           >
             n8n Workflows
