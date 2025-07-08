@@ -2399,15 +2399,15 @@ function KnowledgeBaseScreen() {
       
       <div className="flex items-center justify-end">
         <div className="flex gap-2">
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => console.log('Add Document clicked')}>
             <Plus className="w-4 h-4 mr-1" />
             Add Document
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => console.log('Add URL clicked')}>
             <Link className="w-4 h-4 mr-1" />
             Add URL
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => console.log('Create MD clicked')}>
             <FileText className="w-4 h-4 mr-1" />
             Create MD
           </Button>
@@ -2415,7 +2415,7 @@ function KnowledgeBaseScreen() {
             <Bot className="w-4 h-4 mr-1" />
             AI Suggestions
           </Button>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" onClick={() => console.log('Go to Marketplace clicked')}>
             Go to Marketplace
           </Button>
         </div>

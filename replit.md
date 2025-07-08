@@ -332,6 +332,7 @@ Changelog:
 - July 8, 2025. Added conversation delete confirmation functionality - implemented confirmation dialog using shadcn/ui Dialog components that appears before deleting conversations, includes clear warning message about permanent deletion, Cancel and Delete buttons with proper destructive styling, and prevents accidental conversation removal by requiring explicit user confirmation
 - July 8, 2025. Fixed agent configuration Knowledge Base functionality - added working click handlers to Add Document, Add URL, Create MD, and AI Suggestions buttons, implemented "Go to Marketplace" button to match other knowledge base sections, updated button layout with marketplace on left and action buttons on right for consistent user experience across all knowledge base interfaces
 - July 8, 2025. Updated Knowledge Base button layout in agent configuration - removed shopping cart icon from "Go to Marketplace" button and moved it to the right of "AI Suggestions" button, all action buttons now right-aligned in single group for cleaner interface design
+- July 8, 2025. Fixed Knowledge Base button functionality in workspace section - added working click handlers to Add Document, Add URL, Create MD, and Go to Marketplace buttons in main workspace Knowledge Base screen, ensuring all action buttons are now functional and responsive to user interaction
 ```
 
 ## User Preferences
