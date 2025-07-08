@@ -33,6 +33,14 @@
   background-color: var(--brand-content-bg) !important;
 }
 
+.brand-sidebar-text {
+  color: var(--brand-sidebar-text) !important;
+}
+
+.brand-sidebar-text:hover {
+  color: var(--brand-primary) !important;
+}
+
 /* ContentEditable placeholder styling */
 [data-placeholder]:empty:before {
   content: attr(data-placeholder);
