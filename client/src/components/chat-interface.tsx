@@ -987,13 +987,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             </Button>
           </div>
           <div className="flex-1 overflow-y-auto">
-            <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
+            <div className="max-w-4xl mx-auto h-full flex flex-col p-3 sm:p-6">
 
               {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
-                <div className="mb-6 mt-8 p-4 rounded-lg" style={{ backgroundColor: 'white', border: '1px solid hsl(218, 18%, 80%)' }}>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-medium text-[hsl(var(--foreground))]">Personalize your experience</h3>
+                <div className="mb-4 sm:mb-6 mt-6 sm:mt-8 p-3 sm:p-4 mx-3 sm:mx-0 rounded-lg" style={{ backgroundColor: 'white', border: '1px solid hsl(218, 18%, 80%)' }}>
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3 sm:mb-4">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-2">
+                      <h3 className="font-medium text-base sm:text-lg text-[hsl(var(--foreground))]">Personalize your experience</h3>
                       <span className="text-sm text-[hsl(var(--muted-foreground))]">Help {copilot.name} provide better assistance</span>
                     </div>
                     <Button
@@ -1005,8 +1005,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       <X className="h-4 w-4" />
                     </Button>
                   </div>
-                  <form className="space-y-4">
-                    <div className="space-y-4">
+                  <form className="space-y-3 sm:space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       {copilot.profileFields.map((field) => (
                         <div key={field.id}>
                           <label className="block text-sm font-medium text-[hsl(var(--foreground))] mb-1">
@@ -1055,20 +1055,20 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               )}
 
               
-              <div className="flex-1 space-y-6 overflow-y-auto mt-8">
+              <div className="flex-1 space-y-4 sm:space-y-6 overflow-y-auto mt-6 sm:mt-8">
                 {/* Welcome screen with available tools when no messages */}
                 {messages.length === 0 && copilot && (
-                  <div className="flex-1 flex items-center justify-center">
-                    <div className="max-w-2xl text-center space-y-6">
+                  <div className="flex-1 flex items-center justify-center px-4">
+                    <div className="max-w-2xl w-full text-center space-y-6">
                       <div className="space-y-2">
-                        <h2 className="text-2xl font-semibold text-[hsl(var(--foreground))]">Welcome to {copilot.name}</h2>
+                        <h2 className="text-xl sm:text-2xl font-semibold text-[hsl(var(--foreground))]">Welcome to {copilot.name}</h2>
                         <p className="text-gray-600">{copilot.description}</p>
                       </div>
                       
                       {/* Available Tools Overview */}
                       {copilot.components && copilot.components.length > 0 && (
                         <div className="space-y-3 capabilities-section">
-                          <h3 className="text-lg font-medium text-[hsl(var(--foreground))]">Available Capabilities</h3>
+                          <h3 className="text-base sm:text-lg font-medium text-[hsl(var(--foreground))]">Available Capabilities</h3>
                           <div className={`${
                             (() => {
                               const hasAgents = copilot.components.filter(c => c.type === 'agent').length > 0;
@@ -1076,8 +1076,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               const hasWorkflows = copilot.components.filter(c => c.type === 'workflow').length > 0;
                               const columnCount = [hasAgents, hasTools, hasWorkflows].filter(Boolean).length;
                               
-                              if (columnCount === 3) return 'grid grid-cols-1 md:grid-cols-3 gap-3 auto-rows-fr';
-                              if (columnCount === 2) return 'grid grid-cols-1 md:grid-cols-2 gap-3 justify-center max-w-2xl mx-auto auto-rows-fr';
+                              if (columnCount === 3) return 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 auto-rows-fr';
+                              if (columnCount === 2) return 'grid grid-cols-1 sm:grid-cols-2 gap-3 justify-center max-w-2xl mx-auto auto-rows-fr';
                               return 'flex justify-center max-w-sm mx-auto';
                             })()
                           }`}>
@@ -1094,7 +1094,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     return (
                                       <div 
                                         key={agent.name} 
-                                        className="p-2 bg-purple-50 rounded text-left border border-purple-100 hover:bg-purple-100 transition-colors cursor-pointer min-h-[60px]"
+                                        className="p-2 bg-purple-50 rounded text-left border border-purple-100 hover:bg-purple-100 transition-colors cursor-pointer min-h-[50px] sm:min-h-[60px]"
                                         onClick={() => toggleComponentExpansion(agent.name)}
                                       >
                                         <div className="flex items-center justify-between">
@@ -1131,7 +1131,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     return (
                                       <div 
                                         key={tool.name} 
-                                        className="p-2 bg-blue-50 rounded text-left border border-blue-100 hover:bg-blue-100 transition-colors cursor-pointer min-h-[60px]"
+                                        className="p-2 bg-blue-50 rounded text-left border border-blue-100 hover:bg-blue-100 transition-colors cursor-pointer min-h-[50px] sm:min-h-[60px]"
                                         onClick={() => toggleComponentExpansion(tool.name)}
                                       >
                                         <div className="flex items-center justify-between">
@@ -1168,7 +1168,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     return (
                                       <div 
                                         key={workflow.name} 
-                                        className="p-2 bg-amber-50 rounded text-left border border-amber-100 hover:bg-amber-100 transition-colors cursor-pointer min-h-[60px]"
+                                        className="p-2 bg-amber-50 rounded text-left border border-amber-100 hover:bg-amber-100 transition-colors cursor-pointer min-h-[50px] sm:min-h-[60px]"
                                         onClick={() => toggleComponentExpansion(workflow.name)}
                                       >
                                         <div className="flex items-center justify-between">
@@ -1238,7 +1238,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <button
                                 key={index}
                                 onClick={() => handleStarterClick(starter)}
-                                className="flex-shrink-0 rounded-lg p-2 text-left transition-colors group w-80 hover:opacity-90"
+                                className="flex-shrink-0 rounded-lg p-2 text-left transition-colors group w-72 sm:w-80 hover:opacity-90"
                                 style={{ 
                                   backgroundColor: '#F6F6F6',
                                   border: '1px solid hsl(218, 18%, 80%)' 
@@ -1267,8 +1267,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     <div
-                      className={`p-4 rounded-lg text-foreground pt-[6px] pb-[6px] ${
-                        message.sender === 'user' ? 'max-w-[70%]' : 'w-full'
+                      className={`p-3 sm:p-4 rounded-lg text-foreground pt-[6px] pb-[6px] ${
+                        message.sender === 'user' ? 'max-w-[85%] sm:max-w-[70%]' : 'w-full'
                       }`}
                       style={message.sender === 'user' ? { backgroundColor: '#f8f9fa' } : {}}
                     >
@@ -1283,8 +1283,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       {/* Interaction buttons for AI responses */}
                       {message.sender === 'bot' && (
                         <div className="mt-3 pt-2" style={{ borderTop: '1px solid hsl(218, 18%, 80%)' }}>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                            <div className="flex flex-wrap items-center gap-2">
                               <Button
                                 variant="ghost"
                                 size="sm"
@@ -1424,8 +1424,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           
           {/* Prompt Bar - moved inside chat area */}
           <div className="bg-white relative">
-            <div className="max-w-4xl mx-auto p-3 relative">
-              <div className="flex gap-3 relative items-end">
+            <div className="max-w-4xl mx-auto p-3 sm:p-4 relative">
+              <div className="flex gap-2 sm:gap-3 relative items-end">
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
                   <div className="absolute -top-8 left-0">
@@ -1461,7 +1461,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 )}
                 <Button 
                   variant="outline" 
-                  className="h-12 px-3 self-end"
+                  className="h-12 px-2 sm:px-3 self-end"
                   onClick={() => {
                     setShowAttachmentSidebar(!showAttachmentSidebar);
                     onToggleAttachment?.(!showAttachmentSidebar);
@@ -1473,7 +1473,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   <DropdownMenuTrigger asChild>
                     <Button 
                       variant="outline" 
-                      className="h-12 px-3 self-end"
+                      className="h-12 px-2 sm:px-3 self-end"
                       title="Add Agent, Tool, or Workflow"
                     >
                       <Plus className="h-4 w-4" />
@@ -1584,13 +1584,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     )}
                   </div>
                 </div>
-                <Button onClick={handleSendMessage} className="h-12 w-12 p-0 self-end" title="Send Message">
+                <Button onClick={handleSendMessage} className="h-12 w-10 sm:w-12 p-0 self-end" title="Send Message">
                   <Send className="h-4 w-4" />
                 </Button>
                 {recordingSupported && (
                   <Button 
                     variant={isRecording ? "default" : "outline"}
-                    className={`h-12 px-3 self-end transition-colors ${
+                    className={`h-12 px-2 sm:px-3 self-end transition-colors ${
                       isRecording 
                         ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
                         : 'hover:text-white'
@@ -1606,10 +1606,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           </div>
         </div>
         
-        {/* File Preview Pane */}
+        {/* File Preview Pane - Hidden on mobile */}
         {selectedFiles.length > 0 && showDocumentPreview && (
           <div 
-            className="fixed top-0 right-0 bottom-0 bg-muted/20 flex flex-col z-50"
+            className="hidden lg:flex fixed top-0 right-0 bottom-0 bg-muted/20 flex-col z-50"
             style={{ 
               borderLeft: '1px solid hsl(218, 18%, 80%)', 
               width: `${documentPaneWidth}px` 
