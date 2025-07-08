@@ -169,10 +169,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
             break;
           default:
-            badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
+            badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border border-[hsl(var(--border))]";
         }
       } else {
-        badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
+        badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border border-[hsl(var(--border))]";
       }
       
       return `<span class="${badgeClass}" contenteditable="false">${componentName}</span>`;
@@ -229,7 +229,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               }
             } else {
               // Unknown component - still show as badge but gray
-              badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
+              badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border border-[hsl(var(--border))]";
             }
             
             return (
@@ -336,7 +336,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               break;
           }
         } else {
-          badgeClass += " bg-gray-100 text-gray-600 border border-gray-200";
+          badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border border-[hsl(var(--border))]";
         }
         
         return `<span class="${badgeClass}">${componentName}</span>`;
@@ -354,7 +354,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       // Handle headers
       if (line.startsWith('**') && line.endsWith('**') && line.includes(':')) {
         const headerText = line.replace(/^\*\*(.*?)\*\*$/, '$1');
-        return `<div class="font-semibold text-gray-900 mt-3 mb-1">${headerText}</div>`;
+        return `<div class="font-semibold text-[hsl(var(--foreground))] mt-3 mb-1">${headerText}</div>`;
       }
       
       // Handle bullet points
@@ -364,7 +364,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         const formattedContent = content
           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
           .replace(/\*(.*?)\*/g, '<em>$1</em>')
-          .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+          .replace(/`(.*?)`/g, '<code class="bg-[hsl(var(--muted))] px-1 py-0.5 rounded text-sm">$1</code>');
         return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1 flex-shrink-0">•</span><span>${formattedContent}</span></div>`;
       }
       
@@ -376,7 +376,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
           const formattedContent = match[2]
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
             .replace(/\*(.*?)\*/g, '<em>$1</em>')
-            .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+            .replace(/`(.*?)`/g, '<code class="bg-[hsl(var(--muted))] px-1 py-0.5 rounded text-sm">$1</code>');
           return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1 flex-shrink-0">${match[1]}.</span><span>${formattedContent}</span></div>`;
         }
       }
@@ -387,7 +387,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         const formattedContent = content
           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
           .replace(/\*(.*?)\*/g, '<em>$1</em>')
-          .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+          .replace(/`(.*?)`/g, '<code class="bg-[hsl(var(--muted))] px-1 py-0.5 rounded text-sm">$1</code>');
         return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">✅</span><span>${formattedContent}</span></div>`;
       }
       
@@ -396,7 +396,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         const formattedContent = content
           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
           .replace(/\*(.*?)\*/g, '<em>$1</em>')
-          .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+          .replace(/`(.*?)`/g, '<code class="bg-[hsl(var(--muted))] px-1 py-0.5 rounded text-sm">$1</code>');
         return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">📈</span><span>${formattedContent}</span></div>`;
       }
       
@@ -405,7 +405,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         const formattedContent = content
           .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
           .replace(/\*(.*?)\*/g, '<em>$1</em>')
-          .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+          .replace(/`(.*?)`/g, '<code class="bg-[hsl(var(--muted))] px-1 py-0.5 rounded text-sm">$1</code>');
         return `<div class="flex items-start gap-2 mb-1"><span class="text-xs mt-1">⚠️</span><span>${formattedContent}</span></div>`;
       }
       
@@ -416,7 +416,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         // Italic text *text*
         .replace(/\*(.*?)\*/g, '<em>$1</em>')
         // Code `text`
-        .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>');
+        .replace(/`(.*?)`/g, '<code class="bg-[hsl(var(--muted))] px-1 py-0.5 rounded text-sm">$1</code>');
       
       return `<div class="mb-1">${processedLine}</div>`;
     });
@@ -986,11 +986,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
 
               {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
-                <div className="mb-6 mt-8 p-4 rounded-lg border border-gray-200" style={{ backgroundColor: 'var(--theme-accent)' }}>
+                <div className="mb-6 mt-8 p-4 rounded-lg border border-[hsl(var(--border))]" style={{ backgroundColor: 'var(--theme-accent)' }}>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-medium text-gray-900">Personalize your experience</h3>
-                      <span className="text-sm text-gray-500">Help {copilot.name} provide better assistance</span>
+                      <h3 className="font-medium text-[hsl(var(--foreground))]">Personalize your experience</h3>
+                      <span className="text-sm text-[hsl(var(--muted-foreground))]">Help {copilot.name} provide better assistance</span>
                     </div>
                     <Button
                       variant="ghost"
@@ -1005,14 +1005,14 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     <div className="space-y-4">
                       {copilot.profileFields.map((field) => (
                         <div key={field.id}>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block text-sm font-medium text-[hsl(var(--foreground))] mb-1">
                             <span className="flex items-center justify-between">
                               <span>
                                 {field.label}
                                 {field.required && <span className="text-red-500 ml-1">*</span>}
                               </span>
                               {field.description && (
-                                <span className="text-xs text-gray-500 font-normal">{field.description}</span>
+                                <span className="text-xs text-[hsl(var(--muted-foreground))] font-normal">{field.description}</span>
                               )}
                             </span>
                           </label>
@@ -1021,7 +1021,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       ))}
                     </div>
                     <div className="flex items-center justify-between pt-2">
-                      <div className="text-xs text-gray-500">
+                      <div className="text-xs text-[hsl(var(--muted-foreground))]">
                         This information helps personalize your experience
                       </div>
                       <div className="flex gap-2">
@@ -1057,14 +1057,14 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   <div className="flex-1 flex items-center justify-center">
                     <div className="max-w-2xl text-center space-y-6">
                       <div className="space-y-2">
-                        <h2 className="text-2xl font-semibold text-gray-900">Welcome to {copilot.name}</h2>
+                        <h2 className="text-2xl font-semibold text-[hsl(var(--foreground))]">Welcome to {copilot.name}</h2>
                         <p className="text-gray-600">{copilot.description}</p>
                       </div>
                       
                       {/* Available Tools Overview */}
                       {copilot.components && copilot.components.length > 0 && (
                         <div className="space-y-3 capabilities-section">
-                          <h3 className="text-lg font-medium text-gray-900">Available Capabilities</h3>
+                          <h3 className="text-lg font-medium text-[hsl(var(--foreground))]">Available Capabilities</h3>
                           <div className={`${
                             (() => {
                               const hasAgents = copilot.components.filter(c => c.type === 'agent').length > 0;
@@ -1094,7 +1094,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(agent.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 truncate text-[14px]">{agent.name}</div>
+                                          <div className="font-medium text-[hsl(var(--foreground))] truncate text-[14px]">{agent.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
                                         <div className={`text-gray-600 text-[14px] ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
@@ -1102,7 +1102,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         </div>
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-purple-200">
-                                            <div className="text-xs text-gray-500">
+                                            <div className="text-xs text-[hsl(var(--muted-foreground))]">
                                               Use <code className="px-1 py-0.5 bg-purple-100 rounded text-xs border border-purple-200">@{agent.name}</code> to reference this agent
                                             </div>
                                           </div>
@@ -1131,7 +1131,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(tool.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 truncate !text-sm">{tool.name}</div>
+                                          <div className="font-medium text-[hsl(var(--foreground))] truncate !text-sm">{tool.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
                                         <div className={`text-gray-600 !text-sm ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
@@ -1139,7 +1139,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         </div>
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-blue-200">
-                                            <div className="text-xs text-gray-500">
+                                            <div className="text-xs text-[hsl(var(--muted-foreground))]">
                                               Use <code className="px-1 py-0.5 bg-blue-100 rounded text-xs border border-blue-200">@{tool.name}</code> to reference this tool
                                             </div>
                                           </div>
@@ -1168,7 +1168,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         onClick={() => toggleComponentExpansion(workflow.name)}
                                       >
                                         <div className="flex items-center justify-between">
-                                          <div className="font-medium text-gray-900 text-[14px] truncate">{workflow.name}</div>
+                                          <div className="font-medium text-[hsl(var(--foreground))] text-[14px] truncate">{workflow.name}</div>
                                           <ChevronDown className={`w-3 h-3 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
                                         </div>
                                         <div className={`text-[14px] text-gray-600 leading-tight ${isExpanded ? 'whitespace-normal' : 'truncate'}`}>
@@ -1176,7 +1176,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         </div>
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-amber-200">
-                                            <div className="text-xs text-gray-500">
+                                            <div className="text-xs text-[hsl(var(--muted-foreground))]">
                                               Use <code className="px-1 py-0.5 bg-amber-100 rounded text-xs border border-amber-200">@{workflow.name}</code> to reference this workflow
                                             </div>
                                           </div>
@@ -1189,7 +1189,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             )}
                           </div>
                           
-                          <div className="text-gray-500 mt-3 text-[14px]">
+                          <div className="text-[hsl(var(--muted-foreground))] mt-3 text-[14px]">
                             Use the <Plus className="w-3 h-3 inline mx-1" /> button below to activate tools during our conversation.
                           </div>
                         </div>
@@ -1197,7 +1197,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       
                       {/* Conversation Starters Carousel */}
                       <div className="space-y-2">
-                        <h4 className="text-sm font-medium text-gray-900">Quick prompts</h4>
+                        <h4 className="text-sm font-medium text-[hsl(var(--foreground))]">Quick prompts</h4>
                         <div className="relative group">
                           {/* Left Arrow */}
                           {canScrollLeft && (
@@ -1228,10 +1228,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <button
                                 key={index}
                                 onClick={() => handleStarterClick(starter)}
-                                className="flex-shrink-0 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg p-2 text-left transition-colors group w-80"
+                                className="flex-shrink-0 bg-[hsl(var(--muted))] hover:bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-lg p-2 text-left transition-colors group w-80"
                               >
                                 <span 
-                                  className="text-xs text-gray-700 group-hover:text-gray-900 block"
+                                  className="text-xs text-[hsl(var(--foreground))] group-hover:text-[hsl(var(--foreground))] block"
                                   style={{ lineHeight: '1.75' }}
                                   dangerouslySetInnerHTML={{ 
                                     __html: formatMarkdown(starter)
@@ -1241,7 +1241,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             ))}
                           </div>
                         </div>
-                        <p className="text-gray-500 text-[14px]">Or start typing below to begin our conversation.</p>
+                        <p className="text-[hsl(var(--muted-foreground))] text-[14px]">Or start typing below to begin our conversation.</p>
                       </div>
                     </div>
                   </div>
@@ -1268,13 +1268,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       
                       {/* Interaction buttons for AI responses */}
                       {message.sender === 'bot' && (
-                        <div className="mt-3 pt-2 border-t border-gray-100">
+                        <div className="mt-3 pt-2 border-t border-[hsl(var(--border))]">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900 ${
+                                className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-[hsl(var(--foreground))] ${
                                   copiedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
                                 }`}
                                 onClick={() => handleCopyMessage(message.content, message.id)}
@@ -1294,7 +1294,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900 ${
+                                className={`h-8 px-3 text-xs hover:bg-gray-200 hover:text-[hsl(var(--foreground))] ${
                                   likedMessages.has(message.id) ? 'text-green-600 bg-green-50' : ''
                                 }`}
                                 onClick={() => handleLikeMessage(message.id)}
@@ -1320,7 +1320,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                 <Button
                                   variant="ghost"
                                   size="sm"
-                                  className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900"
+                                  className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-[hsl(var(--foreground))]"
                                   onClick={() => handleDislikeMessage(message.id)}
                                 >
                                   <ThumbsDown className="w-3 h-3 mr-1" />
@@ -1339,7 +1339,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-gray-900"
+                                className="h-8 px-3 text-xs hover:bg-gray-200 hover:text-[hsl(var(--foreground))]"
                                 onClick={() => handleAskHuman(message.id)}
                               >
                                 <MessageCircle className="w-3 h-3 mr-1" />
@@ -1350,9 +1350,9 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           
                           {/* Feedback form */}
                           {feedbackForms[message.id]?.visible && (
-                            <div className="mt-3 p-3 bg-gray-50 rounded-lg">
+                            <div className="mt-3 p-3 bg-[hsl(var(--muted))] rounded-lg">
                               <div className="flex items-center justify-between mb-2">
-                                <div className="text-sm font-medium text-gray-700">
+                                <div className="text-sm font-medium text-[hsl(var(--foreground))]">
                                   {feedbackForms[message.id].type === 'dislike' 
                                     ? "What was wrong with this response?" 
                                     : "What would you like a human to help with?"}
@@ -1395,7 +1395,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 {/* Universal Messaging App */}
                 {showMessagingApp && (
                   <div className="mt-4 mb-4">
-                    <div className="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                    <div className="bg-[hsl(var(--muted))] border border-[hsl(var(--border))] rounded-lg overflow-hidden shadow-sm">
                       <div className="h-[700px]">
                         <UniversalMessagingApp onClose={() => setShowMessagingApp(false)} />
                       </div>
@@ -1537,7 +1537,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     {/* Handle Autocomplete Dropdown */}
                     {showHandleDropdown && handleSuggestions.length > 0 && (
                       <div 
-                        className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto"
+                        className="absolute bottom-full left-0 right-0 mb-1 bg-white border border-[hsl(var(--border))] rounded-lg shadow-lg z-50 max-h-48 overflow-y-auto"
                         onMouseDown={(e) => {
                           e.preventDefault(); // Prevent textarea blur
                         }}
@@ -1548,7 +1548,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             className={`flex items-center gap-2 px-3 py-2 cursor-pointer transition-colors ${
                               index === selectedHandleIndex 
                                 ? 'bg-blue-50 border-l-2 border-blue-500' 
-                                : 'hover:bg-gray-50'
+                                : 'hover:bg-[hsl(var(--muted))]'
                             }`}
                             onMouseDown={(e) => {
                               e.preventDefault(); // Prevent textarea blur
@@ -1561,7 +1561,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                             {suggestion.type === 'inbox' && <MessageSquare className="w-4 h-4 text-green-600" />}
                             <div className="flex-1">
                               <div className="font-medium text-sm">@{suggestion.name}</div>
-                              <div className="text-xs text-gray-500 capitalize">{suggestion.type}</div>
+                              <div className="text-xs text-[hsl(var(--muted-foreground))] capitalize">{suggestion.type}</div>
                             </div>
                           </div>
                         ))}
@@ -1630,7 +1630,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'pdf':
                     return (
                       <div className="h-full bg-white flex flex-col">
-                        <div className="p-3 border-b bg-gray-50 flex-shrink-0">
+                        <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <FileText className="w-4 h-4 text-blue-500" />
@@ -1644,35 +1644,35 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                         <div className="flex-1 overflow-y-auto p-6 text-sm leading-relaxed">
                           <div className="space-y-4">
                             <div className="text-center border-b pb-4">
-                              <h1 className="text-xl font-bold text-gray-900">Project Brief: Q1 Marketing Campaign</h1>
+                              <h1 className="text-xl font-bold text-[hsl(var(--foreground))]">Project Brief: Q1 Marketing Campaign</h1>
                               <p className="text-gray-600 mt-2">Strategic Planning Document</p>
                             </div>
                             
                             <div>
-                              <h2 className="text-lg font-semibold text-gray-900 mb-2">Executive Summary</h2>
-                              <p className="text-gray-700 mb-3">
+                              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-2">Executive Summary</h2>
+                              <p className="text-[hsl(var(--foreground))] mb-3">
                                 This document outlines the key strategies and initiatives for the first quarter marketing campaign. 
                                 Our primary focus will be on brand awareness, customer acquisition, and market expansion.
                               </p>
-                              <p className="text-gray-700 mb-3">
+                              <p className="text-[hsl(var(--foreground))] mb-3">
                                 The campaign targets a 25% increase in brand recognition and a 15% growth in customer base 
                                 through integrated digital and traditional marketing channels.
                               </p>
                             </div>
                             
                             <div>
-                              <h2 className="text-lg font-semibold text-gray-900 mb-2">Budget Allocation</h2>
-                              <div className="bg-gray-50 p-3 rounded">
-                                <p className="text-gray-700">• Digital Advertising: $150,000 (60%)</p>
-                                <p className="text-gray-700">• Content Creation: $50,000 (20%)</p>
-                                <p className="text-gray-700">• Events & PR: $35,000 (14%)</p>
-                                <p className="text-gray-700">• Analytics & Tools: $15,000 (6%)</p>
+                              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-2">Budget Allocation</h2>
+                              <div className="bg-[hsl(var(--muted))] p-3 rounded">
+                                <p className="text-[hsl(var(--foreground))]">• Digital Advertising: $150,000 (60%)</p>
+                                <p className="text-[hsl(var(--foreground))]">• Content Creation: $50,000 (20%)</p>
+                                <p className="text-[hsl(var(--foreground))]">• Events & PR: $35,000 (14%)</p>
+                                <p className="text-[hsl(var(--foreground))]">• Analytics & Tools: $15,000 (6%)</p>
                               </div>
                             </div>
                             
                             <div>
-                              <h2 className="text-lg font-semibold text-gray-900 mb-2">Timeline</h2>
-                              <p className="text-gray-700">
+                              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-2">Timeline</h2>
+                              <p className="text-[hsl(var(--foreground))]">
                                 Campaign launch scheduled for January 15th, with key milestones throughout the quarter...
                               </p>
                             </div>
@@ -1685,7 +1685,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'png':
                     return (
                       <div className="h-full bg-white flex flex-col">
-                        <div className="p-3 border-b bg-gray-50 flex-shrink-0">
+                        <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <Image className="w-4 h-4 text-green-500" />
@@ -1712,7 +1712,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'wav':
                     return (
                       <div className="h-full bg-white flex flex-col">
-                        <div className="p-3 border-b bg-gray-50 flex-shrink-0">
+                        <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <Music className="w-4 h-4 text-purple-500" />
@@ -1747,7 +1747,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'avi':
                     return (
                       <div className="h-full bg-white flex flex-col">
-                        <div className="p-3 border-b bg-gray-50 flex-shrink-0">
+                        <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <Video className="w-4 h-4 text-red-500" />
@@ -1782,7 +1782,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'ppt':
                     return (
                       <div className="h-full bg-white flex flex-col">
-                        <div className="p-3 border-b bg-gray-50 flex-shrink-0">
+                        <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <FileText className="w-4 h-4 text-orange-500" />
@@ -1797,33 +1797,33 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           <div className="space-y-6">
                             <div className="border rounded-lg p-4 bg-gradient-to-r from-blue-50 to-purple-50">
                               <div className="text-center">
-                                <h1 className="text-lg font-bold text-gray-900">Q1 Marketing Strategy</h1>
+                                <h1 className="text-lg font-bold text-[hsl(var(--foreground))]">Q1 Marketing Strategy</h1>
                                 <p className="text-gray-600 mt-1">Presentation Deck</p>
-                                <p className="text-sm text-gray-500 mt-2">Slide 1 of 15</p>
+                                <p className="text-sm text-[hsl(var(--muted-foreground))] mt-2">Slide 1 of 15</p>
                               </div>
                             </div>
                             
                             <div className="border rounded-lg p-4">
-                              <h2 className="font-semibold text-gray-900 mb-2">Agenda</h2>
-                              <ul className="text-sm text-gray-700 space-y-1">
+                              <h2 className="font-semibold text-[hsl(var(--foreground))] mb-2">Agenda</h2>
+                              <ul className="text-sm text-[hsl(var(--foreground))] space-y-1">
                                 <li>• Market Analysis Overview</li>
                                 <li>• Target Audience Segmentation</li>
                                 <li>• Campaign Strategy & Timeline</li>
                                 <li>• Budget Allocation</li>
                                 <li>• Success Metrics & KPIs</li>
                               </ul>
-                              <p className="text-xs text-gray-500 mt-2">Slide 2 of 15</p>
+                              <p className="text-xs text-[hsl(var(--muted-foreground))] mt-2">Slide 2 of 15</p>
                             </div>
                             
                             <div className="border rounded-lg p-4">
-                              <h2 className="font-semibold text-gray-900 mb-2">Market Analysis</h2>
-                              <p className="text-sm text-gray-700 mb-2">Key findings from Q4 performance:</p>
-                              <div className="bg-gray-50 p-3 rounded text-sm">
+                              <h2 className="font-semibold text-[hsl(var(--foreground))] mb-2">Market Analysis</h2>
+                              <p className="text-sm text-[hsl(var(--foreground))] mb-2">Key findings from Q4 performance:</p>
+                              <div className="bg-[hsl(var(--muted))] p-3 rounded text-sm">
                                 <p>📈 25% increase in brand awareness</p>
                                 <p>🎯 Target demographics shifted to 25-40 age group</p>
                                 <p>📱 Mobile engagement up 40%</p>
                               </div>
-                              <p className="text-xs text-gray-500 mt-2">Slide 3 of 15</p>
+                              <p className="text-xs text-[hsl(var(--muted-foreground))] mt-2">Slide 3 of 15</p>
                             </div>
                           </div>
                         </div>
@@ -1832,7 +1832,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   case 'csv':
                     return (
                       <div className="h-full bg-white flex flex-col">
-                        <div className="p-3 border-b bg-gray-50 flex-shrink-0">
+                        <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                               <FileText className="w-4 h-4 text-green-500" />
@@ -1845,7 +1845,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                         </div>
                         <div className="flex-1 overflow-auto">
                           <table className="w-full text-xs">
-                            <thead className="bg-gray-50 sticky top-0">
+                            <thead className="bg-[hsl(var(--muted))] sticky top-0">
                               <tr>
                                 <th className="p-2 text-left border-r">Customer ID</th>
                                 <th className="p-2 text-left border-r">Name</th>
@@ -1855,35 +1855,35 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               </tr>
                             </thead>
                             <tbody>
-                              <tr className="border-b hover:bg-gray-50">
+                              <tr className="border-b hover:bg-[hsl(var(--muted))]">
                                 <td className="p-2 border-r">CUST001</td>
                                 <td className="p-2 border-r">Sarah Johnson</td>
                                 <td className="p-2 border-r">sarah.j@email.com</td>
                                 <td className="p-2 border-r">2024-01-15</td>
                                 <td className="p-2">$299.99</td>
                               </tr>
-                              <tr className="border-b hover:bg-gray-50">
+                              <tr className="border-b hover:bg-[hsl(var(--muted))]">
                                 <td className="p-2 border-r">CUST002</td>
                                 <td className="p-2 border-r">Mike Chen</td>
                                 <td className="p-2 border-r">mike.chen@email.com</td>
                                 <td className="p-2 border-r">2024-01-15</td>
                                 <td className="p-2">$149.50</td>
                               </tr>
-                              <tr className="border-b hover:bg-gray-50">
+                              <tr className="border-b hover:bg-[hsl(var(--muted))]">
                                 <td className="p-2 border-r">CUST003</td>
                                 <td className="p-2 border-r">Emily Davis</td>
                                 <td className="p-2 border-r">emily.d@email.com</td>
                                 <td className="p-2 border-r">2024-01-14</td>
                                 <td className="p-2">$89.99</td>
                               </tr>
-                              <tr className="border-b hover:bg-gray-50">
+                              <tr className="border-b hover:bg-[hsl(var(--muted))]">
                                 <td className="p-2 border-r">CUST004</td>
                                 <td className="p-2 border-r">James Wilson</td>
                                 <td className="p-2 border-r">j.wilson@email.com</td>
                                 <td className="p-2 border-r">2024-01-14</td>
                                 <td className="p-2">$399.00</td>
                               </tr>
-                              <tr className="border-b hover:bg-gray-50">
+                              <tr className="border-b hover:bg-[hsl(var(--muted))]">
                                 <td className="p-2 border-r">CUST005</td>
                                 <td className="p-2 border-r">Lisa Anderson</td>
                                 <td className="p-2 border-r">lisa.a@email.com</td>
@@ -1898,10 +1898,10 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                   default:
                     return (
                       <div className="h-full bg-white flex flex-col">
-                        <div className="p-3 border-b bg-gray-50 flex-shrink-0">
+                        <div className="p-3 border-b bg-[hsl(var(--muted))] flex-shrink-0">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
-                              <FileText className="w-4 h-4 text-gray-500" />
+                              <FileText className="w-4 h-4 text-[hsl(var(--muted-foreground))]" />
                               <span className="text-sm font-medium">{lastFile}</span>
                             </div>
                             <div className="text-xs text-muted-foreground">
@@ -1912,31 +1912,31 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                         <div className="flex-1 overflow-y-auto p-6 text-sm leading-relaxed">
                           <div className="space-y-4">
                             <div className="text-center border-b pb-4">
-                              <h1 className="text-xl font-bold text-gray-900">Document Content</h1>
+                              <h1 className="text-xl font-bold text-[hsl(var(--foreground))]">Document Content</h1>
                               <p className="text-gray-600 mt-2">{extension?.toUpperCase()} File Preview</p>
                             </div>
                             
                             <div>
-                              <h2 className="text-lg font-semibold text-gray-900 mb-2">Document Overview</h2>
-                              <p className="text-gray-700 mb-3">
+                              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-2">Document Overview</h2>
+                              <p className="text-[hsl(var(--foreground))] mb-3">
                                 This document contains important information and data relevant to the current project. 
                                 The content has been formatted for easy reading and reference.
                               </p>
                             </div>
                             
                             <div>
-                              <h2 className="text-lg font-semibold text-gray-900 mb-2">Key Points</h2>
-                              <div className="bg-gray-50 p-3 rounded">
-                                <p className="text-gray-700">• Comprehensive analysis and findings</p>
-                                <p className="text-gray-700">• Strategic recommendations</p>
-                                <p className="text-gray-700">• Implementation guidelines</p>
-                                <p className="text-gray-700">• Next steps and timeline</p>
+                              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-2">Key Points</h2>
+                              <div className="bg-[hsl(var(--muted))] p-3 rounded">
+                                <p className="text-[hsl(var(--foreground))]">• Comprehensive analysis and findings</p>
+                                <p className="text-[hsl(var(--foreground))]">• Strategic recommendations</p>
+                                <p className="text-[hsl(var(--foreground))]">• Implementation guidelines</p>
+                                <p className="text-[hsl(var(--foreground))]">• Next steps and timeline</p>
                               </div>
                             </div>
                             
                             <div>
-                              <h2 className="text-lg font-semibold text-gray-900 mb-2">Additional Information</h2>
-                              <p className="text-gray-700">
+                              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))] mb-2">Additional Information</h2>
+                              <p className="text-[hsl(var(--foreground))]">
                                 For complete details and full content access, this document contains all necessary 
                                 information for review and decision making...
                               </p>

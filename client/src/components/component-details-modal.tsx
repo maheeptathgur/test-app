@@ -330,14 +330,14 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
 
           <div className="space-y-6">
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-2">Description</h3>
+              <h3 className="text-sm font-medium text-[hsl(var(--foreground))] mb-2">Description</h3>
               <p className="text-gray-600 text-sm leading-relaxed">{fallbackDetails.description}</p>
             </div>
 
             <Separator />
 
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-3">Capabilities</h3>
+              <h3 className="text-sm font-medium text-[hsl(var(--foreground))] mb-3">Capabilities</h3>
               <div className="grid grid-cols-2 gap-2">
                 {fallbackDetails.capabilities.map((capability, index) => (
                   <div key={index} className="flex items-center gap-2 text-sm">
@@ -351,11 +351,11 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
             <Separator />
 
             <div>
-              <h3 className="text-sm font-medium text-gray-900 mb-3">Configuration</h3>
+              <h3 className="text-sm font-medium text-[hsl(var(--foreground))] mb-3">Configuration</h3>
               <div className="space-y-3">
                 {Object.entries(fallbackDetails.configuration).map(([key, value], index) => (
                   <div key={index} className="flex justify-between items-start">
-                    <span className="text-sm font-medium text-gray-700 flex-shrink-0 w-1/3">{key}:</span>
+                    <span className="text-sm font-medium text-[hsl(var(--foreground))] flex-shrink-0 w-1/3">{key}:</span>
                     <span className="text-sm text-gray-600 text-right">{value}</span>
                   </div>
                 ))}
@@ -397,14 +397,14 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-sm font-medium text-gray-900 mb-2">Description</h3>
+            <h3 className="text-sm font-medium text-[hsl(var(--foreground))] mb-2">Description</h3>
             <p className="text-gray-600 text-sm leading-relaxed">{details.description}</p>
           </div>
 
           <Separator />
 
           <div>
-            <h3 className="text-sm font-medium text-gray-900 mb-3">Capabilities</h3>
+            <h3 className="text-sm font-medium text-[hsl(var(--foreground))] mb-3">Capabilities</h3>
             <div className="grid grid-cols-2 gap-2">
               {details.capabilities.map((capability, index) => (
                 <div key={index} className="flex items-center gap-2 text-sm">
@@ -418,11 +418,11 @@ export function ComponentDetailsModal({ isOpen, component, onClose }: ComponentD
           <Separator />
 
           <div>
-            <h3 className="text-sm font-medium text-gray-900 mb-3">Configuration</h3>
+            <h3 className="text-sm font-medium text-[hsl(var(--foreground))] mb-3">Configuration</h3>
             <div className="space-y-3">
               {Object.entries(details.configuration).map(([key, value], index) => (
                 <div key={index} className="flex justify-between items-start">
-                  <span className="text-sm font-medium text-gray-700 flex-shrink-0 w-1/3">{key}:</span>
+                  <span className="text-sm font-medium text-[hsl(var(--foreground))] flex-shrink-0 w-1/3">{key}:</span>
                   <span className="text-sm text-gray-600 text-right">{value}</span>
                 </div>
               ))}

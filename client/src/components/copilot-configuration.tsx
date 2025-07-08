@@ -985,7 +985,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       {/* Tabs */}
       <div className="bg-muted/20">
         <div className="px-6 pt-4 pb-4">
-          <div className="border-b border-gray-200">
+          <div className="border-b border-[hsl(var(--border))]">
             <nav className="-mb-px flex space-x-8">
               {[
                 { id: "general", label: "General", icon: Settings },
@@ -1002,7 +1002,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                     className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
                       activeTab === tab.id
                         ? 'border-[var(--theme-primary)] text-[var(--theme-primary)]'
-                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                        : 'border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))] hover:border-[hsl(var(--border))]'
                     }`}
                   >
                     <IconComponent className="w-4 h-4" />
@@ -1368,7 +1368,7 @@ function MyComponent() {
                       </div>
                       
                       {/* Configuration Toggles */}
-                      <div className="space-y-4 pb-6 border-b border-gray-200 mb-6">
+                      <div className="space-y-4 pb-6 border-b border-[hsl(var(--border))] mb-6">
                         
                         
                         <div className="flex items-center justify-between">
@@ -1378,7 +1378,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#e0fff8] text-gray-900 border-gray-200 max-w-xs">
+                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] border-[hsl(var(--border))] max-w-xs">
                                 <p>Show a document preview pane alongside the chat interface</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1405,7 +1405,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#e0fff8] text-gray-900 border-gray-200 max-w-xs">
+                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] border-[hsl(var(--border))] max-w-xs">
                                 <p>Display source references and citations in AI responses</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1432,7 +1432,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#e0fff8] text-gray-900 border-gray-200 max-w-xs">
+                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] border-[hsl(var(--border))] max-w-xs">
                                 <p>Highlight this copilot in featured listings and recommendations</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1459,7 +1459,7 @@ function MyComponent() {
                               <TooltipTrigger asChild>
                                 <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
-                              <TooltipContent className="bg-[#e0fff8] text-gray-900 border-gray-200 max-w-xs">
+                              <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] border-[hsl(var(--border))] max-w-xs">
                                 <p>Require users to enter a custom prompt before starting conversations</p>
                               </TooltipContent>
                             </Tooltip>
@@ -1542,7 +1542,7 @@ function MyComponent() {
               </div>
               
               {/* Save Footer */}
-              <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
+              <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-[hsl(var(--border))] px-6 py-4 z-10">
                 <div className="flex justify-between items-center">
                   <div></div>
                   <div className="flex items-center gap-6">
@@ -1597,7 +1597,7 @@ function MyComponent() {
 
                   {/* Agents Section */}
                   <div className="space-y-4 mb-8">
-                    <h3 className="text-md font-medium text-gray-900">Agents</h3>
+                    <h3 className="text-md font-medium text-[hsl(var(--foreground))]">Agents</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                       <Card className="hover:shadow-md transition-shadow h-full flex flex-col relative">
                         <Button 
@@ -1613,7 +1613,7 @@ function MyComponent() {
                           <div className="flex items-start gap-3">
                             <PenTool className="w-8 h-8 text-purple-600" />
                             <div className="flex-1 min-w-0 pr-8">
-                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Content Creator</h3>
+                              <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Content Creator</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
@@ -1666,7 +1666,7 @@ function MyComponent() {
                           <div className="flex items-start gap-3">
                             <BarChart className="w-8 h-8 text-blue-600" />
                             <div className="flex-1 min-w-0 pr-8">
-                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Data Analyst</h3>
+                              <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Data Analyst</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
@@ -1709,7 +1709,7 @@ function MyComponent() {
 
                   {/* Tools Section */}
                   <div className="space-y-4 mb-8">
-                    <h3 className="text-md font-medium text-gray-900">Tools</h3>
+                    <h3 className="text-md font-medium text-[hsl(var(--foreground))]">Tools</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                       <Card className="hover:shadow-md transition-shadow h-full flex flex-col relative">
                         <Button 
@@ -1729,7 +1729,7 @@ function MyComponent() {
                               </svg>
                             </div>
                             <div className="flex-1 min-w-0 pr-8">
-                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Gmail</h3>
+                              <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Gmail</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
@@ -1783,7 +1783,7 @@ function MyComponent() {
                               </svg>
                             </div>
                             <div className="flex-1 min-w-0 pr-8">
-                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Slack</h3>
+                              <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Slack</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
@@ -1820,7 +1820,7 @@ function MyComponent() {
 
                   {/* Workflows Section */}
                   <div className="space-y-4">
-                    <h3 className="text-md font-medium text-gray-900">Workflows</h3>
+                    <h3 className="text-md font-medium text-[hsl(var(--foreground))]">Workflows</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                       <Card className="hover:shadow-md transition-shadow h-full flex flex-col relative">
                         <Button 
@@ -1836,7 +1836,7 @@ function MyComponent() {
                           <div className="flex items-start gap-3">
                             <Zap className="w-8 h-8 text-amber-600" />
                             <div className="flex-1 min-w-0 pr-8">
-                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Content Pipeline</h3>
+                              <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Content Pipeline</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
@@ -1886,7 +1886,7 @@ function MyComponent() {
                           <div className="flex items-start gap-3">
                             <GitBranch className="w-8 h-8 text-green-600" />
                             <div className="flex-1 min-w-0 pr-8">
-                              <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Data Processing</h3>
+                              <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Data Processing</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
@@ -1926,7 +1926,7 @@ function MyComponent() {
 
                   {copilotData.components.length === 0 && (
                     <div className="text-center py-12 text-muted-foreground">
-                      <div className="w-12 h-12 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <div className="w-12 h-12 mx-auto mb-4 bg-[hsl(var(--muted))] rounded-lg flex items-center justify-center">
                         <Plus className="w-6 h-6 text-gray-400" />
                       </div>
                       <p className="text-lg font-medium mb-2">No components added yet</p>
@@ -2452,37 +2452,37 @@ function MyComponent() {
                         <div className="border rounded-lg p-4">
                           <h4 className="font-medium mb-3">Sheet Preview: Q1 2024 Sales</h4>
                           <div className="overflow-x-auto">
-                            <table className="w-full border-collapse border border-gray-300">
+                            <table className="w-full border-collapse border border-[hsl(var(--border))]">
                               <thead>
-                                <tr className="bg-gray-50">
-                                  <th className="border border-gray-300 p-2 text-left">Region</th>
-                                  <th className="border border-gray-300 p-2 text-left">Product</th>
-                                  <th className="border border-gray-300 p-2 text-left">Sales Rep</th>
-                                  <th className="border border-gray-300 p-2 text-right">Revenue</th>
-                                  <th className="border border-gray-300 p-2 text-right">Units Sold</th>
+                                <tr className="bg-[hsl(var(--muted))]">
+                                  <th className="border border-[hsl(var(--border))] p-2 text-left">Region</th>
+                                  <th className="border border-[hsl(var(--border))] p-2 text-left">Product</th>
+                                  <th className="border border-[hsl(var(--border))] p-2 text-left">Sales Rep</th>
+                                  <th className="border border-[hsl(var(--border))] p-2 text-right">Revenue</th>
+                                  <th className="border border-[hsl(var(--border))] p-2 text-right">Units Sold</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
-                                  <td className="border border-gray-300 p-2">North America</td>
-                                  <td className="border border-gray-300 p-2">Product A</td>
-                                  <td className="border border-gray-300 p-2">John Smith</td>
-                                  <td className="border border-gray-300 p-2 text-right">$125,000</td>
-                                  <td className="border border-gray-300 p-2 text-right">250</td>
+                                  <td className="border border-[hsl(var(--border))] p-2">North America</td>
+                                  <td className="border border-[hsl(var(--border))] p-2">Product A</td>
+                                  <td className="border border-[hsl(var(--border))] p-2">John Smith</td>
+                                  <td className="border border-[hsl(var(--border))] p-2 text-right">$125,000</td>
+                                  <td className="border border-[hsl(var(--border))] p-2 text-right">250</td>
                                 </tr>
                                 <tr>
-                                  <td className="border border-gray-300 p-2">Europe</td>
-                                  <td className="border border-gray-300 p-2">Product B</td>
-                                  <td className="border border-gray-300 p-2">Sarah Wilson</td>
-                                  <td className="border border-gray-300 p-2 text-right">$89,500</td>
-                                  <td className="border border-gray-300 p-2 text-right">179</td>
+                                  <td className="border border-[hsl(var(--border))] p-2">Europe</td>
+                                  <td className="border border-[hsl(var(--border))] p-2">Product B</td>
+                                  <td className="border border-[hsl(var(--border))] p-2">Sarah Wilson</td>
+                                  <td className="border border-[hsl(var(--border))] p-2 text-right">$89,500</td>
+                                  <td className="border border-[hsl(var(--border))] p-2 text-right">179</td>
                                 </tr>
                                 <tr>
-                                  <td className="border border-gray-300 p-2">Asia Pacific</td>
-                                  <td className="border border-gray-300 p-2">Product C</td>
-                                  <td className="border border-gray-300 p-2">Mike Chen</td>
-                                  <td className="border border-gray-300 p-2 text-right">$156,200</td>
-                                  <td className="border border-gray-300 p-2 text-right">312</td>
+                                  <td className="border border-[hsl(var(--border))] p-2">Asia Pacific</td>
+                                  <td className="border border-[hsl(var(--border))] p-2">Product C</td>
+                                  <td className="border border-[hsl(var(--border))] p-2">Mike Chen</td>
+                                  <td className="border border-[hsl(var(--border))] p-2 text-right">$156,200</td>
+                                  <td className="border border-[hsl(var(--border))] p-2 text-right">312</td>
                                 </tr>
                               </tbody>
                             </table>
@@ -2532,7 +2532,7 @@ function MyComponent() {
                           <h3 className="text-xl font-semibold mb-2">Team Meeting Notes</h3>
                           <p className="text-muted-foreground">PDF Document - 564 KB</p>
                         </div>
-                        <div className="border rounded-lg p-6 bg-gray-50">
+                        <div className="border rounded-lg p-6 bg-[hsl(var(--muted))]">
                           <div className="space-y-4">
                             <div>
                               <h4 className="font-semibold text-lg">Weekly Team Meeting - March 15, 2024</h4>
@@ -3428,7 +3428,7 @@ Add sections, lists, and more..."
               
               {mdEditorTab === 'rtf' && (
                 <div className="h-96 overflow-y-auto border rounded-lg">
-                  <div className="border-b p-2 bg-gray-50 flex gap-1">
+                  <div className="border-b p-2 bg-[hsl(var(--muted))] flex gap-1">
                     <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
                       <strong>B</strong>
                     </Button>

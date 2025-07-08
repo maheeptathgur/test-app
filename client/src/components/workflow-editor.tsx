@@ -306,7 +306,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
       email: 'bg-red-100 text-red-700',
       analytics: 'bg-orange-100 text-orange-700'
     };
-    return colors[type as keyof typeof colors] || 'bg-gray-100 text-gray-700';
+    return colors[type as keyof typeof colors] || 'bg-[hsl(var(--muted))] text-[hsl(var(--foreground))]';
   };
 
   const tabs = [
@@ -322,7 +322,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
       <div className="workflow-header flex items-center justify-between px-8 pt-8 pb-6 bg-[#ffffff00]">
         <div className="flex items-center gap-4">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">{workflowName}</h1>
+            <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">{workflowName}</h1>
             <p className="text-sm text-gray-600">{workflowDescription}</p>
           </div>
         </div>
@@ -340,7 +340,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
             className={`flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab.id
                 ? 'border-[var(--theme-primary)] text-[var(--theme-primary)]'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
+                : 'border-transparent text-[hsl(var(--muted-foreground))] hover:text-[hsl(var(--foreground))]'
             }`}
           >
             <tab.icon className="w-4 h-4" />
@@ -354,7 +354,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
           <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f6f6f6' }}>
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-semibold text-gray-900">Workflow Steps</h2>
+                <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Steps</h2>
                 <p className="text-sm text-gray-600">Configure the sequence of actions in your workflow</p>
               </div>
               <Button variant="outline" className="gap-2" onClick={addNewStep}>
@@ -376,7 +376,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                           {getStatusIcon(step.status)}
                         </div>
                         <div>
-                          <h3 className="font-medium text-gray-900">{step.name}</h3>
+                          <h3 className="font-medium text-[hsl(var(--foreground))]">{step.name}</h3>
                           <p className="text-sm text-gray-600">{step.description}</p>
                         </div>
                       </div>
@@ -442,7 +442,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-3">
                           <div>
-                            <Label className="text-xs font-medium text-gray-700">Step Name</Label>
+                            <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Step Name</Label>
                             <Input 
                               value={editingSteps[step.id] ? (stepValues[step.id]?.name || step.name) : step.name}
                               onChange={(e) => updateStepValue(step.id, 'name', e.target.value)}
@@ -451,7 +451,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                             />
                           </div>
                           <div>
-                            <Label className="text-xs font-medium text-gray-700">Description</Label>
+                            <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Description</Label>
                             <Textarea 
                               value={editingSteps[step.id] ? (stepValues[step.id]?.description || step.description) : step.description}
                               onChange={(e) => updateStepValue(step.id, 'description', e.target.value)}
@@ -464,7 +464,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                           {/* Input Parameters (for agents and tools) */}
                           {step.input && (
                             <div>
-                              <Label className="text-xs font-medium text-gray-700">Input Parameters</Label>
+                              <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Input Parameters</Label>
                               <div className="mt-1 p-3 bg-blue-50 rounded-md">
                                 <div className="text-xs text-blue-600 font-medium mb-2">Source: {step.input.source}</div>
                                 <code className="text-xs text-blue-700">
@@ -479,7 +479,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                           {step.isTrigger && editingSteps[step.id] ? (
                             <>
                               <div>
-                                <Label className="text-xs font-medium text-gray-700">Trigger Type</Label>
+                                <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Trigger Type</Label>
                                 <Select 
                                   defaultValue={step.config.triggerType}
                                   onValueChange={setSelectedTriggerType}
@@ -508,7 +508,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                               {selectedTriggerType === 'On Message' && (
                                 <>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Message Condition</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Message Condition</Label>
                                     <Select defaultValue="text_contains">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -520,7 +520,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     </Select>
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Search Text/Pattern</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Search Text/Pattern</Label>
                                     <Input 
                                       defaultValue="pricing"
                                       className="mt-1"
@@ -528,7 +528,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     />
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Message Sender</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Message Sender</Label>
                                     <Select defaultValue="user">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -542,7 +542,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     </Select>
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Specific Copilot (Optional)</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Specific Copilot (Optional)</Label>
                                     <Select defaultValue="any">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -563,7 +563,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                               {selectedTriggerType === 'On Event' && (
                                 <>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Event Source</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Event Source</Label>
                                     <Select defaultValue="tool_event">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -576,7 +576,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     </Select>
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Event Type</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Event Type</Label>
                                     <Select defaultValue="new_row_airtable">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -591,7 +591,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     </Select>
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Filter Conditions (Optional)</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Filter Conditions (Optional)</Label>
                                     <Input 
                                       className="mt-1"
                                       placeholder="e.g. field contains X, status = active"
@@ -604,7 +604,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                               {selectedTriggerType === 'On Schedule' && (
                                 <>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Frequency</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Frequency</Label>
                                     <Select defaultValue="daily">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -619,7 +619,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     </Select>
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Schedule Details</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Schedule Details</Label>
                                     <Input 
                                       defaultValue="09:00"
                                       className="mt-1"
@@ -627,7 +627,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     />
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Timezone</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Timezone</Label>
                                     <Select defaultValue="local">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -647,14 +647,14 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                               {selectedTriggerType === 'On External Call' && (
                                 <>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Webhook Endpoint</Label>
-                                    <div className="mt-1 p-2 bg-gray-50 rounded border text-xs font-mono">
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Webhook Endpoint</Label>
+                                    <div className="mt-1 p-2 bg-[hsl(var(--muted))] rounded border text-xs font-mono">
                                       https://knolli.app/webhook/wf-email-campaign-abc123
                                     </div>
-                                    <p className="text-xs text-gray-500 mt-1">Auto-generated unique URL for this workflow</p>
+                                    <p className="text-xs text-[hsl(var(--muted-foreground))] mt-1">Auto-generated unique URL for this workflow</p>
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Expected Payload Format</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Expected Payload Format</Label>
                                     <Select defaultValue="json">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -667,7 +667,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     </Select>
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Authorization</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Authorization</Label>
                                     <Select defaultValue="api_key">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -681,7 +681,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     </Select>
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Response Behavior</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Response Behavior</Label>
                                     <Select defaultValue="return_json">
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -702,7 +702,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                               {editingSteps[step.id] ? (
                                 <>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Step Type</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Step Type</Label>
                                     <Select defaultValue={step.type}>
                                       <SelectTrigger className="mt-1">
                                         <SelectValue />
@@ -717,7 +717,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                   {/* Agent Selection */}
                                   {step.type === 'agent' && (
                                     <div>
-                                      <Label className="text-xs font-medium text-gray-700">Select Agent</Label>
+                                      <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Select Agent</Label>
                                       <Select defaultValue={step.config.agentId || 'content-creator'}>
                                         <SelectTrigger className="mt-1">
                                           <SelectValue />
@@ -737,7 +737,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                   {/* Tool Selection */}
                                   {step.type === 'tool' && (
                                     <div>
-                                      <Label className="text-xs font-medium text-gray-700">Select Tool</Label>
+                                      <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Select Tool</Label>
                                       <Select defaultValue={step.config.toolId || 'gmail'}>
                                         <SelectTrigger className="mt-1">
                                           <SelectValue />
@@ -759,7 +759,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                   )}
 
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Name</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Name</Label>
                                     <Input 
                                       value={stepValues[step.id]?.name || step.name}
                                       onChange={(e) => updateStepValue(step.id, 'name', e.target.value)}
@@ -767,7 +767,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                     />
                                   </div>
                                   <div>
-                                    <Label className="text-xs font-medium text-gray-700">Description</Label>
+                                    <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Description</Label>
                                     <Textarea 
                                       value={stepValues[step.id]?.description || step.description}
                                       onChange={(e) => updateStepValue(step.id, 'description', e.target.value)}
@@ -780,7 +780,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                   {step.type === 'agent' && (
                                     <>
                                       <div>
-                                        <Label className="text-xs font-medium text-gray-700">Agent Instructions</Label>
+                                        <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Agent Instructions</Label>
                                         <Textarea 
                                           defaultValue={step.config.instructions || "Process the input data and generate appropriate content"}
                                           className="mt-1"
@@ -789,7 +789,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                         />
                                       </div>
                                       <div>
-                                        <Label className="text-xs font-medium text-gray-700">Output Format</Label>
+                                        <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Output Format</Label>
                                         <Select defaultValue={step.config.outputFormat || 'text'}>
                                           <SelectTrigger className="mt-1">
                                             <SelectValue />
@@ -810,7 +810,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                   {step.type === 'tool' && (
                                     <>
                                       <div>
-                                        <Label className="text-xs font-medium text-gray-700">Action</Label>
+                                        <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Action</Label>
                                         <Select defaultValue={step.config.action || 'send_email'}>
                                           <SelectTrigger className="mt-1">
                                             <SelectValue />
@@ -855,7 +855,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                         </Select>
                                       </div>
                                       <div>
-                                        <Label className="text-xs font-medium text-gray-700">Parameters</Label>
+                                        <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Parameters</Label>
                                         <Textarea 
                                           defaultValue={JSON.stringify(step.config.parameters || {}, null, 2)}
                                           className="mt-1 font-mono text-xs"
@@ -868,9 +868,9 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                                 </>
                               ) : (
                                 <div>
-                                  <Label className="text-xs font-medium text-gray-700">Configuration</Label>
-                                  <div className="mt-1 p-3 bg-gray-50 rounded-md">
-                                    <code className="text-xs text-gray-700">
+                                  <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Configuration</Label>
+                                  <div className="mt-1 p-3 bg-[hsl(var(--muted))] rounded-md">
+                                    <code className="text-xs text-[hsl(var(--foreground))]">
                                       {JSON.stringify(step.config, null, 2)}
                                     </code>
                                   </div>
@@ -882,7 +882,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                           {/* Output Parameters (for agents and tools) */}
                           {step.output && (
                             <div>
-                              <Label className="text-xs font-medium text-gray-700">Output Parameters</Label>
+                              <Label className="text-xs font-medium text-[hsl(var(--foreground))]">Output Parameters</Label>
                               <div className="mt-1 p-3 bg-green-50 rounded-md">
                                 <code className="text-xs text-green-700">
                                   {JSON.stringify(step.output.schema, null, 2)}
@@ -937,7 +937,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         {activeTab === 'settings' && (
           <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f6f6f6' }}>
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">Workflow Settings</h2>
+              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Settings</h2>
               <p className="text-sm text-gray-600">Configure general workflow properties and behavior</p>
             </div>
 
@@ -1061,7 +1061,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
           <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f6f6f6' }}>
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-semibold text-gray-900">Workflow Variables</h2>
+                <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Variables</h2>
                 <p className="text-sm text-gray-600">Define reusable variables for your workflow</p>
               </div>
               <Button variant="outline" className="gap-2">
@@ -1116,7 +1116,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
         {activeTab === 'testing' && (
           <div className="workflow-tab-content px-8 pb-24 pt-6 space-y-6" style={{ backgroundColor: '#f6f6f6' }}>
             <div>
-              <h2 className="text-lg font-semibold text-gray-900">Workflow Testing</h2>
+              <h2 className="text-lg font-semibold text-[hsl(var(--foreground))]">Workflow Testing</h2>
               <p className="text-sm text-gray-600">Test your workflow with sample data</p>
             </div>
 
@@ -1164,7 +1164,7 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
                     <div className="space-y-2">
                       <div className="text-sm font-medium">Step Results:</div>
                       {workflowData.steps.map((step, index) => (
-                        <div key={step.id} className="flex items-center gap-2 p-2 bg-gray-50 rounded">
+                        <div key={step.id} className="flex items-center gap-2 p-2 bg-[hsl(var(--muted))] rounded">
                           <span className="w-5 h-5 theme-primary text-white rounded-full flex items-center justify-center text-xs">
                             {index + 1}
                           </span>
@@ -1178,8 +1178,8 @@ export function WorkflowEditor({ workflowId = 'email-campaign', onBack }: Workfl
 
                     <div>
                       <div className="text-sm font-medium mb-2">Output:</div>
-                      <div className="p-3 bg-gray-50 rounded-md">
-                        <code className="text-xs text-gray-700">
+                      <div className="p-3 bg-[hsl(var(--muted))] rounded-md">
+                        <code className="text-xs text-[hsl(var(--foreground))]">
                           {JSON.stringify({
                             email_sent: true,
                             message_id: "msg_123456",

@@ -123,7 +123,7 @@ export function UserView({ copilots, onToggleFavorite, onStartChat }: UserViewPr
                       </Button>
                     </div>
                     <div className="absolute top-2 right-2">
-                      <Badge variant="secondary" className="bg-white/90 text-gray-700 capitalize">
+                      <Badge variant="secondary" className="bg-white/90 text-[hsl(var(--foreground))] capitalize">
                         {copilot.type}
                       </Badge>
                     </div>

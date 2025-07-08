@@ -55,7 +55,7 @@ export function ProfileSettings() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Profile Settings</h1>
+          <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">Profile Settings</h1>
           <p className="text-gray-600">Manage your personal information and preferences</p>
         </div>
         {!isEditing ? (
@@ -307,7 +307,7 @@ export function ProfileSettings() {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Email Notifications</Label>
-                  <p className="text-sm text-gray-500">Receive notifications via email</p>
+                  <p className="text-sm text-[hsl(var(--muted-foreground))]">Receive notifications via email</p>
                 </div>
                 <Switch
                   checked={profileData.emailNotifications}
@@ -321,7 +321,7 @@ export function ProfileSettings() {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Slack Notifications</Label>
-                  <p className="text-sm text-gray-500">Get pinged in Slack for important updates</p>
+                  <p className="text-sm text-[hsl(var(--muted-foreground))]">Get pinged in Slack for important updates</p>
                 </div>
                 <Switch
                   checked={profileData.slackNotifications}
@@ -335,7 +335,7 @@ export function ProfileSettings() {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label>Weekly Digest</Label>
-                  <p className="text-sm text-gray-500">Receive a weekly summary of activity</p>
+                  <p className="text-sm text-[hsl(var(--muted-foreground))]">Receive a weekly summary of activity</p>
                 </div>
                 <Switch
                   checked={profileData.weeklyDigest}

@@ -251,7 +251,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
     return (
       <div className="h-full bg-white flex flex-col">
         {/* Conversation Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between p-4 border-b border-[hsl(var(--border))]">
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
@@ -269,7 +269,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
                 {getChannelTypeIcon(selectedChannel.type)}
                 <h3 className="font-semibold text-sm">{selectedChannel.name}</h3>
               </div>
-              <p className="text-xs text-gray-500 capitalize">
+              <p className="text-xs text-[hsl(var(--muted-foreground))] capitalize">
                 {selectedChannel.platform} • {selectedChannel.type}
               </p>
             </div>
@@ -298,10 +298,10 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="font-medium text-sm">{message.sender}</span>
-                    <span className="text-xs text-gray-500">{message.timestamp}</span>
+                    <span className="text-xs text-[hsl(var(--muted-foreground))]">{message.timestamp}</span>
                     {message.unread && <Circle className="w-2 h-2 fill-blue-500 text-blue-500" />}
                   </div>
-                  <p className="text-sm text-gray-700 leading-relaxed">{message.content}</p>
+                  <p className="text-sm text-[hsl(var(--foreground))] leading-relaxed">{message.content}</p>
                 </div>
               </div>
             ))}
@@ -309,7 +309,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
         </ScrollArea>
 
         {/* Message Input */}
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-[hsl(var(--border))]">
           <div className="flex gap-2">
             <Input
               value={messageInput}
@@ -334,10 +334,10 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
   return (
     <div className="h-full bg-white flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
+      <div className="flex items-center justify-between p-4 border-b border-[hsl(var(--border))]">
         <div>
           <h2 className="font-semibold text-lg">Universal Messaging</h2>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-[hsl(var(--muted-foreground))]">
             {totalUnreadCount} unread across all platforms
           </p>
         </div>
@@ -359,7 +359,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
       </div>
 
       {/* Search and Filters */}
-      <div className="p-4 space-y-3 border-b border-gray-200">
+      <div className="p-4 space-y-3 border-b border-[hsl(var(--border))]">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <Input
@@ -414,7 +414,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
           {filteredChannels.map((channel) => (
             <div
               key={channel.id}
-              className="p-4 hover:bg-gray-50 cursor-pointer transition-colors"
+              className="p-4 hover:bg-[hsl(var(--muted))] cursor-pointer transition-colors"
               onClick={() => handleChannelSelect(channel)}
             >
               <div className="flex items-start gap-3">
@@ -428,7 +428,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
                   <div className="flex items-center justify-between mb-1">
                     <h3 className="font-medium text-sm truncate">{channel.name}</h3>
                     <div className="flex items-center gap-2 flex-shrink-0">
-                      <span className="text-xs text-gray-500">{channel.lastTimestamp}</span>
+                      <span className="text-xs text-[hsl(var(--muted-foreground))]">{channel.lastTimestamp}</span>
                       {channel.unreadCount > 0 && (
                         <Badge variant="default" className="bg-blue-500 text-white text-xs min-w-[20px] h-5 flex items-center justify-center rounded-full">
                           {channel.unreadCount}
@@ -450,7 +450,7 @@ export function UniversalMessagingApp({ onClose }: { onClose?: () => void }) {
       </ScrollArea>
 
       {/* Quick Actions */}
-      <div className="p-4 border-t border-gray-200 bg-gray-50">
+      <div className="p-4 border-t border-[hsl(var(--border))] bg-[hsl(var(--muted))]">
         <div className="flex justify-between items-center">
           <div className="flex gap-2">
             <Button variant="outline" size="sm">

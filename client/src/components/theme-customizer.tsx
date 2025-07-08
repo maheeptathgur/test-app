@@ -87,7 +87,7 @@ export function ThemeCustomizer() {
                   type="color"
                   value={previewColors.primary}
                   onChange={(e) => handleColorChange('primary', e.target.value)}
-                  className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
+                  className="w-12 h-10 rounded border border-[hsl(var(--border))] cursor-pointer"
                 />
                 <div className="flex-1">
                   <input
@@ -97,7 +97,7 @@ export function ThemeCustomizer() {
                     className="w-full px-3 py-2 border rounded-md text-sm font-mono"
                     placeholder="#008062"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Buttons, toggles, active states</p>
+                  <p className="text-xs text-[hsl(var(--muted-foreground))] mt-1">Buttons, toggles, active states</p>
                 </div>
               </div>
             </div>
@@ -110,7 +110,7 @@ export function ThemeCustomizer() {
                   type="color"
                   value={previewColors.background}
                   onChange={(e) => handleColorChange('background', e.target.value)}
-                  className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
+                  className="w-12 h-10 rounded border border-[hsl(var(--border))] cursor-pointer"
                 />
                 <div className="flex-1">
                   <input
@@ -120,7 +120,7 @@ export function ThemeCustomizer() {
                     className="w-full px-3 py-2 border rounded-md text-sm font-mono"
                     placeholder="#e6eeef"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Sidebar, card backgrounds</p>
+                  <p className="text-xs text-[hsl(var(--muted-foreground))] mt-1">Sidebar, card backgrounds</p>
                 </div>
               </div>
             </div>
@@ -133,7 +133,7 @@ export function ThemeCustomizer() {
                   type="color"
                   value={previewColors.text}
                   onChange={(e) => handleColorChange('text', e.target.value)}
-                  className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
+                  className="w-12 h-10 rounded border border-[hsl(var(--border))] cursor-pointer"
                 />
                 <div className="flex-1">
                   <input
@@ -143,7 +143,7 @@ export function ThemeCustomizer() {
                     className="w-full px-3 py-2 border rounded-md text-sm font-mono"
                     placeholder="#1a1a1a"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Primary text, headings</p>
+                  <p className="text-xs text-[hsl(var(--muted-foreground))] mt-1">Primary text, headings</p>
                 </div>
               </div>
             </div>
@@ -156,7 +156,7 @@ export function ThemeCustomizer() {
                   type="color"
                   value={previewColors.accent}
                   onChange={(e) => handleColorChange('accent', e.target.value)}
-                  className="w-12 h-10 rounded border border-gray-300 cursor-pointer"
+                  className="w-12 h-10 rounded border border-[hsl(var(--border))] cursor-pointer"
                 />
                 <div className="flex-1">
                   <input
@@ -166,7 +166,7 @@ export function ThemeCustomizer() {
                     className="w-full px-3 py-2 border rounded-md text-sm font-mono"
                     placeholder="#E0FFF8"
                   />
-                  <p className="text-xs text-gray-500 mt-1">Tooltips, highlights, accents</p>
+                  <p className="text-xs text-[hsl(var(--muted-foreground))] mt-1">Tooltips, highlights, accents</p>
                 </div>
               </div>
             </div>

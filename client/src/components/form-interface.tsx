@@ -322,9 +322,9 @@ Stanford University | 2015
   return (
     <>
       {/* Form Sidebar - positioned next to main sidebar */}
-      <div className="w-80 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col h-full">
+      <div className="w-80 flex-shrink-0 bg-white border-r border-[hsl(var(--border))] flex flex-col h-full">
         {/* Sidebar Header */}
-        <div className="p-4 border-b border-gray-200">
+        <div className="p-4 border-b border-[hsl(var(--border))]">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center flex-shrink-0">
               <FileText className="w-4 h-4 text-indigo-600" />
@@ -370,7 +370,7 @@ Stanford University | 2015
                 Current Resume
               </label>
               {uploadedFile ? (
-                <div className="border-2 border-dashed border-gray-200 rounded-lg p-4">
+                <div className="border-2 border-dashed border-[hsl(var(--border))] rounded-lg p-4">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <File className="w-4 h-4 text-blue-500" />
@@ -393,7 +393,7 @@ Stanford University | 2015
                 </div>
               ) : (
                 <div 
-                  className="border-2 border-dashed border-gray-200 rounded-lg p-6 text-center cursor-pointer hover:border-gray-300 transition-colors"
+                  className="border-2 border-dashed border-[hsl(var(--border))] rounded-lg p-6 text-center cursor-pointer hover:border-[hsl(var(--border))] transition-colors"
                   onClick={handleUploadClick}
                 >
                   <Upload className="w-6 h-6 text-gray-400 mx-auto mb-2" />
@@ -413,7 +413,7 @@ Stanford University | 2015
         </div>
         
         {/* Sidebar Generate Button */}
-        <div className="p-4 border-t border-gray-200">
+        <div className="p-4 border-t border-[hsl(var(--border))]">
           <Button 
             onClick={handleGenerate}
             disabled={!formData.prompt?.trim() || isGenerating}
@@ -438,7 +438,7 @@ Stanford University | 2015
       {/* Main Content Area - Results and Chat */}
       <div className="flex-1 flex flex-col bg-white w-full">
         {/* Results Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+        <div className="flex items-center justify-between p-4 border-b border-[hsl(var(--border))]">
           <div>
             <h2 className="font-semibold text-foreground">AI-Generated Results</h2>
             <p className="text-sm text-muted-foreground">
@@ -494,12 +494,12 @@ Stanford University | 2015
           ) : (
             <div className="flex-1 flex items-center justify-center text-center w-full">
               <div className="space-y-3">
-                <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto flex-shrink-0">
+                <div className="w-12 h-12 bg-[hsl(var(--muted))] rounded-full flex items-center justify-center mx-auto flex-shrink-0">
                   <FileText className="w-6 h-6 text-gray-400" />
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900">Ready to generate</p>
-                  <p className="text-xs text-gray-500">Fill out the form and click Generate to see your results</p>
+                  <p className="text-sm font-medium text-[hsl(var(--foreground))]">Ready to generate</p>
+                  <p className="text-xs text-[hsl(var(--muted-foreground))]">Fill out the form and click Generate to see your results</p>
                 </div>
               </div>
             </div>
@@ -508,7 +508,7 @@ Stanford University | 2015
 
         {/* Chat Input Area - Only shown after generation */}
         {showResult && (
-          <div className="border-t border-gray-200 p-4">
+          <div className="border-t border-[hsl(var(--border))] p-4">
             <div className="flex gap-3">
               <Textarea
                 placeholder="Ask me to modify the content, add sections, change tone..."

@@ -130,7 +130,7 @@ export function AccountSettings() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Account Settings</h1>
+        <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">Account Settings</h1>
         <p className="text-gray-600">Manage your account security, privacy, and connected services</p>
       </div>
 
@@ -151,7 +151,7 @@ export function AccountSettings() {
                 <div className="flex items-center justify-between">
                   <div>
                     <Label className="text-base font-medium">Password</Label>
-                    <p className="text-sm text-gray-500">Last updated 3 months ago</p>
+                    <p className="text-sm text-[hsl(var(--muted-foreground))]">Last updated 3 months ago</p>
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
@@ -250,7 +250,7 @@ export function AccountSettings() {
                       {twoFactorEnabled ? "Enabled" : "Disabled"}
                     </Badge>
                   </div>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-[hsl(var(--muted-foreground))]">
                     {twoFactorEnabled ? "Extra security with authenticator app" : "Enhance account security"}
                   </p>
                 </div>
@@ -266,7 +266,7 @@ export function AccountSettings() {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label className="text-base font-medium">Security Alerts</Label>
-                  <p className="text-sm text-gray-500">Get notified of suspicious activity</p>
+                  <p className="text-sm text-[hsl(var(--muted-foreground))]">Get notified of suspicious activity</p>
                 </div>
                 <Switch
                   checked={securityAlerts}
@@ -295,7 +295,7 @@ export function AccountSettings() {
                         {key.status}
                       </Badge>
                     </div>
-                    <p className="text-sm text-gray-500">{key.description}</p>
+                    <p className="text-sm text-[hsl(var(--muted-foreground))]">{key.description}</p>
                     <p className="text-xs text-gray-400">Created {key.created} • Last used {key.lastUsed}</p>
                   </div>
                   <div className="flex items-center gap-2">
@@ -342,7 +342,7 @@ export function AccountSettings() {
                           {app.connected ? "Connected" : "Disconnected"}
                         </Badge>
                       </div>
-                      <p className="text-sm text-gray-500">{app.description}</p>
+                      <p className="text-sm text-[hsl(var(--muted-foreground))]">{app.description}</p>
                       <p className="text-xs text-gray-400">Last used {app.lastUsed}</p>
                     </div>
                   </div>
@@ -377,7 +377,7 @@ export function AccountSettings() {
                         <Badge variant="default">Current Session</Badge>
                       )}
                     </div>
-                    <p className="text-sm text-gray-500">{session.location}</p>
+                    <p className="text-sm text-[hsl(var(--muted-foreground))]">{session.location}</p>
                     <p className="text-xs text-gray-400">IP: {session.ip} • {session.lastActive}</p>
                   </div>
                   {!session.current && (
@@ -407,7 +407,7 @@ export function AccountSettings() {
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label className="text-base font-medium">Export Account Data</Label>
-                  <p className="text-sm text-gray-500">Download a copy of your data</p>
+                  <p className="text-sm text-[hsl(var(--muted-foreground))]">Download a copy of your data</p>
                 </div>
                 <Button variant="outline" size="sm">
                   <Download className="w-4 h-4 mr-2" />
@@ -421,7 +421,7 @@ export function AccountSettings() {
               <div className="space-y-4">
                 <div>
                   <Label className="text-base font-medium text-red-600">Danger Zone</Label>
-                  <p className="text-sm text-gray-500">Irreversible actions that affect your account</p>
+                  <p className="text-sm text-[hsl(var(--muted-foreground))]">Irreversible actions that affect your account</p>
                 </div>
                 <Dialog open={deleteAccountOpen} onOpenChange={setDeleteAccountOpen}>
                   <DialogTrigger asChild>

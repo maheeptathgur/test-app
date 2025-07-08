@@ -38,7 +38,7 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
       case 'Google Drive':
         return <HardDrive className="w-8 h-8 text-blue-600" />;
       case 'Notion':
-        return <FileText className="w-8 h-8 text-gray-700" />;
+        return <FileText className="w-8 h-8 text-[hsl(var(--foreground))]" />;
       default:
         return <Globe className="w-8 h-8 text-gray-600" />;
     }
@@ -47,7 +47,7 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
   if (!tool) {
     return (
       <div className="flex items-center justify-center h-64">
-        <p className="text-gray-500">No tool selected</p>
+        <p className="text-[hsl(var(--muted-foreground))]">No tool selected</p>
       </div>
     );
   }
@@ -146,7 +146,7 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
         </Card>
       </div>
       {/* Sticky Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-8 py-4 z-10">
+      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-[hsl(var(--border))] px-8 py-4 z-10">
         <div className="flex justify-between items-center">
           {/* Success Message */}
           <div className="flex-1">

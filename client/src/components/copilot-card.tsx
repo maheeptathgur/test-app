@@ -117,7 +117,7 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
         <div className="mb-4">
           <button
             onClick={() => setIsComponentsExpanded(!isComponentsExpanded)}
-            className="flex items-center gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors mb-2"
+            className="flex items-center gap-2 text-sm font-medium text-[hsl(var(--foreground))] hover:text-[hsl(var(--foreground))] transition-colors mb-2"
           >
             <ChevronDown className={`w-4 h-4 transition-transform ${isComponentsExpanded ? 'rotate-180' : ''}`} />
             Components ({copilot.components.length})
