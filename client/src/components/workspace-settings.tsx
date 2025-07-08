@@ -19,6 +19,30 @@ export function WorkspaceSettings() {
   const [activeTab, setActiveTab] = useState("general");
   const { updateColors, resetToDefault: resetThemeToDefault } = useTheme();
   
+  // Helper function to convert hex to HSL format for shadcn/ui
+  const hexToHSL = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16) / 255;
+    const g = parseInt(hex.slice(3, 5), 16) / 255;
+    const b = parseInt(hex.slice(5, 7), 16) / 255;
+
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    let h = 0, s = 0, l = (max + min) / 2;
+
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      switch (max) {
+        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+        case g: h = (b - r) / d + 2; break;
+        case b: h = (r - g) / d + 4; break;
+      }
+      h /= 6;
+    }
+
+    return `${Math.round(h * 360)} ${Math.round(s * 100)}% ${Math.round(l * 100)}%`;
+  };
+  
   // Theme colors state
   const [themeColors, setThemeColors] = useState({
     primary: "#008062",
@@ -127,28 +151,72 @@ export function WorkspaceSettings() {
   };
 
   const applyThemeChanges = () => {
-    // Map our detailed theme colors to the theme context format
+    // Apply all CSS custom properties directly to match our 9-color system
+    const root = document.documentElement;
+    
+    // Core theme properties
+    root.style.setProperty('--theme-primary', themeColors.primary);
+    root.style.setProperty('--theme-primary-hover', themeColors.primaryHover);
+    root.style.setProperty('--theme-primary-light', themeColors.primaryHover);
+    
+    // Background properties
+    root.style.setProperty('--theme-background', themeColors.workspaceBg);
+    root.style.setProperty('--theme-background-light', themeColors.contentBg);
+    root.style.setProperty('--theme-background-dark', themeColors.borders);
+    
+    // Text properties
+    root.style.setProperty('--theme-text', themeColors.primaryText);
+    root.style.setProperty('--theme-text-muted', themeColors.secondaryText);
+    root.style.setProperty('--theme-text-light', themeColors.secondaryText);
+    
+    // Accent properties
+    root.style.setProperty('--theme-accent', themeColors.accent);
+    root.style.setProperty('--theme-accent-dark', themeColors.accent);
+
+    // Additional variables for shadcn/ui compatibility (need HSL format)
+    root.style.setProperty('--background', hexToHSL(themeColors.contentBg));
+    root.style.setProperty('--card', hexToHSL(themeColors.cardBg));
+    root.style.setProperty('--foreground', hexToHSL(themeColors.primaryText));
+    root.style.setProperty('--muted-foreground', hexToHSL(themeColors.secondaryText));
+    root.style.setProperty('--border', hexToHSL(themeColors.borders));
+
+    // Also update theme context for consistency
     const themeUpdate = {
       primary: themeColors.primary,
       background: themeColors.workspaceBg,
       text: themeColors.primaryText,
       accent: themeColors.accent
     };
-
-    // Apply theme using the theme context
     updateColors(themeUpdate);
-    
-    // Also manually set the additional CSS custom properties that aren't in the theme context
-    const root = document.documentElement;
-    root.style.setProperty('--theme-primary-hover', themeColors.primaryHover);
-    root.style.setProperty('--theme-background-light', themeColors.contentBg);
-    root.style.setProperty('--theme-background-dark', themeColors.borders);
-    root.style.setProperty('--theme-text-muted', themeColors.secondaryText);
   };
 
   const resetToDefault = () => {
     setThemeColors(presetThemes.default);
-    // Reset using theme context
+    
+    // Apply default theme manually to ensure all properties are set
+    const root = document.documentElement;
+    const defaultTheme = presetThemes.default;
+    
+    root.style.setProperty('--theme-primary', defaultTheme.primary);
+    root.style.setProperty('--theme-primary-hover', defaultTheme.primaryHover);
+    root.style.setProperty('--theme-primary-light', defaultTheme.primaryHover);
+    root.style.setProperty('--theme-background', defaultTheme.workspaceBg);
+    root.style.setProperty('--theme-background-light', defaultTheme.contentBg);
+    root.style.setProperty('--theme-background-dark', defaultTheme.borders);
+    root.style.setProperty('--theme-text', defaultTheme.primaryText);
+    root.style.setProperty('--theme-text-muted', defaultTheme.secondaryText);
+    root.style.setProperty('--theme-text-light', defaultTheme.secondaryText);
+    root.style.setProperty('--theme-accent', defaultTheme.accent);
+    root.style.setProperty('--theme-accent-dark', defaultTheme.accent);
+
+    // Reset shadcn/ui variables (need HSL format)
+    root.style.setProperty('--background', hexToHSL(defaultTheme.contentBg));
+    root.style.setProperty('--card', hexToHSL(defaultTheme.cardBg));
+    root.style.setProperty('--foreground', hexToHSL(defaultTheme.primaryText));
+    root.style.setProperty('--muted-foreground', hexToHSL(defaultTheme.secondaryText));
+    root.style.setProperty('--border', hexToHSL(defaultTheme.borders));
+    
+    // Also reset theme context
     resetThemeToDefault();
   };
   const [workspaceName, setWorkspaceName] = useState("GTM Team");
@@ -522,7 +590,7 @@ export function WorkspaceSettings() {
                 <div className="flex items-center justify-between">
                   <div>
                     <Label className="text-sm font-medium">Theme Preset</Label>
-                    <p className="text-xs text-gray-500 mt-1">Apply a pre-designed color scheme</p>
+                    <p className="text-xs text-[var(--theme-text-muted)] mt-1">Apply a pre-designed color scheme</p>
                   </div>
                   <Select defaultValue="default" onValueChange={handlePresetChange}>
                     <SelectTrigger className="w-48">
@@ -550,7 +618,7 @@ export function WorkspaceSettings() {
                       className="circular-color-picker mx-auto block mb-2" 
                     />
                     <Label className="text-xs font-medium block mb-1">Primary</Label>
-                    <span className="text-xs text-gray-500">{themeColors.primary}</span>
+                    <span className="text-xs text-[var(--theme-text-muted)]">{themeColors.primary}</span>
                   </div>
                   
                   <div className="text-center">
@@ -561,7 +629,7 @@ export function WorkspaceSettings() {
                       className="circular-color-picker mx-auto block mb-2" 
                     />
                     <Label className="text-xs font-medium block mb-1">Primary Hover</Label>
-                    <span className="text-xs text-gray-500">{themeColors.primaryHover}</span>
+                    <span className="text-xs text-[var(--theme-text-muted)]">{themeColors.primaryHover}</span>
                   </div>
                   
                   <div className="text-center">
@@ -572,7 +640,7 @@ export function WorkspaceSettings() {
                       className="circular-color-picker mx-auto block mb-2" 
                     />
                     <Label className="text-xs font-medium block mb-1">Workspace BG</Label>
-                    <span className="text-xs text-gray-500">{themeColors.workspaceBg}</span>
+                    <span className="text-xs text-[var(--theme-text-muted)]">{themeColors.workspaceBg}</span>
                   </div>
                   
                   <div className="text-center">
@@ -583,7 +651,7 @@ export function WorkspaceSettings() {
                       className="circular-color-picker mx-auto block mb-2" 
                     />
                     <Label className="text-xs font-medium block mb-1">Content BG</Label>
-                    <span className="text-xs text-gray-500">{themeColors.contentBg}</span>
+                    <span className="text-xs text-[var(--theme-text-muted)]">{themeColors.contentBg}</span>
                   </div>
                   
                   <div className="text-center">
@@ -594,7 +662,7 @@ export function WorkspaceSettings() {
                       className="circular-color-picker mx-auto block mb-2" 
                     />
                     <Label className="text-xs font-medium block mb-1">Card BG</Label>
-                    <span className="text-xs text-gray-500">{themeColors.cardBg}</span>
+                    <span className="text-xs text-[var(--theme-text-muted)]">{themeColors.cardBg}</span>
                   </div>
                   
                   <div className="text-center">
@@ -605,7 +673,7 @@ export function WorkspaceSettings() {
                       className="circular-color-picker mx-auto block mb-2" 
                     />
                     <Label className="text-xs font-medium block mb-1">Primary Text</Label>
-                    <span className="text-xs text-gray-500">{themeColors.primaryText}</span>
+                    <span className="text-xs text-[var(--theme-text-muted)]">{themeColors.primaryText}</span>
                   </div>
                   
                   <div className="text-center">
@@ -616,7 +684,7 @@ export function WorkspaceSettings() {
                       className="circular-color-picker mx-auto block mb-2" 
                     />
                     <Label className="text-xs font-medium block mb-1">Secondary Text</Label>
-                    <span className="text-xs text-gray-500">{themeColors.secondaryText}</span>
+                    <span className="text-xs text-[var(--theme-text-muted)]">{themeColors.secondaryText}</span>
                   </div>
                   
                   <div className="text-center">
@@ -627,7 +695,7 @@ export function WorkspaceSettings() {
                       className="circular-color-picker mx-auto block mb-2" 
                     />
                     <Label className="text-xs font-medium block mb-1">Borders</Label>
-                    <span className="text-xs text-gray-500">{themeColors.borders}</span>
+                    <span className="text-xs text-[var(--theme-text-muted)]">{themeColors.borders}</span>
                   </div>
                   
                   <div className="text-center">
@@ -638,7 +706,7 @@ export function WorkspaceSettings() {
                       className="circular-color-picker mx-auto block mb-2" 
                     />
                     <Label className="text-xs font-medium block mb-1">Accent</Label>
-                    <span className="text-xs text-gray-500">{themeColors.accent}</span>
+                    <span className="text-xs text-[var(--theme-text-muted)]">{themeColors.accent}</span>
                   </div>
                 </div>
 
@@ -744,7 +812,7 @@ export function WorkspaceSettings() {
       
       {/* Save Footer - Only show for General, Brand, and Security tabs */}
       {(activeTab === "general" || activeTab === "brand" || activeTab === "security") && (
-        <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-gray-200 px-6 py-4 z-10">
+        <div className="fixed bottom-0 left-64 right-0 bg-[var(--theme-background-light)] border-t border-[var(--theme-background-dark)] px-6 py-4 z-10">
           <div className="flex justify-end gap-3">
             <Button variant="outline">
               Cancel
