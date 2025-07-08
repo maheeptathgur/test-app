@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, ChevronUp, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3, Plus, Wrench } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, ChevronUp, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3, Plus, Wrench, Workflow } from "lucide-react";
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import knolliIcon from "@assets/favicon-256_1751332849559.png";
@@ -512,7 +512,7 @@ const navigationItems = [
     children: [
       { id: 'agents', label: 'Agents', icon: Bot },
       { id: 'tools', label: 'Integrations', icon: Settings },
-      { id: 'workflows', label: 'Workflows', icon: BarChart3 },
+      { id: 'workflows', label: 'Workflows', icon: Workflow },
     ]
   },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
