@@ -410,4 +410,21 @@
     border-radius: 50% !important;
   }
 
+  /* Ensure input elements are never affected by parent hover color forcing */
+  input[type="text"], input[type="email"], input[type="password"], input, textarea {
+    color: hsl(var(--foreground)) !important;
+    background-color: white !important;
+  }
+
+  input:focus, input:active, textarea:focus, textarea:active {
+    color: hsl(var(--foreground)) !important;
+    background-color: white !important;
+  }
+
+  /* Override any parent hover effects for inputs */
+  *:hover input, *:hover textarea {
+    color: hsl(var(--foreground)) !important;
+    background-color: white !important;
+  }
+
 }
