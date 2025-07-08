@@ -377,4 +377,36 @@
     padding: 0 !important;
   }
 
+  /* Custom circular color picker styling */
+  input[type="color"].circular-color-picker {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 3rem;
+    height: 3rem;
+    border: none !important;
+    border-radius: 50% !important;
+    cursor: pointer;
+    outline: none;
+    background: none;
+    padding: 0;
+  }
+
+  input[type="color"].circular-color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+    border: none !important;
+    border-radius: 50% !important;
+  }
+
+  input[type="color"].circular-color-picker::-webkit-color-swatch {
+    border: none !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+  }
+
+  input[type="color"].circular-color-picker::-moz-color-swatch {
+    border: none !important;
+    border-radius: 50% !important;
+  }
+
 }

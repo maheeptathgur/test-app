@@ -407,49 +407,49 @@ export function WorkspaceSettings() {
                 {/* Color Customization Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                   <div className="text-center">
-                    <input type="color" defaultValue="#008062" className="w-12 h-12 rounded-full cursor-pointer mx-auto block mb-2 border-0" style={{ border: 'none' }} />
+                    <input type="color" defaultValue="#008062" className="circular-color-picker mx-auto block mb-2" />
                     <Label className="text-xs font-medium block mb-1">Primary</Label>
                     <span className="text-xs text-gray-500">#008062</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#00D2A0" className="w-12 h-12 rounded-full cursor-pointer mx-auto block mb-2 border-0" style={{ border: 'none' }} />
+                    <input type="color" defaultValue="#00D2A0" className="circular-color-picker mx-auto block mb-2" />
                     <Label className="text-xs font-medium block mb-1">Primary Hover</Label>
                     <span className="text-xs text-gray-500">#00D2A0</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#E6EEEF" className="w-12 h-12 rounded-full cursor-pointer mx-auto block mb-2 border-0" style={{ border: 'none' }} />
+                    <input type="color" defaultValue="#E6EEEF" className="circular-color-picker mx-auto block mb-2" />
                     <Label className="text-xs font-medium block mb-1">Workspace BG</Label>
                     <span className="text-xs text-gray-500">#E6EEEF</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#FFFFFF" className="w-12 h-12 rounded-full cursor-pointer mx-auto block mb-2 border-0" style={{ border: 'none' }} />
+                    <input type="color" defaultValue="#FFFFFF" className="circular-color-picker mx-auto block mb-2" />
                     <Label className="text-xs font-medium block mb-1">Card BG</Label>
                     <span className="text-xs text-gray-500">#FFFFFF</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#191C20" className="w-12 h-12 rounded-full cursor-pointer mx-auto block mb-2 border-0" style={{ border: 'none' }} />
+                    <input type="color" defaultValue="#191C20" className="circular-color-picker mx-auto block mb-2" />
                     <Label className="text-xs font-medium block mb-1">Primary Text</Label>
                     <span className="text-xs text-gray-500">#191C20</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#4E5964" className="w-12 h-12 rounded-full cursor-pointer mx-auto block mb-2 border-0" style={{ border: 'none' }} />
+                    <input type="color" defaultValue="#4E5964" className="circular-color-picker mx-auto block mb-2" />
                     <Label className="text-xs font-medium block mb-1">Secondary Text</Label>
                     <span className="text-xs text-gray-500">#4E5964</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#DADEE2" className="w-12 h-12 rounded-full cursor-pointer mx-auto block mb-2 border-0" style={{ border: 'none' }} />
+                    <input type="color" defaultValue="#DADEE2" className="circular-color-picker mx-auto block mb-2" />
                     <Label className="text-xs font-medium block mb-1">Borders</Label>
                     <span className="text-xs text-gray-500">#DADEE2</span>
                   </div>
                   
                   <div className="text-center">
-                    <input type="color" defaultValue="#E0FFF8" className="w-12 h-12 rounded-full cursor-pointer mx-auto block mb-2 border-0" style={{ border: 'none' }} />
+                    <input type="color" defaultValue="#E0FFF8" className="circular-color-picker mx-auto block mb-2" />
                     <Label className="text-xs font-medium block mb-1">Accent</Label>
                     <span className="text-xs text-gray-500">#E0FFF8</span>
                   </div>
