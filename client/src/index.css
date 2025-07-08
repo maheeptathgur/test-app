@@ -6,9 +6,9 @@
 :root {
   /* Default theme colors - matches current design */
   --theme-primary: #008062;
-  --theme-primary-hover: #00d2a0;
+  --theme-primary-hover: #00D2A0;
   --theme-primary-light: #40bf9f;
-  --theme-background: #e6eeef;
+  --theme-background: #E6EEEF;
   --theme-background-light: #f0f6f7;
   --theme-background-dark: #d0dde0;
   --theme-text: #1a1a1a;
