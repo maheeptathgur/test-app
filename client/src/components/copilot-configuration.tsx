@@ -16,6 +16,12 @@ import { SiGmail, SiSlack } from "react-icons/si";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
 import { useToast } from "@/hooks/use-toast";
+import newCampaignManagerImage from "@assets/image_1751925400273.png";
+import customerSupportImage from "@assets/image_1751925913677.png";
+import socialAnalystImage from "@assets/image_1751926960404.png";
+import resumeAssistantImage from "@assets/image_1751926805510.png";
+import contentAssistantNewImage from "@assets/image_1751927977089.png";
+import workspaceImage from "@assets/image_1751923707146.png";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
@@ -1093,25 +1099,29 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                           <div className="space-y-2">
                             <Label>Tile Image (4:3 ratio)</Label>
                             {(() => {
-                              // Get current image URL based on copilot type
-                              const getImageUrl = (type: string) => {
-                                switch (type.toLowerCase()) {
-                                  case 'general':
-                                    return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
-                                  case 'content':
-                                    return 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=200&fit=crop&auto=format';
-                                  case 'analyst':
-                                    return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop&auto=format';
-                                  case 'support':
-                                    return 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&auto=format';
-                                  case 'form':
-                                    return 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=200&fit=crop&auto=format';
-                                  default:
-                                    return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
+                              // Get current image URL based on copilot type and name (same logic as copilot card)
+                              const getImageUrl = (type: string, name?: string): string => {
+                                // Use specific images for certain copilots
+                                if (name === 'Campaign Manager') {
+                                  return newCampaignManagerImage;
                                 }
+                                if (name === 'Customer Support') {
+                                  return customerSupportImage;
+                                }
+                                if (name === 'Social Analyst') {
+                                  return socialAnalystImage;
+                                }
+                                if (name === 'Resume Assistant') {
+                                  return resumeAssistantImage;
+                                }
+                                if (name === 'Content Assistant') {
+                                  return contentAssistantNewImage;
+                                }
+                                // Use the default workspace image for all other copilots
+                                return workspaceImage;
                               };
                               
-                              const currentImageUrl = getImageUrl(copilotData.type);
+                              const currentImageUrl = getImageUrl(copilotData.type, copilotData.name);
                               
                               return (
                                 <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
@@ -1124,7 +1134,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                   </div>
                                   <div className="p-3 text-center bg-muted/20">
                                     <div className="text-sm font-medium text-foreground mb-2">
-                                      Current tile image for {copilotData.type} copilot
+                                      Current tile image for {copilotData.name}
                                     </div>
                                     <input
                                       type="file"
