@@ -618,7 +618,8 @@ export default function Dashboard() {
   // Branding colors state for current session
   const [brandingColors, setBrandingColors] = useState({
     primary: "#008062",
-    contentBg: "#ffffff", 
+    contentBg: "#ffffff",
+    cardBg: "#f9fafb",
     sidebarBg: "#e6eeef",
     accent: "#00d2a0",
     border: "#e5e7eb"
@@ -666,11 +667,8 @@ export default function Dashboard() {
     const contentTextMuted = brandingColors.contentBg === '#111827' || brandingColors.contentBg === '#1f2937' 
       ? '#d1d5db' : '#6b7280'; // Light gray for dark themes, medium gray for light themes
     
-    // Calculate card background (contrasting with content background)
-    const contentLuminance = (0.299 * parseInt(brandingColors.contentBg.replace('#', '').substr(0, 2), 16) + 
-                             0.587 * parseInt(brandingColors.contentBg.replace('#', '').substr(2, 2), 16) + 
-                             0.114 * parseInt(brandingColors.contentBg.replace('#', '').substr(4, 2), 16)) / 255;
-    const cardBg = contentLuminance > 0.5 ? '#ffffff' : '#374151'; // White for light themes, gray for dark themes
+    // Use configured card background or fallback to content background
+    const cardBg = brandingColors.cardBg || brandingColors.contentBg;
     
     const primaryShades = generateShades(brandingColors.primary);
     
