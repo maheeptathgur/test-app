@@ -1746,7 +1746,7 @@ export default function Dashboard() {
         {/* Main Application Container */}
         <div className="flex flex-1 min-h-0 bg-background">
         {/* Sidebar */}
-        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-sidebar-border flex flex-col theme-background transition-all duration-300`}>
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r flex flex-col theme-background transition-all duration-300`} style={{ borderColor: 'var(--theme-borders)' }}>
         {/* Logo and Toggle */}
         <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'}`}>
           <div className={`flex items-center ${sidebarCollapsed ? 'flex-col gap-3' : 'justify-between'} mb-4`}>
@@ -2121,7 +2121,7 @@ export default function Dashboard() {
       </div>
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
-        <div className="w-64 border-r border-sidebar-border flex flex-col h-full" style={{ backgroundColor: 'var(--theme-background)' }}>
+        <div className="w-64 border-r flex flex-col h-full" style={{ backgroundColor: 'var(--theme-background)', borderColor: 'var(--theme-borders)' }}>
           <div className="p-4 flex items-center justify-between">
             <h3 className="font-semibold text-foreground">Files</h3>
             <Button
@@ -2253,7 +2253,7 @@ export default function Dashboard() {
         </div>
       )}
       {/* Main Content */}
-      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: '#f6f6f6' }}>
+      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: 'var(--theme-content-bg)' }}>
         {/* Form Interface for form-type copilots */}
         {chatCopilot && chatCopilot.type === 'form' ? (
           <div className="h-full flex">
@@ -2293,7 +2293,7 @@ export default function Dashboard() {
           />
         ) : /* Regular Dashboard Content */
         (
-          <div className="h-full overflow-y-auto">
+          <div className="h-full overflow-y-auto" style={{ backgroundColor: 'var(--theme-content-bg)' }}>
             {/* Content Body - Conditional padding for tool config screens */}
             <div className={
               // No padding for configuration screens since they handle their own padding
