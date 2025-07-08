@@ -1746,7 +1746,7 @@ export default function Dashboard() {
         {/* Main Application Container */}
         <div className="flex flex-1 min-h-0 bg-background">
         {/* Sidebar */}
-        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r flex flex-col theme-background transition-all duration-300`} style={{ borderColor: 'var(--theme-borders)' }}>
+        <div className={`${sidebarCollapsed ? 'w-16' : 'w-64'} border-r border-[hsl(var(--border))] flex flex-col theme-background transition-all duration-300`}>
         {/* Logo and Toggle */}
         <div className={`${sidebarCollapsed ? 'p-4' : 'p-6'}`}>
           <div className={`flex items-center ${sidebarCollapsed ? 'flex-col gap-3' : 'justify-between'} mb-4`}>
@@ -2121,7 +2121,7 @@ export default function Dashboard() {
       </div>
       {/* Attachment Sidebar */}
       {showAttachmentSidebar && (
-        <div className="w-64 border-r flex flex-col h-full" style={{ backgroundColor: 'var(--theme-background)', borderColor: 'var(--theme-borders)' }}>
+        <div className="w-64 border-r border-[hsl(var(--border))] flex flex-col h-full" style={{ backgroundColor: 'var(--theme-background)' }}>
           <div className="p-4 flex items-center justify-between">
             <h3 className="font-semibold text-foreground">Files</h3>
             <Button
