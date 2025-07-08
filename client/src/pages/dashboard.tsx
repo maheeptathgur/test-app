@@ -2103,7 +2103,7 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleDeleteConversation(conversation.id);
                                   }}
-                                  className="h-6 w-6 p-1 text-red-500 hover:text-white hover:bg-red-500"
+                                  className="h-6 w-6 p-1 text-red-500 hover:text-red-600 hover:bg-red-50"
                                   title="Delete conversation"
                                 >
                                   <Trash2 className="w-3 h-3" />
