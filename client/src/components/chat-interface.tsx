@@ -1076,8 +1076,8 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               const hasWorkflows = copilot.components.filter(c => c.type === 'workflow').length > 0;
                               const columnCount = [hasAgents, hasTools, hasWorkflows].filter(Boolean).length;
                               
-                              if (columnCount === 3) return 'grid grid-cols-1 md:grid-cols-3 gap-3 items-start';
-                              if (columnCount === 2) return 'flex flex-col md:flex-row gap-3 justify-center max-w-2xl mx-auto items-start';
+                              if (columnCount === 3) return 'grid grid-cols-1 md:grid-cols-3 gap-3 items-stretch min-h-[120px]';
+                              if (columnCount === 2) return 'flex flex-col md:flex-row gap-3 justify-center max-w-2xl mx-auto items-stretch min-h-[120px]';
                               return 'flex justify-center max-w-sm mx-auto';
                             })()
                           }`}>
@@ -1088,7 +1088,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                   <Bot className="w-4 h-4 text-purple-600" />
                                   <h4 className="font-medium text-purple-900 text-[15px]">Agents</h4>
                                 </div>
-                                <div className="space-y-1">
+                                <div className="space-y-1 flex-1">
                                   {copilot.components.filter(c => c.type === 'agent').map((agent) => {
                                     const isExpanded = expandedComponents.has(agent.name);
                                     return (
@@ -1125,7 +1125,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                   <Wrench className="w-4 h-4 text-blue-600" />
                                   <h4 className="font-medium text-blue-900 text-[15px]">Tools</h4>
                                 </div>
-                                <div className="space-y-1">
+                                <div className="space-y-1 flex-1">
                                   {copilot.components.filter(c => c.type === 'tool').map((tool) => {
                                     const isExpanded = expandedComponents.has(tool.name);
                                     return (
@@ -1162,7 +1162,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                   <Workflow className="w-4 h-4 text-amber-600" />
                                   <h4 className="font-medium text-amber-900 text-[15px]">Workflows</h4>
                                 </div>
-                                <div className="space-y-1">
+                                <div className="space-y-1 flex-1">
                                   {copilot.components.filter(c => c.type === 'workflow').map((workflow) => {
                                     const isExpanded = expandedComponents.has(workflow.name);
                                     return (
