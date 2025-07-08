@@ -1238,8 +1238,11 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                               <button
                                 key={index}
                                 onClick={() => handleStarterClick(starter)}
-                                className="flex-shrink-0 bg-[hsl(var(--muted))] hover:bg-[hsl(var(--muted))] rounded-lg p-2 text-left transition-colors group w-80"
-                                style={{ border: '1px solid hsl(218, 18%, 80%)' }}
+                                className="flex-shrink-0 rounded-lg p-2 text-left transition-colors group w-80 hover:opacity-90"
+                                style={{ 
+                                  backgroundColor: 'var(--theme-background)',
+                                  border: '1px solid hsl(218, 18%, 80%)' 
+                                }}
                               >
                                 <span 
                                   className="text-xs text-[hsl(var(--foreground))] group-hover:text-[hsl(var(--foreground))] block"
