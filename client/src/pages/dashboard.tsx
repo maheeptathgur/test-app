@@ -2011,7 +2011,8 @@ export default function Dashboard() {
                                 }
                               }}
                               onBlur={() => handleSaveConversationTitle(conversation.id)}
-                              className="h-6 text-sm px-2 py-0"
+                              className="h-6 text-sm px-2 py-0 text-foreground bg-background"
+                              style={{ color: 'hsl(var(--foreground)) !important' }}
                               autoFocus
                               onClick={(e) => e.stopPropagation()}
                             />
