@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3, Plus } from "lucide-react";
+import { Monitor, Users, Settings, BarChart3, BookOpen, UserCog, CreditCard, MessageSquare, TrendingUp, Shield, Grid, List, Search, Filter, ArrowUpDown, PanelLeftClose, PanelLeftOpen, Upload, FileText, Music, Video, Image, File, X, ChevronDown, ChevronUp, LogOut, User, Trash2, Check, LayoutDashboard, Bot, Headphones, Edit3, Plus } from "lucide-react";
 import { SiGoogledrive } from "react-icons/si";
 import knolliLogo from "@assets/image_1751267938774.png";
 import knolliIcon from "@assets/favicon-256_1751332849559.png";
@@ -505,9 +505,16 @@ const mockCopilots: CopilotData[] = [
 
 const navigationItems = [
   { id: 'copilots', label: 'Copilots', icon: Monitor },
-  { id: 'agents', label: 'Agents', icon: Users },
-  { id: 'tools', label: 'Integrations', icon: Settings },
-  { id: 'workflows', label: 'Workflows', icon: BarChart3 },
+  { 
+    id: 'tools-menu', 
+    label: 'Tools', 
+    icon: Settings,
+    children: [
+      { id: 'agents', label: 'Agents', icon: Users },
+      { id: 'tools', label: 'Integrations', icon: Settings },
+      { id: 'workflows', label: 'Workflows', icon: BarChart3 },
+    ]
+  },
   { id: 'knowledge-base', label: 'Knowledge Base', icon: BookOpen },
   { id: 'subscriptions', label: 'Subscriptions', icon: CreditCard },
   { id: 'workspace-settings', label: 'Settings', icon: Settings },
@@ -614,6 +621,9 @@ export default function Dashboard() {
   const [deletingConversationId, setDeletingConversationId] = useState<string | null>(null);
   const [deletingFileName, setDeletingFileName] = useState<string | null>(null);
   
+  // State for expanded submenus
+  const [expandedSubmenus, setExpandedSubmenus] = useState<Set<string>>(new Set());
+  
   // State for creation wizard
   const [showCreationWizard, setShowCreationWizard] = useState(false);
   const [showWorkspaceCreationModal, setShowWorkspaceCreationModal] = useState(false);
@@ -672,6 +682,23 @@ export default function Dashboard() {
     });
   };
 
+  // Helper functions for submenu management
+  const toggleSubmenu = (submenuId: string) => {
+    setExpandedSubmenus(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(submenuId)) {
+        newSet.delete(submenuId);
+      } else {
+        newSet.add(submenuId);
+      }
+      return newSet;
+    });
+  };
+
+  const isSubmenuExpanded = (submenuId: string) => {
+    return expandedSubmenus.has(submenuId);
+  };
+
 
 
 
@@ -683,6 +710,12 @@ export default function Dashboard() {
 
   const handleSectionChange = (section: NavigationSection) => {
     setActiveSection(section);
+    
+    // Auto-expand Tools submenu when navigating to child items
+    if (section === 'agents' || section === 'tools' || section === 'workflows') {
+      setExpandedSubmenus(prev => new Set([...prev, 'tools-menu']));
+    }
+    
     // Close chat when navigating to other sections
     if (chatCopilot) {
       setChatCopilot(null);
@@ -2172,22 +2205,36 @@ export default function Dashboard() {
             (<ul className="space-y-2">
               {navigationItems.map((item) => {
                 const Icon = item.icon;
-                const isActive = activeSection === item.id;
+                const hasChildren = 'children' in item && item.children;
+                const isActive = hasChildren 
+                  ? item.children.some(child => activeSection === child.id)
+                  : activeSection === item.id;
+                const isSubmenuOpen = hasChildren ? isSubmenuExpanded(item.id) : false;
+
                 return (
                   <li key={item.id}>
+                    {/* Parent Menu Item */}
                     <Button
                       variant="ghost"
                       onClick={(e) => {
-                        handleSectionChange(item.id as NavigationSection);
-                        // Immediately force the active text color on click
-                        e.currentTarget.style.setProperty('color', 'var(--theme-primary)', 'important');
-                        e.currentTarget.style.removeProperty('--sidebar-foreground');
-                        e.currentTarget.style.removeProperty('--sidebar-primary');
-                        // Force all nested elements (including icons) to use the primary color
-                        const allElements = e.currentTarget.querySelectorAll('*');
-                        allElements.forEach((el: any) => {
-                          el.style.setProperty('color', 'var(--theme-primary)', 'important');
-                        });
+                        if (hasChildren) {
+                          toggleSubmenu(item.id);
+                          // If sidebar is collapsed, expand it when clicking on a submenu
+                          if (sidebarCollapsed) {
+                            setSidebarCollapsed(false);
+                          }
+                        } else {
+                          handleSectionChange(item.id as NavigationSection);
+                          // Immediately force the active text color on click
+                          e.currentTarget.style.setProperty('color', 'var(--theme-primary)', 'important');
+                          e.currentTarget.style.removeProperty('--sidebar-foreground');
+                          e.currentTarget.style.removeProperty('--sidebar-primary');
+                          // Force all nested elements (including icons) to use the primary color
+                          const allElements = e.currentTarget.querySelectorAll('*');
+                          allElements.forEach((el: any) => {
+                            el.style.setProperty('color', 'var(--theme-primary)', 'important');
+                          });
+                        }
                       }}
                       className={`w-full ${sidebarCollapsed ? 'justify-center px-0 py-3' : 'justify-start gap-3'} ${
                         isActive 
@@ -2227,8 +2274,84 @@ export default function Dashboard() {
                       title={sidebarCollapsed ? item.label : undefined}
                     >
                       <Icon className="w-5 h-5" />
-                      {!sidebarCollapsed && item.label}
+                      {!sidebarCollapsed && (
+                        <>
+                          <span className="flex-1 text-left">{item.label}</span>
+                          {hasChildren && (
+                            isSubmenuOpen ? 
+                              <ChevronUp className="w-4 h-4" /> : 
+                              <ChevronDown className="w-4 h-4" />
+                          )}
+                        </>
+                      )}
                     </Button>
+
+                    {/* Submenu Items */}
+                    {hasChildren && !sidebarCollapsed && isSubmenuOpen && (
+                      <ul className="ml-6 mt-2 space-y-1">
+                        {item.children.map((child) => {
+                          const ChildIcon = child.icon;
+                          const isChildActive = activeSection === child.id;
+                          return (
+                            <li key={child.id}>
+                              <Button
+                                variant="ghost"
+                                onClick={(e) => {
+                                  handleSectionChange(child.id as NavigationSection);
+                                  // Immediately force the active text color on click
+                                  e.currentTarget.style.setProperty('color', 'var(--theme-primary)', 'important');
+                                  e.currentTarget.style.removeProperty('--sidebar-foreground');
+                                  e.currentTarget.style.removeProperty('--sidebar-primary');
+                                  // Force all nested elements (including icons) to use the primary color
+                                  const allElements = e.currentTarget.querySelectorAll('*');
+                                  allElements.forEach((el: any) => {
+                                    el.style.setProperty('color', 'var(--theme-primary)', 'important');
+                                  });
+                                }}
+                                className={`w-full justify-start gap-3 py-2 text-sm ${
+                                  isChildActive 
+                                    ? 'text-sidebar-primary' 
+                                    : 'text-sidebar-foreground hover:text-sidebar-primary'
+                                }`}
+                                style={isChildActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
+                                  // Override all text colors forcefully, but exclude input elements and delete buttons
+                                  e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
+                                  // Force all nested text elements to white, but exclude inputs and delete button elements
+                                  const allTextElements = e.currentTarget.querySelectorAll('*:not(input):not([title="Delete conversation"]):not([title="Delete conversation"] *)');
+                                  allTextElements.forEach((el: any) => {
+                                    el.style.setProperty('color', 'white', 'important');
+                                  });
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.backgroundColor = isChildActive ? 'var(--theme-accent)' : 'transparent';
+                                  // Reset colors
+                                  e.currentTarget.style.removeProperty('color');
+                                  e.currentTarget.style.removeProperty('--sidebar-foreground');
+                                  e.currentTarget.style.removeProperty('--sidebar-primary');
+                                  // Reset all nested text elements, but exclude inputs
+                                  const allTextElements = e.currentTarget.querySelectorAll('*:not(input)');
+                                  allTextElements.forEach((el: any) => {
+                                    el.style.removeProperty('color');
+                                  });
+                                  // If this is the active item, set the icon color back to primary
+                                  if (isChildActive) {
+                                    const iconElement = e.currentTarget.querySelector('.lucide');
+                                    if (iconElement) {
+                                      (iconElement as HTMLElement).style.setProperty('color', 'var(--theme-primary)', 'important');
+                                    }
+                                  }
+                                }}
+                              >
+                                <ChildIcon className="w-4 h-4" />
+                                {child.label}
+                              </Button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    )}
                   </li>
                 );
               })}
