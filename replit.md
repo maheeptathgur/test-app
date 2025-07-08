@@ -328,6 +328,7 @@ Changelog:
 - July 8, 2025. Added proper spacing to workspace selector button - implemented mt-4 margin to create visual separation from Knolli logo, preventing crowding and improving overall sidebar layout hierarchy
 - July 8, 2025. Fixed conversation edit functionality issues - resolved duplicate conversation IDs causing React warnings, fixed edit button sizing to 24px with proper padding for better clickability, corrected input field text color issues by adding proper dark text styling and excluding input elements from hover color forcing logic, ensuring conversation titles remain readable and editable with proper save/cancel button functionality
 - July 8, 2025. Completed conversation edit functionality fixes - resolved checkmark save button not closing edit mode by removing onBlur handler causing multiple saves, improved delete button styling with proper red background and white text on hover, added preventDefault() to keyboard events, and implemented comprehensive input protection from parent hover color forcing with multiple layers of CSS and JavaScript safeguards
+- July 8, 2025. Fixed delete button icon color behavior - implemented proper gray-to-red transition on hover by adding CSS class .delete-conversation-btn with !important styling to override parent conversation card hover effects, button now correctly shows gray icon by default and red icon only on direct hover with complementary light red background
 ```
 
 ## User Preferences
