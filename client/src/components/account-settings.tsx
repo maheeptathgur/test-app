@@ -230,7 +230,7 @@ export function AccountSettings() {
                       </div>
                       <DialogFooter>
                         <Button variant="outline">Cancel</Button>
-                        <Button onClick={handlePasswordChange} className="bg-[#008062] hover:bg-[#00d2a0]">
+                        <Button onClick={handlePasswordChange} className="theme-primary theme-primary-hover:hover">
                           Update Password
                         </Button>
                       </DialogFooter>
@@ -349,7 +349,7 @@ export function AccountSettings() {
                   <Button 
                     variant={app.connected ? "outline" : "default"}
                     size="sm"
-                    className={app.connected ? "text-red-600 hover:text-red-700" : "bg-[#008062] hover:bg-[#00d2a0]"}
+                    className={app.connected ? "text-red-600 hover:text-red-700" : "theme-primary theme-primary-hover:hover"}
                   >
                     {app.connected ? "Disconnect" : "Connect"}
                   </Button>

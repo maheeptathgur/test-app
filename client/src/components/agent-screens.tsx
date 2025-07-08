@@ -82,7 +82,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
               onClick={() => setActiveTab(tab.id)}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === tab.id
-                  ? 'border-[#008062] text-[#008062]'
+                  ? 'border-[var(--theme-primary)] text-[var(--theme-primary)]'
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
             >
@@ -108,8 +108,8 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                       {agent.status === "Active" ? "Active" : "Inactive"}
                     </span>
                     <button
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                        agent.status === "Active" ? 'bg-[#008062]' : 'bg-gray-200'
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                        agent.status === "Active" ? 'theme-primary' : 'bg-gray-200'
                       }`}
                     >
                       <span
@@ -134,7 +134,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   <textarea 
                     defaultValue={agent.description}
                     rows={3}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008062]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
                   />
                 </div>
                 
@@ -143,7 +143,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                   <textarea 
                     placeholder="You are a helpful AI assistant specialized in..."
                     rows={6}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008062]"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
                   />
                 </div>
 
@@ -243,7 +243,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           {/* Toggle Switch */}
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
-                              <div className="w-11 h-6 bg-[#008062] rounded-full relative transition-colors">
+                              <div className="w-11 h-6 theme-primary rounded-full relative transition-colors">
                                 <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
                               </div>
                               <span className="ml-2 text-sm font-medium text-gray-900">Active</span>
@@ -297,7 +297,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           {/* Toggle Switch */}
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
-                              <div className="w-11 h-6 bg-[#008062] rounded-full relative transition-colors">
+                              <div className="w-11 h-6 theme-primary rounded-full relative transition-colors">
                                 <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
                               </div>
                               <span className="ml-2 text-sm font-medium text-gray-900">Active</span>
@@ -401,7 +401,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           {/* Toggle Switch */}
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
-                              <div className="w-11 h-6 bg-[#008062] rounded-full relative transition-colors">
+                              <div className="w-11 h-6 theme-primary rounded-full relative transition-colors">
                                 <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
                               </div>
                               <span className="ml-2 text-sm font-medium text-gray-900">Active</span>
@@ -457,14 +457,14 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                         onChange={(e) => setTestMessage(e.target.value)}
                         placeholder="Type your test message here..."
                         rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008062]"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
                       />
                       <div className="space-y-4">
                         <div className="flex gap-2">
                           <Button 
                             onClick={runTest}
                             disabled={isRunning || !testMessage.trim()}
-                            className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+                            className="theme-primary theme-primary-hover:hover text-white"
                           >
                             {isRunning ? (
                               <>
@@ -622,13 +622,13 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
                   onChange={(e) => setTestMessage(e.target.value)}
                   placeholder="Type your test message here..."
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008062]"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)]"
                 />
                 <div className="flex gap-2">
                   <Button 
                     onClick={runTest}
                     disabled={isRunning || !testMessage.trim()}
-                    className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+                    className="theme-primary theme-primary-hover:hover text-white"
                   >
                     {isRunning ? (
                       <>

@@ -630,7 +630,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         {/* Markdown Editor Header */}
         <div className="flex items-center justify-between p-6 bg-muted/50 border-b">
           <div className="flex items-center gap-3">
-            <FileText className="w-6 h-6 text-[#008062]" />
+            <FileText className="w-6 h-6 text-[var(--theme-primary)]" />
             <div>
               <h1 className="font-semibold text-foreground text-[24px]">Markdown Editor</h1>
               <p className="text-muted-foreground text-[16px]">Create and edit markdown documents for {copilotData.name}</p>
@@ -648,7 +648,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
             </Button>
             <Button 
               type="button"
-              className="gap-2 bg-[#008062] hover:bg-[#006b54]"
+              className="gap-2 theme-primary hover:bg-[#006b54]"
               onClick={() => {
                 // Save markdown document logic here
                 console.log('Saving markdown document:', { title: mdTitle, description: mdDescription, content: mdContent });
@@ -693,7 +693,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 onClick={() => setMdEditorTab('markdown')}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                   mdEditorTab === 'markdown' 
-                    ? 'bg-white text-[#008062] shadow-sm' 
+                    ? 'bg-white text-[var(--theme-primary)] shadow-sm' 
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -705,7 +705,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 onClick={() => setMdEditorTab('rtf')}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                   mdEditorTab === 'rtf' 
-                    ? 'bg-white text-[#008062] shadow-sm' 
+                    ? 'bg-white text-[var(--theme-primary)] shadow-sm' 
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -717,7 +717,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 onClick={() => setMdEditorTab('preview')}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                   mdEditorTab === 'preview' 
-                    ? 'bg-white text-[#008062] shadow-sm' 
+                    ? 'bg-white text-[var(--theme-primary)] shadow-sm' 
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -1001,7 +1001,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                     onClick={() => setActiveTab(tab.id)}
                     className={`py-2 px-1 border-b-2 font-medium text-sm flex items-center gap-2 ${
                       activeTab === tab.id
-                        ? 'border-[#008062] text-[#008062]'
+                        ? 'border-[var(--theme-primary)] text-[var(--theme-primary)]'
                         : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
                     }`}
                   >
@@ -1210,7 +1210,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                     onClick={() => setCodeTab("javascript")}
                                     className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                                       codeTab === "javascript"
-                                        ? "border-[#008062] text-[#008062]"
+                                        ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                                         : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
                                     }`}
                                   >
@@ -1220,7 +1220,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                     onClick={() => setCodeTab("iframe")}
                                     className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                                       codeTab === "iframe"
-                                        ? "border-[#008062] text-[#008062]"
+                                        ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                                         : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
                                     }`}
                                   >
@@ -1230,7 +1230,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                     onClick={() => setCodeTab("react")}
                                     className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
                                       codeTab === "react"
-                                        ? "border-[#008062] text-[#008062]"
+                                        ? "border-[var(--theme-primary)] text-[var(--theme-primary)]"
                                         : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
                                     }`}
                                   >
@@ -1388,8 +1388,8 @@ function MyComponent() {
                               setDocumentPaneEnabled(!documentPaneEnabled);
                               setHasChanges(true);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                              documentPaneEnabled ? 'bg-[#008062]' : 'bg-gray-200'
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                              documentPaneEnabled ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
                             <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -1415,8 +1415,8 @@ function MyComponent() {
                               setShowSources(!showSources);
                               setHasChanges(true);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                              showSources ? 'bg-[#008062]' : 'bg-gray-200'
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                              showSources ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
                             <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -1442,8 +1442,8 @@ function MyComponent() {
                               setIsFeatured(!isFeatured);
                               setHasChanges(true);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                              isFeatured ? 'bg-[#008062]' : 'bg-gray-200'
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                              isFeatured ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
                             <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -1469,8 +1469,8 @@ function MyComponent() {
                               setPromptRequired(!promptRequired);
                               setHasChanges(true);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#008062] focus:ring-offset-2 ${
-                              promptRequired ? 'bg-[#008062]' : 'bg-gray-200'
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                              promptRequired ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
                             <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
@@ -1547,7 +1547,7 @@ function MyComponent() {
                   <div></div>
                   <div className="flex items-center gap-6">
                     {showSavedMessage && (
-                      <div className="text-lg text-[#008062] font-semibold">
+                      <div className="text-lg text-[var(--theme-primary)] font-semibold">
                         Your changes have been saved.
                       </div>
                     )}
@@ -1558,7 +1558,7 @@ function MyComponent() {
                       <Button 
                         onClick={handleSave} 
                         disabled={!hasChanges}
-                        className="bg-[#008062] hover:bg-[#006b54] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
+                        className="theme-primary hover:bg-[#006b54] disabled:bg-gray-300 disabled:text-gray-500 disabled:cursor-not-allowed"
                       >
                         Save Changes
                       </Button>
@@ -1616,7 +1616,7 @@ function MyComponent() {
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Content Creator</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
                                   <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
@@ -1669,7 +1669,7 @@ function MyComponent() {
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Data Analyst</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
                                   <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
@@ -1732,7 +1732,7 @@ function MyComponent() {
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Gmail</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
                                   <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
@@ -1786,7 +1786,7 @@ function MyComponent() {
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Slack</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
                                   <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
@@ -1839,7 +1839,7 @@ function MyComponent() {
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Content Pipeline</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
                                   <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
@@ -1889,7 +1889,7 @@ function MyComponent() {
                               <h3 className="font-semibold text-gray-900 text-base mb-1 truncate">Data Processing</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors bg-[#008062]"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
                                   <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>

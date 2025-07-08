@@ -112,7 +112,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
                     <p className="text-sm text-gray-600">Click Connect to authenticate your {toolName} account</p>
                   </div>
                 </div>
-                <Button className="bg-[#008062] hover:bg-[#00d2a0] text-white" size="sm">
+                <Button className="theme-primary theme-primary-hover:hover text-white" size="sm">
                   Connect
                 </Button>
               </div>
@@ -210,7 +210,7 @@ export function ToolConfigScreen({ toolName, onBack, onBackToBrowseIntegrations 
               Cancel
             </Button>
             <Button 
-              className="bg-[#008062] hover:bg-[#00d2a0] text-white border-0"
+              className="theme-primary theme-primary-hover:hover text-white border-0"
               disabled={!hasChanges}
               onClick={handleSave}
             >

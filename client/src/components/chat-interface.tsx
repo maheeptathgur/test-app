@@ -966,7 +966,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <Button 
               variant="outline" 
               size="sm"
-              className="h-7 w-7 p-0 bg-white/90 hover:bg-[#00d2a0] hover:text-white shadow-sm" 
+              className="h-7 w-7 p-0 bg-white/90 theme-primary-hover:hover hover:text-white shadow-sm" 
               onClick={() => setShowProfileFields(!showProfileFields)}
               title="Toggle Profile Fields"
             >
@@ -976,7 +976,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               variant="outline" 
               size="sm"
               onClick={onClose} 
-              className="h-7 w-7 p-0 bg-white/90 hover:bg-[#00d2a0] hover:text-white shadow-sm"
+              className="h-7 w-7 p-0 bg-white/90 theme-primary-hover:hover hover:text-white shadow-sm"
               title="Close Chat"
             >
               <X className="h-3 w-3" />
@@ -1203,7 +1203,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           {canScrollLeft && (
                             <button
                               onClick={() => scrollCarousel('left')}
-                              className="absolute left-2 top-2 z-10 h-8 w-8 rounded-md bg-[#008062]/80 hover:bg-[#008062] opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center ml-[0px] mr-[0px] mt-[10px] mb-[10px]"
+                              className="absolute left-2 top-2 z-10 h-8 w-8 rounded-md theme-primary/80 hover:theme-primary opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center ml-[0px] mr-[0px] mt-[10px] mb-[10px]"
                             >
                               <ChevronLeft className="h-4 w-4 text-white" />
                             </button>
@@ -1213,7 +1213,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                           {canScrollRight && (
                             <button
                               onClick={() => scrollCarousel('right')}
-                              className="absolute right-2 top-2 z-10 h-8 w-8 rounded-md bg-[#008062]/80 hover:bg-[#008062] opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center mt-[8px] mb-[8px]"
+                              className="absolute right-2 top-2 z-10 h-8 w-8 rounded-md theme-primary/80 hover:theme-primary opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center mt-[8px] mb-[8px]"
                             >
                               <ChevronRight className="h-4 w-4 text-white" />
                             </button>
@@ -1256,7 +1256,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                       className={`p-4 rounded-lg text-foreground pt-[6px] pb-[6px] ${
                         message.sender === 'user' ? 'max-w-[70%]' : 'w-full'
                       }`}
-                      style={message.sender === 'user' ? { backgroundColor: '#e6eeef' } : {}}
+                      style={message.sender === 'user' ? { backgroundColor: 'var(--theme-background)' } : {}}
                     >
                       <div 
                         className="whitespace-pre-wrap" 
@@ -1415,7 +1415,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                 {/* Floating Attached Files Display */}
                 {selectedFiles.length > 0 && (
                   <div className="absolute -top-8 left-0">
-                    <div className="flex items-center gap-2 px-3 py-1 bg-[#008062] backdrop-blur-sm rounded-full text-white text-xs mt-[-6px] mb-[-6px]">
+                    <div className="flex items-center gap-2 px-3 py-1 theme-primary backdrop-blur-sm rounded-full text-white text-xs mt-[-6px] mb-[-6px]">
                       <Paperclip className="w-3 h-3" />
                       <span>{selectedFiles.length} file{selectedFiles.length > 1 ? 's' : ''}</span>
                       <div className="flex items-center gap-1 flex-wrap">
@@ -1578,7 +1578,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                     className={`h-12 px-3 self-end transition-colors ${
                       isRecording 
                         ? 'bg-red-500 hover:bg-red-600 text-white animate-pulse' 
-                        : 'hover:bg-[#00d2a0] hover:text-white'
+                        : 'theme-primary-hover:hover hover:text-white'
                     }`}
                     onClick={toggleRecording}
                     title={isRecording ? "Stop recording" : "Start voice input"}
@@ -1600,7 +1600,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             {/* Resize Handle */}
             <div
               ref={resizeRef}
-              className="absolute left-0 top-0 bottom-0 w-1 bg-transparent hover:bg-[#00d2a0] cursor-col-resize transition-colors z-10"
+              className="absolute left-0 top-0 bottom-0 w-1 bg-transparent theme-primary-hover:hover cursor-col-resize transition-colors z-10"
               onMouseDown={(e) => {
                 e.preventDefault();
                 setIsResizing(true);
@@ -1611,7 +1611,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <Button
               variant="ghost"
               size="sm"
-              className="absolute top-1 right-1 h-5 w-5 p-0 z-20 bg-white/90 hover:bg-[#00d2a0] shadow-md rounded-full transition-colors"
+              className="absolute top-1 right-1 h-5 w-5 p-0 z-20 bg-white/90 theme-primary-hover:hover shadow-md rounded-full transition-colors"
               onClick={() => {
                 // Only hide the document preview, keep the attachment display
                 setShowDocumentPreview(false);

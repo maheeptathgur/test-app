@@ -88,14 +88,14 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               <Card 
                 className={`cursor-pointer transition-all border-2 ${
                   formData.builderType === "chat" 
-                    ? "border-[#008062] bg-[#008062] text-white" 
-                    : "border-gray-200 hover:border-[#008062] hover:shadow-md"
+                    ? "border-[var(--theme-primary)] theme-primary text-white" 
+                    : "border-gray-200 hover:border-[var(--theme-primary)] hover:shadow-md"
                 }`}
                 onClick={() => setFormData({ ...formData, builderType: "chat" })}
               >
                 <CardHeader className="text-center">
                   <div className={`p-3 rounded-lg mx-auto w-fit mb-3 ${
-                    formData.builderType === "chat" ? "bg-white/20" : "bg-[#008062] text-white"
+                    formData.builderType === "chat" ? "bg-white/20" : "theme-primary text-white"
                   }`}>
                     <MessageSquare className="w-6 h-6" />
                   </div>
@@ -115,7 +115,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               <Card 
                 className={`cursor-pointer transition-all border-2 ${
                   formData.builderType === "app" 
-                    ? "border-[#008062] bg-blue-50" 
+                    ? "border-[var(--theme-primary)] bg-blue-50" 
                     : "border-gray-200 hover:border-gray-300 hover:shadow-md"
                 }`}
                 onClick={() => setFormData({ ...formData, builderType: "app" })}
@@ -129,7 +129,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                     Build an AI-powered app with structured form inputs and AI-generated responses
                   </CardDescription>
                   {formData.builderType === "app" && (
-                    <Check className="w-5 h-5 text-[#008062] mx-auto mt-2" />
+                    <Check className="w-5 h-5 text-[var(--theme-primary)] mx-auto mt-2" />
                   )}
                 </CardHeader>
               </Card>
@@ -138,7 +138,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               <Card 
                 className={`cursor-pointer transition-all border-2 ${
                   formData.builderType === "image" 
-                    ? "border-[#008062] bg-purple-50" 
+                    ? "border-[var(--theme-primary)] bg-purple-50" 
                     : "border-gray-200 hover:border-gray-300 hover:shadow-md"
                 }`}
                 onClick={() => setFormData({ ...formData, builderType: "image" })}
@@ -152,7 +152,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                     Design an AI-powered app that generates images based on user inputs
                   </CardDescription>
                   {formData.builderType === "image" && (
-                    <Check className="w-5 h-5 text-[#008062] mx-auto mt-2" />
+                    <Check className="w-5 h-5 text-[var(--theme-primary)] mx-auto mt-2" />
                   )}
                 </CardHeader>
               </Card>
@@ -285,7 +285,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                     key={field}
                     className={`p-3 cursor-pointer transition-all border-2 ${
                       formData.profileFields.includes(field)
-                        ? 'border-[#008062] bg-green-50'
+                        ? 'border-[var(--theme-primary)] bg-green-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                     onClick={() => {
@@ -298,7 +298,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                     <div className="flex items-center justify-between">
                       <span className="font-medium">{field}</span>
                       {formData.profileFields.includes(field) && (
-                        <Check className="w-4 h-4 text-[#008062]" />
+                        <Check className="w-4 h-4 text-[var(--theme-primary)]" />
                       )}
                     </div>
                   </Card>
@@ -340,7 +340,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                       key={input.name}
                       className={`p-4 cursor-pointer transition-all border-2 ${
                         formData.userInputs.includes(input.name)
-                          ? 'border-[#008062] bg-green-50'
+                          ? 'border-[var(--theme-primary)] bg-green-50'
                           : 'border-gray-200 hover:border-gray-300'
                       }`}
                       onClick={() => {
@@ -354,7 +354,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                         <IconComponent className="w-5 h-5 text-gray-600" />
                         <span className="font-medium flex-1">{input.name}</span>
                         {formData.userInputs.includes(input.name) && (
-                          <Check className="w-4 h-4 text-[#008062]" />
+                          <Check className="w-4 h-4 text-[var(--theme-primary)]" />
                         )}
                       </div>
                     </Card>
@@ -392,7 +392,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                     key={source}
                     className={`p-3 cursor-pointer transition-all border-2 ${
                       formData.knowledgeFiles.includes(source)
-                        ? 'border-[#008062] bg-green-50'
+                        ? 'border-[var(--theme-primary)] bg-green-50'
                         : 'border-gray-200 hover:border-gray-300'
                     }`}
                     onClick={() => {
@@ -405,7 +405,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                     <div className="flex items-center justify-between">
                       <span className="font-medium text-sm">{source}</span>
                       {formData.knowledgeFiles.includes(source) && (
-                        <Check className="w-4 h-4 text-[#008062]" />
+                        <Check className="w-4 h-4 text-[var(--theme-primary)]" />
                       )}
                     </div>
                   </Card>
@@ -469,7 +469,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               <div key={step.id} className="flex flex-col items-center relative z-10">
                 <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 text-sm font-medium ${
                   step.id === currentStep 
-                    ? 'bg-[#008062] border-[#008062] text-white'
+                    ? 'theme-primary border-[var(--theme-primary)] text-white'
                     : step.isCompleted 
                     ? 'bg-green-100 border-green-500 text-green-700'
                     : 'bg-white border-gray-300 text-gray-500'
@@ -479,7 +479,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                 <div className="mt-2 hidden sm:block">
                   <div className={`text-xs font-medium text-center ${
                     step.id === currentStep 
-                      ? 'text-[#008062]'
+                      ? 'text-[var(--theme-primary)]'
                       : step.isCompleted 
                       ? 'text-green-700'
                       : 'text-gray-500'
@@ -522,7 +522,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                   (currentStep === 2 && !formData.purpose) ||
                   (currentStep === 3 && !formData.name)
                 }
-                className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+                className="theme-primary theme-primary-hover:hover text-white"
               >
                 {getNextButtonText()}
                 <ChevronRight className="w-4 h-4 ml-2" />
@@ -530,7 +530,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
             ) : (
               <Button 
                 onClick={handleComplete}
-                className="bg-[#008062] hover:bg-[#00d2a0] text-white"
+                className="theme-primary theme-primary-hover:hover text-white"
               >
                 Create Copilot
               </Button>
