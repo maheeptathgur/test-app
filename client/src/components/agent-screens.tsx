@@ -825,11 +825,7 @@ function KnowledgeBaseTab({ agentName }: { agentName: string }) {
       </CardHeader>
       <CardContent className="space-y-6">
         {/* Action Buttons */}
-        <div className="flex items-center justify-between">
-          <Button variant="outline" size="sm">
-            <ShoppingCart className="w-4 h-4 mr-1" />
-            Go to Marketplace
-          </Button>
+        <div className="flex items-center justify-end">
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={() => console.log('Add Document clicked')}>
               <Plus className="w-4 h-4 mr-1" />
@@ -846,6 +842,9 @@ function KnowledgeBaseTab({ agentName }: { agentName: string }) {
             <Button variant="outline" size="sm" onClick={() => console.log('AI Suggestions clicked')}>
               <Bot className="w-4 h-4 mr-1" />
               AI Suggestions
+            </Button>
+            <Button variant="outline" size="sm">
+              Go to Marketplace
             </Button>
           </div>
         </div>
