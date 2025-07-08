@@ -427,4 +427,23 @@
     background-color: white !important;
   }
 
+  /* Ultra-aggressive input text color fix for conversation editing */
+  input[type="text"] {
+    color: black !important;
+    background-color: white !important;
+  }
+
+  input[type="text"]:focus,
+  input[type="text"]:active,
+  input[type="text"]:hover {
+    color: black !important;
+    background-color: white !important;
+  }
+
+  /* Force all input elements to have black text regardless of parent state */
+  * input, *:hover input, *:active input, *:focus input {
+    color: black !important;
+    background-color: white !important;
+  }
+
 }

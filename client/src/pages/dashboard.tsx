@@ -1953,6 +1953,9 @@ export default function Dashboard() {
                       }`}
                       style={conversation.isActive ? { backgroundColor: 'var(--theme-accent)' } : {}}
                       onMouseEnter={(e) => {
+                        // Don't apply hover effects if this conversation is being edited
+                        if (editingConversationId === conversation.id) return;
+                        
                         e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
                         e.currentTarget.style.cssText += '; color: white !important; --sidebar-foreground: white !important; --sidebar-primary: white !important;';
                         // Force all nested text elements to white, but exclude input elements
@@ -1962,6 +1965,9 @@ export default function Dashboard() {
                         });
                       }}
                       onMouseLeave={(e) => {
+                        // Don't apply leave effects if this conversation is being edited
+                        if (editingConversationId === conversation.id) return;
+                        
                         e.currentTarget.style.backgroundColor = conversation.isActive ? 'var(--theme-accent)' : 'rgba(255, 255, 255, 0.5)';
                         e.currentTarget.style.removeProperty('color');
                         e.currentTarget.style.removeProperty('--sidebar-foreground');
@@ -1998,35 +2004,42 @@ export default function Dashboard() {
                       <div className="space-y-0.5">
                         {editingConversationId === conversation.id ? (
                           <div className="space-y-1">
-                            <Input
-                              value={editingConversationTitle}
-                              onChange={(e) => setEditingConversationTitle(e.target.value)}
-                              onKeyDown={(e) => {
-                                if (e.key === 'Enter') {
-                                  handleSaveConversationTitle(conversation.id);
-                                } else if (e.key === 'Escape') {
-                                  handleCancelEditConversationTitle();
-                                }
-                              }}
-                              onBlur={() => handleSaveConversationTitle(conversation.id)}
-                              className="h-6 text-sm px-2 py-0 text-foreground bg-background"
-                              style={{ 
-                                color: 'hsl(var(--foreground)) !important',
-                                backgroundColor: 'white !important'
-                              }}
-                              onFocus={(e) => {
-                                // Force dark text on focus
-                                e.target.style.setProperty('color', 'hsl(var(--foreground))', 'important');
-                                e.target.style.setProperty('background-color', 'white', 'important');
-                              }}
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                // Force dark text on click
-                                e.target.style.setProperty('color', 'hsl(var(--foreground))', 'important');
-                                e.target.style.setProperty('background-color', 'white', 'important');
-                              }}
-                              autoFocus
-                            />
+                            <div 
+                              onMouseEnter={(e) => e.stopPropagation()}
+                              onMouseLeave={(e) => e.stopPropagation()}
+                              style={{ backgroundColor: 'white', padding: '0' }}
+                            >
+                              <Input
+                                value={editingConversationTitle}
+                                onChange={(e) => setEditingConversationTitle(e.target.value)}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter') {
+                                    handleSaveConversationTitle(conversation.id);
+                                  } else if (e.key === 'Escape') {
+                                    handleCancelEditConversationTitle();
+                                  }
+                                }}
+                                onBlur={() => handleSaveConversationTitle(conversation.id)}
+                                className="h-6 text-sm px-2 py-0"
+                                style={{ 
+                                  color: 'black !important',
+                                  backgroundColor: 'white !important',
+                                  borderColor: '#d1d5db'
+                                }}
+                                onFocus={(e) => {
+                                  // Force dark text on focus
+                                  e.target.style.setProperty('color', 'black', 'important');
+                                  e.target.style.setProperty('background-color', 'white', 'important');
+                                }}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  // Force dark text on click
+                                  e.target.style.setProperty('color', 'black', 'important');
+                                  e.target.style.setProperty('background-color', 'white', 'important');
+                                }}
+                                autoFocus
+                              />
+                            </div>
                             <div className="flex items-center justify-between">
                               <span className="text-xs text-muted-foreground leading-tight">{conversation.timestamp}</span>
                               <div className="flex items-center gap-1">
