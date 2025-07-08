@@ -990,7 +990,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             <div className="max-w-4xl mx-auto h-full flex flex-col p-6">
 
               {showProfileFields && copilot?.profileFields && copilot.profileFields.length > 0 && (
-                <div className="mb-6 mt-8 p-4 rounded-lg" style={{ backgroundColor: 'var(--theme-accent)', border: '1px solid hsl(218, 18%, 80%)' }}>
+                <div className="mb-6 mt-8 p-4 rounded-lg" style={{ backgroundColor: 'white', border: '1px solid hsl(218, 18%, 80%)' }}>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
                       <h3 className="font-medium text-[hsl(var(--foreground))]">Personalize your experience</h3>
