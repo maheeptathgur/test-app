@@ -446,4 +446,21 @@
     background-color: white !important;
   }
 
+  /* Delete Conversation Button Styling */
+  .delete-conversation-btn {
+    color: #6b7280 !important; /* Gray by default */
+  }
+
+  .delete-conversation-btn svg {
+    color: #6b7280 !important; /* Gray icon by default */
+  }
+
+  .delete-conversation-btn:hover {
+    color: #ef4444 !important; /* Red on hover */
+  }
+
+  .delete-conversation-btn:hover svg {
+    color: #ef4444 !important; /* Red icon on hover */
+  }
+
 }

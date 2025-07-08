@@ -2103,28 +2103,16 @@ export default function Dashboard() {
                                     e.stopPropagation();
                                     handleDeleteConversation(conversation.id);
                                   }}
-                                  className="h-6 w-6 p-1 text-muted-foreground hover:bg-red-50"
+                                  className="h-6 w-6 p-1 delete-conversation-btn hover:bg-red-50"
                                   title="Delete conversation"
                                   onMouseEnter={(e) => {
                                     e.stopPropagation();
-                                    e.currentTarget.style.setProperty('color', '#ef4444', 'important');
-                                    // Force the icon to turn red on hover
-                                    const icon = e.currentTarget.querySelector('svg');
-                                    if (icon) {
-                                      (icon as HTMLElement).style.setProperty('color', '#ef4444', 'important');
-                                    }
                                   }}
                                   onMouseLeave={(e) => {
                                     e.stopPropagation();
-                                    e.currentTarget.style.setProperty('color', '#6b7280', 'important');
-                                    // Force the icon back to gray
-                                    const icon = e.currentTarget.querySelector('svg');
-                                    if (icon) {
-                                      (icon as HTMLElement).style.setProperty('color', '#6b7280', 'important');
-                                    }
                                   }}
                                 >
-                                  <Trash2 className="w-3 h-3" style={{ color: 'inherit' }} />
+                                  <Trash2 className="w-3 h-3" />
                                 </Button>
                               </div>
                             </div>
