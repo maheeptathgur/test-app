@@ -152,9 +152,13 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
             onClick={() => setActiveTab("general")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "general"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-transparent text-foreground"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
+            style={activeTab === "general" ? {
+              borderBottomColor: 'var(--brand-primary)',
+              color: 'var(--brand-primary)'
+            } : {}}
           >
             General
           </button>
@@ -162,9 +166,13 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
             onClick={() => setActiveTab("security")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "security"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-transparent text-foreground"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
+            style={activeTab === "security" ? {
+              borderBottomColor: 'var(--brand-primary)',
+              color: 'var(--brand-primary)'
+            } : {}}
           >
             Security
           </button>
@@ -172,9 +180,13 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
             onClick={() => setActiveTab("branding")}
             className={`py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
               activeTab === "branding"
-                ? "border-[#008062] text-[#008062]"
+                ? "border-transparent text-foreground"
                 : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted"
             }`}
+            style={activeTab === "branding" ? {
+              borderBottomColor: 'var(--brand-primary)',
+              color: 'var(--brand-primary)'
+            } : {}}
           >
             Branding
           </button>
@@ -794,7 +806,19 @@ export function WorkspaceSettings({ brandingColors, onBrandingColorsChange }: Wo
             <Button variant="outline">
               Cancel
             </Button>
-            <Button className="bg-[#008062] hover:bg-[#006b54]">
+            <Button 
+              className="text-white"
+              style={{
+                backgroundColor: 'var(--brand-primary)',
+                borderColor: 'var(--brand-primary)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = adjustColorShade(brandingColors.primary, -20);
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--brand-primary)';
+              }}
+            >
               Save Changes
             </Button>
           </div>
