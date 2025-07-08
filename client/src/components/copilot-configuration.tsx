@@ -1368,7 +1368,7 @@ function MyComponent() {
                       </div>
                       
                       {/* Configuration Toggles */}
-                      <div className="space-y-4 pb-6 border-b border-[hsl(var(--border))] mb-6">
+                      <div className="space-y-4 pb-6 border-b mb-6" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
                         
                         
                         <div className="flex items-center justify-between">
@@ -1495,8 +1495,6 @@ function MyComponent() {
                           </div>
                         )}
                       </div>
-                      
-                      <div className="border-t my-6" style={{ borderTopColor: 'hsl(187, 18%, 80%)' }}></div>
                       
                       <div className="space-y-4">
                         <div className="space-y-2">
