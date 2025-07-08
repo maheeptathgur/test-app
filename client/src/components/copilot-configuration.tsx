@@ -1092,34 +1092,66 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                           
                           <div className="space-y-2">
                             <Label>Tile Image (4:3 ratio)</Label>
-                            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                              <Image className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                              <div className="text-sm text-muted-foreground mb-2">
-                                Upload banner image
-                              </div>
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => handleImageUpload('banner', e.target.files?.[0] || null)}
-                                className="hidden"
-                                id="banner-upload"
-                              />
-                              <Button
-                                type="button"
-                                variant="outline"
-                                size="sm"
-                                onClick={() => document.getElementById('banner-upload')?.click()}
-                                className="gap-2"
-                              >
-                                <Upload className="h-3 w-3" />
-                                Choose File
-                              </Button>
-                              {bannerImage && (
-                                <div className="mt-2 text-xs text-muted-foreground">
-                                  {bannerImage.name}
+                            {(() => {
+                              // Get current image URL based on copilot type
+                              const getImageUrl = (type: string) => {
+                                switch (type.toLowerCase()) {
+                                  case 'general':
+                                    return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
+                                  case 'content':
+                                    return 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=200&fit=crop&auto=format';
+                                  case 'analyst':
+                                    return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop&auto=format';
+                                  case 'support':
+                                    return 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=200&fit=crop&auto=format';
+                                  case 'form':
+                                    return 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=200&fit=crop&auto=format';
+                                  default:
+                                    return 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop&auto=format';
+                                }
+                              };
+                              
+                              const currentImageUrl = getImageUrl(copilotData.type);
+                              
+                              return (
+                                <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
+                                  <div className="aspect-[4/3] bg-muted relative">
+                                    <img 
+                                      src={currentImageUrl} 
+                                      alt={`${copilotData.type} copilot tile`}
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                  <div className="p-3 text-center bg-muted/20">
+                                    <div className="text-sm font-medium text-foreground mb-2">
+                                      Current tile image for {copilotData.type} copilot
+                                    </div>
+                                    <input
+                                      type="file"
+                                      accept="image/*"
+                                      onChange={(e) => handleImageUpload('banner', e.target.files?.[0] || null)}
+                                      className="hidden"
+                                      id="banner-upload"
+                                    />
+                                    <Button
+                                      type="button"
+                                      variant="outline"
+                                      size="sm"
+                                      onClick={() => document.getElementById('banner-upload')?.click()}
+                                      className="gap-2"
+                                    >
+                                      <Upload className="h-3 w-3" />
+                                      Change Image
+                                    </Button>
+                                    {bannerImage && (
+                                      <div className="mt-2 text-xs text-muted-foreground">
+                                        New: {bannerImage.name}
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
-                              )}
-                            </div>
+                              );
+                            })()}
                           </div>
                         </div>
                         
