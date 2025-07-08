@@ -1802,7 +1802,7 @@ export default function Dashboard() {
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.backgroundColor = 'transparent';
-                            e.currentTarget.style.setProperty('color', '', 'important');
+                            e.currentTarget.style.removeProperty('color');
                           }}
                         >
                           <div className={`w-8 h-8 ${copilot.avatarColor} rounded-lg flex items-center justify-center text-xs font-semibold`}>
@@ -1836,7 +1836,7 @@ export default function Dashboard() {
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.setProperty('color', '', 'important');
+                        e.currentTarget.style.removeProperty('color');
                       }}
                       title={copilot.name}
                     >
@@ -1875,7 +1875,7 @@ export default function Dashboard() {
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = chatCopilot?.id === copilot.id ? 'var(--theme-accent)' : 'transparent';
-                          e.currentTarget.style.setProperty('color', chatCopilot?.id === copilot.id ? 'var(--theme-primary)' : '', 'important');
+                          e.currentTarget.style.removeProperty('color');
                         }}
                         title={copilot.name}
                       >
@@ -1920,7 +1920,7 @@ export default function Dashboard() {
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = conversation.isActive ? 'var(--theme-accent)' : 'rgba(255, 255, 255, 0.5)';
-                        e.currentTarget.style.setProperty('color', conversation.isActive ? 'var(--theme-primary)' : '', 'important');
+                        e.currentTarget.style.removeProperty('color');
                       }}
                       onClick={() => !editingConversationId && handleLoadConversation(conversation)}
                     >
@@ -2045,7 +2045,7 @@ export default function Dashboard() {
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.backgroundColor = isActive ? 'var(--theme-accent)' : 'transparent';
-                        e.currentTarget.style.setProperty('color', isActive ? 'var(--theme-primary)' : '', 'important');
+                        e.currentTarget.style.removeProperty('color');
                       }}
                       title={sidebarCollapsed ? item.label : undefined}
                     >
