@@ -19,6 +19,7 @@ import {
   SiNotion
 } from 'react-icons/si';
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -2319,6 +2320,19 @@ function KnowledgeBaseScreen() {
   const [tempTitle, setTempTitle] = useState("");
   const [tempDescription, setTempDescription] = useState("");
   
+  // New modal states
+  const [addDocumentOpen, setAddDocumentOpen] = useState(false);
+  const [addUrlOpen, setAddUrlOpen] = useState(false);
+  const [createMdOpen, setCreateMdOpen] = useState(false);
+  const [marketplaceOpen, setMarketplaceOpen] = useState(false);
+  
+  // Form states
+  const [documentFile, setDocumentFile] = useState<File | null>(null);
+  const [urlInput, setUrlInput] = useState("");
+  const [urlDescription, setUrlDescription] = useState("");
+  const [mdTitle, setMdTitle] = useState("");
+  const [mdContent, setMdContent] = useState("");
+  
   // Search and filtering state
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
@@ -2399,15 +2413,15 @@ function KnowledgeBaseScreen() {
       
       <div className="flex items-center justify-end">
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" onClick={() => console.log('Add Document clicked')}>
+          <Button variant="outline" size="sm" onClick={() => setAddDocumentOpen(true)}>
             <Plus className="w-4 h-4 mr-1" />
             Add Document
           </Button>
-          <Button variant="outline" size="sm" onClick={() => console.log('Add URL clicked')}>
+          <Button variant="outline" size="sm" onClick={() => setAddUrlOpen(true)}>
             <Link className="w-4 h-4 mr-1" />
             Add URL
           </Button>
-          <Button variant="outline" size="sm" onClick={() => console.log('Create MD clicked')}>
+          <Button variant="outline" size="sm" onClick={() => setCreateMdOpen(true)}>
             <FileText className="w-4 h-4 mr-1" />
             Create MD
           </Button>
@@ -2415,7 +2429,7 @@ function KnowledgeBaseScreen() {
             <Bot className="w-4 h-4 mr-1" />
             AI Suggestions
           </Button>
-          <Button variant="outline" size="sm" onClick={() => console.log('Go to Marketplace clicked')}>
+          <Button variant="outline" size="sm" onClick={() => setMarketplaceOpen(true)}>
             Go to Marketplace
           </Button>
         </div>
@@ -2781,6 +2795,239 @@ function KnowledgeBaseScreen() {
                 Generate Selected ({selectedSuggestions.length})
               </Button>
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add Document Modal */}
+      <Dialog open={addDocumentOpen} onOpenChange={setAddDocumentOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Plus className="w-5 h-5" />
+              Add Document
+            </DialogTitle>
+            <DialogDescription>
+              Upload a document to your knowledge base. Supported formats: PDF, DOC, DOCX, TXT.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-8 text-center">
+              <Upload className="w-8 h-8 mx-auto mb-4 text-muted-foreground" />
+              <div className="space-y-2">
+                <p className="text-sm font-medium">Drop files here or click to browse</p>
+                <p className="text-xs text-muted-foreground">Maximum file size: 10MB</p>
+              </div>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx,.txt"
+                onChange={(e) => setDocumentFile(e.target.files?.[0] || null)}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+            </div>
+            
+            {documentFile && (
+              <div className="p-3 bg-muted rounded-lg">
+                <p className="text-sm font-medium">{documentFile.name}</p>
+                <p className="text-xs text-muted-foreground">
+                  {(documentFile.size / 1024 / 1024).toFixed(2)} MB
+                </p>
+              </div>
+            )}
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-4 border-t">
+            <Button variant="outline" onClick={() => setAddDocumentOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              onClick={() => {
+                console.log('Uploading document:', documentFile?.name);
+                setAddDocumentOpen(false);
+                setDocumentFile(null);
+              }}
+              disabled={!documentFile}
+            >
+              Upload Document
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Add URL Modal */}
+      <Dialog open={addUrlOpen} onOpenChange={setAddUrlOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Link className="w-5 h-5" />
+              Add URL
+            </DialogTitle>
+            <DialogDescription>
+              Add a web page or online resource to your knowledge base.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="url">URL</Label>
+              <Input
+                id="url"
+                placeholder="https://example.com"
+                value={urlInput}
+                onChange={(e) => setUrlInput(e.target.value)}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="description">Description (optional)</Label>
+              <Textarea
+                id="description"
+                placeholder="Brief description of this resource..."
+                value={urlDescription}
+                onChange={(e) => setUrlDescription(e.target.value)}
+                rows={3}
+              />
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-4 border-t">
+            <Button variant="outline" onClick={() => {
+              setAddUrlOpen(false);
+              setUrlInput("");
+              setUrlDescription("");
+            }}>
+              Cancel
+            </Button>
+            <Button 
+              onClick={() => {
+                console.log('Adding URL:', urlInput, urlDescription);
+                setAddUrlOpen(false);
+                setUrlInput("");
+                setUrlDescription("");
+              }}
+              disabled={!urlInput.trim()}
+            >
+              Add URL
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Create Markdown Modal */}
+      <Dialog open={createMdOpen} onOpenChange={setCreateMdOpen}>
+        <DialogContent className="max-w-4xl max-h-[80vh]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <FileText className="w-5 h-5" />
+              Create Markdown Document
+            </DialogTitle>
+            <DialogDescription>
+              Create a new markdown document for your knowledge base.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            <div className="space-y-2">
+              <Label htmlFor="mdTitle">Document Title</Label>
+              <Input
+                id="mdTitle"
+                placeholder="Document title..."
+                value={mdTitle}
+                onChange={(e) => setMdTitle(e.target.value)}
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="mdContent">Content</Label>
+              <Textarea
+                id="mdContent"
+                placeholder="# Your markdown content here...
+
+Use **bold** text, *italic* text, and `code` blocks.
+
+## Lists
+- Item 1
+- Item 2
+
+## Links
+[Link text](https://example.com)"
+                value={mdContent}
+                onChange={(e) => setMdContent(e.target.value)}
+                rows={12}
+                className="font-mono text-sm"
+              />
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-4 border-t">
+            <Button variant="outline" onClick={() => {
+              setCreateMdOpen(false);
+              setMdTitle("");
+              setMdContent("");
+            }}>
+              Cancel
+            </Button>
+            <Button 
+              onClick={() => {
+                console.log('Creating markdown document:', mdTitle, mdContent);
+                setCreateMdOpen(false);
+                setMdTitle("");
+                setMdContent("");
+              }}
+              disabled={!mdTitle.trim() || !mdContent.trim()}
+            >
+              Create Document
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Marketplace Modal */}
+      <Dialog open={marketplaceOpen} onOpenChange={setMarketplaceOpen}>
+        <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Building2 className="w-5 h-5" />
+              Knowledge Base Marketplace
+            </DialogTitle>
+            <DialogDescription>
+              Browse pre-built knowledge resources and templates.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {[
+                { name: "Sales Playbook", category: "Sales", description: "Complete sales processes and scripts" },
+                { name: "HR Policies", category: "HR", description: "Standard HR policies and procedures" },
+                { name: "Tech Documentation", category: "Technical", description: "API docs and technical guides" },
+                { name: "Marketing Templates", category: "Marketing", description: "Email and content templates" },
+                { name: "Legal Compliance", category: "Legal", description: "Compliance guidelines and forms" },
+                { name: "Product Guides", category: "Product", description: "Product specs and user guides" }
+              ].map((item, index) => (
+                <div key={index} className="p-4 border rounded-lg hover:bg-muted/50 transition-colors">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h4 className="font-medium">{item.name}</h4>
+                      <p className="text-sm text-muted-foreground">{item.description}</p>
+                      <Badge variant="outline" className="mt-2 text-xs">
+                        {item.category}
+                      </Badge>
+                    </div>
+                    <Button size="sm" variant="outline">
+                      Add
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="flex justify-end pt-4 border-t">
+            <Button variant="outline" onClick={() => setMarketplaceOpen(false)}>
+              Close
+            </Button>
           </div>
         </DialogContent>
       </Dialog>
