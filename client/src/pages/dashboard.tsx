@@ -2253,7 +2253,7 @@ export default function Dashboard() {
         </div>
       )}
       {/* Main Content */}
-      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: 'var(--theme-content-bg)' }}>
+      <div className={`flex-1 ${configuringCopilot ? 'overflow-y-auto' : 'overflow-hidden'}`} style={{ backgroundColor: 'var(--theme-background-light)' }}>
         {/* Form Interface for form-type copilots */}
         {chatCopilot && chatCopilot.type === 'form' ? (
           <div className="h-full flex">
@@ -2293,7 +2293,7 @@ export default function Dashboard() {
           />
         ) : /* Regular Dashboard Content */
         (
-          <div className="h-full overflow-y-auto" style={{ backgroundColor: 'var(--theme-content-bg)' }}>
+          <div className="h-full overflow-y-auto" style={{ backgroundColor: 'var(--theme-background-light)' }}>
             {/* Content Body - Conditional padding for tool config screens */}
             <div className={
               // No padding for configuration screens since they handle their own padding
