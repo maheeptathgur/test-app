@@ -159,7 +159,7 @@ export function WorkspaceSettings() {
     root.style.setProperty('--theme-primary-hover', themeColors.primaryHover);
     root.style.setProperty('--theme-primary-light', themeColors.primaryHover);
     
-    // Background properties (using exact variable names from index.css)
+    // Background properties
     root.style.setProperty('--theme-background', themeColors.workspaceBg);
     root.style.setProperty('--theme-background-light', themeColors.contentBg);
     root.style.setProperty('--theme-background-dark', themeColors.borders);
@@ -171,7 +171,6 @@ export function WorkspaceSettings() {
     
     // Accent properties
     root.style.setProperty('--theme-accent', themeColors.accent);
-    root.style.setProperty('--theme-accent-hover', themeColors.primaryHover);
     root.style.setProperty('--theme-accent-dark', themeColors.accent);
 
     // Override all shadcn/ui variables for complete theme coverage (need HSL format)
@@ -340,7 +339,7 @@ export function WorkspaceSettings() {
         <div className="grid grid-cols-3 gap-6 mt-6">
           {/* Workspace Information - 2/3 column */}
           <div className="col-span-2">
-            <Card >
+            <Card style={{ backgroundColor: '#ffffff' }}>
               <CardHeader>
                 <CardTitle className="text-[hsl(var(--card-foreground))]">Workspace Information</CardTitle>
                 <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -435,7 +434,7 @@ export function WorkspaceSettings() {
 
           {/* Workspace Preferences - 1/3 column */}
           <div className="col-span-1">
-            <Card >
+            <Card style={{ backgroundColor: '#ffffff' }}>
               <CardHeader>
                 <CardTitle className="font-semibold tracking-tight text-[16px] text-[hsl(var(--card-foreground))]">Workspace Preferences</CardTitle>
                 <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -492,7 +491,7 @@ export function WorkspaceSettings() {
 
         {activeTab === "security" && (
         <div className="space-y-6 mt-6">
-          <Card >
+          <Card style={{ backgroundColor: '#ffffff' }}>
             <CardHeader>
               <CardTitle className="text-[hsl(var(--card-foreground))]">Security Settings</CardTitle>
               <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -561,7 +560,7 @@ export function WorkspaceSettings() {
         {activeTab === "brand" && (
           <div className="space-y-6 mt-6">
             {/* Brand Assets */}
-            <Card >
+            <Card style={{ backgroundColor: '#ffffff' }}>
               <CardHeader>
                 <CardTitle className="text-[hsl(var(--card-foreground))]">Brand Assets</CardTitle>
                 <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -612,7 +611,7 @@ export function WorkspaceSettings() {
             </Card>
 
             {/* Theme Colors */}
-            <Card >
+            <Card style={{ backgroundColor: '#ffffff' }}>
               <CardHeader>
                 <CardTitle className="text-[hsl(var(--card-foreground))]">Theme Colors</CardTitle>
                 <CardDescription className="text-[hsl(var(--muted-foreground))]">
@@ -745,7 +744,7 @@ export function WorkspaceSettings() {
                 </div>
 
                 {/* Realistic Theme Preview */}
-                <Card >
+                <Card style={{ backgroundColor: '#ffffff' }}>
                   <CardHeader>
                     <CardTitle className="text-[hsl(var(--card-foreground))]">Live Preview</CardTitle>
                     <CardDescription className="text-[hsl(var(--muted-foreground))]">

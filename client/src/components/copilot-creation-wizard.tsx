@@ -81,32 +81,32 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
           <div className="space-y-6">
             <div className="text-center">
               <h2 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-2">Choose what you want to build</h2>
-              <p className="text-muted-foreground">Select the type of application you want to create.</p>
+              <p className="text-gray-600">Select the type of application you want to create.</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-6xl mx-auto">
               {/* Chat Copilot Builder - Featured */}
               <Card 
                 className={`cursor-pointer transition-all border-2 ${
                   formData.builderType === "chat" 
-                    ? "border-[var(--theme-primary)] theme-primary text-card-foreground" 
+                    ? "border-[var(--theme-primary)] theme-primary text-white" 
                     : "border-[hsl(var(--border))] hover:border-[var(--theme-primary)] hover:shadow-md"
                 }`}
                 onClick={() => setFormData({ ...formData, builderType: "chat" })}
               >
                 <CardHeader className="text-center">
                   <div className={`p-3 rounded-lg mx-auto w-fit mb-3 ${
-                    formData.builderType === "chat" ? "bg-card/20" : "theme-primary text-card-foreground"
+                    formData.builderType === "chat" ? "bg-white/20" : "theme-primary text-white"
                   }`}>
                     <MessageSquare className="w-6 h-6" />
                   </div>
-                  <CardTitle className={`text-lg ${formData.builderType === "chat" ? "text-card-foreground" : "text-[hsl(var(--foreground))]"}`}>
+                  <CardTitle className={`text-lg ${formData.builderType === "chat" ? "text-white" : "text-[hsl(var(--foreground))]"}`}>
                     Chat Copilot Builder
                   </CardTitle>
-                  <CardDescription className={`${formData.builderType === "chat" ? "text-card-foreground/80" : "text-muted-foreground"} text-sm`}>
+                  <CardDescription className={`${formData.builderType === "chat" ? "text-white/80" : "text-gray-600"} text-sm`}>
                     Create an AI-powered chat assistant to answer questions and guide users in real time.
                   </CardDescription>
                   {formData.builderType === "chat" && (
-                    <Check className="w-5 h-5 text-card-foreground mx-auto mt-2" />
+                    <Check className="w-5 h-5 text-white mx-auto mt-2" />
                   )}
                 </CardHeader>
               </Card>
@@ -125,7 +125,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                     <Smartphone className="w-6 h-6" />
                   </div>
                   <CardTitle className="text-lg text-[hsl(var(--foreground))]">Form App Builder</CardTitle>
-                  <CardDescription className="text-muted-foreground text-sm">
+                  <CardDescription className="text-gray-600 text-sm">
                     Build an AI-powered app with structured form inputs and AI-generated responses
                   </CardDescription>
                   {formData.builderType === "app" && (
@@ -148,7 +148,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                     <Image className="w-6 h-6" />
                   </div>
                   <CardTitle className="text-lg text-[hsl(var(--foreground))]">Image App Builder</CardTitle>
-                  <CardDescription className="text-muted-foreground text-sm">
+                  <CardDescription className="text-gray-600 text-sm">
                     Design an AI-powered app that generates images based on user inputs
                   </CardDescription>
                   {formData.builderType === "image" && (
@@ -164,7 +164,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                   <HelpCircle className="w-5 h-5 text-[hsl(var(--muted-foreground))] mt-0.5" />
                   <div>
                     <h4 className="font-medium text-[hsl(var(--foreground))] mb-2">Help me choose</h4>
-                    <div className="space-y-2 text-sm text-muted-foreground">
+                    <div className="space-y-2 text-sm text-gray-600">
                       <p><strong>Chat Copilot Builder:</strong> Choose this if you want an AI that chats with users in real time. Best for answering questions, offering support, or acting as a guide.</p>
                       <p><strong>App Builder:</strong> Choose this if you need an AI app where users enter structured inputs, and AI generates tailored responses.</p>
                       <p><strong>Image App Builder:</strong> Choose this if you want an AI app that generates images based on structured user inputs.</p>
@@ -181,7 +181,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
           <div className="space-y-6 max-w-4xl mx-auto">
             <div className="text-center">
               <h2 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-2">Define AI's Purpose</h2>
-              <p className="text-muted-foreground">What should your AI assistant do? Be specific about its role and capabilities.</p>
+              <p className="text-gray-600">What should your AI assistant do? Be specific about its role and capabilities.</p>
             </div>
             
             <div className="space-y-4">
@@ -200,7 +200,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <Card className="p-4">
                   <h4 className="font-medium text-[hsl(var(--foreground))] mb-2">Good examples:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
+                  <ul className="text-sm text-gray-600 space-y-1">
                     <li>• Help customers with product support</li>
                     <li>• Generate marketing content ideas</li>
                     <li>• Analyze sales data and trends</li>
@@ -210,7 +210,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                 
                 <Card className="p-4">
                   <h4 className="font-medium text-[hsl(var(--foreground))] mb-2">Be specific about:</h4>
-                  <ul className="text-sm text-muted-foreground space-y-1">
+                  <ul className="text-sm text-gray-600 space-y-1">
                     <li>• Target audience</li>
                     <li>• Key tasks it should perform</li>
                     <li>• Tone and style preferences</li>
@@ -227,7 +227,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
           <div className="space-y-6 max-w-2xl mx-auto">
             <div className="text-center">
               <h2 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-2">Choose a Name</h2>
-              <p className="text-muted-foreground">Give your AI assistant a memorable name that reflects its purpose.</p>
+              <p className="text-gray-600">Give your AI assistant a memorable name that reflects its purpose.</p>
             </div>
             
             <div className="space-y-4">
@@ -271,7 +271,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
           <div className="space-y-6 max-w-4xl mx-auto">
             <div className="text-center">
               <h2 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-2">Customize Profile</h2>
-              <p className="text-muted-foreground">What information should your AI collect about users to personalize responses?</p>
+              <p className="text-gray-600">What information should your AI collect about users to personalize responses?</p>
             </div>
             
             <div className="space-y-4">
@@ -321,7 +321,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
           <div className="space-y-6 max-w-4xl mx-auto">
             <div className="text-center">
               <h2 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-2">User Inputs</h2>
-              <p className="text-muted-foreground">What types of input should users be able to provide to your AI?</p>
+              <p className="text-gray-600">What types of input should users be able to provide to your AI?</p>
             </div>
             
             <div className="space-y-4">
@@ -351,7 +351,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                       }}
                     >
                       <div className="flex items-center gap-3">
-                        <IconComponent className="w-5 h-5 text-muted-foreground" />
+                        <IconComponent className="w-5 h-5 text-gray-600" />
                         <span className="font-medium flex-1">{input.name}</span>
                         {formData.userInputs.includes(input.name) && (
                           <Check className="w-4 h-4 text-[var(--theme-primary)]" />
@@ -378,7 +378,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
           <div className="space-y-6 max-w-4xl mx-auto">
             <div className="text-center">
               <h2 className="text-2xl font-bold text-[hsl(var(--foreground))] mb-2">Upload Knowledge</h2>
-              <p className="text-muted-foreground">Add documents and data sources to make your AI more knowledgeable.</p>
+              <p className="text-gray-600">Add documents and data sources to make your AI more knowledgeable.</p>
             </div>
             
             <div className="space-y-4">
@@ -414,8 +414,8 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               
               <Card className="p-4 border-2 border-dashed border-[hsl(var(--border))] bg-[hsl(var(--muted))]">
                 <div className="text-center">
-                  <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground mb-2">Drag and drop files here, or click to browse</p>
+                  <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600 mb-2">Drag and drop files here, or click to browse</p>
                   <Button variant="outline" size="sm">Choose Files</Button>
                 </div>
               </Card>
@@ -437,13 +437,13 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
   };
 
   return (
-    <div className="h-full bg-card">
+    <div className="h-full bg-white">
       {/* Header with close button */}
       <div className="border-b border-[hsl(var(--border))] px-8 py-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">Create New Copilot</h1>
-            <p className="text-muted-foreground mt-1">Follow the steps below to set up your AI assistant</p>
+            <p className="text-gray-600 mt-1">Follow the steps below to set up your AI assistant</p>
           </div>
           <Button variant="ghost" onClick={onClose}>
             <X className="w-5 h-5" />
@@ -469,10 +469,10 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
               <div key={step.id} className="flex flex-col items-center relative z-10">
                 <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 text-sm font-medium ${
                   step.id === currentStep 
-                    ? 'theme-primary border-[var(--theme-primary)] text-card-foreground'
+                    ? 'theme-primary border-[var(--theme-primary)] text-white'
                     : step.isCompleted 
                     ? 'bg-green-100 border-green-500 text-green-700'
-                    : 'bg-card border-[hsl(var(--border))] text-[hsl(var(--muted-foreground))]'
+                    : 'bg-white border-[hsl(var(--border))] text-[hsl(var(--muted-foreground))]'
                 }`}>
                   {step.isCompleted && step.id !== currentStep ? <Check className="w-4 h-4" /> : step.id}
                 </div>
@@ -522,7 +522,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
                   (currentStep === 2 && !formData.purpose) ||
                   (currentStep === 3 && !formData.name)
                 }
-                className="theme-primary theme-primary-hover:hover text-card-foreground"
+                className="theme-primary theme-primary-hover:hover text-white"
               >
                 {getNextButtonText()}
                 <ChevronRight className="w-4 h-4 ml-2" />
@@ -530,7 +530,7 @@ export function CopilotCreationWizard({ onCreateCopilot, onClose }: CopilotCreat
             ) : (
               <Button 
                 onClick={handleComplete}
-                className="theme-primary theme-primary-hover:hover text-card-foreground"
+                className="theme-primary theme-primary-hover:hover text-white"
               >
                 Create Copilot
               </Button>

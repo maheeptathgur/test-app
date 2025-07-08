@@ -40,7 +40,7 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
       case 'Notion':
         return <FileText className="w-8 h-8 text-[hsl(var(--foreground))]" />;
       default:
-        return <Globe className="w-8 h-8 text-muted-foreground" />;
+        return <Globe className="w-8 h-8 text-gray-600" />;
     }
   };
 
@@ -84,7 +84,7 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
                 <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                 <div>
                   <p className="font-medium">Connected to {tool.name}</p>
-                  <p className="text-sm text-muted-foreground">mandeep@knolli.ai</p>
+                  <p className="text-sm text-gray-600">mandeep@knolli.ai</p>
                 </div>
               </div>
               <Button variant="outline" size="sm">
@@ -124,21 +124,21 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
             <div className="flex items-center justify-between p-3 border rounded-lg">
               <div>
                 <p className="font-medium">Read Data</p>
-                <p className="text-sm text-muted-foreground">Access and read data from {tool.name}</p>
+                <p className="text-sm text-gray-600">Access and read data from {tool.name}</p>
               </div>
               <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
             </div>
             <div className="flex items-center justify-between p-3 border rounded-lg">
               <div>
                 <p className="font-medium">Write Data</p>
-                <p className="text-sm text-muted-foreground">Create and modify data in {tool.name}</p>
+                <p className="text-sm text-gray-600">Create and modify data in {tool.name}</p>
               </div>
               <Switch defaultChecked={true} onCheckedChange={() => setHasChanges(true)} />
             </div>
             <div className="flex items-center justify-between p-3 border rounded-lg">
               <div>
                 <p className="font-medium">Delete Data</p>
-                <p className="text-sm text-muted-foreground">Remove data from {tool.name}</p>
+                <p className="text-sm text-gray-600">Remove data from {tool.name}</p>
               </div>
               <Switch defaultChecked={false} onCheckedChange={() => setHasChanges(true)} />
             </div>
@@ -146,7 +146,7 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
         </Card>
       </div>
       {/* Sticky Footer */}
-      <div className="fixed bottom-0 left-64 right-0 bg-card border-t border-[hsl(var(--border))] px-8 py-4 z-10">
+      <div className="fixed bottom-0 left-64 right-0 bg-white border-t border-[hsl(var(--border))] px-8 py-4 z-10">
         <div className="flex justify-between items-center">
           {/* Success Message */}
           <div className="flex-1">
@@ -164,7 +164,7 @@ export function ToolConfigureScreen({ tool, onBack }: { tool: any; onBack: () =>
               Cancel
             </Button>
             <Button 
-              className="theme-primary theme-primary-hover:hover text-card-foreground border-0"
+              className="theme-primary theme-primary-hover:hover text-white border-0"
               disabled={!hasChanges}
               onClick={handleSave}
             >

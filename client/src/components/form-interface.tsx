@@ -322,7 +322,7 @@ Stanford University | 2015
   return (
     <>
       {/* Form Sidebar - positioned next to main sidebar */}
-      <div className="w-80 flex-shrink-0 bg-card border-r border-[hsl(var(--border))] flex flex-col h-full">
+      <div className="w-80 flex-shrink-0 bg-white border-r border-[hsl(var(--border))] flex flex-col h-full">
         {/* Sidebar Header */}
         <div className="p-4 border-b border-[hsl(var(--border))]">
           <div className="flex items-center gap-3">
@@ -396,9 +396,9 @@ Stanford University | 2015
                   className="border-2 border-dashed border-[hsl(var(--border))] rounded-lg p-6 text-center cursor-pointer hover:border-[hsl(var(--border))] transition-colors"
                   onClick={handleUploadClick}
                 >
-                  <Upload className="w-6 h-6 text-muted-foreground mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground mb-1">Click to upload resume</p>
-                  <p className="text-xs text-muted-foreground">PDF, DOC, DOCX, or TXT files</p>
+                  <Upload className="w-6 h-6 text-gray-400 mx-auto mb-2" />
+                  <p className="text-sm text-gray-600 mb-1">Click to upload resume</p>
+                  <p className="text-xs text-gray-400">PDF, DOC, DOCX, or TXT files</p>
                 </div>
               )}
               <input
@@ -436,7 +436,7 @@ Stanford University | 2015
       </div>
 
       {/* Main Content Area - Results and Chat */}
-      <div className="flex-1 flex flex-col bg-card w-full">
+      <div className="flex-1 flex flex-col bg-white w-full">
         {/* Results Header */}
         <div className="flex items-center justify-between p-4 border-b border-[hsl(var(--border))]">
           <div>
@@ -475,7 +475,7 @@ Stanford University | 2015
               variant="outline" 
               size="sm"
               onClick={onClose} 
-              className="h-7 w-7 p-0 theme-primary-hover:hover hover:text-card-foreground"
+              className="h-7 w-7 p-0 theme-primary-hover:hover hover:text-white"
             >
               <X className="h-3 w-3" />
             </Button>
@@ -495,7 +495,7 @@ Stanford University | 2015
             <div className="flex-1 flex items-center justify-center text-center w-full">
               <div className="space-y-3">
                 <div className="w-12 h-12 bg-[hsl(var(--muted))] rounded-full flex items-center justify-center mx-auto flex-shrink-0">
-                  <FileText className="w-6 h-6 text-muted-foreground" />
+                  <FileText className="w-6 h-6 text-gray-400" />
                 </div>
                 <div>
                   <p className="text-sm font-medium text-[hsl(var(--foreground))]">Ready to generate</p>

@@ -664,7 +664,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         {/* Markdown Editor Content */}
         <div className="flex flex-col h-[calc(100vh-120px)]">
           {/* Document Info */}
-          <div className="p-6 bg-card border-b" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
+          <div className="p-6 bg-white border-b" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div className="space-y-2">
                 <Label htmlFor="md-title">Document Title</Label>
@@ -693,7 +693,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 onClick={() => setMdEditorTab('markdown')}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                   mdEditorTab === 'markdown' 
-                    ? 'bg-card text-[var(--theme-primary)] shadow-sm' 
+                    ? 'bg-white text-[var(--theme-primary)] shadow-sm' 
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -705,7 +705,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 onClick={() => setMdEditorTab('rtf')}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                   mdEditorTab === 'rtf' 
-                    ? 'bg-card text-[var(--theme-primary)] shadow-sm' 
+                    ? 'bg-white text-[var(--theme-primary)] shadow-sm' 
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -717,7 +717,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 onClick={() => setMdEditorTab('preview')}
                 className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
                   mdEditorTab === 'preview' 
-                    ? 'bg-card text-[var(--theme-primary)] shadow-sm' 
+                    ? 'bg-white text-[var(--theme-primary)] shadow-sm' 
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
@@ -742,7 +742,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
 
             {mdEditorTab === 'rtf' && (
               <div className="w-full p-6">
-                <div className="border rounded-lg min-h-[500px] bg-card focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:border-primary transition-all" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
+                <div className="border rounded-lg min-h-[500px] bg-white focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 focus-within:border-primary transition-all" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
                   {/* RTF Toolbar */}
                   <div className="border-b p-3 bg-muted/30 flex items-center gap-2 flex-wrap rounded-t-lg" style={{ borderBottomColor: 'hsl(187, 18%, 80%)' }}>
                     <div className="flex items-center gap-1">
@@ -935,7 +935,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                     value={mdContent}
                     onChange={(e) => setMdContent(e.target.value)}
                     placeholder="Start writing your content here... Use the toolbar buttons to add formatting."
-                    className="w-full h-[450px] border-0 resize-none focus-visible:ring-0 focus:ring-0 focus:outline-none rounded-none rounded-b-lg bg-card focus:bg-card"
+                    className="w-full h-[450px] border-0 resize-none focus-visible:ring-0 focus:ring-0 focus:outline-none rounded-none rounded-b-lg bg-white focus:bg-white"
                     style={{ 
                       fontFamily: 'ui-sans-serif, system-ui, sans-serif',
                       backgroundColor: 'white',
@@ -947,7 +947,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
             )}
             
             {mdEditorTab === 'preview' && (
-              <div className="w-full p-6 bg-card">
+              <div className="w-full p-6 bg-white">
                 <div className="prose max-w-none">
                   {mdContent ? (
                     <div className="whitespace-pre-wrap">{mdContent}</div>
@@ -970,7 +970,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       <div className="flex items-center justify-between p-6 bg-muted/50">
         <div className="flex items-center gap-3">
           <div className={`w-10 h-10 ${copilotData.avatarColor} rounded-full flex items-center justify-center`}>
-            <Image className="w-5 h-5 text-card-foreground" />
+            <Image className="w-5 h-5 text-white" />
           </div>
           <div>
             <h1 className="font-semibold text-foreground text-[24px]">Configure {copilotData.name}</h1>
@@ -1376,7 +1376,7 @@ function MyComponent() {
                             <span className="text-sm font-medium">Document Pane</span>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <HelpCircle className="w-4 h-4 text-muted-foreground cursor-help" />
+                                <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
                               <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] border-[hsl(var(--border))] max-w-xs">
                                 <p>Show a document preview pane alongside the chat interface</p>
@@ -1389,10 +1389,10 @@ function MyComponent() {
                               setHasChanges(true);
                             }}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                              documentPaneEnabled ? 'theme-primary' : 'bg-muted'
+                              documentPaneEnabled ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
-                            <span className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               documentPaneEnabled ? 'translate-x-6' : 'translate-x-1'
                             }`} />
                           </button>
@@ -1403,7 +1403,7 @@ function MyComponent() {
                             <span className="text-sm font-medium">Show Sources</span>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <HelpCircle className="w-4 h-4 text-muted-foreground cursor-help" />
+                                <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
                               <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] border-[hsl(var(--border))] max-w-xs">
                                 <p>Display source references and citations in AI responses</p>
@@ -1416,10 +1416,10 @@ function MyComponent() {
                               setHasChanges(true);
                             }}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                              showSources ? 'theme-primary' : 'bg-muted'
+                              showSources ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
-                            <span className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               showSources ? 'translate-x-6' : 'translate-x-1'
                             }`} />
                           </button>
@@ -1430,7 +1430,7 @@ function MyComponent() {
                             <span className="text-sm font-medium">Featured</span>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <HelpCircle className="w-4 h-4 text-muted-foreground cursor-help" />
+                                <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
                               <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] border-[hsl(var(--border))] max-w-xs">
                                 <p>Highlight this copilot in featured listings and recommendations</p>
@@ -1443,10 +1443,10 @@ function MyComponent() {
                               setHasChanges(true);
                             }}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                              isFeatured ? 'theme-primary' : 'bg-muted'
+                              isFeatured ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
-                            <span className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               isFeatured ? 'translate-x-6' : 'translate-x-1'
                             }`} />
                           </button>
@@ -1457,7 +1457,7 @@ function MyComponent() {
                             <span className="text-sm font-medium">Prompt required</span>
                             <Tooltip>
                               <TooltipTrigger asChild>
-                                <HelpCircle className="w-4 h-4 text-muted-foreground cursor-help" />
+                                <HelpCircle className="w-4 h-4 text-gray-400 cursor-help" />
                               </TooltipTrigger>
                               <TooltipContent className="bg-[#e0fff8] text-[hsl(var(--foreground))] border-[hsl(var(--border))] max-w-xs">
                                 <p>Require users to enter a custom prompt before starting conversations</p>
@@ -1470,10 +1470,10 @@ function MyComponent() {
                               setHasChanges(true);
                             }}
                             className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                              promptRequired ? 'theme-primary' : 'bg-muted'
+                              promptRequired ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
-                            <span className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               promptRequired ? 'translate-x-6' : 'translate-x-1'
                             }`} />
                           </button>
@@ -1542,7 +1542,7 @@ function MyComponent() {
               </div>
               
               {/* Save Footer */}
-              <div className="fixed bottom-0 left-64 right-0 bg-card border-t px-6 py-4 z-10" style={{ borderTopColor: 'hsl(187, 18%, 80%)' }}>
+              <div className="fixed bottom-0 left-64 right-0 bg-white border-t px-6 py-4 z-10" style={{ borderTopColor: 'hsl(187, 18%, 80%)' }}>
                 <div className="flex justify-between items-center">
                   <div></div>
                   <div className="flex items-center gap-6">
@@ -1618,15 +1618,15 @@ function MyComponent() {
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded-full bg-card transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
-                                <span className="text-xs text-muted-foreground">Active</span>
+                                <span className="text-xs text-gray-600">Active</span>
                               </div>
                             </div>
                           </div>
                         </CardHeader>
                         <CardContent className="pt-0 flex-1 flex flex-col">
-                          <p className="text-sm text-muted-foreground mb-4 flex-grow">Creates and manages content across platforms with AI-powered writing tools</p>
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Creates and manages content across platforms with AI-powered writing tools</p>
                           
                           <div className="space-y-4 mt-auto">
                             
@@ -1671,15 +1671,15 @@ function MyComponent() {
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded-full bg-card transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
-                                <span className="text-xs text-muted-foreground">Active</span>
+                                <span className="text-xs text-gray-600">Active</span>
                               </div>
                             </div>
                           </div>
                         </CardHeader>
                         <CardContent className="pt-0 flex-1 flex flex-col">
-                          <p className="text-sm text-muted-foreground mb-4 flex-grow">Analyzes data and generates insights for performance optimization</p>
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Analyzes data and generates insights for performance optimization</p>
                           
                           <div className="space-y-4 mt-auto">
                             
@@ -1734,15 +1734,15 @@ function MyComponent() {
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded-full bg-card transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
-                                <span className="text-xs text-muted-foreground">Active</span>
+                                <span className="text-xs text-gray-600">Active</span>
                               </div>
                             </div>
                           </div>
                         </CardHeader>
                         <CardContent className="pt-0 flex-1 flex flex-col">
-                          <p className="text-sm text-muted-foreground mb-4 flex-grow">Send emails, read messages, organize inbox, and manage labels</p>
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Send emails, read messages, organize inbox, and manage labels</p>
                           
                           <div className="pt-2 mt-auto">
                             <Button 
@@ -1788,15 +1788,15 @@ function MyComponent() {
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded-full bg-card transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
-                                <span className="text-xs text-muted-foreground">Active</span>
+                                <span className="text-xs text-gray-600">Active</span>
                               </div>
                             </div>
                           </div>
                         </CardHeader>
                         <CardContent className="pt-0 flex-1 flex flex-col">
-                          <p className="text-sm text-muted-foreground mb-4 flex-grow">Send messages, create channels, and manage team notifications</p>
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Send messages, create channels, and manage team notifications</p>
                           
                           <div className="pt-2 mt-auto">
                             <Button 
@@ -1841,15 +1841,15 @@ function MyComponent() {
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded-full bg-card transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
-                                <span className="text-xs text-muted-foreground">Active</span>
+                                <span className="text-xs text-gray-600">Active</span>
                               </div>
                             </div>
                           </div>
                         </CardHeader>
                         <CardContent className="pt-0 flex-1 flex flex-col">
-                          <p className="text-sm text-muted-foreground mb-4 flex-grow">Automated content creation and publishing workflow with 5 steps</p>
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Automated content creation and publishing workflow with 5 steps</p>
                           
                           <div className="space-y-4 mt-auto">
                             <div className="pt-2">
@@ -1891,15 +1891,15 @@ function MyComponent() {
                                 <button
                                   className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded-full bg-card transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
-                                <span className="text-xs text-muted-foreground">Active</span>
+                                <span className="text-xs text-gray-600">Active</span>
                               </div>
                             </div>
                           </div>
                         </CardHeader>
                         <CardContent className="pt-0 flex-1 flex flex-col">
-                          <p className="text-sm text-muted-foreground mb-4 flex-grow">Automated data analysis and reporting workflow with 8 steps</p>
+                          <p className="text-sm text-gray-600 mb-4 flex-grow">Automated data analysis and reporting workflow with 8 steps</p>
                           
                           <div className="space-y-4 mt-auto">
                             <div className="pt-2">
@@ -1927,7 +1927,7 @@ function MyComponent() {
                   {copilotData.components.length === 0 && (
                     <div className="text-center py-12 text-muted-foreground">
                       <div className="w-12 h-12 mx-auto mb-4 bg-[hsl(var(--muted))] rounded-lg flex items-center justify-center">
-                        <Plus className="w-6 h-6 text-muted-foreground" />
+                        <Plus className="w-6 h-6 text-gray-400" />
                       </div>
                       <p className="text-lg font-medium mb-2">No components added yet</p>
                       <p className="text-sm">Use the buttons above to add agents, tools, or workflows to your copilot.</p>
@@ -2010,7 +2010,7 @@ function MyComponent() {
                   
                   <div className="space-y-4">
                     {/* Sample knowledge base items */}
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3 flex-1">
                           <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
@@ -2051,7 +2051,7 @@ function MyComponent() {
                                 <Check className="w-4 h-4 text-green-600" />
                               </Button>
                               <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                                <X className="w-4 h-4 text-muted-foreground" />
+                                <X className="w-4 h-4 text-gray-600" />
                               </Button>
                             </>
                           ) : (
@@ -2076,7 +2076,7 @@ function MyComponent() {
                       </div>
                     </div>
                     
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3 flex-1">
                           <FileText className="w-5 h-5 text-purple-500 mt-0.5" />
@@ -2117,7 +2117,7 @@ function MyComponent() {
                                 <Check className="w-4 h-4 text-green-600" />
                               </Button>
                               <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                                <X className="w-4 h-4 text-muted-foreground" />
+                                <X className="w-4 h-4 text-gray-600" />
                               </Button>
                             </>
                           ) : (
@@ -2142,7 +2142,7 @@ function MyComponent() {
                       </div>
                     </div>
                     
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3 flex-1">
                           <FileText className="w-5 h-5 text-green-500 mt-0.5" />
@@ -2183,7 +2183,7 @@ function MyComponent() {
                                 <Check className="w-4 h-4 text-green-600" />
                               </Button>
                               <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                                <X className="w-4 h-4 text-muted-foreground" />
+                                <X className="w-4 h-4 text-gray-600" />
                               </Button>
                             </>
                           ) : (
@@ -2267,7 +2267,7 @@ function MyComponent() {
                   
                   <div className="space-y-4">
                     {/* Sample user documents */}
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3 flex-1">
                           <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
@@ -2299,7 +2299,7 @@ function MyComponent() {
                       </div>
                     </div>
 
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3 flex-1">
                           <FileText className="w-5 h-5 text-green-500 mt-0.5" />
@@ -2331,7 +2331,7 @@ function MyComponent() {
                       </div>
                     </div>
 
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3 flex-1">
                           <FileText className="w-5 h-5 text-purple-500 mt-0.5" />
@@ -2363,7 +2363,7 @@ function MyComponent() {
                       </div>
                     </div>
 
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3 flex-1">
                           <FileText className="w-5 h-5 text-orange-500 mt-0.5" />
@@ -2440,7 +2440,7 @@ function MyComponent() {
                 </div>
 
                 {/* Document Content Preview */}
-                <div className="flex-1 bg-card border rounded-lg overflow-hidden" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
+                <div className="flex-1 bg-white border rounded-lg overflow-hidden" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
                   <div className="h-full p-8 overflow-y-auto">
                     {previewDocument?.endsWith('.xlsx') && (
                       <div className="space-y-6">
@@ -2579,7 +2579,7 @@ function MyComponent() {
                           <p className="text-muted-foreground">PowerPoint Presentation - 3.1 MB</p>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div className="border rounded-lg p-4 bg-card">
+                          <div className="border rounded-lg p-4 bg-white">
                             <div className="aspect-video bg-blue-50 rounded border-2 border-dashed border-blue-200 flex items-center justify-center mb-3">
                               <div className="text-center">
                                 <h4 className="font-semibold text-blue-700">Slide 1</h4>
@@ -2589,7 +2589,7 @@ function MyComponent() {
                             <p className="text-sm text-muted-foreground">Introduction to user research methodology and objectives</p>
                           </div>
                           
-                          <div className="border rounded-lg p-4 bg-card">
+                          <div className="border rounded-lg p-4 bg-white">
                             <div className="aspect-video bg-green-50 rounded border-2 border-dashed border-green-200 flex items-center justify-center mb-3">
                               <div className="text-center">
                                 <h4 className="font-semibold text-green-700">Slide 2</h4>
@@ -2599,7 +2599,7 @@ function MyComponent() {
                             <p className="text-sm text-muted-foreground">Primary findings from user interviews and surveys</p>
                           </div>
                           
-                          <div className="border rounded-lg p-4 bg-card">
+                          <div className="border rounded-lg p-4 bg-white">
                             <div className="aspect-video bg-purple-50 rounded border-2 border-dashed border-purple-200 flex items-center justify-center mb-3">
                               <div className="text-center">
                                 <h4 className="font-semibold text-purple-700">Slide 3</h4>
@@ -2609,7 +2609,7 @@ function MyComponent() {
                             <p className="text-sm text-muted-foreground">Detailed personas based on research data</p>
                           </div>
                           
-                          <div className="border rounded-lg p-4 bg-card">
+                          <div className="border rounded-lg p-4 bg-white">
                             <div className="aspect-video bg-orange-50 rounded border-2 border-dashed border-orange-200 flex items-center justify-center mb-3">
                               <div className="text-center">
                                 <h4 className="font-semibold text-orange-700">Slide 4</h4>
@@ -2646,7 +2646,7 @@ function MyComponent() {
                   
                   <div className="space-y-4">
                     {/* Sample profile fields */}
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Badge variant="secondary" className="text-xs">Text</Badge>
@@ -2667,7 +2667,7 @@ function MyComponent() {
                       </div>
                     </div>
 
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Badge variant="secondary" className="text-xs">Select</Badge>
@@ -2688,7 +2688,7 @@ function MyComponent() {
                       </div>
                     </div>
 
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Badge variant="secondary" className="text-xs">Select</Badge>
@@ -2709,7 +2709,7 @@ function MyComponent() {
                       </div>
                     </div>
 
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Badge variant="secondary" className="text-xs">Text Area</Badge>
@@ -2730,7 +2730,7 @@ function MyComponent() {
                       </div>
                     </div>
 
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Badge variant="secondary" className="text-xs">Text</Badge>
@@ -2751,7 +2751,7 @@ function MyComponent() {
                       </div>
                     </div>
 
-                    <div className="p-4 border rounded-lg bg-card">
+                    <div className="p-4 border rounded-lg bg-white">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                           <Badge variant="secondary" className="text-xs">Text Area</Badge>
@@ -2860,7 +2860,7 @@ function MyComponent() {
                     className="mt-1"
                   />
                   <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-lg flex items-center justify-center">
-                    <PenTool className="w-5 h-5 text-card-foreground" />
+                    <PenTool className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1">
                     <div className="font-medium">{agent.name}</div>
@@ -2941,7 +2941,7 @@ function MyComponent() {
                     className="mt-1"
                   />
                   <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg flex items-center justify-center">
-                    <Zap className="w-5 h-5 text-card-foreground" />
+                    <Zap className="w-5 h-5 text-white" />
                   </div>
                   <div className="flex-1">
                     <div className="font-medium">{workflow.name}</div>
@@ -3403,7 +3403,7 @@ Add sections, lists, and more..."
               )}
               
               {mdEditorTab === 'preview' && (
-                <div className="h-96 overflow-y-auto border rounded-lg p-4 bg-card">
+                <div className="h-96 overflow-y-auto border rounded-lg p-4 bg-white">
                   <div className="prose prose-sm max-w-none">
                     {mdContent ? (
                       <div dangerouslySetInnerHTML={{ 

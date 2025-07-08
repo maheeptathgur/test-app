@@ -60,7 +60,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">Configure {agent.name}</h1>
-          <p className="text-muted-foreground">Customize agent behavior, tools, and capabilities</p>
+          <p className="text-gray-600">Customize agent behavior, tools, and capabilities</p>
         </div>
         <Button variant="outline" size="sm" onClick={onBack}>
           <X className="w-4 h-4" />
@@ -104,16 +104,16 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                     <CardDescription>Basic configuration for {agent.name}</CardDescription>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm font-medium text-muted-foreground">
+                    <span className="text-sm font-medium text-gray-600">
                       {agent.status === "Active" ? "Active" : "Inactive"}
                     </span>
                     <button
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                        agent.status === "Active" ? 'theme-primary' : 'bg-muted'
+                        agent.status === "Active" ? 'theme-primary' : 'bg-gray-200'
                       }`}
                     >
                       <span
-                        className={`inline-block h-4 w-4 transform rounded-full bg-card transition-transform ${
+                        className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                           agent.status === "Active" ? 'translate-x-6' : 'translate-x-1'
                         }`}
                       />
@@ -154,7 +154,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                 <div className="space-y-4 pt-6 border-t">
                   <div>
                     <h3 className="text-lg font-medium text-[hsl(var(--foreground))]">Quick Test Inputs</h3>
-                    <p className="text-sm text-muted-foreground">Manage pre-defined test scenarios that appear in the Test tab</p>
+                    <p className="text-sm text-gray-600">Manage pre-defined test scenarios that appear in the Test tab</p>
                   </div>
                   
                   {/* Add new quick input */}
@@ -225,12 +225,12 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="text-base font-medium text-[hsl(var(--foreground))] truncate">Gmail</h3>
-                            <p className="text-sm text-muted-foreground">Email management platform</p>
+                            <p className="text-sm text-gray-600">Email management platform</p>
                           </div>
                           <Checkbox defaultChecked />
                         </div>
                         
-                        <div className="flex-1 space-y-2 text-sm text-muted-foreground mb-4">
+                        <div className="flex-1 space-y-2 text-sm text-gray-600 mb-4">
                           <div className="flex justify-between">
                             <span>Status:</span>
                             <span className="font-medium text-green-600">Connected</span>
@@ -246,7 +246,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
                               <div className="w-11 h-6 theme-primary rounded-full relative transition-colors">
-                                <div className="w-5 h-5 bg-card rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
+                                <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
                               </div>
                               <span className="ml-2 text-sm font-medium text-[hsl(var(--foreground))]">Active</span>
                             </div>
@@ -256,7 +256,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="w-full text-muted-foreground hover:!bg-[var(--theme-primary-hover)] hover:!text-card-foreground"
+                            className="w-full text-gray-600 hover:!bg-[var(--theme-primary-hover)] hover:!text-white"
                             onClick={() => {
                               console.log('Tool configure event:', { id: 'gmail', name: 'Gmail' });
                               // onToolConfigure?.({ id: 'gmail', name: 'Gmail' });
@@ -279,12 +279,12 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="text-base font-medium text-[hsl(var(--foreground))] truncate">Slack</h3>
-                            <p className="text-sm text-muted-foreground">Team communication and collaboration</p>
+                            <p className="text-sm text-gray-600">Team communication and collaboration</p>
                           </div>
                           <Checkbox defaultChecked />
                         </div>
                         
-                        <div className="flex-1 space-y-2 text-sm text-muted-foreground mb-4">
+                        <div className="flex-1 space-y-2 text-sm text-gray-600 mb-4">
                           <div className="flex justify-between">
                             <span>Status:</span>
                             <span className="font-medium text-green-600">Connected</span>
@@ -300,7 +300,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
                               <div className="w-11 h-6 theme-primary rounded-full relative transition-colors">
-                                <div className="w-5 h-5 bg-card rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
+                                <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
                               </div>
                               <span className="ml-2 text-sm font-medium text-[hsl(var(--foreground))]">Active</span>
                             </div>
@@ -310,7 +310,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="w-full text-muted-foreground hover:!bg-[var(--theme-primary-hover)] hover:!text-card-foreground"
+                            className="w-full text-gray-600 hover:!bg-[var(--theme-primary-hover)] hover:!text-white"
                             onClick={() => {
                               console.log('Tool configure event:', { id: 'slack', name: 'Slack' });
                               // onToolConfigure?.({ id: 'slack', name: 'Slack' });
@@ -331,12 +331,12 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="text-base font-medium text-[hsl(var(--foreground))] truncate">Google Analytics</h3>
-                            <p className="text-sm text-muted-foreground">Web analytics and insights platform</p>
+                            <p className="text-sm text-gray-600">Web analytics and insights platform</p>
                           </div>
                           <Checkbox />
                         </div>
                         
-                        <div className="flex-1 space-y-2 text-sm text-muted-foreground mb-4">
+                        <div className="flex-1 space-y-2 text-sm text-gray-600 mb-4">
                           <div className="flex justify-between">
                             <span>Status:</span>
                             <span className="font-medium text-yellow-600">Not Connected</span>
@@ -352,7 +352,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
                               <div className="w-11 h-6 bg-gray-300 rounded-full relative transition-colors">
-                                <div className="w-5 h-5 bg-card rounded-full absolute top-0.5 left-0.5 transition-transform"></div>
+                                <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-transform"></div>
                               </div>
                               <span className="ml-2 text-sm font-medium text-[hsl(var(--foreground))]">Inactive</span>
                             </div>
@@ -362,7 +362,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="w-full text-muted-foreground hover:!bg-[var(--theme-primary-hover)] hover:!text-card-foreground"
+                            className="w-full text-gray-600 hover:!bg-[var(--theme-primary-hover)] hover:!text-white"
                             onClick={() => {
                               console.log('Tool configure event:', { id: 'google-analytics', name: 'Google Analytics' });
                               // onToolConfigure?.({ id: 'google-analytics', name: 'Google Analytics' });
@@ -383,12 +383,12 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           </div>
                           <div className="flex-1 min-w-0">
                             <h3 className="text-base font-medium text-[hsl(var(--foreground))] truncate">OpenAI</h3>
-                            <p className="text-sm text-muted-foreground">AI language model and processing</p>
+                            <p className="text-sm text-gray-600">AI language model and processing</p>
                           </div>
                           <Checkbox defaultChecked />
                         </div>
                         
-                        <div className="flex-1 space-y-2 text-sm text-muted-foreground mb-4">
+                        <div className="flex-1 space-y-2 text-sm text-gray-600 mb-4">
                           <div className="flex justify-between">
                             <span>Status:</span>
                             <span className="font-medium text-green-600">Connected</span>
@@ -404,7 +404,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <div className="flex items-center justify-between">
                             <div className="flex items-center">
                               <div className="w-11 h-6 theme-primary rounded-full relative transition-colors">
-                                <div className="w-5 h-5 bg-card rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
+                                <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 right-0.5 transition-transform"></div>
                               </div>
                               <span className="ml-2 text-sm font-medium text-[hsl(var(--foreground))]">Active</span>
                             </div>
@@ -414,7 +414,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <Button 
                             size="sm" 
                             variant="outline" 
-                            className="w-full text-muted-foreground hover:!bg-[var(--theme-primary-hover)] hover:!text-card-foreground"
+                            className="w-full text-gray-600 hover:!bg-[var(--theme-primary-hover)] hover:!text-white"
                             onClick={() => {
                               console.log('Tool configure event:', { id: 'openai', name: 'OpenAI' });
                               // onToolConfigure?.({ id: 'openai', name: 'OpenAI' });
@@ -467,7 +467,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                           <Button 
                             onClick={runTest}
                             disabled={isRunning || !testMessage.trim()}
-                            className="theme-primary theme-primary-hover:hover text-card-foreground"
+                            className="theme-primary theme-primary-hover:hover text-white"
                           >
                             {isRunning ? (
                               <>
@@ -528,7 +528,7 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                         {testResults.map((result) => (
                           <div key={result.id} className="border rounded-lg p-4 space-y-3">
                             <div className="flex items-center justify-between">
-                              <span className="text-sm font-medium text-muted-foreground">Test at {result.timestamp}</span>
+                              <span className="text-sm font-medium text-gray-600">Test at {result.timestamp}</span>
                               <div className="flex items-center gap-2">
                                 <Badge variant={result.success ? "default" : "destructive"}>
                                   {result.success ? "Success" : "Failed"}
@@ -539,11 +539,11 @@ export function AgentConfigureScreen({ agent, onBack }: { agent: any; onBack: ()
                             <div className="space-y-2">
                               <div>
                                 <p className="text-sm font-medium text-[hsl(var(--foreground))]">Input:</p>
-                                <p className="text-sm text-muted-foreground bg-[hsl(var(--muted))] p-2 rounded">{result.input}</p>
+                                <p className="text-sm text-gray-600 bg-[hsl(var(--muted))] p-2 rounded">{result.input}</p>
                               </div>
                               <div>
                                 <p className="text-sm font-medium text-[hsl(var(--foreground))]">Output:</p>
-                                <p className="text-sm text-muted-foreground bg-blue-50 p-2 rounded">{result.output}</p>
+                                <p className="text-sm text-gray-600 bg-blue-50 p-2 rounded">{result.output}</p>
                               </div>
                               <div className="flex justify-between text-xs text-[hsl(var(--muted-foreground))]">
                                 <span>Tokens used: {result.tokensUsed}</span>
@@ -605,7 +605,7 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
         </Button>
         <div>
           <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">Test {agent.name}</h1>
-          <p className="text-muted-foreground">Run tests to validate agent behavior and responses</p>
+          <p className="text-gray-600">Run tests to validate agent behavior and responses</p>
         </div>
       </div>
 
@@ -632,7 +632,7 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
                   <Button 
                     onClick={runTest}
                     disabled={isRunning || !testMessage.trim()}
-                    className="theme-primary theme-primary-hover:hover text-card-foreground"
+                    className="theme-primary theme-primary-hover:hover text-white"
                   >
                     {isRunning ? (
                       <>
@@ -672,7 +672,7 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
                   {testResults.map((result) => (
                     <div key={result.id} className="border rounded-lg p-4 space-y-3">
                       <div className="flex items-center justify-between">
-                        <span className="text-sm font-medium text-muted-foreground">Test at {result.timestamp}</span>
+                        <span className="text-sm font-medium text-gray-600">Test at {result.timestamp}</span>
                         <div className="flex items-center gap-2">
                           <Badge variant={result.success ? "default" : "destructive"}>
                             {result.success ? "Success" : "Failed"}
@@ -683,11 +683,11 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
                       <div className="space-y-2">
                         <div>
                           <p className="text-sm font-medium text-[hsl(var(--foreground))]">Input:</p>
-                          <p className="text-sm text-muted-foreground bg-[hsl(var(--muted))] p-2 rounded">{result.input}</p>
+                          <p className="text-sm text-gray-600 bg-[hsl(var(--muted))] p-2 rounded">{result.input}</p>
                         </div>
                         <div>
                           <p className="text-sm font-medium text-[hsl(var(--foreground))]">Output:</p>
-                          <p className="text-sm text-muted-foreground bg-blue-50 p-2 rounded">{result.output}</p>
+                          <p className="text-sm text-gray-600 bg-blue-50 p-2 rounded">{result.output}</p>
                         </div>
                         <div className="flex justify-between text-xs text-[hsl(var(--muted-foreground))]">
                           <span>Tokens used: {result.tokensUsed}</span>
@@ -721,7 +721,7 @@ export function AgentTestScreen({ agent, onBack }: { agent: any; onBack: () => v
                 </div>
                 <div className="space-y-2">
                   <p className="text-sm font-medium">Capabilities</p>
-                  <div className="text-sm text-muted-foreground space-y-1">
+                  <div className="text-sm text-gray-600 space-y-1">
                     <p>• Specialization: {agent.specialization}</p>
                     <p>• Connected tools: {agent.tools.length}</p>
                     <p>• Active workflows: {agent.workflows.length}</p>
@@ -885,7 +885,7 @@ function KnowledgeBaseTab({ agentName }: { agentName: string }) {
 
         {/* Knowledge Base Documents */}
         <div className="space-y-4">
-          <div className="p-4 border rounded-lg bg-card">
+          <div className="p-4 border rounded-lg bg-white">
             <div className="flex items-start justify-between">
               <div className="flex items-start gap-3 flex-1">
                 <FileText className="w-5 h-5 text-blue-500 mt-0.5" />
@@ -926,7 +926,7 @@ function KnowledgeBaseTab({ agentName }: { agentName: string }) {
                       <Check className="w-4 h-4 text-green-600" />
                     </Button>
                     <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                      <X className="w-4 h-4 text-muted-foreground" />
+                      <X className="w-4 h-4 text-gray-600" />
                     </Button>
                   </>
                 ) : (
@@ -951,7 +951,7 @@ function KnowledgeBaseTab({ agentName }: { agentName: string }) {
             </div>
           </div>
 
-          <div className="p-4 border rounded-lg bg-card">
+          <div className="p-4 border rounded-lg bg-white">
             <div className="flex items-start justify-between">
               <div className="flex items-start gap-3 flex-1">
                 <FileText className="w-5 h-5 text-green-500 mt-0.5" />
@@ -992,7 +992,7 @@ function KnowledgeBaseTab({ agentName }: { agentName: string }) {
                       <Check className="w-4 h-4 text-green-600" />
                     </Button>
                     <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                      <X className="w-4 h-4 text-muted-foreground" />
+                      <X className="w-4 h-4 text-gray-600" />
                     </Button>
                   </>
                 ) : (
@@ -1017,7 +1017,7 @@ function KnowledgeBaseTab({ agentName }: { agentName: string }) {
             </div>
           </div>
 
-          <div className="p-4 border rounded-lg bg-card">
+          <div className="p-4 border rounded-lg bg-white">
             <div className="flex items-start justify-between">
               <div className="flex items-start gap-3 flex-1">
                 <FileText className="w-5 h-5 text-purple-500 mt-0.5" />
@@ -1058,7 +1058,7 @@ function KnowledgeBaseTab({ agentName }: { agentName: string }) {
                       <Check className="w-4 h-4 text-green-600" />
                     </Button>
                     <Button variant="ghost" size="sm" onClick={cancelEditing}>
-                      <X className="w-4 h-4 text-muted-foreground" />
+                      <X className="w-4 h-4 text-gray-600" />
                     </Button>
                   </>
                 ) : (

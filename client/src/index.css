@@ -2,91 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Theme CSS Custom Properties - Updated to match workspace-settings.tsx */
+/* Theme CSS Custom Properties */
 :root {
-  /* Core theme colors - set by applyThemeChanges() */
+  /* Default theme colors - matches brand palette */
   --theme-primary: #008062;
   --theme-primary-hover: #00D2A0;
   --theme-primary-light: #00A881;
-  
-  /* Background colors */
-  --theme-background: #E6EEEF;          /* workspace background */
-  --theme-background-light: #F8F6F6;    /* content background */
-  --theme-background-dark: #DADEE2;     /* borders */
-  
-  /* Text colors */
-  --theme-text: #191C20;               /* primary text */
-  --theme-text-muted: #4E5964;         /* secondary text */
-  --theme-text-light: #78838D;         /* light text */
-  
-  /* Accent colors */
+  --theme-background: #E6EEEF;
+  --theme-background-light: #F8F6F6;
+  --theme-background-dark: #DADEE2;
+  --theme-text: #191C20;
+  --theme-text-muted: #4E5964;
+  --theme-text-light: #78838D;
   --theme-accent: #E0FFF8;
   --theme-accent-hover: #00D2A0;
   --theme-accent-dark: #C2FFF1;
-
-  /* Shadcn/ui default values - will be overridden by theme function */
-  --background: 210 40% 98%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 142 86% 28%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222.2 84% 4.9%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent-foreground: 222.2 84% 4.9%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 142 86% 28%;
-}
-
-/* Global theme-aware styles - Trust shadcn/ui system */
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-}
-
-/* Force theme variables on key layout containers */
-.sidebar {
-  background-color: var(--theme-background) !important;
-  color: var(--theme-text) !important;
-}
-
-.main-content {
-  background-color: var(--theme-background-light) !important;
-}
-
-/* Override hardcoded Tailwind classes with CSS variables */
-.bg-white {
-  background-color: hsl(var(--card)) !important;
-}
-
-.bg-gray-50, .bg-gray-100 {
-  background-color: hsl(var(--muted)) !important;
-}
-
-.text-gray-900, .text-gray-800 {
-  color: hsl(var(--foreground)) !important;
-}
-
-.text-gray-600, .text-gray-500 {
-  color: hsl(var(--muted-foreground)) !important;
-}
-
-.border-gray-200, .border-gray-300 {
-  border-color: hsl(var(--border)) !important;
-}
-
-/* Specific brand color overrides for buttons */
-.bg-green-600, .bg-[#008062] {
-  background-color: var(--theme-primary) !important;
-}
-
-.hover\:bg-green-700:hover, .hover\:bg-[#00d2a0]:hover {
-  background-color: var(--theme-primary-hover) !important;
 }
 
 /* Theme-aware utility classes */
@@ -99,27 +29,11 @@ body {
 }
 
 .theme-background {
-  background-color: var(--theme-workspace-bg) !important;
-}
-
-.theme-content-bg {
-  background-color: var(--theme-content-bg) !important;
-}
-
-.theme-card-bg {
-  background-color: var(--theme-card-bg) !important;
+  background-color: var(--theme-background) !important;
 }
 
 .theme-text {
-  color: var(--theme-primary-text) !important;
-}
-
-.theme-text-secondary {
-  color: var(--theme-secondary-text) !important;
-}
-
-.theme-borders {
-  border-color: var(--theme-borders) !important;
+  color: var(--theme-text) !important;
 }
 
 .theme-accent {
