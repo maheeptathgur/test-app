@@ -165,7 +165,9 @@ export function WorkspaceSelector({ currentWorkspace, workspaces, onWorkspaceCha
                 }`}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor = 'var(--theme-accent-hover)';
-                  e.currentTarget.style.setProperty('color', 'white', 'important');
+                  if (workspace.id !== currentWorkspace.id) {
+                    e.currentTarget.style.setProperty('color', 'white', 'important');
+                  }
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = workspace.id === currentWorkspace.id ? 'var(--theme-accent)' : '';
