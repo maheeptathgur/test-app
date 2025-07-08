@@ -338,6 +338,7 @@ Changelog:
 - July 8, 2025. Fixed attachment sidebar styling - changed background color to #f6f6f6, made document cards white with 1px borders instead of 2px, and implemented automatic main sidebar collapse when attachment sidebar opens for better space utilization
 - July 8, 2025. Added comprehensive file delete functionality to attachment sidebar - implemented trash can icons that appear on hover with red color transition, added confirmation dialogs for file deletion with proper file name display, and integrated delete handlers to remove files from selected files state when confirmed
 - July 8, 2025. Enhanced file selection visual feedback in attachment sidebar - updated all file cards to display 2px green border when selected (using theme primary color) and 1px gray border when unselected, providing clear visual distinction between selected and unselected files
+- July 8, 2025. Converted modal dialogs to inline displays in copilot configuration - replaced profile field modal dialogs with inline editing forms including: dashed border form for adding new fields, blue highlighted form for editing existing fields, red confirmation display for field deletion, and updated state management to use inline editing states (isAddingField, editingFieldId) for better user experience and improved visual hierarchy
 ```
 
 ## User Preferences
