@@ -561,6 +561,8 @@ interface SampleScreenProps {
   onGmailConfigChange?: (isActive: boolean) => void;
   onToolConfigChange?: (isActive: boolean) => void;
   onToolConfig?: (toolName: string) => void;
+  mdEditorOpen?: boolean;
+  onMdEditorOpenChange?: (open: boolean) => void;
 }
 
 export function SampleScreen({ 
@@ -575,7 +577,9 @@ export function SampleScreen({
   onBrowseIntegrationsChange,
   onGmailConfigChange,
   onToolConfigChange,
-  onToolConfig
+  onToolConfig,
+  mdEditorOpen,
+  onMdEditorOpenChange
 }: SampleScreenProps) {
   const [localConfigureAgent, setLocalConfigureAgent] = useState<any>(null);
   const [editWorkflow, setEditWorkflow] = useState<string | undefined>(undefined);
@@ -853,7 +857,10 @@ export function SampleScreen({
           case 'workflows':
             return <WorkflowsScreen onWorkflowEdit={handleWorkflowEdit} />;
           case 'knowledge-base':
-            return <KnowledgeBaseScreen />;
+            return <KnowledgeBaseScreen 
+              mdEditorOpen={mdEditorOpen}
+              onMdEditorOpenChange={onMdEditorOpenChange}
+            />;
           case 'subscriptions' as any:
             return <SubscriptionsScreen />;
           case 'conversations' as any:
@@ -2313,7 +2320,12 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
   );
 }
 
-function KnowledgeBaseScreen() {
+interface KnowledgeBaseScreenProps {
+  mdEditorOpen?: boolean;
+  onMdEditorOpenChange?: (open: boolean) => void;
+}
+
+function KnowledgeBaseScreen({ mdEditorOpen = false, onMdEditorOpenChange }: KnowledgeBaseScreenProps) {
   const [suggestDocsOpen, setSuggestDocsOpen] = useState(false);
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
   const [editingDocument, setEditingDocument] = useState<string | null>(null);
@@ -2331,7 +2343,6 @@ function KnowledgeBaseScreen() {
   const [urlDescription, setUrlDescription] = useState("");
   
   // Markdown editor states
-  const [mdEditorOpen, setMdEditorOpen] = useState(false);
   const [mdEditorTab, setMdEditorTab] = useState<'markdown' | 'preview' | 'rtf'>('markdown');
   const [mdContent, setMdContent] = useState('# New Document\n\nStart writing your markdown content here...');
   const [mdTitle, setMdTitle] = useState('');
@@ -2420,7 +2431,7 @@ function KnowledgeBaseScreen() {
             <Button 
               type="button"
               variant="outline" 
-              onClick={() => setMdEditorOpen(false)} 
+              onClick={() => onMdEditorOpenChange?.(false)} 
               className="gap-2"
             >
               <X className="h-4 w-4" />
@@ -2432,7 +2443,7 @@ function KnowledgeBaseScreen() {
               style={{ backgroundColor: 'var(--theme-primary)', color: 'white' }}
               onClick={() => {
                 console.log('Saving markdown document:', { title: mdTitle, description: mdDescription, content: mdContent });
-                setMdEditorOpen(false);
+                onMdEditorOpenChange?.(false);
               }}
             >
               <Save className="h-4 w-4" />
@@ -2613,7 +2624,7 @@ function KnowledgeBaseScreen() {
             <Link className="w-4 h-4 mr-1" />
             Add URL
           </Button>
-          <Button variant="outline" size="sm" onClick={() => setMdEditorOpen(true)}>
+          <Button variant="outline" size="sm" onClick={() => onMdEditorOpenChange?.(true)}>
             <FileText className="w-4 h-4 mr-1" />
             Create MD
           </Button>
