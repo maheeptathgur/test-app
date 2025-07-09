@@ -128,8 +128,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
       status: "resolved"
     }
   ]);
-  const [replyModalOpen, setReplyModalOpen] = useState(false);
-  const [replyingToRequest, setReplyingToRequest] = useState(null);
+  const [replyingToRequestId, setReplyingToRequestId] = useState(null);
   const [replyMessage, setReplyMessage] = useState('');
 
   // Functions to handle support requests
@@ -144,19 +143,32 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
     setHasChanges(true);
   };
 
-  const handleReplyToRequest = (request) => {
-    setReplyingToRequest(request);
-    setReplyModalOpen(true);
+  const handleReplyToRequest = (requestId) => {
+    if (replyingToRequestId === requestId) {
+      // Close if already open
+      setReplyingToRequestId(null);
+      setReplyMessage('');
+    } else {
+      // Open reply form for this request
+      setReplyingToRequestId(requestId);
+      setReplyMessage('');
+    }
   };
 
-  const handleSendReply = () => {
+  const handleSendReply = (requestId) => {
     if (replyMessage.trim()) {
-      console.log('Sending reply to', replyingToRequest.user, ':', replyMessage);
+      const request = supportRequests.find(r => r.id === requestId);
+      console.log('Sending reply to', request?.user, ':', replyMessage);
       // Here you would typically send the reply via email/slack/etc
       setReplyMessage('');
-      setReplyModalOpen(false);
-      setReplyingToRequest(null);
+      setReplyingToRequestId(null);
+      setHasChanges(true);
     }
+  };
+
+  const handleCancelReply = () => {
+    setReplyingToRequestId(null);
+    setReplyMessage('');
   };
   const [mdEditorOpen, setMdEditorOpen] = useState(false);
   const [mdEditorTab, setMdEditorTab] = useState<'markdown' | 'preview' | 'rtf'>('markdown');
@@ -3175,12 +3187,55 @@ function MyComponent() {
                                   <Button 
                                     variant="outline" 
                                     size="sm" 
-                                    onClick={() => handleReplyToRequest(request)}
+                                    onClick={() => handleReplyToRequest(request.id)}
                                   >
                                     Reply
                                   </Button>
                                 </div>
                               </div>
+                              
+                              {/* Inline Reply Form */}
+                              {replyingToRequestId === request.id && (
+                                <div className="mt-4 p-4 border rounded-lg bg-muted/20" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
+                                  <div className="mb-3">
+                                    <p className="text-sm font-medium mb-1">Original Message:</p>
+                                    <p className="text-sm text-muted-foreground italic">"{request.message}"</p>
+                                  </div>
+                                  
+                                  <div className="space-y-3">
+                                    <div>
+                                      <Label htmlFor={`reply-${request.id}`} className="text-sm font-medium">Your Reply</Label>
+                                      <Textarea
+                                        id={`reply-${request.id}`}
+                                        value={replyMessage}
+                                        onChange={(e) => setReplyMessage(e.target.value)}
+                                        placeholder="Type your response..."
+                                        rows={3}
+                                        className="mt-1"
+                                      />
+                                    </div>
+                                    
+                                    <div className="flex justify-end gap-2">
+                                      <Button 
+                                        variant="outline" 
+                                        size="sm"
+                                        onClick={handleCancelReply}
+                                      >
+                                        Cancel
+                                      </Button>
+                                      <Button 
+                                        size="sm"
+                                        onClick={() => handleSendReply(request.id)}
+                                        disabled={!replyMessage.trim()}
+                                        className="gap-2"
+                                      >
+                                        <Send className="w-4 h-4" />
+                                        Send Reply
+                                      </Button>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
                             </div>
                           ))}
                           
@@ -3613,53 +3668,7 @@ function MyComponent() {
         </DialogContent>
       </Dialog>
 
-      {/* Reply to Support Request Modal */}
-      <Dialog open={replyModalOpen} onOpenChange={setReplyModalOpen}>
-        <DialogContent className="max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
-              <MessageCircle className="w-5 h-5" style={{ color: 'var(--theme-primary)' }} />
-              Reply to Support Request
-            </DialogTitle>
-            <DialogDescription>
-              Respond to {replyingToRequest?.user}'s support request
-            </DialogDescription>
-          </DialogHeader>
-          
-          <div className="space-y-4">
-            <div className="p-3 border rounded-lg bg-gray-50">
-              <p className="text-sm font-medium mb-1">Original Message:</p>
-              <p className="text-sm text-muted-foreground">{replyingToRequest?.message}</p>
-            </div>
-            
-            <div className="space-y-2">
-              <Label htmlFor="reply-message">Your Reply</Label>
-              <Textarea
-                id="reply-message"
-                value={replyMessage}
-                onChange={(e) => setReplyMessage(e.target.value)}
-                placeholder="Type your response..."
-                rows={4}
-                className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-0"
-              />
-            </div>
-          </div>
-          
-          <div className="flex justify-end gap-2 pt-4">
-            <Button variant="outline" onClick={() => setReplyModalOpen(false)}>
-              Cancel
-            </Button>
-            <Button 
-              onClick={handleSendReply}
-              disabled={!replyMessage.trim()}
-              className="gap-2"
-            >
-              <Send className="w-4 h-4" />
-              Send Reply
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+
       {/* Create MD Modal */}
       <Dialog open={createMdModalOpen} onOpenChange={setCreateMdModalOpen}>
         <DialogContent className="max-w-4xl max-h-[90vh] flex flex-col">
