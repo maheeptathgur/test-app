@@ -100,7 +100,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [createMdModalOpen, setCreateMdModalOpen] = useState(false);
   
   // Human Support configuration
-  const [humanSupportEnabled, setHumanSupportEnabled] = useState(true);
+  const [humanSupportEnabled, setHumanSupportEnabled] = useState(false);
   const [adminEmail, setAdminEmail] = useState("admin@company.com");
   const [escalationTimeout, setEscalationTimeout] = useState("15");
   const [autoResponseMessage, setAutoResponseMessage] = useState("Thank you for reaching out. Your request has been forwarded to our support team. We'll get back to you within 24 hours.");
