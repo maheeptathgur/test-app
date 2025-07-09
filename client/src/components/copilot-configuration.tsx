@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { X, Save, Settings, Wrench, UserCircle, Plus, Trash2, Files, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download, Search, Filter, SortAsc, PenTool, BarChart, Zap, GitBranch, HelpCircle } from "lucide-react";
+import { X, Save, Settings, Wrench, UserCircle, Plus, Trash2, Files, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download, Search, Filter, SortAsc, PenTool, BarChart, Zap, GitBranch, HelpCircle, MessageCircle } from "lucide-react";
 import { SiGmail, SiSlack } from "react-icons/si";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
@@ -98,6 +98,13 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [addDocumentModalOpen, setAddDocumentModalOpen] = useState(false);
   const [addUrlModalOpen, setAddUrlModalOpen] = useState(false);
   const [createMdModalOpen, setCreateMdModalOpen] = useState(false);
+  
+  // Human Support configuration
+  const [humanSupportEnabled, setHumanSupportEnabled] = useState(true);
+  const [adminEmail, setAdminEmail] = useState("admin@company.com");
+  const [escalationTimeout, setEscalationTimeout] = useState("15");
+  const [autoResponseMessage, setAutoResponseMessage] = useState("Thank you for reaching out. Your request has been forwarded to our support team. We'll get back to you within 24 hours.");
+  const [humanSupportWorkflow, setHumanSupportWorkflow] = useState("email"); // email, slack, ticket
   const [mdEditorOpen, setMdEditorOpen] = useState(false);
   const [mdEditorTab, setMdEditorTab] = useState<'markdown' | 'preview' | 'rtf'>('markdown');
   const [mdContent, setMdContent] = useState('# New Document\n\nStart writing your markdown content here...');
@@ -998,7 +1005,8 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 { id: "components", label: "Tools", icon: Wrench },
                 { id: "knowledge", label: "Knowledge Base", icon: BookOpen },
                 { id: "user-docs", label: "User Documents", icon: Files },
-                { id: "profile", label: "Profile Fields", icon: UserCircle }
+                { id: "profile", label: "Profile Fields", icon: UserCircle },
+                { id: "human-support", label: "Human Support", icon: MessageCircle }
               ].map((tab) => {
                 const IconComponent = tab.icon;
                 return (
@@ -3163,6 +3171,215 @@ function MyComponent() {
                 </div>
                 </CardContent>
               </Card>
+            </div>
+            )}
+
+            {activeTab === "human-support" && (
+            <div className="p-6 pb-24">
+              <div className="grid grid-cols-3 gap-6">
+                {/* Configuration - 2/3 width */}
+                <div className="col-span-2">
+                  <Card className="w-full">
+                    <CardContent className="p-6">
+                      <div className="mb-6">
+                        <h2 className="font-semibold text-foreground text-[24px]">Human Support Configuration</h2>
+                        <p className="text-sm text-muted-foreground">Configure how users can escalate to human support</p>
+                      </div>
+                      
+                      <div className="space-y-6">
+                        {/* Enable/Disable Toggle */}
+                        <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
+                          <div>
+                            <h3 className="font-medium text-foreground">Enable Human Support</h3>
+                            <p className="text-sm text-muted-foreground">Allow users to escalate conversations to human support</p>
+                          </div>
+                          <button 
+                            onClick={() => {
+                              setHumanSupportEnabled(!humanSupportEnabled);
+                              setHasChanges(true);
+                            }}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                              humanSupportEnabled ? 'theme-primary' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              humanSupportEnabled ? 'translate-x-6' : 'translate-x-1'
+                            }`} />
+                          </button>
+                        </div>
+                        
+                        {humanSupportEnabled && (
+                          <>
+                            {/* Admin Configuration */}
+                            <div className="space-y-4">
+                              <h3 className="font-medium text-foreground">Admin Contact</h3>
+                              <div className="space-y-3">
+                                <div className="space-y-2">
+                                  <Label htmlFor="admin-email">Admin Email Address</Label>
+                                  <Input
+                                    id="admin-email"
+                                    type="email"
+                                    value={adminEmail}
+                                    onChange={(e) => {
+                                      setAdminEmail(e.target.value);
+                                      setHasChanges(true);
+                                    }}
+                                    placeholder="admin@company.com"
+                                  />
+                                  <p className="text-xs text-muted-foreground">
+                                    This email will receive all human support requests
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            {/* Workflow Configuration */}
+                            <div className="space-y-4">
+                              <h3 className="font-medium text-foreground">Escalation Workflow</h3>
+                              <div className="space-y-3">
+                                <div className="space-y-2">
+                                  <Label>How should requests be handled?</Label>
+                                  <RadioGroup value={humanSupportWorkflow} onValueChange={(value) => {
+                                    setHumanSupportWorkflow(value);
+                                    setHasChanges(true);
+                                  }}>
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="email" id="email" />
+                                      <Label htmlFor="email" className="text-sm">
+                                        Send email notification to admin
+                                      </Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="slack" id="slack" />
+                                      <Label htmlFor="slack" className="text-sm">
+                                        Post to Slack channel
+                                      </Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                      <RadioGroupItem value="ticket" id="ticket" />
+                                      <Label htmlFor="ticket" className="text-sm">
+                                        Create support ticket
+                                      </Label>
+                                    </div>
+                                  </RadioGroup>
+                                </div>
+                                
+                                <div className="space-y-2">
+                                  <Label htmlFor="timeout">Response Timeout (minutes)</Label>
+                                  <Input
+                                    id="timeout"
+                                    type="number"
+                                    value={escalationTimeout}
+                                    onChange={(e) => {
+                                      setEscalationTimeout(e.target.value);
+                                      setHasChanges(true);
+                                    }}
+                                    placeholder="15"
+                                    min="5"
+                                    max="120"
+                                  />
+                                  <p className="text-xs text-muted-foreground">
+                                    How long to wait before showing escalation option
+                                  </p>
+                                </div>
+                                
+                                <div className="space-y-2">
+                                  <Label htmlFor="auto-response">Auto-response Message</Label>
+                                  <Textarea
+                                    id="auto-response"
+                                    value={autoResponseMessage}
+                                    onChange={(e) => {
+                                      setAutoResponseMessage(e.target.value);
+                                      setHasChanges(true);
+                                    }}
+                                    placeholder="Thank you for reaching out..."
+                                    rows={3}
+                                  />
+                                  <p className="text-xs text-muted-foreground">
+                                    Message shown to users when they request human support
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+                
+                {/* Recent Requests - 1/3 width */}
+                <div className="col-span-1">
+                  <Card className="w-full">
+                    <CardContent className="p-6">
+                      <div className="mb-6">
+                        <h2 className="font-semibold text-foreground text-[24px]">Recent Requests</h2>
+                        <p className="text-sm text-muted-foreground">Latest human support escalations</p>
+                      </div>
+                      
+                      {humanSupportEnabled ? (
+                        <div className="space-y-4">
+                          {/* Sample Recent Requests */}
+                          {[
+                            {
+                              id: 1,
+                              user: "john@example.com",
+                              message: "I need help with my campaign setup",
+                              time: "2 hours ago",
+                              status: "pending"
+                            },
+                            {
+                              id: 2,
+                              user: "sarah@company.com",
+                              message: "The analytics data seems incorrect",
+                              time: "1 day ago",
+                              status: "resolved"
+                            },
+                            {
+                              id: 3,
+                              user: "mike@startup.io",
+                              message: "Can't connect to my email account",
+                              time: "3 days ago",
+                              status: "resolved"
+                            }
+                          ].map((request) => (
+                            <div key={request.id} className="p-3 border rounded-lg space-y-2" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-medium">{request.user}</span>
+                                <Badge 
+                                  variant={request.status === 'pending' ? 'destructive' : 'default'}
+                                  className="text-xs"
+                                >
+                                  {request.status}
+                                </Badge>
+                              </div>
+                              <p className="text-xs text-muted-foreground line-clamp-2">
+                                {request.message}
+                              </p>
+                              <div className="text-xs text-muted-foreground">
+                                {request.time}
+                              </div>
+                            </div>
+                          ))}
+                          
+                          <div className="pt-4 border-t" style={{ borderTopColor: 'hsl(187, 18%, 80%)' }}>
+                            <Button variant="outline" size="sm" className="w-full">
+                              View All Requests
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-center py-8">
+                          <MessageCircle className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                          <p className="text-sm text-muted-foreground">
+                            Enable human support to see escalation requests
+                          </p>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
             </div>
             )}
       </div>

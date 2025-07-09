@@ -358,6 +358,7 @@ Changelog:
 - July 8, 2025. Improved tab icons in copilot configuration for better functionality representation - updated Tools tab from Bot to Wrench icon, User Documents tab from Upload to Files icon, and Profile Fields tab from Users to UserCircle icon while keeping General (Settings) and Knowledge Base (BookOpen) unchanged
 - July 9, 2025. Fixed remaining Bot icon references causing runtime errors - replaced all remaining <Bot> icon components with PenTool icons in AI Document Suggestions dialog, buttons, and OpenAI tool displays throughout copilot configuration interface
 - July 9, 2025. Updated badge color palette throughout application - replaced default purple/blue/amber colors with custom palette: agents (#E9E6FF with #6B46C1 text), tools (#DEF3F7 with #1E40AF text), workflows (#F2E2D2 with #9A3412 text) across chat interface, dashboard, and copilot cards for unified visual design
+- July 9, 2025. Added Human Support tab to copilot configuration interface - created comprehensive human support management system allowing copilot creators to enable/disable "ask a human" feature, configure admin email address, set escalation workflows (email, Slack, ticket), define response timeouts, customize auto-response messages, and view recent support requests with status tracking in dedicated sidebar panel
 ```
 
 ## User Preferences
