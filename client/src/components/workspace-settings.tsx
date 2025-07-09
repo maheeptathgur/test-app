@@ -3,6 +3,7 @@ import { Save, Upload, Trash2, Users, Lock, Globe, Bell, Shield, CreditCard, Dat
 import { useTheme } from "@/lib/theme-context";
 import { ThemeCustomizer } from "@/components/theme-customizer";
 import avatarImagePath from "@assets/image_1751745994194.png";
+import workspaceBannerImage from "@assets/image_1752033344177.png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -411,20 +412,28 @@ export function WorkspaceSettings() {
 
                   <div className="space-y-2">
                     <Label>Banner Image (16:9 ratio)</Label>
-                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
-                      <ImageIcon className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
-                      <div className="text-sm text-muted-foreground mb-2">
-                        Upload banner image
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
+                      <div className="aspect-video bg-white p-3">
+                        <img 
+                          src={workspaceBannerImage} 
+                          alt="Workspace banner showing dashboard analytics interface"
+                          className="w-full h-full object-contain rounded"
+                        />
                       </div>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className="gap-2"
-                      >
-                        <Upload className="h-3 w-3" />
-                        Choose File
-                      </Button>
+                      <div className="p-3 text-center bg-muted/20">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="gap-2"
+                        >
+                          <Upload className="h-3 w-3" />
+                          Change File
+                        </Button>
+                        <div className="mt-2 text-xs text-muted-foreground">
+                          Current: workspace-banner.png
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
