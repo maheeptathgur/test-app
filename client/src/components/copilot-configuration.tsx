@@ -1138,7 +1138,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                 <img 
                                   src={iconImage ? URL.createObjectURL(iconImage) : (copilotData.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage)} 
                                   alt="Copilot icon"
-                                  className="w-full h-full object-contain rounded"
+                                  className="w-full h-full object-contain rounded-lg"
                                 />
                               </div>
                               <div className="p-3 text-center bg-muted/20">
