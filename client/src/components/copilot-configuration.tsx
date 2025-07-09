@@ -3216,8 +3216,12 @@ function MyComponent() {
                               <div className="flex items-center justify-between">
                                 <span className="text-sm font-medium">{request.user}</span>
                                 <Badge 
-                                  variant={request.status === 'pending' ? 'destructive' : 'default'}
-                                  className="text-xs"
+                                  className="text-xs px-1.5 py-0.5 rounded"
+                                  style={{
+                                    backgroundColor: request.status === 'pending' ? '#FF5555' : '#51CC56',
+                                    color: 'white',
+                                    border: `1px solid ${request.status === 'pending' ? '#FF5555' : '#51CC56'}`
+                                  }}
                                 >
                                   {request.status}
                                 </Badge>
