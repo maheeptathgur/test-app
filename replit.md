@@ -351,6 +351,7 @@ Changelog:
 - July 8, 2025. Added padding around tile image in copilot configuration - implemented p-3 padding to image container and rounded corners to image for better visual spacing and polished appearance
 - July 8, 2025. Implemented rounded corners for icon images in copilot configuration - created centered fixed-size container (96px x 96px) with mx-auto positioning, gray background, and rounded-lg styling to make rounded corners clearly visible around icon images, updated button text to consistently say "Change Image" instead of conditional "Choose File"/"Change Image"
 - July 8, 2025. Enhanced header icon display - updated header icon to show actual uploaded icon image instead of generic icon, increased icon size from 40px to 48px (w-12 h-12) for better visibility, uses same logic as icon image section (uploaded image → Campaign Manager megaphone → default icon)
+- July 8, 2025. Standardized border radius consistency - updated icon image container to use 'rounded' (4px) instead of 'rounded-lg' (8px) to match tile image border radius for visual consistency
 ```
 
 ## User Preferences
