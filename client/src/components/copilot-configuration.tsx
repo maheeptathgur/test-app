@@ -3127,8 +3127,31 @@ function MyComponent() {
                               <p className="text-xs text-muted-foreground line-clamp-2">
                                 {request.message}
                               </p>
-                              <div className="text-xs text-muted-foreground">
-                                {request.time}
+                              <div className="flex items-center justify-between">
+                                <div className="text-xs text-muted-foreground">
+                                  {request.time}
+                                </div>
+                                <div className="flex items-center gap-1">
+                                  {request.status === 'pending' && (
+                                    <Button 
+                                      variant="ghost" 
+                                      size="sm" 
+                                      className="text-xs h-6 px-2"
+                                      style={{ color: 'var(--theme-primary)' }}
+                                      onClick={() => console.log('Marking as resolved:', request.id)}
+                                    >
+                                      Mark Resolved
+                                    </Button>
+                                  )}
+                                  <Button 
+                                    variant="ghost" 
+                                    size="sm" 
+                                    className="text-xs h-6 px-2 text-blue-600 hover:text-blue-700"
+                                    onClick={() => console.log('Opening reply:', request.id)}
+                                  >
+                                    Reply
+                                  </Button>
+                                </div>
                               </div>
                             </div>
                           ))}
