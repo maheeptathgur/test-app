@@ -22,7 +22,7 @@ import socialAnalystImage from "@assets/image_1751926960404.png";
 import resumeAssistantImage from "@assets/image_1751926805510.png";
 import contentAssistantNewImage from "@assets/image_1751927977089.png";
 import workspaceImage from "@assets/image_1751923707146.png";
-import defaultIconImage from "@assets/image_1752010885962.png";
+import defaultIconImage from "@assets/image_1752019289491.png";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
