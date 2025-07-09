@@ -356,6 +356,7 @@ Changelog:
 - July 8, 2025. Updated dashboard avatars to use square format with rounded corners - changed TableAvatar from circular (rounded-full) to square with border radius (rounded) for better icon display and visual consistency
 - July 8, 2025. Updated configuration header icon to square format - changed header icon container from rounded-full to rounded for consistent square styling with all other icon components throughout the application
 - July 8, 2025. Improved tab icons in copilot configuration for better functionality representation - updated Tools tab from Bot to Wrench icon, User Documents tab from Upload to Files icon, and Profile Fields tab from Users to UserCircle icon while keeping General (Settings) and Knowledge Base (BookOpen) unchanged
+- July 9, 2025. Fixed remaining Bot icon references causing runtime errors - replaced all remaining <Bot> icon components with PenTool icons in AI Document Suggestions dialog, buttons, and OpenAI tool displays throughout copilot configuration interface
 ```
 
 ## User Preferences

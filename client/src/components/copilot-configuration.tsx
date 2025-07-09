@@ -2009,7 +2009,7 @@ function MyComponent() {
                       Create MD
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => setSuggestDocsOpen(true)}>
-                      <Bot className="w-4 h-4 mr-1" />
+                      <PenTool className="w-4 h-4 mr-1" />
                       AI Suggestions
                     </Button>
                     <Button variant="outline" size="sm">
@@ -3171,7 +3171,7 @@ function MyComponent() {
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <Bot className="w-5 h-5" />
+              <PenTool className="w-5 h-5" />
               AI Document Suggestions
             </DialogTitle>
             <DialogDescription>
@@ -3218,7 +3218,7 @@ function MyComponent() {
                 disabled={selectedSuggestions.length === 0}
                 className="gap-2"
               >
-                <Bot className="w-4 h-4" />
+                <PenTool className="w-4 h-4" />
                 Generate Selected ({selectedSuggestions.length})
               </Button>
             </div>
@@ -3297,7 +3297,7 @@ function MyComponent() {
                     {tool.name === 'Gmail' && <SiGmail className="w-5 h-5 text-red-600" />}
                     {tool.name === 'Slack' && <SiSlack className="w-5 h-5 text-blue-600" />}
                     {tool.name === 'Google Analytics' && <BarChart className="w-5 h-5 text-orange-600" />}
-                    {tool.name === 'OpenAI' && <Bot className="w-5 h-5 text-green-600" />}
+                    {tool.name === 'OpenAI' && <PenTool className="w-5 h-5 text-green-600" />}
                   </div>
                   <div className="flex-1">
                     <div className="font-medium">{tool.name}</div>
