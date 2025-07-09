@@ -24,6 +24,7 @@ import contentAssistantNewImage from "@assets/image_1751927977089.png";
 import workspaceImage from "@assets/image_1751923707146.png";
 import defaultIconImage from "@assets/image_1752019289491.png";
 import campaignManagerIconImage from "@assets/image_1752019378986.png";
+import contentAssistantIconImage from "@assets/image_1752032362767.png";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
@@ -1045,7 +1046,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-gray-100 rounded flex items-center justify-center overflow-hidden">
             <img 
-              src={iconImage ? URL.createObjectURL(iconImage) : (copilotData.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage)} 
+              src={iconImage ? URL.createObjectURL(iconImage) : (
+                copilotData.name === 'Campaign Manager' ? campaignManagerIconImage :
+                copilotData.name === 'Content Assistant' ? contentAssistantIconImage :
+                defaultIconImage
+              )} 
               alt="Copilot icon"
               className="w-full h-full object-contain"
             />
@@ -1214,7 +1219,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                               <div className="h-36 relative p-3 bg-[#ffffff] flex items-center justify-center">
                                 <div className="w-24 h-24 bg-gray-50 rounded overflow-hidden flex items-center justify-center mx-auto">
                                   <img 
-                                    src={iconImage ? URL.createObjectURL(iconImage) : (copilotData.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage)} 
+                                    src={iconImage ? URL.createObjectURL(iconImage) : (
+                                      copilotData.name === 'Campaign Manager' ? campaignManagerIconImage :
+                                      copilotData.name === 'Content Assistant' ? contentAssistantIconImage :
+                                      defaultIconImage
+                                    )} 
                                     alt="Copilot icon"
                                     className="w-full h-full object-contain"
                                   />

@@ -33,6 +33,7 @@ import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 import { useTheme } from "@/lib/theme-context";
 import defaultIconImage from "@assets/image_1752019289491.png";
 import campaignManagerIconImage from "@assets/image_1752019378986.png";
+import contentAssistantIconImage from "@assets/image_1752032362767.png";
 
 const workspaces: Workspace[] = [
   { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'theme-primary' },
@@ -563,7 +564,11 @@ const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
   return (
     <div className="w-10 h-10 aspect-square rounded bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
       <img 
-        src={copilot.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage} 
+        src={
+          copilot.name === 'Campaign Manager' ? campaignManagerIconImage :
+          copilot.name === 'Content Assistant' ? contentAssistantIconImage :
+          defaultIconImage
+        } 
         alt="Copilot icon"
         className="w-full h-full object-contain"
       />
