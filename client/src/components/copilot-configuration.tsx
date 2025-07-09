@@ -3116,9 +3116,9 @@ function MyComponent() {
                                 <Badge 
                                   className="text-xs px-1.5 py-0.5 rounded"
                                   style={{
-                                    backgroundColor: request.status === 'pending' ? '#FF5555' : '#51CC56',
+                                    backgroundColor: request.status === 'pending' ? '#DC6B6B' : '#6B9D6B',
                                     color: 'white',
-                                    border: `1px solid ${request.status === 'pending' ? '#FF5555' : '#51CC56'}`
+                                    border: `1px solid ${request.status === 'pending' ? '#DC6B6B' : '#6B9D6B'}`
                                   }}
                                 >
                                   {request.status}
