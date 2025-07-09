@@ -1191,14 +1191,14 @@ function AgentsScreen({ onAgentConfigure }: { onAgentConfigure?: (agent: any) =>
                   <div className="flex items-center gap-2 mb-2">
                     <button
                       onClick={() => toggleAgentStatus(agent.id)}
-                      className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                      className={`relative inline-flex h-5 w-9 items-center rounded transition-colors ${
                         agent.status === 'Active' 
                           ? 'theme-primary' 
                           : 'bg-gray-300'
                       }`}
                     >
                       <span
-                        className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                        className={`inline-block h-3 w-3 transform rounded bg-white transition-transform ${
                           agent.status === 'Active' ? 'translate-x-5' : 'translate-x-1'
                         }`}
                       />
@@ -1682,7 +1682,7 @@ function ToolsScreen({
                           <div className="flex items-center gap-2 mb-2">
                             <button
                               onClick={() => toggleToolStatus(tool.id)}
-                              className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors ${
+                              className={`relative inline-flex h-5 w-9 items-center rounded transition-colors ${
                                 (toolStatuses[tool.id] || tool.status) === 'Connected' 
                                   ? 'theme-primary' 
                                   : (toolStatuses[tool.id] || tool.status) === 'Connected But Errored'
@@ -1694,7 +1694,7 @@ function ToolsScreen({
                               }}
                             >
                               <span
-                                className={`inline-block h-3 w-3 transform rounded-full bg-white transition-transform ${
+                                className={`inline-block h-3 w-3 transform rounded bg-white transition-transform ${
                                   (toolStatuses[tool.id] || tool.status) === 'Connected' ? 'translate-x-5' : 'translate-x-1'
                                 }`}
                               />
@@ -2213,7 +2213,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                       <div className="flex items-center gap-2 mb-2">
                         <button
                           onClick={() => handleWorkflowToggle(workflow.id, workflowStatuses[workflow.id] || workflow.status)}
-                          className={`workflow-toggle relative inline-flex items-center rounded-full w-11 h-6 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--theme-primary)] ${
+                          className={`workflow-toggle relative inline-flex items-center rounded w-11 h-6 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--theme-primary)] ${
                             (workflowStatuses[workflow.id] || workflow.status) === 'Active'
                               ? 'theme-primary'
                               : (workflowStatuses[workflow.id] || workflow.status) === 'Error'
@@ -2222,7 +2222,7 @@ function WorkflowsScreen({ onWorkflowEdit }: { onWorkflowEdit?: (workflowId: str
                           }`}
                         >
                           <span
-                            className={`inline-block w-4 h-4 rounded-full bg-white transition-transform ${
+                            className={`inline-block w-4 h-4 rounded bg-white transition-transform ${
                               (workflowStatuses[workflow.id] || workflow.status) === 'Active'
                                 ? 'translate-x-6'
                                 : 'translate-x-1'

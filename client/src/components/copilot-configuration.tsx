@@ -1943,9 +1943,9 @@ function MyComponent() {
                               <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Data Processing</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
+                                  className="relative inline-flex h-5 w-9 items-center rounded transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded bg-white transition-transform translate-x-5" />
                                 </button>
                                 <span className="text-xs text-gray-600">Active</span>
                               </div>
