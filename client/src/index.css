@@ -19,12 +19,12 @@
   --theme-accent-dark: #C2FFF1;
   
   /* Extended palette for component badges */
-  --theme-agent-bg: #F0FF3D;
+  --theme-agent-bg: #9DE653;
   --theme-agent-text: #2D3748;
-  --theme-agent-hover: #E8F733;
-  --theme-tool-bg: #DEFF00;
+  --theme-agent-hover: #8BD447;
+  --theme-tool-bg: #FFA100;
   --theme-tool-text: #2D3748;
-  --theme-tool-hover: #D4F000;
+  --theme-tool-hover: #E08900;
   --theme-workflow-bg: #FFD700;
   --theme-workflow-text: #2D3748;
   --theme-workflow-hover: #F0C814;
