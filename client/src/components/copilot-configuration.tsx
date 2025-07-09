@@ -3264,8 +3264,8 @@ function MyComponent() {
                       
                       <div className="space-y-6">
                         {/* Enable/Disable Toggle */}
-                        <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
-                          <div>
+                        <div className="flex items-center gap-4 p-4 border rounded-lg" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
+                          <div className="flex-1">
                             <h3 className="font-medium text-foreground">Enable Human Support</h3>
                             <p className="text-sm text-muted-foreground">Allow users to escalate conversations to human support</p>
                           </div>
