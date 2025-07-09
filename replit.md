@@ -354,6 +354,7 @@ Changelog:
 - July 8, 2025. Standardized border radius consistency - updated icon image container to use 'rounded' (4px) instead of 'rounded-lg' (8px) to match tile image border radius for visual consistency
 - July 8, 2025. Extended icon image consistency to dashboard avatar components - updated TableAvatar component in dashboard to display actual uploaded icon images instead of type-based icons, uses same logic as configuration header (Campaign Manager megaphone icon → default icon)
 - July 8, 2025. Updated dashboard avatars to use square format with rounded corners - changed TableAvatar from circular (rounded-full) to square with border radius (rounded) for better icon display and visual consistency
+- July 8, 2025. Updated configuration header icon to square format - changed header icon container from rounded-full to rounded for consistent square styling with all other icon components throughout the application
 ```
 
 ## User Preferences
