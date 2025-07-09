@@ -387,7 +387,7 @@ export function WorkspaceSettings() {
                 {/* Avatar and Banner Images */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label>Avatar Image (1:1 ratio)</Label>
+                    <Label>Icon Image (1:1 ratio)</Label>
                     <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-muted-foreground/50 transition-colors">
                       <img 
                         src={avatarImagePath} 
@@ -836,7 +836,6 @@ export function WorkspaceSettings() {
           </div>
         )}
       </div>
-      
       {/* Save Footer - Only show for General, Brand, and Security tabs */}
       {(activeTab === "general" || activeTab === "brand" || activeTab === "security") && (
         <div className="fixed bottom-0 left-64 right-0 bg-[var(--theme-background-light)] border-t border-[var(--theme-background-dark)] px-6 py-4 z-10">
