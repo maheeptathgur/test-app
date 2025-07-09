@@ -359,6 +359,7 @@ Changelog:
 - July 9, 2025. Fixed remaining Bot icon references causing runtime errors - replaced all remaining <Bot> icon components with PenTool icons in AI Document Suggestions dialog, buttons, and OpenAI tool displays throughout copilot configuration interface
 - July 9, 2025. Updated badge color palette throughout application - replaced default purple/blue/amber colors with custom palette: agents (#E9E6FF with #6B46C1 text), tools (#DEF3F7 with #1E40AF text), workflows (#F2E2D2 with #9A3412 text) across chat interface, dashboard, and copilot cards for unified visual design
 - July 9, 2025. Added Human Support tab to copilot configuration interface - created comprehensive human support management system allowing copilot creators to enable/disable "ask a human" feature, configure admin email address, set escalation workflows (email, Slack, ticket), define response timeouts, customize auto-response messages, and view recent support requests with status tracking in dedicated sidebar panel
+- July 9, 2025. Updated all toggle switches throughout copilot configuration interface to use square styling instead of rounded - applied consistent square design to Human Support toggle, Advanced Settings toggles (Document Pane, Show Sources, Featured, Prompt Required), and all component toggles (agents, tools, workflows) for modern unified aesthetic while preserving all functionality and brand colors
 ```
 
 ## User Preferences
