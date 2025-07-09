@@ -1067,43 +1067,6 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                         
                         <div className="grid grid-cols-2 gap-6">
                           <div className="space-y-2">
-                            <Label>Icon Image (1:1 ratio)</Label>
-                            <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
-                              <div className="h-36 relative p-3 bg-[#ffffff]">
-                                <img 
-                                  src={iconImage ? URL.createObjectURL(iconImage) : (copilotData.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage)} 
-                                  alt="Copilot icon"
-                                  className="w-full h-full object-contain rounded"
-                                />
-                              </div>
-                              <div className="p-3 text-center bg-muted/20">
-                                <input
-                                  type="file"
-                                  accept="image/*"
-                                  onChange={(e) => handleImageUpload('icon', e.target.files?.[0] || null)}
-                                  className="hidden"
-                                  id="icon-upload"
-                                />
-                                <Button
-                                  type="button"
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => document.getElementById('icon-upload')?.click()}
-                                  className="gap-2"
-                                >
-                                  <Upload className="h-3 w-3" />
-                                  {iconImage ? 'Change Image' : 'Choose File'}
-                                </Button>
-                                {iconImage && (
-                                  <div className="mt-2 text-xs text-muted-foreground">
-                                    New: {iconImage.name}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="space-y-2">
                             <Label>Tile Image (4:3 ratio)</Label>
                             {(() => {
                               // Get current image URL based on copilot type and name (same logic as copilot card)
@@ -1166,6 +1129,43 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                 </div>
                               );
                             })()}
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <Label>Icon Image (1:1 ratio)</Label>
+                            <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
+                              <div className="h-36 relative p-3 bg-[#ffffff]">
+                                <img 
+                                  src={iconImage ? URL.createObjectURL(iconImage) : (copilotData.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage)} 
+                                  alt="Copilot icon"
+                                  className="w-full h-full object-contain rounded"
+                                />
+                              </div>
+                              <div className="p-3 text-center bg-muted/20">
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  onChange={(e) => handleImageUpload('icon', e.target.files?.[0] || null)}
+                                  className="hidden"
+                                  id="icon-upload"
+                                />
+                                <Button
+                                  type="button"
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => document.getElementById('icon-upload')?.click()}
+                                  className="gap-2"
+                                >
+                                  <Upload className="h-3 w-3" />
+                                  {iconImage ? 'Change Image' : 'Choose File'}
+                                </Button>
+                                {iconImage && (
+                                  <div className="mt-2 text-xs text-muted-foreground">
+                                    New: {iconImage.name}
+                                  </div>
+                                )}
+                              </div>
+                            </div>
                           </div>
                         </div>
                         
