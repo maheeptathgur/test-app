@@ -1069,7 +1069,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                           <div className="space-y-2">
                             <Label>Icon Image (1:1 ratio)</Label>
                             <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
-                              <div className="aspect-square relative p-3 bg-[#ffffff]">
+                              <div className="h-48 relative p-3 bg-[#ffffff]">
                                 <img 
                                   src={iconImage ? URL.createObjectURL(iconImage) : (copilotData.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage)} 
                                   alt="Copilot icon"
@@ -1132,7 +1132,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                               
                               return (
                                 <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
-                                  <div className="aspect-[4/3] relative p-3 bg-[#ffffff]">
+                                  <div className="h-48 relative p-3 bg-[#ffffff]">
                                     <img 
                                       src={currentImageUrl} 
                                       alt={`${copilotData.type} copilot tile`}
