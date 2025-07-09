@@ -412,13 +412,13 @@ export function WorkspaceSettings() {
 
                   <div className="space-y-2">
                     <Label>Banner Image (16:9 ratio)</Label>
-                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
+                    <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg hover:border-muted-foreground/50 transition-colors">
                       <div className="aspect-video bg-white p-3">
-                        <div className="w-full h-full mx-auto rounded overflow-hidden">
+                        <div className="w-full h-full mx-auto rounded-lg overflow-hidden bg-gray-50">
                           <img 
                             src={workspaceBannerImage} 
                             alt="Workspace banner showing dashboard analytics interface"
-                            className="w-full h-full object-contain"
+                            className="w-full h-full object-contain rounded-lg"
                           />
                         </div>
                       </div>
