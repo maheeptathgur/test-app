@@ -18,16 +18,16 @@
   --theme-accent-hover: #00D2A0;
   --theme-accent-dark: #C2FFF1;
   
-  /* Extended palette for component badges */
-  --theme-agent-bg: #9DE653;
-  --theme-agent-text: #2D3748;
-  --theme-agent-hover: #8BD447;
-  --theme-tool-bg: #FFA100;
-  --theme-tool-text: #2D3748;
-  --theme-tool-hover: #E08900;
-  --theme-workflow-bg: #FFD700;
-  --theme-workflow-text: #2D3748;
-  --theme-workflow-hover: #F0C814;
+  /* Extended palette for component badges - toned down */
+  --theme-agent-bg: #E8F5D3;
+  --theme-agent-text: #4A5D23;
+  --theme-agent-hover: #D4E8B8;
+  --theme-tool-bg: #FFE4CC;
+  --theme-tool-text: #8B4513;
+  --theme-tool-hover: #FFD4B3;
+  --theme-workflow-bg: #FFF4CC;
+  --theme-workflow-text: #8B6914;
+  --theme-workflow-hover: #FFECB3;
 }
 
 /* Theme-aware utility classes */
