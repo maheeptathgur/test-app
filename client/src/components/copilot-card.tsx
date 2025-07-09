@@ -132,11 +132,26 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
                       <div>
                         <Badge
                           variant="secondary"
-                          className={`text-xs font-medium cursor-help hover:shadow-md transition-shadow !items-start ${
-                            component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
-                            component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
-                            'bg-amber-100 text-amber-700 hover:bg-amber-200'
-                          }`}
+                          className="text-xs font-medium cursor-help hover:shadow-md transition-all !items-start"
+                          style={{
+                            backgroundColor: component.type === 'agent' ? 'var(--theme-agent-bg)' :
+                                           component.type === 'tool' ? 'var(--theme-tool-bg)' :
+                                           'var(--theme-workflow-bg)',
+                            color: component.type === 'agent' ? 'var(--theme-agent-text)' :
+                                   component.type === 'tool' ? 'var(--theme-tool-text)' :
+                                   'var(--theme-workflow-text)',
+                            border: '1px solid transparent'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = component.type === 'agent' ? 'var(--theme-agent-hover)' :
+                                                                  component.type === 'tool' ? 'var(--theme-tool-hover)' :
+                                                                  'var(--theme-workflow-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = component.type === 'agent' ? 'var(--theme-agent-bg)' :
+                                                                  component.type === 'tool' ? 'var(--theme-tool-bg)' :
+                                                                  'var(--theme-workflow-bg)';
+                          }}
                         >
                           {component.name}
                         </Badge>

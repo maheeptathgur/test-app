@@ -209,33 +209,47 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
               c.name.toLowerCase().trim() === part.toLowerCase().trim()
             );
             
-            let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium align-baseline";
+            let badgeClass = "inline-flex items-center mx-0.5 px-1.5 py-0.5 rounded text-xs font-medium align-baseline border border-opacity-30";
             let iconElement = null;
+            let badgeStyle = {};
             
             if (component) {
               switch (component.type) {
                 case 'agent':
-                  badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
-                  iconElement = <Bot className="w-2.5 h-2.5 mr-1" />;
+                  badgeStyle = {
+                    backgroundColor: 'var(--theme-agent-bg)',
+                    color: 'var(--theme-agent-text)',
+                    borderColor: 'var(--theme-agent-text)'
+                  };
+                  iconElement = <PenTool className="w-2.5 h-2.5 mr-1" />;
                   break;
                 case 'tool':
-                  badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+                  badgeStyle = {
+                    backgroundColor: 'var(--theme-tool-bg)',
+                    color: 'var(--theme-tool-text)',
+                    borderColor: 'var(--theme-tool-text)'
+                  };
                   iconElement = <Wrench className="w-2.5 h-2.5 mr-1" />;
                   break;
                 case 'workflow':
-                  badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
+                  badgeStyle = {
+                    backgroundColor: 'var(--theme-workflow-bg)',
+                    color: 'var(--theme-workflow-text)',
+                    borderColor: 'var(--theme-workflow-text)'
+                  };
                   iconElement = <Workflow className="w-2.5 h-2.5 mr-1" />;
                   break;
               }
             } else {
               // Unknown component - still show as badge but gray
-              badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
+              badgeClass += " bg-[hsl(var(--muted))] text-gray-600";
             }
             
             return (
               <span 
                 key={index} 
                 className={badgeClass}
+                style={badgeStyle}
               >
                 {iconElement}
                 {part}

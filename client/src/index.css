@@ -17,6 +17,17 @@
   --theme-accent: #E0FFF8;
   --theme-accent-hover: #00D2A0;
   --theme-accent-dark: #C2FFF1;
+  
+  /* Extended palette for component badges */
+  --theme-agent-bg: #F0FF3D;
+  --theme-agent-text: #2D3748;
+  --theme-agent-hover: #E8F733;
+  --theme-tool-bg: #DEFF00;
+  --theme-tool-text: #2D3748;
+  --theme-tool-hover: #D4F000;
+  --theme-workflow-bg: #FFD700;
+  --theme-workflow-text: #2D3748;
+  --theme-workflow-hover: #F0C814;
 }
 
 /* Theme-aware utility classes */
