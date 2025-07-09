@@ -3270,9 +3270,11 @@ function MyComponent() {
                               setHumanSupportEnabled(!humanSupportEnabled);
                               setHasChanges(true);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                              humanSupportEnabled ? 'theme-primary' : 'bg-gray-200'
-                            }`}
+                            className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+                            style={{
+                              backgroundColor: humanSupportEnabled ? 'var(--theme-primary)' : '#e5e7eb',
+                              focusRingColor: 'var(--theme-primary)'
+                            }}
                           >
                             <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               humanSupportEnabled ? 'translate-x-6' : 'translate-x-1'
