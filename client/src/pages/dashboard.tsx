@@ -31,6 +31,8 @@ import { ProfileSettings } from "@/components/profile-settings";
 import { AccountSettings } from "@/components/account-settings";
 import { Workspace, CopilotData, NavigationSection } from "@/lib/types";
 import { useTheme } from "@/lib/theme-context";
+import defaultIconImage from "@assets/image_1752019289491.png";
+import campaignManagerIconImage from "@assets/image_1752019378986.png";
 
 const workspaces: Workspace[] = [
   { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'theme-primary' },
@@ -556,28 +558,15 @@ const getTypeIcon = (type: string) => {
   }
 };
 
-// Table Avatar Component with solid colors and icons
+// Table Avatar Component with actual icon images
 const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
-  const getAvatarStyle = (type: string) => {
-    switch (type.toLowerCase()) {
-      case 'general':
-        return 'bg-blue-500';
-      case 'content':
-        return 'bg-green-500';
-      case 'analyst':
-        return 'bg-purple-500';
-      case 'support':
-        return 'bg-orange-500';
-      case 'form':
-        return 'bg-indigo-500';
-      default:
-        return 'bg-gray-500';
-    }
-  };
-
   return (
-    <div className={`w-10 h-10 aspect-square rounded-full flex items-center justify-center flex-shrink-0 ${getAvatarStyle(copilot.type)}`}>
-      {getTypeIcon(copilot.type)}
+    <div className="w-10 h-10 aspect-square rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
+      <img 
+        src={copilot.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage} 
+        alt="Copilot icon"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 };
