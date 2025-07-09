@@ -1135,11 +1135,11 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                             <Label>Icon Image (1:1 ratio)</Label>
                             <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
                               <div className="h-36 relative p-3 bg-[#ffffff]">
-                                <div className="w-full h-full bg-white rounded-lg overflow-hidden flex items-center justify-center">
+                                <div className="w-full h-full bg-gray-50 rounded-lg overflow-hidden flex items-center justify-center">
                                   <img 
                                     src={iconImage ? URL.createObjectURL(iconImage) : (copilotData.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage)} 
                                     alt="Copilot icon"
-                                    className="max-w-full max-h-full object-contain"
+                                    className="w-4/5 h-4/5 object-contain"
                                   />
                                 </div>
                               </div>
