@@ -23,6 +23,7 @@ import resumeAssistantImage from "@assets/image_1751926805510.png";
 import contentAssistantNewImage from "@assets/image_1751927977089.png";
 import workspaceImage from "@assets/image_1751923707146.png";
 import defaultIconImage from "@assets/image_1752019289491.png";
+import campaignManagerIconImage from "@assets/image_1752019378986.png";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
@@ -1070,7 +1071,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                             <div className="border border-muted-foreground/25 rounded-lg overflow-hidden hover:border-muted-foreground/50 transition-colors">
                               <div className="aspect-square relative p-3 bg-[#ffffff]">
                                 <img 
-                                  src={iconImage ? URL.createObjectURL(iconImage) : defaultIconImage} 
+                                  src={iconImage ? URL.createObjectURL(iconImage) : (copilotData.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage)} 
                                   alt="Copilot icon"
                                   className="w-full h-full object-cover rounded"
                                 />
