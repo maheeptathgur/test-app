@@ -132,9 +132,9 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
                       <div>
                         <div
                           className={`inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium cursor-help hover:shadow-md transition-all border ${
-                            component.type === 'agent' ? 'bg-[#E9E6FF] text-[#6B46C1] border-[#D8B4FE] hover:bg-[#D8B4FE]' :
-                            component.type === 'tool' ? 'bg-[#DEF3F7] text-[#1E40AF] border-[#A5D8FF] hover:bg-[#A5D8FF]' :
-                            'bg-[#F2E2D2] text-[#9A3412] border-[#FBD5A7] hover:bg-[#FBD5A7]'
+                            component.type === 'agent' ? 'bg-[#E9E6FF] text-[#6B46C1] border-[#C4B5FD] hover:bg-[#D8B4FE]' :
+                            component.type === 'tool' ? 'bg-[#DEF3F7] text-[#1E40AF] border-[#7DD3FC] hover:bg-[#A5D8FF]' :
+                            'bg-[#F2E2D2] text-[#9A3412] border-[#E4C7A0] hover:bg-[#FBD5A7]'
                           }`}
                         >
                           {component.name}
