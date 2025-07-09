@@ -3165,20 +3165,16 @@ function MyComponent() {
                                 <div className="flex items-center gap-1">
                                   {request.status === 'pending' && (
                                     <Button 
-                                      variant="ghost" 
+                                      variant="outline" 
                                       size="sm" 
-                                      className="text-xs h-6 px-2"
-                                      style={{ color: 'var(--theme-primary)' }}
                                       onClick={() => handleMarkResolved(request.id)}
                                     >
                                       Mark Resolved
                                     </Button>
                                   )}
                                   <Button 
-                                    variant="ghost" 
+                                    variant="outline" 
                                     size="sm" 
-                                    className="text-xs h-6 px-2"
-                                    style={{ color: 'var(--theme-primary)' }}
                                     onClick={() => handleReplyToRequest(request)}
                                   >
                                     Reply
