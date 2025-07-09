@@ -360,7 +360,6 @@ Changelog:
 - July 9, 2025. Updated badge color palette throughout application - replaced default purple/blue/amber colors with custom palette: agents (#E9E6FF with #6B46C1 text), tools (#DEF3F7 with #1E40AF text), workflows (#F2E2D2 with #9A3412 text) across chat interface, dashboard, and copilot cards for unified visual design
 - July 9, 2025. Added Human Support tab to copilot configuration interface - created comprehensive human support management system allowing copilot creators to enable/disable "ask a human" feature, configure admin email address, set escalation workflows (email, Slack, ticket), define response timeouts, customize auto-response messages, and view recent support requests with status tracking in dedicated sidebar panel
 - July 9, 2025. Implemented streamlined inline editing for profile fields - replaced expansive form blocks with compact inline editing interface where field name and description are editable directly within the field row, with save/cancel buttons appearing inline for better user experience
-- July 9, 2025. Toned down vibrant status badge colors in Human Support tab - changed from bright red/green (#FF5555/#51CC56) to muted red/green (#DC6B6B/#6B9D6B) for pending/resolved status badges, maintaining distinction while reducing visual intensity
 ```
 
 ## User Preferences
