@@ -3177,7 +3177,8 @@ function MyComponent() {
                                   <Button 
                                     variant="ghost" 
                                     size="sm" 
-                                    className="text-xs h-6 px-2 text-blue-600 hover:text-blue-700"
+                                    className="text-xs h-6 px-2"
+                                    style={{ color: 'var(--theme-primary)' }}
                                     onClick={() => handleReplyToRequest(request)}
                                   >
                                     Reply
