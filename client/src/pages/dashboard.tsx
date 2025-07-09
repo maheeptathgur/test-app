@@ -34,6 +34,7 @@ import { useTheme } from "@/lib/theme-context";
 import defaultIconImage from "@assets/image_1752019289491.png";
 import campaignManagerIconImage from "@assets/image_1752019378986.png";
 import contentAssistantIconImage from "@assets/image_1752032362767.png";
+import socialAnalystIconImage from "@assets/image_1752032749676.png";
 
 const workspaces: Workspace[] = [
   { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'theme-primary' },
@@ -567,6 +568,7 @@ const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
         src={
           copilot.name === 'Campaign Manager' ? campaignManagerIconImage :
           copilot.name === 'Content Assistant' ? contentAssistantIconImage :
+          copilot.name === 'Social Analyst' ? socialAnalystIconImage :
           defaultIconImage
         } 
         alt="Copilot icon"
