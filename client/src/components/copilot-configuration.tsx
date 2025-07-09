@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { X, Save, Settings, Wrench, UserCircle, Plus, Trash2, Files, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download, Search, Filter, SortAsc, PenTool, BarChart, Zap, GitBranch, HelpCircle, MessageCircle } from "lucide-react";
+import { X, Save, Settings, Wrench, UserCircle, Plus, Trash2, Files, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download, Search, Filter, SortAsc, PenTool, BarChart, Zap, GitBranch, HelpCircle, MessageCircle, Send } from "lucide-react";
 import { SiGmail, SiSlack } from "react-icons/si";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
@@ -105,6 +105,59 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
   const [escalationTimeout, setEscalationTimeout] = useState("15");
   const [autoResponseMessage, setAutoResponseMessage] = useState("Thank you for reaching out. Your request has been forwarded to our support team. We'll get back to you within 24 hours.");
   const [humanSupportWorkflow, setHumanSupportWorkflow] = useState("email"); // email, slack, ticket
+  const [supportRequests, setSupportRequests] = useState([
+    {
+      id: 1,
+      user: "john@example.com",
+      message: "I need help with my campaign setup",
+      time: "2 hours ago",
+      status: "pending"
+    },
+    {
+      id: 2,
+      user: "sarah@company.com",
+      message: "The analytics data seems incorrect",
+      time: "1 day ago",
+      status: "resolved"
+    },
+    {
+      id: 3,
+      user: "mike@startup.io",
+      message: "Can't connect to my email account",
+      time: "3 days ago",
+      status: "resolved"
+    }
+  ]);
+  const [replyModalOpen, setReplyModalOpen] = useState(false);
+  const [replyingToRequest, setReplyingToRequest] = useState(null);
+  const [replyMessage, setReplyMessage] = useState('');
+
+  // Functions to handle support requests
+  const handleMarkResolved = (requestId) => {
+    setSupportRequests(prev => 
+      prev.map(request => 
+        request.id === requestId 
+          ? { ...request, status: 'resolved' }
+          : request
+      )
+    );
+    setHasChanges(true);
+  };
+
+  const handleReplyToRequest = (request) => {
+    setReplyingToRequest(request);
+    setReplyModalOpen(true);
+  };
+
+  const handleSendReply = () => {
+    if (replyMessage.trim()) {
+      console.log('Sending reply to', replyingToRequest.user, ':', replyMessage);
+      // Here you would typically send the reply via email/slack/etc
+      setReplyMessage('');
+      setReplyModalOpen(false);
+      setReplyingToRequest(null);
+    }
+  };
   const [mdEditorOpen, setMdEditorOpen] = useState(false);
   const [mdEditorTab, setMdEditorTab] = useState<'markdown' | 'preview' | 'rtf'>('markdown');
   const [mdContent, setMdContent] = useState('# New Document\n\nStart writing your markdown content here...');
@@ -3086,30 +3139,8 @@ function MyComponent() {
                       
                       {humanSupportEnabled ? (
                         <div className="space-y-4">
-                          {/* Sample Recent Requests */}
-                          {[
-                            {
-                              id: 1,
-                              user: "john@example.com",
-                              message: "I need help with my campaign setup",
-                              time: "2 hours ago",
-                              status: "pending"
-                            },
-                            {
-                              id: 2,
-                              user: "sarah@company.com",
-                              message: "The analytics data seems incorrect",
-                              time: "1 day ago",
-                              status: "resolved"
-                            },
-                            {
-                              id: 3,
-                              user: "mike@startup.io",
-                              message: "Can't connect to my email account",
-                              time: "3 days ago",
-                              status: "resolved"
-                            }
-                          ].map((request) => (
+                          {/* Recent Requests */}
+                          {supportRequests.map((request) => (
                             <div key={request.id} className="p-3 border rounded-lg space-y-2" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
                               <div className="flex items-center justify-between">
                                 <span className="text-sm font-medium">{request.user}</span>
@@ -3138,7 +3169,7 @@ function MyComponent() {
                                       size="sm" 
                                       className="text-xs h-6 px-2"
                                       style={{ color: 'var(--theme-primary)' }}
-                                      onClick={() => console.log('Marking as resolved:', request.id)}
+                                      onClick={() => handleMarkResolved(request.id)}
                                     >
                                       Mark Resolved
                                     </Button>
@@ -3147,7 +3178,7 @@ function MyComponent() {
                                     variant="ghost" 
                                     size="sm" 
                                     className="text-xs h-6 px-2 text-blue-600 hover:text-blue-700"
-                                    onClick={() => console.log('Opening reply:', request.id)}
+                                    onClick={() => handleReplyToRequest(request)}
                                   >
                                     Reply
                                   </Button>
@@ -3580,6 +3611,54 @@ function MyComponent() {
             }}>
               <Link className="w-4 h-4 mr-2" />
               Add URL
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Reply to Support Request Modal */}
+      <Dialog open={replyModalOpen} onOpenChange={setReplyModalOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <MessageCircle className="w-5 h-5" style={{ color: 'var(--theme-primary)' }} />
+              Reply to Support Request
+            </DialogTitle>
+            <DialogDescription>
+              Respond to {replyingToRequest?.user}'s support request
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div className="p-3 border rounded-lg bg-gray-50">
+              <p className="text-sm font-medium mb-1">Original Message:</p>
+              <p className="text-sm text-muted-foreground">{replyingToRequest?.message}</p>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="reply-message">Your Reply</Label>
+              <Textarea
+                id="reply-message"
+                value={replyMessage}
+                onChange={(e) => setReplyMessage(e.target.value)}
+                placeholder="Type your response..."
+                rows={4}
+                className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-0"
+              />
+            </div>
+          </div>
+          
+          <div className="flex justify-end gap-2 pt-4">
+            <Button variant="outline" onClick={() => setReplyModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button 
+              onClick={handleSendReply}
+              disabled={!replyMessage.trim()}
+              className="gap-2"
+            >
+              <Send className="w-4 h-4" />
+              Send Reply
             </Button>
           </div>
         </DialogContent>
