@@ -2771,32 +2771,34 @@ function MyComponent() {
                     
                     {/* Job Title field - Sample profile field */}
                     {editingFieldId === 'job-title' ? (
-                      <div className="p-4 border rounded-lg bg-white border-green-200" style={{ borderColor: 'var(--theme-primary)' }}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3 flex-1">
+                      <div className="p-4 border rounded-lg bg-white">
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-start gap-3 flex-1">
                             <Badge variant="secondary" className="text-xs">Text</Badge>
-                            <div className="flex-1 space-y-1">
-                              <Input
-                                value={newFieldName}
-                                onChange={(e) => setNewFieldName(e.target.value)}
-                                placeholder="Field name"
-                                className="text-sm font-medium border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
-                              />
-                              <Input
-                                value={newFieldDescription}
-                                onChange={(e) => setNewFieldDescription(e.target.value)}
-                                placeholder="Field description"
-                                className="text-xs text-muted-foreground border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
-                              />
+                            <div className="flex-1 min-w-0">
+                              <div className="space-y-2">
+                                <Input
+                                  value={newFieldName}
+                                  onChange={(e) => setNewFieldName(e.target.value)}
+                                  className="font-medium"
+                                  placeholder="Field name"
+                                />
+                                <Input
+                                  value={newFieldDescription}
+                                  onChange={(e) => setNewFieldDescription(e.target.value)}
+                                  className="text-sm"
+                                  placeholder="Field description"
+                                />
+                              </div>
                             </div>
                           </div>
                           <div className="flex items-center gap-2 ml-4">
                             <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
                             <Button variant="ghost" size="sm" onClick={handleSaveEditField} disabled={!newFieldName.trim() || !newFieldDescription.trim()}>
-                              <Check className="w-4 h-4" />
+                              <Check className="w-4 h-4 text-green-600" />
                             </Button>
                             <Button variant="ghost" size="sm" onClick={handleCancelEditField}>
-                              <X className="w-4 h-4" />
+                              <X className="w-4 h-4 text-gray-600" />
                             </Button>
                           </div>
                         </div>
@@ -2847,32 +2849,34 @@ function MyComponent() {
 
                     {/* Industry field */}
                     {editingFieldId === 'industry' ? (
-                      <div className="p-4 border rounded-lg bg-white border-green-200" style={{ borderColor: 'var(--theme-primary)' }}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3 flex-1">
+                      <div className="p-4 border rounded-lg bg-white">
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-start gap-3 flex-1">
                             <Badge variant="secondary" className="text-xs">Select</Badge>
-                            <div className="flex-1 space-y-1">
-                              <Input
-                                value={newFieldName}
-                                onChange={(e) => setNewFieldName(e.target.value)}
-                                placeholder="Field name"
-                                className="text-sm font-medium border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
-                              />
-                              <Input
-                                value={newFieldDescription}
-                                onChange={(e) => setNewFieldDescription(e.target.value)}
-                                placeholder="Field description"
-                                className="text-xs text-muted-foreground border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
-                              />
+                            <div className="flex-1 min-w-0">
+                              <div className="space-y-2">
+                                <Input
+                                  value={newFieldName}
+                                  onChange={(e) => setNewFieldName(e.target.value)}
+                                  className="font-medium"
+                                  placeholder="Field name"
+                                />
+                                <Input
+                                  value={newFieldDescription}
+                                  onChange={(e) => setNewFieldDescription(e.target.value)}
+                                  className="text-sm"
+                                  placeholder="Field description"
+                                />
+                              </div>
                             </div>
                           </div>
                           <div className="flex items-center gap-2 ml-4">
                             <Badge variant="outline" className="text-xs" style={{ color: 'var(--theme-primary)' }}>Optional</Badge>
                             <Button variant="ghost" size="sm" onClick={handleSaveEditField} disabled={!newFieldName.trim() || !newFieldDescription.trim()}>
-                              <Check className="w-4 h-4" />
+                              <Check className="w-4 h-4 text-green-600" />
                             </Button>
                             <Button variant="ghost" size="sm" onClick={handleCancelEditField}>
-                              <X className="w-4 h-4" />
+                              <X className="w-4 h-4 text-gray-600" />
                             </Button>
                           </div>
                         </div>
@@ -2923,32 +2927,34 @@ function MyComponent() {
 
                     {/* Experience Level field */}
                     {editingFieldId === 'experience' ? (
-                      <div className="p-4 border rounded-lg bg-white border-green-200" style={{ borderColor: 'var(--theme-primary)' }}>
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-3 flex-1">
+                      <div className="p-4 border rounded-lg bg-white">
+                        <div className="flex items-start justify-between">
+                          <div className="flex items-start gap-3 flex-1">
                             <Badge variant="secondary" className="text-xs">Select</Badge>
-                            <div className="flex-1 space-y-1">
-                              <Input
-                                value={newFieldName}
-                                onChange={(e) => setNewFieldName(e.target.value)}
-                                placeholder="Field name"
-                                className="text-sm font-medium border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
-                              />
-                              <Input
-                                value={newFieldDescription}
-                                onChange={(e) => setNewFieldDescription(e.target.value)}
-                                placeholder="Field description"
-                                className="text-xs text-muted-foreground border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
-                              />
+                            <div className="flex-1 min-w-0">
+                              <div className="space-y-2">
+                                <Input
+                                  value={newFieldName}
+                                  onChange={(e) => setNewFieldName(e.target.value)}
+                                  className="font-medium"
+                                  placeholder="Field name"
+                                />
+                                <Input
+                                  value={newFieldDescription}
+                                  onChange={(e) => setNewFieldDescription(e.target.value)}
+                                  className="text-sm"
+                                  placeholder="Field description"
+                                />
+                              </div>
                             </div>
                           </div>
                           <div className="flex items-center gap-2 ml-4">
                             <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
                             <Button variant="ghost" size="sm" onClick={handleSaveEditField} disabled={!newFieldName.trim() || !newFieldDescription.trim()}>
-                              <Check className="w-4 h-4" />
+                              <Check className="w-4 h-4 text-green-600" />
                             </Button>
                             <Button variant="ghost" size="sm" onClick={handleCancelEditField}>
-                              <X className="w-4 h-4" />
+                              <X className="w-4 h-4 text-gray-600" />
                             </Button>
                           </div>
                         </div>
