@@ -3177,70 +3177,8 @@ function MyComponent() {
             {activeTab === "human-support" && (
             <div className="p-6 pb-24">
               <div className="grid grid-cols-3 gap-6">
-                {/* Configuration - 2/3 width */}
+                {/* Recent Requests - 2/3 width */}
                 <div className="col-span-2">
-                  <Card className="w-full">
-                    <CardContent className="p-6">
-                      <div className="mb-6">
-                        <h2 className="font-semibold text-foreground text-[24px]">Human Support Configuration</h2>
-                        <p className="text-sm text-muted-foreground">Configure how users can escalate to human support</p>
-                      </div>
-                      
-                      <div className="space-y-6">
-                        {/* Enable/Disable Toggle */}
-                        <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
-                          <div>
-                            <h3 className="font-medium text-foreground">Enable Human Support</h3>
-                            <p className="text-sm text-muted-foreground">Allow users to escalate conversations to human support</p>
-                          </div>
-                          <button 
-                            onClick={() => {
-                              setHumanSupportEnabled(!humanSupportEnabled);
-                              setHasChanges(true);
-                            }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
-                              humanSupportEnabled ? 'theme-primary' : 'bg-gray-200'
-                            }`}
-                          >
-                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                              humanSupportEnabled ? 'translate-x-6' : 'translate-x-1'
-                            }`} />
-                          </button>
-                        </div>
-                        
-                        {humanSupportEnabled && (
-                          <>
-                            {/* Admin Configuration */}
-                            <div className="space-y-4">
-                              <h3 className="font-medium text-foreground">Admin Contact</h3>
-                              <div className="space-y-3">
-                                <div className="space-y-2">
-                                  <Label htmlFor="admin-email">Admin Email Address</Label>
-                                  <Input
-                                    id="admin-email"
-                                    type="email"
-                                    value={adminEmail}
-                                    onChange={(e) => {
-                                      setAdminEmail(e.target.value);
-                                      setHasChanges(true);
-                                    }}
-                                    placeholder="admin@company.com"
-                                  />
-                                  <p className="text-xs text-muted-foreground">
-                                    This email will receive all human support requests
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-                
-                {/* Recent Requests - 1/3 width */}
-                <div className="col-span-1">
                   <Card className="w-full">
                     <CardContent className="p-6">
                       <div className="mb-6">
@@ -3307,6 +3245,68 @@ function MyComponent() {
                           </p>
                         </div>
                       )}
+                    </CardContent>
+                  </Card>
+                </div>
+                
+                {/* Configuration - 1/3 width */}
+                <div className="col-span-1">
+                  <Card className="w-full">
+                    <CardContent className="p-6">
+                      <div className="mb-6">
+                        <h2 className="font-semibold text-foreground text-[24px]">Human Support Configuration</h2>
+                        <p className="text-sm text-muted-foreground">Configure how users can escalate to human support</p>
+                      </div>
+                      
+                      <div className="space-y-6">
+                        {/* Enable/Disable Toggle */}
+                        <div className="flex items-center justify-between p-4 border rounded-lg" style={{ borderColor: 'hsl(187, 18%, 80%)' }}>
+                          <div>
+                            <h3 className="font-medium text-foreground">Enable Human Support</h3>
+                            <p className="text-sm text-muted-foreground">Allow users to escalate conversations to human support</p>
+                          </div>
+                          <button 
+                            onClick={() => {
+                              setHumanSupportEnabled(!humanSupportEnabled);
+                              setHasChanges(true);
+                            }}
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                              humanSupportEnabled ? 'theme-primary' : 'bg-gray-200'
+                            }`}
+                          >
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                              humanSupportEnabled ? 'translate-x-6' : 'translate-x-1'
+                            }`} />
+                          </button>
+                        </div>
+                        
+                        {humanSupportEnabled && (
+                          <>
+                            {/* Admin Configuration */}
+                            <div className="space-y-4">
+                              <h3 className="font-medium text-foreground">Admin Contact</h3>
+                              <div className="space-y-3">
+                                <div className="space-y-2">
+                                  <Label htmlFor="admin-email">Admin Email Address</Label>
+                                  <Input
+                                    id="admin-email"
+                                    type="email"
+                                    value={adminEmail}
+                                    onChange={(e) => {
+                                      setAdminEmail(e.target.value);
+                                      setHasChanges(true);
+                                    }}
+                                    placeholder="admin@company.com"
+                                  />
+                                  <p className="text-xs text-muted-foreground">
+                                    This email will receive all human support requests
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 </div>
