@@ -36,6 +36,7 @@ import campaignManagerIconImage from "@assets/image_1752019378986.png";
 import contentAssistantIconImage from "@assets/image_1752032362767.png";
 import socialAnalystIconImage from "@assets/image_1752032749676.png";
 import customerSupportIconImage from "@assets/image_1752032905214.png";
+import resumeAssistantIconImage from "@assets/image_1752033010511.png";
 
 const workspaces: Workspace[] = [
   { id: '1', name: 'Marketing', type: '', avatar: '⚡', color: 'theme-primary' },
@@ -571,6 +572,7 @@ const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
           copilot.name === 'Content Assistant' ? contentAssistantIconImage :
           copilot.name === 'Social Analyst' ? socialAnalystIconImage :
           copilot.name === 'Customer Support' ? customerSupportIconImage :
+          copilot.name === 'Resume Assistant' ? resumeAssistantIconImage :
           defaultIconImage
         } 
         alt="Copilot icon"

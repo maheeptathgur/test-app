@@ -27,6 +27,7 @@ import campaignManagerIconImage from "@assets/image_1752019378986.png";
 import contentAssistantIconImage from "@assets/image_1752032362767.png";
 import socialAnalystIconImage from "@assets/image_1752032749676.png";
 import customerSupportIconImage from "@assets/image_1752032905214.png";
+import resumeAssistantIconImage from "@assets/image_1752033010511.png";
 
 interface CopilotConfigurationProps {
   copilot: CopilotData;
@@ -1053,6 +1054,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                 copilotData.name === 'Content Assistant' ? contentAssistantIconImage :
                 copilotData.name === 'Social Analyst' ? socialAnalystIconImage :
                 copilotData.name === 'Customer Support' ? customerSupportIconImage :
+                copilotData.name === 'Resume Assistant' ? resumeAssistantIconImage :
                 defaultIconImage
               )} 
               alt="Copilot icon"
@@ -1228,6 +1230,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                       copilotData.name === 'Content Assistant' ? contentAssistantIconImage :
                                       copilotData.name === 'Social Analyst' ? socialAnalystIconImage :
                                       copilotData.name === 'Customer Support' ? customerSupportIconImage :
+                                      copilotData.name === 'Resume Assistant' ? resumeAssistantIconImage :
                                       defaultIconImage
                                     )} 
                                     alt="Copilot icon"
