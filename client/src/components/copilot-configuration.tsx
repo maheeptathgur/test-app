@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { X, Save, Settings, Bot, Users, Plus, Trash2, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download, Search, Filter, SortAsc, PenTool, BarChart, Zap, GitBranch, HelpCircle } from "lucide-react";
+import { X, Save, Settings, Wrench, UserCircle, Plus, Trash2, Files, Upload, Image, Code, Copy, BookOpen, FileText, Link, ExternalLink, Edit3, Eye, Check, FolderOpen, Download, Search, Filter, SortAsc, PenTool, BarChart, Zap, GitBranch, HelpCircle } from "lucide-react";
 import { SiGmail, SiSlack } from "react-icons/si";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { CopilotData } from "@/lib/types";
@@ -995,10 +995,10 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
             <nav className="-mb-px flex space-x-8">
               {[
                 { id: "general", label: "General", icon: Settings },
-                { id: "components", label: "Tools", icon: Bot },
+                { id: "components", label: "Tools", icon: Wrench },
                 { id: "knowledge", label: "Knowledge Base", icon: BookOpen },
-                { id: "user-docs", label: "User Documents", icon: Upload },
-                { id: "profile", label: "Profile Fields", icon: Users }
+                { id: "user-docs", label: "User Documents", icon: Files },
+                { id: "profile", label: "Profile Fields", icon: UserCircle }
               ].map((tab) => {
                 const IconComponent = tab.icon;
                 return (

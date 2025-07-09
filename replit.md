@@ -355,6 +355,7 @@ Changelog:
 - July 8, 2025. Extended icon image consistency to dashboard avatar components - updated TableAvatar component in dashboard to display actual uploaded icon images instead of type-based icons, uses same logic as configuration header (Campaign Manager megaphone icon → default icon)
 - July 8, 2025. Updated dashboard avatars to use square format with rounded corners - changed TableAvatar from circular (rounded-full) to square with border radius (rounded) for better icon display and visual consistency
 - July 8, 2025. Updated configuration header icon to square format - changed header icon container from rounded-full to rounded for consistent square styling with all other icon components throughout the application
+- July 8, 2025. Improved tab icons in copilot configuration for better functionality representation - updated Tools tab from Bot to Wrench icon, User Documents tab from Upload to Files icon, and Profile Fields tab from Users to UserCircle icon while keeping General (Settings) and Knowledge Base (BookOpen) unchanged
 ```
 
 ## User Preferences
