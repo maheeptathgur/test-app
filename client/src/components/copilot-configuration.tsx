@@ -2771,68 +2771,32 @@ function MyComponent() {
                     
                     {/* Job Title field - Sample profile field */}
                     {editingFieldId === 'job-title' ? (
-                      <div className="p-6 border-2 rounded-lg" style={{ backgroundColor: 'var(--theme-accent)', borderColor: 'var(--theme-primary)' }}>
-                        <div className="space-y-4">
-                          <div className="space-y-2">
-                            <Label htmlFor="edit-field-name">Field Name</Label>
-                            <Input
-                              id="edit-field-name"
-                              value={newFieldName}
-                              onChange={(e) => setNewFieldName(e.target.value)}
-                              placeholder="e.g., Job Title, Company, Department"
-                            />
+                      <div className="p-4 border rounded-lg bg-white border-green-200" style={{ borderColor: 'var(--theme-primary)' }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3 flex-1">
+                            <Badge variant="secondary" className="text-xs">Text</Badge>
+                            <div className="flex-1 space-y-1">
+                              <Input
+                                value={newFieldName}
+                                onChange={(e) => setNewFieldName(e.target.value)}
+                                placeholder="Field name"
+                                className="text-sm font-medium border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
+                              />
+                              <Input
+                                value={newFieldDescription}
+                                onChange={(e) => setNewFieldDescription(e.target.value)}
+                                placeholder="Field description"
+                                className="text-xs text-muted-foreground border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
+                              />
+                            </div>
                           </div>
-                          
-                          <div className="space-y-2">
-                            <Label htmlFor="edit-field-description">Description</Label>
-                            <Textarea
-                              id="edit-field-description"
-                              value={newFieldDescription}
-                              onChange={(e) => setNewFieldDescription(e.target.value)}
-                              placeholder="Describe what information this field collects..."
-                              rows={2}
-                            />
-                          </div>
-                          
-                          <div className="space-y-2">
-                            <Label htmlFor="edit-field-type">Field Type</Label>
-                            <Select value={newFieldType} onValueChange={setNewFieldType}>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select field type" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="text">Text</SelectItem>
-                                <SelectItem value="textarea">Text Area</SelectItem>
-                                <SelectItem value="select">Select</SelectItem>
-                                <SelectItem value="number">Number</SelectItem>
-                                <SelectItem value="email">Email</SelectItem>
-                                <SelectItem value="date">Date</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          
-                          <div className="flex items-center space-x-2">
-                            <Checkbox
-                              id="edit-field-required"
-                              checked={newFieldRequired}
-                              onCheckedChange={(checked) => setNewFieldRequired(checked === true)}
-                            />
-                            <Label htmlFor="edit-field-required" className="text-sm">
-                              This field is required
-                            </Label>
-                          </div>
-                          
-                          <div className="flex justify-end gap-2 pt-2">
-                            <Button variant="outline" onClick={handleCancelEditField}>
-                              Cancel
+                          <div className="flex items-center gap-2 ml-4">
+                            <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
+                            <Button variant="ghost" size="sm" onClick={handleSaveEditField} disabled={!newFieldName.trim() || !newFieldDescription.trim()}>
+                              <Check className="w-4 h-4" />
                             </Button>
-                            <Button 
-                              onClick={handleSaveEditField}
-                              disabled={!newFieldName.trim() || !newFieldDescription.trim()}
-                              className="gap-2"
-                            >
-                              <Save className="w-4 h-4" />
-                              Save Changes
+                            <Button variant="ghost" size="sm" onClick={handleCancelEditField}>
+                              <X className="w-4 h-4" />
                             </Button>
                           </div>
                         </div>
@@ -2883,68 +2847,32 @@ function MyComponent() {
 
                     {/* Industry field */}
                     {editingFieldId === 'industry' ? (
-                      <div className="p-6 border-2 rounded-lg" style={{ backgroundColor: 'var(--theme-accent)', borderColor: 'var(--theme-primary)' }}>
-                        <div className="space-y-4">
-                          <div className="space-y-2">
-                            <Label htmlFor="edit-field-name">Field Name</Label>
-                            <Input
-                              id="edit-field-name"
-                              value={newFieldName}
-                              onChange={(e) => setNewFieldName(e.target.value)}
-                              placeholder="e.g., Job Title, Company, Department"
-                            />
+                      <div className="p-4 border rounded-lg bg-white border-green-200" style={{ borderColor: 'var(--theme-primary)' }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3 flex-1">
+                            <Badge variant="secondary" className="text-xs">Select</Badge>
+                            <div className="flex-1 space-y-1">
+                              <Input
+                                value={newFieldName}
+                                onChange={(e) => setNewFieldName(e.target.value)}
+                                placeholder="Field name"
+                                className="text-sm font-medium border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
+                              />
+                              <Input
+                                value={newFieldDescription}
+                                onChange={(e) => setNewFieldDescription(e.target.value)}
+                                placeholder="Field description"
+                                className="text-xs text-muted-foreground border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
+                              />
+                            </div>
                           </div>
-                          
-                          <div className="space-y-2">
-                            <Label htmlFor="edit-field-description">Description</Label>
-                            <Textarea
-                              id="edit-field-description"
-                              value={newFieldDescription}
-                              onChange={(e) => setNewFieldDescription(e.target.value)}
-                              placeholder="Describe what information this field collects..."
-                              rows={2}
-                            />
-                          </div>
-                          
-                          <div className="space-y-2">
-                            <Label htmlFor="edit-field-type">Field Type</Label>
-                            <Select value={newFieldType} onValueChange={setNewFieldType}>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select field type" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="text">Text</SelectItem>
-                                <SelectItem value="textarea">Text Area</SelectItem>
-                                <SelectItem value="select">Select</SelectItem>
-                                <SelectItem value="number">Number</SelectItem>
-                                <SelectItem value="email">Email</SelectItem>
-                                <SelectItem value="date">Date</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          
-                          <div className="flex items-center space-x-2">
-                            <Checkbox
-                              id="edit-field-required"
-                              checked={newFieldRequired}
-                              onCheckedChange={(checked) => setNewFieldRequired(checked === true)}
-                            />
-                            <Label htmlFor="edit-field-required" className="text-sm">
-                              This field is required
-                            </Label>
-                          </div>
-                          
-                          <div className="flex justify-end gap-2 pt-2">
-                            <Button variant="outline" onClick={handleCancelEditField}>
-                              Cancel
+                          <div className="flex items-center gap-2 ml-4">
+                            <Badge variant="outline" className="text-xs" style={{ color: 'var(--theme-primary)' }}>Optional</Badge>
+                            <Button variant="ghost" size="sm" onClick={handleSaveEditField} disabled={!newFieldName.trim() || !newFieldDescription.trim()}>
+                              <Check className="w-4 h-4" />
                             </Button>
-                            <Button 
-                              onClick={handleSaveEditField}
-                              disabled={!newFieldName.trim() || !newFieldDescription.trim()}
-                              className="gap-2"
-                            >
-                              <Save className="w-4 h-4" />
-                              Save Changes
+                            <Button variant="ghost" size="sm" onClick={handleCancelEditField}>
+                              <X className="w-4 h-4" />
                             </Button>
                           </div>
                         </div>
@@ -2995,68 +2923,32 @@ function MyComponent() {
 
                     {/* Experience Level field */}
                     {editingFieldId === 'experience' ? (
-                      <div className="p-6 border-2 rounded-lg" style={{ backgroundColor: 'var(--theme-accent)', borderColor: 'var(--theme-primary)' }}>
-                        <div className="space-y-4">
-                          <div className="space-y-2">
-                            <Label htmlFor="edit-field-name">Field Name</Label>
-                            <Input
-                              id="edit-field-name"
-                              value={newFieldName}
-                              onChange={(e) => setNewFieldName(e.target.value)}
-                              placeholder="e.g., Job Title, Company, Department"
-                            />
+                      <div className="p-4 border rounded-lg bg-white border-green-200" style={{ borderColor: 'var(--theme-primary)' }}>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3 flex-1">
+                            <Badge variant="secondary" className="text-xs">Select</Badge>
+                            <div className="flex-1 space-y-1">
+                              <Input
+                                value={newFieldName}
+                                onChange={(e) => setNewFieldName(e.target.value)}
+                                placeholder="Field name"
+                                className="text-sm font-medium border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
+                              />
+                              <Input
+                                value={newFieldDescription}
+                                onChange={(e) => setNewFieldDescription(e.target.value)}
+                                placeholder="Field description"
+                                className="text-xs text-muted-foreground border-0 p-0 h-auto focus-visible:ring-0 bg-transparent"
+                              />
+                            </div>
                           </div>
-                          
-                          <div className="space-y-2">
-                            <Label htmlFor="edit-field-description">Description</Label>
-                            <Textarea
-                              id="edit-field-description"
-                              value={newFieldDescription}
-                              onChange={(e) => setNewFieldDescription(e.target.value)}
-                              placeholder="Describe what information this field collects..."
-                              rows={2}
-                            />
-                          </div>
-                          
-                          <div className="space-y-2">
-                            <Label htmlFor="edit-field-type">Field Type</Label>
-                            <Select value={newFieldType} onValueChange={setNewFieldType}>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select field type" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="text">Text</SelectItem>
-                                <SelectItem value="textarea">Text Area</SelectItem>
-                                <SelectItem value="select">Select</SelectItem>
-                                <SelectItem value="number">Number</SelectItem>
-                                <SelectItem value="email">Email</SelectItem>
-                                <SelectItem value="date">Date</SelectItem>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          
-                          <div className="flex items-center space-x-2">
-                            <Checkbox
-                              id="edit-field-required"
-                              checked={newFieldRequired}
-                              onCheckedChange={(checked) => setNewFieldRequired(checked === true)}
-                            />
-                            <Label htmlFor="edit-field-required" className="text-sm">
-                              This field is required
-                            </Label>
-                          </div>
-                          
-                          <div className="flex justify-end gap-2 pt-2">
-                            <Button variant="outline" onClick={handleCancelEditField}>
-                              Cancel
+                          <div className="flex items-center gap-2 ml-4">
+                            <Badge variant="outline" className="text-xs text-green-600">Required</Badge>
+                            <Button variant="ghost" size="sm" onClick={handleSaveEditField} disabled={!newFieldName.trim() || !newFieldDescription.trim()}>
+                              <Check className="w-4 h-4" />
                             </Button>
-                            <Button 
-                              onClick={handleSaveEditField}
-                              disabled={!newFieldName.trim() || !newFieldDescription.trim()}
-                              className="gap-2"
-                            >
-                              <Save className="w-4 h-4" />
-                              Save Changes
+                            <Button variant="ghost" size="sm" onClick={handleCancelEditField}>
+                              <X className="w-4 h-4" />
                             </Button>
                           </div>
                         </div>
