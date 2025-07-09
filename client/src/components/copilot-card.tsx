@@ -133,9 +133,9 @@ export function CopilotCard({ copilot, onStartChat, onEdit, onDuplicate, onArchi
                         <Badge
                           variant="secondary"
                           className={`text-xs font-medium cursor-help hover:shadow-md transition-shadow !items-start ${
-                            component.type === 'agent' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200' :
-                            component.type === 'tool' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200' :
-                            'bg-amber-100 text-amber-700 hover:bg-amber-200'
+                            component.type === 'agent' ? 'bg-[#E9E6FF] text-[#6B46C1] hover:bg-[#D8B4FE]' :
+                            component.type === 'tool' ? 'bg-[#DEF3F7] text-[#1E40AF] hover:bg-[#A5D8FF]' :
+                            'bg-[#F2E2D2] text-[#9A3412] hover:bg-[#FBD5A7]'
                           }`}
                         >
                           {component.name}

@@ -160,13 +160,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
       if (component) {
         switch (component.type) {
           case 'agent':
-            badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
+            badgeClass += " bg-[#E9E6FF] text-[#6B46C1] border border-[#D8B4FE]";
             break;
           case 'tool':
-            badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+            badgeClass += " bg-[#DEF3F7] text-[#1E40AF] border border-[#A5D8FF]";
             break;
           case 'workflow':
-            badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
+            badgeClass += " bg-[#F2E2D2] text-[#9A3412] border border-[#FBD5A7]";
             break;
           default:
             badgeClass += " bg-[hsl(var(--muted))] text-gray-600 border";
@@ -215,15 +215,15 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
             if (component) {
               switch (component.type) {
                 case 'agent':
-                  badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
+                  badgeClass += " bg-[#E9E6FF] text-[#6B46C1] border-[#D8B4FE]";
                   iconElement = <Bot className="w-2.5 h-2.5 mr-1" />;
                   break;
                 case 'tool':
-                  badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+                  badgeClass += " bg-[#DEF3F7] text-[#1E40AF] border-[#A5D8FF]";
                   iconElement = <Wrench className="w-2.5 h-2.5 mr-1" />;
                   break;
                 case 'workflow':
-                  badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
+                  badgeClass += " bg-[#F2E2D2] text-[#9A3412] border-[#FBD5A7]";
                   iconElement = <Workflow className="w-2.5 h-2.5 mr-1" />;
                   break;
               }
@@ -326,13 +326,13 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
         if (component) {
           switch (component.type) {
             case 'agent':
-              badgeClass += " bg-purple-100 text-purple-800 border border-purple-200";
+              badgeClass += " bg-[#E9E6FF] text-[#6B46C1] border border-[#D8B4FE]";
               break;
             case 'tool':
-              badgeClass += " bg-blue-100 text-blue-800 border border-blue-200";
+              badgeClass += " bg-[#DEF3F7] text-[#1E40AF] border border-[#A5D8FF]";
               break;
             case 'workflow':
-              badgeClass += " bg-amber-100 text-amber-800 border border-amber-200";
+              badgeClass += " bg-[#F2E2D2] text-[#9A3412] border border-[#FBD5A7]";
               break;
           }
         } else {
@@ -1094,7 +1094,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     return (
                                       <div 
                                         key={agent.name} 
-                                        className="p-2 bg-purple-50 rounded text-left border border-purple-100 hover:bg-purple-100 transition-colors cursor-pointer min-h-[60px]"
+                                        className="p-2 bg-[#F8F6FF] rounded text-left border border-[#E9E6FF] hover:bg-[#E9E6FF] transition-colors cursor-pointer min-h-[60px]"
                                         onClick={() => toggleComponentExpansion(agent.name)}
                                       >
                                         <div className="flex items-center justify-between">
@@ -1107,7 +1107,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-purple-200">
                                             <div className="text-xs text-[hsl(var(--muted-foreground))]">
-                                              Use <code className="px-1 py-0.5 bg-purple-100 rounded text-xs border border-purple-200">@{agent.name}</code> to reference this agent
+                                              Use <code className="px-1 py-0.5 bg-[#E9E6FF] rounded text-xs border border-[#D8B4FE]">@{agent.name}</code> to reference this agent
                                             </div>
                                           </div>
                                         )}
@@ -1131,7 +1131,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     return (
                                       <div 
                                         key={tool.name} 
-                                        className="p-2 bg-blue-50 rounded text-left border border-blue-100 hover:bg-blue-100 transition-colors cursor-pointer min-h-[60px]"
+                                        className="p-2 bg-[#F6FAFB] rounded text-left border border-[#DEF3F7] hover:bg-[#DEF3F7] transition-colors cursor-pointer min-h-[60px]"
                                         onClick={() => toggleComponentExpansion(tool.name)}
                                       >
                                         <div className="flex items-center justify-between">
@@ -1144,7 +1144,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-blue-200">
                                             <div className="text-xs text-[hsl(var(--muted-foreground))]">
-                                              Use <code className="px-1 py-0.5 bg-blue-100 rounded text-xs border border-blue-200">@{tool.name}</code> to reference this tool
+                                              Use <code className="px-1 py-0.5 bg-[#DEF3F7] rounded text-xs border border-[#A5D8FF]">@{tool.name}</code> to reference this tool
                                             </div>
                                           </div>
                                         )}
@@ -1168,7 +1168,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                     return (
                                       <div 
                                         key={workflow.name} 
-                                        className="p-2 bg-amber-50 rounded text-left border border-amber-100 hover:bg-amber-100 transition-colors cursor-pointer min-h-[60px]"
+                                        className="p-2 bg-[#FAF8F4] rounded text-left border border-[#F2E2D2] hover:bg-[#F2E2D2] transition-colors cursor-pointer min-h-[60px]"
                                         onClick={() => toggleComponentExpansion(workflow.name)}
                                       >
                                         <div className="flex items-center justify-between">
@@ -1181,7 +1181,7 @@ export function ChatInterface({ isOpen, copilot, onClose, onToggleAttachment, se
                                         {isExpanded && (
                                           <div className="mt-2 pt-2 border-t border-amber-200">
                                             <div className="text-xs text-[hsl(var(--muted-foreground))]">
-                                              Use <code className="px-1 py-0.5 bg-amber-100 rounded text-xs border border-amber-200">@{workflow.name}</code> to reference this workflow
+                                              Use <code className="px-1 py-0.5 bg-[#F2E2D2] rounded text-xs border border-[#FBD5A7]">@{workflow.name}</code> to reference this workflow
                                             </div>
                                           </div>
                                         )}

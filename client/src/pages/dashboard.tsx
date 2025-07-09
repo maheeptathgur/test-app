@@ -351,7 +351,7 @@ const mockCopilots: CopilotData[] = [
     description: 'Helps with blog posts, social media content, and marketing copy. Optimized for brand voice and SEO.',
     status: 'active',
     avatar: 'CA',
-    avatarColor: 'bg-blue-100 text-blue-600',
+    avatarColor: 'bg-[#DEF3F7] text-[#1E40AF]',
     type: 'content',
     favorite: true,
     workspaceId: '1',
@@ -467,7 +467,7 @@ const mockCopilots: CopilotData[] = [
     description: 'Provides 24/7 customer support with intelligent ticket routing and automated responses.',
     status: 'active',
     avatar: 'CS',
-    avatarColor: 'bg-purple-100 text-purple-600',
+    avatarColor: 'bg-[#E9E6FF] text-[#6B46C1]',
     type: 'support',
     favorite: false,
     workspaceId: '4',
@@ -797,7 +797,7 @@ export default function Dashboard() {
 
   const handleCreateCopilot = (data: { name: string; description: string; type: string }) => {
     const avatarInitials = data.name.split(' ').map(word => word[0]).join('').toUpperCase().slice(0, 2);
-    const colors = ['bg-blue-100 text-blue-600', 'bg-green-100 text-green-600', 'bg-purple-100 text-purple-600', 'bg-orange-100 text-orange-600'];
+    const colors = ['bg-[#DEF3F7] text-[#1E40AF]', 'bg-green-100 text-green-600', 'bg-[#E9E6FF] text-[#6B46C1]', 'bg-[#F2E2D2] text-[#9A3412]'];
     
     const newCopilot: CopilotData = {
       id: Date.now().toString(),
