@@ -353,6 +353,7 @@ Changelog:
 - July 8, 2025. Enhanced header icon display - updated header icon to show actual uploaded icon image instead of generic icon, increased icon size from 40px to 48px (w-12 h-12) for better visibility, uses same logic as icon image section (uploaded image → Campaign Manager megaphone → default icon)
 - July 8, 2025. Standardized border radius consistency - updated icon image container to use 'rounded' (4px) instead of 'rounded-lg' (8px) to match tile image border radius for visual consistency
 - July 8, 2025. Extended icon image consistency to dashboard avatar components - updated TableAvatar component in dashboard to display actual uploaded icon images instead of type-based icons, uses same logic as configuration header (Campaign Manager megaphone icon → default icon)
+- July 8, 2025. Updated dashboard avatars to use square format with rounded corners - changed TableAvatar from circular (rounded-full) to square with border radius (rounded) for better icon display and visual consistency
 ```
 
 ## User Preferences

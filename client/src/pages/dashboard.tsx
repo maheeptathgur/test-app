@@ -561,7 +561,7 @@ const getTypeIcon = (type: string) => {
 // Table Avatar Component with actual icon images
 const TableAvatar = ({ copilot }: { copilot: CopilotData }) => {
   return (
-    <div className="w-10 h-10 aspect-square rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
+    <div className="w-10 h-10 aspect-square rounded bg-gray-100 flex items-center justify-center flex-shrink-0 overflow-hidden">
       <img 
         src={copilot.name === 'Campaign Manager' ? campaignManagerIconImage : defaultIconImage} 
         alt="Copilot icon"
