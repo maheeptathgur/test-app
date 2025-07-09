@@ -1442,11 +1442,11 @@ function MyComponent() {
                               setDocumentPaneEnabled(!documentPaneEnabled);
                               setHasChanges(true);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
                               documentPaneEnabled ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
-                            <span className={`inline-block h-4 w-4 transform rounded bg-white transition-transform ${
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               documentPaneEnabled ? 'translate-x-6' : 'translate-x-1'
                             }`} />
                           </button>
@@ -1469,11 +1469,11 @@ function MyComponent() {
                               setShowSources(!showSources);
                               setHasChanges(true);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
                               showSources ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
-                            <span className={`inline-block h-4 w-4 transform rounded bg-white transition-transform ${
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               showSources ? 'translate-x-6' : 'translate-x-1'
                             }`} />
                           </button>
@@ -1496,11 +1496,11 @@ function MyComponent() {
                               setIsFeatured(!isFeatured);
                               setHasChanges(true);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
                               isFeatured ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
-                            <span className={`inline-block h-4 w-4 transform rounded bg-white transition-transform ${
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               isFeatured ? 'translate-x-6' : 'translate-x-1'
                             }`} />
                           </button>
@@ -1523,11 +1523,11 @@ function MyComponent() {
                               setPromptRequired(!promptRequired);
                               setHasChanges(true);
                             }}
-                            className={`relative inline-flex h-6 w-11 items-center rounded transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
+                            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--theme-primary)] focus:ring-offset-2 ${
                               promptRequired ? 'theme-primary' : 'bg-gray-200'
                             }`}
                           >
-                            <span className={`inline-block h-4 w-4 transform rounded bg-white transition-transform ${
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               promptRequired ? 'translate-x-6' : 'translate-x-1'
                             }`} />
                           </button>
@@ -1670,9 +1670,9 @@ function MyComponent() {
                               <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Content Creator</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded transition-colors theme-primary"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded bg-white transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
                                 <span className="text-xs text-gray-600">Active</span>
                               </div>
@@ -1723,9 +1723,9 @@ function MyComponent() {
                               <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Data Analyst</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded transition-colors theme-primary"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded bg-white transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
                                 <span className="text-xs text-gray-600">Active</span>
                               </div>
@@ -1786,9 +1786,9 @@ function MyComponent() {
                               <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Gmail</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded transition-colors theme-primary"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded bg-white transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
                                 <span className="text-xs text-gray-600">Active</span>
                               </div>
@@ -1840,9 +1840,9 @@ function MyComponent() {
                               <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Slack</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded transition-colors theme-primary"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded bg-white transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
                                 <span className="text-xs text-gray-600">Active</span>
                               </div>
@@ -1893,9 +1893,9 @@ function MyComponent() {
                               <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Content Pipeline</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded transition-colors theme-primary"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded bg-white transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
                                 <span className="text-xs text-gray-600">Active</span>
                               </div>
@@ -1943,9 +1943,9 @@ function MyComponent() {
                               <h3 className="font-semibold text-[hsl(var(--foreground))] text-base mb-1 truncate">Data Processing</h3>
                               <div className="flex items-center gap-2 mb-2">
                                 <button
-                                  className="relative inline-flex h-5 w-9 items-center rounded transition-colors theme-primary"
+                                  className="relative inline-flex h-5 w-9 items-center rounded-full transition-colors theme-primary"
                                 >
-                                  <span className="inline-block h-3 w-3 transform rounded bg-white transition-transform translate-x-5" />
+                                  <span className="inline-block h-3 w-3 transform rounded-full bg-white transition-transform translate-x-5" />
                                 </button>
                                 <span className="text-xs text-gray-600">Active</span>
                               </div>
@@ -3274,13 +3274,13 @@ function MyComponent() {
                               setHumanSupportEnabled(!humanSupportEnabled);
                               setHasChanges(true);
                             }}
-                            className="relative inline-flex h-6 w-11 items-center rounded transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
+                            className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2"
                             style={{
                               backgroundColor: humanSupportEnabled ? 'var(--theme-primary)' : '#e5e7eb',
                               '--tw-ring-color': 'var(--theme-primary)'
                             } as React.CSSProperties}
                           >
-                            <span className={`inline-block h-4 w-4 transform rounded bg-white transition-transform ${
+                            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
                               humanSupportEnabled ? 'translate-x-6' : 'translate-x-1'
                             }`} />
                           </button>
