@@ -1159,7 +1159,7 @@ export function CopilotConfiguration({ copilot, onClose, onSave }: CopilotConfig
                                   className="gap-2"
                                 >
                                   <Upload className="h-3 w-3" />
-                                  {iconImage ? 'Change Image' : 'Choose File'}
+                                  Change Image
                                 </Button>
                                 {iconImage && (
                                   <div className="mt-2 text-xs text-muted-foreground">
